@@ -1,0 +1,12 @@
+defaultPlacement: end
+enableVersioning: true
+handle: peopleIndex
+name: 'People Index'
+propagationMethod: all
+siteSettings:
+  0c99f337-2218-4c6f-b0ad-30589c1ebbc5: # neubauer
+    enabledByDefault: true
+    hasUrls: true
+    template: people/_index
+    uriFormat: people
+type: single

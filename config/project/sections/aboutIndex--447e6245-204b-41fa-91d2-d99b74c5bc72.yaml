@@ -1,0 +1,12 @@
+defaultPlacement: end
+enableVersioning: true
+handle: aboutIndex
+name: 'About Index'
+propagationMethod: all
+siteSettings:
+  0c99f337-2218-4c6f-b0ad-30589c1ebbc5: # neubauer
+    enabledByDefault: true
+    hasUrls: true
+    template: about/_index
+    uriFormat: about
+type: single

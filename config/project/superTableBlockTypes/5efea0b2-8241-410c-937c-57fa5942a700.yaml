@@ -1,0 +1,147 @@
+field: ad039f29-1b37-466f-8148-84f4a6bad1e2 # Contact Info
+fieldLayouts:
+  5131898f-b53f-4285-91c3-fc11d5211c7e:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: b0ae2ad9-7257-4cbf-9876-384fbc36354e # Street Address
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: cdc834cd-c6bc-443d-ba86-edc70defd5a0 # Location
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 8ce822fd-9c12-4dfa-9ef3-42966b9fe46f # Phone Number
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: d30dbef2-6253-486c-a07d-7a57e79c1fcf # Fax Number
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9b9a218b-d1b8-4129-946e-251494e3ce7c # Email Address
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  8ce822fd-9c12-4dfa-9ef3-42966b9fe46f: # Phone Number
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: phoneNumber
+    instructions: 'Format: xxx.xxx.xxxx'
+    name: 'Phone Number'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: xxx.xxx.xxxx
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  9b9a218b-d1b8-4129-946e-251494e3ce7c: # Email Address
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: emailAddress
+    instructions: 'e.g. collegium@uchicago.edu'
+    name: 'Email Address'
+    searchable: false
+    settings:
+      placeholder: ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Email
+  b0ae2ad9-7257-4cbf-9876-384fbc36354e: # Street Address
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: streetAddress
+    instructions: 'e.g. 5701 S. Woodlawn Avenue'
+    name: 'Street Address'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  cdc834cd-c6bc-443d-ba86-edc70defd5a0: # Location
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: location
+    instructions: 'e.g. Chicago, IL 60637'
+    name: Location
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  d30dbef2-6253-486c-a07d-7a57e79c1fcf: # Fax Number
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: faxNumber
+    instructions: 'Format: xxx.xxx.xxxx'
+    name: 'Fax Number'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: xxx.xxx.xxxx
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText

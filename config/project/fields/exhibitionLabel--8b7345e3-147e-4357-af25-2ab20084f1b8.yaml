@@ -1,0 +1,35 @@
+columnSuffix: slbyomsl
+contentColumnType: string
+fieldGroup: 840b4f3b-b9bb-4665-8929-9d5969e6c272 # Exhibition
+handle: exhibitionLabel
+instructions: 'Select a label for the featured exhibition (e.g. "Upcoming").'
+name: 'Featured Label'
+searchable: false
+settings:
+  optgroups: true
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Upcoming
+        -
+          - value
+          - upcoming
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Featured
+        -
+          - value
+          - featured
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

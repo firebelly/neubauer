@@ -1,0 +1,44 @@
+field: 307bc9bb-3bc7-45b4-b535-976adc89de97 # Narrative Block
+fieldLayouts:
+  31687c5a-5184-4fc3-9424-9bc7935e1b00:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 49f91a58-0c7a-4d84-a70d-fe29b1128987 # Select an existing "Exhibition," or create a new one.
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  49f91a58-0c7a-4d84-a70d-fe29b1128987: # Select an existing "Exhibition," or create a new one.
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: item
+    instructions: ''
+    name: 'Select an existing "Exhibition," or create a new one.'
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      limit: '1'
+      localizeRelations: false
+      selectionLabel: 'Add an exhibition'
+      showSiteMenu: true
+      source: null
+      sources:
+        - 'section:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Entries
+handle: exhibitionNarrative
+name: 'Exhibition Narrative'
+sortOrder: 2

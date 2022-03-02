@@ -1,0 +1,8 @@
+baseUrl: $PRIMARY_SITE_URL
+handle: default
+hasUrls: true
+language: en-US
+name: neubauer
+primary: true
+siteGroup: efbbd4ec-e2c9-4adc-8df6-02610b708a5d # neubauer
+sortOrder: 1

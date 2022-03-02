@@ -1,0 +1,139 @@
+/* project.scss */
+
+/* ---------------------------------------------------------------------
+ Project-specific generic element declarations
+------------------------------------------------------------------------ */
+@use "utils/_utils" as *;
+@use "components/__components" as *;
+@use "sass:math";
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%; // Reset base font size for easier em & rem calculations: 1em = 10px
+	-webkit-overflow-scrolling: touch;
+	scroll-behavior: smooth;
+	min-height: -webkit-fill-available;
+}
+
+body {
+	$max: map-get($breakpoints,'xl');
+	max-width: #{$max};
+	min-height: -webkit-fill-available;
+	overflow-x: hidden;
+	background:getColor('white');
+	color: getColor('black');
+	font-family: $font-primary;
+	-webkit-font-smoothing: antialiased;
+	-webkit-overflow-scrolling: touch;
+
+	@include breakpoint(md) {
+		//font-size: 200%;
+	}
+
+	@include breakpoint(lg) {
+		//font-size: 150%;
+	}
+
+	@include breakpoint(xl) {
+	}
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	font-weight: normal;
+}
+
+ol, ul {
+	margin: 0;
+	padding: 0;
+}
+
+p {
+	margin: 0;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+}
+
+.viewportMod {
+	&._is-debug::before {
+		font-size: 1.1em;
+	}
+}
+
+/* ---------------------------------------------------------------------
+  Accessibility Skip
+------------------------------------------------------------------------ */
+.skip-link {
+	background: getColor('black');
+	color: getColor('white');
+	font-weight: 700;
+	left: 50%;
+	padding: 4px;
+	position: absolute;
+	transform: translateY(-100%);
+}
+  
+.skip-link:focus {
+	transform: translateY(0%);
+}
+
+.skip-link:focus-within {
+	transform: translateY(0%);
+}
+
+/* ---------------------------------------------------------------------
+  Initialize common components
+
+  Example:
+  @include accordionMenu($selector:'.myAccordion',$icon-size:20px,$default:true);
+------------------------------------------------------------------------ */
+@include assetItem('.profileAsset');
+
+
+/* ---------------------------------------------------------------------
+  Person
+------------------------------------------------------------------------ */
+.contentContainer {
+	font-size: 1rem;
+	max-width: 1440px;
+	padding: 2em;
+
+	@include breakpoint(md) {
+		padding: 4em;
+	}
+
+}
+
+.profileContainer {
+
+	@include breakpoint(md) {
+		@include flexParent($display:flex, $values:row nowrap);
+		@include alignItems(flex-start);
+		padding-right: 12em;
+		gap: 4em;
+
+		> * {
+			@include flexChild(0 1 50%);
+		}
+	}
+}
+
+.profileAsset {
+
+	&--interior {
+		@include breakpoint(md) {
+			//padding-right: 4em;
+		}	
+	}
+}
+
+.profileBody {
+	font-size: 2.4em;
+}

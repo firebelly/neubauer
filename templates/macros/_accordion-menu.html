@@ -1,0 +1,55 @@
+{# accordionMenu: 
+   See styles/components/_accordion-menu.scss for styling
+
+   @accordionName {str}    - base styling hook
+   @actionList {arr}       - contains accordion objects
+   @allowMultiple {bool}   - (optional) allow multiple accordion panels to be open simultaneously
+   @allowToggle {bool}     - (optional) allow active accordion panel to be toggled
+   @expandIconName {str}   - (optional) e.g. expand-30|expand-20
+   @contractIconName {str} - (optional) e.g. contract-30|contract-20
+#}
+{% macro accordionMenu(accordionName,accordionList,allowMultiple = false,allowToggle = true,expandIconName = null,contractIconName = null) %}
+<div
+    class="{{ accordionName }}" 
+    id="{{ accordionName }}"
+    data-accordion-container="{{ accordionName }}"
+    data-accordion-multiple="{{ allowMultiple ?? false }}" 
+    data-accordion-toggle="{{ allowToggle ?? false }}">
+
+{% for idx, accordion in accordionList %}
+    <h3 class="{{ accordionName }}-title">
+        <button 
+            id="button-{{ accordionName }}-{{ loop.index }}"
+            class="{{ accordionName }}-trigger"
+            data-accordion-trigger="{{ accordionName }}"
+            aria-controls="panel-{{ accordionName }}-{{ loop.index }}"
+            aria-expanded="false"
+            type="button">
+            <span class="{{ accordionName }}-name">{{ accordion.heading }}</span>
+
+            {% if expandIconName and contractIconName %}
+            <span class="{{ accordionName }}-icon">
+                {% set expandIcon, contractIcon = "/spritemap.svg#icon-#{expandIconName}", "/spritemap.svg#icon-#{contractIconName}" %}
+                <svg class="{{ accordionName }}-toggle {{ accordionName }}-toggle--expand" role="presentation">
+                    <use xlink:href="{{ rev(expandIcon) }}"></use>
+                </svg> 
+                <svg class="{{ accordionName }}-toggle {{ accordionName }}-toggle--contract" role="presentation">
+                    <use xlink:href="{{ rev(contractIcon) }}"></use>
+                </svg> 
+            </span>
+            {% endif %}
+        </button>
+    </h3>
+    <div 
+        id="panel-{{ accordionName }}-{{ loop.index }}"
+        class="{{ accordionName }}-panel"
+        role="region"
+        aria-labelledby="button-{{ accordionName }}-{{ loop.index }}"
+        hidden="">
+        <div class="{{ accordionName }}-content">
+            {{ accordion.body }}
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endmacro %}

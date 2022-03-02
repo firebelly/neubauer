@@ -1,0 +1,14 @@
+columnSuffix: pkhgejmj
+contentColumnType: boolean
+fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
+handle: currentStatus
+instructions: 'Defaults to "In Progress"'
+name: Status
+searchable: false
+settings:
+  default: true
+  offLabel: Completed
+  onLabel: 'In Progress'
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Lightswitch

@@ -1,0 +1,45 @@
+<style>
+.adminTip-label {
+    color: #596673;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.adminTip-box {
+  background: #f3f7fc;
+  margin-top: 0;
+  padding: 1em;
+  border-radius: 10px;
+}
+.adminTip-desc {
+    margin-top: 0;
+}
+.adminTip-list {
+    margin-left: 2em;
+    list-style-type: disc;
+}
+</style>
+
+
+{% set currentSection = "section" in element|keys ? element.section : element %}
+{% set isIndex = ("Index" in currentSection) %}
+{% set currentEntryType = isIndex ? currentSection|replace(" Index","") : currentSection|replace("s","") %}
+
+{% set isExhibitions = (currentEntryType == "Exhibitions") %}
+{% set isPeople = (currentEntryType == "People") %}
+
+<h3 class="adminTip-label">{{ isIndex ? "" : currentEntryType ~ " " }}Opener Image</h3>
+
+<p class="adminTip-desc">
+    {% if isExhibitions or isPeople %}
+    An opener image is optional for the {{ currentEntryType}} section; however, if adding one:
+    {% else %}
+    Add an Opener Image for the {{ currentEntryType }}{% if isIndex %} Section.{% endif %}
+    {% endif %}
+</p>   
+<div class="adminTip-box">
+    <ul class="adminTip-list">
+        <li>Recommended size: 1360px x 480px.</li>
+        <li>Be sure to add a <em>caption</em> that provides additional context to the image, as well as <em>alt text</em> for SEO and accessibility.</li> 
+        <li><strong>Hint:</strong> Once you've added an image, double-click its thumbnail below to update the caption and alt text.</li>
+    </ul>
+</div>  

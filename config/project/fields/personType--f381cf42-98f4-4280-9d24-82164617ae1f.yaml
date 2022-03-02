@@ -1,0 +1,24 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 206e479c-63c6-4776-b5f2-709e81c8c2fd # Person
+handle: personType
+instructions: 'Add as many types as needed, e.g. "Current Researcher," "Former Staff"'
+name: 'Person Type'
+searchable: false
+settings:
+  allowLimit: false
+  allowMultipleSources: false
+  allowSelfRelations: false
+  branchLimit: ''
+  limit: null
+  localizeRelations: false
+  selectionLabel: 'Add a type'
+  showSiteMenu: true
+  source: 'group:dbb74986-f45a-4de0-b349-f466e988a4cb' # Person Types
+  sources: '*'
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Categories

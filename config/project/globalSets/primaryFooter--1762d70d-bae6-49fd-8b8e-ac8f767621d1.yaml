@@ -1,0 +1,32 @@
+fieldLayouts:
+  a18fc235-39fd-46f2-9c1c-e049dc4eb70c:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 1b5ff85e-b240-4399-b573-d707fe1c03da # Discover More
+            instructions: ''
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: 'Discover More'
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: ad039f29-1b37-466f-8148-84f4a6bad1e2 # Contact Info
+            instructions: ''
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: 'Contact Info'
+        sortOrder: 2
+handle: primaryFooter
+name: 'Primary Footer'
+sortOrder: 1

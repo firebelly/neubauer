@@ -1,0 +1,43 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 8b1838a3-ba11-4d93-bb4f-ffb4b03082ca # Footer
+handle: discoverMore
+instructions: 'Labeled links with brief descriptions that display within the footer. Add three links.'
+name: 'Discover More'
+searchable: false
+settings:
+  columns:
+    __assoc__:
+      -
+        - 1d2233b4-6057-429d-8554-943383539dcb # Label
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 5f9f5e73-b6cf-46f5-8012-60b8301bff36 # Description
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 8e497ed8-5673-40b5-a1ca-3f83b9ef05b6 # URL
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_discovermore}}'
+  fieldLayout: matrix
+  maxRows: '3'
+  minRows: '3'
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add a link'
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

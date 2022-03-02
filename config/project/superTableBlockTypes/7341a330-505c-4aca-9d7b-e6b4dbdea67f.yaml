@@ -1,0 +1,121 @@
+field: 6217da4c-403b-4e7c-bfd0-c78365638e41 # Citations
+fieldLayouts:
+  6a4ab632-2ea2-40b1-ab35-bc33a5bcc44d:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 6225f69a-e829-4678-a475-92e742c178d2 # Article Title
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 6aa48823-cbaf-44a6-9309-745e32af08cf # Article Contributor(s)
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 3ea2c78d-77d3-4d32-8e59-ee65d76e2cc8 # Publication Name
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: a75bfc1f-4f92-47d9-a862-6f67efd7b4cc # Article URL
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  3ea2c78d-77d3-4d32-8e59-ee65d76e2cc8: # Publication Name
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: publicationName
+    instructions: "Name of publication, and any other relevant information (i.e. volume, date), \r\ne.g. Modern Intellectual History, 4(3), 495-508"
+    name: 'Publication Name'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  6aa48823-cbaf-44a6-9309-745e32af08cf: # Article Contributor(s)
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: articleContributors
+    instructions: 'Semi-colon-separated list of contributors, authors or editors listed alphabetically (Last Name, First Name), e.g. Berg, Maxine; Hudson, Pat; Sonenscher, Michael, eds.'
+    name: 'Article Contributor(s)'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  6225f69a-e829-4678-a475-92e742c178d2: # Article Title
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: articleTitle
+    instructions: ''
+    name: 'Article Title'
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  a75bfc1f-4f92-47d9-a862-6f67efd7b4cc: # Article URL
+    columnSuffix: null
+    contentColumnType: string(255)
+    fieldGroup: null
+    handle: articleUrl
+    instructions: 'Link to article, e.g. https://google.com'
+    name: 'Article URL'
+    searchable: false
+    settings:
+      maxLength: '255'
+      placeholder: null
+      types:
+        - url
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Url

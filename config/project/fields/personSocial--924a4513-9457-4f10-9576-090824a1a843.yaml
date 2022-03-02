@@ -1,0 +1,96 @@
+columnSuffix: null
+contentColumnType: text
+fieldGroup: 206e479c-63c6-4776-b5f2-709e81c8c2fd # Person
+handle: personSocial
+instructions: "(Optional) Person's social media account(s). For each account, select an account type, and enter the person's handle or username associated with the account. \r\n\r\nFor example, select \"Instagram\" then type \"uchicollegium\""
+name: 'Social Media'
+searchable: false
+settings:
+  addRowLabel: 'Add a social media account'
+  columnType: text
+  columns:
+    __assoc__:
+      -
+        - col1
+        -
+          __assoc__:
+            -
+              - heading
+              - 'Account Type'
+            -
+              - handle
+              - accountType
+            -
+              - width
+              - ''
+            -
+              - type
+              - select
+            -
+              - options
+              -
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - Instagram
+                    -
+                      - value
+                      - instagram
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - Facebook
+                    -
+                      - value
+                      - facebook
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - LinkedIn
+                    -
+                      - value
+                      - linkedin
+                    -
+                      - default
+                      - false
+                -
+                  __assoc__:
+                    -
+                      - label
+                      - YouTube
+                    -
+                      - value
+                      - youtube
+                    -
+                      - default
+                      - false
+      -
+        - col2
+        -
+          __assoc__:
+            -
+              - heading
+              - 'Account Handle'
+            -
+              - handle
+              - accountHandle
+            -
+              - width
+              - ''
+            -
+              - type
+              - singleline
+  maxRows: ''
+  minRows: ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Table

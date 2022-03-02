@@ -1,0 +1,139 @@
+fieldLayouts:
+  09138ec8-c94b-474e-84ed-ff755e86dec9:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\EntryTitleField
+            warning: null
+            width: 100
+          -
+            fieldUid: 92ff1e19-9bd3-4b91-98fa-6965b49847f1 # Event Location
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 1b346868-16dd-435c-b0ff-d4319de58b94 # Date Block
+            instructions: ''
+            label: 'Event Date(s)'
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            fieldUid: 8028473d-ea1d-41ca-a24b-7e636f4225c2 # Event Type
+            instructions: ''
+            label: ''
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 4ca3c4c3-a656-4252-a5b3-c2ae5eeea39b # Event Label
+            instructions: ''
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 09f28401-5afb-4037-a4d4-988179869f4d # Related Exhibition
+            instructions: 'Connect an exhibition to the event.'
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 2d527c5e-9c0d-4cc1-ae6e-7be103ce4ff9 # Related Project
+            instructions: 'Connect a project to the event.'
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            template: control-panel/common/_card-image.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+          -
+            fieldUid: 539c4bcb-5095-490d-81b8-872d3745551f # Card Image
+            instructions: ' '
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            fieldUid: b79984f8-2e51-4b9f-8356-b887f57da8fd # Call-to-Actions
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            template: control-panel/events/_events-example.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Info
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: 4defd050-67bf-44b0-a585-e6a0f635921d # Summary
+            instructions: '**Brief description of the event (Optional)**'
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Summary
+        sortOrder: 2
+handle: module
+hasTitleField: true
+name: Module
+section: 54497447-5d94-44d4-aed1-b898e86a9b77 # Events
+sortOrder: 1
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

@@ -1,0 +1,12 @@
+{% set env = getenv('ENVIRONMENT') %}
+<footer class="primaryFooter" id="primaryFooter">
+</footer>
+
+<div id="viewportMod" class="viewportMod{{ env == 'dev' ? ' _is-debug' : '' }}"></div>
+
+{% block js %}
+{{ sprig.script }}
+<script async src="{{ rev('/scripts/manifest.js') }}"></script>
+<script async src="{{ rev('/scripts/vendor.js') }}"></script>
+<script async src="{{ rev('/scripts/main.js') }}"></script>
+{% endblock %}

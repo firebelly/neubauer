@@ -1,0 +1,163 @@
+fieldLayouts:
+  6838d822-a205-4c0b-92db-59ff3ce260cd:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\EntryTitleField
+            warning: null
+            width: 100
+          -
+            fieldUid: 1b346868-16dd-435c-b0ff-d4319de58b94 # Date Block
+            instructions: ''
+            label: 'Exhibition Date(s)'
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            fieldUid: 7b9acf95-b9b8-48aa-ba4f-223883c1e223 # Topics
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            template: control-panel/common/_opener-image.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+          -
+            fieldUid: dd463042-99d6-4725-b849-2546454db735 # Opener Image
+            instructions: ' '
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            template: control-panel/common/_card-image.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+          -
+            fieldUid: 539c4bcb-5095-490d-81b8-872d3745551f # Card Image
+            instructions: " \r\n\r\n"
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            fieldUid: b79984f8-2e51-4b9f-8356-b887f57da8fd # Call-to-Actions
+            instructions: 'Add as many call-to-actions as needed that should display under the exhibition''s Opener Image. See screenshot below for example links.'
+            label: ''
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/exhibitions/_exhibition-cta.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Info
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: 4defd050-67bf-44b0-a585-e6a0f635921d # Summary
+            instructions: "**Brief description of exhibition**\r\n\r\nMaximum char count: 675"
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Summary
+        sortOrder: 2
+      -
+        elements:
+          -
+            fieldUid: 5c40b73f-d87a-4035-b7a3-070b71bdb617 # Gallery Image
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Gallery
+        sortOrder: 3
+      -
+        elements:
+          -
+            fieldUid: 307bc9bb-3bc7-45b4-b535-976adc89de97 # Narrative Block
+            instructions: "## Add as many narratives as needed. \r\n\r\nNarratives can be reordered by drag & drop. "
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/exhibitions/_exhibition-narrative.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Narratives
+        sortOrder: 4
+      -
+        elements:
+          -
+            fieldUid: 2d527c5e-9c0d-4cc1-ae6e-7be103ce4ff9 # Related Project
+            instructions: 'Connect the exhibition to a project by selecting an existing project, or creating a new one.'
+            label: 'Is this exhibition part of a project?'
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/exhibitions/_exhibition-related.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: 'Related Project'
+        sortOrder: 5
+handle: interior
+hasTitleField: true
+name: Interior
+section: 01aee8f9-1a88-4c82-b1ae-372cd5805db7 # Exhibitions
+sortOrder: 1
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

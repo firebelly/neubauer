@@ -1,0 +1,37 @@
+field: 1b346868-16dd-435c-b0ff-d4319de58b94 # Date Block
+fieldLayouts:
+  241178a8-da01-4993-a9ef-9246bf0a8069:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: e75102dc-d05f-4089-bd59-28bf186610f9 # __blank__
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  e75102dc-d05f-4089-bd59-28bf186610f9: # __blank__
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: item
+    instructions: ''
+    name: __blank__
+    searchable: false
+    settings:
+      endAfterStart: '1'
+      showEndTime: '1'
+      showStartTime: '1'
+      someAttribute: 'Some Default'
+    translationKeyFormat: null
+    translationMethod: none
+    type: studioespresso\daterange\fields\DateRangeField
+handle: datePlusTimeRange
+name: 'Date + Time Range'
+sortOrder: 5

@@ -1,0 +1,32 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 840b4f3b-b9bb-4665-8929-9d5969e6c272 # Exhibition
+handle: galleryImage
+instructions: "Add as many gallery images as needed. Thumbnails can be reordered by drag & drop.\r\n\r\n- Recommended minimum size: 1440px x 1440px\r\n\r\n- Be sure to add a *caption* that provides additional context to the image, as well as *alt text* for SEO and accessibility.\r\n \r\n**Hint:** once you've added an image, double-click its thumbnail below to update the caption and alt text."
+name: 'Gallery Image'
+searchable: false
+settings:
+  allowSelfRelations: false
+  allowUploads: true
+  allowedKinds: null
+  defaultUploadLocationSource: 'volume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  defaultUploadLocationSubpath: '{section}{% if slug %}/{slug}{% endif %}/gallery/'
+  limit: ''
+  localizeRelations: false
+  previewMode: full
+  restrictFiles: ''
+  selectionLabel: 'Add a gallery image'
+  showSiteMenu: true
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  singleUploadLocationSource: 'volume:486a45fd-ed4e-40c5-b637-d55222520ab5'
+  singleUploadLocationSubpath: ''
+  source: null
+  sources: '*'
+  targetSiteId: null
+  useSingleFolder: false
+  validateRelatedElements: false
+  viewMode: large
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Assets

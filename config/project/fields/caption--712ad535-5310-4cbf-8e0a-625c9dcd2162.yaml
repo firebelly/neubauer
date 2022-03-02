@@ -1,0 +1,19 @@
+columnSuffix: daibqqhh
+contentColumnType: string(600)
+fieldGroup: 10ed9c28-61c3-4258-bc65-24b2ecaa7930 # Asset
+handle: caption
+instructions: 'A brief image or video caption that adds context or credit to the media. (Max character count: 150)'
+name: Caption
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: 150
+  code: ''
+  columnType: null
+  initialRows: '4'
+  multiline: ''
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

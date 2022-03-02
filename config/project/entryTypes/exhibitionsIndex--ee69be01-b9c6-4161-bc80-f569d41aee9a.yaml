@@ -1,0 +1,90 @@
+fieldLayouts:
+  1d52a87b-37e4-4edd-8de8-39bb49681fbd:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\EntryTitleField
+            warning: null
+            width: 100
+          -
+            fieldUid: d5c86c8a-c961-4fb2-8348-90331ee47da2 # Opener Content
+            instructions: "Brief text introducing the Exhibitions section.\r\n\r\nMaximum character count: 675"
+            label: ''
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/common/_opener-image.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+          -
+            fieldUid: dd463042-99d6-4725-b849-2546454db735 # Opener Image
+            instructions: ' '
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/exhibitions/_exhibition-opener.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Opener
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: e93b9edb-c0f9-454a-b64e-43cd24153a86 # Featured Exhibition
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 8b7345e3-147e-4357-af25-2ab20084f1b8 # Featured Label
+            instructions: ''
+            label: ''
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/exhibitions/_exhibition-featured.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: 'Featured Exhibition'
+        sortOrder: 2
+handle: exhibitionsIndex
+hasTitleField: false
+name: 'Exhibitions Index'
+section: 98858034-126a-44ae-9de2-5508625e9e84 # Exhibitions Index
+sortOrder: 1
+titleFormat: '{section.name|raw}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

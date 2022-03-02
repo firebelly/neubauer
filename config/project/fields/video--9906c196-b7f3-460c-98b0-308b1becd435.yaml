@@ -1,0 +1,12 @@
+columnSuffix: null
+contentColumnType: text
+fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
+handle: video
+instructions: "Add a video to accompany the article\r\n\r\ne.g. http://vimeo.com/myvideo/ or http://youtube.com/myvideo/. Preview of the video will display below once added."
+name: Video
+searchable: false
+settings:
+  url: ''
+translationKeyFormat: null
+translationMethod: none
+type: wrav\oembed\fields\OembedField

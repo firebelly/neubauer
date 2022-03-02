@@ -1,0 +1,24 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
+handle: topicList
+instructions: 'Select an existing topic, or create a new one; add as many as needed. Topics are used to index, search, and integrate Projects and Exhibitions.'
+name: Topics
+searchable: false
+settings:
+  allowLimit: false
+  allowMultipleSources: false
+  allowSelfRelations: false
+  branchLimit: ''
+  limit: null
+  localizeRelations: false
+  selectionLabel: 'Add a topic'
+  showSiteMenu: true
+  source: 'group:44640def-c232-4e0a-b207-660156167038' # Topics
+  sources: '*'
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Categories

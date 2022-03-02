@@ -1,0 +1,22 @@
+{% set env = getenv('ENVIRONMENT') %}
+{% set siteSlug, siteTitle = '', '' %}
+{% set siteContent = '' %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% hook 'seo' %}
+
+    <meta name="generator" content="Craft CMS">
+    <meta name="subject" content="{{ siteContent }}">
+
+    <link rel="stylesheet" href="{{ rev('/styles/main.css') }}">
+    <link rel="author" href="{{ siteUrl }}humans.txt">
+
+    <link rel="icon" sizes="192x192" href="{{ rev('/images/icons/#{siteSlug}-icon-192.png') }}">
+    <link rel="apple-touch-icon" href="{{ rev('/images/icons/#{siteSlug}-icon-192.png') }}">
+    <link rel="mask-icon" href="{{ rev('/images/icons/#{siteSlug}-icon-pinned-16.svg') }}" color="#">
+    <link rel="shortcut icon" type="image/ico" href="{{ rev('/images/icons/#{siteSlug}-favicon.ico') }}">
+</head>
+

@@ -1,0 +1,40 @@
+/* _viewport.scss */
+@use "_config" as *;
+@use "_system" as *;
+
+/* ---------------------------------------------------------------------
+ Viewport Module
+ Visual responsive development helper.
+ Dynamically updates viewport module content with current breakpoint key.
+------------------------------------------------------------------------ */
+.viewportMod {
+	// Hidden by default; display in debug mode
+    &._is-debug {
+    	box-sizing: border-box;
+    	padding: 0.2rem;
+	    bottom: 0.5rem;
+	    left: 0;
+	    position: fixed;
+	    z-index: 2000;
+	    background: getColor('black');
+	    color: getColor('white');
+	    font: normal 1rem arial, helvetica;
+
+		// Override font-size on the ::pseudo
+		// within project.scss as needed
+	    &::before {
+	        display: block;
+	        content: '';
+	        text-align: center;
+	    }
+
+	    @each $br, $width in $breakpoints {
+	    	@include breakpoint($br) {
+				&::before {
+	            	content: '#{$br}';
+	        	}
+	        }
+	    }
+    }
+
+}

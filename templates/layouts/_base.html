@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+
+{% include 'partials/_head' %}
+<body>
+    <a class="skip-link" href="#primaryContent">
+        Skip to content
+    </a>
+    <header class="primaryHeader">
+        <h1>   
+            <a href="{{ siteUrl }}">
+                <span class="primaryHeader-title"></span>
+                <svg class="primaryHeader-logo" role="img">
+                    <use xlink:href="{{ rev('/spritemap.svg#logo-#{siteSlug}-icon') }}"></use>
+                </svg>
+            </a>
+        </h1>
+    </header>
+    <main class="primaryContent" id="primaryContent" tabindex="-1">     
+        {% block content %}
+        {% endblock %}
+    </main>
+{% include 'partials/_footer' %}
+</body>
+</html>

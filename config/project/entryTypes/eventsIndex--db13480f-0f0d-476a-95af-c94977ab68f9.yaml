@@ -1,0 +1,67 @@
+fieldLayouts:
+  fd8a05d9-0ce3-4e69-9a90-7f7719b61dd3:
+    tabs:
+      -
+        elements:
+          -
+            heading: 'Events Page Opener'
+            type: craft\fieldlayoutelements\Heading
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\EntryTitleField
+            warning: null
+            width: 100
+          -
+            fieldUid: d5c86c8a-c961-4fb2-8348-90331ee47da2 # Opener Content
+            instructions: "Brief text introducing the Events section. \r\n\r\nMaximum character count: 675"
+            label: ''
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/common/_opener-image.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+          -
+            fieldUid: dd463042-99d6-4725-b849-2546454db735 # Opener Image
+            instructions: ' '
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/events/_events-opener.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: eventsIndex
+hasTitleField: false
+name: 'Events Index'
+section: 6c89b3bb-96bc-468a-ba96-98c7cd21c777 # Events Index
+sortOrder: 1
+titleFormat: '{section.name|raw}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

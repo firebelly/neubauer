@@ -1,0 +1,37 @@
+{# actionItem: 
+   See styles/components/_actions.scss for styling
+
+   @actionName {str}    - base styling hook
+   @actionType {str}    - e.g. email|external
+   @actionVariant {str} - (optional) e.g. solid|ghost
+   @actionText {str}    - call-to-action
+   @actionUrl {str}     - button destination
+   @actionIcon {str}    - (optional) e.g. arrow-30|download-20|email-20
+   @actionData {str}    - (optional) data-attr-name="value" 
+#}
+{% macro actionItem(actionName,actionType,actionVariant = null,actionText,actionUrl,actionIcon = null,actionData = null) %}
+<a 
+    class="{{ actionName }}{% if actionVariant %} {{ actionName }}--{{ actionVariant }}{% endif %}{% if actionIcon %} {{ actionName }}--hasicon{% endif %}" 
+    href="{% if actionType == 'email' %}mailto:{% endif %}{{ actionUrl }}"
+    {% if actionType == 'external' %}
+    target="_blank"
+    rel="external nofollow"
+    {% endif %}
+    {% if actionData %}
+    {{ actionData }}
+    {% endif %}>
+        <span 
+            class="{{ actionName }}-trigger">
+            {{ actionText }}
+        </span>
+        {% if actionIcon %}
+        <svg 
+            class="{{ actionName }}-icon">
+            {% set iconPath = "/spritemap.svg#icon-#{actionIcon}" %}
+            <use xlink:href="{{ rev(iconPath) }}"></use>
+            {% endif %}
+        </svg> 
+        {% endif %}
+</a>
+{% endmacro %}
+

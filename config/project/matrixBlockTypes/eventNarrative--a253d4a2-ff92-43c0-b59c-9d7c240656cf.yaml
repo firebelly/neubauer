@@ -1,0 +1,44 @@
+field: 307bc9bb-3bc7-45b4-b535-976adc89de97 # Narrative Block
+fieldLayouts:
+  f142aa3c-5af5-4d07-88f7-2ac1b329a3b4:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: c00a2e11-74cb-4d5b-95f2-1878dee82fee # Select an existing "Event," or create a new one.
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  c00a2e11-74cb-4d5b-95f2-1878dee82fee: # Select an existing "Event," or create a new one.
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: item
+    instructions: ''
+    name: 'Select an existing "Event," or create a new one.'
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      limit: '1'
+      localizeRelations: false
+      selectionLabel: 'Add an event'
+      showSiteMenu: true
+      source: null
+      sources:
+        - 'section:54497447-5d94-44d4-aed1-b898e86a9b77' # Events
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Entries
+handle: eventNarrative
+name: 'Event Narrative'
+sortOrder: 3

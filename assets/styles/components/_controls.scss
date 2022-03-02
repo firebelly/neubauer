@@ -1,0 +1,600 @@
+/* _controls.scss */
+@use "../utils/_utils" as *;
+
+/* ---------------------------------------------------------------------
+  Select Control: Structure
+  See templates/macros/_controls.html for markup
+------------------------------------------------------------------------ */
+@mixin controlSelect($selector,$icon-size:20px,$default:true) {
+    // TODO: 
+    // 1. integrate JS to get this the rest of the way for WCAG
+    $transition: 280ms all 120ms ease-out;
+    $border-size: 1px;
+
+    #{$selector} {
+        font-size: 1rem;
+        
+        &-title {
+            margin: 0 0 1em 0;
+        }
+
+        &-container {
+            display: grid;
+            place-items: start;
+        }
+
+        &-list {
+            display: grid;
+            grid-auto-flow: column;
+            margin: 0;
+            padding: 0;
+            list-style: none; 
+        }   
+
+        &-dropdown {
+            margin: 0 2em 0 0;
+            position: relative;
+        }        
+
+        &-button {
+            @include resetNativeButton;
+            @include alignItems(center);
+            border: $border-size solid transparent;
+            display: inline-flex;
+            padding: 0.8em 1.5em;
+            transition: $transition;
+            
+            #{$selector}-dropdown:hover & {
+                border-bottom: none;
+            }
+        }
+
+        &-label {
+            padding: 0 3em 0 0;
+        }
+
+        &-menu {
+            border: $border-size solid transparent;
+            border-top: none;
+            min-width: 15ch;
+            width: 100%;
+            padding: 1em 2em;
+            position: absolute;
+            top: calc(100% - 1em);
+            left: 50%;
+            transform: rotateX(-90deg) translateX(-50%);
+            transform-origin: top center;
+            transition: $transition;
+            opacity: 0.3;
+            visibility: hidden;
+            z-index: 2;
+    
+            #{$selector}-dropdown:hover & {
+                opacity: 1;
+                transform: rotateX(0) translateX(-50%);
+                visibility: visible;
+            }
+
+        }
+
+        &-icon {
+            display: inline-block;
+            height: $icon-size;
+            width: $icon-size;
+        }
+
+        &-item {
+            
+            a:link,
+            a:visited,
+            a:hover,
+            a:active {
+                display: block;
+            }
+
+        }
+
+    }
+
+    @if $default != false {
+		@include controlSelect--default($selector);
+	}
+
+}
+
+/* -------------------------------------------------------------------------------
+ Select Control: Default Presentation
+---------------------------------------------------------------------------------- */
+@mixin controlSelect--default($selector) {
+    $default-color: getColor('black');
+    $border-radius: 10px;
+    $border-default-color: getColor('black');
+    $menu-default-bg: getColor('white');
+
+    #{$selector} {
+        
+        &-button {
+            border-color: $default-color;
+            border-radius: $border-radius;
+            background: none;
+
+            #{$selector}-dropdown:hover & {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+
+        &-menu {
+            border-color: $border-default-color;
+            border-bottom-right-radius: $border-radius;
+            border-bottom-left-radius: $border-radius;
+            background: $menu-default-bg;
+        }
+
+        &-item {
+            
+            a:link,
+            a:visited,
+            a:hover,
+            a:active {
+                color: $default-color;
+                text-decoration: none;
+            }
+
+        }
+
+
+    }
+
+}
+
+/* -------------------------------------------------------------------------------
+ Sort Control: Structure
+---------------------------------------------------------------------------------- */
+@mixin controlSort($selector,$icon-size: 20px,$default:true) {
+    $border-size: 2px;
+
+    #{$selector} {
+
+        &-title {
+            margin: 0 0 1em 0;
+        }
+
+        &-trigger {
+            @include flexParent();
+
+            &:link,
+            &:visited,
+            &:hover,
+            &:active {
+                text-decoration: none;
+            }
+        }
+
+        &-label {
+            position: relative;
+
+            &::after {
+                content: "";
+                width: 100%;
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                border-bottom: $border-size solid transparent;
+            }
+        }
+
+        &-icon {
+            @include flexChild();
+            height: $icon-size;
+            width: $icon-size;
+        }
+
+    }
+
+    @if $default != false {
+		@include controlSort--default($selector);
+	}
+
+}
+
+/* -------------------------------------------------------------------------------
+ Sort Control: Default Presentation
+---------------------------------------------------------------------------------- */
+@mixin controlSort--default($selector) {
+    $action-default-color: getColor('blue');
+
+    #{$selector} {
+
+        &-trigger {
+            &:link,
+            &:visited,
+            &:hover,
+            &:active {
+                color: $action-default-color;
+            }
+        }
+
+        &-label {
+            &::after {
+                border-bottom-color: $action-default-color;
+            }
+        }
+
+        &-icon {
+            fill: $action-default-color;
+        }
+
+    }
+
+}
+
+
+/* -------------------------------------------------------------------------------
+ Layout Control: Structure
+---------------------------------------------------------------------------------- */
+@mixin controlLayout($selector,$height:25px,$width:25px,$icon-size:20px,$default:true) {
+
+    $border-size: 2px;
+    $radio-size: 15px;
+    $color: getColor('black',10);
+    $triggerThreshold: 250%;
+
+    #{$selector} {
+
+        &-title {
+            margin: 0 0 1em 0;
+
+            &--right {
+                text-align: right;
+            }
+        }
+        
+        &-list {
+            @include flexParent();
+        }
+        
+        &-item {
+            @include flexParent();
+            @include flexChild();
+            @include alignItems(center);
+
+            &:not(:first-child)::before {
+                content: '';
+                border-left: 1px solid transparent;
+                height: 16px;
+                margin: 0 0 0 1em;
+                padding: 0 0 0 1em;
+            }
+        }
+
+        &-name {
+            margin: 0 0 0 0.5em;
+        }
+
+        &-control {
+            height: $height;
+            margin: 0.2em;
+            width: $width;
+            position: relative;
+
+            &-input, &-label {
+                display: block;
+                height: 100%;
+                width: 100%;
+                left: 0;
+                top: 0;
+            }
+
+            &-input {
+                width: $triggerThreshold;
+                opacity: 0;
+                z-index: 2;
+                position: absolute;
+
+                &:checked + #{$selector}-label--faux {
+                    height: calc(100% - #{$border-size});
+                    width:  calc(100% - #{$border-size});
+
+                    &::after {
+                        display: block;
+                        content: '';
+                        height: $radio-size;
+                        width: $radio-size;
+                        position: relative;
+                        top: 3px;
+                        left: 3px;
+                        border-radius: 100%;
+                    }
+
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+            }
+
+            &-label {
+                z-index: 1;
+                position: relative;
+                
+                &--faux {
+                    border: $border-size solid transparent;
+                    border-radius: 100%;
+                }
+
+            }
+
+            &-icon {
+                display: inline-block;
+                height: $icon-size;
+                width: $icon-size;
+                fill: black;
+
+                #{$selector}-label--faux & {
+                    @include totallyHide;
+                }
+
+            }
+
+
+            &-ghost {
+                @include visuallyHide;
+            }
+
+        }
+    }
+
+    @if $default != false {
+		@include controlLayout--default($selector);
+	}
+
+}
+
+/* -------------------------------------------------------------------------------
+ Layout Control: Default Presentation
+---------------------------------------------------------------------------------- */
+@mixin controlLayout--default($selector) {
+
+    $item-border-color: getColor('gray',10);
+    $label-border-color: getColor('black',10);
+    $bg-color: getColor('black',10);
+
+    #{$selector} {
+
+        &-item {
+            &:not(:first-child)::before {
+                border-left-color: $item-border-color;
+            }
+        }
+
+        &-input {
+            &:checked + #{$selector}-label--faux {
+                &::after {
+                    background: $bg-color;
+                }
+            }
+        }
+
+        &-label {
+            &--faux {
+                border-color: $label-border-color;
+                background-color: transparent;
+            }
+        }
+
+        &-icon {
+            display: inline-block;
+            height: $icon-size;
+            width: $icon-size;
+            fill: black;
+
+            #{$selector}-label--faux & {
+                @include totallyHide;
+            }
+        }
+
+    }
+
+}
+
+/* -------------------------------------------------------------------------------
+ Pagination Control: Structure
+---------------------------------------------------------------------------------- */
+@mixin controlPagination($selector,$icon-size:20px,$default:true) {
+    $border-page-size: 1px;
+    $border-nav-size: 2px;
+    $border-num-size: 1px;
+
+    #{$selector} {
+        @include flexParent();
+        margin: 2em 0 0;
+        width: 100%;
+        
+        @include breakpoint(md) {
+            width: auto;
+        }
+
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
+            display: block;
+            text-decoration: none;
+        }
+
+        &-group {
+            @include flexParent();
+            @include flexChild();
+            @include alignItems(center);
+            margin: 0 0 2em 0;
+
+            &--direction {
+                @include breakpoint(md) {
+                    margin: 0;
+                }
+            }
+
+            &--pages {
+                position: relative;
+                padding: 0 0.5em;
+
+                @include breakpoint(md) {
+                    padding: 0 1.5em;
+                    margin: 0 1.2em;
+                
+                    &::before,
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        border-left: $border-page-size solid transparent;
+                        height: 100%;
+                    }
+                    &::before {
+                        left: 0;
+                    }
+                    &::after {
+                        right: 0;
+                    }
+                }
+
+            }
+
+            li {
+                @include flexChild();
+            }
+
+        }
+
+        &-nav {
+            $parent: &;
+            margin: 0 0.8em 0 0;
+            padding-right: 2em;
+            position: relative;
+
+            @include breakpoint(md) {
+                margin: 0 0 0 0.8em;
+            }
+
+            &::after {
+                content: '';
+                display: block;
+                margin: 0.5em 0 0 0;
+                width: 100%;
+                border-bottom: $border-nav-size solid transparent;
+            }
+
+            &._is-inactive {
+                pointer-events: none;
+
+                &:hover {
+                    cursor: default;
+                }
+            }
+
+        }
+
+        &-num {
+            margin: 0 0.5em;
+
+            &::after {
+                content: '';
+                display: block;
+                width: 100%;
+                border-bottom: $border-num-size solid transparent;
+            }
+
+            &._is-inactive {
+                pointer-events: none;
+            }
+
+        }
+
+        &-icon {
+            display: inline-block;
+            height: $icon-size;
+            width: $icon-size;
+            position: absolute;
+            right: 0;
+        }
+    
+    }
+
+    @if $default != false {
+		@include controlPagination--default($selector);
+	}
+
+}
+
+/* -------------------------------------------------------------------------------
+ Pagination Control: Default Presentation
+---------------------------------------------------------------------------------- */
+@mixin controlPagination--default($selector) {
+    $border-left-color: getColor('gray',10);
+    $border-bottom-color: getColor('blue');
+    $inactive-color: getColor('gray',10);
+    $nav-default-color: getColor('blue');
+    $num-default-color: getColor('gray',10);
+    $num-inactive-color: getColor('gray');
+    $icon-default-color: getColor('blue');
+    $icon-inactive-color: getColor('gray',10);
+
+    #{$selector} {
+
+        &--pages {
+
+            @include breakpoint(md) {
+                
+                &::before,
+                &::after {
+                    border-left-color: $border-left-color;
+                }
+            }
+        }
+
+        &-nav {
+            $parent: &;
+            color: $nav-default-color;
+
+            &::after {
+                border-bottom-color: $border-bottom-color;
+
+                @at-root {
+                    #{$parent}._is-inactive::after {
+                        border-color: $inactive-color;
+                    }
+                }
+            }
+
+            &._is-inactive {
+                color: $inactive-color;
+            }
+
+        }
+
+        &-num {
+            color: $num-default-color;
+
+            &._is-inactive {
+                color: $num-inactive-color;
+
+                &::after {
+                    border-bottom-color: $num-inactive-color;
+                }
+            }
+
+        }
+
+        &-icon {
+            fill: $icon-default-color;
+
+            #{$selector}-nav._is-inactive & {
+                fill: $icon-inactive-color;
+            }
+
+        }
+
+    }
+
+}

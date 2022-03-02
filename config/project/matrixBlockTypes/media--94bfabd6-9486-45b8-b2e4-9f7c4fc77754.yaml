@@ -1,0 +1,95 @@
+field: b79984f8-2e51-4b9f-8356-b887f57da8fd # Call-to-Actions
+fieldLayouts:
+  e2899d7f-cb99-4ace-b093-785c9f4a8841:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 83a548ae-9269-46bb-8ee0-4a6929613dd7 # Label
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 84d51659-d55a-4529-bd5d-9c19e31e6fdb # Add a link to the media source
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: b9aaff06-fe75-4456-b02d-bc5736565777 # Provide the length of audio, video, or podcast source
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  83a548ae-9269-46bb-8ee0-4a6929613dd7: # Label
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: actionText
+    instructions: 'e.g. "Listen" or "Watch"'
+    name: Label
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  84d51659-d55a-4529-bd5d-9c19e31e6fdb: # Add a link to the media source
+    columnSuffix: null
+    contentColumnType: string(255)
+    fieldGroup: null
+    handle: actionURL
+    instructions: 'e.g. "http://apple.com/apple-podcasts/my-podcast"'
+    name: 'Add a link to the media source'
+    searchable: false
+    settings:
+      maxLength: '255'
+      placeholder: null
+      types:
+        - url
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Url
+  b9aaff06-fe75-4456-b02d-bc5736565777: # Provide the length of audio, video, or podcast source
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: mediaLength
+    instructions: 'e.g. 13:33 (Optional)'
+    name: 'Provide the length of audio, video, or podcast source'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: media
+name: Media
+sortOrder: 3

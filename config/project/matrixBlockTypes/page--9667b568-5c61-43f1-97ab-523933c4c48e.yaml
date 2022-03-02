@@ -1,0 +1,43 @@
+field: b79984f8-2e51-4b9f-8356-b887f57da8fd # Call-to-Actions
+fieldLayouts:
+  0f2d3c3f-c1d4-465a-80a7-b82953aa0126:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 24a17e09-26e2-478c-9dfe-bbca0be0122b # Select a Neubauer page as the destination
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  24a17e09-26e2-478c-9dfe-bbca0be0122b: # Select a Neubauer page as the destination
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: actionURL
+    instructions: ''
+    name: 'Select a Neubauer page as the destination'
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      limit: '1'
+      localizeRelations: false
+      selectionLabel: 'Link a page'
+      showSiteMenu: true
+      source: null
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Entries
+handle: page
+name: Page
+sortOrder: 1

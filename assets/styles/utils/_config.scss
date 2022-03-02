@@ -1,0 +1,131 @@
+/* _config.scss */
+
+/* ---------------------------------------------------------------------
+ _config contains project-specific settings
+------------------------------------------------------------------------ */
+
+/* ---------------------------------------------------------------------
+ Breakpoints Map
+------------------------------------------------------------------------ */
+$breakpoints: (
+	"xs": "0",
+	"sm": "43em",
+	"md": "62em",
+	"lg": "1260px",
+	"xl": "1441px"
+);
+
+/* ---------------------------------------------------------------------
+ Fonts
+ font url is relative to our compiled stylesheet
+------------------------------------------------------------------------ */
+@mixin getFont($fontname, $filename, $isBold: false, $isItalic: false) {
+
+	@font-face {
+		font-family: $fontname;
+		src: url('../fonts/#{$fontname}/#{$filename}.eot'),
+		     url('../fonts/#{$fontname}/#{$filename}.woff') format('woff'),
+             url('../fonts/#{$fontname}/#{$filename}.woff2') format('woff2'),
+		     url('../fonts/#{$fontname}/#{$filename}.ttf') format('truetype');
+
+		@if $isBold {
+			font-weight: bold;
+		} @else {
+			font-weight: normal;
+		}
+		@if $isItalic {
+			font-style: italic;
+		} @else {
+			font-style: normal;
+		}
+	}
+}
+
+// Define project fonts
+$font-primary-name: 'myfont-sans-regular';
+$font-primary-file: 'myfontSansWeb-Regular';
+
+$font-secondary-name: 'myfont-sans-mono';
+$font-secondary-file: 'myfontSansMonoWeb-Regular';
+
+$font-tertiary-name: 'myfont-sans-light';
+$font-tertiary-file: 'myfontSansMonoWeb-Light';
+
+@include getFont($font-primary-name, $font-primary-file);
+@include getFont($font-secondary-name, $font-secondary-file);
+@include getFont($font-tertiary-name, $font-tertiary-file);
+
+$font-primary: $font-primary-name, sans-serif;
+$font-secondary: $font-secondary-name, sans-serif;
+$font-tertiary: $font-tertiary-name, sans-serif;
+
+// DevHub font
+$font-devhub: sans-serif;
+
+/* ---------------------------------------------------------------------
+ palettes() Map
+ Maps global color families, assigning a "core" or default to each one
+------------------------------------------------------------------------ */
+$palettes: (
+	'red': (
+		core: #800000,
+		10: #DD4A3C,
+		20: #F4C2BE
+	),
+	'yellow': (
+		core: #FBF8E9,
+		10: #FFA319,
+		20: #F7EDBA,
+		30: #EC9213
+	),
+	'green': (
+		core: #348B52
+	),
+	'blue': (
+		core: #4444E4
+,	),
+	'white': (
+		core: #FFFFFF
+	),
+	'black': (
+		core: #000000,
+		10: #0D0D0C
+	),
+	'gray': (
+		core: #4F4E4A,
+		10: #A3A29E,
+		20: #CDCDCB
+	),
+	// DevHub palette
+	'devhub': (
+		'blue': #4a7cf6,
+		'red': #ff3d00,
+		'orange': #ff3d00,
+		'gray': #e2e8f0
+	)
+);
+
+/* ---------------------------------------------------------------------
+ getColor()
+ Retrieves color from palettes() map based on hue, and optional tone parameters
+
+ // Props to https://www.ibm.com/design/language/resources for the conditional
+ // which enforces the %10 convention within the palette map
+
+ // Usage:
+ // background: getColor('gray', 10); // #ecf0f4
+ // background: getColor('gray');     // #5E788D
+------------------------------------------------------------------------ */
+@function getColor($color, $tone: 'core') {
+
+  @if type-of($tone) == 'number' {
+
+  	@if $tone % 10 == $tone {
+    	$tone: $tone * 10;
+    }
+
+  }
+
+  @return map-get(map-get($palettes, $color), $tone);
+
+}

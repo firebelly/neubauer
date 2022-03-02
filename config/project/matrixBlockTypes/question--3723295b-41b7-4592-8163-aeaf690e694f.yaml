@@ -1,0 +1,49 @@
+field: a669cdfe-3072-4a16-b2cc-20c2e4f28eb9 # Spotlight Block
+fieldLayouts:
+  72601a3e-a4d3-4e60-a785-a85b9ac6df73:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 4e880cde-b663-435b-98ea-3b28ebd17af7 # Key Question Content
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  4e880cde-b663-435b-98ea-3b28ebd17af7: # Key Question Content
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: body
+    instructions: "Key question content; multiple questions will be translated into slides.\r\n\r\nMaximum character count: 120"
+    name: 'Key Question Content'
+    searchable: false
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Simple.json
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: ''
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+handle: question
+name: 'Key Question'
+sortOrder: 1

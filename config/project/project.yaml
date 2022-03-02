@@ -1,0 +1,241 @@
+dateModified: 1646241740
+email:
+  fromEmail: betsy@firebellydesign.com
+  fromName: neubauer
+  transportType: craft\mail\transportadapters\Sendmail
+meta:
+  __names__:
+    00ba858c-638d-4a15-85f1-dc3c8f7d2874: 'About Index' # About Index
+    0c6fe226-534a-4703-a928-3b7937eba1db: 'Featured Project' # Featured Project
+    0c99f337-2218-4c6f-b0ad-30589c1ebbc5: neubauer # neubauer
+    01aee8f9-1a88-4c82-b1ae-372cd5805db7: Exhibitions # Exhibitions
+    1b5ff85e-b240-4399-b573-d707fe1c03da: 'Discover More' # Discover More
+    1b346868-16dd-435c-b0ff-d4319de58b94: 'Date Block' # Date Block
+    1c4b2c81-42c9-4a48-bc45-d96d7cb075a1: Affiliation # Affiliation
+    1d5d9084-5116-4341-9273-0e6750188d00: 'Story Narrative' # Story Narrative
+    1d2233b4-6057-429d-8554-943383539dcb: Label # Label
+    1dcbcf8b-88b0-4ed2-83c1-72478538fa6a: 'Exhibition Narrative' # Exhibition Narrative
+    2a21450c-2eec-4dd9-8471-32730404d554: __blank__ # __blank__
+    2aa7cc76-d234-465e-bccf-a196b38144e4: Email # Email
+    2af1e335-4b67-463a-90e3-79430cc1f266: End # End
+    2bd4c98a-17ca-44f2-bb7c-1a21e5b924b9: Address # Address
+    2c03794c-ee5d-433d-9d1c-7c7d3cc3dd81: Appearance # Appearance
+    2d527c5e-9c0d-4cc1-ae6e-7be103ce4ff9: 'Related Project' # Related Project
+    2eb1c876-ef17-46cc-bc9d-811c0340374d: Start # Start
+    2fcce12f-270f-466d-8676-063396ea0bd9: Topics # Topics
+    3c888dfb-dbd7-46d5-a090-f49f218df87f: 'Story Label' # Story Label
+    3cde6b11-23d3-4206-b20b-14d76b82dbbf: 'Date + Time Range' # Date + Time Range
+    3d1bd88f-a886-47d2-909d-054a372a1d39: __blank__ # __blank__
+    3e8382d6-a793-41db-bed1-5fa902fc4b33: Image # Image
+    3ea2c78d-77d3-4d32-8e59-ee65d76e2cc8: 'Publication Name' # Publication Name
+    4a309e71-113e-4d32-b1cf-253702d72281: Label # Label
+    4ca3c4c3-a656-4252-a5b3-c2ae5eeea39b: 'Event Label' # Event Label
+    4d051939-b6d0-4800-8c01-a156665ad91f: Register # Register
+    4defd050-67bf-44b0-a585-e6a0f635921d: Summary # Summary
+    4e880cde-b663-435b-98ea-3b28ebd17af7: 'Key Question Content' # Key Question Content
+    4f3f74e9-4363-4024-a787-0167c7a8081a: 'Add a link to the registration page' # Add a link to the registration page
+    5c40b73f-d87a-4035-b7a3-070b71bdb617: 'Gallery Image' # Gallery Image
+    5f9f5e73-b6cf-46f5-8012-60b8301bff36: Description # Description
+    6aa48823-cbaf-44a6-9309-745e32af08cf: 'Article Contributor(s)' # Article Contributor(s)
+    6c89b3bb-96bc-468a-ba96-98c7cd21c777: 'Events Index' # Events Index
+    7b9acf95-b9b8-48aa-ba4f-223883c1e223: Topics # Topics
+    7e5074b8-9286-4b35-9424-be7fbe9dd19b: Image # Image
+    8b1838a3-ba11-4d93-bb4f-ffb4b03082ca: Footer # Footer
+    8b7345e3-147e-4357-af25-2ab20084f1b8: 'Featured Label' # Featured Label
+    8bf1b66f-209a-47fc-83b4-6cd05d70cb02: 'Date By Year' # Date By Year
+    8ce822fd-9c12-4dfa-9ef3-42966b9fe46f: 'Phone Number' # Phone Number
+    8e497ed8-5673-40b5-a1ca-3f83b9ef05b6: URL # URL
+    8fd99288-7c12-4e97-9e07-616209a1bd9e: Label # Label
+    9a9e267a-3735-42d9-8ab5-7ea1111a74ff: Label # Label
+    9b9a218b-d1b8-4129-946e-251494e3ce7c: 'Email Address' # Email Address
+    09f28401-5afb-4037-a4d4-988179869f4d: 'Related Exhibition' # Related Exhibition
+    10ed9c28-61c3-4258-bc65-24b2ecaa7930: Asset # Asset
+    13c69d07-19c1-4dc3-af5a-7145671835bc: 'Quote Content' # Quote Content
+    15bb1bb5-a683-4cf9-a1b5-3edfe2182dfa: 'Research Index' # Research Index
+    15e90b86-4c9d-4654-b994-f245970468f0: 'Full Summary' # Full Summary
+    18fb76df-c956-475c-8202-71b47fa72ddb: 'People Index' # People Index
+    24a17e09-26e2-478c-9dfe-bbca0be0122b: 'Select a Neubauer page as the destination' # Select a Neubauer page as the destination
+    29a66baf-c15f-4cd8-bc9a-08825a4ee34d: Date # Date
+    40a4b8f6-206e-4664-86a2-9a6e0d2c1213: 'Date + Time' # Date + Time
+    47e78d01-d60c-4623-939e-b212935f0db8: Story # Story
+    49f91a58-0c7a-4d84-a70d-fe29b1128987: 'Select an existing "Exhibition," or create a new one.' # Select an existing "Exhibition," or create a new one.
+    66a3bd47-7aa6-4023-9c01-4f4b2a2b1bdd: 'Error Index' # Error Index
+    68fdccfc-d2f6-4e92-a49c-22f02d67d3b7: Quote # Quote
+    70f4d9f3-ca18-4e75-aaf3-de2fdea80886: Text # Text
+    77e2104f-9397-4206-877a-0aaf7f813485: __blank__ # __blank__
+    83a548ae-9269-46bb-8ee0-4a6929613dd7: Label # Label
+    84b1efbb-d314-43e3-8fb5-fc6af1012146: Common # Common
+    84d51659-d55a-4529-bd5d-9c19e31e6fdb: 'Add a link to the media source' # Add a link to the media source
+    90ab227e-755c-40a8-95e5-b154c2284a37: Project # Project
+    92ff1e19-9bd3-4b91-98fa-6965b49847f1: 'Event Location' # Event Location
+    94bfabd6-9486-45b8-b2e4-9f7c4fc77754: Media # Media
+    094c3891-3671-46cc-a1e0-25740e798305: Times # Times
+    95ffdab7-fa54-4df5-97e6-d7bb1088a352: Image # Image
+    206e479c-63c6-4776-b5f2-709e81c8c2fd: Person # Person
+    284b1f37-fd98-47e6-9a1a-1e1b6400a27e: 'Select an existing "Story," or create a new one.' # Select an existing "Story," or create a new one.
+    307bc9bb-3bc7-45b4-b535-976adc89de97: 'Narrative Block' # Narrative Block
+    314d1749-591d-4f88-a382-680ece5d6b71: 'Date Only' # Date Only
+    426d3cf9-e094-428a-82c2-66a0874790b8: Appearance # Appearance
+    446e488e-e627-4618-95fe-5cec7146b5ad: Module # Module
+    447e6245-204b-41fa-91d2-d99b74c5bc72: 'About Index' # About Index
+    523a11a6-88bd-4fe2-bad0-d9127f8d3e5e: 'Date Range' # Date Range
+    539c4bcb-5095-490d-81b8-872d3745551f: 'Card Image' # Card Image
+    712ad535-5310-4cbf-8e0a-625c9dcd2162: Caption # Caption
+    769b4f61-faf8-4d7a-8f9e-4835ad68b369: 'Search Index' # Search Index
+    840b4f3b-b9bb-4665-8929-9d5969e6c272: Exhibition # Exhibition
+    881a793e-ef76-462e-aad9-1bc0ae20165b: Module # Module
+    881ab662-b053-4f99-bee8-9bd994ffad04: 'End Date' # End Date
+    895c9d65-27aa-4819-a434-9afd5ff0f4b5: Appearance # Appearance
+    924a4513-9457-4f10-9576-090824a1a843: 'Social Media' # Social Media
+    1762d70d-bae6-49fd-8b8e-ac8f767621d1: 'Primary Footer' # Primary Footer
+    3530a622-54c3-4a05-89a1-490b289f1cec: __blank__ # __blank__
+    5954c04f-9f0f-49bd-ab19-7f17413ca714: Video # Video
+    6217da4c-403b-4e7c-bfd0-c78365638e41: Citations # Citations
+    6225f69a-e829-4678-a475-92e742c178d2: 'Article Title' # Article Title
+    9667b568-5c61-43f1-97ab-523933c4c48e: Page # Page
+    9906c196-b7f3-460c-98b0-308b1becd435: Video # Video
+    18400b36-d7ac-4476-aa8e-11f567a13e44: Interior # Interior
+    36019fd7-eb81-4dc0-af12-15575833ecf5: Appearance # Appearance
+    44640def-c232-4e0a-b207-660156167038: Topics # Topics
+    047894b5-efe1-4a12-8b99-900a2d9df90a: Appearance # Appearance
+    72885e22-1f71-4250-b73c-582b782d52c9: 'First Name' # First Name
+    244011b6-03f3-45fa-b766-21bc4c70b758: Body # Body
+    2098244b-aca8-47e2-98e7-0c0b057e76c9: Projects # Projects
+    3723295b-41b7-4592-8163-aeaf690e694f: 'Key Question' # Key Question
+    8028473d-ea1d-41ca-a24b-7e636f4225c2: 'Event Type' # Event Type
+    51786161-bb39-4ca3-9246-d4f938d1a053: 'Research Index' # Research Index
+    54497447-5d94-44d4-aed1-b898e86a9b77: Events # Events
+    55170991-72d7-4945-8338-4d7eeefd8536: Custom # Custom
+    59088958-5649-44ab-993b-ae474fef4c67: 'Add a link to the web page' # Add a link to the web page
+    98858034-126a-44ae-9de2-5508625e9e84: 'Exhibitions Index' # Exhibitions Index
+    a75bfc1f-4f92-47d9-a862-6f67efd7b4cc: 'Article URL' # Article URL
+    a253d4a2-ff92-43c0-b59c-9d7c240656cf: 'Event Narrative' # Event Narrative
+    a669cdfe-3072-4a16-b2cc-20c2e4f28eb9: 'Spotlight Block' # Spotlight Block
+    a985f634-1a5a-456d-b07f-5b0a964f502b: 'Add a document that can be downloaded by visitors' # Add a document that can be downloaded by visitors
+    a9037236-9afc-4591-8ab0-5d1ed7c8dac6: 'Alt Text' # Alt Text
+    abf135fc-5443-48d6-bc54-cf819645a909: Abstract # Abstract
+    ad039f29-1b37-466f-8148-84f4a6bad1e2: 'Contact Info' # Contact Info
+    afe4aa4d-a254-4790-93e7-f8575e3d0073: 'Story Type' # Story Type
+    b0ae2ad9-7257-4cbf-9876-384fbc36354e: 'Street Address' # Street Address
+    b5afa9b0-dd12-4d99-9bdd-fba44a0186a4: End # End
+    b9aaff06-fe75-4456-b02d-bc5736565777: 'Provide the length of audio, video, or podcast source' # Provide the length of audio, video, or podcast source
+    b45dd5d4-f13d-4da4-a383-147faa04ecdb: Start # Start
+    b79984f8-2e51-4b9f-8356-b887f57da8fd: Call-to-Actions # Call-to-Actions
+    bcfd93a5-57c1-4491-bbc0-aca218206183: 'Start Date' # Start Date
+    bd77161e-1841-4cfe-b745-6b2d4e682211: Actions # Actions
+    bf69a54a-5f76-43e5-bae9-36c58e062145: URL # URL
+    c00a2e11-74cb-4d5b-95f2-1878dee82fee: 'Select an existing "Event," or create a new one.' # Select an existing "Event," or create a new one.
+    c9d2a3a1-cf8d-4060-9704-4f800fa8de4e: Attribution # Attribution
+    ca62998e-92bf-4a32-be88-8eacd7a4025c: __blank__ # __blank__
+    cdc834cd-c6bc-443d-ba86-edc70defd5a0: Location # Location
+    d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a: Common # Common
+    d5c86c8a-c961-4fb2-8348-90331ee47da2: 'Opener Content' # Opener Content
+    d8c2bb45-1781-4d8b-bb49-b8b92cf194e8: 'People Index' # People Index
+    d30dbef2-6253-486c-a07d-7a57e79c1fcf: 'Fax Number' # Fax Number
+    d42f1b8d-6335-4a9b-8f81-80061a0faa35: People # People
+    d80e45b8-04d1-46ed-acdf-4a78508e73c6: Appearance # Appearance
+    d5943f00-060b-4c27-974e-b57dccb00c41: Title # Title
+    da9f5f4f-4753-45ed-a951-351b4cc3cd75: Type # Type
+    db13480f-0f0d-476a-95af-c94977ab68f9: 'Events Index' # Events Index
+    dbb74986-f45a-4de0-b349-f466e988a4cb: 'Person Types' # Person Types
+    dd463042-99d6-4725-b849-2546454db735: 'Opener Image' # Opener Image
+    e93b9edb-c0f9-454a-b64e-43cd24153a86: 'Featured Exhibition' # Featured Exhibition
+    e104f1e4-4334-4b43-80b2-47e3fb3813f7: Heading # Heading
+    e75102dc-d05f-4089-bd59-28bf186610f9: __blank__ # __blank__
+    e411160c-4119-4cd7-9b04-9921a260e03a: Status # Status
+    e3631722-e9da-4086-8806-2e7a56ddf46a: Team # Team
+    ea5ef15e-f15f-4cdc-86a4-4193a5f346b9: Download # Download
+    eb6e4b27-3a81-4da1-8f40-fa29c0f7805c: Event # Event
+    ed2564a5-16db-476f-bd15-c976a55d38fa: 'Manual Uploads' # Manual Uploads
+    ee69be01-b9c6-4161-bc80-f569d41aee9a: 'Exhibitions Index' # Exhibitions Index
+    ef7c75e2-900a-42e2-b700-9e7eee852c3d: Abstract # Abstract
+    efbbd4ec-e2c9-4adc-8df6-02610b708a5d: neubauer # neubauer
+    f4cd1bcd-70d6-4ea7-9569-9756a49ff60d: Interior # Interior
+    f8fc100c-a097-4184-a0e8-3f36393711ea: Stories # Stories
+    f55f0760-8acb-4022-8920-361ee1e78c67: 'Last Name' # Last Name
+    f381cf42-98f4-4280-9d24-82164617ae1f: 'Person Type' # Person Type
+    fa7b84ab-aced-4076-9af6-f7c241f2470f: Text # Text
+    fbf7fd25-1dd4-4ceb-a4d9-c468db28e4c9: Interior # Interior
+plugins:
+  assetrev:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  blitz:
+    edition: standard
+    enabled: true
+    licenseKey: RTSE5PWUIJUVG3QKHQ38VE75
+    schemaVersion: 3.10.0
+  cp-css:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.0.0
+  cp-field-inspect:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  date-range:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  field-manager:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  imager:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.0.0
+  imager-x:
+    edition: lite
+    enabled: false
+    licenseKey: WAAV2Q1M9R1L192B1R3QCYHF
+    schemaVersion: 3.0.0
+  imgix:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.0.0
+  matrixmate:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  oembed:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.1
+  reasons:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.1.1
+  redactor:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.3.0
+  seo:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.2.0
+  sprig:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.1
+  super-table:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.2.1
+  ui-element-fields:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+system:
+  edition: solo
+  live: true
+  name: neubauer
+  schemaVersion: 3.7.33
+  timeZone: America/Los_Angeles
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: null
+  photoVolumeUid: null
+  requireEmailVerification: true

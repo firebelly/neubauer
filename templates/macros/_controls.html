@@ -1,0 +1,255 @@
+{# controlItem: 
+   See: styles/components/_controls.scss for styling
+   Required: sprig
+
+   @itemName {str}       - select child name
+   @selectName {str}     - base styling hook
+   @selectSlug {str}     - select parent slug
+   @activeSlug {str}     - active select parent slug
+   @selectDataAttr {str} - (optional) data-attr-name 
+#}
+{% macro controlSelectItem(itemName,selectName,selectSlug,activeSlug) %}
+{% set itemSlug = itemName|lower|replace(' ','-') %}
+{% set isSelectLabel = (itemSlug == selectSlug) ? true : false %}
+{% set isHidden = (itemSlug == activeSlug or activeSlug == '' and isSelectLabel) ? true : false %}
+{# If the item is active, hide it from the select list #}
+<li class="{{ selectName }}-item{% if isSelectLabel %} {{ selectName }}-item--reset{% endif %}{{ isHidden ? ' _is-hidden' : '' }}">
+    <a 
+        id="{{ selectSlug }},{{ itemSlug }}"
+        href=""
+        sprig
+        s-val:{{ selectSlug }}="{% if not isSelectLabel %}{{ itemName }}{% endif %}">
+        {% if isSelectLabel %}Reset{% else %}{{ item }}{% endif %}
+    </a>
+</li>
+{% endmacro %}
+
+{# controlSelect: 
+   See: styles/components/_controls.scss for styling
+   Required: sprig
+
+   @selectName {str}     - base styling hook
+   @selectTitle {str}    - select control title
+   @selectObj {obj}      - contains any number of select control key-value pairs
+   @selectVariant {str}  - (optional) 
+   @selectIcon {str}     - (optional) e.g. arrow-30|arrow-20 
+#}
+{% macro controlSelect(selectName,selectTitle,selectObj,selectVariant = null,selectIcon = null) %}
+<div class="{{ selectName }}" aria-label="Select {{ selectTitle }}">
+    <h3 class="{{ selectName }}-title">{{ selectTitle }}</h3>
+    <div class="{{ selectName }}-container">
+       
+        <ul class="{{ selectName }}-list{% if selectVariant %} {{ selectName }}-list--{{ selectVariant }}{% endif %}">
+            {% for selectItem, selectValues in selectObj %}
+            {% set selectSlug = selectItem|lower %}
+            {% set activeSlug = selectValues.active ?? null %}
+            {% set activeItem = activeSlug ? activeSlug|title : null %}
+            {% set selectList = selectValues.options is not empty ? selectValues.options : null %}
+
+            {% set idx = loop.index %}
+            <li class="{{ selectName }}-dropdown">
+                <button 
+                    class="{{ selectName }}-button" 
+                    type="button" 
+                    aria-expanded="false" 
+                    aria-controls="{{ selectSlug }}-select">
+                    <span class="{{ selectName }}-label">
+                       {{ activeItem ?? selectItem }}
+                    </span>
+                    {% if selectIcon %}
+                    {% set iconPath = "/spritemap.svg#icon-#{selectIcon}" %}
+                    <svg class="{{ selectName }}-icon">
+                        <use xlink:href="{{ rev(iconPath) }}"></use>
+                    </svg>
+                    {% endif %}
+                </button>
+
+                {% if selectList %}
+                <ul class="{{ selectName }}-menu" id="{{ selectSlug }}-select">
+                    {# Merge selectItem and selectList to handle select resets #}
+                    {% set selectList = [selectItem]|merge(selectList) %}
+
+                    {# If selectList is multi-column, break the list into batches #}
+                    {% set batchSlugs = [] %}
+                    {% set batchCount = 20 %}
+                    {% if selectSlug in batchSlugs %}
+                    <li class="{{ selectName }}-batch">
+                    {% for batchList in selectList|batch(batchCount) %}
+                        <ul class="{{ selectName }}-batch-list">
+                            {% for itemName in batchList %}
+                            {{ _self.controlSelectItem(itemName,selectName,selectSlug,activeSlug) }}
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                    </li>
+                    {% else %}
+                    {# If selectList is single-column #}
+                    {% for itemName in selectList %}
+                    {{ _self.controlSelectItem(itemName,selectName,selectSlug,activeSlug) }}
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endmacro %}
+
+{# controlSort: 
+   See: styles/components/_controls.scss for styling
+   Required: sprig
+   Defaults to alphabetical sorting
+
+   @sortName {str}     - base styling hook
+   @sortLabel {str}    - sort control label, e.g. Chronological
+   @sortOptions {arr}  - (optional) pair of sortable criteria, e.g. ['newest','oldest']
+   @activeSort {str}   - (optional) e.g. 'newest'
+   @sortVariant {str}  - (optional) 
+   @sortIcon {str}     - (optional) e.g. sort-30|sort-20 
+#}
+{% macro controlSort(sortName,sortLabel = 'A-Z',sortOptions = ['asc','desc'], activeSort = 'asc', sortVariant = null) %}
+<div class="{{ sortName }}{% if sortVariant %} {{ sortName }}--{{ sortVariant }}{% endif %}" aria-label="Sort {{ sortLabel }}">
+    <h3 class="{{ sortName }}-title">Sort By</h3>
+    <a 
+        class="{{ sortName }}-trigger" 
+        href=""
+        sprig
+        s-val:sort="{{ sortOptions|filter((idx,option) => option != activeSort) }}">
+        <span class="{{ sortName }}-label">{{ sortLabel }}</span>
+        {% if sortIcon %}
+        {% set iconPath = "/spritemap.svg#icon-#{sortIcon}" %}
+        <svg class="{{ sortName }}-icon">
+            <use xlink:href="{{ rev(iconPath) }}"></use>
+        </svg>
+        {% endif %}
+    </a>
+</div>
+{% endmacro %}
+
+{# controlLayout: 
+   See: styles/components/_controls.scss for styling
+   Required: sprig
+   Defaults to grid|list with radio buttons
+ 
+   @layoutName {str}     - base styling hook
+   @layoutOptions {arr}  - (optional) list of layout slugs
+   @activeLayout {str}   - (optional) 
+   @layoutVariant {str}  - (optional) 
+   @layoutIcons {arr}    - (optional) override radio buttons with specific icons,
+                           formatted like so: #{slug}-#{size}, e.g. ['grid-20','list-20'] 
+#}
+{% macro controlLayout(layoutName,layoutOptions = ['grid','list'],activeLayout = 'grid',layoutVariant = null,layoutIcons = []) %}
+{% set hasIcons = (layoutIcons|length > 0) %}
+<ul class="{{ layoutName }}-list{% if layoutVariant %} {{ layoutName }}--{{ layoutVariant }}{% endif %}">
+    {% for layout in layoutOptions %}
+    {% set layoutTitle = layout|title %}
+    <li class="{{ layoutName }}-item"> 
+        <div class="{{ layoutName }}-control">
+            <input 
+                id="{{ layout }}View"
+                class="{{ layoutName }}-input" 
+                type="radio" 
+                name="layout-toggle"
+                sprig
+                s-val:layout="{{ layout }}"
+                {% if activeLayout == layout %}checked{% endif %}
+                />
+            <label class="{{ layoutName }}-label {{ layoutName }}-label--{{ hasIcons ? 'svg' : 'faux' }}" for="{{ layout }}View">
+                {% if hasIcons %}
+                {% set currentIcon = layoutIcons|filter((idx,icon) => icon|split('-')[0] == layout) %}
+                {% set iconPath = "/spritemap.svg#icon-#{currentIcon}" %}
+                <svg class="{{ sortName }}-icon">
+                    <use xlink:href="{{ rev(iconPath) }}"></use>
+                </svg>
+                {% endif %}
+                <span class="{{ layoutName }}-ghost">{{ layoutTitle }}</span>
+            </label>
+        </div>
+        <span class="{{ layoutName }}-name">{{ layoutTitle }}</span>
+    </li>
+    {% endfor %}
+</ul>
+{% endmacro %}
+
+{# controlPaginationItem: 
+   See styles/components/_controls.scss for styling
+ 
+   @pageName {str}    - base styling hook
+   @currentPage {int} - sprig-assigned current page
+   @totalPages {int}  - sprig-assigned page total
+   @lastPage {int}    - sprig-assigned last page
+   @groupKey {str}    
+   @groupValues {obj} 
+   @iconSize {int}    
+#}
+{% macro controlPaginationItem(pageName,currentPage,totalPages,lastPage,groupKey,groupValues,iconSize) %}
+{% set pageSlug, pageIcons = groupValues.slug, groupValues.icons %}
+
+{% for pageTrigger in groupValues.triggers %}
+{% set isInactive = groupKey == 'back' ? (currentPage == 1) : ( groupKey == 'forward' ? (currentPage == totalPages) : (currentPage == pageTrigger)) %}
+{% set pageUrl = pageTrigger %}
+{% if pageSlug == 'nav' %}
+    {% if pageTrigger == 'previous' %}
+    {% set pageUrl = currentPage -1 %}
+    {% else if pageTrigger == 'next' %}
+    {% set pageUrl = currentPage +1 %}
+    {% else %}
+    {% set pageUrl = pageTrigger == 'first' ? 1 : lastPage %}
+    {% endif %}
+{% endif %}
+<li>
+    <a 
+        class="{{ pageName }}-{{ pageSlug }} {{ pageName }}-{{ pageSlug }}--{{ groupKey }}{{ isInactive ? ' _is-inactive' : '' }}" 
+        href=""
+        sprig
+        s-val:page="{{ pageUrl }}"
+        >{{ pageSlug == 'nav' ? pageTrigger|title : pageTrigger }}
+        {% if pageIcons is not null %}
+        {% set icon = pageIcons[loop.index0] %}
+        {% set iconPath = "/spritemap.svg#icon-#{icon}-#{iconSize}" %}
+        <svg class="{{ pageName }}-icon">
+            <use xlink:href="{{ rev(iconPath) }}"></use>
+        </svg>
+        {% endif %}
+    </a>
+</li>
+{% endfor %}
+{% endmacro %}
+
+{# controlPagination: 
+   See styles/components/_controls.scss for styling
+ 
+   @pageName {str}  - base styling hook
+   @pageObj {obj}   - sprig pagination object
+   @pageRange {int} - (optional) var to pass to sprig; spread of page links to display 
+   @iconSize {int}  - (optional) 
+#}
+{% macro controlPagination(pageName,pageObj,pageRange = 5,iconSize = 20) %}
+{% set currentPage, totalPages, lastPage = pageObj.current_page, pageObj.page_info.totalPages, pageObj.page_info.last %}
+<div class="{{ pageName }}"> 
+    {% set paginationGroups = {
+        'back': {
+            'triggers': ['first','previous'], 
+            'slug': 'nav', 
+            'icons': ['arrow-end-left','arrow-left']
+        },
+        'pages': {
+            'triggers': pageObj.page_info.getDynamicRange(pageRange), 
+            'slug': 'num',
+            'icons': null
+        },
+        'forward': {
+            'triggers': ['next','last'], 
+            'slug': 'nav',
+            'icons': ['arrow-right','arrow-end-right']
+        }
+    }%}
+    {% for groupKey, groupValues in paginationGroups %}
+    <ul class="{{ pageName }}-group {{ pageName }}-group--{{ groupKey == 'pages' ? 'pages' : 'direction' }}">
+        {{ _self.controlPaginationItem(pageName,currentPage,totalPages,lastPage,groupKey,groupValues,iconSize) }}
+    </ul>
+    {% endfor %}
+</div>
+{% endmacro %}

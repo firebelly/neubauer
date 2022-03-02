@@ -1,0 +1,41 @@
+field: b79984f8-2e51-4b9f-8356-b887f57da8fd # Call-to-Actions
+fieldLayouts:
+  7b4de438-dbd2-45ca-a98a-ffe0e9152c54:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 4f3f74e9-4363-4024-a787-0167c7a8081a # Add a link to the registration page
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 25
+        name: Content
+        sortOrder: 1
+fields:
+  4f3f74e9-4363-4024-a787-0167c7a8081a: # Add a link to the registration page
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: actionURL
+    instructions: 'e.g. "https://www.eventbrite.com/my-event/"'
+    name: 'Add a link to the registration page'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: register
+name: Register
+sortOrder: 2

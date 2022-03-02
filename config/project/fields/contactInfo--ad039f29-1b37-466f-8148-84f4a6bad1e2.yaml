@@ -1,0 +1,57 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 8b1838a3-ba11-4d93-bb4f-ffb4b03082ca # Footer
+handle: contactInfo
+instructions: 'Contact copy that displays within the footer.'
+name: 'Contact Info'
+searchable: false
+settings:
+  columns:
+    __assoc__:
+      -
+        - b0ae2ad9-7257-4cbf-9876-384fbc36354e # Street Address
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - cdc834cd-c6bc-443d-ba86-edc70defd5a0 # Location
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 8ce822fd-9c12-4dfa-9ef3-42966b9fe46f # Phone Number
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - d30dbef2-6253-486c-a07d-7a57e79c1fcf # Fax Number
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 9b9a218b-d1b8-4129-946e-251494e3ce7c # Email Address
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_contactinfo}}'
+  fieldLayout: matrix
+  maxRows: '1'
+  minRows: '1'
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: ''
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

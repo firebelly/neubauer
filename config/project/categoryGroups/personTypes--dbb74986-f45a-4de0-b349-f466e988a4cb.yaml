@@ -1,0 +1,41 @@
+defaultPlacement: end
+fieldLayouts:
+  01be9c7c-4e61-4167-8abd-be04bd6f20fb:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\TitleField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: personTypes
+name: 'Person Types'
+siteSettings:
+  0c99f337-2218-4c6f-b0ad-30589c1ebbc5: # neubauer
+    hasUrls: true
+    template: null
+    uriFormat: 'people-types/{slug}'
+structure:
+  maxLevels: 1
+  uid: 5b1cdab7-cc6a-4331-aee6-6f296de2761b

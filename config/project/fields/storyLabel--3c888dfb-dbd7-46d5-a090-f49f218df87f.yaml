@@ -1,0 +1,19 @@
+columnSuffix: lqzswjgv
+contentColumnType: string(80)
+fieldGroup: 47e78d01-d60c-4623-939e-b212935f0db8 # Story
+handle: storyLabel
+instructions: 'Label that describes the type of story e.g. "Announcement" '
+name: 'Story Label'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: 20
+  code: ''
+  columnType: null
+  initialRows: '4'
+  multiline: ''
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

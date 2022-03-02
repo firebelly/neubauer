@@ -1,0 +1,67 @@
+fieldLayouts:
+  461a3662-5251-49b8-921b-c46a7becae61:
+    tabs:
+      -
+        elements:
+          -
+            heading: 'Update the People Opener'
+            type: craft\fieldlayoutelements\Heading
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\EntryTitleField
+            warning: null
+            width: 100
+          -
+            fieldUid: d5c86c8a-c961-4fb2-8348-90331ee47da2 # Opener Content
+            instructions: "Brief text introducing the People section.\r\n\r\nMaximum character count: 675"
+            label: ''
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/common/_opener-image.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+          -
+            fieldUid: dd463042-99d6-4725-b849-2546454db735 # Opener Image
+            instructions: ' '
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/people/_people-opener.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: peopleIndex
+hasTitleField: false
+name: 'People Index'
+section: d8c2bb45-1781-4d8b-bb49-b8b92cf194e8 # People Index
+sortOrder: 1
+titleFormat: '{section.name|raw}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

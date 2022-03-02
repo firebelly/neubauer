@@ -1,0 +1,22 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 90ab227e-755c-40a8-95e5-b154c2284a37 # Project
+handle: featuredProject
+instructions: 'Select an existing project, or create a new one, to feature it between the Research Opener and Directory.'
+name: 'Featured Project'
+searchable: false
+settings:
+  allowSelfRelations: false
+  limit: '1'
+  localizeRelations: false
+  selectionLabel: 'Add a featured project'
+  showSiteMenu: false
+  source: null
+  sources:
+    - 'section:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Entries

@@ -1,0 +1,57 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 47e78d01-d60c-4623-939e-b212935f0db8 # Story
+handle: storyType
+instructions: 'Select the story''s development type (e.g. "Update" or "Interview"). Defaults to "Update." '
+name: 'Story Type'
+searchable: false
+settings:
+  optgroups: true
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Update
+        -
+          - value
+          - update
+        -
+          - default
+          - '1'
+    -
+      __assoc__:
+        -
+          - label
+          - Interview
+        -
+          - value
+          - interview
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Video
+        -
+          - value
+          - video
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Custom
+        -
+          - value
+          - custom
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

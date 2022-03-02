@@ -1,0 +1,121 @@
+fieldLayouts:
+  9ccfbe54-2d35-4036-9aef-b17a7e9c5ab3:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: 'Heading for the development, e.g. "Fieldwork in Afar" or "Opening Reception and Ceremony"'
+            label: ''
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\EntryTitleField
+            warning: null
+            width: 100
+          -
+            fieldUid: 1b346868-16dd-435c-b0ff-d4319de58b94 # Date Block
+            instructions: ''
+            label: 'Story Date'
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            fieldUid: afe4aa4d-a254-4790-93e7-f8575e3d0073 # Story Type
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 3c888dfb-dbd7-46d5-a090-f49f218df87f # Story Label
+            instructions: ''
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            template: control-panel/common/_card-image.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+          -
+            fieldUid: 539c4bcb-5095-490d-81b8-872d3745551f # Card Image
+            instructions: ' '
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9906c196-b7f3-460c-98b0-308b1becd435 # Video
+            instructions: "Add a video to represent the story. If added, this will replace the Story Card Image. Preview of the video will display below once added.\r\n\r\ne.g. http://vimeo.com/myvideo/ or http://youtube.com/myvideo/."
+            label: 'Story Card Video'
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            fieldUid: b79984f8-2e51-4b9f-8356-b887f57da8fd # Call-to-Actions
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            template: control-panel/stories/_story-module.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Info
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: 4defd050-67bf-44b0-a585-e6a0f635921d # Summary
+            instructions: "**Brief story content**\r\n\r\nMaximum character count: 355"
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Summary
+        sortOrder: 2
+handle: module
+hasTitleField: true
+name: Module
+section: f8fc100c-a097-4184-a0e8-3f36393711ea # Stories
+sortOrder: 1
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

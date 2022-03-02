@@ -1,0 +1,125 @@
+{# assetImage: 
+    See: styles/components/_assets.scss for styling
+    Required: 
+    -- Imager (https://github.com/aelvan/Imager-Craft/blob/e06b24885dd194a6b0659a66f9333067975b027e/README.md) OR
+    -- ImageX (https://imager-x.spacecat.ninja/overview.html#features)
+
+    @imageName {str}       - base styling hook
+    @imageVariant {str}    - (optional) style variant
+    @imageObj {obj}        - craft image object
+    @imageTransforms {arr} - context-specific image transform width values
+    @aspectRatioObj {obj}  - (optional) contains orientation key-value pairs
+    @showCaption {bool}    - (optional) showCaption will wrap image in figure tag
+    @imageBlock {obj}      - (optional) craft block that can be used for customization
+    @imagerX {bool}        - (optional) if not imagerX, assume the old version of the plugin is installed on Craft, make calls accordingly 
+
+    TODO: picture + webp stuffs
+#}
+{% macro assetImage(
+    imageName,
+    imageVariant = null,
+    imageObj,
+    imageTransforms = [],
+    aspectRatioObj = {},
+    showCaption = false,
+    imageBlock = {}, 
+    imagerX = false) 
+%}
+
+    {% set currentImage = imageObj.one() %}
+    {% set imageWidth, imageHeight = currentImage.getWidth(), currentImage.getHeight() %}
+    {% set orientation = (imageWidth == imageHeight) ? 'square' : (imageWidth > imageHeight ? 'landscape' : 'portrait') %}
+    
+    {% set defaultAspectRatioObj = {
+        'landscape': '16/9',
+        'panorama': '16/4.5',
+        'portrait': '2/3',
+        'square': '1/1'
+    }%}
+    {% set aspectRatio = (aspectRatioObj is not null and orientation in aspectRatioObj) ? aspectRatioObj[orientation] : defaultAspectRatioObj[orientation] %} 
+    
+    {# Prep the markup #}
+    {% set ratioClass = aspectRatio|replace('/','-')|replace('.','_') %}
+    {% set imageClass = imageVariant ? "#{imageName} #{imageName}--#{ratioClass} #{imageName}--#{imageVariant}" : "#{imageName} #{imageName}--#{ratioClass}" %}
+    {% set hasCaption = (showCaption and imageObj.caption) %}
+    {# Prep the image sources #}
+    {% set transformedImages = null %}
+    {% set imageSource = '' %}
+    {# Default Transforms #}
+    {% set defaultTransforms = imagerX ? [
+        { width: 1600 }, 
+        { width: 600, jpegQuality: 65 }, 
+        { width: 400, jpegQuality: 65 }
+    ] : [
+        { width: 600 }, 
+        { width: 800 }, 
+        { width: 1000 }, 
+        { width: 1200 }, 
+        { width: 1400 }, 
+        { width: 1600 }
+    ]%}
+    {# Define the transforms #}
+    {% set currentTransforms = imageTransforms is not null ? imageTransforms : defaultTransforms %}
+    {# imagerX Default Config #}
+    {% set defaultSettings = {
+        ratio: aspectRatio, 
+        position: '100% 100%', 
+        jpegQuality: 80     
+    }%}
+    {# If imagerX ... #}
+    {% if imagerX %}    
+    {% set transformedImages = craft.imager.transformImage(currentImage,currentTransforms,defaultSettings,{ fillTransforms: true }) %}
+    {% set imageSource = craft.imager.placeholder({ width: 160, height: 90 }) %}
+    {% endif %}
+    {# If not imagerX, currently assumes Imager 2.0 #}
+    {% if not imagerX %}
+    {% set transformedImages = craft.imager.transformImage(currentImage,currentTransforms) %}
+    {% set imageSource = craft.imager.base64Pixel() %}
+    {% endif %}
+    
+    {# Build the image markup #}
+    {% if imageObj and transformedImages %}
+
+    {{ hasCaption ? ('<figure class="'~imageClass~'">')|raw : ('<div class="'~imageClass~'">')|raw }}
+        <img 
+            class="{{ imageName }}-image"
+            height="{{ imageHeight }}"
+            width="{{ imageWidth }}"
+            alt="{{ imageObj.caption ?? '' }}"
+            loading="lazy"
+            src="{{ imageSource }}" 
+            sizes="100vw" 
+            srcset="{{ craft.imager.srcset(transformedImages) }}">
+        {% if hasCaption %}
+        <figcaption class="{{ imageName }}-caption">
+            {{ imageObj.caption }}
+        </figcaption>
+        {% endif %}
+    {{ hasCaption ? '</figure>' : '</div>' }}
+    {% endif %}
+
+{% endmacro %}
+
+{# assetImageWithEffects: 
+    See: styles/components/_assets.scss for styling
+    Required: ImageX (https://imager-x.spacecat.ninja/overview.html#features)
+    Usage (to increase performance or simplify tmpl code): 
+    {% set newImage = _self.assetImageWithEffects(imageObj) %}
+    {{ _self.assetImage(imageName,imageObj) }}
+
+    @imageObj {obj} - craft image object
+    @imageWidth {int}
+    @imageHeight {int}
+    @imageQuality {int} 
+    @imageEffects {obj} - e.g. { modulate: [110, 100, 100], colorBlend: ['#ffcc33', 0.3], gamma: 1.2 }
+#}
+{% macro assetImageWithEffects(imageObj,imageWidth = 1600,imageHeight = 1600,imageQuality = 95,imageEffects = {}) %}
+
+    {% set newImage = craft.imager.transformImage(imageObj, { 
+        width: imageWidth, 
+        height: imageHeight, 
+        effects: imageEffects,
+        jpegQuality: imageQuality }) %}
+
+    {{ newImage }}
+{% endmacro %}

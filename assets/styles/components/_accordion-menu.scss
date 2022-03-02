@@ -1,0 +1,112 @@
+/* _menus.scss */
+@use "../utils/_utils" as *;
+@use "sass:math";
+@use "sass:meta";
+
+/* ---------------------------------------------------------------------
+  Accordion Menu: Structure
+  See templates/macros/_accordion-menu.html for markup
+------------------------------------------------------------------------ */
+@mixin accordionMenu($selector, $icon-size: 30px, $default: true) {
+    $border-size: 1px;
+
+    #{$selector} {
+        margin: 0;
+        padding: 0;
+        font-size: 1rem;
+
+        &-title {
+            margin: 0;
+            padding: 0;
+        }
+
+        &-trigger {
+            @include resetNativeButton;
+            @include flexParent();
+            @include alignItems(center);
+            border-top: $border-size solid transparent;
+            padding: 1em;
+            width: 100%;
+            outline: none;
+            background: none;
+            text-align: left;
+
+            &::-moz-focus-inner {
+                border: 0;
+            }
+
+        }
+
+        &-name {
+            @include flexChild(0 1 80%);
+            display: block;
+            pointer-events: none;
+            outline: none;
+        }
+
+        &-icon {
+            @include flexChild(0 1 20%);
+            @include justifyContent(flex-end);
+            pointer-events: none;
+            text-align: right;
+        }
+
+        &-toggle {
+            height: $icon-size;
+            width: $icon-size;
+
+            &--expand {
+                #{$selector}-trigger[aria-expanded="true"] & {
+                    @include totallyHide;
+                }
+            }
+
+            &--contract {
+                #{$selector}-trigger[aria-expanded="false"] & {
+                    @include totallyHide;
+                }
+            }
+
+        }
+
+        &-panel {
+            padding: 1em;
+            /* Edge bug - still relevant? */
+            &[hidden] {
+                display: none;
+            }
+        }
+
+    }
+
+    @if $default != false {
+		@include menuAccordion--default($selector);
+	}
+
+}
+
+/* -------------------------------------------------------------------------------
+ Accordion Menu: Default Presentation
+---------------------------------------------------------------------------------- */
+@mixin accordionMenu--default($selector) {
+    // Border Palette
+    $border-default-color: getColor('black');
+    // Trigger Palette
+    $trigger-default-color: getColor('black');
+    $trigger-action-bg: hsl(216, 94%, 94%);
+
+	#{$selector} {
+
+        &-trigger {
+            border-color: $border-default-color;
+            color: $trigger-default-color;
+
+            &:focus {
+                background: $trigger-action-bg;
+            }
+
+        }
+
+    }
+
+}

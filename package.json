@@ -1,0 +1,25 @@
+{
+  "name": "neubauer",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "mix --production"
+  },
+  "devDependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.2",
+    "babel-eslint": "^10.0.2",
+    "browser-sync": "^2.26",
+    "browser-sync-webpack-plugin": "2.2",
+    "cross-env": "^5.2",
+    "eslint": "^6.2",
+    "eslint-plugin-import": "^2.18",
+    "laravel-mix": "^6.0.42",
+    "sass": "^1.49.0",
+    "sass-loader": "7.*",
+    "svg-spritemap-webpack-plugin": "^3.4.0"
+  }
+}

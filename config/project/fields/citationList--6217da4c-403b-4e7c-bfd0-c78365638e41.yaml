@@ -1,0 +1,50 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
+handle: citationList
+instructions: "##  Add as many citations as needed.\r\nCitations can be rearranged by drag & drop. See screenshot below for examples."
+name: Citations
+searchable: true
+settings:
+  columns:
+    __assoc__:
+      -
+        - 6225f69a-e829-4678-a475-92e742c178d2 # Article Title
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 6aa48823-cbaf-44a6-9309-745e32af08cf # Article Contributor(s)
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 3ea2c78d-77d3-4d32-8e59-ee65d76e2cc8 # Publication Name
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - a75bfc1f-4f92-47d9-a862-6f67efd7b4cc # Article URL
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_citationlist}}'
+  fieldLayout: matrix
+  maxRows: ''
+  minRows: ''
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add a citation'
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

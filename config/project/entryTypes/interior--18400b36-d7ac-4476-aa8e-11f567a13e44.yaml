@@ -1,0 +1,139 @@
+fieldLayouts:
+  3ff64f3d-760b-48b8-824f-140d89a06596:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\EntryTitleField
+            warning: null
+            width: 100
+          -
+            fieldUid: 72885e22-1f71-4250-b73c-582b782d52c9 # First Name
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: f55f0760-8acb-4022-8920-361ee1e78c67 # Last Name
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 2aa7cc76-d234-465e-bccf-a196b38144e4 # Email
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            fieldUid: f381cf42-98f4-4280-9d24-82164617ae1f # Person Type
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: d5943f00-060b-4c27-974e-b57dccb00c41 # Title
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 1c4b2c81-42c9-4a48-bc45-d96d7cb075a1 # Affiliation
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            template: control-panel/common/_card-image.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+          -
+            fieldUid: 539c4bcb-5095-490d-81b8-872d3745551f # Card Image
+            instructions: ' '
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Info
+        sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: 4defd050-67bf-44b0-a585-e6a0f635921d # Summary
+            instructions: "**Brief biography**\r\n\r\nMaximum character count: 1425"
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Summary
+        sortOrder: 2
+      -
+        elements:
+          -
+            fieldUid: 6217da4c-403b-4e7c-bfd0-c78365638e41 # Citations
+            instructions: ''
+            label: __blank__
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/people/_people-citations.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Publications
+        sortOrder: 3
+handle: interior
+hasTitleField: false
+name: Interior
+section: d42f1b8d-6335-4a9b-8f81-80061a0faa35 # People
+sortOrder: 1
+titleFormat: '{personFirst} {personLast}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

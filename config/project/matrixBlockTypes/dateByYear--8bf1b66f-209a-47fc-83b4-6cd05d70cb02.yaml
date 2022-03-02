@@ -1,0 +1,150 @@
+field: 1b346868-16dd-435c-b0ff-d4319de58b94 # Date Block
+fieldLayouts:
+  08ebde95-f17d-47cb-9dcb-4b054beae828:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: ca62998e-92bf-4a32-be88-8eacd7a4025c # __blank__
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  ca62998e-92bf-4a32-be88-8eacd7a4025c: # __blank__
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: item
+    instructions: ''
+    name: __blank__
+    searchable: false
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Select a year'
+            -
+              - value
+              - ''
+            -
+              - disabled
+              - true
+        -
+          __assoc__:
+            -
+              - label
+              - 2010
+            -
+              - value
+              - 2010
+        -
+          __assoc__:
+            -
+              - label
+              - 2011
+            -
+              - value
+              - 2011
+        -
+          __assoc__:
+            -
+              - label
+              - 2012
+            -
+              - value
+              - 2012
+        -
+          __assoc__:
+            -
+              - label
+              - 2013
+            -
+              - value
+              - 2013
+        -
+          __assoc__:
+            -
+              - label
+              - 2014
+            -
+              - value
+              - 2014
+        -
+          __assoc__:
+            -
+              - label
+              - 2015
+            -
+              - value
+              - 2015
+        -
+          __assoc__:
+            -
+              - label
+              - 2016
+            -
+              - value
+              - 2016
+        -
+          __assoc__:
+            -
+              - label
+              - 2017
+            -
+              - value
+              - 2017
+        -
+          __assoc__:
+            -
+              - label
+              - 2018
+            -
+              - value
+              - 2018
+        -
+          __assoc__:
+            -
+              - label
+              - 2019
+            -
+              - value
+              - 2019
+        -
+          __assoc__:
+            -
+              - label
+              - 2020
+            -
+              - value
+              - 2020
+        -
+          __assoc__:
+            -
+              - label
+              - 2021
+            -
+              - value
+              - 2021
+        -
+          __assoc__:
+            -
+              - label
+              - 2022
+            -
+              - value
+              - 2022
+    translationKeyFormat: null
+    translationMethod: none
+    type: controlpanel\fields\DateByYear
+handle: dateByYear
+name: 'Date By Year'
+sortOrder: 3

@@ -1,0 +1,56 @@
+
+{% extends "layouts/_base.html" %}
+{% import 'macros/_assets' as assets %}
+
+{% block content %}
+{# Define projects associated with Person #}
+{% set projectList = craft.entries()
+    .section('projects')
+    .search('projectTeam:' ~ entry ~'')
+    .all()
+%}
+
+{% set topicList = [] %}
+{% for project in projectList if project.topicList is not null %}
+    {% set topicList = topicList|merge(project.topicList) %}
+{% endfor %}
+
+{% if topicList is not null %}
+Topics:
+<ul>
+{% for topic in topicList %}
+    <li>{{ topic }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+Testing Images
+
+{{ entry.title }}
+
+{% set imageName, imageVariant, imageObj = 'profileAsset', 'interior', entry.bioImage %}
+{% set imageTransforms = [
+    { width: 675 }, 
+    { width: 500 }, 
+    { width: 400 }, 
+    { width: 300 } 
+]%}
+{% set aspectRatioObj,showCaption,imageBlock = {},false,{} %}
+{% set imagerX = false %}
+
+<div class="contentContainer">
+    <div class="profileContainer">
+        {{ assets.assetImage(imageName,imageVariant,imageObj,imageTransforms,aspectRatioObj,showCaption,imageBlock,imagerX) }}
+        <div class="profileBody">
+        {{ entry.bioSummary }}
+        </div>
+    </div>
+
+    <div>
+    Projects:
+    {% for project in projectList %}
+        {{ project.title }}            
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

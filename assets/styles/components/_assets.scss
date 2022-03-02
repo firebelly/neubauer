@@ -1,0 +1,81 @@
+/* _assets.scss */
+@use "../utils/_utils" as *;
+@use "sass:string";
+@use "sass:math";
+
+// Set proper aspect ratio directly on image or use padding hack
+// Add ratios as needed
+$ratio-map: (
+    '16-9',
+    '16-4_5',
+    '2-3',
+    '1-1'
+);
+
+/* ---------------------------------------------------------------------
+  Asset Item: Structure
+  See templates/macros/_assets.html for markup
+
+  Browser support detection for aspect-ratio
+------------------------------------------------------------------------ */
+@mixin assetItem($selector,$default:true) {
+    
+    #{$selector} {
+        overflow: hidden;
+        position: relative;
+        font-size: 1rem; // standardize sizing 
+
+        @each $ratio in $ratio-map {
+            $ratio-str: str-replace($ratio,'_',$replace:'.');
+            $ratio-list: str-split($ratio-str,'-');
+            $ratio-x: nth($ratio-list,1);
+            $ratio-y: nth($ratio-list,2);
+
+            &--#{$ratio} {
+                $aspect-ratio: math.div(#{$ratio-x},#{$ratio-y});
+                
+                // If aspect-ratio isn't supported (IE!) use the padding hack
+                @supports not (aspect-ratio: 1) {
+                    padding-bottom:  calc(#{$aspect-ratio} * 100%);
+                }
+                #{$selector}-image {
+                    
+                    // Set aspect-ratio directly on asset for supporting browsers 
+                    @supports (aspect-ratio: 1) {
+                        aspect-ratio: $aspect-ratio;
+                    }
+                    // If aspect-ratio isn't supported (IE!) use the padding hack
+                    @supports not (aspect-ratio: 1) {
+                        left: 0;
+                        position: absolute;
+                        top: 0;
+                    }
+                }
+
+            }
+        }
+
+        &-image,
+        &-video {
+            height: 100%;
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    @if $default != false {
+		@include assetItem--default($selector);
+	}
+
+}
+
+/* ---------------------------------------------------------------------
+  Asset Item: Default Presentation
+------------------------------------------------------------------------ */
+@mixin assetItem--default($selector) {
+
+    #{$selector} {
+
+    }
+
+}

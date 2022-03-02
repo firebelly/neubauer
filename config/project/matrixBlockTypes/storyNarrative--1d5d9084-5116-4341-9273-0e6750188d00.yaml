@@ -1,0 +1,44 @@
+field: 307bc9bb-3bc7-45b4-b535-976adc89de97 # Narrative Block
+fieldLayouts:
+  07c6ae1c-4460-42d2-879d-b74fb01690ab:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 284b1f37-fd98-47e6-9a1a-1e1b6400a27e # Select an existing "Story," or create a new one.
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  284b1f37-fd98-47e6-9a1a-1e1b6400a27e: # Select an existing "Story," or create a new one.
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: item
+    instructions: ''
+    name: 'Select an existing "Story," or create a new one.'
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      limit: '1'
+      localizeRelations: false
+      selectionLabel: 'Add a story'
+      showSiteMenu: true
+      source: null
+      sources:
+        - 'section:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Entries
+handle: storyNarrative
+name: 'Story Narrative'
+sortOrder: 1

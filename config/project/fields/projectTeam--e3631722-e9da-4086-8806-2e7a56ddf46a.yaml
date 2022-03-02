@@ -1,0 +1,22 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 90ab227e-755c-40a8-95e5-b154c2284a37 # Project
+handle: projectTeam
+instructions: "## Select as many project contributors as needed.\r\nContributors can be rearranged by drag & drop."
+name: Team
+searchable: true
+settings:
+  allowSelfRelations: false
+  limit: ''
+  localizeRelations: false
+  selectionLabel: 'Add a contributor'
+  showSiteMenu: true
+  source: null
+  sources:
+    - 'section:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Entries

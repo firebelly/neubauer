@@ -1,0 +1,84 @@
+field: b79984f8-2e51-4b9f-8356-b887f57da8fd # Call-to-Actions
+fieldLayouts:
+  bf60dd18-4694-4630-9c1f-6ddd4baccf1f:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 9a9e267a-3735-42d9-8ab5-7ea1111a74ff # Label
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: a985f634-1a5a-456d-b07f-5b0a964f502b # Add a document that can be downloaded by visitors
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  9a9e267a-3735-42d9-8ab5-7ea1111a74ff: # Label
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: actionText
+    instructions: 'e.g. "Gallery Guide"'
+    name: Label
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  a985f634-1a5a-456d-b07f-5b0a964f502b: # Add a document that can be downloaded by visitors
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: actionURL
+    instructions: '(.PDFs only)'
+    name: 'Add a document that can be downloaded by visitors'
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      allowUploads: true
+      allowedKinds:
+        - pdf
+      defaultUploadLocationSource: 'volume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+      defaultUploadLocationSubpath: '{owner.section.handle}{% if owner.parent.uri %}/{owner.parent.uri}{% endif %}/{owner.slug}'
+      limit: '1'
+      localizeRelations: false
+      previewMode: full
+      restrictFiles: '1'
+      selectionLabel: 'Add a document'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      singleUploadLocationSource: 'volume:486a45fd-ed4e-40c5-b637-d55222520ab5'
+      singleUploadLocationSubpath: ''
+      source: null
+      sources: '*'
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+handle: download
+name: Download
+sortOrder: 4

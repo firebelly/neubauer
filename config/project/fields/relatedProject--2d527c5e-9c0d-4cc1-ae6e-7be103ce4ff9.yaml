@@ -1,0 +1,22 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
+handle: relatedProject
+instructions: 'Connect a project to the entry.'
+name: 'Related Project'
+searchable: false
+settings:
+  allowSelfRelations: false
+  limit: '1'
+  localizeRelations: false
+  selectionLabel: 'Add a project'
+  showSiteMenu: true
+  source: null
+  sources:
+    - 'section:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Entries

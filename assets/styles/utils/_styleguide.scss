@@ -1,0 +1,136 @@
+/* _styleguide.scss */
+@use "mixins" as *;
+@use "helpers" as *;
+@use "config" as *;
+@use "sass:math";
+@use "sass:string";
+
+/* ---------------------------------------------------------------------
+ _styleguide contains project-specific style patterns
+------------------------------------------------------------------------ */
+// svg path, relative to compiled stylesheet
+$svg-path: '../svgs/';
+
+/* ---------------------------------------------------------------------
+ Headings
+------------------------------------------------------------------------ */
+$heading-map: (
+	// Examples
+	// "xs": 1em,
+	// "sm": 1.2em,
+	// "md": 1.3em,
+	// "lg": 1.5em,
+	// "xl": 3em
+);
+
+// @param $size {str|num} - accepts $heading-map key or number with unit
+@mixin heading($size:null) {
+	$heading-size: map-get($heading-map, $size);
+	@if $heading-size == null and type-of($size) == "number" {
+		$heading-size: if(str-index("#{$size}",'px'),$size, if(str-index("#{$size}",'em'),$size,null));
+	}
+	font-weight: 600;
+	font-size: if($heading-size,$heading-size,$default-size);
+}
+
+/* ---------------------------------------------------------------------
+ Text
+ // ems based on 1rem-sized parent
+ // relative line-heights
+------------------------------------------------------------------------ */
+$text-map: (
+	// Examples
+	// "section-title": (350,"8em/1"),
+	// "section-link": (350,"3em/1.33")
+);
+// @param $name {str}
+@mixin text($name) {
+	$text-attrs: map-get($text-map, $name);
+	$font-weight: nth($text-attrs,1);
+	$font-size: nth($text-attrs,2);
+	color: getColor('black');
+	font: $font-weight string.unquote($font-size) $font-primary;
+
+	// Example
+	@if (str-index($name, 'section')) {
+		letter-spacing: -0.015em;
+	}
+}
+
+/* ---------------------------------------------------------------------
+ Buttons
+------------------------------------------------------------------------ */
+@mixin globalButton($selector) {
+
+	#{$selector} {
+		@include resetNativeButton;
+
+		// Interactives
+		&:hover {
+			cursor: pointer;
+		}
+		&:focus {
+			outline: none;
+		}
+		// Button link   
+		&:link,
+		&:visited,
+		&:hover,
+		&:active {
+			text-decoration: none;
+		}
+		// Variants
+		$button-variants: (
+			"confirm": getColor('green'),
+			"save": getColor('blue'),
+			"cancel": getColor('gray'),
+			"alert": getColor('red'),
+			"ignore": getColor('yellow')
+		);
+		@each $button, $color in $button-variants {
+			&--#{$button} {
+				background-color: $color;
+				&:hover,
+				&:focus,
+				&:active {
+                	background-color: darken($color, 10%);
+            	}
+			}
+		}
+		// States
+		&._is-inactive {
+			background: getColor('gray',20);
+			pointer-events: none;
+		}
+	}
+
+}
+
+/* ---------------------------------------------------------------------
+ Lists
+------------------------------------------------------------------------ */
+@mixin globalList($selector,$direction:horizontal,$color:getColor('black')) {
+
+	#{$selector} {
+
+		@if $direction == 'horizontal' {
+			@include flexParent;
+			@include justifyContent(space-between);
+		}
+
+		li {
+			@include flexChild();
+		}
+
+		a:link,
+		a:visited,
+		a:hover,
+		a:active {
+			display: block;
+			color: $color;
+			text-decoration: none;
+		}
+	
+	}
+
+}

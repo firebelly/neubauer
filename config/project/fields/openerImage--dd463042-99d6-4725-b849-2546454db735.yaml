@@ -1,0 +1,34 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
+handle: openerImage
+instructions: "- Recommended size: 1360px x 480px. \r\n\r\n- Be sure to add a *caption* that provides additional context to the image, as well as *alt text* for SEO and accessibility. \r\n\r\n**Hint:** once you've added an image, double-click its thumbnail below to update the caption and alt text."
+name: 'Opener Image'
+searchable: false
+settings:
+  allowSelfRelations: false
+  allowUploads: true
+  allowedKinds: null
+  defaultUploadLocationSource: 'volume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  defaultUploadLocationSubpath: '{section.handle|replace("Index","")|title}/'
+  limit: '1'
+  localizeRelations: false
+  previewMode: full
+  restrictFiles: ''
+  selectionLabel: 'Add an opener image'
+  showSiteMenu: true
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  singleUploadLocationSource: 'volume:486a45fd-ed4e-40c5-b637-d55222520ab5'
+  singleUploadLocationSubpath: ''
+  source: null
+  sources:
+    - 'volume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+    - 'volume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  targetSiteId: null
+  useSingleFolder: false
+  validateRelatedElements: false
+  viewMode: large
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Assets
