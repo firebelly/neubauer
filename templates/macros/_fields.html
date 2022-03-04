@@ -1,0 +1,26 @@
+{# textField: 
+   See: styles/components/_fields.scss for styling
+
+   @fieldName {str}    - namespace
+   @fieldId {str}      - field identifier
+   @fieldLabel {str}   - input label
+   @fieldVariant {str} - (optional)
+   @isRequired {bool}  - defaults to false
+#}
+{% macro textField(fieldName,fieldId,fieldLabel,fieldVariant = null,isRequired = false) %}
+<div class="{{ fieldName }}{% if fieldVariant is not null %} {{ fieldName }}--{{ fieldVariant }}{% endif %}">
+    <label 
+        for="field_{{ fieldId }}" 
+        class="{{ fieldName }}-label">
+        {{ fieldLabel }}
+        {% if isRequired %}
+        <span class="{{ fieldName }}-abbr">*</span>
+        {% endif %}
+    </label>
+    <input
+        id="field_{{ fieldId }}"
+        class="{{ fieldName }}-input {{ fieldName }}-input--text" 
+        type="text" 
+        name="field_{{ fieldId }}">
+</div>
+{% endmacro %}

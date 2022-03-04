@@ -1,4 +1,4 @@
-dateModified: 1646261730
+dateModified: 1646428065
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: neubauer
@@ -21,6 +21,7 @@ meta:
     2bd4c98a-17ca-44f2-bb7c-1a21e5b924b9: Address # Address
     2c03794c-ee5d-433d-9d1c-7c7d3cc3dd81: Appearance # Appearance
     2d527c5e-9c0d-4cc1-ae6e-7be103ce4ff9: 'Related Project' # Related Project
+    2df2bcc7-46c7-49b5-be7b-b0ade6314496: 'Search Index' # Search Index
     2eb1c876-ef17-46cc-bc9d-811c0340374d: Start # Start
     2fcce12f-270f-466d-8676-063396ea0bd9: Topics # Topics
     3c888dfb-dbd7-46d5-a090-f49f218df87f: 'Story Label' # Story Label
@@ -49,6 +50,7 @@ meta:
     9a9e267a-3735-42d9-8ab5-7ea1111a74ff: Label # Label
     9b9a218b-d1b8-4129-946e-251494e3ce7c: 'Email Address' # Email Address
     09f28401-5afb-4037-a4d4-988179869f4d: 'Related Exhibition' # Related Exhibition
+    9fd3f9eb-43e9-41a0-860d-cc3ad5d91231: 'Search Index' # Search Index
     10ed9c28-61c3-4258-bc65-24b2ecaa7930: Asset # Asset
     13c69d07-19c1-4dc3-af5a-7145671835bc: 'Quote Content' # Quote Content
     15bb1bb5-a683-4cf9-a1b5-3edfe2182dfa: 'Research Index' # Research Index
@@ -57,6 +59,7 @@ meta:
     24a17e09-26e2-478c-9dfe-bbca0be0122b: 'Select a Neubauer page as the destination' # Select a Neubauer page as the destination
     29a66baf-c15f-4cd8-bc9a-08825a4ee34d: Date # Date
     40a4b8f6-206e-4664-86a2-9a6e0d2c1213: 'Date + Time' # Date + Time
+    41a7228a-3bfb-47bf-a8e7-9e0ec9cc0ea5: 'Display Name' # Display Name
     47e78d01-d60c-4623-939e-b212935f0db8: Story # Story
     49f91a58-0c7a-4d84-a70d-fe29b1128987: 'Select an existing "Exhibition," or create a new one.' # Select an existing "Exhibition," or create a new one.
     66a3bd47-7aa6-4023-9c01-4f4b2a2b1bdd: 'Error Index' # Error Index
@@ -81,7 +84,6 @@ meta:
     523a11a6-88bd-4fe2-bad0-d9127f8d3e5e: 'Date Range' # Date Range
     539c4bcb-5095-490d-81b8-872d3745551f: 'Card Image' # Card Image
     712ad535-5310-4cbf-8e0a-625c9dcd2162: Caption # Caption
-    769b4f61-faf8-4d7a-8f9e-4835ad68b369: 'Search Index' # Search Index
     840b4f3b-b9bb-4665-8929-9d5969e6c272: Exhibition # Exhibition
     881a793e-ef76-462e-aad9-1bc0ae20165b: Module # Module
     881ab662-b053-4f99-bee8-9bd994ffad04: 'End Date' # End Date
@@ -157,10 +159,6 @@ meta:
     fa7b84ab-aced-4076-9af6-f7c241f2470f: Text # Text
     fbf7fd25-1dd4-4ceb-a4d9-c468db28e4c9: Interior # Interior
 plugins:
-  assetrev:
-    edition: standard
-    enabled: true
-    schemaVersion: 1.0.0
   blitz:
     edition: standard
     enabled: true
@@ -223,6 +221,10 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 2.2.1
+  twigpack:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
   ui-element-fields:
     edition: standard
     enabled: true

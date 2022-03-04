@@ -1,0 +1,36 @@
+/* _fields.scss */
+@use "../utils/_utils" as *;
+
+/* ---------------------------------------------------------------------
+  Text Field: Structure
+  See templates/macros/_controls.html for markup
+------------------------------------------------------------------------ */
+@mixin fieldText($selector,$icon-size:20px,$default:true) {
+    
+    #{$selector} {
+      @include flexParent();
+      font-size: 1rem;
+
+      &-label,
+      &-input {
+        @include flexChild();
+      }
+
+    }
+
+    @if $default != false {
+      @include fieldText--default($selector);
+    }
+
+}
+
+/* -------------------------------------------------------------------------------
+ Text Field: Default Presentation
+---------------------------------------------------------------------------------- */
+@mixin fieldText--default($selector) {
+
+  #{$selector} {
+  
+  }
+
+}

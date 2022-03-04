@@ -193,7 +193,7 @@
 {% if pageSlug == 'nav' %}
     {% if pageTrigger == 'previous' %}
     {% set pageUrl = currentPage -1 %}
-    {% else if pageTrigger == 'next' %}
+    {% elseif pageTrigger == 'next' %}
     {% set pageUrl = currentPage +1 %}
     {% else %}
     {% set pageUrl = pageTrigger == 'first' ? 1 : lastPage %}
@@ -252,4 +252,24 @@
     </ul>
     {% endfor %}
 </div>
+{% endmacro %}
+
+{# controlTags: 
+   See: styles/components/_.scss for styling
+
+   @tagName {str}    - base styling hook
+   @tagList {arr}    - list containing tags
+#}
+{% macro controlTags(tagName,tagList) %}
+<ul class="{{ tagName }}">
+    {% for tag in tagList %}
+    <li class="{{ tagName }}-item">
+        <a 
+            id=""
+            href="">
+            {{ tag.title }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 {% endmacro %}

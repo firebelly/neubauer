@@ -23,7 +23,7 @@ body {
 	max-width: #{$max};
 	min-height: -webkit-fill-available;
 	overflow-x: hidden;
-	background:getColor('white');
+	background: getColor('white');
 	color: getColor('black');
 	font-family: $font-primary;
 	-webkit-font-smoothing: antialiased;
@@ -67,6 +67,12 @@ img {
 	}
 }
 
+.svg-defs {
+	&._is-hidden {
+		display: none;
+	}
+}
+
 /* ---------------------------------------------------------------------
   Accessibility Skip
 ------------------------------------------------------------------------ */
@@ -95,7 +101,68 @@ img {
   @include accordionMenu($selector:'.myAccordion',$icon-size:20px,$default:true);
 ------------------------------------------------------------------------ */
 @include assetItem('.profileAsset');
+@include fieldText('.primarySearch-field');
 
+
+/* ---------------------------------------------------------------------
+  Header
+------------------------------------------------------------------------ */
+.primaryHeader {
+
+	&-logo {
+		height: 40px;
+		width: 140px;
+	}
+
+}
+
+/* ---------------------------------------------------------------------
+  Navigation
+------------------------------------------------------------------------ */
+.primaryNav {
+
+	&-close {
+
+		&-icon {
+			height: 20px;
+			width: 20px;
+		}
+
+	}
+
+}
+
+.primaryMenu {
+
+	&-icon {
+		height: 20px;
+		width: 20px;
+	}
+}
+
+.primarySearch {
+
+	&-field {
+
+		&-label {
+			@include visuallyHide;
+		}
+
+	}
+
+	&-submit {
+
+		&-label {
+			@include visuallyHide;
+		}
+
+		&-icon {
+			height: 20px;
+			width: 20px;
+		}
+
+	}
+}
 
 /* ---------------------------------------------------------------------
   Person

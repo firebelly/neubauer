@@ -1,5 +1,5 @@
 {% set env = getenv('ENVIRONMENT') %}
-{% set siteSlug, siteTitle = '', '' %}
+
 {% set siteContent = '' %}
 
 <head>
@@ -10,13 +10,29 @@
 
     <meta name="generator" content="Craft CMS">
     <meta name="subject" content="{{ siteContent }}">
+    
+	{{ craft.twigpack.includeCssModule("/build/styles/main.css", true) }}
 
-    <link rel="stylesheet" href="{{ rev('/styles/main.css') }}">
     <link rel="author" href="{{ siteUrl }}humans.txt">
 
-    <link rel="icon" sizes="192x192" href="{{ rev('/images/icons/#{siteSlug}-icon-192.png') }}">
-    <link rel="apple-touch-icon" href="{{ rev('/images/icons/#{siteSlug}-icon-192.png') }}">
-    <link rel="mask-icon" href="{{ rev('/images/icons/#{siteSlug}-icon-pinned-16.svg') }}" color="#">
-    <link rel="shortcut icon" type="image/ico" href="{{ rev('/images/icons/#{siteSlug}-favicon.ico') }}">
+    {% set iconPath = "/images/icon/#{siteName}-" %}
+    <link rel="icon" sizes="192x192" href="{{ alias('@assetBasePath' ~ iconPath ~ 'icon-192.png') }}">
+    <link rel="apple-touch-icon" href="{{ alias('@assetBasePath' ~ iconPath ~ 'icon-192.png') }}">
+    <link rel="mask-icon" href="{{ alias('@assetBasePath' ~ iconPath ~ 'icon-pinned-16.svg') }}" color="#">
+    <link rel="shortcut icon" type="image/ico" href="{{ alias('@assetBasePath' ~ iconPath ~ 'favicon.ico') }}">
+
+    <script>
+		var ajax = new XMLHttpRequest();
+		ajax.open('GET', '/build/spritemap.svg', true);
+		ajax.send();
+		ajax.onload = function(e) {
+			var div = document.createElement('div');
+			div.className = 'svg-defs _is-hidden';
+			div.setAttribute('aria-hidden', 'true');
+			div.innerHTML = ajax.responseText;
+			document.body.insertBefore(div, document.body.childNodes[0]);
+		}
+	</script>
+
 </head>
 

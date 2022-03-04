@@ -25,4 +25,8 @@ return [
         'controlpanel' => controlpanel\ControlPanelModule::class,
     ],
     'bootstrap' => ['controlpanel'],
+    'aliases' => [
+        '@assetBaseUrl' => craft\helpers\App::env('ASSETS_BASE_URL'),
+        '@assetBasePath' => craft\helpers\App::env('ASSETS_BASE_PATH'),
+    ],
 ];

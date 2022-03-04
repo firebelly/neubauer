@@ -1,6 +1,7 @@
 
 {% extends "layouts/_base.html" %}
 {% import 'macros/_assets' as assets %}
+{% import 'macros/_controls' as controls %}
 
 {% block content %}
 {# Define projects associated with Person #}
@@ -17,18 +18,15 @@
 
 {% if topicList is not null %}
 Topics:
-<ul>
-{% for topic in topicList %}
-    <li>{{ topic }}</li>
-{% endfor %}
-</ul>
+{{ controls.controlTags('topicList',topicList) }}
 {% endif %}
 
 Testing Images
 
 {{ entry.title }}
+{{ entry.personEmail }}
 
-{% set imageName, imageVariant, imageObj = 'profileAsset', 'interior', entry.bioImage %}
+{% set imageName, imageVariant, imageObj = 'profileAsset', 'interior', entry.cardImage %}
 {% set imageTransforms = [
     { width: 675 }, 
     { width: 500 }, 
@@ -42,7 +40,7 @@ Testing Images
     <div class="profileContainer">
         {{ assets.assetImage(imageName,imageVariant,imageObj,imageTransforms,aspectRatioObj,showCaption,imageBlock,imagerX) }}
         <div class="profileBody">
-        {{ entry.bioSummary }}
+        {{ entry.summary }}
         </div>
     </div>
 

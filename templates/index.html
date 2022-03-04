@@ -1,5 +1,78 @@
 {% extends "layouts/_base.html" %}
 
 {% block content %}
-Homepage
+<h1>Homepage</h1>
+
+<div>
+<h2>Data Tests</h2>
+
+{% set projectsQuery = craft.entries.section('Projects') %}
+{% set allProjects = projectsQuery.all() %}
+
+<div>
+    Projects:
+    <ul>
+    {% for project in allProjects %}
+        <li>{{ project }}</li>
+    {% endfor %}
+    </ul>
+</div>
+
+{% set categoryList = craft.categories.group('Topics') %}
+<div>
+    Categories
+    <ul>
+    {% for category in categoryList %}
+        <li>{{ category }}</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div>   
+    Projects by category
+    {% for category in categoryList %}
+    {% set projectsByCategory = craft.entries
+        .relatedTo(category)
+        .all() %}
+
+    {# {% set entries = craft.entries()
+    .relatedTo(myCategoryA)
+    .andRelatedTo(myCategoryB)
+    .all() %} #}
+
+
+    <ul>
+        <li>
+            <strong>{{ category }}</strong>
+            <ul>
+            {% for project in projectsByCategory %}
+                <li>{{ category }}: {{ project }}</li>
+            {% endfor %}
+            </ul>
+        </li>
+    </ul>
+    {% endfor %}
+</div>
+
+{% set peopleQuery = craft.entries.section('People') %}
+{% set allPeople = peopleQuery.all() %}
+
+<div>
+    People:
+    <ul>
+    {% for person in allPeople %}
+        <li>{{ person }}: 
+            {% for type in person.personType if type.level != 1 %}
+            {{ type.parent }}: {{ type.title }}
+            {% endfor %}
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+
+</div>
+
+
+
 {% endblock %}

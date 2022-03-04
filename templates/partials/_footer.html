@@ -6,7 +6,8 @@
 
 {% block js %}
 {{ sprig.script }}
-<script async src="{{ rev('/scripts/manifest.js') }}"></script>
-<script async src="{{ rev('/scripts/vendor.js') }}"></script>
-<script async src="{{ rev('/scripts/main.js') }}"></script>
+
+{{ craft.twigpack.includeJsModule("/build/scripts/manifest.js") }}
+{{ craft.twigpack.includeJsModule("/build/scripts/vendor.js") }}
+{{ craft.twigpack.includeJsModule("/build/scripts/main.js") }}
 {% endblock %}

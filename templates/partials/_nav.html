@@ -1,0 +1,54 @@
+{% import 'macros/_fields' as fields %}
+
+{% set sectionList = craft.app.sections.getSectionsByType('single') %}
+{% set excludeList = ['searchIndex'] %}
+
+<nav class="primaryNav">
+    <h2 class="primaryNav-title">Menu</h2>
+    
+    <ul class="primaryMenu">
+    {% for thisSection in sectionList if thisSection.handle not in excludeList %}
+        {% set indexPage = craft.entries.section(thisSection).status('enabled').one() %}
+        <li class="primaryMenu-item">
+            <a class="primaryMenu-trigger" href="{{ url(indexPage.url) }}">
+                <span class="primaryMenu-label">{{ indexPage.displayName }}</span>
+                <svg 
+                    class="primaryMenu-icon"
+                    role="presentation">
+                    {% set svgPath = "/spritemap.svg#icon-arrow-right-20" %}
+                    <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
+                </svg> 
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+
+    <h2 class="primaryNav-title">Search</h2>
+
+    <div class="primarySearch">
+        {{ fields.textField('primarySearch-field','primary_search','Search') }}
+        <a 
+            class="primarySearch-submit"
+            href="{{ url('search')}}">
+            <span class="primarySearch-submit-label">Go</span>
+            <svg 
+                class="primarySearch-submit-icon"
+                role="presentation">
+                {% set svgPath = "/spritemap.svg#icon-search-20" %}
+                <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
+            </svg> 
+        </a>
+    </div>
+
+    <a 
+        class="primaryNav-close"
+        href="#closeNav">
+        <span class="primaryNav-close-label">Close</span>
+        <svg 
+            class="primaryNav-close-icon"
+            role="presentation">
+            {% set svgPath = "/spritemap.svg#icon-close-20" %}
+            <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
+        </svg> 
+    </a>
+</nav>
