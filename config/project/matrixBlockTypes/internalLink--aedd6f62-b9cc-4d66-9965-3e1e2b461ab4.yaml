@@ -1,0 +1,43 @@
+field: 8e497ed8-5673-40b5-a1ca-3f83b9ef05b6 # Call-to-Action
+fieldLayouts:
+  51d4b50b-c2ba-4c13-b726-17cf35ea711a:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 0e3da5e7-ca13-4d64-8432-9224cfd0eade # __blank__
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  0e3da5e7-ca13-4d64-8432-9224cfd0eade: # __blank__
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: item
+    instructions: 'Link an existing internal web page'
+    name: __blank__
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      limit: '1'
+      localizeRelations: false
+      selectionLabel: 'Add a link'
+      showSiteMenu: true
+      source: null
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Entries
+handle: internalLink
+name: 'Internal Link'
+sortOrder: 1

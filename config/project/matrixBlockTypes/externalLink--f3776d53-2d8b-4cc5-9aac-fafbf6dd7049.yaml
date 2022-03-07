@@ -1,0 +1,37 @@
+field: 8e497ed8-5673-40b5-a1ca-3f83b9ef05b6 # Call-to-Action
+fieldLayouts:
+  13c6847b-b5d0-4a7e-9aec-7c169b0f6c03:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 7426f4ea-af7c-4a85-9784-117b708b8697 # __blank__
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  7426f4ea-af7c-4a85-9784-117b708b8697: # __blank__
+    columnSuffix: null
+    contentColumnType: string(255)
+    fieldGroup: null
+    handle: item
+    instructions: "Full URL of external web page\r\n\r\ne.g. \"https://giving.uchicago.edu/\""
+    name: __blank__
+    searchable: false
+    settings:
+      maxLength: '255'
+      placeholder: null
+      types:
+        - url
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Url
+handle: externalLink
+name: 'External Link'
+sortOrder: 2

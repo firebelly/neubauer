@@ -23,7 +23,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 8e497ed8-5673-40b5-a1ca-3f83b9ef05b6 # URL
+            fieldUid: 8e497ed8-5673-40b5-a1ca-3f83b9ef05b6 # Call-to-Action
             instructions: null
             label: null
             required: true
@@ -74,23 +74,20 @@ fields:
     translationKeyFormat: null
     translationMethod: none
     type: craft\fields\PlainText
-  8e497ed8-5673-40b5-a1ca-3f83b9ef05b6: # URL
+  8e497ed8-5673-40b5-a1ca-3f83b9ef05b6: # Call-to-Action
     columnSuffix: null
-    contentColumnType: text
+    contentColumnType: string
     fieldGroup: null
-    handle: cta
-    instructions: 'Relative url path, e.g. visit/gallery '
-    name: URL
+    handle: callToAction
+    instructions: ''
+    name: Call-to-Action
     searchable: false
     settings:
-      byteLimit: null
-      charLimit: null
-      code: ''
-      columnType: null
-      initialRows: '4'
-      multiline: ''
-      placeholder: null
-      uiMode: normal
+      contentTable: '{{%matrixcontent_calltoaction}}'
+      maxBlocks: '1'
+      minBlocks: ''
+      propagationKeyFormat: null
+      propagationMethod: all
     translationKeyFormat: null
-    translationMethod: none
-    type: craft\fields\PlainText
+    translationMethod: site
+    type: craft\fields\Matrix

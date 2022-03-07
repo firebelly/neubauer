@@ -12,6 +12,10 @@ fieldLayouts:
             type: craft\fieldlayoutelements\CustomField
             warning: null
             width: 100
+          -
+            template: control-panel/common/_footer-discover.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
         name: 'Discover More'
         sortOrder: 1
       -

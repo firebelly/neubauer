@@ -1,4 +1,4 @@
-dateModified: 1646668879
+dateModified: 1646671082
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -14,6 +14,7 @@ meta:
     00ba858c-638d-4a15-85f1-dc3c8f7d2874: 'About Index' # About Index
     0c6fe226-534a-4703-a928-3b7937eba1db: 'Featured Project' # Featured Project
     0c99f337-2218-4c6f-b0ad-30589c1ebbc5: neubauer # neubauer
+    0e3da5e7-ca13-4d64-8432-9224cfd0eade: __blank__ # __blank__
     01aee8f9-1a88-4c82-b1ae-372cd5805db7: Exhibitions # Exhibitions
     1b5ff85e-b240-4399-b573-d707fe1c03da: 'Discover More' # Discover More
     1b346868-16dd-435c-b0ff-d4319de58b94: 'Date Block' # Date Block
@@ -51,7 +52,7 @@ meta:
     8b7345e3-147e-4357-af25-2ab20084f1b8: 'Featured Label' # Featured Label
     8bf1b66f-209a-47fc-83b4-6cd05d70cb02: 'Date By Year' # Date By Year
     8ce822fd-9c12-4dfa-9ef3-42966b9fe46f: 'Phone Number' # Phone Number
-    8e497ed8-5673-40b5-a1ca-3f83b9ef05b6: URL # URL
+    8e497ed8-5673-40b5-a1ca-3f83b9ef05b6: Call-to-Action # Call-to-Action
     8fd99288-7c12-4e97-9e07-616209a1bd9e: Label # Label
     9a9e267a-3735-42d9-8ab5-7ea1111a74ff: Label # Label
     9b9a218b-d1b8-4129-946e-251494e3ce7c: 'Email Address' # Email Address
@@ -100,6 +101,7 @@ meta:
     5954c04f-9f0f-49bd-ab19-7f17413ca714: Video # Video
     6217da4c-403b-4e7c-bfd0-c78365638e41: Citations # Citations
     6225f69a-e829-4678-a475-92e742c178d2: 'Article Title' # Article Title
+    7426f4ea-af7c-4a85-9784-117b708b8697: __blank__ # __blank__
     9667b568-5c61-43f1-97ab-523933c4c48e: Page # Page
     9906c196-b7f3-460c-98b0-308b1becd435: Video # Video
     18400b36-d7ac-4476-aa8e-11f567a13e44: Interior # Interior
@@ -124,6 +126,7 @@ meta:
     a9037236-9afc-4591-8ab0-5d1ed7c8dac6: 'Alt Text' # Alt Text
     abf135fc-5443-48d6-bc54-cf819645a909: Abstract # Abstract
     ad039f29-1b37-466f-8148-84f4a6bad1e2: 'Contact Info' # Contact Info
+    aedd6f62-b9cc-4d66-9965-3e1e2b461ab4: 'Internal Link' # Internal Link
     afe4aa4d-a254-4790-93e7-f8575e3d0073: 'Story Type' # Story Type
     b0ae2ad9-7257-4cbf-9876-384fbc36354e: 'Street Address' # Street Address
     b5afa9b0-dd12-4d99-9bdd-fba44a0186a4: End # End
@@ -166,6 +169,7 @@ meta:
     f8fc100c-a097-4184-a0e8-3f36393711ea: Stories # Stories
     f55f0760-8acb-4022-8920-361ee1e78c67: 'Last Name' # Last Name
     f381cf42-98f4-4280-9d24-82164617ae1f: 'Person Type' # Person Type
+    f3776d53-2d8b-4cc5-9aac-fafbf6dd7049: 'External Link' # External Link
     fa7b84ab-aced-4076-9af6-f7c241f2470f: Text # Text
     fbf7fd25-1dd4-4ceb-a4d9-c468db28e4c9: Interior # Interior
 plugins:
