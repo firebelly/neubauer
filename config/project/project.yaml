@@ -1,4 +1,4 @@
-dateModified: 1646664093
+dateModified: 1646668879
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -116,6 +116,7 @@ meta:
     55170991-72d7-4945-8338-4d7eeefd8536: Custom # Custom
     59088958-5649-44ab-993b-ae474fef4c67: 'Add a link to the web page' # Add a link to the web page
     98858034-126a-44ae-9de2-5508625e9e84: 'Exhibitions Index' # Exhibitions Index
+    a1ea3cc0-8cb8-43e4-bad0-c6ae57f4a69b: Homepage # Homepage
     a75bfc1f-4f92-47d9-a862-6f67efd7b4cc: 'Article URL' # Article URL
     a253d4a2-ff92-43c0-b59c-9d7c240656cf: 'Event Narrative' # Event Narrative
     a669cdfe-3072-4a16-b2cc-20c2e4f28eb9: 'Spotlight Block' # Spotlight Block
@@ -129,6 +130,7 @@ meta:
     b9aaff06-fe75-4456-b02d-bc5736565777: 'Provide the length of audio, video, or podcast source' # Provide the length of audio, video, or podcast source
     b45dd5d4-f13d-4da4-a383-147faa04ecdb: Start # Start
     b79984f8-2e51-4b9f-8356-b887f57da8fd: Call-to-Actions # Call-to-Actions
+    ba7372d1-df0e-4e4c-8081-62faf2c8bcbb: 'Opener Tagline' # Opener Tagline
     bcfd93a5-57c1-4491-bbc0-aca218206183: 'Start Date' # Start Date
     bd77161e-1841-4cfe-b745-6b2d4e682211: Actions # Actions
     bf69a54a-5f76-43e5-bae9-36c58e062145: URL # URL
@@ -136,12 +138,14 @@ meta:
     c9d2a3a1-cf8d-4060-9704-4f800fa8de4e: Attribution # Attribution
     ca62998e-92bf-4a32-be88-8eacd7a4025c: __blank__ # __blank__
     cdc834cd-c6bc-443d-ba86-edc70defd5a0: Location # Location
+    cf51bd0c-dc97-4734-9328-2dcbf1c1f311: Homepage # Homepage
     d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a: Common # Common
     d5c86c8a-c961-4fb2-8348-90331ee47da2: 'Opener Content' # Opener Content
     d8c2bb45-1781-4d8b-bb49-b8b92cf194e8: 'People Index' # People Index
     d30dbef2-6253-486c-a07d-7a57e79c1fcf: 'Fax Number' # Fax Number
     d42f1b8d-6335-4a9b-8f81-80061a0faa35: People # People
     d80e45b8-04d1-46ed-acdf-4a78508e73c6: Appearance # Appearance
+    d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d: Homepage # Homepage
     d5943f00-060b-4c27-974e-b57dccb00c41: Title # Title
     da9f5f4f-4753-45ed-a951-351b4cc3cd75: Type # Type
     db13480f-0f0d-476a-95af-c94977ab68f9: 'Events Index' # Events Index
