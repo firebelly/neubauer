@@ -101,10 +101,10 @@ fieldLayouts:
       -
         elements:
           -
-            fieldUid: 4defd050-67bf-44b0-a585-e6a0f635921d # Summary
-            instructions: "**Brief story content**\r\n\r\nMaximum character count: 355"
-            label: __blank__
-            required: ''
+            fieldUid: d6d530ae-230b-42de-bb1f-d5c341704755 # Brief description of story
+            instructions: null
+            label: null
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null

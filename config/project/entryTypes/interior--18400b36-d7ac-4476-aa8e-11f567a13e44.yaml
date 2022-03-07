@@ -102,9 +102,9 @@ fieldLayouts:
       -
         elements:
           -
-            fieldUid: 4defd050-67bf-44b0-a585-e6a0f635921d # Summary
-            instructions: "**Brief biography**\r\n\r\nMaximum character count: 1425"
-            label: __blank__
+            fieldUid: 7b2b0d67-1ff7-4ea2-9763-34f9215adb48 # Brief Biography
+            instructions: ''
+            label: ''
             required: ''
             tip: null
             type: craft\fieldlayoutelements\CustomField

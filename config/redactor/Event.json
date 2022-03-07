@@ -1,0 +1,6 @@
+{
+    "buttons": ["bold", "italic", "link", "unorderedlist", "orderedlist"],
+    "plugins": ["fullscreen", "limiter", "counter"],
+    "limiter": 150,
+    "toolbarFixed": true
+}

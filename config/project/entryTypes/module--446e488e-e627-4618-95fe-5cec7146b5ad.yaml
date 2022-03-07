@@ -119,10 +119,10 @@ fieldLayouts:
       -
         elements:
           -
-            fieldUid: 4defd050-67bf-44b0-a585-e6a0f635921d # Summary
-            instructions: '**Brief description of the event (Optional)**'
-            label: __blank__
-            required: ''
+            fieldUid: befa4c7d-b94d-49e4-b3a1-857d02a67a3b # Brief description of event
+            instructions: null
+            label: null
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null

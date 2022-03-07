@@ -40,7 +40,7 @@ fieldLayouts:
             width: 100
           -
             fieldUid: d5c86c8a-c961-4fb2-8348-90331ee47da2 # Opener Content
-            instructions: "Brief text introducing the Events section. \r\n\r\nMaximum character count: 675"
+            instructions: "Brief text introducing the Events section. \r\n\r\nMax characters: 675"
             label: ''
             required: ''
             tip: null

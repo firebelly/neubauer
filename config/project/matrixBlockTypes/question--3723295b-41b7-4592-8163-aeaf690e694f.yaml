@@ -21,7 +21,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: body
-    instructions: "Key question content; multiple questions will be translated into slides.\r\n\r\nMaximum character count: 120"
+    instructions: "Key question content; multiple questions will be translated into slides.\r\n\r\nMax characters: 120"
     name: 'Key Question Content'
     searchable: false
     settings:
@@ -33,7 +33,7 @@ fields:
       manualConfig: ''
       purifierConfig: ''
       purifyHtml: '1'
-      redactorConfig: Simple.json
+      redactorConfig: Spotlight.json
       removeEmptyTags: '1'
       removeInlineStyles: '1'
       removeNbsp: '1'

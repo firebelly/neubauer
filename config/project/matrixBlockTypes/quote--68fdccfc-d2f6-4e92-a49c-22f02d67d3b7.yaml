@@ -46,8 +46,8 @@ fields:
       allowSelfRelations: false
       allowUploads: true
       allowedKinds: null
-      defaultUploadLocationSource: 'volume:486a45fd-ed4e-40c5-b637-d55222520ab5'
-      defaultUploadLocationSubpath: '{% if slug %}{slug}{% endif %}'
+      defaultUploadLocationSource: 'volume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+      defaultUploadLocationSubpath: '{% if owner.section %}{% if owner.section == "Projects" %}Research/{% endif %}{owner.section}/{% endif %}{% if owner.slug %}{owner.slug}{% endif %}'
       limit: '1'
       localizeRelations: false
       previewMode: full
@@ -56,7 +56,7 @@ fields:
       showSiteMenu: true
       showUnpermittedFiles: false
       showUnpermittedVolumes: false
-      singleUploadLocationSource: 'volume:486a45fd-ed4e-40c5-b637-d55222520ab5'
+      singleUploadLocationSource: 'volume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
       singleUploadLocationSubpath: ''
       source: null
       sources: '*'
@@ -72,7 +72,7 @@ fields:
     contentColumnType: text
     fieldGroup: null
     handle: body
-    instructions: 'Brief quote content. Omit quotation marks. '
+    instructions: "Brief quote content. Omit quotation marks. \r\n\r\nMax characters: 120"
     name: 'Quote Content'
     searchable: false
     settings:
@@ -84,7 +84,7 @@ fields:
       manualConfig: ''
       purifierConfig: ''
       purifyHtml: '1'
-      redactorConfig: Simple.json
+      redactorConfig: Spotlight.json
       removeEmptyTags: '1'
       removeInlineStyles: '1'
       removeNbsp: '1'

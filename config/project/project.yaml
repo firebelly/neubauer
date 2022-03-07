@@ -1,4 +1,4 @@
-dateModified: 1646671082
+dateModified: 1646674694
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -46,6 +46,7 @@ meta:
     5f9f5e73-b6cf-46f5-8012-60b8301bff36: Description # Description
     6aa48823-cbaf-44a6-9309-745e32af08cf: 'Article Contributor(s)' # Article Contributor(s)
     6c89b3bb-96bc-468a-ba96-98c7cd21c777: 'Events Index' # Events Index
+    7b2b0d67-1ff7-4ea2-9763-34f9215adb48: 'Brief Biography' # Brief Biography
     7b9acf95-b9b8-48aa-ba4f-223883c1e223: Topics # Topics
     7e5074b8-9286-4b35-9424-be7fbe9dd19b: Image # Image
     8b1838a3-ba11-4d93-bb4f-ffb4b03082ca: Footer # Footer
@@ -127,6 +128,7 @@ meta:
     abf135fc-5443-48d6-bc54-cf819645a909: Abstract # Abstract
     ad039f29-1b37-466f-8148-84f4a6bad1e2: 'Contact Info' # Contact Info
     aedd6f62-b9cc-4d66-9965-3e1e2b461ab4: 'Internal Link' # Internal Link
+    afd5fc2a-82b5-40f5-908b-f8e679205d29: 'Brief description of exhibition' # Brief description of exhibition
     afe4aa4d-a254-4790-93e7-f8575e3d0073: 'Story Type' # Story Type
     b0ae2ad9-7257-4cbf-9876-384fbc36354e: 'Street Address' # Street Address
     b5afa9b0-dd12-4d99-9bdd-fba44a0186a4: End # End
@@ -136,6 +138,7 @@ meta:
     ba7372d1-df0e-4e4c-8081-62faf2c8bcbb: 'Opener Tagline' # Opener Tagline
     bcfd93a5-57c1-4491-bbc0-aca218206183: 'Start Date' # Start Date
     bd77161e-1841-4cfe-b745-6b2d4e682211: Actions # Actions
+    befa4c7d-b94d-49e4-b3a1-857d02a67a3b: 'Brief description of event' # Brief description of event
     bf69a54a-5f76-43e5-bae9-36c58e062145: URL # URL
     c00a2e11-74cb-4d5b-95f2-1878dee82fee: 'Select an existing "Event," or create a new one.' # Select an existing "Event," or create a new one.
     c9d2a3a1-cf8d-4060-9704-4f800fa8de4e: Attribution # Attribution
@@ -144,6 +147,7 @@ meta:
     cf51bd0c-dc97-4734-9328-2dcbf1c1f311: Homepage # Homepage
     d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a: Common # Common
     d5c86c8a-c961-4fb2-8348-90331ee47da2: 'Opener Content' # Opener Content
+    d6d530ae-230b-42de-bb1f-d5c341704755: 'Brief description of story' # Brief description of story
     d8c2bb45-1781-4d8b-bb49-b8b92cf194e8: 'People Index' # People Index
     d30dbef2-6253-486c-a07d-7a57e79c1fcf: 'Fax Number' # Fax Number
     d42f1b8d-6335-4a9b-8f81-80061a0faa35: People # People
@@ -172,6 +176,7 @@ meta:
     f3776d53-2d8b-4cc5-9aac-fafbf6dd7049: 'External Link' # External Link
     fa7b84ab-aced-4076-9af6-f7c241f2470f: Text # Text
     fbf7fd25-1dd4-4ceb-a4d9-c468db28e4c9: Interior # Interior
+    fd969c8b-861f-4a69-8f86-4bab475af647: 'Opener Content' # Opener Content
 plugins:
   blitz:
     edition: standard

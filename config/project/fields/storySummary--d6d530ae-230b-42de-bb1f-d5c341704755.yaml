@@ -1,9 +1,9 @@
 columnSuffix: null
 contentColumnType: text
-fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
-handle: openerText
-instructions: "Brief text introducing the section.\r\n\r\nMax characters: 675"
-name: 'Opener Content'
+fieldGroup: 47e78d01-d60c-4623-939e-b212935f0db8 # Story
+handle: storySummary
+instructions: 'Max characters: 355'
+name: 'Brief description of story'
 searchable: true
 settings:
   availableTransforms: '*'
@@ -14,7 +14,7 @@ settings:
   manualConfig: ''
   purifierConfig: ''
   purifyHtml: '1'
-  redactorConfig: Opener.json
+  redactorConfig: Story.json
   removeEmptyTags: '1'
   removeInlineStyles: '1'
   removeNbsp: '1'

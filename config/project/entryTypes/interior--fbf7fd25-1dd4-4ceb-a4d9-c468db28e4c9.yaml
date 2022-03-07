@@ -96,10 +96,10 @@ fieldLayouts:
       -
         elements:
           -
-            fieldUid: 4defd050-67bf-44b0-a585-e6a0f635921d # Summary
-            instructions: "**Brief description of exhibition**\r\n\r\nMaximum char count: 675"
-            label: __blank__
-            required: ''
+            fieldUid: afd5fc2a-82b5-40f5-908b-f8e679205d29 # Brief description of exhibition
+            instructions: null
+            label: null
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null

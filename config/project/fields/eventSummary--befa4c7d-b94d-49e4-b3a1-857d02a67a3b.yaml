@@ -1,9 +1,9 @@
-columnSuffix: null
+columnSuffix: tisjyjpw
 contentColumnType: text
-fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
-handle: openerText
-instructions: "Brief text introducing the section.\r\n\r\nMax characters: 675"
-name: 'Opener Content'
+fieldGroup: eb6e4b27-3a81-4da1-8f40-fa29c0f7805c # Event
+handle: eventSummary
+instructions: 'Max characters: 150'
+name: 'Brief description of event'
 searchable: true
 settings:
   availableTransforms: '*'
@@ -14,7 +14,7 @@ settings:
   manualConfig: ''
   purifierConfig: ''
   purifyHtml: '1'
-  redactorConfig: Opener.json
+  redactorConfig: Event.json
   removeEmptyTags: '1'
   removeInlineStyles: '1'
   removeNbsp: '1'

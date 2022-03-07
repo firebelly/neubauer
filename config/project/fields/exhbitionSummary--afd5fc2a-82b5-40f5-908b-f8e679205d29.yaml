@@ -1,9 +1,9 @@
-columnSuffix: null
+columnSuffix: tgoqopjn
 contentColumnType: text
-fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
-handle: openerText
-instructions: "Brief text introducing the section.\r\n\r\nMax characters: 675"
-name: 'Opener Content'
+fieldGroup: 840b4f3b-b9bb-4665-8929-9d5969e6c272 # Exhibition
+handle: exhbitionSummary
+instructions: 'Max characters: 675'
+name: 'Brief description of exhibition'
 searchable: true
 settings:
   availableTransforms: '*'
@@ -14,7 +14,7 @@ settings:
   manualConfig: ''
   purifierConfig: ''
   purifyHtml: '1'
-  redactorConfig: Opener.json
+  redactorConfig: Exhibition.json
   removeEmptyTags: '1'
   removeInlineStyles: '1'
   removeNbsp: '1'

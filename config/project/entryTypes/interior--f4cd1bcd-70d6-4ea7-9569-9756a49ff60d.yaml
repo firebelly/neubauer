@@ -82,7 +82,7 @@ fieldLayouts:
         elements:
           -
             fieldUid: abf135fc-5443-48d6-bc54-cf819645a909 # Abstract
-            instructions: "**Brief introduction to the project**\r\n\r\nMaximum character count: 610"
+            instructions: "**Brief introduction to the project**\r\n\r\nMax characters: 620"
             label: __blank__
             required: ''
             tip: null
