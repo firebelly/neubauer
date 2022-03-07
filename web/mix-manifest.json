@@ -1,11 +1,6 @@
 {
-    "/build/scripts/spritemap.js": "/build/scripts/spritemap.js?id=164c4c658f9eb07c6521825443db1dd1",
-    "/build/scripts/main.js": "/build/scripts/main.js?id=bb19b222a69369a5eb3abcca89dd4717",
-    "/build/scripts/manifest.js": "/build/scripts/manifest.js?id=5b146026d602d1c7edde0ac09ee95d92",
-    "/build/styles/main.css": "/build/styles/main.css?id=439ffd6bceeeb4688dca285735d99638",
-    "/build/svgs/icon-arrow-right-20.svg": "/build/svgs/icon-arrow-right-20.svg?id=f49987c52884fa94f41eac7edfa08f50",
-    "/build/svgs/icon-close-20.svg": "/build/svgs/icon-close-20.svg?id=60c7a83ccd07c057fb74503f5a83b04b",
-    "/build/spritemap.svg": "/build/spritemap.svg?id=ae09393a1c043a11b67ab0c59125bd4e",
-    "/build/svgs/logo-neubauer.svg": "/build/svgs/logo-neubauer.svg?id=5ce8fa8ce4cfa5ca24b5bdff7be11b4e",
-    "/build/svgs/icon-search-20.svg": "/build/svgs/icon-search-20.svg?id=dbd894e316d3ce080760cb29ba4326d4"
+    "/build/scripts/spritemap.js": "/build/scripts/spritemap.js",
+    "/build/scripts/main.js": "/build/scripts/main.js",
+    "/build/scripts/manifest.js": "/build/scripts/manifest.js",
+    "/build/styles/main.css": "/build/styles/main.css"
 }

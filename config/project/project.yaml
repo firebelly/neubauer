@@ -1,8 +1,14 @@
-dateModified: 1646428065
+dateModified: 1646664093
 email:
   fromEmail: betsy@firebellydesign.com
-  fromName: neubauer
-  transportType: craft\mail\transportadapters\Sendmail
+  fromName: 'Neubauer Collegium'
+  replyToEmail: betsy@firebellydesign.com
+  template: ''
+  transportSettings:
+    apiKey: MAILGUN_API_KEY
+    domain: MAILGUN_HOST
+    endpoint: 'https://api.mailgun.net/v3'
+  transportType: craft\mailgun\MailgunAdapter
 meta:
   __names__:
     00ba858c-638d-4a15-85f1-dc3c8f7d2874: 'About Index' # About Index
@@ -193,6 +199,10 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 2.0.0
+  mailgun:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
   matrixmate:
     edition: standard
     enabled: true
@@ -230,9 +240,10 @@ plugins:
     enabled: true
     schemaVersion: 1.0.0
 system:
-  edition: solo
+  edition: pro
   live: true
   name: neubauer
+  retryDuration: null
   schemaVersion: 3.7.33
   timeZone: America/Los_Angeles
 users:
