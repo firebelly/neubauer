@@ -140,8 +140,8 @@ fieldLayouts:
         elements:
           -
             fieldUid: 2d527c5e-9c0d-4cc1-ae6e-7be103ce4ff9 # Related Project
-            instructions: 'Connect the exhibition to a project by selecting an existing project, or creating a new one.'
-            label: 'Is this exhibition part of a project?'
+            instructions: "## Is this exhibition part of a project?\r\n\r\nConnect the exhibition to a project by selecting an existing project, or creating a new one."
+            label: __blank__
             required: ''
             tip: null
             type: craft\fieldlayoutelements\CustomField

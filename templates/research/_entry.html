@@ -1,3 +1,32 @@
 Single Project
 
+{% set currentProject = entry %}
+{% set searchSlug = 'ida-applebroog' %}
 
+
+{% set exhibitionList = craft.entries()
+    .section('exhibitions') 
+%}
+
+{% set exhibitions = craft.entries()
+    .section('exhibitions') 
+    .search('relatedProject:' ~ entry ~ '')
+    .all()
+%}
+
+
+{% set projectTeam = entry.projectTeam %}
+
+{% for person in projectTeam %}
+    {{ person }}
+{% endfor %}
+
+{% for x in exhibitions %}
+    X: {{ x }}
+{% endfor %}
+
+{% for item in exhibitionList if item.relatedProject|length and item.relatedProject.one().title == entry.title %}
+    {% set relatedProject = item.relatedProject.one() %}
+    ex slug: {{ item.slug }}
+    project slug: {{ relatedProject.slug }} 
+{% endfor %}

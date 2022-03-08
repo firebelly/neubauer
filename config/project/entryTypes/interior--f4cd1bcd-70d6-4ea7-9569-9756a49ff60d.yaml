@@ -171,15 +171,13 @@ fieldLayouts:
       -
         elements:
           -
-            fieldUid: e93b9edb-c0f9-454a-b64e-43cd24153a86 # Featured Exhibition
-            instructions: null
-            label: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            warning: null
+            heading: 'Is this project related to an exhibition?'
+            type: craft\fieldlayoutelements\Heading
+          -
+            template: control-panel/projects/_project-featured-exhibition.html
+            type: craft\fieldlayoutelements\Template
             width: 100
-        name: 'Featured Exhibition'
+        name: 'Related Exhibition'
         sortOrder: 7
 handle: interior
 hasTitleField: true

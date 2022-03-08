@@ -59,7 +59,8 @@
                     {% if selectIcon %}
                     {% set iconPath = "/spritemap.svg#icon-#{selectIcon}" %}
                     <svg class="{{ selectName }}-icon">
-                        <use xlink:href="{{ rev(iconPath) }}"></use>
+                        {# rev(iconPath) #}
+                        <use xlink:href="{{ alias('@assetBasePath' ~ iconPath) }}"></use>
                     </svg>
                     {% endif %}
                 </button>
@@ -121,7 +122,8 @@
         {% if sortIcon %}
         {% set iconPath = "/spritemap.svg#icon-#{sortIcon}" %}
         <svg class="{{ sortName }}-icon">
-            <use xlink:href="{{ rev(iconPath) }}"></use>
+            <use xlink:href="{{ alias('@assetBasePath' ~ iconPath) }}"></use>
+            {# <use xlink:href="{{ rev(iconPath) }}"></use> #}
         </svg>
         {% endif %}
     </a>
@@ -161,7 +163,8 @@
                 {% set currentIcon = layoutIcons|filter((idx,icon) => icon|split('-')[0] == layout) %}
                 {% set iconPath = "/spritemap.svg#icon-#{currentIcon}" %}
                 <svg class="{{ sortName }}-icon">
-                    <use xlink:href="{{ rev(iconPath) }}"></use>
+                    {# <use xlink:href="{{ rev(iconPath) }}"></use> #}
+                    <use xlink:href="{{ alias('@assetBasePath' ~ iconPath) }}"></use>
                 </svg>
                 {% endif %}
                 <span class="{{ layoutName }}-ghost">{{ layoutTitle }}</span>
@@ -210,7 +213,8 @@
         {% set icon = pageIcons[loop.index0] %}
         {% set iconPath = "/spritemap.svg#icon-#{icon}-#{iconSize}" %}
         <svg class="{{ pageName }}-icon">
-            <use xlink:href="{{ rev(iconPath) }}"></use>
+            {# <use xlink:href="{{ rev(iconPath) }}"></use> #}
+            <use xlink:href="{{ alias('@assetBasePath' ~ iconPath) }}"></use>
         </svg>
         {% endif %}
     </a>

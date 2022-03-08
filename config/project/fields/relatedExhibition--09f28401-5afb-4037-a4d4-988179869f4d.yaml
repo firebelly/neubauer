@@ -4,7 +4,7 @@ fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
 handle: relatedExhibition
 instructions: 'Connect an exhibition to the entry.'
 name: 'Related Exhibition'
-searchable: false
+searchable: true
 settings:
   allowSelfRelations: false
   limit: '1'

@@ -1,0 +1,38 @@
+<style>
+.adminTip-list {
+    margin-left: 2em;
+    list-style-type: disc;
+}
+.adminTip-item {
+    margin-bottom: 1em;
+}
+.adminTip-hr {
+    margin-top: 0;
+    width: 50px;
+}
+</style>
+
+{% set currentProject = element %}
+{% set relatedExhibitions = craft.entries()
+    .section('exhibitions') 
+    .search('relatedProject:' ~ currentProject ~ '')
+    .all()
+%}
+
+<hr class="adminTip-hr" />
+{% if relatedExhibitions|length %}
+<p>To add/edit/remove a related exhibition, go to its admin page, click the "Related Project" tab, edit as needed.</p>
+<ul class="adminTip-list">
+{% for ex in relatedExhibitions %}
+    <li class="adminTip-item">
+        {% if ex.isEditable() %}
+        <a href="{{ ex.cpEditUrl }}">{{ ex }}</a>
+        {% else %}
+        {{ ex }}
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% else %}
+<p>Not yet! To connect an exhibition, go to its admin page, click the "Related Project" tab, select this project.</p>
+{% endif %}

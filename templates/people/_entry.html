@@ -1,6 +1,6 @@
 
 {% extends "layouts/_base.html" %}
-{% import 'macros/_assets' as assets %}
+{# {% import 'macros/_assets' as assets %} #}
 {% import 'macros/_controls' as controls %}
 
 {% block content %}
@@ -38,7 +38,7 @@ Testing Images
 
 <div class="contentContainer">
     <div class="profileContainer">
-        {{ assets.assetImage(imageName,imageVariant,imageObj,imageTransforms,aspectRatioObj,showCaption,imageBlock,imagerX) }}
+        {# {{ assets.assetImage(imageName,imageVariant,imageObj,imageTransforms,aspectRatioObj,showCaption,imageBlock,imagerX) }} #}
         <div class="profileBody">
         {{ entry.summary }}
         </div>

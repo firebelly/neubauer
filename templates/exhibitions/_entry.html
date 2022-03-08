@@ -20,7 +20,11 @@
 
 <div class="contentContainer">
     
+{% set relatedProjects = entry.relatedProject %}
 
+{% for project in relatedProjects %}
+    {{ project }}
+{% endfor %}
    
 </div>
 {% endblock %}
