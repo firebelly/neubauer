@@ -6,9 +6,14 @@
 .adminTip-item {
     margin-bottom: 1em;
 }
-.adminTip-hr {
-    margin-top: 0;
-    width: 50px;
+.adminTip-box {
+    margin-top: 24px;
+    background: #f3f7fc;
+    padding: 1em;
+    border-radius: 10px;
+}
+.adminTip-title {
+    margin: 0 0 14px 0;
 }
 </style>
 
@@ -19,9 +24,17 @@
     .all()
 %}
 
-<hr class="adminTip-hr" />
+
 {% if relatedExhibitions|length %}
-<p>To add/edit/remove a related exhibition, go to its admin page, click the "Related Project" tab, edit as needed.</p>
+<h2 class="adminTip-title">This project is related to:</h2>
+{% if relatedExhibitions|length == 1 %}
+{% set ex = relatedExhibitions[0] %}
+{% if ex.isEditable() %}
+<a href="{{ ex.cpEditUrl }}">{{ ex }}</a>
+{% else %}
+{{ ex }}
+{% endif %}
+{% else %}
 <ul class="adminTip-list">
 {% for ex in relatedExhibitions %}
     <li class="adminTip-item">
@@ -32,7 +45,10 @@
         {% endif %}
     </li>
 {% endfor %}
+{% endif %}
 </ul>
+<p class="adminTip-box"><strong>Hint:</strong> To add/edit/remove a related exhibition, go to its admin page, click the "Related Project" tab, edit as needed.</p>
 {% else %}
-<p>Not yet! To connect an exhibition, go to its admin page, click the "Related Project" tab, select this project.</p>
+<h2 class="adminTip-title">This project is not related to an exhibition yet.</h2>
+<p class="adminTip-box"><strong>Hint:</strong> To connect an exhibition, go to its admin page, click the "Related Project" tab, select this project.</p>
 {% endif %}

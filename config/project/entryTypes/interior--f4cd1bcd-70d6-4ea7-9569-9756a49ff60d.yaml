@@ -171,9 +171,6 @@ fieldLayouts:
       -
         elements:
           -
-            heading: 'Is this project related to an exhibition?'
-            type: craft\fieldlayoutelements\Heading
-          -
             template: control-panel/projects/_project-featured-exhibition.html
             type: craft\fieldlayoutelements\Template
             width: 100
