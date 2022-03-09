@@ -1,1 +1,13 @@
-(self.webpackChunkneubauer=self.webpackChunkneubauer||[]).push([[355],{256:()=>{}}]);
+(self["webpackChunkneubauer"] = self["webpackChunkneubauer"] || []).push([["spritemap"],{
+
+/***/ "?c20d":
+/*!******************************!*\
+  !*** spritemap-dummy-module ***!
+  \******************************/
+/***/ (() => {
+
+
+
+/***/ })
+
+}]);

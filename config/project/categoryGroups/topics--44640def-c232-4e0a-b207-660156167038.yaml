@@ -27,15 +27,19 @@ fieldLayouts:
             type: craft\fieldlayoutelements\TitleField
             warning: null
             width: 100
+          -
+            template: control-panel/common/_topic-results.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
         name: Content
         sortOrder: 1
 handle: topics
 name: Topics
 siteSettings:
   0c99f337-2218-4c6f-b0ad-30589c1ebbc5: # neubauer
-    hasUrls: true
+    hasUrls: false
     template: null
-    uriFormat: 'topics/{slug}'
+    uriFormat: null
 structure:
   maxLevels: null
   uid: e5f4ee20-8ca7-43a9-8063-7d05dce93b07

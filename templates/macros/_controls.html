@@ -1,4 +1,42 @@
-{# controlItem: 
+{# controlSearch: 
+   See: styles/components/_controls.scss for styling
+
+   @searchName {str}    - namespace
+   @searchId {str}      - identifier
+   @searchLabel {str}   - input label
+   @searchQuery {str}   - 
+   @searchVariant {str} - (optional)
+#}
+{% macro controlSearch(searchName,searchId,searchLabel,searchQuery,searchVariant = null) %}
+<div class="{{ searchName }}{% if searchVariant is not null %} {{ searchName }}--{{ searchVariant }}{% endif %}">
+    <div>
+        <label 
+            for="search_{{ searchId }}" 
+            class="{{ searchName }}-label">
+            {{ searchLabel }}
+        </label>
+        <input
+            id="search_{{ searchId }}"
+            class="{{ searchName }}-input {{ searchName }}-input--text{% if searchQuery %} _has-value{% endif %}" 
+            type="text" 
+            name="query"
+            sprig
+            value="{{ searchQuery }}" />
+    </div>
+    <button 
+        class="{{ searchName }}-button" 
+        id="search_submit_{{ searchId }}" 
+        name="search_submit_{{ searchId }}" 
+        role="submit"
+        sprig
+        s-trigger="click"
+        s-replace="#search_{{ searchId }}_results">
+        <span class="{{ searchName }}-trigger">Search</span>
+    </button>
+</div>
+{% endmacro %}
+
+{# controlSelectItem: 
    See: styles/components/_controls.scss for styling
    Required: sprig
 

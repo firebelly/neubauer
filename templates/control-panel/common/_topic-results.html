@@ -1,0 +1,71 @@
+<style>
+.adminTip-list {
+    margin-left: 2em;
+    margin-bottom: 3em;
+    list-style-type: disc;
+}
+.adminTip-item {
+    margin-bottom: 1em;
+}
+.adminTip-p {
+    margin-bottom: 3em;
+}
+.adminTip-box {
+    margin-top: 0;
+    margin-bottom: 3em;
+    background: #f3f7fc;
+    padding: 1em;
+    border-radius: 10px;
+}
+.adminTip-title {
+    margin: 0 0 14px 0;
+}
+</style>
+
+{% set currentTopic = element %}
+{% set projects = craft.entries()
+    .section('projects') 
+    .search('topicList:' ~ currentTopic ~ '')
+    .all()
+%}
+{% set exhibitions = craft.entries()
+    .section('exhibitions') 
+    .search('topicList:' ~ currentTopic ~ '')
+    .all()
+%}
+
+<p class="adminTip-box"><strong>Hint:</strong> To assign a topic to a Project or Exhibition, go to its admin page, click "Add a topic."</p>
+
+<h2 class="adminTip-title"><strong>Projects</strong> tagged "{{ currentTopic }}:"</h2>
+{% if projects|length %}
+<ul class="adminTip-list">
+{% for ex in projects %}
+    <li class="adminTip-item">
+        {% if ex.isEditable() %}
+        <a href="{{ ex.cpEditUrl }}">{{ ex }}</a>
+        {% else %}
+        {{ ex }}
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% else %}
+<p class="adminTip-p">There are no projects tagged "{{ currentTopic }}."
+{% endif %}
+
+<h2 class="adminTip-title"><strong>Exhibitions</strong> tagged "{{ currentTopic }}:"</h2>
+{% if exhibitions|length %}
+<ul class="adminTip-list">
+{% for ex in exhibitions %}
+    <li class="adminTip-item">
+        {% if ex.isEditable() %}
+        <a href="{{ ex.cpEditUrl }}">{{ ex }}</a>
+        {% else %}
+        {{ ex }}
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% else %}
+<p class="adminTip-p">There are no exhibitions tagged "{{ currentTopic }}."
+{% endif %}

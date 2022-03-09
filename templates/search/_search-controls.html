@@ -1,0 +1,59 @@
+{% import 'macros/_controls' as controls %}
+
+{# set default search vars  #}
+{% set query = query ?? '' %}
+{% set count = count ?? 0 %}
+{% set page = page ?? 1 %}
+{% set limit = limit ?? 10 %}
+{# sprig update url #}
+{% do sprig.pushUrl('?' ~ {query: query, page: page}|url_encode) %}
+{# sprig persistent state  #}
+{{ hiddenInput('page', page) }}
+{{ hiddenInput('count', count) }}
+
+
+
+<div>
+{{ count }} Results for <br />"{{ query }}"
+</div>
+
+
+<div class="indexSearch">
+    {% set searchName,searchId,searchLabel = 'indexSearch','index','Enter keyword(s) here' %}
+    {{ controls.controlSearch(searchName,searchId,searchLabel,query) }}
+</div>
+
+{% set excludeList = ['about-us'] %}
+{% set tabList = craft.categories.group('navigation') %}
+
+<ul class="searchTabs">
+    <li class="searchTabs-item">
+        <a class="searchTabs-trigger" href="#all">
+            <span class="searchTabs-label">All</span>
+        </a>
+    </li>
+{% for tab in tabList if tab.slug not in excludeList %}
+{% set tabSlug = tab.slug %}
+    <li class="searchTabs-item">
+        <a class="searchTabs-trigger" href="#{{ tabSlug }}">
+            <span class="searchTabs-label">{{ tab }}</span>
+        </a>
+    </li>
+{% endfor %}
+</ul>
+
+
+
+<section class="searchResults" id="search_index_results">
+<h2>Results:</h2>
+{% if query %}
+    {% set entries = craft.entries.search(query).all() %}
+    {% if entries|length %}
+      {% for entry in entries %}
+        <a href="{{ entry.url }}">{{ entry.title }}</a>
+      {% endfor %}
+    {% else %}
+        No results
+    {% endif %}
+  {% endif %}
+</section>
