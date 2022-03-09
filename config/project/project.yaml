@@ -1,4 +1,4 @@
-dateModified: 1646838757
+dateModified: 1646844600
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -73,6 +73,7 @@ meta:
     68fdccfc-d2f6-4e92-a49c-22f02d67d3b7: Quote # Quote
     70f4d9f3-ca18-4e75-aaf3-de2fdea80886: Text # Text
     77e2104f-9397-4206-877a-0aaf7f813485: __blank__ # __blank__
+    80bdb7fb-a142-426f-a1cc-9bb2510da412: 'Neubauer Admin' # Neubauer Admin
     83a548ae-9269-46bb-8ee0-4a6929613dd7: Label # Label
     84b1efbb-d314-43e3-8fb5-fc6af1012146: Common # Common
     84d51659-d55a-4529-bd5d-9c19e31e6fdb: 'Add a link to the media source' # Add a link to the media source
@@ -259,9 +260,3 @@ system:
   retryDuration: null
   schemaVersion: 3.7.33
   timeZone: America/Los_Angeles
-users:
-  allowPublicRegistration: false
-  defaultGroup: null
-  photoSubpath: null
-  photoVolumeUid: null
-  requireEmailVerification: true

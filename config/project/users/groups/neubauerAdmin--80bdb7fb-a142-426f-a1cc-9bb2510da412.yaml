@@ -1,0 +1,122 @@
+description: 'Allowed access to user and page content management; prevented from system access.'
+handle: neubauerAdmin
+name: 'Neubauer Admin'
+permissions:
+  - accesscp
+  - registerusers
+  - moderateusers
+  - assignuserpermissions
+  - assignusergroups
+  - editusers
+  - deleteusers
+  - 'publishentries:447e6245-204b-41fa-91d2-d99b74c5bc72' # About Index
+  - 'publishpeerentrydrafts:447e6245-204b-41fa-91d2-d99b74c5bc72' # About Index
+  - 'deletepeerentrydrafts:447e6245-204b-41fa-91d2-d99b74c5bc72' # About Index
+  - 'editpeerentrydrafts:447e6245-204b-41fa-91d2-d99b74c5bc72' # About Index
+  - 'editentries:447e6245-204b-41fa-91d2-d99b74c5bc72' # About Index
+  - 'createentries:54497447-5d94-44d4-aed1-b898e86a9b77' # Events
+  - 'publishentries:54497447-5d94-44d4-aed1-b898e86a9b77' # Events
+  - 'deleteentries:54497447-5d94-44d4-aed1-b898e86a9b77' # Events
+  - 'publishpeerentries:54497447-5d94-44d4-aed1-b898e86a9b77' # Events
+  - 'deletepeerentries:54497447-5d94-44d4-aed1-b898e86a9b77' # Events
+  - 'editpeerentries:54497447-5d94-44d4-aed1-b898e86a9b77' # Events
+  - 'publishpeerentrydrafts:54497447-5d94-44d4-aed1-b898e86a9b77' # Events
+  - 'deletepeerentrydrafts:54497447-5d94-44d4-aed1-b898e86a9b77' # Events
+  - 'editpeerentrydrafts:54497447-5d94-44d4-aed1-b898e86a9b77' # Events
+  - 'editentries:54497447-5d94-44d4-aed1-b898e86a9b77' # Events
+  - 'publishentries:6c89b3bb-96bc-468a-ba96-98c7cd21c777' # Events Index
+  - 'publishpeerentrydrafts:6c89b3bb-96bc-468a-ba96-98c7cd21c777' # Events Index
+  - 'deletepeerentrydrafts:6c89b3bb-96bc-468a-ba96-98c7cd21c777' # Events Index
+  - 'editpeerentrydrafts:6c89b3bb-96bc-468a-ba96-98c7cd21c777' # Events Index
+  - 'editentries:6c89b3bb-96bc-468a-ba96-98c7cd21c777' # Events Index
+  - 'createentries:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
+  - 'publishentries:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
+  - 'deleteentries:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
+  - 'publishpeerentries:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
+  - 'deletepeerentries:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
+  - 'editpeerentries:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
+  - 'publishpeerentrydrafts:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
+  - 'deletepeerentrydrafts:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
+  - 'editpeerentrydrafts:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
+  - 'editentries:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
+  - 'publishentries:98858034-126a-44ae-9de2-5508625e9e84' # Exhibitions Index
+  - 'publishpeerentrydrafts:98858034-126a-44ae-9de2-5508625e9e84' # Exhibitions Index
+  - 'deletepeerentrydrafts:98858034-126a-44ae-9de2-5508625e9e84' # Exhibitions Index
+  - 'editpeerentrydrafts:98858034-126a-44ae-9de2-5508625e9e84' # Exhibitions Index
+  - 'editentries:98858034-126a-44ae-9de2-5508625e9e84' # Exhibitions Index
+  - 'publishentries:a1ea3cc0-8cb8-43e4-bad0-c6ae57f4a69b' # Homepage
+  - 'publishpeerentrydrafts:a1ea3cc0-8cb8-43e4-bad0-c6ae57f4a69b' # Homepage
+  - 'deletepeerentrydrafts:a1ea3cc0-8cb8-43e4-bad0-c6ae57f4a69b' # Homepage
+  - 'editpeerentrydrafts:a1ea3cc0-8cb8-43e4-bad0-c6ae57f4a69b' # Homepage
+  - 'editentries:a1ea3cc0-8cb8-43e4-bad0-c6ae57f4a69b' # Homepage
+  - 'createentries:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
+  - 'publishentries:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
+  - 'deleteentries:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
+  - 'publishpeerentries:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
+  - 'deletepeerentries:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
+  - 'editpeerentries:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
+  - 'publishpeerentrydrafts:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
+  - 'deletepeerentrydrafts:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
+  - 'editpeerentrydrafts:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
+  - 'editentries:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
+  - 'publishentries:d8c2bb45-1781-4d8b-bb49-b8b92cf194e8' # People Index
+  - 'publishpeerentrydrafts:d8c2bb45-1781-4d8b-bb49-b8b92cf194e8' # People Index
+  - 'deletepeerentrydrafts:d8c2bb45-1781-4d8b-bb49-b8b92cf194e8' # People Index
+  - 'editpeerentrydrafts:d8c2bb45-1781-4d8b-bb49-b8b92cf194e8' # People Index
+  - 'editentries:d8c2bb45-1781-4d8b-bb49-b8b92cf194e8' # People Index
+  - 'createentries:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+  - 'publishentries:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+  - 'deleteentries:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+  - 'publishpeerentries:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+  - 'deletepeerentries:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+  - 'editpeerentries:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+  - 'publishpeerentrydrafts:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+  - 'deletepeerentrydrafts:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+  - 'editpeerentrydrafts:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+  - 'editentries:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+  - 'publishentries:51786161-bb39-4ca3-9246-d4f938d1a053' # Research Index
+  - 'publishpeerentrydrafts:51786161-bb39-4ca3-9246-d4f938d1a053' # Research Index
+  - 'deletepeerentrydrafts:51786161-bb39-4ca3-9246-d4f938d1a053' # Research Index
+  - 'editpeerentrydrafts:51786161-bb39-4ca3-9246-d4f938d1a053' # Research Index
+  - 'editentries:51786161-bb39-4ca3-9246-d4f938d1a053' # Research Index
+  - 'publishentries:2df2bcc7-46c7-49b5-be7b-b0ade6314496' # Search Index
+  - 'publishpeerentrydrafts:2df2bcc7-46c7-49b5-be7b-b0ade6314496' # Search Index
+  - 'deletepeerentrydrafts:2df2bcc7-46c7-49b5-be7b-b0ade6314496' # Search Index
+  - 'editpeerentrydrafts:2df2bcc7-46c7-49b5-be7b-b0ade6314496' # Search Index
+  - 'editentries:2df2bcc7-46c7-49b5-be7b-b0ade6314496' # Search Index
+  - 'createentries:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
+  - 'publishentries:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
+  - 'deleteentries:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
+  - 'publishpeerentries:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
+  - 'deletepeerentries:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
+  - 'editpeerentries:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
+  - 'publishpeerentrydrafts:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
+  - 'deletepeerentrydrafts:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
+  - 'editpeerentrydrafts:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
+  - 'editentries:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
+  - 'editglobalset:1762d70d-bae6-49fd-8b8e-ac8f767621d1' # Primary Footer
+  - 'editglobalset:66a3bd47-7aa6-4023-9c01-4f4b2a2b1bdd' # Error Index
+  - 'editcategories:dbb74986-f45a-4de0-b349-f466e988a4cb' # Person Types
+  - 'editcategories:44640def-c232-4e0a-b207-660156167038' # Topics
+  - 'saveassetinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  - 'createfoldersinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  - 'deletefilesandfoldersinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  - 'replacefilesinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  - 'editimagesinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  - 'editpeerfilesinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  - 'replacepeerfilesinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  - 'deletepeerfilesinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  - 'editpeerimagesinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  - 'viewpeerfilesinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  - 'viewvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  - 'saveassetinvolume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  - 'createfoldersinvolume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  - 'deletefilesandfoldersinvolume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  - 'replacefilesinvolume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  - 'editimagesinvolume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  - 'editpeerfilesinvolume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  - 'replacepeerfilesinvolume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  - 'deletepeerfilesinvolume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  - 'editpeerimagesinvolume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  - 'viewpeerfilesinvolume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  - 'viewvolume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
