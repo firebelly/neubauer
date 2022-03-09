@@ -4,7 +4,7 @@ fieldGroup: 47e78d01-d60c-4623-939e-b212935f0db8 # Story
 handle: storyType
 instructions: 'Select the story''s development type (e.g. "Update" or "Interview"). Defaults to "Update." '
 name: 'Story Type'
-searchable: false
+searchable: true
 settings:
   optgroups: true
   options:

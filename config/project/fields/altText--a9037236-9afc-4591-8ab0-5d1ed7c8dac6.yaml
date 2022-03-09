@@ -4,7 +4,7 @@ fieldGroup: 10ed9c28-61c3-4258-bc65-24b2ecaa7930 # Asset
 handle: altText
 instructions: 'The alternate text description of an image vital to SEO and Accessibility; ensures people do not miss information conveyed by graphics if using assistive technology (i.e. screen readers), or if images are slow or fail to load.'
 name: 'Alt Text'
-searchable: false
+searchable: true
 settings:
   byteLimit: null
   charLimit: null

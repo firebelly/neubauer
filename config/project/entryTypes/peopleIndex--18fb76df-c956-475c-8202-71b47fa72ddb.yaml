@@ -30,7 +30,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 41a7228a-3bfb-47bf-a8e7-9e0ec9cc0ea5 # Display Name
+            fieldUid: 41a7228a-3bfb-47bf-a8e7-9e0ec9cc0ea5
             instructions: null
             label: null
             required: false

@@ -4,7 +4,7 @@ fieldGroup: eb6e4b27-3a81-4da1-8f40-fa29c0f7805c # Event
 handle: eventLabel
 instructions: 'Label that describes the type of event, e.g. "Book Signing" '
 name: 'Event Label'
-searchable: false
+searchable: true
 settings:
   byteLimit: null
   charLimit: 20

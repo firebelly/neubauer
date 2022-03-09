@@ -1,0 +1,41 @@
+defaultPlacement: end
+fieldLayouts:
+  f2a5060b-d030-4bbd-906d-d2b8ccfe2b0d:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\TitleField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: navigation
+name: Navigation
+siteSettings:
+  0c99f337-2218-4c6f-b0ad-30589c1ebbc5: # neubauer
+    hasUrls: false
+    template: null
+    uriFormat: null
+structure:
+  maxLevels: null
+  uid: d4698d46-259f-4ab8-b674-a3eb10cde547

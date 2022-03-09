@@ -4,7 +4,7 @@ fieldGroup: d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d # Homepage
 handle: openerTagline
 instructions: "Prominent site tagline, e.g. \"Open to Inquiry\"\r\n\r\nMax characters: 20"
 name: 'Opener Tagline'
-searchable: false
+searchable: true
 settings:
   availableTransforms: '*'
   availableVolumes: '*'

@@ -1,4 +1,4 @@
-dateModified: 1646770749
+dateModified: 1646838757
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -67,7 +67,6 @@ meta:
     24a17e09-26e2-478c-9dfe-bbca0be0122b: 'Select a Neubauer page as the destination' # Select a Neubauer page as the destination
     29a66baf-c15f-4cd8-bc9a-08825a4ee34d: Date # Date
     40a4b8f6-206e-4664-86a2-9a6e0d2c1213: 'Date + Time' # Date + Time
-    41a7228a-3bfb-47bf-a8e7-9e0ec9cc0ea5: 'Display Name' # Display Name
     47e78d01-d60c-4623-939e-b212935f0db8: Story # Story
     49f91a58-0c7a-4d84-a70d-fe29b1128987: 'Select an existing "Exhibition," or create a new one.' # Select an existing "Exhibition," or create a new one.
     66a3bd47-7aa6-4023-9c01-4f4b2a2b1bdd: 'Error Index' # Error Index
@@ -102,6 +101,7 @@ meta:
     5954c04f-9f0f-49bd-ab19-7f17413ca714: Video # Video
     6217da4c-403b-4e7c-bfd0-c78365638e41: Citations # Citations
     6225f69a-e829-4678-a475-92e742c178d2: 'Article Title' # Article Title
+    6744a538-4565-4885-8d5a-7fb015f93267: Navigation # Navigation
     7426f4ea-af7c-4a85-9784-117b708b8697: __blank__ # __blank__
     9667b568-5c61-43f1-97ab-523933c4c48e: Page # Page
     9906c196-b7f3-460c-98b0-308b1becd435: Video # Video

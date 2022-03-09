@@ -4,7 +4,7 @@ fieldGroup: 840b4f3b-b9bb-4665-8929-9d5969e6c272 # Exhibition
 handle: exhibitionLabel
 instructions: 'Select a label for the featured exhibition (e.g. "Upcoming").'
 name: 'Featured Label'
-searchable: false
+searchable: true
 settings:
   optgroups: true
   options:

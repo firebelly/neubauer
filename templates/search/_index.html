@@ -1,1 +1,15 @@
 Search Index
+
+{% set excludeList = [] %}
+{% set tabList = craft.categories.group('navigation') %}
+
+<ul class="searchTabs">
+{% for tab in tabList if tab not in excludeList %}
+{% set tabSlug = tab.slug %}
+    <li class="searchTabs-item">
+        <a class="searchTabs-trigger" href="#{{ tabSlug }}">
+            <span class="searchTabs-label">{{ tab }}</span>
+        </a>
+    </li>
+{% endfor %}
+</ul>

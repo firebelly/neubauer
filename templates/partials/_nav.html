@@ -1,17 +1,16 @@
 {% import 'macros/_fields' as fields %}
 
-{% set sectionList = craft.app.sections.getSectionsByType('single') %}
-{% set excludeList = ['homepage','searchIndex'] %}
+{% set excludeList = [] %}
+{% set navList = craft.categories.group('navigation') %}
 
 <nav class="primaryNav">
     <h2 class="primaryNav-title">Menu</h2>
     
     <ul class="primaryMenu">
-    {% for thisSection in sectionList if thisSection.handle not in excludeList %}
-        {% set indexPage = craft.entries.section(thisSection).status('enabled').one() %}
+    {% for navItem in navList if navItem not in excludeList %}
         <li class="primaryMenu-item">
-            <a class="primaryMenu-trigger" href="{{ url(indexPage.url) }}">
-                <span class="primaryMenu-label">{{ indexPage.displayName }}</span>
+            <a class="primaryMenu-trigger" href="{{ navItem.slug }}">
+                <span class="primaryMenu-label">{{ navItem }}</span>
                 <svg 
                     class="primaryMenu-icon"
                     role="presentation">
@@ -20,6 +19,7 @@
                 </svg> 
             </a>
         </li>
+
     {% endfor %}
     </ul>
 

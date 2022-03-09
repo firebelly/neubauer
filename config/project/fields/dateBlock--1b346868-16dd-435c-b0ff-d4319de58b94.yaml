@@ -4,7 +4,7 @@ fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
 handle: dateBlock
 instructions: ''
 name: 'Date Block'
-searchable: false
+searchable: true
 settings:
   contentTable: '{{%matrixcontent_dateblock}}'
   maxBlocks: '1'
