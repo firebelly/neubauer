@@ -347,6 +347,9 @@ Usage: @include breakpoint(md);
 /* -------------------------------------------------------------------------------
  Pagination Control: Default Presentation
 ---------------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------
+  Tags
+------------------------------------------------------------------------ */
 /* _fields.scss */
 /* ---------------------------------------------------------------------
   Text Field: Structure
@@ -539,6 +542,208 @@ img {
   flex: 0 1 auto;
 }
 
+.searchPagination {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 2em 0 0;
+  width: 100%;
+}
+@media (min-width: 62em) {
+  .searchPagination {
+    width: auto;
+  }
+}
+.searchPagination a:link,
+.searchPagination a:visited,
+.searchPagination a:hover,
+.searchPagination a:active {
+  display: block;
+  text-decoration: none;
+}
+.searchPagination-group {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 0 1 auto;
+  -webkit-box-alignpack: center;
+  -ms-flex-alignpack: center;
+  -webkit-align-itemspack: center;
+  align-items: center;
+  margin: 0 0 2em 0;
+}
+@media (min-width: 62em) {
+  .searchPagination-group--direction {
+    margin: 0;
+  }
+}
+.searchPagination-group--pages {
+  position: relative;
+  padding: 0 0.5em;
+}
+@media (min-width: 62em) {
+  .searchPagination-group--pages {
+    padding: 0 1.5em;
+    margin: 0 1.2em;
+  }
+  .searchPagination-group--pages::before, .searchPagination-group--pages::after {
+    content: "";
+    position: absolute;
+    border-left: 1px solid transparent;
+    height: 100%;
+  }
+  .searchPagination-group--pages::before {
+    left: 0;
+  }
+  .searchPagination-group--pages::after {
+    right: 0;
+  }
+}
+.searchPagination-group li {
+  flex: 0 1 auto;
+}
+.searchPagination-nav {
+  margin: 0 0.8em 0 0;
+  padding-right: 2em;
+  position: relative;
+}
+@media (min-width: 62em) {
+  .searchPagination-nav {
+    margin: 0 0 0 0.8em;
+  }
+}
+.searchPagination-nav::after {
+  content: "";
+  display: block;
+  margin: 0.5em 0 0 0;
+  width: 100%;
+  border-bottom: 2px solid transparent;
+}
+.searchPagination-nav._is-inactive {
+  pointer-events: none;
+}
+.searchPagination-nav._is-inactive:hover {
+  cursor: default;
+}
+.searchPagination-num {
+  margin: 0 0.5em;
+}
+.searchPagination-num::after {
+  content: "";
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid transparent;
+}
+.searchPagination-num._is-inactive {
+  pointer-events: none;
+}
+.searchPagination-icon {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  right: 0;
+}
+
+@media (min-width: 62em) {
+  .searchPagination--pages::before, .searchPagination--pages::after {
+    border-left-color: #A3A29E;
+  }
+}
+.searchPagination-nav {
+  color: #4444E4;
+}
+.searchPagination-nav::after {
+  border-bottom-color: #4444E4;
+}
+.searchPagination-nav._is-inactive::after {
+  border-color: #A3A29E;
+}
+
+.searchPagination-nav._is-inactive {
+  color: #A3A29E;
+}
+.searchPagination-num {
+  color: #A3A29E;
+}
+.searchPagination-num._is-inactive {
+  color: #4F4E4A;
+}
+.searchPagination-num._is-inactive::after {
+  border-bottom-color: #4F4E4A;
+}
+.searchPagination-icon {
+  fill: #4444E4;
+}
+.searchPagination-nav._is-inactive .searchPagination-icon {
+  fill: #A3A29E;
+}
+
+.searchTags {
+  border: none;
+  -webkit-appearance: none;
+  display: flex;
+  flex-flow: row wrap;
+  -webkit-box-alignpack: center;
+  -ms-flex-alignpack: center;
+  -webkit-align-itemspack: center;
+  align-items: center;
+  border-radius: 20px;
+  margin: 0 0.5em 0 0;
+  padding: 0.2em 1em 0.3em 1em;
+  font-size: 1rem;
+}
+.searchTags-trigger {
+  flex: 0 1 auto;
+  font: 350 1.4em "myfont-sans-regular", sans-serif;
+}
+.searchTags-trigger:link, .searchTags-trigger:visited, .searchTags-trigger:hover, .searchTags-trigger:active {
+  text-decoration: none;
+}
+.searchTags--ghost .searchTags-trigger {
+  color: #0D0D0C;
+}
+.searchTags--solid .searchTags-trigger {
+  color: #FFFFFF;
+}
+.searchTags--ghost {
+  border: 1px solid #0D0D0C;
+  background: none;
+}
+.searchTags--solid {
+  background: #0D0D0C;
+  color: #FFFFFF;
+}
+.searchTags-close {
+  flex: 0 1 auto;
+  display: inline-block;
+  height: 20px;
+  margin: 0 0 0 0.3em;
+  width: 20px;
+  fill: #FFFFFF;
+}
+.searchTags:hover .searchTags-close {
+  fill: #0D0D0C;
+}
+.searchTags-file {
+  flex: 0 1 auto;
+  display: inline-block;
+  height: 20px;
+  margin: 0 0.3em 0 0;
+  width: 20px;
+}
+.searchTags--solid .searchTags-file {
+  fill: #FFFFFF;
+}
+.searchTags:hover .searchTags-file {
+  fill: #0D0D0C;
+}
+.searchTags:hover {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  border-color: transparent;
+  background: #FFA319;
+  color: #0D0D0C;
+}
+
 /* ---------------------------------------------------------------------
   Header
 ------------------------------------------------------------------------ */
@@ -605,6 +810,11 @@ img {
   Search Index
 ------------------------------------------------------------------------ */
 .indexSearch-submit-icon {
+  height: 20px;
+  width: 20px;
+}
+
+.searchTags-icon {
   height: 20px;
   width: 20px;
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4795f1cef5bad2f2c7c3c025af293c8",
+    "content-hash": "376e31887ef7fec639528592be0b49d9",
     "packages": [
         {
             "name": "carlcs/craft-uielementfields",
@@ -222,6 +222,75 @@
                 }
             ],
             "time": "2022-02-21T13:15:14+00:00"
+        },
+        {
+            "name": "cocur/slugify",
+            "version": "v3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cocur/slugify.git",
+                "reference": "d41701efe58ba2df9cae029c3d21e1518cc6780e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/d41701efe58ba2df9cae029c3d21e1518cc6780e",
+                "reference": "d41701efe58ba2df9cae029c3d21e1518cc6780e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "laravel/framework": "~5.1",
+                "latte/latte": "~2.2",
+                "league/container": "^2.2.0",
+                "mikey179/vfsstream": "~1.6",
+                "mockery/mockery": "~0.9",
+                "nette/di": "~2.2",
+                "phpunit/phpunit": "~4.8.36|~5.2",
+                "pimple/pimple": "~1.1",
+                "plumphp/plum": "~0.1",
+                "silex/silex": "~1.3",
+                "symfony/config": "~2.4|~3.0|~4.0",
+                "symfony/dependency-injection": "~2.4|~3.0|~4.0",
+                "symfony/http-kernel": "~2.4|~3.0|~4.0",
+                "twig/twig": "~1.26|~2.0",
+                "zendframework/zend-modulemanager": "~2.2",
+                "zendframework/zend-servicemanager": "~2.2",
+                "zendframework/zend-view": "~2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cocur\\Slugify\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ivo Bathke",
+                    "email": "ivo.bathke@gmail.com"
+                },
+                {
+                    "name": "Florian Eckerstorfer",
+                    "email": "florian@eckerstorfer.co",
+                    "homepage": "https://florian.ec"
+                }
+            ],
+            "description": "Converts a string into a slug.",
+            "keywords": [
+                "slug",
+                "slugify"
+            ],
+            "support": {
+                "issues": "https://github.com/cocur/slugify/issues",
+                "source": "https://github.com/cocur/slugify/tree/master"
+            },
+            "time": "2019-01-31T20:38:55+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -1560,6 +1629,64 @@
                 }
             ],
             "time": "2021-11-21T21:41:47+00:00"
+        },
+        {
+            "name": "guilty/craft-slugify",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guilty-as/craft-slugify.git",
+                "reference": "d6212713cceb94b2e91e69c4668430e847a5d21c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guilty-as/craft-slugify/zipball/d6212713cceb94b2e91e69c4668430e847a5d21c",
+                "reference": "d6212713cceb94b2e91e69c4668430e847a5d21c",
+                "shasum": ""
+            },
+            "require": {
+                "cocur/slugify": "^3.1",
+                "craftcms/cms": "^3.0.0-RC1"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "name": "Craft Slugify",
+                "handle": "craft-slugify",
+                "hasCpSettings": false,
+                "hasCpSection": false,
+                "developer": "Guilty AS",
+                "developerEmail": "tech@guilty.no",
+                "developerUrl": "https://guilty.no",
+                "class": "Guilty\\CraftSlugify\\CraftSlugify"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Guilty\\CraftSlugify\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilty AS",
+                    "homepage": "https://guilty.no"
+                }
+            ],
+            "description": "Adds slugify twig extensions to your craft install.",
+            "keywords": [
+                "Craft",
+                "cms",
+                "craft-plugin",
+                "craftcms",
+                "slug"
+            ],
+            "support": {
+                "issues": "https://github.com/guilty-as/craft-slugify/issues",
+                "source": "https://github.com/guilty-as/craft-slugify/tree/master"
+            },
+            "time": "2018-11-05T15:22:02+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -3899,6 +4026,50 @@
                 "promises"
             ],
             "time": "2022-02-11T10:27:51+00:00"
+        },
+        {
+            "name": "sebastianlenz/linkfield",
+            "version": "1.0.25",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastian-lenz/craft-linkfield.git",
+                "reference": "a29f328fe41248e9b1722c52f68e435f53c241d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastian-lenz/craft-linkfield/zipball/a29f328fe41248e9b1722c52f68e435f53c241d3",
+                "reference": "a29f328fe41248e9b1722c52f68e435f53c241d3",
+                "shasum": ""
+            },
+            "require": {
+                "craftcms/cms": "^3.0.0-RC1",
+                "php": "^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5 || ^8.0"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "handle": "typedlinkfield",
+                "name": "Typed link field",
+                "developer": "Sebastian Lenz",
+                "developerUrl": "https://github.com/sebastian-lenz/"
+            },
+            "autoload": {
+                "psr-4": {
+                    "typedlinkfield\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Craft field type for selecting links",
+            "support": {
+                "issues": "https://github.com/sebastian-lenz/craft-linkfield/issues",
+                "source": "https://github.com/sebastian-lenz/craft-linkfield/tree/1.0.25"
+            },
+            "time": "2021-02-23T20:55:03+00:00"
         },
         {
             "name": "seld/cli-prompt",

@@ -1,16 +1,16 @@
 {% import 'macros/_fields' as fields %}
 
 {% set excludeList = [] %}
-{% set navList = craft.categories.group('navigation') %}
+{% set navList = primaryNav.navigationBlock.all() %}
 
 <nav class="primaryNav">
     <h2 class="primaryNav-title">Menu</h2>
     
     <ul class="primaryMenu">
-    {% for navItem in navList if navItem not in excludeList %}
+    {% for navItem in navList if navItem.page not in excludeList %}
         <li class="primaryMenu-item">
-            <a class="primaryMenu-trigger" href="{{ navItem.slug }}">
-                <span class="primaryMenu-label">{{ navItem }}</span>
+            <a class="primaryMenu-trigger" href="{{ navItem.page[0].uri }}">
+                <span class="primaryMenu-label">{{ navItem.displayText }}</span>
                 <svg 
                     class="primaryMenu-icon"
                     role="presentation">

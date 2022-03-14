@@ -598,3 +598,92 @@
     }
 
 }
+
+/* ---------------------------------------------------------------------
+  Tags
+------------------------------------------------------------------------ */
+@mixin controlTags($selector) {
+
+    #{$selector} {
+		@include resetNativeButton;
+        @include flexParent();
+        @include alignItems(center);
+        border-radius: 20px;
+        margin: 0 0.5em 0 0;
+        padding: 0.2em 1em 0.3em 1em;
+        font-size: 1rem;
+
+        &-trigger {
+            @include flexChild();
+            font: 350 1.4em $font-primary;
+
+            &:link,
+            &:visited,
+            &:hover,
+            &:active {
+                text-decoration: none;
+            }
+
+            #{$selector}--ghost & {
+                color: getColor('black',10);
+            }
+
+            #{$selector}--solid & {
+                color: getColor('white');
+            }
+	
+        }
+
+        &--ghost {
+            border: 1px solid getColor('black',10);
+            background: none;
+        }
+
+        &--solid {
+            background: getColor('black',10);
+            color: getColor('white');
+        }
+
+        &-close {
+            @include flexChild();
+            $size: 20px;
+            display: inline-block;
+            height: $size;
+            margin: 0 0 0 0.3em;
+            width: $size;
+            fill: getColor('white');
+
+            #{$selector}:hover & {
+                fill: getColor('black',10);
+            }
+        }
+
+        &-file {
+            @include flexChild();
+            $size: 20px;
+            display: inline-block;
+            height: $size;
+            margin: 0 0.3em 0 0;
+            width: $size;
+
+            #{$selector}--solid & {
+                fill: getColor('white');
+            }
+
+            #{$selector}:hover & {
+                fill: getColor('black',10);
+            }
+
+        }
+
+        &:hover {
+            @include boxShadow(0,1px,5px,rgba(getColor('black'),.6));
+            cursor: pointer;
+            border-color: transparent;
+            background: getColor('yellow',10);
+            color: getColor('black',10);
+        }
+
+    }
+
+}

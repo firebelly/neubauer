@@ -1,4 +1,4 @@
-dateModified: 1646850370
+dateModified: 1647287851
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -30,7 +30,9 @@ meta:
     2d527c5e-9c0d-4cc1-ae6e-7be103ce4ff9: 'Related Project' # Related Project
     2df2bcc7-46c7-49b5-be7b-b0ade6314496: 'Search Index' # Search Index
     2eb1c876-ef17-46cc-bc9d-811c0340374d: Start # Start
+    2f76f1b1-c207-4e5f-9dd7-3908a2282e41: Page # Page
     2fcce12f-270f-466d-8676-063396ea0bd9: Topics # Topics
+    3a220011-959c-43c1-a8b3-5aacb1d67b31: __blank__ # __blank__
     3c888dfb-dbd7-46d5-a090-f49f218df87f: 'Story Label' # Story Label
     3cde6b11-23d3-4206-b20b-14d76b82dbbf: 'Date + Time Range' # Date + Time Range
     3d1bd88f-a886-47d2-909d-054a372a1d39: __blank__ # __blank__
@@ -62,6 +64,7 @@ meta:
     10ed9c28-61c3-4258-bc65-24b2ecaa7930: Asset # Asset
     13c69d07-19c1-4dc3-af5a-7145671835bc: 'Quote Content' # Quote Content
     15bb1bb5-a683-4cf9-a1b5-3edfe2182dfa: 'Research Index' # Research Index
+    15bc16dd-1c9e-43ad-b846-1a41657cc675: 'Nav Name' # Nav Name
     15e90b86-4c9d-4654-b994-f245970468f0: 'Full Summary' # Full Summary
     18fb76df-c956-475c-8202-71b47fa72ddb: 'People Index' # People Index
     24a17e09-26e2-478c-9dfe-bbca0be0122b: 'Select a Neubauer page as the destination' # Select a Neubauer page as the destination
@@ -69,6 +72,7 @@ meta:
     40a4b8f6-206e-4664-86a2-9a6e0d2c1213: 'Date + Time' # Date + Time
     47e78d01-d60c-4623-939e-b212935f0db8: Story # Story
     49f91a58-0c7a-4d84-a70d-fe29b1128987: 'Select an existing "Exhibition," or create a new one.' # Select an existing "Exhibition," or create a new one.
+    58d3215a-f902-4463-af05-977570812e6b: 'Nav Item' # Nav Item
     66a3bd47-7aa6-4023-9c01-4f4b2a2b1bdd: 'Error Index' # Error Index
     68fdccfc-d2f6-4e92-a49c-22f02d67d3b7: Quote # Quote
     70f4d9f3-ca18-4e75-aaf3-de2fdea80886: Text # Text
@@ -78,6 +82,7 @@ meta:
     84b1efbb-d314-43e3-8fb5-fc6af1012146: Common # Common
     84d51659-d55a-4529-bd5d-9c19e31e6fdb: 'Add a link to the media source' # Add a link to the media source
     90ab227e-755c-40a8-95e5-b154c2284a37: Project # Project
+    92b6ae63-7c12-4164-b18e-082865cc14d9: 'Navigation ' # Navigation 
     92ff1e19-9bd3-4b91-98fa-6965b49847f1: 'Event Location' # Event Location
     94bfabd6-9486-45b8-b2e4-9f7c4fc77754: Media # Media
     094c3891-3671-46cc-a1e0-25740e798305: Times # Times
@@ -99,10 +104,11 @@ meta:
     924a4513-9457-4f10-9576-090824a1a843: 'Social Media' # Social Media
     1762d70d-bae6-49fd-8b8e-ac8f767621d1: 'Primary Footer' # Primary Footer
     3530a622-54c3-4a05-89a1-490b289f1cec: __blank__ # __blank__
+    3672d36f-9790-4efa-a11b-46144c88fe0d: 'Display Text' # Display Text
     5954c04f-9f0f-49bd-ab19-7f17413ca714: Video # Video
+    6189b323-6110-479a-85ea-f4d0cf190af5: 'Primary Nav' # Primary Nav
     6217da4c-403b-4e7c-bfd0-c78365638e41: Citations # Citations
     6225f69a-e829-4678-a475-92e742c178d2: 'Article Title' # Article Title
-    6744a538-4565-4885-8d5a-7fb015f93267: Navigation # Navigation
     7426f4ea-af7c-4a85-9784-117b708b8697: __blank__ # __blank__
     9667b568-5c61-43f1-97ab-523933c4c48e: Page # Page
     9906c196-b7f3-460c-98b0-308b1becd435: Video # Video
@@ -192,6 +198,10 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 1.0.0
+  craft-slugify:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
   date-range:
     edition: standard
     enabled: true
@@ -246,6 +256,10 @@ plugins:
     enabled: true
     schemaVersion: 2.2.1
   twigpack:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  typedlinkfield:
     edition: standard
     enabled: true
     schemaVersion: 1.0.0

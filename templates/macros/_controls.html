@@ -148,14 +148,16 @@
    @sortVariant {str}  - (optional) 
    @sortIcon {str}     - (optional) e.g. sort-30|sort-20 
 #}
-{% macro controlSort(sortName,sortLabel = 'A-Z',sortOptions = ['asc','desc'], activeSort = 'asc', sortVariant = null) %}
+{% macro controlSort(sortName,sortLabel = 'A-Z',sortOptions = ['asc','desc'], activeSort = 'asc', sortVariant = null, sortIcon = null) %}
 <div class="{{ sortName }}{% if sortVariant %} {{ sortName }}--{{ sortVariant }}{% endif %}" aria-label="Sort {{ sortLabel }}">
+{# s-val:sort="{{ sortOptions|filter((idx,option) => option != activeSort) }}"> #}
     <h3 class="{{ sortName }}-title">Sort By</h3>
     <a 
         class="{{ sortName }}-trigger" 
+        id="sort"
         href=""
         sprig
-        s-val:sort="{{ sortOptions|filter((idx,option) => option != activeSort) }}">
+        s-val:sort="{{ sortOptions|filter((option) => option != activeSort)|join('') }}">
         <span class="{{ sortName }}-label">{{ sortLabel }}</span>
         {% if sortIcon %}
         {% set iconPath = "/spritemap.svg#icon-#{sortIcon}" %}
@@ -269,7 +271,7 @@
    @iconSize {int}  - (optional) 
 #}
 {% macro controlPagination(pageName,pageObj,pageRange = 5,iconSize = 20) %}
-{% set currentPage, totalPages, lastPage = pageObj.current_page, pageObj.page_info.totalPages, pageObj.page_info.last %}
+{% set currentPage, totalPages, lastPage = pageObj.current_page, pageObj.page_info.totalPages, pageObj.page_info.totalPages %}
 <div class="{{ pageName }}"> 
     {% set paginationGroups = {
         'back': {
@@ -297,7 +299,7 @@
 {% endmacro %}
 
 {# controlTags: 
-   See: styles/components/_.scss for styling
+   See: styles/components/_controls.scss for styling
 
    @tagName {str}    - base styling hook
    @tagList {arr}    - list containing tags
@@ -305,12 +307,60 @@
 {% macro controlTags(tagName,tagList) %}
 <ul class="{{ tagName }}">
     {% for tag in tagList %}
+    {% set tagSlug = tag|slugify %}
     <li class="{{ tagName }}-item">
         <a 
-            id=""
-            href="">
+            id="tag_{{ tagSlug }}"
+            href=""
+            sprig
+            s-val:tag="{{ tagSlug }}">
             {{ tag.title }}
         </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endmacro %}
+
+{# controlTagsFilter: 
+   See: styles/components/_controls.scss for styling
+
+   @tagName {str}    - base styling hook
+   @tagList {arr}    - list containing tags
+   @activeTags {arr} - comma-separated string
+   @iconSlug {str}   - optional
+   @iconSize {int}   - optional
+#}
+{% macro controlTagsFilter(tagName,tagList,activeTags,iconSlug = null,iconSize = 20) %}
+<ul class="{{ tagName }}">
+    {% set tagArr = activeTags ? activeTags|split(',') : [] %}
+
+    {% for tagItem in tagList %}
+
+    {% set tagSlug = tagItem|slugify %}
+    {% set isActive = (tagArr|length and (tagSlug in tagArr)) %}
+    {% set tagValues = (isActive ? (tagArr|filter((v) => v != tagSlug)) : tagArr|merge([tagSlug]))|join(',') %}
+
+    <li class="{{ tagName }}-item">
+        <a 
+            id="tags_{{ tagSlug }}"
+            class="{{ tagName }}-trigger"
+            href=""
+            sprig
+            s-val:tags="{{ tagValues }}">
+            {{ tagItem.title }}
+            {% if isActive %}
+            {% if iconSlug %}
+            {% set iconPath = "/spritemap.svg#icon-#{iconSlug}-#{iconSize}" %}
+            <svg class="{{ tagName }}-icon">
+                {# <use xlink:href="{{ rev(iconPath) }}"></use> #}
+                <use xlink:href="{{ alias('@assetBasePath' ~ iconPath) }}"></use>
+            </svg>
+            {% else %}
+            <span>&#215;</span>
+            {% endif %}
+            {% endif %}
+        </a>
+       
     </li>
     {% endfor %}
 </ul>

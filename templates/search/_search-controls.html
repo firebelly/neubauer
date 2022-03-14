@@ -1,59 +1,134 @@
 {% import 'macros/_controls' as controls %}
 
-{# set default search vars  #}
-{% set query = query ?? '' %}
-{% set count = count ?? 0 %}
-{% set page = page ?? 1 %}
-{% set limit = limit ?? 10 %}
+{% set isSprig = sprig.isRequest %}
+{# set default result count #}
+{% set results = results ?? 0 %}
+{# search result limit #}
+{% set limit = limit ?? 1 %}
+{# search filters #}
+{% set filters = ['section','tags','search','sort'] %}
+{% set trigger = sprig.trigger|split('_')[0] %}
+{# Handle multiple tags #}
+{% if isSprig and trigger == 'tags' %}
+    {% if tags %}
+    <div>CURRENT TAGS: {{ tags }}</div>
+    {% endif %}
+{% endif %}
+{% set section, tags, query, sort = section ?? '', tags ?? '', query ?? '', sort ?? 'asc' %}
+{# reset current page if new filter is triggered #}
+{% set page = isSprig and (trigger in filters) ? 1 : (page ?? 1) %}
 {# sprig update url #}
-{% do sprig.pushUrl('?' ~ {query: query, page: page}|url_encode) %}
-{# sprig persistent state  #}
+{% do sprig.pushUrl('?' ~ {query: query, tags: tags, page: page}|url_encode) %}
+{# sprig persistent state #}
+{{ hiddenInput('section', section) }}
+{{ hiddenInput('tags', tags) }}
+{{ hiddenInput('sort', sort) }}
+{{ hiddenInput('results', results) }}
 {{ hiddenInput('page', page) }}
-{{ hiddenInput('count', count) }}
 
+{# BEGIN RESULTING #}
+{# Resource: https://craftcms.com/docs/3.x/relations.html#advanced-relationships #}
+{# add relatedParams to params #}
+{% set baseQuery = craft.entries() %}
 
+{% if section %}
+    {% set baseQuery = baseQuery.section(section) %}
+{% endif %}
 
+{% if tags %}
+    {# get the tag(s) category object #}
+    {% set tagArray = tags|split(',') %}
+    {% set hasMultipleTags = (tagArray|length > 1) %}
+    {% set category = hasMultipleTags ? [] : craft.categories().group('topics').slug(tags).one() %}
+
+    {% if hasMultipleTags %}
+    {% for tagSlug in tagArray %}
+        {% set category = category|merge([craft.categories().group('topics').slug(tagSlug).one()]) %}
+    {% endfor %}
+    {% endif %}
+
+    {% set baseQuery = baseQuery.relatedTo(category) %}
+    
+{% endif %}
+
+{# define sorting #}
+{% set byTitle = 'title ' ~ sort %}
+{# get results #}
+{% set currentResults = (query ? baseQuery.search(query) : baseQuery).orderBy(byTitle).limit(limit) %}
+{# define pagination #}
+{% set pageInfo = sprig.paginate(currentResults, page) %}
+{% set results = currentResults|length %}
+{% set resultsByPage = pageInfo.pageResults %}
+{% set pageObj = {
+    'page_info': pageInfo,
+    'current_page': page
+}%}
+{# END RESULTING #}
+
+{# result status #}
 <div>
-{{ count }} Results for <br />"{{ query }}"
+    <span>{{ results }}</span> Result{{ results != 1 ? 's' : ''}} for <br />"{{ query }}"
 </div>
 
-
+{# search form #}
+{% set searchName,searchId,searchLabel = 'indexSearch','index','Enter keyword(s) here' %}
 <div class="indexSearch">
-    {% set searchName,searchId,searchLabel = 'indexSearch','index','Enter keyword(s) here' %}
     {{ controls.controlSearch(searchName,searchId,searchLabel,query) }}
 </div>
 
+{# section tabs #}
 {% set excludeList = ['about-us'] %}
-{% set tabList = craft.categories.group('navigation') %}
-
+{% set tabList = primaryNav.navigationBlock.all() %}
 <ul class="searchTabs">
     <li class="searchTabs-item">
-        <a class="searchTabs-trigger" href="#all">
+        <a 
+            class="searchTabs-trigger" 
+            id="section_all"
+            href=""
+            sprig
+            s-val:section=""
+            s-replace="#search_{{ searchId }}_results">
             <span class="searchTabs-label">All</span>
         </a>
     </li>
-{% for tab in tabList if tab.slug not in excludeList %}
-{% set tabSlug = tab.slug %}
+{% for tab in tabList if tab.displayText|slugify not in excludeList %}
+    {% set tabName,tabSlug = tab.displayText, tab.displayText|slugify %}
     <li class="searchTabs-item">
-        <a class="searchTabs-trigger" href="#{{ tabSlug }}">
-            <span class="searchTabs-label">{{ tab }}</span>
+        <a 
+            class="searchTabs-trigger" 
+            id="section_{{ tabSlug }}"
+            href=""
+            sprig
+            s-val:section="{{ tabSlug == 'research' ? 'projects' : tabSlug }}">
+            <span class="searchTabs-label">{{ tabName }}</span>
         </a>
     </li>
 {% endfor %}
 </ul>
 
+{# sort control #}
+{% set sortName,sortLabel,sortOptions,activeSort = 'searchSort','Sort By Name (A-Z)',['asc','desc'], sort %}
+{{ controls.controlSort(sortName,sortLabel,sortOptions,activeSort) }}
 
+{# tag control #}
+{% set tagName,tagList,removeIconSlug = 'searchTags', craft.categories.group('topics'),'close' %}
+{% set activeTags = tags ?? null %}
+{{ controls.controlTagsFilter(tagName,tagList,activeTags,removeIconSlug) }}
 
+{# RESULTS #}
 <section class="searchResults" id="search_index_results">
 <h2>Results:</h2>
-{% if query %}
-    {% set entries = craft.entries.search(query).all() %}
-    {% if entries|length %}
-      {% for entry in entries %}
-        <a href="{{ entry.url }}">{{ entry.title }}</a>
-      {% endfor %}
-    {% else %}
-        No results
-    {% endif %}
-  {% endif %}
+{% if results %}
+    {% for entry in resultsByPage %}
+    <a href="{{ entry.url }}">{{ entry.title }}</a>
+    {% endfor %}
+{% else %}
+    No results
+{% endif %}
 </section>
+
+{# PAGINATION #}
+{% if results %}
+{% set pageName,pageRange,iconSize = 'searchPagination',5,20 %}
+{{ controls.controlPagination(pageName,pageObj,pageRange,iconSize) }} 
+{% endif %}
