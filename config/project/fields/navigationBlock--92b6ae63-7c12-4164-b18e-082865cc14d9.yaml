@@ -1,0 +1,16 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
+handle: navigationBlock
+instructions: 'The order in which the Nav Items appear below is the order in which they appear on the site; they can be reordered by drag & drop.'
+name: 'Navigation '
+searchable: false
+settings:
+  contentTable: '{{%matrixcontent_navigationblock}}'
+  maxBlocks: ''
+  minBlocks: ''
+  propagationKeyFormat: null
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

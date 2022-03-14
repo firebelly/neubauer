@@ -1,0 +1,73 @@
+field: 92b6ae63-7c12-4164-b18e-082865cc14d9 # Navigation 
+fieldLayouts:
+  a6430360-cbba-4982-9fa5-7581e08fe50d:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 2f76f1b1-c207-4e5f-9dd7-3908a2282e41 # Page
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 3672d36f-9790-4efa-a11b-46144c88fe0d # Display Text
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  2f76f1b1-c207-4e5f-9dd7-3908a2282e41: # Page
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: page
+    instructions: 'Select the index page you want to link to the nav item.'
+    name: Page
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      limit: '1'
+      localizeRelations: false
+      selectionLabel: 'Add a page'
+      showSiteMenu: true
+      source: null
+      sources:
+        - singles
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Entries
+  3672d36f-9790-4efa-a11b-46144c88fe0d: # Display Text
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: displayText
+    instructions: 'e.g. "Research"'
+    name: 'Display Text'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: navItem
+name: 'Nav Item'
+sortOrder: 1

@@ -1,0 +1,19 @@
+fieldLayouts:
+  537b5c4f-0dcb-4315-969e-8c4e9407e7a1:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 92b6ae63-7c12-4164-b18e-082865cc14d9 # Navigation 
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Links
+        sortOrder: 1
+handle: primaryNav
+name: 'Primary Nav'
+sortOrder: 1
