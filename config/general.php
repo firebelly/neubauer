@@ -33,5 +33,6 @@ return [
     'allowAdminChanges' => $isDev,
 
     // Whether crawlers should be allowed to index pages and following links
-    'disallowRobots' => !$isProd,
+    'disallowRobots' => !$isProd
+
 ];

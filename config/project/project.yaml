@@ -1,4 +1,4 @@
-dateModified: 1647287851
+dateModified: 1647378518
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -94,6 +94,7 @@ meta:
     426d3cf9-e094-428a-82c2-66a0874790b8: Appearance # Appearance
     446e488e-e627-4618-95fe-5cec7146b5ad: Module # Module
     447e6245-204b-41fa-91d2-d99b74c5bc72: 'About Index' # About Index
+    464d6956-ffb4-4883-a8af-830c2242c869: 'Story Types' # Story Types
     523a11a6-88bd-4fe2-bad0-d9127f8d3e5e: 'Date Range' # Date Range
     539c4bcb-5095-490d-81b8-872d3745551f: 'Card Image' # Card Image
     712ad535-5310-4cbf-8e0a-625c9dcd2162: Caption # Caption
@@ -136,7 +137,6 @@ meta:
     ad039f29-1b37-466f-8148-84f4a6bad1e2: 'Contact Info' # Contact Info
     aedd6f62-b9cc-4d66-9965-3e1e2b461ab4: 'Internal Link' # Internal Link
     afd5fc2a-82b5-40f5-908b-f8e679205d29: 'Brief description of exhibition' # Brief description of exhibition
-    afe4aa4d-a254-4790-93e7-f8575e3d0073: 'Story Type' # Story Type
     b0ae2ad9-7257-4cbf-9876-384fbc36354e: 'Street Address' # Street Address
     b5afa9b0-dd12-4d99-9bdd-fba44a0186a4: End # End
     b9aaff06-fe75-4456-b02d-bc5736565777: 'Provide the length of audio, video, or podcast source' # Provide the length of audio, video, or podcast source
@@ -149,6 +149,7 @@ meta:
     bf69a54a-5f76-43e5-bae9-36c58e062145: URL # URL
     c00a2e11-74cb-4d5b-95f2-1878dee82fee: 'Select an existing "Event," or create a new one.' # Select an existing "Event," or create a new one.
     c9d2a3a1-cf8d-4060-9704-4f800fa8de4e: Attribution # Attribution
+    c14d2c78-f58f-45a6-b6d2-beed7ffabb69: 'Story Type' # Story Type
     ca62998e-92bf-4a32-be88-8eacd7a4025c: __blank__ # __blank__
     cdc834cd-c6bc-443d-ba86-edc70defd5a0: Location # Location
     cf51bd0c-dc97-4734-9328-2dcbf1c1f311: Homepage # Homepage

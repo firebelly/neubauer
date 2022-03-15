@@ -1,0 +1,46 @@
+<style>
+.adminTip-list {
+    margin-left: 2em;
+    margin-bottom: 3em;
+    list-style-type: disc;
+}
+.adminTip-item {
+    margin-bottom: 1em;
+}
+.adminTip-p {
+    margin-bottom: 3em;
+}
+.adminTip-box {
+    margin-top: 0;
+    margin-bottom: 3em;
+    background: #f3f7fc;
+    padding: 1em;
+    border-radius: 10px;
+}
+.adminTip-title {
+    margin: 0 0 14px 0;
+}
+</style>
+
+{% set currentType = element %}
+{% set storyQuery = craft.entries().section('stories') %}
+{% set stories = storyQuery.search('storyCategory:' ~ currentType ~ '').all() %}
+
+<p class="adminTip-box"><strong>Hint:</strong> To assign a type to a Story, go to its admin page, click "Add a story type."</p>
+
+<h2 class="adminTip-title"><strong>Stories</strong> tagged "{{ currentType }}:"</h2>
+{% if stories|length %}
+<ul class="adminTip-list">
+{% for ex in stories %}
+    <li class="adminTip-item">
+        {% if ex.isEditable() %}
+        <a href="{{ ex.cpEditUrl }}">{{ ex }}</a>
+        {% else %}
+        {{ ex }}
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% else %}
+<p class="adminTip-p">There are no stories tagged "{{ currentType }}."
+{% endif %}

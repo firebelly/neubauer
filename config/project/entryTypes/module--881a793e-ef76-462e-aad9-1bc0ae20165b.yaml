@@ -38,19 +38,10 @@ fieldLayouts:
           -
             type: craft\fieldlayoutelements\HorizontalRule
           -
-            fieldUid: afe4aa4d-a254-4790-93e7-f8575e3d0073 # Story Type
+            fieldUid: c14d2c78-f58f-45a6-b6d2-beed7ffabb69 # Story Type
             instructions: null
             label: null
             required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            warning: null
-            width: 100
-          -
-            fieldUid: 3c888dfb-dbd7-46d5-a090-f49f218df87f # Story Label
-            instructions: ''
-            label: __blank__
-            required: ''
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null

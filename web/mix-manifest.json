@@ -2,12 +2,12 @@
     "/build/scripts/spritemap.js": "/build/scripts/spritemap.js",
     "/build/scripts/main.js": "/build/scripts/main.js",
     "/build/scripts/manifest.js": "/build/scripts/manifest.js",
+    "/build/styles/main.css": "/build/styles/main.css",
     "/build/scripts/vendor.js": "/build/scripts/vendor.js",
     "/build/images/.DS_Store": "/build/images/.DS_Store",
+    "/build/fonts/.DS_Store": "/build/fonts/.DS_Store",
     "/build/svgs/icon-arrow-right-20.svg": "/build/svgs/icon-arrow-right-20.svg",
     "/build/svgs/icon-close-20.svg": "/build/svgs/icon-close-20.svg",
     "/build/svgs/icon-search-20.svg": "/build/svgs/icon-search-20.svg",
-    "/build/svgs/logo-neubauer.svg": "/build/svgs/logo-neubauer.svg",
-    "/build/spritemap.svg": "/build/spritemap.svg",
-    "/build/styles/main.css": "/build/styles/main.css"
+    "/build/svgs/logo-neubauer.svg": "/build/svgs/logo-neubauer.svg"
 }

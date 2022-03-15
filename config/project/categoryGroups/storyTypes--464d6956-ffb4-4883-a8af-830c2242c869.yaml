@@ -1,0 +1,45 @@
+defaultPlacement: end
+fieldLayouts:
+  79bd23c9-d99d-46db-a66e-dabebcd8d913:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\TitleField
+            warning: null
+            width: 100
+          -
+            template: control-panel/common/_story-results.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: storyTypes
+name: 'Story Types'
+siteSettings:
+  0c99f337-2218-4c6f-b0ad-30589c1ebbc5: # neubauer
+    hasUrls: true
+    template: null
+    uriFormat: 'story-types/{slug}'
+structure:
+  maxLevels: 1
+  uid: d28c9c98-8f63-48f0-9781-ec0ee18c49f2
