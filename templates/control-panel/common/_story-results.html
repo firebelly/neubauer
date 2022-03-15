@@ -28,6 +28,7 @@
 
 <p class="adminTip-box"><strong>Hint:</strong> To assign a type to a Story, go to its admin page, click "Add a story type."</p>
 
+{% if currentType.slug %}
 <h2 class="adminTip-title"><strong>Stories</strong> tagged "{{ currentType }}:"</h2>
 {% if stories|length %}
 <ul class="adminTip-list">
@@ -43,4 +44,5 @@
 </ul>
 {% else %}
 <p class="adminTip-p">There are no stories tagged "{{ currentType }}."
+{% endif %}
 {% endif %}

@@ -36,6 +36,7 @@
 
 <p class="adminTip-box"><strong>Hint:</strong> To assign a topic to a Project or Exhibition, go to its admin page, click "Add a topic."</p>
 
+{% if currentTopic.slug %}
 <h2 class="adminTip-title"><strong>Projects</strong> tagged "{{ currentTopic }}:"</h2>
 {% if projects|length %}
 <ul class="adminTip-list">
@@ -68,4 +69,5 @@
 </ul>
 {% else %}
 <p class="adminTip-p">There are no exhibitions tagged "{{ currentTopic }}."
+{% endif %}
 {% endif %}
