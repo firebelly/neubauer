@@ -27,15 +27,6 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 41a7228a-3bfb-47bf-a8e7-9e0ec9cc0ea5
-            instructions: null
-            label: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            warning: null
-            width: 100
-          -
             fieldUid: d5c86c8a-c961-4fb2-8348-90331ee47da2 # Opener Content
             instructions: "Brief text introducing the Exhibitions section.\r\n\r\nMax characters: 675"
             label: ''
@@ -67,9 +58,9 @@ fieldLayouts:
         elements:
           -
             fieldUid: e93b9edb-c0f9-454a-b64e-43cd24153a86 # Featured Exhibition
-            instructions: null
-            label: null
-            required: false
+            instructions: 'Select an existing Exhibition, or create a new one, to feature on the Exhibitions Index page.'
+            label: 'Primary Featured Exhibition'
+            required: ''
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -85,6 +76,19 @@ fieldLayouts:
             width: 100
           -
             template: control-panel/exhibitions/_exhibition-featured.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+          -
+            fieldUid: 299c0b84-1414-493a-9423-7c2e905e0080 # Secondary Featured Exhibition
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/exhibitions/_exhibition-featured-secondary.html
             type: craft\fieldlayoutelements\Template
             width: 100
         name: 'Featured Exhibition'

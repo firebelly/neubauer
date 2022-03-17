@@ -4,6 +4,7 @@
 @use "config" as *;
 @use "sass:math";
 @use "sass:string";
+@use "sass:list";
 
 /* ---------------------------------------------------------------------
  _styleguide contains project-specific style patterns
@@ -12,49 +13,79 @@
 $svg-path: '../svgs/';
 
 /* ---------------------------------------------------------------------
- Headings
+ Type
+ 1. ems based on 1rem-sized parent
+ 2. relative line-heights
+ 3. quoted font-size/line-height to avoid old sass math calcs
 ------------------------------------------------------------------------ */
-$heading-map: (
-	// Examples
-	// "xs": 1em,
-	// "sm": 1.2em,
-	// "md": 1.3em,
-	// "lg": 1.5em,
-	// "xl": 3em
+$text-map: (
+	// "type-name": ("$font-size/$line-height,$font-family,$letter-spacing,$text-decoration,$text-transform"
+	
+	// Openers
+	"o-normal": ("12em/1",$font-primary,-0.02em),	
+	"o-italic": ("12em/1",$font-tertiary,-0.02em),
+	// Headlines 1
+	"h1-normal": ("6.5em/1.08",$font-primary,-0.035em),
+	"h1-italic": ("6.5em/1.08",$font-tertiary,-0.03em),
+	"h1-sans": ("6.5em/1.08",$font-secondary,-0.0075em),	
+	// Headlines 2
+	"h2-normal": ("4em/1.12",$font-primary,-0.035em),
+	"h2-italic": ("4em/1.12",$font-tertiary,-0.0125em),
+	"h2-sans": ("4em/1.12",$font-secondary,-0.0375em),
+	// Headlines 3
+	"h3-normal": ("3em/1.17",$font-primary,-0.01em),
+	"h3-italic": ("3em/1.17",$font-tertiary,-0.01em),
+	"h3-italic-ul": ("3em/1.17",$font-secondary,-0.01em,underline),
+	"h3-sans": ("2.8em/1.25",$font-secondary),
+	"h3-sans-ul": ("2.8em/1.25",$font-secondary,normal,underline),
+	// Headlines 4
+	"h4-normal": ("2em/0.7",$font-primary,-0.01em),
+	"h4-italic": ("2em/0.7",$font-tertiary),
+	"h4-sans": ("2em/0.7",$font-secondary),
+	// Non-headlines
+	"action": ("1.2em/1.67",$font-secondary,0.1em,inherit,uppercase),
+	"subtitle": ("2.4em/1.46",$font-secondary),
+	"p": ("2em/1.5",$font-secondary),
+	"caption": ("1.6em/1.56",$font-secondary),
+	"fine": ("1.4em/1.43",$font-secondary),
+	"micro": ("1.2em/1.2",$font-secondary)
 );
 
-// @param $size {str|num} - accepts $heading-map key or number with unit
-@mixin heading($size:null) {
-	$heading-size: map-get($heading-map, $size);
-	@if $heading-size == null and type-of($size) == "number" {
-		$heading-size: if(str-index("#{$size}",'px'),$size, if(str-index("#{$size}",'em'),$size,null));
+@mixin getType($name) {
+	$type-attrs: map-get($text-map, $name);
+	$type-length: list.length($type-attrs);
+	$sizing: nth($type-attrs,1);
+	$family: nth($type-attrs,2);
+	$spacing: if($type-length >= 3,nth($type-attrs,3),null);
+	$decoration: if($type-length >= 4,nth($type-attrs,4),null);
+	$transform: if($type-length >= 5,nth($type-attrs,5),null);
+	// Declare type
+	font: normal string.unquote($sizing) $family;
+	@if ($spacing != null) {
+		letter-spacing: $spacing;
 	}
-	font-weight: 600;
-	font-size: if($heading-size,$heading-size,$default-size);
+	@if ($decoration != null) {
+		text-decoration: $decoration;
+	}	
+	@if ($transform != null) {
+		text-transform: $transform;
+	}	
 }
 
 /* ---------------------------------------------------------------------
- Text
- // ems based on 1rem-sized parent
- // relative line-heights
+ Themes
 ------------------------------------------------------------------------ */
-$text-map: (
-	// Examples
-	// "section-title": (350,"8em/1"),
-	// "section-link": (350,"3em/1.33")
+$theme-map: (
+	'red': (getColor('red'),getColor('red',10)),
+	'yellow': (getColor('gray'),getColor('yellow')),
+	'green': (getColor('green'),getColor('green',10)),
+	'blue': (getColor('blue'),getColor('blue',10)),
+	'gray': (getColor('gray'),getColor('gray',10)),
+	'black': (getColor('black'),getColor('white'))
 );
-// @param $name {str}
-@mixin text($name) {
-	$text-attrs: map-get($text-map, $name);
-	$font-weight: nth($text-attrs,1);
-	$font-size: nth($text-attrs,2);
-	color: getColor('black');
-	font: $font-weight string.unquote($font-size) $font-primary;
 
-	// Example
-	@if (str-index($name, 'section')) {
-		letter-spacing: -0.015em;
-	}
+@function getTheme($color) {
+	@return map-get($theme-map, $color);
 }
 
 /* ---------------------------------------------------------------------

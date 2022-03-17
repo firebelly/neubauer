@@ -1,0 +1,19 @@
+fieldLayouts:
+  d3548426-3688-47d6-9677-0bdf21e70dce:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 876e2d54-ffa5-4c34-9fda-7c192be75bc8 # Common Label
+            instructions: ''
+            label: 'Site Name'
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Info
+        sortOrder: 1
+handle: siteInfo
+name: 'Site Info'
+sortOrder: 1

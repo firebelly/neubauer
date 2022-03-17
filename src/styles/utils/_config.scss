@@ -42,22 +42,22 @@ $breakpoints: (
 }
 
 // Define project fonts
-$font-primary-name: 'myfont-sans-regular';
-$font-primary-file: 'myfontSansWeb-Regular';
+$font-primary-name: 'domaine-text';
+$font-primary-file: 'domaine-text-light';
 
-$font-secondary-name: 'myfont-sans-mono';
-$font-secondary-file: 'myfontSansMonoWeb-Regular';
+$font-secondary-name: 'apercu';
+$font-secondary-file: 'apercu-light';
 
-$font-tertiary-name: 'myfont-sans-light';
-$font-tertiary-file: 'myfontSansMonoWeb-Light';
+$font-tertiary-name: 'domain-text';
+$font-tertiary-file: 'domaine-text-lightitalic';
 
 @include getFont($font-primary-name, $font-primary-file);
 @include getFont($font-secondary-name, $font-secondary-file);
 @include getFont($font-tertiary-name, $font-tertiary-file);
 
-$font-primary: $font-primary-name, sans-serif;
+$font-primary: $font-primary-name, serif;
 $font-secondary: $font-secondary-name, sans-serif;
-$font-tertiary: $font-tertiary-name, sans-serif;
+$font-tertiary: $font-tertiary-name, serif;
 
 // DevHub font
 $font-devhub: sans-serif;
@@ -69,32 +69,30 @@ $font-devhub: sans-serif;
 $palettes: (
 	'red': (
 		core: #800000,
-		10: #DD4A3C,
-		20: #F4C2BE
+		10: #FFE5E6,
+		20: rgba(255, 229, 230, 0.1)
 	),
 	'yellow': (
-		core: #FBF8E9,
-		10: #FFA319,
-		20: #F7EDBA,
-		30: #EC9213
+		core: #FFF2B2
 	),
 	'green': (
-		core: #348B52
+		core: #1F4D49,
+		10: #E5FFFD
 	),
 	'blue': (
-		core: #4444E4
+		core: #1C2AA7,
+		10: #E5E8FF
 ,	),
+	'gray': (
+		core: #3F3606,
+		10: #F6F4F4
+	),
 	'white': (
 		core: #FFFFFF
 	),
 	'black': (
 		core: #000000,
-		10: #0D0D0C
-	),
-	'gray': (
-		core: #4F4E4A,
-		10: #A3A29E,
-		20: #CDCDCB
+		10: #151515
 	),
 	// DevHub palette
 	'devhub': (

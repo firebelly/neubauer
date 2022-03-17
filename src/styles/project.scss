@@ -25,7 +25,7 @@ body {
 	overflow-x: hidden;
 	background: getColor('white');
 	color: getColor('black');
-	font-family: $font-primary;
+	font-family: $font-secondary;
 	-webkit-font-smoothing: antialiased;
 	-webkit-overflow-scrolling: touch;
 
@@ -104,13 +104,65 @@ img {
 @include fieldText('.primarySearch-field');
 @include controlPagination('.searchPagination');
 @include controlTags('.searchTags');
+@include flyoutContent('.primaryNav');
+
+/* ---------------------------------------------------------------------
+  Icons
+------------------------------------------------------------------------ */
+@mixin icon {
+	// default icon sizing
+	height: 20px;
+	width: 20px;
+}
+
+/* ---------------------------------------------------------------------
+  Theme
+
+  $theme: getTheme($color);
+  $primary: nth($theme,1);
+  $secondary: nth($theme,2);
+------------------------------------------------------------------------ */
+.primaryTheme {
+
+	$sections: (
+		'homepage':'black',
+		'research': 'green',
+		'exhibitions': 'gray',
+		'events': 'yellow',
+		'people':'blue',
+		'about': 'red',
+		'search': 'red'
+	);
+
+	@each $section, $color in $sections {
+		$theme: getTheme($color);
+		&--#{$section} {
+			background: nth($theme,2);
+			color: nth($theme,1);
+		}
+	}
+
+}
+
+
 
 /* ---------------------------------------------------------------------
   Header
 ------------------------------------------------------------------------ */
 .primaryHeader {
+	@include flexParent();
+	padding: 2em;
+	font-size: 1rem;
 
-	&-logo {
+	> * {
+		@include flexChild(0 1 50%);
+	}
+
+	&-title {
+		@include visuallyHide;
+	}
+
+	&-icon {
 		height: 40px;
 		width: 140px;
 	}
@@ -121,23 +173,79 @@ img {
   Navigation
 ------------------------------------------------------------------------ */
 .primaryNav {
+	$parent: &;
+	position: relative;
+	font-size: 1rem;
 
-	&-close {
+	&-trigger {
+		@include flexParent();
+		@include justifyContent(flex-end);
+
+		&--open {
+			color: getColor('black');
+
+			#{$parent}._is-open & {
+				@include visuallyHide;
+			}
+		}
+
+		&--close {
+			color: getColor('red',10);
+		}
+
+		&:link,
+		&:visited,
+		&:hover,
+		&:active {
+			text-decoration: none;
+		}
+		
+		&-label {
+			display: inline-block;
+			margin: 0 1em 0 0;
+			@include getType('action');
+			text-decoration: underline;
+			text-underline-offset: 0.5em;
+		}
 
 		&-icon {
-			height: 20px;
-			width: 20px;
+			@include icon;
 		}
 
 	}
 
+	&-logo {
+		@include flexParent();
+		padding: 2em;
+		font-size: 1rem;
+	
+		> * {
+			@include flexChild(0 1 50%);
+		}
+	
+		&-title {
+			@include visuallyHide;
+		}
+	
+		&-icon {
+			height: 40px;
+			width: 140px;
+		}
+	
+	}
+
+	&-content {
+		$menu-theme: getTheme('red');
+		background: nth($menu-theme,1);
+		color: nth($menu-theme,2);
+	}
+
 }
 
-.primaryMenu {
+.primaryPages {
 
 	&-icon {
-		height: 20px;
-		width: 20px;
+		@include icon;
 	}
 }
 

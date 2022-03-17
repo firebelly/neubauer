@@ -1,4 +1,4 @@
-dateModified: 1647378518
+dateModified: 1647536125
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -89,6 +89,7 @@ meta:
     95ffdab7-fa54-4df5-97e6-d7bb1088a352: Image # Image
     206e479c-63c6-4776-b5f2-709e81c8c2fd: Person # Person
     284b1f37-fd98-47e6-9a1a-1e1b6400a27e: 'Select an existing "Story," or create a new one.' # Select an existing "Story," or create a new one.
+    299c0b84-1414-493a-9423-7c2e905e0080: 'Secondary Featured Exhibition' # Secondary Featured Exhibition
     307bc9bb-3bc7-45b4-b535-976adc89de97: 'Narrative Block' # Narrative Block
     314d1749-591d-4f88-a382-680ece5d6b71: 'Date Only' # Date Only
     426d3cf9-e094-428a-82c2-66a0874790b8: Appearance # Appearance
@@ -99,6 +100,7 @@ meta:
     539c4bcb-5095-490d-81b8-872d3745551f: 'Card Image' # Card Image
     712ad535-5310-4cbf-8e0a-625c9dcd2162: Caption # Caption
     840b4f3b-b9bb-4665-8929-9d5969e6c272: Exhibition # Exhibition
+    876e2d54-ffa5-4c34-9fda-7c192be75bc8: 'Common Label' # Common Label
     881a793e-ef76-462e-aad9-1bc0ae20165b: Module # Module
     881ab662-b053-4f99-bee8-9bd994ffad04: 'End Date' # End Date
     895c9d65-27aa-4819-a434-9afd5ff0f4b5: Appearance # Appearance
@@ -166,6 +168,7 @@ meta:
     db13480f-0f0d-476a-95af-c94977ab68f9: 'Events Index' # Events Index
     dbb74986-f45a-4de0-b349-f466e988a4cb: 'Person Types' # Person Types
     dd463042-99d6-4725-b849-2546454db735: 'Opener Image' # Opener Image
+    e073e248-18f9-4384-84cf-1c0bb14dcae7: 'Site Info' # Site Info
     e93b9edb-c0f9-454a-b64e-43cd24153a86: 'Featured Exhibition' # Featured Exhibition
     e104f1e4-4334-4b43-80b2-47e3fb3813f7: Heading # Heading
     e75102dc-d05f-4089-bd59-28bf186610f9: __blank__ # __blank__

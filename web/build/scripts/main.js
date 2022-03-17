@@ -118,6 +118,85 @@ var accordionMenu = {
 
 /***/ }),
 
+/***/ "./src/scripts/components/flyoutContent.js":
+/*!*************************************************!*\
+  !*** ./src/scripts/components/flyoutContent.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// flyoutContent
+
+/* 
+1. Add these data-attrs to the flyout nav:
+// {str} - accordion parent class name
+data-flyout-target={str}
+// {bool} - allows multiple accordion panels to be open simultaneously
+data-accordion-multiple={bool} 
+// {bool} - allows active accordion panel to be toggled
+data-accordion-toggle={bool}
+3. Add data-accordion-trigger={str} to ... trigger element
+4. See templates/macros/_accordion-menu.html for sample markup
+5. See assets/styles/components/_accordion-menu.scss for sample styles
+*/
+var flyoutContent = {
+  isOpen: false,
+  target: null,
+  triggers: null,
+  content: null,
+  _open: '_is-open',
+  _close: '_is-closing',
+  handleMenu: function handleMenu(e) {
+    flyoutContent.isOpen = flyoutContent.isOpen ? flyoutContent.hideMenu() : flyoutContent.showMenu();
+
+    if (flyoutContent.content) {
+      // Ensure flyoutContent maintains z-index precedent over content beneath
+      flyoutContent.content.ontransitionrun = function () {
+        flyoutContent.content.style.zIndex = 100;
+      };
+
+      flyoutContent.content.ontransitionend = function () {
+        // Overflow specs helps w vw-scrollbar issues
+        document.body.style.overflow = flyoutContent.isOpen ? 'hidden' : 'auto';
+        flyoutContent.content.removeAttribute('style'); // On close, remove transition hook
+
+        if (!flyoutContent.isOpen) {
+          flyoutContent.target.classList.remove(flyoutContent._close);
+        }
+      };
+    }
+  },
+  showMenu: function showMenu() {
+    flyoutContent.target.classList.add(flyoutContent._open);
+    return true;
+  },
+  hideMenu: function hideMenu() {
+    flyoutContent.target.classList.remove(flyoutContent._open); // On close, ensure a nice transition by adding this hook
+
+    flyoutContent.target.classList.add(flyoutContent._close);
+    return false;
+  },
+  init: function init(name) {
+    var _this = this;
+
+    this.target = document.querySelector("[data-flyout-target=".concat(name, "]"));
+    this.triggers = this.target.querySelectorAll('[data-flyout-trigger]');
+    this.content = this.target.querySelector('[data-flyout-content]');
+
+    if (this.triggers && this.target) {
+      this.triggers.forEach(function (trigger) {
+        trigger.addEventListener('click', _this.handleMenu, false);
+      });
+    }
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (flyoutContent);
+
+/***/ }),
+
 /***/ "./src/scripts/main.js":
 /*!*****************************!*\
   !*** ./src/scripts/main.js ***!
@@ -127,13 +206,16 @@ var accordionMenu = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_appState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/appState */ "./src/scripts/utils/appState.js");
 /* harmony import */ var _components_accordionMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/accordionMenu */ "./src/scripts/components/accordionMenu.js");
+/* harmony import */ var _components_flyoutContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/flyoutContent */ "./src/scripts/components/flyoutContent.js");
 // Import local dependencies
+
 
  // Inits
 
 _utils_appState__WEBPACK_IMPORTED_MODULE_0__["default"].init(); // Components
 
 _components_accordionMenu__WEBPACK_IMPORTED_MODULE_1__["default"].init();
+_components_flyoutContent__WEBPACK_IMPORTED_MODULE_2__["default"].init('nav');
 
 /***/ }),
 

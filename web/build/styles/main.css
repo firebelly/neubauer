@@ -69,20 +69,20 @@ table {
  font url is relative to our compiled stylesheet
 ------------------------------------------------------------------------ */
 @font-face {
-  font-family: "myfont-sans-regular";
-  src: url("../fonts/myfont-sans-regular/myfontSansWeb-Regular.eot"), url("../fonts/myfont-sans-regular/myfontSansWeb-Regular.woff") format("woff"), url("../fonts/myfont-sans-regular/myfontSansWeb-Regular.woff2") format("woff2"), url("../fonts/myfont-sans-regular/myfontSansWeb-Regular.ttf") format("truetype");
+  font-family: "domaine-text";
+  src: url("../fonts/domaine-text/domaine-text-light.eot"), url("../fonts/domaine-text/domaine-text-light.woff") format("woff"), url("../fonts/domaine-text/domaine-text-light.woff2") format("woff2"), url("../fonts/domaine-text/domaine-text-light.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "myfont-sans-mono";
-  src: url("../fonts/myfont-sans-mono/myfontSansMonoWeb-Regular.eot"), url("../fonts/myfont-sans-mono/myfontSansMonoWeb-Regular.woff") format("woff"), url("../fonts/myfont-sans-mono/myfontSansMonoWeb-Regular.woff2") format("woff2"), url("../fonts/myfont-sans-mono/myfontSansMonoWeb-Regular.ttf") format("truetype");
+  font-family: "apercu";
+  src: url("../fonts/apercu/apercu-light.eot"), url("../fonts/apercu/apercu-light.woff") format("woff"), url("../fonts/apercu/apercu-light.woff2") format("woff2"), url("../fonts/apercu/apercu-light.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "myfont-sans-light";
-  src: url("../fonts/myfont-sans-light/myfontSansMonoWeb-Light.eot"), url("../fonts/myfont-sans-light/myfontSansMonoWeb-Light.woff") format("woff"), url("../fonts/myfont-sans-light/myfontSansMonoWeb-Light.woff2") format("woff2"), url("../fonts/myfont-sans-light/myfontSansMonoWeb-Light.ttf") format("truetype");
+  font-family: "domain-text";
+  src: url("../fonts/domain-text/domaine-text-lightitalic.eot"), url("../fonts/domain-text/domaine-text-lightitalic.woff") format("woff"), url("../fonts/domain-text/domaine-text-lightitalic.woff2") format("woff2"), url("../fonts/domain-text/domaine-text-lightitalic.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -222,12 +222,13 @@ Usage: @include breakpoint(md);
  _styleguide contains project-specific style patterns
 ------------------------------------------------------------------------ */
 /* ---------------------------------------------------------------------
- Headings
+ Type
+ 1. ems based on 1rem-sized parent
+ 2. relative line-heights
+ 3. quoted font-size/line-height to avoid old sass math calcs
 ------------------------------------------------------------------------ */
 /* ---------------------------------------------------------------------
- Text
- // ems based on 1rem-sized parent
- // relative line-heights
+ Themes
 ------------------------------------------------------------------------ */
 /* ---------------------------------------------------------------------
  Buttons
@@ -321,6 +322,10 @@ Usage: @include breakpoint(md);
 /* -------------------------------------------------------------------------------
  Accordion Menu: Default Presentation
 ---------------------------------------------------------------------------------- */
+/* _flyout-content.scss */
+/* ---------------------------------------------------------------------
+  Flyout Content
+------------------------------------------------------------------------ */
 /* _controls.scss */
 /* ---------------------------------------------------------------------
   Select Control: Structure
@@ -396,7 +401,7 @@ body {
   overflow-x: hidden;
   background: #FFFFFF;
   color: #000000;
-  font-family: "myfont-sans-regular", sans-serif;
+  font-family: "apercu", sans-serif;
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
 }
@@ -645,36 +650,36 @@ img {
 
 @media (min-width: 62em) {
   .searchPagination--pages::before, .searchPagination--pages::after {
-    border-left-color: #A3A29E;
+    border-left-color: #F6F4F4;
   }
 }
 .searchPagination-nav {
-  color: #4444E4;
+  color: #1C2AA7;
 }
 .searchPagination-nav::after {
-  border-bottom-color: #4444E4;
+  border-bottom-color: #1C2AA7;
 }
 .searchPagination-nav._is-inactive::after {
-  border-color: #A3A29E;
+  border-color: #F6F4F4;
 }
 
 .searchPagination-nav._is-inactive {
-  color: #A3A29E;
+  color: #F6F4F4;
 }
 .searchPagination-num {
-  color: #A3A29E;
+  color: #F6F4F4;
 }
 .searchPagination-num._is-inactive {
-  color: #4F4E4A;
+  color: #3F3606;
 }
 .searchPagination-num._is-inactive::after {
-  border-bottom-color: #4F4E4A;
+  border-bottom-color: #3F3606;
 }
 .searchPagination-icon {
-  fill: #4444E4;
+  fill: #1C2AA7;
 }
 .searchPagination-nav._is-inactive .searchPagination-icon {
-  fill: #A3A29E;
+  fill: #F6F4F4;
 }
 
 .searchTags {
@@ -693,23 +698,23 @@ img {
 }
 .searchTags-trigger {
   flex: 0 1 auto;
-  font: 350 1.4em "myfont-sans-regular", sans-serif;
+  font: 350 1.4em "domaine-text", serif;
 }
 .searchTags-trigger:link, .searchTags-trigger:visited, .searchTags-trigger:hover, .searchTags-trigger:active {
   text-decoration: none;
 }
 .searchTags--ghost .searchTags-trigger {
-  color: #0D0D0C;
+  color: #151515;
 }
 .searchTags--solid .searchTags-trigger {
   color: #FFFFFF;
 }
 .searchTags--ghost {
-  border: 1px solid #0D0D0C;
+  border: 1px solid #151515;
   background: none;
 }
 .searchTags--solid {
-  background: #0D0D0C;
+  background: #151515;
   color: #FFFFFF;
 }
 .searchTags-close {
@@ -721,7 +726,7 @@ img {
   fill: #FFFFFF;
 }
 .searchTags:hover .searchTags-close {
-  fill: #0D0D0C;
+  fill: #151515;
 }
 .searchTags-file {
   flex: 0 1 auto;
@@ -734,20 +739,102 @@ img {
   fill: #FFFFFF;
 }
 .searchTags:hover .searchTags-file {
-  fill: #0D0D0C;
+  fill: #151515;
 }
 .searchTags:hover {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
   cursor: pointer;
   border-color: transparent;
-  background: #FFA319;
-  color: #0D0D0C;
+  color: #151515;
+}
+
+.primaryNav-content {
+  height: 100vh;
+  width: 100vw;
+  left: 0;
+  top: 0;
+  position: fixed;
+  transform: translateX(100vw);
+}
+.primaryNav._is-closing .primaryNav-content {
+  transform: translateX(100vw);
+  transition: transform 0.5s ease-in-out;
+}
+.primaryNav._is-open .primaryNav-content {
+  transform: translateX(0);
+  transition: transform 0.5s ease-in-out;
+}
+
+/* ---------------------------------------------------------------------
+  Icons
+------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------
+  Theme
+
+  $theme: getTheme($color);
+  $primary: nth($theme,1);
+  $secondary: nth($theme,2);
+------------------------------------------------------------------------ */
+.primaryTheme--homepage {
+  background: #FFFFFF;
+  color: #000000;
+}
+.primaryTheme--research {
+  background: #E5FFFD;
+  color: #1F4D49;
+}
+.primaryTheme--exhibitions {
+  background: #F6F4F4;
+  color: #3F3606;
+}
+.primaryTheme--events {
+  background: #FFF2B2;
+  color: #3F3606;
+}
+.primaryTheme--people {
+  background: #E5E8FF;
+  color: #1C2AA7;
+}
+.primaryTheme--about {
+  background: #FFE5E6;
+  color: #800000;
+}
+.primaryTheme--search {
+  background: #FFE5E6;
+  color: #800000;
 }
 
 /* ---------------------------------------------------------------------
   Header
 ------------------------------------------------------------------------ */
-.primaryHeader-logo {
+.primaryHeader {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 2em;
+  font-size: 1rem;
+}
+.primaryHeader > * {
+  flex: 0 1 50%;
+}
+.primaryHeader-title {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.primaryHeader-title.focusable:active, .primaryHeader-title.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.primaryHeader-icon {
   height: 40px;
   width: 140px;
 }
@@ -755,12 +842,93 @@ img {
 /* ---------------------------------------------------------------------
   Navigation
 ------------------------------------------------------------------------ */
-.primaryNav-close-icon {
+.primaryNav {
+  position: relative;
+  font-size: 1rem;
+}
+.primaryNav-trigger {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+}
+.primaryNav-trigger--open {
+  color: #000000;
+}
+.primaryNav._is-open .primaryNav-trigger--open {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.primaryNav._is-open .primaryNav-trigger--open.focusable:active, .primaryNav._is-open .primaryNav-trigger--open.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.primaryNav-trigger--close {
+  color: #FFE5E6;
+}
+.primaryNav-trigger:link, .primaryNav-trigger:visited, .primaryNav-trigger:hover, .primaryNav-trigger:active {
+  text-decoration: none;
+}
+.primaryNav-trigger-label {
+  display: inline-block;
+  margin: 0 1em 0 0;
+  font: normal 1.2em/1.67 "apercu", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: inherit;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.5em;
+}
+.primaryNav-trigger-icon {
   height: 20px;
   width: 20px;
 }
+.primaryNav-logo {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 2em;
+  font-size: 1rem;
+}
+.primaryNav-logo > * {
+  flex: 0 1 50%;
+}
+.primaryNav-logo-title {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.primaryNav-logo-title.focusable:active, .primaryNav-logo-title.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.primaryNav-logo-icon {
+  height: 40px;
+  width: 140px;
+}
+.primaryNav-content {
+  background: #800000;
+  color: #FFE5E6;
+}
 
-.primaryMenu-icon {
+.primaryPages-icon {
   height: 20px;
   width: 20px;
 }

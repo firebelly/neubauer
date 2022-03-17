@@ -3,52 +3,80 @@
 {% set excludeList = [] %}
 {% set navList = primaryNav.navigationBlock.all() %}
 
-<nav class="primaryNav">
-    <h2 class="primaryNav-title">Menu</h2>
-    
-    <ul class="primaryMenu">
-    {% for navItem in navList if navItem.page not in excludeList %}
-        <li class="primaryMenu-item">
-            <a class="primaryMenu-trigger" href="{{ navItem.page[0].uri }}">
-                <span class="primaryMenu-label">{{ navItem.displayText }}</span>
-                <svg 
-                    class="primaryMenu-icon"
-                    role="presentation">
-                    {% set svgPath = "/spritemap.svg#icon-arrow-right-20" %}
-                    <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
-                </svg> 
-            </a>
-        </li>
-
-    {% endfor %}
-    </ul>
-
-    <h2 class="primaryNav-title">Search</h2>
-
-    <div class="primarySearch">
-        {{ fields.textField('primarySearch-field','primary_search','Search') }}
-        <a 
-            class="primarySearch-submit"
-            href="{{ url('search')}}">
-            <span class="primarySearch-submit-label">Go</span>
-            <svg 
-                class="primarySearch-submit-icon"
-                role="presentation">
-                {% set svgPath = "/spritemap.svg#icon-search-20" %}
-                <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
-            </svg> 
-        </a>
-    </div>
-
+<nav    
+    class="primaryNav" 
+    data-flyout-target="nav">
     <a 
-        class="primaryNav-close"
-        href="#closeNav">
-        <span class="primaryNav-close-label">Close</span>
+        class="primaryNav-trigger primaryNav-trigger--open"
+        href="#openNav"
+        data-flyout-trigger>
+        <span class="primaryNav-trigger-label">Menu</span>
         <svg 
-            class="primaryNav-close-icon"
+            class="primaryNav-trigger-icon"
             role="presentation">
-            {% set svgPath = "/spritemap.svg#icon-close-20" %}
+            {% set svgPath = "/spritemap.svg#icon-menu-20" %}
             <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
         </svg> 
     </a>
+
+    <div 
+        class="primaryNav-content" 
+        data-flyout-content>
+
+        <div class="primaryNav-logo">
+            <a href="{{ siteUrl }}">
+                <span class="primaryNav-logo-title">{{ siteInfo.commonLabel }}</span>
+                <svg 
+                    class="primaryNav-logo-icon" role="img">
+                    {% set svgPath = "/spritemap.svg#logo-#{siteName}" %}
+                    <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
+                </svg> 
+            </a>
+            <a 
+                class="primaryNav-trigger primaryNav-trigger--close"
+                href="#closeNav"
+                data-flyout-trigger>
+                <span class="primaryNav-trigger-label">Close</span>
+                <svg 
+                    class="primaryNav-trigger-icon"
+                    role="presentation">
+                    {% set svgPath = "/spritemap.svg#icon-close-20" %}
+                    <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
+                </svg> 
+            </a>
+        </div>
+
+        <h2 class="primaryNav-title">Menu</h2>
+        <ul class="primaryPages">
+        {% for navItem in navList if navItem.page not in excludeList %}
+            <li class="primaryPages-item">
+                <a class="primaryPages-trigger" href="{{ navItem.page[0].uri }}">
+                    <span class="primaryPages-label">{{ navItem.displayText }}</span>
+                    <svg 
+                        class="primaryPages-icon"
+                        role="presentation">
+                        {% set svgPath = "/spritemap.svg#icon-arrow-right-20" %}
+                        <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
+                    </svg> 
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+
+        <h2 class="primaryNav-title">Search</h2>
+        <div class="primarySearch">
+            {{ fields.textField('primarySearch-field','primary_search','Search') }}
+            <a 
+                class="primarySearch-submit"
+                href="{{ url('search')}}">
+                <span class="primarySearch-submit-label">Go</span>
+                <svg 
+                    class="primarySearch-submit-icon"
+                    role="presentation">
+                    {% set svgPath = "/spritemap.svg#icon-search-20" %}
+                    <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
+                </svg> 
+            </a>
+        </div>
+   </div>
 </nav>

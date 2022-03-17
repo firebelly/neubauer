@@ -3,24 +3,26 @@
 
 {% include 'partials/_head' %}
 
-<body>
+{% set cleanSection = entry.getSection()|replace('Index','')|slugify %}
+{% set currentSection = cleanSection == 'projects' ? 'research' : cleanSection %}
+
+<body class="primaryTheme primaryTheme--{{ currentSection }}">
     <a class="skip-link" href="#primaryContent">
         Skip to content
     </a>
     <header class="primaryHeader">
-        <h1>   
+        <h1 class="primaryHeader-logo">   
             <a href="{{ siteUrl }}">
-                <span class="primaryHeader-title"></span>
+                <span class="primaryHeader-title">{{ siteInfo.commonLabel }}</span>
                 <svg 
-                    class="primaryHeader-logo" role="img">
+                    class="primaryHeader-icon" role="img">
                     {% set svgPath = "/spritemap.svg#logo-#{siteName}" %}
                     <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
                 </svg> 
             </a>
         </h1>
+        {% include 'partials/_nav' %}
     </header>
-    
-    {% include 'partials/_nav' %}
 
     <main class="primaryContent" id="primaryContent" tabindex="-1">     
         {% block content %}
