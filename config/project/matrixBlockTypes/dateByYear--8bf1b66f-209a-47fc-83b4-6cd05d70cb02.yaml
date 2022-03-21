@@ -23,7 +23,7 @@ fields:
     handle: item
     instructions: ''
     name: __blank__
-    searchable: false
+    searchable: true
     settings:
       optgroups: true
       options:
@@ -210,5 +210,5 @@ fields:
     translationMethod: none
     type: controlpanel\fields\DateByYear
 handle: dateByYear
-name: 'Date By Year'
+name: Year
 sortOrder: 3

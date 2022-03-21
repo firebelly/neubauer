@@ -122,29 +122,54 @@ img {
   $primary: nth($theme,1);
   $secondary: nth($theme,2);
 ------------------------------------------------------------------------ */
-.primaryTheme {
+$sections: (
+	'homepage':'black',
+	'research': 'green',
+	'exhibitions': 'gray',
+	'events': 'yellow',
+	'people':'blue',
+	'about': 'red',
+	'search': 'red'
+);
 
-	$sections: (
-		'homepage':'black',
-		'research': 'green',
-		'exhibitions': 'gray',
-		'events': 'yellow',
-		'people':'blue',
-		'about': 'red',
-		'search': 'red'
-	);
+// themed body class
+.primaryTheme {
 
 	@each $section, $color in $sections {
 		$theme: getTheme($color);
+
 		&--#{$section} {
-			background: nth($theme,2);
-			color: nth($theme,1);
+			$theme-primary: nth($theme,1);
+			$theme-secondary: nth($theme,2);
+
+			background: $theme-secondary;
+			color: $theme-primary;
+
+			// Section-based larger vw and "closed nav" themes
+			.primaryNav {
+				$selector: &;
+
+				&-trigger {
+					&--open {
+						color: $theme-primary;
+						#{$selector}-trigger-icon {
+							fill: $theme-primary;
+						}
+					}
+				}
+
+				&-content {
+					@include breakpoint(sm) {
+						color: $theme-primary;
+					}
+				}
+			}
+
 		}
+
 	}
 
 }
-
-
 
 /* ---------------------------------------------------------------------
   Header
@@ -153,6 +178,11 @@ img {
 	@include flexParent();
 	padding: 2em;
 	font-size: 1rem;
+
+	@include breakpoint(sm) {
+		padding-left: 4em;
+		padding-right: 3em;
+	}
 
 	> * {
 		@include flexChild(0 1 50%);
@@ -171,33 +201,42 @@ img {
 
 /* ---------------------------------------------------------------------
   Navigation
+  NOTE: See themed-declarations above
 ------------------------------------------------------------------------ */
+$red-theme: getTheme('red');
+$red-primary: nth($red-theme,1);
+$red-secondary: nth($red-theme,2);
+
 .primaryNav {
 	$parent: &;
+	// Persistent "open nav" mobile theme
+	$red-theme: getTheme('red');
+	$red-primary: nth($red-theme,1);
+	$red-secondary: nth($red-theme,2);
+
 	position: relative;
 	font-size: 1rem;
 
+	// Open / Close triggers
 	&-trigger {
 		@include flexParent();
 		@include justifyContent(flex-end);
-
-		&--open {
-			color: getColor('black');
-
-			#{$parent}._is-open & {
-				@include visuallyHide;
-			}
-		}
-
-		&--close {
-			color: getColor('red',10);
-		}
 
 		&:link,
 		&:visited,
 		&:hover,
 		&:active {
 			text-decoration: none;
+		}
+
+		&--open {
+			#{$parent}._is-open & {
+				@include visuallyHide;
+			}
+		}
+
+		&--close {
+			color: $red-secondary;
 		}
 		
 		&-label {
@@ -210,13 +249,19 @@ img {
 
 		&-icon {
 			@include icon;
+
+			#{$parent}-trigger--close & {
+				fill: $red-secondary;
+			}
+			
 		}
 
 	}
 
+	// Open nav state logo and its els
 	&-logo {
 		@include flexParent();
-		padding: 2em;
+		margin: 0 0 6em 0;
 		font-size: 1rem;
 	
 		> * {
@@ -230,22 +275,91 @@ img {
 		&-icon {
 			height: 40px;
 			width: 140px;
+			fill: $red-secondary;
 		}
-	
+
 	}
 
+	// Open nav state content
 	&-content {
-		$menu-theme: getTheme('red');
-		background: nth($menu-theme,1);
-		color: nth($menu-theme,2);
+		padding: 2em;
+		background: $red-primary;
+		color: $red-secondary;
+
+		@include breakpoint(sm) {
+			@include flexParent;
+			@include justifyContent(space-between);
+			background: none;
+		}
+
+	}
+
+	&-title {
+		$mb: math.div(20,14);
+		@include getType('fine');
+		margin: 0 0 #{$mb}em 0;
+	}
+
+	// Hide these elements in larger vws
+	&-trigger,
+	&-trigger-label,
+	&-title,
+	&-logo {
+		@include breakpoint(sm) {
+			display: none;
+		}
 	}
 
 }
 
 .primaryPages {
+	font-size: 1rem;
+
+	@include breakpoint(sm) {
+		@include flexParent;
+	}
+
+	&-item {
+
+		@include breakpoint(sm) {
+			margin-right: 4em;
+		}
+
+	}
+
+	&-trigger {
+		@include flexParent();
+		@include alignItems(center);
+		@include getType('h2-sans');
+		$gutter: math.div(10,40);
+		border-bottom: 1px solid $red-secondary;
+		padding-bottom: #{$gutter}em;
+		margin-bottom: #{$gutter}em;
+		color: $red-secondary;
+		text-decoration: none;
+
+		> * {
+			@include flexChild();
+		}
+
+		@include breakpoint(sm) {
+			@include getType('caption');
+			color: getColor('black');
+			text-decoration: none;
+		}
+	}
+
+	&-label {
+		flex-grow: 1;
+	}
 
 	&-icon {
 		@include icon;
+		fill: $red-secondary;
+
+		@include breakpoint(sm) {
+			display: none;
+		}
 	}
 }
 
@@ -256,6 +370,10 @@ img {
 		&-label {
 			@include visuallyHide;
 		}
+
+		@include breakpoint(sm) {
+			display: none;
+		}	
 
 	}
 

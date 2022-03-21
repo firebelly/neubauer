@@ -1,0 +1,416 @@
+field: 1b346868-16dd-435c-b0ff-d4319de58b94 # Date Block
+fieldLayouts:
+  4e65fb29-48f3-4e65-bc4b-08cfcb781c87:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 9649df13-0153-45ec-a469-921435e36fb6 # From
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: df9b5267-3176-4fe5-821f-ffe2e2e2f686 # To
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  9649df13-0153-45ec-a469-921435e36fb6: # From
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: itemFrom
+    instructions: ''
+    name: From
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Select a year'
+            -
+              - value
+              - ''
+            -
+              - disabled
+              - true
+        -
+          __assoc__:
+            -
+              - label
+              - 2012
+            -
+              - value
+              - 2012
+        -
+          __assoc__:
+            -
+              - label
+              - 2013
+            -
+              - value
+              - 2013
+        -
+          __assoc__:
+            -
+              - label
+              - 2014
+            -
+              - value
+              - 2014
+        -
+          __assoc__:
+            -
+              - label
+              - 2015
+            -
+              - value
+              - 2015
+        -
+          __assoc__:
+            -
+              - label
+              - 2016
+            -
+              - value
+              - 2016
+        -
+          __assoc__:
+            -
+              - label
+              - 2017
+            -
+              - value
+              - 2017
+        -
+          __assoc__:
+            -
+              - label
+              - 2018
+            -
+              - value
+              - 2018
+        -
+          __assoc__:
+            -
+              - label
+              - 2019
+            -
+              - value
+              - 2019
+        -
+          __assoc__:
+            -
+              - label
+              - 2020
+            -
+              - value
+              - 2020
+        -
+          __assoc__:
+            -
+              - label
+              - 2021
+            -
+              - value
+              - 2021
+        -
+          __assoc__:
+            -
+              - label
+              - 2022
+            -
+              - value
+              - 2022
+        -
+          __assoc__:
+            -
+              - label
+              - 2023
+            -
+              - value
+              - 2023
+        -
+          __assoc__:
+            -
+              - label
+              - 2024
+            -
+              - value
+              - 2024
+        -
+          __assoc__:
+            -
+              - label
+              - 2025
+            -
+              - value
+              - 2025
+        -
+          __assoc__:
+            -
+              - label
+              - 2026
+            -
+              - value
+              - 2026
+        -
+          __assoc__:
+            -
+              - label
+              - 2027
+            -
+              - value
+              - 2027
+        -
+          __assoc__:
+            -
+              - label
+              - 2028
+            -
+              - value
+              - 2028
+        -
+          __assoc__:
+            -
+              - label
+              - 2029
+            -
+              - value
+              - 2029
+        -
+          __assoc__:
+            -
+              - label
+              - 2030
+            -
+              - value
+              - 2030
+        -
+          __assoc__:
+            -
+              - label
+              - 2031
+            -
+              - value
+              - 2031
+        -
+          __assoc__:
+            -
+              - label
+              - 2032
+            -
+              - value
+              - 2032
+    translationKeyFormat: null
+    translationMethod: none
+    type: controlpanel\fields\DateByYear
+  df9b5267-3176-4fe5-821f-ffe2e2e2f686: # To
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: itemTo
+    instructions: ''
+    name: To
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Select a year'
+            -
+              - value
+              - ''
+            -
+              - disabled
+              - true
+        -
+          __assoc__:
+            -
+              - label
+              - 2012
+            -
+              - value
+              - 2012
+        -
+          __assoc__:
+            -
+              - label
+              - 2013
+            -
+              - value
+              - 2013
+        -
+          __assoc__:
+            -
+              - label
+              - 2014
+            -
+              - value
+              - 2014
+        -
+          __assoc__:
+            -
+              - label
+              - 2015
+            -
+              - value
+              - 2015
+        -
+          __assoc__:
+            -
+              - label
+              - 2016
+            -
+              - value
+              - 2016
+        -
+          __assoc__:
+            -
+              - label
+              - 2017
+            -
+              - value
+              - 2017
+        -
+          __assoc__:
+            -
+              - label
+              - 2018
+            -
+              - value
+              - 2018
+        -
+          __assoc__:
+            -
+              - label
+              - 2019
+            -
+              - value
+              - 2019
+        -
+          __assoc__:
+            -
+              - label
+              - 2020
+            -
+              - value
+              - 2020
+        -
+          __assoc__:
+            -
+              - label
+              - 2021
+            -
+              - value
+              - 2021
+        -
+          __assoc__:
+            -
+              - label
+              - 2022
+            -
+              - value
+              - 2022
+        -
+          __assoc__:
+            -
+              - label
+              - 2023
+            -
+              - value
+              - 2023
+        -
+          __assoc__:
+            -
+              - label
+              - 2024
+            -
+              - value
+              - 2024
+        -
+          __assoc__:
+            -
+              - label
+              - 2025
+            -
+              - value
+              - 2025
+        -
+          __assoc__:
+            -
+              - label
+              - 2026
+            -
+              - value
+              - 2026
+        -
+          __assoc__:
+            -
+              - label
+              - 2027
+            -
+              - value
+              - 2027
+        -
+          __assoc__:
+            -
+              - label
+              - 2028
+            -
+              - value
+              - 2028
+        -
+          __assoc__:
+            -
+              - label
+              - 2029
+            -
+              - value
+              - 2029
+        -
+          __assoc__:
+            -
+              - label
+              - 2030
+            -
+              - value
+              - 2030
+        -
+          __assoc__:
+            -
+              - label
+              - 2031
+            -
+              - value
+              - 2031
+        -
+          __assoc__:
+            -
+              - label
+              - 2032
+            -
+              - value
+              - 2032
+    translationKeyFormat: null
+    translationMethod: none
+    type: controlpanel\fields\DateByYear
+handle: yearRange
+name: 'Year Range'
+sortOrder: 4

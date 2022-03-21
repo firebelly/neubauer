@@ -764,6 +764,14 @@ img {
   transform: translateX(0);
   transition: transform 0.5s ease-in-out;
 }
+@media (min-width: 43em) {
+  .primaryNav-content {
+    height: auto;
+    width: auto;
+    position: static;
+    transform: translateX(0);
+  }
+}
 
 /* ---------------------------------------------------------------------
   Icons
@@ -779,29 +787,106 @@ img {
   background: #FFFFFF;
   color: #000000;
 }
+.primaryTheme--homepage .primaryNav-trigger--open {
+  color: #000000;
+}
+.primaryTheme--homepage .primaryNav-trigger--open .primaryTheme--homepage .primaryNav-trigger-icon {
+  fill: #000000;
+}
+@media (min-width: 43em) {
+  .primaryTheme--homepage .primaryNav-content {
+    color: #000000;
+  }
+}
 .primaryTheme--research {
   background: #E5FFFD;
   color: #1F4D49;
+}
+.primaryTheme--research .primaryNav-trigger--open {
+  color: #1F4D49;
+}
+.primaryTheme--research .primaryNav-trigger--open .primaryTheme--research .primaryNav-trigger-icon {
+  fill: #1F4D49;
+}
+@media (min-width: 43em) {
+  .primaryTheme--research .primaryNav-content {
+    color: #1F4D49;
+  }
 }
 .primaryTheme--exhibitions {
   background: #F6F4F4;
   color: #3F3606;
 }
+.primaryTheme--exhibitions .primaryNav-trigger--open {
+  color: #3F3606;
+}
+.primaryTheme--exhibitions .primaryNav-trigger--open .primaryTheme--exhibitions .primaryNav-trigger-icon {
+  fill: #3F3606;
+}
+@media (min-width: 43em) {
+  .primaryTheme--exhibitions .primaryNav-content {
+    color: #3F3606;
+  }
+}
 .primaryTheme--events {
   background: #FFF2B2;
   color: #3F3606;
+}
+.primaryTheme--events .primaryNav-trigger--open {
+  color: #3F3606;
+}
+.primaryTheme--events .primaryNav-trigger--open .primaryTheme--events .primaryNav-trigger-icon {
+  fill: #3F3606;
+}
+@media (min-width: 43em) {
+  .primaryTheme--events .primaryNav-content {
+    color: #3F3606;
+  }
 }
 .primaryTheme--people {
   background: #E5E8FF;
   color: #1C2AA7;
 }
+.primaryTheme--people .primaryNav-trigger--open {
+  color: #1C2AA7;
+}
+.primaryTheme--people .primaryNav-trigger--open .primaryTheme--people .primaryNav-trigger-icon {
+  fill: #1C2AA7;
+}
+@media (min-width: 43em) {
+  .primaryTheme--people .primaryNav-content {
+    color: #1C2AA7;
+  }
+}
 .primaryTheme--about {
   background: #FFE5E6;
   color: #800000;
 }
+.primaryTheme--about .primaryNav-trigger--open {
+  color: #800000;
+}
+.primaryTheme--about .primaryNav-trigger--open .primaryTheme--about .primaryNav-trigger-icon {
+  fill: #800000;
+}
+@media (min-width: 43em) {
+  .primaryTheme--about .primaryNav-content {
+    color: #800000;
+  }
+}
 .primaryTheme--search {
   background: #FFE5E6;
   color: #800000;
+}
+.primaryTheme--search .primaryNav-trigger--open {
+  color: #800000;
+}
+.primaryTheme--search .primaryNav-trigger--open .primaryTheme--search .primaryNav-trigger-icon {
+  fill: #800000;
+}
+@media (min-width: 43em) {
+  .primaryTheme--search .primaryNav-content {
+    color: #800000;
+  }
 }
 
 /* ---------------------------------------------------------------------
@@ -812,6 +897,12 @@ img {
   flex-flow: row wrap;
   padding: 2em;
   font-size: 1rem;
+}
+@media (min-width: 43em) {
+  .primaryHeader {
+    padding-left: 4em;
+    padding-right: 3em;
+  }
 }
 .primaryHeader > * {
   flex: 0 1 50%;
@@ -841,6 +932,7 @@ img {
 
 /* ---------------------------------------------------------------------
   Navigation
+  NOTE: See themed-declarations above
 ------------------------------------------------------------------------ */
 .primaryNav {
   position: relative;
@@ -851,8 +943,8 @@ img {
   flex-flow: row wrap;
   justify-content: flex-end;
 }
-.primaryNav-trigger--open {
-  color: #000000;
+.primaryNav-trigger:link, .primaryNav-trigger:visited, .primaryNav-trigger:hover, .primaryNav-trigger:active {
+  text-decoration: none;
 }
 .primaryNav._is-open .primaryNav-trigger--open {
   border: 0;
@@ -875,9 +967,6 @@ img {
 .primaryNav-trigger--close {
   color: #FFE5E6;
 }
-.primaryNav-trigger:link, .primaryNav-trigger:visited, .primaryNav-trigger:hover, .primaryNav-trigger:active {
-  text-decoration: none;
-}
 .primaryNav-trigger-label {
   display: inline-block;
   margin: 0 1em 0 0;
@@ -892,10 +981,13 @@ img {
   height: 20px;
   width: 20px;
 }
+.primaryNav-trigger--close .primaryNav-trigger-icon {
+  fill: #FFE5E6;
+}
 .primaryNav-logo {
   display: flex;
   flex-flow: row wrap;
-  padding: 2em;
+  margin: 0 0 6em 0;
   font-size: 1rem;
 }
 .primaryNav-logo > * {
@@ -922,15 +1014,82 @@ img {
 .primaryNav-logo-icon {
   height: 40px;
   width: 140px;
+  fill: #FFE5E6;
 }
 .primaryNav-content {
+  padding: 2em;
   background: #800000;
   color: #FFE5E6;
 }
+@media (min-width: 43em) {
+  .primaryNav-content {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    background: none;
+  }
+}
+.primaryNav-title {
+  font: normal 1.4em/1.43 "apercu", sans-serif;
+  margin: 0 0 1.4285714286em 0;
+}
+@media (min-width: 43em) {
+  .primaryNav-trigger, .primaryNav-trigger-label, .primaryNav-title, .primaryNav-logo {
+    display: none;
+  }
+}
 
+.primaryPages {
+  font-size: 1rem;
+}
+@media (min-width: 43em) {
+  .primaryPages {
+    display: flex;
+    flex-flow: row wrap;
+  }
+}
+@media (min-width: 43em) {
+  .primaryPages-item {
+    margin-right: 4em;
+  }
+}
+.primaryPages-trigger {
+  display: flex;
+  flex-flow: row wrap;
+  -webkit-box-alignpack: center;
+  -ms-flex-alignpack: center;
+  -webkit-align-itemspack: center;
+  align-items: center;
+  font: normal 4em/1.12 "apercu", sans-serif;
+  letter-spacing: -0.0375em;
+  border-bottom: 1px solid #FFE5E6;
+  padding-bottom: 0.25em;
+  margin-bottom: 0.25em;
+  color: #FFE5E6;
+  text-decoration: none;
+}
+.primaryPages-trigger > * {
+  flex: 0 1 auto;
+}
+@media (min-width: 43em) {
+  .primaryPages-trigger {
+    font: normal 1.6em/1.56 "apercu", sans-serif;
+    color: #000000;
+    text-decoration: none;
+  }
+}
+.primaryPages-label {
+  flex-grow: 1;
+}
 .primaryPages-icon {
   height: 20px;
   width: 20px;
+  fill: #FFE5E6;
+}
+@media (min-width: 43em) {
+  .primaryPages-icon {
+    display: none;
+  }
 }
 
 .primarySearch-field-label {
@@ -950,6 +1109,11 @@ img {
   overflow: visible;
   position: static;
   width: auto;
+}
+@media (min-width: 43em) {
+  .primarySearch-field {
+    display: none;
+  }
 }
 .primarySearch-submit-label {
   border: 0;

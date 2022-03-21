@@ -6,7 +6,7 @@
 /* ---------------------------------------------------------------------
   Flyout Content
 ------------------------------------------------------------------------ */
-@mixin flyoutContent($selector) {
+@mixin flyoutContent($selector,$responsive:true) {
     
     #{$selector} {
         
@@ -31,6 +31,15 @@
             #{$selector}._is-open & {
                 transform: translateX(0);
                 transition: $fly-transition;
+            }
+
+            @if ( $responsive ) {
+                @include breakpoint(sm) {
+                    height: auto;
+                    width: auto;
+                    position: static;
+                    transform: translateX(0);
+                }
             }
         
         }

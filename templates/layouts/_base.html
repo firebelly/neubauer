@@ -15,7 +15,10 @@
             <a href="{{ siteUrl }}">
                 <span class="primaryHeader-title">{{ siteInfo.commonLabel }}</span>
                 <svg 
-                    class="primaryHeader-icon" role="img">
+                    class="primaryHeader-icon" 
+                    role="img">
+                    <title>Organization Logo</title>
+                    <desc>{{ siteInfo.commonLabel }}</desc>
                     {% set svgPath = "/spritemap.svg#logo-#{siteName}" %}
                     <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
                 </svg> 

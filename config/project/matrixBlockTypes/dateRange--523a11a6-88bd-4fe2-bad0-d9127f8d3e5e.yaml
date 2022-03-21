@@ -23,7 +23,7 @@ fields:
     handle: item
     instructions: ''
     name: __blank__
-    searchable: false
+    searchable: true
     settings:
       endAfterStart: '1'
       showEndTime: ''
@@ -34,4 +34,4 @@ fields:
     type: studioespresso\daterange\fields\DateRangeField
 handle: dateRange
 name: 'Date Range'
-sortOrder: 4
+sortOrder: 5

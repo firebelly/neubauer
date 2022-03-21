@@ -1,15 +1,14 @@
 // flyoutContent
 /* 
-1. Add these data-attrs to the flyout nav:
-// {str} - accordion parent class name
-data-flyout-target={str}
-// {bool} - allows multiple accordion panels to be open simultaneously
-data-accordion-multiple={bool} 
-// {bool} - allows active accordion panel to be toggled
-data-accordion-toggle={bool}
-3. Add data-accordion-trigger={str} to ... trigger element
-4. See templates/macros/_accordion-menu.html for sample markup
-5. See assets/styles/components/_accordion-menu.scss for sample styles
+1. Add these data-attrs to the relevant flyout nav elements:
+// Parent element: containers trigger(s) and content
+   data-flyout-target={str} | {str} flyout namespace
+// Trigger element(s): el(s) that trigger the flyout action
+    data-flyout-trigger
+// Target element: el to which flyout action is applied
+    data-flyout-content 
+2. See templates/partials/_nav.html for example markup
+5. See src/styles/components/_accordion-menu.scss for sample styles
 */
 const flyoutContent = {
     isOpen: false,
@@ -20,6 +19,8 @@ const flyoutContent = {
     _close: '_is-closing',
 
     handleMenu(e) {
+
+        e.preventDefault();
 
         flyoutContent.isOpen = flyoutContent.isOpen ? flyoutContent.hideMenu() : flyoutContent.showMenu();
 

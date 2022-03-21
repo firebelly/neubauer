@@ -8,7 +8,7 @@
     data-flyout-target="nav">
     <a 
         class="primaryNav-trigger primaryNav-trigger--open"
-        href="#openNav"
+        href="#toggleNav"
         data-flyout-trigger>
         <span class="primaryNav-trigger-label">Menu</span>
         <svg 
@@ -21,20 +21,24 @@
 
     <div 
         class="primaryNav-content" 
+        id="toggleNav"
         data-flyout-content>
 
         <div class="primaryNav-logo">
             <a href="{{ siteUrl }}">
                 <span class="primaryNav-logo-title">{{ siteInfo.commonLabel }}</span>
                 <svg 
-                    class="primaryNav-logo-icon" role="img">
+                    class="primaryNav-logo-icon" 
+                    role="img">
+                    <title>Organization Logo</title>
+                    <desc>{{ siteInfo.commonLabel }}</desc>
                     {% set svgPath = "/spritemap.svg#logo-#{siteName}" %}
                     <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
                 </svg> 
             </a>
             <a 
                 class="primaryNav-trigger primaryNav-trigger--close"
-                href="#closeNav"
+                href="#toggleNav"
                 data-flyout-trigger>
                 <span class="primaryNav-trigger-label">Close</span>
                 <svg 

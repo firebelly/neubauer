@@ -1,4 +1,4 @@
-dateModified: 1647536125
+dateModified: 1647636076
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -53,7 +53,7 @@ meta:
     7e5074b8-9286-4b35-9424-be7fbe9dd19b: Image # Image
     8b1838a3-ba11-4d93-bb4f-ffb4b03082ca: Footer # Footer
     8b7345e3-147e-4357-af25-2ab20084f1b8: 'Featured Label' # Featured Label
-    8bf1b66f-209a-47fc-83b4-6cd05d70cb02: 'Date By Year' # Date By Year
+    8bf1b66f-209a-47fc-83b4-6cd05d70cb02: Year # Year
     8ce822fd-9c12-4dfa-9ef3-42966b9fe46f: 'Phone Number' # Phone Number
     8e497ed8-5673-40b5-a1ca-3f83b9ef05b6: Call-to-Action # Call-to-Action
     8fd99288-7c12-4e97-9e07-616209a1bd9e: Label # Label
@@ -112,7 +112,9 @@ meta:
     6189b323-6110-479a-85ea-f4d0cf190af5: 'Primary Nav' # Primary Nav
     6217da4c-403b-4e7c-bfd0-c78365638e41: Citations # Citations
     6225f69a-e829-4678-a475-92e742c178d2: 'Article Title' # Article Title
+    6746fb81-7195-494d-9d0c-4df815f0a944: 'Year Range' # Year Range
     7426f4ea-af7c-4a85-9784-117b708b8697: __blank__ # __blank__
+    9649df13-0153-45ec-a469-921435e36fb6: From # From
     9667b568-5c61-43f1-97ab-523933c4c48e: Page # Page
     9906c196-b7f3-460c-98b0-308b1becd435: Video # Video
     18400b36-d7ac-4476-aa8e-11f567a13e44: Interior # Interior
@@ -168,6 +170,7 @@ meta:
     db13480f-0f0d-476a-95af-c94977ab68f9: 'Events Index' # Events Index
     dbb74986-f45a-4de0-b349-f466e988a4cb: 'Person Types' # Person Types
     dd463042-99d6-4725-b849-2546454db735: 'Opener Image' # Opener Image
+    df9b5267-3176-4fe5-821f-ffe2e2e2f686: To # To
     e073e248-18f9-4384-84cf-1c0bb14dcae7: 'Site Info' # Site Info
     e93b9edb-c0f9-454a-b64e-43cd24153a86: 'Featured Exhibition' # Featured Exhibition
     e104f1e4-4334-4b43-80b2-47e3fb3813f7: Heading # Heading
@@ -210,6 +213,10 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 1.0.0
+  feed-me:
+    edition: standard
+    enabled: true
+    schemaVersion: 4.4.0
   field-manager:
     edition: standard
     enabled: true

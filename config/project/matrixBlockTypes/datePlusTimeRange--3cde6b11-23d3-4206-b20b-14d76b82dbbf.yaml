@@ -23,7 +23,7 @@ fields:
     handle: item
     instructions: ''
     name: __blank__
-    searchable: false
+    searchable: true
     settings:
       endAfterStart: '1'
       showEndTime: '1'
@@ -34,4 +34,4 @@ fields:
     type: studioespresso\daterange\fields\DateRangeField
 handle: datePlusTimeRange
 name: 'Date + Time Range'
-sortOrder: 5
+sortOrder: 6
