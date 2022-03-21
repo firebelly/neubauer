@@ -16,6 +16,10 @@
         @include flexChild();
       }
 
+      &-input {
+        border: none;
+      }
+
     }
 
     @if $default != false {

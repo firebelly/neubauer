@@ -4,10 +4,12 @@
    @fieldName {str}    - namespace
    @fieldId {str}      - field identifier
    @fieldLabel {str}   - input label
-   @fieldVariant {str} - (optional)
-   @isRequired {bool}  - defaults to false
+   @fieldLabel {str}   - input label
+   @hasPlaceholder {bool} - (optional) false
+   @fieldVariant {str} - (optional) null
+   @isRequired {bool}  - (optional) false
 #}
-{% macro textField(fieldName,fieldId,fieldLabel,fieldVariant = null,isRequired = false) %}
+{% macro textField(fieldName,fieldId,fieldLabel,hasPlaceholder = false,fieldVariant = null,isRequired = false) %}
 <div class="{{ fieldName }}{% if fieldVariant is not null %} {{ fieldName }}--{{ fieldVariant }}{% endif %}">
     <label 
         for="field_{{ fieldId }}" 
@@ -22,6 +24,7 @@
         class="{{ fieldName }}-input {{ fieldName }}-input--text" 
         type="text" 
         name="field_{{ fieldId }}"
+        {% if hasPlaceholder %}placeholder="{{ fieldLabel }}"{% endif %}
         value="">
 </div>
 {% endmacro %}

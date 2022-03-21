@@ -11,8 +11,8 @@ fieldLayouts:
             class: null
             disabled: false
             id: null
-            instructions: null
-            label: null
+            instructions: 'Person Type, e.g. "Visiting Fellow," "Staff"'
+            label: ''
             max: null
             min: null
             name: null
@@ -27,15 +27,24 @@ fieldLayouts:
             type: craft\fieldlayoutelements\TitleField
             warning: null
             width: 100
+          -
+            fieldUid: 7d34dc34-5e47-46f5-b6ab-6592edab3987
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
         name: Content
         sortOrder: 1
 handle: personTypes
 name: 'Person Types'
 siteSettings:
   0c99f337-2218-4c6f-b0ad-30589c1ebbc5: # neubauer
-    hasUrls: true
+    hasUrls: false
     template: null
-    uriFormat: 'people-types/{slug}'
+    uriFormat: null
 structure:
   maxLevels: 1
   uid: 5b1cdab7-cc6a-4331-aee6-6f296de2761b

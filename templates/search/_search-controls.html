@@ -71,9 +71,9 @@
 </div>
 
 {# search form #}
-{% set searchName,searchId,searchLabel = 'indexSearch','index','Enter keyword(s) here' %}
+{% set searchName,searchId,searchLabel,hasPlaceholder = 'indexSearch','index','Enter keyword(s) here',true %}
 <div class="indexSearch">
-    {{ controls.controlSearch(searchName,searchId,searchLabel,query) }}
+    {{ controls.controlSearch(searchName,searchId,searchLabel,hasPlaceholder,query) }}
 </div>
 
 {# section tabs #}

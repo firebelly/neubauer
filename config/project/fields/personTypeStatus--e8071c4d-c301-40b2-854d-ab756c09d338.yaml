@@ -1,0 +1,35 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 206e479c-63c6-4776-b5f2-709e81c8c2fd # Person
+handle: personTypeStatus
+instructions: 'Select person''s type status, e.g. "Current" or "Past"'
+name: 'Person Type Status'
+searchable: true
+settings:
+  optgroups: true
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Past
+        -
+          - value
+          - past
+        -
+          - default
+          - '1'
+    -
+      __assoc__:
+        -
+          - label
+          - Current
+        -
+          - value
+          - current
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

@@ -4,35 +4,46 @@
    @searchName {str}    - namespace
    @searchId {str}      - identifier
    @searchLabel {str}   - input label
+   @hasPlaceholder {bool} - (optional)
    @searchQuery {str}   - 
    @searchVariant {str} - (optional)
 #}
-{% macro controlSearch(searchName,searchId,searchLabel,searchQuery,searchVariant = null) %}
+{% macro controlSearch(searchName,searchId,searchLabel,hasPlaceholder = false,searchQuery,searchVariant = null) %}
 <div class="{{ searchName }}{% if searchVariant is not null %} {{ searchName }}--{{ searchVariant }}{% endif %}">
-    <div>
+    <div class="{{ searchName }}-field">
         <label 
             for="search_{{ searchId }}" 
-            class="{{ searchName }}-label">
+            class="{{ searchName }}-field-label">
             {{ searchLabel }}
         </label>
         <input
             id="search_{{ searchId }}"
-            class="{{ searchName }}-input {{ searchName }}-input--text{% if searchQuery %} _has-value{% endif %}" 
+            class="{{ searchName }}-field-input {{ searchName }}-field-input--text{% if searchQuery %} _has-value{% endif %}" 
             type="text" 
+            {% if hasPlaceholder %}
+            placeholder="{{ searchLabel }}"
+            {% endif %}
             name="query"
             sprig
             value="{{ searchQuery }}" />
     </div>
-    <button 
-        class="{{ searchName }}-button" 
+    <a 
+        class="{{ searchName }}-submit" 
         id="search_submit_{{ searchId }}" 
         name="search_submit_{{ searchId }}" 
         role="submit"
+        href=""
         sprig
         s-trigger="click"
         s-replace="#search_{{ searchId }}_results">
-        <span class="{{ searchName }}-trigger">Search</span>
-    </button>
+        <span class="{{ searchName }}-submit-label">Search</span>
+        <svg 
+            class="{{ searchName }}-submit-icon"
+            role="presentation">
+            {% set svgPath = "/spritemap.svg#icon-search-20" %}
+            <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
+        </svg> 
+    </a>
 </div>
 {% endmacro %}
 

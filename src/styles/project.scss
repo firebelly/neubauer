@@ -176,16 +176,20 @@ $sections: (
 ------------------------------------------------------------------------ */
 .primaryHeader {
 	@include flexParent();
+	@include justifyContent(space-between);
 	padding: 2em;
 	font-size: 1rem;
 
 	@include breakpoint(sm) {
 		padding-left: 4em;
 		padding-right: 3em;
+		background-blend-mode: multiply;
+		-webkit-backdrop-filter: blur(50px);
+  		backdrop-filter: blur(50px);
 	}
 
 	> * {
-		@include flexChild(0 1 50%);
+		@include flexChild(0 1 auto);
 	}
 
 	&-title {
@@ -195,6 +199,7 @@ $sections: (
 	&-icon {
 		height: 40px;
 		width: 140px;
+		fill: getColor('gray');
 	}
 
 }
@@ -289,6 +294,8 @@ $red-secondary: nth($red-theme,2);
 		@include breakpoint(sm) {
 			@include flexParent;
 			@include justifyContent(space-between);
+			@include alignItems(center);
+			padding: 0;
 			background: none;
 		}
 
@@ -314,9 +321,11 @@ $red-secondary: nth($red-theme,2);
 
 .primaryPages {
 	font-size: 1rem;
+	margin: 0 0 6.6em;
 
 	@include breakpoint(sm) {
 		@include flexParent;
+		margin-bottom: 0;
 	}
 
 	&-item {
@@ -344,6 +353,7 @@ $red-secondary: nth($red-theme,2);
 
 		@include breakpoint(sm) {
 			@include getType('caption');
+			border-bottom: none;
 			color: getColor('black');
 			text-decoration: none;
 		}
@@ -364,8 +374,34 @@ $red-secondary: nth($red-theme,2);
 }
 
 .primarySearch {
+	@include flexParent();
+	@include alignItems(center);
+	font-size: 1rem;
+
+	> * {
+		@include flexChild();
+	}
 
 	&-field {
+		flex-grow: 1;
+
+		&-input {
+			$pt: math.div(12,16);
+			$pb: math.div(13,16);
+			$pl: math.div(15,16);
+			@include getType('caption');
+			border-bottom: 1px solid getColor('red',10);
+			border-radius: 5px 5px 0 0;
+			padding: #{$pt}em 0 #{$pb}em #{$pl}em;
+			width: 100%;
+			background: getColor('red',20);
+			color: getColor('red',10);
+
+			&::placeholder {
+				color: getColor('red',10);
+			}
+
+		}
 
 		&-label {
 			@include visuallyHide;
@@ -378,14 +414,26 @@ $red-secondary: nth($red-theme,2);
 	}
 
 	&-submit {
+		border: 1px solid getColor('red',10);
+		border-radius: 5px;
+		margin-left: 1em;
+		padding: 1.5em;
+
+		@include breakpoint(sm) {
+			border: none;
+		}
 
 		&-label {
 			@include visuallyHide;
 		}
 
 		&-icon {
-			height: 20px;
-			width: 20px;
+			@include icon();
+			fill: getColor('red',10);
+
+			@include breakpoint(sm) {
+				fill: getColor('gray');
+			}
 		}
 
 	}

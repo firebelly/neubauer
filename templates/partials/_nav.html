@@ -67,20 +67,8 @@
         {% endfor %}
         </ul>
 
-        <h2 class="primaryNav-title">Search</h2>
-        <div class="primarySearch">
-            {{ fields.textField('primarySearch-field','primary_search','Search') }}
-            <a 
-                class="primarySearch-submit"
-                href="{{ url('search')}}">
-                <span class="primarySearch-submit-label">Go</span>
-                <svg 
-                    class="primarySearch-submit-icon"
-                    role="presentation">
-                    {% set svgPath = "/spritemap.svg#icon-search-20" %}
-                    <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
-                </svg> 
-            </a>
-        </div>
+        {{ sprig('partials/_search-bar') }}
+
+        
    </div>
 </nav>

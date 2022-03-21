@@ -1,0 +1,25 @@
+{% import 'macros/_controls' as controls %}
+
+{% set query = query ?? '' %}
+{# sprig update url #}
+{% do sprig.pushUrl('/search?' ~ {query: query}|url_encode) %}
+
+<h2 class="primaryNav-title">Search</h2>
+
+{% set searchName,searchId,searchLabel,hasPlaceholder = 'primarySearch','primary_search','Enter keyword(s) here',true %}
+{{ controls.controlSearch(searchName,searchId,searchLabel,hasPlaceholder,query) }}
+
+{# <div class="primarySearch">
+    {{ fields.textField('primarySearch-field','primary_search','Enter Keyword(s)',true) }}
+    <a 
+        class="primarySearch-submit"
+        href="{{ url('search')}}">
+        <span class="primarySearch-submit-label">Go</span>
+        <svg 
+            class="primarySearch-submit-icon"
+            role="presentation">
+            {% set svgPath = "/spritemap.svg#icon-search-20" %}
+            <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
+        </svg> 
+    </a>
+</div> #}
