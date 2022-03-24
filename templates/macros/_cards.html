@@ -1,0 +1,75 @@
+{# actionItem: 
+    See styles/components/_actions.scss for styling
+
+    @cardName {str}  - base styling hook
+    @cardEntry {obj} - entry object
+#}
+{% macro cardArticle(cardName,cardEntry,cardVariant = null) %}
+{% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
+<article class="{{ cardName }}">
+
+    {% if cardEntry.cardImage and cardEntry.cardImage.one() is not null %}
+    <img 
+        class="{{ cardName }}-img"
+        src="" />
+    {% else %}
+    <div class="{{ cardName }}-placeholder"></div>
+    {% endif %}
+
+    <h3 class="{{ cardName }}-title">{{ cardEntry.title }}</h3>
+    
+    
+
+    {% if cardEntry.projectTeam|length %}
+    <ul class="{{ cardName }}-team">
+    {% for person in cardEntry.projectTeam %}
+        <li class="{{ cardName }}-team-item">
+            <a 
+                class="{{ cardName }}-team-trigger"
+                href="#">
+                {{ person }}
+            </a>
+            {% if loop.length > 1 and not loop.last %}&#44;{% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if cardEntry.dateBlock|length %}
+    {% set dateBlock = cardEntry.dateBlock[0] %}
+    {% set isRange = (dateBlock.item is null) %}
+    <div class="{{ cardName }}-date">
+    {% if isRange %}
+    {{ dateBlock.itemFrom }} &ndash; {{ dateBlock.itemTo }}
+    {% else %}
+    {{ dateBlock.item }}
+    {% endif %}
+    </div>
+    {% endif %}
+
+    {% if cardEntry.topicList|length %}
+    <ul class="{{ cardName }}-list">
+    {% for tag in cardEntry.topicList %}
+        <li class="{{ cardName }}-item">
+            <a 
+                class="{{ cardName }}-trigger {{ cardName }}-trigger--tag"
+                href="#">
+                <span class="{{ cardName }}-label {{ cardName }}-label--tag">{{ tag }}</span>
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+    <a 
+        class="{{ cardName }}-action"
+        href="{{ cardEntry.url }}"
+        title=""
+        role="">
+        <span class="{{ cardName }}-action-label">Learn More</span>
+        <svg class="{{ cardName }}-action-icon">
+            <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+        </svg>
+    </a>
+</article>
+{% endmacro %}

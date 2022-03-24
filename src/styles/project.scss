@@ -147,10 +147,6 @@ $sections: (
 			background: $theme-secondary;
 			color: $theme-primary;
 
-			a {
-				color: $theme-primary;
-			}
-
 			// Primary selectors
 			.primaryHeader {
 
@@ -202,6 +198,13 @@ $sections: (
 					}
 				}
 
+			}
+
+			.primaryContent {
+
+				a {
+					color: $theme-primary;
+				}
 			}
 
 		}
@@ -491,6 +494,15 @@ $red-secondary: nth($red-theme,2);
 
 }
 
+/* ---------------------------------------------------------------------
+  Primary Content
+------------------------------------------------------------------------ */
+.primaryContent {
+	padding: 2em 4em 4em 4em;
+}
+
+
+
 
 /* ---------------------------------------------------------------------
   Search Index
@@ -548,17 +560,24 @@ $red-secondary: nth($red-theme,2);
 .pageOpener {
 	$parent: &;
 	font-size: 1rem;
-	padding: 2em 4em 4em 4em;
+	padding: 0 0 4em 0;
 
 	&-title {
+		$mb: math.div(20,65);
 		@include getType('h1-normal');
+		margin-bottom: #{$mb}em;
 	}
 
 	&-container {
 
 		&--results {
-			margin-bottom: 12em;
+			margin-bottom: 4em;
 			@extend %global-flex--half;
+
+			@include breakpoint(sm) {
+				margin-bottom: 12em;
+			}
+
 		}
 
 		&--control {
@@ -589,7 +608,6 @@ $red-secondary: nth($red-theme,2);
   Search Filters
 ------------------------------------------------------------------------ */
 .searchFilters {
-	padding: 0 4em 0 4em;
 
 	&-title {
 		@include visuallyHide;
@@ -598,12 +616,17 @@ $red-secondary: nth($red-theme,2);
 }
 
 .searchTabs {
-	@extend %global-flex--auto;
-	margin-bottom: 4em;
+	display: none;
 	
 	@include breakpoint(sm) {
+		@include flexParent();
+		margin-bottom: 4em;
 		border-bottom: 1px solid getColor('red');
 		padding-bottom: 1.7em;
+
+		> * {
+			@include flexChild();
+		}
 	}
 
 	&-item {
@@ -636,12 +659,21 @@ $red-secondary: nth($red-theme,2);
 	$pl: math.div(15,16);
 	$pr: math.div(15,16);
 	$pb: math.div(13,16);
+	$mb: math.div(20,16);
 	@include resetButton;
 	@include getType('caption');
 	border-radius: 2px;
 	border: 1px solid $red-primary;
+	margin-bottom: #{$mb}em;
 	padding: #{$pt}em #{$pr}em #{$pb}em #{$pl}em;
+	width: 100%;
 	color: $red-primary;
+
+	@include breakpoint(sm) {
+		margin-bottom: 0;
+		width: auto;
+	}
+
 }
 
 .resultsFilter {
@@ -714,7 +746,6 @@ $red-secondary: nth($red-theme,2);
 	&-icon {
 		@include icon;
 		@include flexChild();
-		@include alignSelf(flex-end);
 
 		#{$parent}-controls & {
 			fill: $red-primary;
@@ -739,7 +770,7 @@ $red-secondary: nth($red-theme,2);
 					display: none;
 				}
 			}
-			
+
 		}
 
 		&--apply,
@@ -802,6 +833,70 @@ $red-secondary: nth($red-theme,2);
 		@include alignItems(center);
 		margin: 4em 0 0 0;
 	}
+
+}
+
+/* ---------------------------------------------------------------------
+  Search Results
+------------------------------------------------------------------------ */
+@include controlTags('.searchArticle',$red-primary,$red-secondary);
+
+.searchResults {
+
+	&-content {
+		
+		@include breakpoint(sm) {
+			@include flexParent();
+			margin-left: -0.25em;
+
+			> * {
+				$thirds: math.div(100,30) * 10%;
+				$margin: 0.5em;
+				$percent: calc($thirds - $margin);
+				@include flexChild(0 1 #{$percent});
+			}
+
+		}
+
+	}
+
+}
+
+.searchArticle {
+	font-size: 1rem;
+	margin: 0 0.25em;
+
+	&-title {
+		@include getType('h4-sans');
+	}
+
+	&-placeholder {
+		background: lightgray;
+		width: 100%;
+		aspect-ratio: 4 / 3;
+	}
+
+	&-team {
+
+		&-trigger {
+			@include getType('caption');
+		}
+
+
+	}
+
+	&-date {
+		@include getType('caption');
+	}
+	
+	&-action {
+
+		&-icon {
+			@include icon();
+		}
+
+	}
+
 
 }
 

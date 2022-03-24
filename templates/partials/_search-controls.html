@@ -1,11 +1,12 @@
 {% import 'macros/_controls' as controls %}
+{% import 'macros/_cards' as cards %}
 
 {% set entry = craft.entries.id(entryId).one() %}
 {% set isSprig = sprig.isRequest %}
 {# set default result count #}
 {% set results = results ?? 0 %}
 {# search result limit #}
-{% set limit = limit ?? 1 %}
+{% set limit = limit ?? 10 %}
 {# search filters #}
 {% set filters = ['section','tags','search','sort'] %}
 {% set trigger = sprig.trigger|split('_')[0] %}
@@ -54,6 +55,7 @@
 {% set byTitle = 'title ' ~ sort %}
 {% set byTitleExcludeArticles = "(CASE WHEN `title` LIKE 'The %' THEN SUBSTRING(`title`, 5) WHEN `title` LIKE 'A %' THEN SUBSTRING(`title`, 3) ELSE `title` END)" ~ sort %}
 {# get results #}
+{# TODO: exclude index pages from query #}
 {% set currentResults = (query ? baseQuery.search(query) : baseQuery).orderBy(byTitleExcludeArticles).limit(limit) %}
 {# define pagination #}
 {% set pageInfo = sprig.paginate(currentResults, page) %}
@@ -81,10 +83,10 @@
 </section>
 
 {# Search Filters #}
+{% set excludeList = ['about-us'] %}
+{% set sectionList = primaryNav.navigationBlock.all() %}
 <section class="searchFilters">
     <h2 class="searchFilters-title">Filter the search</h2>
-    {% set excludeList = ['about-us'] %}
-    {% set tabList = primaryNav.navigationBlock.all() %}
     <ul class="searchTabs">
         <li class="searchTabs-item">
             <a 
@@ -97,7 +99,7 @@
                 <span class="searchTabs-label">All</span>
             </a>
         </li>
-    {% for tab in tabList if tab.displayText|slugify not in excludeList %}
+    {% for tab in sectionList if tab.displayText|slugify not in excludeList %}
         {% set tabName = tab.displayText %} 
         {% set tabSlug = tabName == 'Research' ? 'projects' : tab.displayText|slugify %}
         <li class="searchTabs-item">
@@ -131,14 +133,18 @@
 
 {# RESULTS #}
 <section class="searchResults" id="search_index_results">
-<h2>Results:</h2>
-{% if results %}
-    {% for entry in resultsByPage %}
-    <a href="{{ entry.url }}">{{ entry.title }}</a>
-    {% endfor %}
-{% else %}
-    No results
-{% endif %}
+    <h2 class="searchResults-title">Results:</h2>
+    {% if results %}
+    <div class="searchResults-content">
+        {% for entry in resultsByPage %}
+        {# <a href="{{ entry.url }}">{{ entry.title }}</a> #}
+        {% set cardName,cardEntry = 'searchArticle', entry %}
+        {{ cards.cardArticle(cardName,cardEntry) }}
+        {% endfor %}
+    </div>
+    {% else %}
+        No results
+    {% endif %}
 </section>
 
 {# PAGINATION #}

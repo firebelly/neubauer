@@ -673,7 +673,7 @@
                 &:visited,
                 &:hover,
                 &:active {
-                    color: $color-primary;
+                    color: $color-primary !important;
                     text-decoration: none;
                     
                     #{$selector}-item._is-active &,
