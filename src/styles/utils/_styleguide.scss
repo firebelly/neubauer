@@ -39,9 +39,9 @@ $text-map: (
 	"h3-sans": ("2.8em/1.25",$font-secondary),
 	"h3-sans-ul": ("2.8em/1.25",$font-secondary,normal,underline),
 	// Headlines 4
-	"h4-normal": ("2em/0.7",$font-primary,-0.01em),
-	"h4-italic": ("2em/0.7",$font-tertiary),
-	"h4-sans": ("2em/0.7",$font-secondary),
+	"h4-normal": ("2em/1.5",$font-primary,-0.01em),
+	"h4-italic": ("2em/1.5",$font-tertiary),
+	"h4-sans": ("2em/1.5",$font-secondary),
 	// Non-headlines
 	"action": ("1.2em/1.67",$font-secondary,0.1em,inherit,uppercase),
 	"subtitle": ("2.4em/1.46",$font-secondary),

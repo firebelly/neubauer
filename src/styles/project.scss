@@ -101,10 +101,12 @@ img {
   @include accordionMenu($selector:'.myAccordion',$icon-size:20px,$default:true);
 ------------------------------------------------------------------------ */
 @include assetItem('.profileAsset');
-@include fieldText('.primarySearch-field');
+// @include fieldText('.primarySearch-field');
 @include controlPagination('.searchPagination');
 @include controlTags('.searchTags');
 @include flyoutContent('.primaryNav');
+@include fieldSearch('.primarySearch');
+@include fieldSearch('.indexSearch');
 
 /* ---------------------------------------------------------------------
   Icons
@@ -132,7 +134,7 @@ $sections: (
 	'search': 'red'
 );
 
-// themed body class
+// Themed body class
 .primaryTheme {
 
 	@each $section, $color in $sections {
@@ -145,7 +147,19 @@ $sections: (
 			background: $theme-secondary;
 			color: $theme-primary;
 
-			// Section-based larger vw and "closed nav" themes
+			a {
+				color: $theme-primary;
+			}
+
+			// Primary selectors
+			.primaryHeader {
+
+				&-icon {
+					fill: $theme-primary; 
+				}
+
+			}
+
 			.primaryNav {
 				$selector: &;
 
@@ -156,6 +170,9 @@ $sections: (
 							fill: $theme-primary;
 						}
 					}
+					&-icon {
+						fill: $theme-primary;
+					}
 				}
 
 				&-content {
@@ -165,11 +182,68 @@ $sections: (
 				}
 			}
 
+			.primarySearch {
+
+				&-submit {
+					&-icon {
+						@include breakpoint(sm) {
+							fill: $theme-primary;
+						}
+					}
+				}
+
+			}
+
+			.primaryPages {
+
+				&-trigger {
+					@include breakpoint(sm) {
+						color: $theme-primary;
+					}
+				}
+
+			}
+
 		}
 
 	}
 
 }
+
+/* ---------------------------------------------------------------------
+  Global Container Placeholders
+------------------------------------------------------------------------ */
+%global {
+
+	&-half {
+		@include breakpoint(sm) {
+			max-width: 50%;
+		}
+	}
+
+	&-flex--auto {
+		@include breakpoint(sm) {
+			@include flexParent();
+			> * {
+				@include flexChild();
+			}
+		}
+	}
+
+
+	&-flex--half {
+		@include breakpoint(sm) {
+			@include flexParent();
+			> * {
+				@include flexChild(0 1 50%);
+			}
+		}
+	}
+
+}
+
+
+
 
 /* ---------------------------------------------------------------------
   Header
@@ -199,7 +273,6 @@ $sections: (
 	&-icon {
 		height: 40px;
 		width: 140px;
-		fill: getColor('gray');
 	}
 
 }
@@ -354,7 +427,8 @@ $red-secondary: nth($red-theme,2);
 		@include breakpoint(sm) {
 			@include getType('caption');
 			border-bottom: none;
-			color: getColor('black');
+			padding: 0;
+			margin: 0;
 			text-decoration: none;
 		}
 	}
@@ -374,61 +448,33 @@ $red-secondary: nth($red-theme,2);
 }
 
 .primarySearch {
-	@include flexParent();
-	@include alignItems(center);
-	font-size: 1rem;
-
-	> * {
-		@include flexChild();
-	}
 
 	&-field {
-		flex-grow: 1;
+		
+		@include breakpoint(sm) {
+		    display: none;
+		}	
 
 		&-input {
-			$pt: math.div(12,16);
-			$pb: math.div(13,16);
-			$pl: math.div(15,16);
-			@include getType('caption');
-			border-bottom: 1px solid getColor('red',10);
-			border-radius: 5px 5px 0 0;
-			padding: #{$pt}em 0 #{$pb}em #{$pl}em;
-			width: 100%;
-			background: getColor('red',20);
+			border-bottom-color: getColor('red',10);
+			background-color: getColor('red',20);
 			color: getColor('red',10);
 
 			&::placeholder {
 				color: getColor('red',10);
 			}
-
 		}
-
-		&-label {
-			@include visuallyHide;
-		}
-
-		@include breakpoint(sm) {
-			display: none;
-		}	
 
 	}
 
 	&-submit {
-		border: 1px solid getColor('red',10);
-		border-radius: 5px;
-		margin-left: 1em;
-		padding: 1.5em;
-
-		@include breakpoint(sm) {
-			border: none;
-		}
+		border-color: getColor('red',10);
 
 		&-label {
 			@include visuallyHide;
 		}
 
 		&-icon {
-			@include icon();
 			fill: getColor('red',10);
 
 			@include breakpoint(sm) {
@@ -436,22 +482,55 @@ $red-secondary: nth($red-theme,2);
 			}
 		}
 
+		@include breakpoint(sm) {
+			border: none;
+			padding: 0;
+		}
+
 	}
+
 }
+
 
 /* ---------------------------------------------------------------------
   Search Index
 ------------------------------------------------------------------------ */
 .indexSearch {
 
-	&-submit {
+	&-field {
 
-		&-icon {
-			height: 20px;
-			width: 20px;
+		&-input {
+			background-color: getColor('red',30);
+			border-color: getColor('red');
+			color: getColor('red');
+
+			&::placeholder {
+				color: getColor('red');
+			}
+
 		}
 
 	}
+
+	&-submit {
+		@include flexParent();
+		@include alignItems(center);
+		border-color: getColor('red');
+
+		&-label {
+			$mr: math.div(10,12);
+			@include getType('micro');
+			margin-right: #{$mr}em;
+			color: getColor('red');
+			text-transform: uppercase;	
+		}
+
+		&-icon {
+			fill: getColor('red');
+		}
+
+	}
+
 }
 
 .searchTags {
@@ -462,6 +541,271 @@ $red-secondary: nth($red-theme,2);
 	}
 
 }
+
+/* ---------------------------------------------------------------------
+  Page Opener
+------------------------------------------------------------------------ */
+.pageOpener {
+	$parent: &;
+	font-size: 1rem;
+	padding: 2em 4em 4em 4em;
+
+	&-title {
+		@include getType('h1-normal');
+	}
+
+	&-container {
+
+		&--results {
+			margin-bottom: 12em;
+			@extend %global-flex--half;
+		}
+
+		&--control {
+			@extend %global-half;
+		}
+
+	}
+
+	&-subtitle {
+
+		#{$parent}--search & {
+			@include getType('h4-sans');
+			margin-bottom: 1em;
+		}
+
+	}
+
+	&-desc {
+
+		#{$parent}--search & {
+			@include getType('subtitle');
+		}
+	}
+
+}
+
+/* ---------------------------------------------------------------------
+  Search Filters
+------------------------------------------------------------------------ */
+.searchFilters {
+	padding: 0 4em 0 4em;
+
+	&-title {
+		@include visuallyHide;
+	}
+
+}
+
+.searchTabs {
+	@extend %global-flex--auto;
+	margin-bottom: 4em;
+	
+	@include breakpoint(sm) {
+		border-bottom: 1px solid getColor('red');
+		padding-bottom: 1.7em;
+	}
+
+	&-item {
+		margin-right: 4em;	
+	}
+
+	&-trigger {
+		$height: math.div(10,28);
+		@include getType('h3-sans');
+		text-decoration-color: transparent;
+		text-underline-offset: #{$height}em;
+		text-decoration-thickness: #{$height}em;
+
+		&:hover,
+		&._is-active {
+			text-decoration-color: getColor('red');
+		}
+
+	}
+
+}
+
+/* ---------------------------------------------------------------------
+  Results Filter
+------------------------------------------------------------------------ */
+@include controlTags('.resultsFilter',$red-secondary,$red-primary);
+
+%trigger--open {
+	$pt: math.div(12,16);
+	$pl: math.div(15,16);
+	$pr: math.div(15,16);
+	$pb: math.div(13,16);
+	@include resetButton;
+	@include getType('caption');
+	border-radius: 2px;
+	border: 1px solid $red-primary;
+	padding: #{$pt}em #{$pr}em #{$pb}em #{$pl}em;
+	color: $red-primary;
+}
+
+.resultsFilter {
+	$parent: &;
+
+	&-overlay {
+		padding: 2em;
+		background: $red-primary;
+	}
+
+	&-controls {
+		margin-bottom: 2em;
+
+		@include breakpoint(sm) {
+			@include flexParent();
+			@include justifyContent(space-between);
+
+			> * {
+				@include flexChild(0 1 50%);
+			}
+		}
+
+	}
+
+	&-trigger {
+		@include flexParent();
+		@include alignItems(center);
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		#{$parent}-controls & {
+			@extend %trigger--open;
+		}
+
+		&--close,
+		&--clear,
+		&--apply {
+			@include resetButton;
+		}
+
+		&--sort {
+			@include breakpoint(sm) {
+				flex-basis: auto;
+				min-width: 280px;
+			}
+		}
+
+		&--apply {
+			border-radius: 5px;
+			border: 1px solid $red-secondary;
+			margin-left: 2em;
+			padding: 1.5em 2em 1.5em 2em;
+		}
+
+		&--close {
+			position: absolute;
+			top: 1.5em;
+			right: 1em;
+			font-size: 1rem;
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
+
+	}
+
+	&-icon {
+		@include icon;
+		@include flexChild();
+		@include alignSelf(flex-end);
+
+		#{$parent}-controls & {
+			fill: $red-primary;
+		}
+
+		&--plus {
+
+			#{$parent}-trigger--filter & {
+				display: none;
+
+				@include breakpoint(sm) {
+					display: inline-block;
+				}
+			}
+			
+		}
+
+		&--caret {
+
+			#{$parent}-trigger--filter & {
+				@include breakpoint(sm) {
+					display: none;
+				}
+			}
+			
+		}
+
+		&--apply,
+		&--close {
+			fill: $red-secondary;
+		}
+
+	}
+
+	&-title {
+
+		&--headline {
+			$mb: math.div(40,20);
+			@include getType('h4-sans');
+			margin-bottom: #{$mb}em;
+			color: $red-secondary;
+		}
+
+		&--group {
+			$mb: math.div(15,16);
+			@include getType('caption');
+			margin-bottom: #{$mb}em;
+			color: $red-secondary;
+		}
+	}
+
+	&-label {
+
+		&--headline {
+			flex-grow: 1;
+			text-align: left;
+		}
+
+		&--action {
+			$height: math.div(5,12);
+			$width: math.div(10,12);
+			@include getType('action');
+			margin-right: #{$width}em;
+			color: $red-secondary;
+			text-decoration: underline;
+			text-decoration-color: $red-secondary;
+			text-underline-offset: #{$height}em;
+			text-decoration-thickness: 1px;
+
+			#{$parent}-trigger--apply & {
+				text-decoration: none;
+			}
+
+		}
+
+	}
+
+	&-overlay {
+		position: relative;
+	}
+
+	&-footer {
+		@include flexParent();
+		@include justifyContent(flex-end);
+		@include alignItems(center);
+		margin: 4em 0 0 0;
+	}
+
+}
+
+
 
 
 

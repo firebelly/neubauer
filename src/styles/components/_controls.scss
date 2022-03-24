@@ -1,5 +1,6 @@
 /* _controls.scss */
 @use "../utils/_utils" as *;
+@use "sass:math";
 
 /* ---------------------------------------------------------------------
   Select Control: Structure
@@ -602,88 +603,104 @@
 /* ---------------------------------------------------------------------
   Tags
 ------------------------------------------------------------------------ */
-@mixin controlTags($selector) {
+@mixin controlTags($selector,$color-primary:#000000,$color-secondary:#FFFFFF,$default:true) {
 
     #{$selector} {
-		@include resetNativeButton;
-        @include flexParent();
-        @include alignItems(center);
-        border-radius: 20px;
-        margin: 0 0.5em 0 0;
-        padding: 0.2em 1em 0.3em 1em;
-        font-size: 1rem;
+        $gutter-a: math.div(5,14); 
+        $gutter-b: math.div(10,14);
+
+        &-list {
+            @include flexParent();
+        }
+
+        &-item {
+            @include flexChild();
+            border-radius: 100px;
+            border: 1px solid transparent;
+            margin: 0 1em 1em 0;
+        }
 
         &-trigger {
-            @include flexChild();
-            font: 350 1.4em $font-primary;
 
-            &:link,
-            &:visited,
-            &:hover,
-            &:active {
-                text-decoration: none;
-            }
-
-            #{$selector}--ghost & {
-                color: getColor('black',10);
-            }
-
-            #{$selector}--solid & {
-                color: getColor('white');
-            }
-	
-        }
-
-        &--ghost {
-            border: 1px solid getColor('black',10);
-            background: none;
-        }
-
-        &--solid {
-            background: getColor('black',10);
-            color: getColor('white');
-        }
-
-        &-close {
-            @include flexChild();
-            $size: 20px;
-            display: inline-block;
-            height: $size;
-            margin: 0 0 0 0.3em;
-            width: $size;
-            fill: getColor('white');
-
-            #{$selector}:hover & {
-                fill: getColor('black',10);
-            }
-        }
-
-        &-file {
-            @include flexChild();
-            $size: 20px;
-            display: inline-block;
-            height: $size;
-            margin: 0 0.3em 0 0;
-            width: $size;
-
-            #{$selector}--solid & {
-                fill: getColor('white');
-            }
-
-            #{$selector}:hover & {
-                fill: getColor('black',10);
+            &--tag {
+                padding: 0.5em 1em;
+                font-size: 1rem;
             }
 
         }
 
+        &-icon {
+
+            &--remove {
+                margin-left: #{$gutter-a}em;
+            }
+
+        }
+        
         &:hover {
-            @include boxShadow(0,1px,5px,rgba(getColor('black'),.6));
             cursor: pointer;
-            border-color: transparent;
-            background: getColor('yellow',10);
-            color: getColor('black',10);
         }
 
     }
 
+    @if $default != false {
+        @include controlTags--default($selector,$color-primary,$color-secondary);
+      }
+
+}
+
+/* -------------------------------------------------------------------------------
+ Tag Control: Default Presentation
+---------------------------------------------------------------------------------- */
+@mixin controlTags--default($selector,$color-primary,$color-secondary) {
+    
+    #{$selector} {
+
+        &-item {
+            border-color: $color-primary;
+
+            &._is-active,
+            &:hover {
+                background: $color-primary;
+            }
+        }
+
+        &-trigger {
+
+            &--tag { 
+
+                &:link,
+                &:visited,
+                &:hover,
+                &:active {
+                    color: $color-primary;
+                    text-decoration: none;
+                    
+                    #{$selector}-item._is-active &,
+                    #{$selector}-item:hover & {
+                        color: $color-secondary;
+                    }
+
+                }
+
+            }
+        }
+
+        &-label {
+
+            &--tag {
+                @include getType('fine');
+            }
+
+        }
+
+        &-icon {
+
+            &--remove {
+                fill: $color-secondary;
+            }
+
+        }
+
+    }
 }

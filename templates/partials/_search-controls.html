@@ -1,0 +1,149 @@
+{% import 'macros/_controls' as controls %}
+
+{% set entry = craft.entries.id(entryId).one() %}
+{% set isSprig = sprig.isRequest %}
+{# set default result count #}
+{% set results = results ?? 0 %}
+{# search result limit #}
+{% set limit = limit ?? 1 %}
+{# search filters #}
+{% set filters = ['section','tags','search','sort'] %}
+{% set trigger = sprig.trigger|split('_')[0] %}
+{% set overlay = overlay ?? false %}
+{% if isSprig and trigger == 'tags' %}
+{# Tags testing #}
+{% endif %}
+{% set section, tags, query, sort = section ?? '', tags ?? '', query ?? '', sort ?? 'asc' %}
+{# reset current page if new filter is triggered #}
+{% set page = isSprig and (trigger in filters) ? 1 : (page ?? 1) %}
+{# sprig update url #}
+{% do sprig.pushUrl('?' ~ {query: query, tags: tags, page: page}|url_encode) %}
+{# sprig persistent state #}
+{{ hiddenInput('section', section) }}
+{{ hiddenInput('tags', tags) }}
+{{ hiddenInput('sort', sort) }}
+{{ hiddenInput('results', results) }}
+{{ hiddenInput('page', page) }}
+
+{# BEGIN RESULTING #}
+{# Resource: https://craftcms.com/docs/3.x/relations.html#advanced-relationships #}
+{# add relatedParams to params #}
+{% set baseQuery = craft.entries() %}
+
+{% if section %}
+    {% set baseQuery = baseQuery.section(section) %}
+{% endif %}
+
+{% if tags %}
+    {# get the tag(s) category object #}
+    {% set tagArray = tags|split(',') %}
+    {% set hasMultipleTags = (tagArray|length > 1) %}
+    {% set category = hasMultipleTags ? [] : craft.categories().group('topics').slug(tags).one() %}
+
+    {% if hasMultipleTags %}
+    {% for tagSlug in tagArray %}
+        {% set category = category|merge([craft.categories().group('topics').slug(tagSlug).one()]) %}
+    {% endfor %}
+    {% endif %}
+
+    {% set baseQuery = baseQuery.relatedTo(category) %}
+    
+{% endif %}
+
+{# define sorting #}
+{% set byTitle = 'title ' ~ sort %}
+{% set byTitleExcludeArticles = "(CASE WHEN `title` LIKE 'The %' THEN SUBSTRING(`title`, 5) WHEN `title` LIKE 'A %' THEN SUBSTRING(`title`, 3) ELSE `title` END)" ~ sort %}
+{# get results #}
+{% set currentResults = (query ? baseQuery.search(query) : baseQuery).orderBy(byTitleExcludeArticles).limit(limit) %}
+{# define pagination #}
+{% set pageInfo = sprig.paginate(currentResults, page) %}
+{% set results = currentResults|length %}
+{% set resultsByPage = pageInfo.pageResults %}
+{% set pageObj = {
+    'page_info': pageInfo,
+    'current_page': page
+}%}
+{# END RESULTING #}
+
+{# Page Opener #}
+<section class="pageOpener pageOpener--search">
+    <h2 class="pageOpener-subtitle">Search</h2>
+    {# result status #}
+    <div class="pageOpener-container pageOpener-container--results">
+        <h3 class="pageOpener-title">{{ results }}</span> Result{{ results != 1 ? 's' : ''}} for <br />"{{ query }}"</h3>
+        <div class="pageOpener-desc">{{ entry.openerText }}</div>
+    </div>
+    {# search form #}
+    {% set searchName,searchId,searchLabel,hasPlaceholder,isSprig = 'indexSearch','index','Enter keyword(s) here',true,true %}
+    <div class="pageOpener-container pageOpener-container--control">
+        {{ controls.controlSearch(searchName,searchId,searchLabel,hasPlaceholder,query) }}
+    </div>
+</section>
+
+{# Search Filters #}
+<section class="searchFilters">
+    <h2 class="searchFilters-title">Filter the search</h2>
+    {% set excludeList = ['about-us'] %}
+    {% set tabList = primaryNav.navigationBlock.all() %}
+    <ul class="searchTabs">
+        <li class="searchTabs-item">
+            <a 
+                class="searchTabs-trigger{% if not section %} _is-active{% endif %}" 
+                id="section_all"
+                href=""
+                sprig
+                s-val:section=""
+                s-replace="#search_{{ searchId }}_results">
+                <span class="searchTabs-label">All</span>
+            </a>
+        </li>
+    {% for tab in tabList if tab.displayText|slugify not in excludeList %}
+        {% set tabName = tab.displayText %} 
+        {% set tabSlug = tabName == 'Research' ? 'projects' : tab.displayText|slugify %}
+        <li class="searchTabs-item">
+            <a 
+                class="searchTabs-trigger{% if section == tabSlug %} _is-active{% endif %}" 
+                id="section_{{ tabSlug }}"
+                href=""
+                sprig
+                s-val:section="{{ tabSlug }}">
+                <span class="searchTabs-label">{{ tabName }}</span>
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+
+    {# dimensions control #}
+    {% set filterList = [{'title': 'Topics', 'tagList': craft.categories.group('topics')}] %}
+    {% set filterName, filterLabel, activeTags = 'resultsFilter','Filter Results', tags %}
+    {{ controls.controlDimensions(filterName,filterLabel,filterList,activeTags,overlay) }}
+
+    {# sort control #}
+    {% set sortName,sortLabel,sortOptions,activeSort = 'searchSort','Sort By Name (A-Z)',['asc','desc'], sort %}
+    {{ controls.controlSort(sortName,sortLabel,sortOptions,activeSort) }}
+
+    {# tag control #}
+    {# {% set tagName,tagList,removeIconSlug = 'searchTags', craft.categories.group('topics'),'close' %}
+    {% set activeTags = tags ?? null %}
+    {{ controls.controlTagsFilter(tagName,tagList,activeTags,removeIconSlug) }} #}
+
+</section>
+
+{# RESULTS #}
+<section class="searchResults" id="search_index_results">
+<h2>Results:</h2>
+{% if results %}
+    {% for entry in resultsByPage %}
+    <a href="{{ entry.url }}">{{ entry.title }}</a>
+    {% endfor %}
+{% else %}
+    No results
+{% endif %}
+</section>
+
+{# PAGINATION #}
+{% if results %}
+{% set pageName,pageRange,iconSize = 'searchPagination',5,20 %}
+{{ controls.controlPagination(pageName,pageObj,pageRange,iconSize) }} 
+{% endif %}
+

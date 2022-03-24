@@ -5,11 +5,12 @@
    @searchId {str}      - identifier
    @searchLabel {str}   - input label
    @hasPlaceholder {bool} - (optional)
-   @searchQuery {str}   - 
+   @searchQuery {str}   - (optional)
+   @isIndex {bool}      - (optional)
    @searchVariant {str} - (optional)
 #}
-{% macro controlSearch(searchName,searchId,searchLabel,hasPlaceholder = false,searchQuery,searchVariant = null) %}
-<div class="{{ searchName }}{% if searchVariant is not null %} {{ searchName }}--{{ searchVariant }}{% endif %}">
+{% macro controlSearch(searchName,searchId,searchLabel,hasPlaceholder = false,searchQuery = null,isIndex = true,searchVariant = null) %}
+<form class="{{ searchName }}{% if searchVariant is not null %} {{ searchName }}--{{ searchVariant }}{% endif %}" method="post" action="search?query={{ searchQuery }}">
     <div class="{{ searchName }}-field">
         <label 
             for="search_{{ searchId }}" 
@@ -24,18 +25,22 @@
             placeholder="{{ searchLabel }}"
             {% endif %}
             name="query"
+            {% if isIndex %}
             sprig
+            {% endif %}
             value="{{ searchQuery }}" />
     </div>
-    <a 
+    <button 
         class="{{ searchName }}-submit" 
         id="search_submit_{{ searchId }}" 
         name="search_submit_{{ searchId }}" 
         role="submit"
-        href=""
+        type="submit"
+        {% if isIndex %}
         sprig
         s-trigger="click"
-        s-replace="#search_{{ searchId }}_results">
+        s-replace="#search_{{ searchId }}_results"
+        {% endif %}>
         <span class="{{ searchName }}-submit-label">Search</span>
         <svg 
             class="{{ searchName }}-submit-icon"
@@ -43,8 +48,8 @@
             {% set svgPath = "/spritemap.svg#icon-search-20" %}
             <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
         </svg> 
-    </a>
-</div>
+    </button>
+</form>
 {% endmacro %}
 
 {# controlSelectItem: 
@@ -375,4 +380,124 @@
     </li>
     {% endfor %}
 </ul>
+{% endmacro %}
+
+{# controlDimensions: 
+   See: styles/components/_controls.scss for styling
+
+   @filterName {str}  - base styling hook
+   @filterLabel {str} -
+   @filterList {arr}  - a
+   @activeTags {str}  - comma-separated list
+   @overlay    {bool} - overlay state (sm viewport or larger only)
+#}
+{% macro controlDimensions(filterName,filterLabel,filterList,activeTags,overlay,iconSize = 20) %}
+
+{# If there are activeTags, split the string to create array #}
+{% set activeArr = activeTags ? activeTags|split(',') : [] %}
+{# Icons #}
+{% set plusPath = "/spritemap.svg#icon-plus-#{iconSize}" %}
+{% set caretPath = "/spritemap.svg#icon-caret-down-#{iconSize}" %}
+{% set closePath = "/spritemap.svg#icon-close-#{iconSize}" %}
+{% set arrowPath = "/spritemap.svg#icon-arrow-right-#{iconSize}" %}
+
+<div class="{{ filterName }}">
+
+    <div class="{{ filterName }}-controls">
+        <button 
+            class="{{ filterName }}-trigger {{ filterName }}-trigger--filter"
+            role="button"
+            type="button">
+            <span class="{{ filterName }}-label {{ filterName }}-label--headline">{{ filterLabel }}</span>
+           
+            <svg class="{{ filterName }}-icon {{ filterName }}-icon--plus">
+                <use xlink:href="{{ alias('@assetBasePath' ~ plusPath) }}"></use>
+            </svg>
+            <svg class="{{ filterName }}-icon {{ filterName }}-icon--caret">
+                <use xlink:href="{{ alias('@assetBasePath' ~ caretPath) }}"></use>
+            </svg>
+        </button>
+
+        <button 
+            class="{{ filterName }}-trigger {{ filterName }}-trigger--sort"
+            role="button"
+            type="button">
+            <span class="{{ filterName }}-label {{ filterName }}-label--headline">Sort By Name (A-Z)</span>
+            <svg class="{{ filterName }}-icon {{ filterName }}-icon--caret">
+                <use xlink:href="{{ alias('@assetBasePath' ~ caretPath) }}"></use>
+            </svg>
+        </button>
+    </div>
+
+    <div class="{{ filterName }}-overlay{% if not overlay %} _is-closed{% endif %}">
+        <h3 class="{{ filterName }}-title {{ filterName }}-title--headline">{{ filterLabel }}</h3>
+        <button 
+            class="{{ filterName }}-trigger {{ filterName }}-trigger--close"
+            role="button"
+            type="button"
+            sprig
+            s-val:overlay=false>
+            <span class="{{ filterName }}-label {{ filterName }}-label--action">Close</span>
+            <svg class="{{ filterName }}-icon {{ filterName }}-icon--close">
+                <use xlink:href="{{ alias('@assetBasePath' ~ closePath) }}"></use>
+            </svg>
+        </button>
+
+        {% if filterList|length %}
+        {% for filterGroup in filterList %}
+        <div class="{{ filterName }}-group">
+            <h4 class="{{ filterName }}-title {{ filterName }}-title--group">{{ filterGroup.title }}</h4>
+            {% set tagList = filterGroup.tagList %}
+            <ul class="{{ filterName }}-list">
+                {% for tagItem in tagList %}
+
+                {% set tagSlug, tagTitle = tagItem|slugify, tagItem.title %}
+                {% set isActive = (activeArr|length and (tagSlug in activeArr)) %}
+                {% set tagValues = (isActive ? (activeArr|filter((v) => v != tagSlug)) : activeArr|merge([tagSlug]))|join(',') %}                
+
+                <li class="{{ filterName }}-item{{ isActive ? ' _is-active' : '' }}">
+                    <a 
+                        id="tags_{{ tagSlug }}"
+                        class="{{ filterName }}-trigger {{ filterName }}-trigger--tag"
+                        href=""
+                        sprig
+                        s-val:tags="{{ tagValues }}">
+                        <span class="{{ filterName }}-label {{ filterName }}-label--tag">{{ tagTitle }}</span>
+                        {% if isActive %}
+                        <svg class="{{ filterName }}-icon {{ filterName }}-icon--remove">
+                            <use xlink:href="{{ alias('@assetBasePath' ~ closePath) }}"></use>
+                        </svg>
+                        {% endif %}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="{{ filterName }}-footer">
+            <button 
+                class="{{ filterName }}-trigger {{ filterName }}-trigger--clear"
+                role="button"
+                type="button"
+                sprig
+                s-val:tags="">
+                <span class="{{ filterName }}-label {{ filterName }}-label--action">Clear All</span>
+            </button>
+
+            <button 
+                class="{{ filterName }}-trigger {{ filterName }}-trigger--apply"
+                role="button"
+                type="button"
+                sprig
+                s-val:overlay=false>
+                <span class="{{ filterName }}-label {{ filterName }}-label--action">Apply Filters</span>
+                <svg class="{{ filterName }}-icon {{ filterName }}-icon--apply">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
 {% endmacro %}

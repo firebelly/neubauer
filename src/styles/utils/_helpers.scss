@@ -144,18 +144,13 @@ $vendors: -webkit-,-moz-,-ms-,-ms-input-,-o-;
 	Forms
 ------------------------------------------------------------------------ */
 @mixin resetButton {
-	float: none;
-	clear: none;
 	background: none;
     border: none;
-    font: normal normal inherit/1 sans-serif;
+	border-radius: none;
+	font-size: inherit;
     outline: none;
 	margin: 0;
     padding: 0;
-    height: auto;
-    text-transform: none;
-    @include roundedCorners(0 0 0 0);
-    @include transition(none);
     -webkit-appearance: none;
 }
 

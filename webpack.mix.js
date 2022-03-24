@@ -25,7 +25,7 @@ mix.browserSync({
 mix.sass(src`styles/main.scss`, 'web/build/styles');
 // Critical CSS
 // Config homepage and index page templates
-const pageTemplates = ['about','research','people','events','exhibitions'];
+const pageTemplates = ['about','research','people','events','exhibitions','search'];
 const pageUrls = [];
 pageUrls.push( { url: '/', template: 'index' });
 pageTemplates.forEach(page => pageUrls.push({url:`/${page}`, template: '_index' }) );

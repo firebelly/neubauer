@@ -1,10 +1,7 @@
 {% extends "layouts/_base.html" %}
 
 {% block content %}
-Search Index
-
-
-{{ sprig('search/_search-controls') }}
+{{ sprig('partials/_search-controls', {'entryId': entry.id}) }}
 {% endblock %}
 
 

@@ -1,5 +1,6 @@
 /* _fields.scss */
 @use "../utils/_utils" as *;
+@use "sass:math";
 
 /* ---------------------------------------------------------------------
   Text Field: Structure
@@ -8,17 +9,17 @@
 @mixin fieldText($selector,$icon-size:20px,$default:true) {
     
     #{$selector} {
-      @include flexParent();
-      font-size: 1rem;
+        @include flexParent();
+        font-size: 1rem;
 
-      &-label,
-      &-input {
-        @include flexChild();
-      }
+        &-label,
+        &-input {
+            @include flexChild();
+        }
 
-      &-input {
-        border: none;
-      }
+        &-input {
+            border: none;
+        }
 
     }
 
@@ -32,9 +33,92 @@
  Text Field: Default Presentation
 ---------------------------------------------------------------------------------- */
 @mixin fieldText--default($selector) {
+    #{$selector} {
 
-  #{$selector} {
-  
-  }
+    }
+}
+
+/* -------------------------------------------------------------------------------
+ Search Field
+---------------------------------------------------------------------------------- */
+@mixin fieldSearch($selector,$icon-size:20px,$default:true) {
+
+    #{$selector} {
+        @include flexParent();
+        @include alignItems(center);
+        font-size: 1rem;
+
+        > * {
+            @include flexChild();
+        }
+
+        &-field {
+            $self: &;
+            @at-root {
+                @include fieldText(#{$self});
+            }
+            flex-grow: 1;
+
+            &-label {
+                @include visuallyHide;
+            }
+
+            &-input {
+                width: 100%;
+            }
+
+        }
+
+        &-submit {
+            @include resetButton;
+            margin-left: 1em;
+            padding: calc(1.5em - 2px);
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &-icon {
+                height: $icon-size;
+                width: $icon-size;
+            }
+        }
+    
+    }
+
+    @if $default != false {
+        @include fieldSearch--default($selector);
+    }
+
+}
+
+/* -------------------------------------------------------------------------------
+ Search Field: Default Presentation
+---------------------------------------------------------------------------------- */
+@mixin fieldSearch--default($selector) {
+
+    #{$selector} {
+
+        &-field {
+            flex-grow: 1;
+
+            &-input {
+                $pt: math.div(12,16);
+                $pb: math.div(13,16);
+                $pl: math.div(15,16);
+                @include getType('caption');
+                border-bottom: 1px solid transparent;
+                border-radius: 5px 5px 0 0;
+                padding: calc(#{$pt}em - 1px) 0 calc(#{$pb}em - 1px) #{$pl}em;
+            }
+
+        }
+
+        &-submit {
+            border: 1px solid transparent; 
+            border-radius: 5px;
+        }
+
+    }
 
 }
