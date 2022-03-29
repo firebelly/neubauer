@@ -1,0 +1,50 @@
+<style>
+.adminTip-list {
+    margin-left: 2em;
+    margin-bottom: 3em;
+    list-style-type: disc;
+}
+.adminTip-item {
+    margin-bottom: 1em;
+}
+.adminTip-p {
+    margin-bottom: 3em;
+}
+.adminTip-box {
+    margin-top: 0;
+    margin-bottom: 3em;
+    background: #f3f7fc;
+    padding: 1em;
+    border-radius: 10px;
+}
+.adminTip-title {
+    margin: 0 0 14px 0;
+}
+</style>
+
+{% set currentType = element %}
+{% set people = craft.entries()
+    .section('people') 
+    .search('personType:' ~ currentType ~ '')
+    .all()
+%}
+<p class="adminTip-box"><strong>Hint:</strong> To assign a Person Type to a Person, go to its admin page, click "Add a type."</p>
+
+{% if currentType.slug %}
+<h2 class="adminTip-title"><strong>People</strong> tagged "{{ currentType }}:"</h2>
+{% if people|length %}
+<ul class="adminTip-list">
+{% for entry in people %}
+    <li class="adminTip-item">
+        {% if entry.isEditable() %}
+        <a href="{{ entry.cpEditUrl }}">{{ entry }}</a>
+        {% else %}
+        {{ entry }}
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% else %}
+<p class="adminTip-p">There are no people tagged "{{ currentType }}."
+{% endif %}
+{% endif %}

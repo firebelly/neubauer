@@ -200,11 +200,12 @@ $sections: (
 
 			}
 
-			.primaryContent {
+			.searchTabs {
 
-				a {
+				&-trigger {
 					color: $theme-primary;
 				}
+
 			}
 
 		}
@@ -864,10 +865,17 @@ $red-secondary: nth($red-theme,2);
 
 .searchArticle {
 	font-size: 1rem;
-	margin: 0 0.25em;
+	margin: 0 0.25em 8em 0.25em;
 
 	&-title {
+		$mb: math.div(10,20);
 		@include getType('h4-sans');
+		margin-bottom: #{$mb}em;
+	}
+
+	&-img,
+	&-placeholder {
+		margin-bottom: 2em;
 	}
 
 	&-placeholder {
@@ -877,22 +885,46 @@ $red-secondary: nth($red-theme,2);
 	}
 
 	&-team {
+		margin-bottom: 1em;
 
 		&-trigger {
 			@include getType('caption');
 		}
 
+	}
 
+	&-trigger {
+		display: inline-flex;
 	}
 
 	&-date {
+		$mb: math.div(10,16);
 		@include getType('caption');
+		margin-bottom: #{$mb}em;
 	}
 	
 	&-action {
+		@include flexParent($display:inline-flex);
+		border-radius: 5px;
+		border: 1px solid $red-primary;
+		margin-top: 2em;
+		padding: 1.5em 2em 1.5em 2em;
+		color: $red-primary;
+		text-decoration: none;
+		
+		> * {
+			@include flexChild();
+		}
+
+		&-label {
+			$mr: math.div(10,12);
+			@include getType('action');
+			margin-right: #{$mr}em;
+		}
 
 		&-icon {
 			@include icon();
+			fill: $red-primary;
 		}
 
 	}
