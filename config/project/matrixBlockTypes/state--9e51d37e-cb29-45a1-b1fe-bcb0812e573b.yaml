@@ -1,0 +1,457 @@
+field: 157444bb-e53a-4eb4-a588-09fb7710813d # Location Block
+fieldLayouts:
+  0700c16a-ea51-4d2c-be00-a49434bf15a2:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 855892be-aa5a-4894-9a54-6a23890c78da # __blank__
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  855892be-aa5a-4894-9a54-6a23890c78da: # __blank__
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: item
+    instructions: ''
+    name: __blank__
+    searchable: true
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Select a state'
+            -
+              - value
+              - ''
+            -
+              - disabled
+              - true
+        -
+          __assoc__:
+            -
+              - label
+              - Alabama
+            -
+              - value
+              - Alabama
+        -
+          __assoc__:
+            -
+              - label
+              - Alaska
+            -
+              - value
+              - Alaska
+        -
+          __assoc__:
+            -
+              - label
+              - Arizona
+            -
+              - value
+              - Arizona
+        -
+          __assoc__:
+            -
+              - label
+              - Arkansas
+            -
+              - value
+              - Arkansas
+        -
+          __assoc__:
+            -
+              - label
+              - California
+            -
+              - value
+              - California
+        -
+          __assoc__:
+            -
+              - label
+              - Colorado
+            -
+              - value
+              - Colorado
+        -
+          __assoc__:
+            -
+              - label
+              - Connecticut
+            -
+              - value
+              - Connecticut
+        -
+          __assoc__:
+            -
+              - label
+              - Delaware
+            -
+              - value
+              - Delaware
+        -
+          __assoc__:
+            -
+              - label
+              - 'District Of Columbia'
+            -
+              - value
+              - 'District Of Columbia'
+        -
+          __assoc__:
+            -
+              - label
+              - Florida
+            -
+              - value
+              - Florida
+        -
+          __assoc__:
+            -
+              - label
+              - Georgia
+            -
+              - value
+              - Georgia
+        -
+          __assoc__:
+            -
+              - label
+              - Hawaii
+            -
+              - value
+              - Hawaii
+        -
+          __assoc__:
+            -
+              - label
+              - Idaho
+            -
+              - value
+              - Idaho
+        -
+          __assoc__:
+            -
+              - label
+              - Illinois
+            -
+              - value
+              - Illinois
+            -
+              - default
+              - true
+        -
+          __assoc__:
+            -
+              - label
+              - Indiana
+            -
+              - value
+              - Indiana
+        -
+          __assoc__:
+            -
+              - label
+              - Iowa
+            -
+              - value
+              - Iowa
+        -
+          __assoc__:
+            -
+              - label
+              - Kansas
+            -
+              - value
+              - Kansas
+        -
+          __assoc__:
+            -
+              - label
+              - Kentucky
+            -
+              - value
+              - Kentucky
+        -
+          __assoc__:
+            -
+              - label
+              - Louisiana
+            -
+              - value
+              - Louisiana
+        -
+          __assoc__:
+            -
+              - label
+              - Maine
+            -
+              - value
+              - Maine
+        -
+          __assoc__:
+            -
+              - label
+              - Maryland
+            -
+              - value
+              - Maryland
+        -
+          __assoc__:
+            -
+              - label
+              - Massachusetts
+            -
+              - value
+              - Massachusetts
+        -
+          __assoc__:
+            -
+              - label
+              - Michigan
+            -
+              - value
+              - Michigan
+        -
+          __assoc__:
+            -
+              - label
+              - Minnesota
+            -
+              - value
+              - Minnesota
+        -
+          __assoc__:
+            -
+              - label
+              - Mississippi
+            -
+              - value
+              - Mississippi
+        -
+          __assoc__:
+            -
+              - label
+              - Missouri
+            -
+              - value
+              - Missouri
+        -
+          __assoc__:
+            -
+              - label
+              - Montana
+            -
+              - value
+              - Montana
+        -
+          __assoc__:
+            -
+              - label
+              - Nebraska
+            -
+              - value
+              - Nebraska
+        -
+          __assoc__:
+            -
+              - label
+              - Nevada
+            -
+              - value
+              - Nevada
+        -
+          __assoc__:
+            -
+              - label
+              - 'New Hampshire'
+            -
+              - value
+              - 'New Hampshire'
+        -
+          __assoc__:
+            -
+              - label
+              - 'New Jersey'
+            -
+              - value
+              - 'New Jersey'
+        -
+          __assoc__:
+            -
+              - label
+              - 'New Mexico'
+            -
+              - value
+              - 'New Mexico'
+        -
+          __assoc__:
+            -
+              - label
+              - 'New York'
+            -
+              - value
+              - 'New York'
+        -
+          __assoc__:
+            -
+              - label
+              - 'North Carolina'
+            -
+              - value
+              - 'North Carolina'
+        -
+          __assoc__:
+            -
+              - label
+              - 'North Dakota'
+            -
+              - value
+              - 'North Dakota'
+        -
+          __assoc__:
+            -
+              - label
+              - Ohio
+            -
+              - value
+              - Ohio
+        -
+          __assoc__:
+            -
+              - label
+              - Oklahoma
+            -
+              - value
+              - Oklahoma
+        -
+          __assoc__:
+            -
+              - label
+              - Oregon
+            -
+              - value
+              - Oregon
+        -
+          __assoc__:
+            -
+              - label
+              - Pennsylvania
+            -
+              - value
+              - Pennsylvania
+        -
+          __assoc__:
+            -
+              - label
+              - 'Rhode Island'
+            -
+              - value
+              - 'Rhode Island'
+        -
+          __assoc__:
+            -
+              - label
+              - 'South Carolina'
+            -
+              - value
+              - 'South Carolina'
+        -
+          __assoc__:
+            -
+              - label
+              - 'South Dakota'
+            -
+              - value
+              - 'South Dakota'
+        -
+          __assoc__:
+            -
+              - label
+              - Tennessee
+            -
+              - value
+              - Tennessee
+        -
+          __assoc__:
+            -
+              - label
+              - Texas
+            -
+              - value
+              - Texas
+        -
+          __assoc__:
+            -
+              - label
+              - Utah
+            -
+              - value
+              - Utah
+        -
+          __assoc__:
+            -
+              - label
+              - Vermont
+            -
+              - value
+              - Vermont
+        -
+          __assoc__:
+            -
+              - label
+              - Virginia
+            -
+              - value
+              - Virginia
+        -
+          __assoc__:
+            -
+              - label
+              - Washington
+            -
+              - value
+              - Washington
+        -
+          __assoc__:
+            -
+              - label
+              - 'West Virginia'
+            -
+              - value
+              - 'West Virginia'
+        -
+          __assoc__:
+            -
+              - label
+              - Wisconsin
+            -
+              - value
+              - Wisconsin
+        -
+          __assoc__:
+            -
+              - label
+              - Wyoming
+            -
+              - value
+              - Wyoming
+    translationKeyFormat: null
+    translationMethod: none
+    type: controlpanel\fields\StatesDropdown
+handle: state
+name: State
+sortOrder: 4

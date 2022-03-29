@@ -1,0 +1,41 @@
+field: 157444bb-e53a-4eb4-a588-09fb7710813d # Location Block
+fieldLayouts:
+  991a5cd9-8e2a-465e-b0b9-68080c69bd8c:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 674ab64e-555a-4055-af9f-7de041bafff6 # __blank__
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  674ab64e-555a-4055-af9f-7de041bafff6: # __blank__
+    columnSuffix: null
+    contentColumnType: string(20)
+    fieldGroup: null
+    handle: item
+    instructions: 'e.g. "60637"'
+    name: __blank__
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: 5
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: zipCode
+name: Zip
+sortOrder: 5

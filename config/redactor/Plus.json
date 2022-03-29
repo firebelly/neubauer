@@ -1,5 +1,6 @@
 {
     "buttons": ["bold", "italic", "link", "unorderedlist", "orderedlist"],
-    "toolbarFixed": true
+    "toolbarFixed": true,
+    "pastePlainText": true
 }
   

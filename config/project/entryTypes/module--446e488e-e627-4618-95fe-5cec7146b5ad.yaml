@@ -27,10 +27,10 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 92ff1e19-9bd3-4b91-98fa-6965b49847f1 # Event Location
-            instructions: null
-            label: null
-            required: false
+            fieldUid: 157444bb-e53a-4eb4-a588-09fb7710813d # Location Block
+            instructions: ''
+            label: 'Event Location'
+            required: ''
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -39,6 +39,21 @@ fieldLayouts:
             fieldUid: 1b346868-16dd-435c-b0ff-d4319de58b94 # Date Block
             instructions: ''
             label: 'Event Date(s)'
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            template: control-panel/common/_card-image.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+          -
+            fieldUid: 539c4bcb-5095-490d-81b8-872d3745551f # Card Image
+            instructions: ' '
+            label: __blank__
             required: ''
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -85,25 +100,14 @@ fieldLayouts:
           -
             type: craft\fieldlayoutelements\HorizontalRule
           -
-            template: control-panel/common/_card-image.html
+            template: control-panel/common/_call-to-actions.html
             type: craft\fieldlayoutelements\Template
             width: 100
           -
-            fieldUid: 539c4bcb-5095-490d-81b8-872d3745551f # Card Image
-            instructions: ' '
-            label: __blank__
-            required: ''
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            warning: null
-            width: 100
-          -
-            type: craft\fieldlayoutelements\HorizontalRule
-          -
             fieldUid: b79984f8-2e51-4b9f-8356-b887f57da8fd # Call-to-Actions
-            instructions: null
-            label: null
-            required: false
+            instructions: ' '
+            label: ' '
+            required: ''
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -129,6 +133,19 @@ fieldLayouts:
             width: 100
         name: Summary
         sortOrder: 2
+      -
+        elements:
+          -
+            fieldUid: 69f62ba0-22f7-4f78-a3bc-534d5f8c9b4b # Event Speakers
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Speakers
+        sortOrder: 3
 handle: module
 hasTitleField: true
 name: Module

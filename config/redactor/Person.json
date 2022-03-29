@@ -2,5 +2,6 @@
     "buttons": ["bold", "italic", "link", "unorderedlist", "orderedlist"],
     "plugins": ["fullscreen", "limiter", "counter"],
     "limiter": 1425,
-    "toolbarFixed": true
+    "toolbarFixed": true,
+    "pastePlainText": true
 }

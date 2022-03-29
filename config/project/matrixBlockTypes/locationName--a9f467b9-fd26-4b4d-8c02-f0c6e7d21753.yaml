@@ -1,0 +1,66 @@
+field: 157444bb-e53a-4eb4-a588-09fb7710813d # Location Block
+fieldLayouts:
+  3a279d39-13d1-4dfc-a369-b03225927d93:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 52e70aed-6264-4441-939c-12b2bd00e0da # __blank__
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 957fc412-43c2-4b06-abfd-3e9716989769 # __blank__
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  52e70aed-6264-4441-939c-12b2bd00e0da: # __blank__
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: item
+    instructions: 'e.g. " Neubauer Collegium via Zoom"'
+    name: __blank__
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  957fc412-43c2-4b06-abfd-3e9716989769: # __blank__
+    columnSuffix: null
+    contentColumnType: string(255)
+    fieldGroup: null
+    handle: itemURL
+    instructions: '(Optional) Add a link to the location, e.g. "https://maps.uchicago.edu/?location=Neubauer+Family+Collegium"'
+    name: __blank__
+    searchable: false
+    settings:
+      maxLength: '255'
+      placeholder: null
+      types:
+        - url
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Url
+handle: locationName
+name: 'Location Name'
+sortOrder: 1

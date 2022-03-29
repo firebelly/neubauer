@@ -2,6 +2,7 @@
     "buttons": ["bold", "italic"],
     "plugins": ["fullscreen", "limiter", "counter"],
     "limiter": 150,
-    "toolbarFixed": true
+    "toolbarFixed": true,
+    "pastePlainText": true
 }
   

@@ -1,0 +1,35 @@
+<style>
+.adminTip-label {
+    color: #596673;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.adminTip-box {
+  background: #f3f7fc;
+  padding: 1em;
+  border-radius: 10px;
+}
+.adminTip-desc {
+    margin-top: 0;
+}
+.adminTip-list {
+    margin-left: 2em;
+    list-style-type: disc;
+}
+</style>
+{% set sectionMap = {
+    "Stories": "Story",
+    "People": "Person"
+}%}
+{% set currentSection = element.section|title %}
+{% set currentEntryType = (currentSection in sectionMap|keys) ? sectionMap[currentSection] : currentSection|trim("s") %}
+{% set isExhibition = (currentEntryType == "Exhibition") %}
+{% set isProject = (currentEntryType == "Project") %}
+{% set isPerson = (currentEntryType == "Person") %}
+{% set isEvent = (currentEntryType == "Event") %}
+
+<h3 class="adminTip-label">Call-to-Action</h3>
+<p class="adminTip-desc">Add a link to provide more context around the event, e.g. "Register."</p>
+<div class="adminTip-box">
+   <strong>Hint:</strong> If registration is required for the event, click "+ Register" to add the registration link; the call-to-action will be labeled "Register" by default. If there is no registration required for this event, <em>and</em> you connected this event to a project or exhibition (above), the call-to-action will be labeled "Learn More," and link to the respective project or exhibition by default. 
+</div>  

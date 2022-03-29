@@ -1,0 +1,16 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: eb6e4b27-3a81-4da1-8f40-fa29c0f7805c # Event
+handle: eventSpeakers
+instructions: 'Add as many speakers as needed.'
+name: 'Event Speakers'
+searchable: true
+settings:
+  contentTable: '{{%matrixcontent_eventspeakers}}'
+  maxBlocks: ''
+  minBlocks: ''
+  propagationKeyFormat: null
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix
