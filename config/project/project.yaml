@@ -1,4 +1,4 @@
-dateModified: 1648579769
+dateModified: 1648590582
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -14,6 +14,7 @@ meta:
     00ba858c-638d-4a15-85f1-dc3c8f7d2874: 'About Index' # About Index
     0c6fe226-534a-4703-a928-3b7937eba1db: 'Featured Project' # Featured Project
     0c99f337-2218-4c6f-b0ad-30589c1ebbc5: neubauer # neubauer
+    0d4ed8f4-2f3b-4320-89ac-8225fbc867d3: Directions # Directions
     0e3da5e7-ca13-4d64-8432-9224cfd0eade: __blank__ # __blank__
     01aee8f9-1a88-4c82-b1ae-372cd5805db7: Exhibitions # Exhibitions
     1b5ff85e-b240-4399-b573-d707fe1c03da: 'Discover More' # Discover More
@@ -33,9 +34,11 @@ meta:
     2f76f1b1-c207-4e5f-9dd7-3908a2282e41: Page # Page
     2fcce12f-270f-466d-8676-063396ea0bd9: Topics # Topics
     3a220011-959c-43c1-a8b3-5aacb1d67b31: __blank__ # __blank__
+    3c438fc0-437a-42b9-9982-0184376e5ade: Person # Person
     3c888dfb-dbd7-46d5-a090-f49f218df87f: 'Story Label' # Story Label
     3cde6b11-23d3-4206-b20b-14d76b82dbbf: 'Date + Time Range' # Date + Time Range
     3d1bd88f-a886-47d2-909d-054a372a1d39: __blank__ # __blank__
+    3dd9b99c-cb0a-4c19-b011-525e2fb81430: Intro # Intro
     3e8382d6-a793-41db-bed1-5fa902fc4b33: Image # Image
     3ea2c78d-77d3-4d32-8e59-ee65d76e2cc8: 'Publication Name' # Publication Name
     4a309e71-113e-4d32-b1cf-253702d72281: Label # Label
@@ -48,6 +51,7 @@ meta:
     5f9f5e73-b6cf-46f5-8012-60b8301bff36: Description # Description
     6aa48823-cbaf-44a6-9309-745e32af08cf: 'Article Contributor(s)' # Article Contributor(s)
     6b48c10e-76cf-48ef-8797-755ad4c3838c: To # To
+    6bba32ff-dc50-486e-b368-9d0eed179cab: Full # Full
     6c89b3bb-96bc-468a-ba96-98c7cd21c777: 'Events Index' # Events Index
     7b2b0d67-1ff7-4ea2-9763-34f9215adb48: 'Brief Biography' # Brief Biography
     7b9acf95-b9b8-48aa-ba4f-223883c1e223: Topics # Topics
@@ -71,7 +75,10 @@ meta:
     15e90b86-4c9d-4654-b994-f245970468f0: 'Full Summary' # Full Summary
     18fb76df-c956-475c-8202-71b47fa72ddb: 'People Index' # People Index
     24a17e09-26e2-478c-9dfe-bbca0be0122b: 'Select a Neubauer page as the destination' # Select a Neubauer page as the destination
+    028f51f0-ce87-4a29-9df2-bf30a7cf4783: 'Public Transit' # Public Transit
     29a66baf-c15f-4cd8-bc9a-08825a4ee34d: Date # Date
+    34e083b7-1017-43e8-8a33-cb3b0f535740: 'Director''s Statement' # Director's Statement
+    37e0e210-2202-421d-8e44-5c51a0756fa5: About # About
     38e5dea1-a869-47af-a6c8-f358a344f764: Zip # Zip
     40a4b8f6-206e-4664-86a2-9a6e0d2c1213: 'Date + Time' # Date + Time
     47e78d01-d60c-4623-939e-b212935f0db8: Story # Story
@@ -88,6 +95,7 @@ meta:
     83a548ae-9269-46bb-8ee0-4a6929613dd7: Label # Label
     84b1efbb-d314-43e3-8fb5-fc6af1012146: Common # Common
     84d51659-d55a-4529-bd5d-9c19e31e6fdb: 'Add a link to the media source' # Add a link to the media source
+    87ef4cab-5dca-4851-a37f-55955e5d3b85: Details # Details
     90ab227e-755c-40a8-95e5-b154c2284a37: Project # Project
     92b6ae63-7c12-4164-b18e-082865cc14d9: 'Navigation ' # Navigation 
     94bfabd6-9486-45b8-b2e4-9f7c4fc77754: Media # Media
@@ -106,8 +114,10 @@ meta:
     464d6956-ffb4-4883-a8af-830c2242c869: 'Story Types' # Story Types
     523a11a6-88bd-4fe2-bad0-d9127f8d3e5e: 'Date Range' # Date Range
     539c4bcb-5095-490d-81b8-872d3745551f: 'Card Image' # Card Image
+    592d2e6a-2bb7-4989-9a4a-32917490d422: Supporters # Supporters
     674ab64e-555a-4055-af9f-7de041bafff6: __blank__ # __blank__
     712ad535-5310-4cbf-8e0a-625c9dcd2162: Caption # Caption
+    818f53aa-3e82-415a-b006-29e756c48c47: Organization # Organization
     840b4f3b-b9bb-4665-8929-9d5969e6c272: Exhibition # Exhibition
     876e2d54-ffa5-4c34-9fda-7c192be75bc8: 'Common Label' # Common Label
     881a793e-ef76-462e-aad9-1bc0ae20165b: Module # Module
@@ -153,12 +163,14 @@ meta:
     a9037236-9afc-4591-8ab0-5d1ed7c8dac6: 'Alt Text' # Alt Text
     abf135fc-5443-48d6-bc54-cf819645a909: Abstract # Abstract
     ad039f29-1b37-466f-8148-84f4a6bad1e2: 'Contact Info' # Contact Info
+    ae7b786d-4670-4705-ad8f-15b732234f3d: Image # Image
     aedd6f62-b9cc-4d66-9965-3e1e2b461ab4: 'Internal Link' # Internal Link
     afd5fc2a-82b5-40f5-908b-f8e679205d29: 'Brief description of exhibition' # Brief description of exhibition
     b0ae2ad9-7257-4cbf-9876-384fbc36354e: 'Street Address' # Street Address
     b5afa9b0-dd12-4d99-9bdd-fba44a0186a4: End # End
     b9aaff06-fe75-4456-b02d-bc5736565777: 'Provide the length of audio, video, or podcast source' # Provide the length of audio, video, or podcast source
     b45dd5d4-f13d-4da4-a383-147faa04ecdb: Start # Start
+    b171a4a0-abb4-4afa-8265-ce90caf9c0ff: Car # Car
     b29919d5-0aa5-4e6a-a38e-29e3e9653ee0: __blank__ # __blank__
     b79984f8-2e51-4b9f-8356-b887f57da8fd: Call-to-Actions # Call-to-Actions
     ba7372d1-df0e-4e4c-8081-62faf2c8bcbb: 'Opener Tagline' # Opener Tagline
@@ -185,6 +197,7 @@ meta:
     da9f5f4f-4753-45ed-a951-351b4cc3cd75: Type # Type
     db13480f-0f0d-476a-95af-c94977ab68f9: 'Events Index' # Events Index
     dbb74986-f45a-4de0-b349-f466e988a4cb: 'Person Types' # Person Types
+    dcb3fab5-053d-4e50-b485-3c29324a8e3d: 'Full Name' # Full Name
     dd463042-99d6-4725-b849-2546454db735: 'Opener Image' # Opener Image
     df9b5267-3176-4fe5-821f-ffe2e2e2f686: To # To
     e073e248-18f9-4384-84cf-1c0bb14dcae7: 'Site Info' # Site Info

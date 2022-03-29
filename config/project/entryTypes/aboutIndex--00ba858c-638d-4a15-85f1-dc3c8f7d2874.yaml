@@ -27,15 +27,6 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 41a7228a-3bfb-47bf-a8e7-9e0ec9cc0ea5
-            instructions: null
-            label: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            warning: null
-            width: 100
-          -
             fieldUid: d5c86c8a-c961-4fb2-8348-90331ee47da2 # Opener Content
             instructions: null
             label: null
@@ -59,6 +50,45 @@ fieldLayouts:
             width: 100
         name: Content
         sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: 34e083b7-1017-43e8-8a33-cb3b0f535740 # Director's Statement
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: 'Director''s Statement'
+        sortOrder: 2
+      -
+        elements:
+          -
+            fieldUid: 592d2e6a-2bb7-4989-9a4a-32917490d422 # Supporters
+            instructions: ''
+            label: ' '
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Supporters
+        sortOrder: 3
+      -
+        elements:
+          -
+            fieldUid: 0d4ed8f4-2f3b-4320-89ac-8225fbc867d3 # Directions
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Visiting
+        sortOrder: 4
 handle: aboutIndex
 hasTitleField: false
 name: 'About Index'

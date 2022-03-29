@@ -1,0 +1,43 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 37e0e210-2202-421d-8e44-5c51a0756fa5 # About
+handle: directions
+instructions: ''
+name: Directions
+searchable: true
+settings:
+  columns:
+    __assoc__:
+      -
+        - 87ef4cab-5dca-4851-a37f-55955e5d3b85 # Details
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - b171a4a0-abb4-4afa-8265-ce90caf9c0ff # Car
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 028f51f0-ce87-4a29-9df2-bf30a7cf4783 # Public Transit
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_directions}}'
+  fieldLayout: matrix
+  maxRows: '1'
+  minRows: '1'
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add directions'
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

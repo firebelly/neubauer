@@ -1,0 +1,43 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 37e0e210-2202-421d-8e44-5c51a0756fa5 # About
+handle: directorsStatement
+instructions: ''
+name: 'Director''s Statement'
+searchable: true
+settings:
+  columns:
+    __assoc__:
+      -
+        - 3dd9b99c-cb0a-4c19-b011-525e2fb81430 # Intro
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 6bba32ff-dc50-486e-b368-9d0eed179cab # Full
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - ae7b786d-4670-4705-ad8f-15b732234f3d # Image
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_directorsstatement}}'
+  fieldLayout: matrix
+  maxRows: '1'
+  minRows: '1'
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add a statement'
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField
