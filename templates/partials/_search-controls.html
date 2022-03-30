@@ -10,19 +10,26 @@
 {# search filters #}
 {% set filters = ['section','tags','search','sort'] %}
 {% set trigger = sprig.trigger|split('_')[0] %}
-{% set overlay = overlay ?? false %}
-{% if isSprig and trigger == 'tags' %}
+
+{% if isSprig %}
 {# Tags testing #}
+{% if trigger == 'tags' %}
+    {# {% set overlay = 'on' %} #}
 {% endif %}
-{% set section, tags, query, sort = section ?? '', tags ?? '', query ?? '', sort ?? 'asc' %}
+{% endif %}
+
+{# sprig default vars #}
+{% set overlay, section, tags, query, sort, date = overlay ?? 'off', section ?? '', tags ?? '', query ?? '', sort ?? 'asc', date ?? '' %}
 {# reset current page if new filter is triggered #}
 {% set page = isSprig and (trigger in filters) ? 1 : (page ?? 1) %}
 {# sprig update url #}
 {% do sprig.pushUrl('?' ~ {query: query, tags: tags, page: page}|url_encode) %}
 {# sprig persistent state #}
+{{ hiddenInput('overlay', overlay) }}
 {{ hiddenInput('section', section) }}
 {{ hiddenInput('tags', tags) }}
 {{ hiddenInput('sort', sort) }}
+{{ hiddenInput('date', date) }}
 {{ hiddenInput('results', results) }}
 {{ hiddenInput('page', page) }}
 
@@ -35,6 +42,7 @@
     {% set baseQuery = baseQuery.section(section) %}
 {% endif %}
 
+{# handle tags #}
 {% if tags %}
     {# get the tag(s) category object #}
     {% set tagArray = tags|split(',') %}
@@ -49,6 +57,22 @@
 
     {% set baseQuery = baseQuery.relatedTo(category) %}
     
+{% endif %}
+
+{# handle filtering/sorting by date #}
+{# source: https://craftcms.stackexchange.com/questions/36292/order-entries-by-multiple-matrix-date-field #}
+{% if date %}
+{# query matrix blocks that have a dateBlock #}
+{# 
+{% set matrixBlocksQuery = craft.matrixBlocks().field('dateBlock') %}
+{% set uniqueDatesSorted = matrixBlocksQuery.all()|map(block => block.yearRange.itemFrom|date('Y'))|unique|sort %}
+
+{% set allEntries = craft.entries
+    .with('dateBlock')
+    .dateBlock(':notempty:')
+    .all()
+%} 
+#}
 {% endif %}
 
 {# define sorting #}
@@ -117,8 +141,8 @@
 
     {# dimensions control #}
     {% set filterList = [{'title': 'Topics', 'tagList': craft.categories.group('topics')}] %}
-    {% set filterName, filterLabel, activeTags = 'resultsFilter','Filter Results', tags %}
-    {{ controls.controlDimensions(filterName,filterLabel,filterList,activeTags,overlay) }}
+    {% set filterName, filterLabel, activeTags, resultsId = 'resultsFilter','Filter Results', tags, "#search_{{ searchId }}_results" %}
+    {{ controls.controlDimensions(filterName,filterLabel,filterList,activeTags,resultsId,overlay) }}
 
     {# sort control #}
     {% set sortName,sortLabel,sortOptions,activeSort = 'searchSort','Sort By Name (A-Z)',['asc','desc'], sort %}

@@ -95,7 +95,7 @@ fields:
     contentColumnType: string
     fieldGroup: null
     handle: image
-    instructions: 'Upload a profile image to accompany the Statement.'
+    instructions: 'Upload a profile image to accompany the Statement. Min 640px x 640px.'
     name: Image
     searchable: false
     settings:

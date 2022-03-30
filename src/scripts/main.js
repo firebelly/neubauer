@@ -2,6 +2,7 @@
 import appState from './utils/appState';
 import accordionMenu from './components/accordionMenu';
 import flyoutContent from './components/flyoutContent';
+import searchFilters from './components/searchFilters';
 
 // Inits
 appState.init();
@@ -9,3 +10,9 @@ appState.init();
 // Components
 accordionMenu.init();
 flyoutContent.init('nav');
+
+// 
+const id = '#resultsFilter_dialog';
+//searchFilters.init(id);
+
+

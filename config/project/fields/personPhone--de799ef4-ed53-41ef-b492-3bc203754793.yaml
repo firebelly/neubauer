@@ -1,0 +1,15 @@
+columnSuffix: null
+contentColumnType: string(255)
+fieldGroup: 206e479c-63c6-4776-b5f2-709e81c8c2fd # Person
+handle: personPhone
+instructions: '10-digit number, including area code'
+name: Phone
+searchable: false
+settings:
+  maxLength: '255'
+  placeholder: null
+  types:
+    - tel
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Url

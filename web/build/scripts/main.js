@@ -197,6 +197,33 @@ var flyoutContent = {
 
 /***/ }),
 
+/***/ "./src/scripts/components/searchFilters.js":
+/*!*************************************************!*\
+  !*** ./src/scripts/components/searchFilters.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var a11y_dialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! a11y-dialog */ "./node_modules/a11y-dialog/dist/a11y-dialog.esm.js");
+// searchFilters
+// Source: https://a11y-dialog.netlify.app/
+
+var searchFilters = {
+  init: function init(id) {
+    var dialogContainer = document.querySelector(id);
+
+    if (dialogContainer) {
+      var dialog = new a11y_dialog__WEBPACK_IMPORTED_MODULE_0__["default"](dialogContainer);
+    }
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (searchFilters);
+
+/***/ }),
+
 /***/ "./src/scripts/main.js":
 /*!*****************************!*\
   !*** ./src/scripts/main.js ***!
@@ -207,7 +234,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_appState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/appState */ "./src/scripts/utils/appState.js");
 /* harmony import */ var _components_accordionMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/accordionMenu */ "./src/scripts/components/accordionMenu.js");
 /* harmony import */ var _components_flyoutContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/flyoutContent */ "./src/scripts/components/flyoutContent.js");
+/* harmony import */ var _components_searchFilters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/searchFilters */ "./src/scripts/components/searchFilters.js");
 // Import local dependencies
+
 
 
  // Inits
@@ -215,7 +244,9 @@ __webpack_require__.r(__webpack_exports__);
 _utils_appState__WEBPACK_IMPORTED_MODULE_0__["default"].init(); // Components
 
 _components_accordionMenu__WEBPACK_IMPORTED_MODULE_1__["default"].init();
-_components_flyoutContent__WEBPACK_IMPORTED_MODULE_2__["default"].init('nav');
+_components_flyoutContent__WEBPACK_IMPORTED_MODULE_2__["default"].init('nav'); // 
+
+var id = '#resultsFilter_dialog'; //searchFilters.init(id);
 
 /***/ }),
 
@@ -260,7 +291,7 @@ __webpack_require__.r(__webpack_exports__);
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, ["build/styles/main"], () => (__webpack_exec__("./src/scripts/main.js"), __webpack_exec__("./src/styles/main.scss")));
+/******/ __webpack_require__.O(0, ["build/styles/main","/build/scripts/vendor"], () => (__webpack_exec__("./src/scripts/main.js"), __webpack_exec__("./src/styles/main.scss")));
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

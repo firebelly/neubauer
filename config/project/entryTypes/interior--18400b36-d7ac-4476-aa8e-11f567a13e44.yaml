@@ -54,6 +54,15 @@ fieldLayouts:
             warning: null
             width: 100
           -
+            fieldUid: de799ef4-ed53-41ef-b492-3bc203754793 # Phone
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
             type: craft\fieldlayoutelements\HorizontalRule
           -
             fieldUid: d5943f00-060b-4c27-974e-b57dccb00c41 # Title

@@ -389,9 +389,11 @@
    @filterLabel {str} -
    @filterList {arr}  - a
    @activeTags {str}  - comma-separated list
-   @overlay    {bool} - overlay state (sm viewport or larger only)
+   @resultsId {str}   - results namespace to which dimensions apply
+   @overlay    {str}  - (on|off) overlay state (sm viewport or larger only)
+   @iconSize   {int}  - (optional)
 #}
-{% macro controlDimensions(filterName,filterLabel,filterList,activeTags,overlay,iconSize = 20) %}
+{% macro controlDimensions(filterName,filterLabel,filterList,activeTags,resultsId,overlay = "off",iconSize = 20) %}
 
 {# If there are activeTags, split the string to create array #}
 {% set activeArr = activeTags ? activeTags|split(',') : [] %}
@@ -407,7 +409,11 @@
         <button 
             class="{{ filterName }}-trigger {{ filterName }}-trigger--filter"
             role="button"
-            type="button">
+            type="button"
+            sprig
+            s-val:tags="{{ activeTags }}"
+            s-val:overlay="on"
+            data-a11y-dialog-show="{{ filterName }}_dialog">
             <span class="{{ filterName }}-label {{ filterName }}-label--headline">{{ filterLabel }}</span>
            
             <svg class="{{ filterName }}-icon {{ filterName }}-icon--plus">
@@ -429,74 +435,113 @@
         </button>
     </div>
 
-    <div class="{{ filterName }}-overlay{% if not overlay %} _is-closed{% endif %}">
-        <h3 class="{{ filterName }}-title {{ filterName }}-title--headline">{{ filterLabel }}</h3>
-        <button 
-            class="{{ filterName }}-trigger {{ filterName }}-trigger--close"
-            role="button"
-            type="button"
-            sprig
-            s-val:overlay=false>
-            <span class="{{ filterName }}-label {{ filterName }}-label--action">Close</span>
-            <svg class="{{ filterName }}-icon {{ filterName }}-icon--close">
-                <use xlink:href="{{ alias('@assetBasePath' ~ closePath) }}"></use>
-            </svg>
-        </button>
-
-        {% if filterList|length %}
-        {% for filterGroup in filterList %}
-        <div class="{{ filterName }}-group">
-            <h4 class="{{ filterName }}-title {{ filterName }}-title--group">{{ filterGroup.title }}</h4>
-            {% set tagList = filterGroup.tagList %}
-            <ul class="{{ filterName }}-list">
-                {% for tagItem in tagList %}
-
-                {% set tagSlug, tagTitle = tagItem|slugify, tagItem.title %}
-                {% set isActive = (activeArr|length and (tagSlug in activeArr)) %}
-                {% set tagValues = (isActive ? (activeArr|filter((v) => v != tagSlug)) : activeArr|merge([tagSlug]))|join(',') %}                
-
-                <li class="{{ filterName }}-item{{ isActive ? ' _is-active' : '' }}">
-                    <a 
-                        id="tags_{{ tagSlug }}"
-                        class="{{ filterName }}-trigger {{ filterName }}-trigger--tag"
-                        href=""
-                        sprig
-                        s-val:tags="{{ tagValues }}">
-                        <span class="{{ filterName }}-label {{ filterName }}-label--tag">{{ tagTitle }}</span>
-                        {% if isActive %}
-                        <svg class="{{ filterName }}-icon {{ filterName }}-icon--remove">
-                            <use xlink:href="{{ alias('@assetBasePath' ~ closePath) }}"></use>
-                        </svg>
-                        {% endif %}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
+   
+    {# NOTE: 
+        Ensure that sprig components and a11y overlay/dialog play nicely together:
+        1. Set the overlay sprig var to true when dialog is open; false when closed.
+        2. Persist the tags values on open, close, and apply triggers
+    #} 
+    {# Dialog parent container #}
+    <div 
+        class="{{ filterName }}-dialog"
+        id="{{ filterName }}_dialog"
+        aria-labelledby="{{ filterName }}_dialog_title" 
+        aria-hidden={{ overlay == "on" ? "false" : "true" }}>
+        {# Dialog overlay #}
+        <div 
+            class="{{ filterName }}-overlay"
+            data-a11y-dialog-hide>
         </div>
-        {% endfor %}
-        {% endif %}
-
-        <div class="{{ filterName }}-footer">
+        {# Dialog content container #}
+        <div 
+            class="{{ filterName }}-content"
+            role="document">
+            <h3 
+                class="{{ filterName }}-title {{ filterName }}-title--headline"
+                id="{{ filterName }}_dialog_title">
+                {{ filterLabel }}
+            </h3>
+            {# Dialog close #}
             <button 
-                class="{{ filterName }}-trigger {{ filterName }}-trigger--clear"
+                class="{{ filterName }}-trigger {{ filterName }}-trigger--close"
                 role="button"
                 type="button"
                 sprig
-                s-val:tags="">
-                <span class="{{ filterName }}-label {{ filterName }}-label--action">Clear All</span>
-            </button>
-
-            <button 
-                class="{{ filterName }}-trigger {{ filterName }}-trigger--apply"
-                role="button"
-                type="button"
-                sprig
-                s-val:overlay=false>
-                <span class="{{ filterName }}-label {{ filterName }}-label--action">Apply Filters</span>
-                <svg class="{{ filterName }}-icon {{ filterName }}-icon--apply">
-                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+                s-val:overlay="off"
+                s-val:tags="{{ activeTags }}"
+                data-a11y-dialog-hide="{{ filterName }}_dialog"
+                aria-label="Close dialog">
+                <span class="{{ filterName }}-label {{ filterName }}-label--action">Close</span>
+                <svg class="{{ filterName }}-icon {{ filterName }}-icon--close">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ closePath) }}"></use>
                 </svg>
             </button>
+
+            {% if filterList|length %}
+            {% for filterGroup in filterList %}
+            <div class="{{ filterName }}-group">
+                <h4 class="{{ filterName }}-title {{ filterName }}-title--group">{{ filterGroup.title }}</h4>
+                {% set tagList = filterGroup.tagList %}
+
+                <ul class="{{ filterName }}-list">
+                    {% for tagItem in tagList %}
+
+                    {% set tagSlug, tagTitle = tagItem|slugify, tagItem.title %}
+                    {% set isActive = (activeArr|length and (tagSlug in activeArr)) %}
+                    {% set tagValues = (isActive ? (activeArr|filter((v) => v != tagSlug)) : activeArr|merge([tagSlug]))|join(',') %} 
+
+                                
+                    <li class="{{ filterName }}-item">
+                        <input 
+                            class="{{ filterName }}-input {{ filterName }}-input--faux"
+                            id="tags_{{ tagSlug }}"
+                            type="checkbox"
+                            sprig
+                            name="tags"
+                            s-val:tags="{{ tagValues }}"
+                            {{ isActive ? 'checked' : '' }}>
+                            <label 
+                                class="{{ filterName }}-trigger {{ filterName }}-trigger--tag"
+                                for="tags_{{ tagSlug }}">
+                                <span class="{{ filterName }}-label {{ filterName }}-label--tag">{{ tagTitle }}</span>
+                                
+                                <svg class="{{ filterName }}-icon {{ filterName }}-icon--remove">
+                                    <use xlink:href="{{ alias('@assetBasePath' ~ closePath) }}"></use>
+                                </svg>
+                                
+                            </label>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <div class="{{ filterName }}-footer">
+                <button 
+                    class="{{ filterName }}-trigger {{ filterName }}-trigger--clear"
+                    role="button"
+                    type="button"
+                    sprig
+                    s-val:tags="">
+                    <span class="{{ filterName }}-label {{ filterName }}-label--action">Clear All</span>
+                </button>
+
+                <button 
+                    class="{{ filterName }}-trigger {{ filterName }}-trigger--apply"
+                    role="button"
+                    type="button"
+                    sprig
+                    s-val:tags="{{ activeTags }}"
+                    s-val:overlay="off"
+                    data-a11y-dialog-hide="{{ filterName }}_dialog"
+                    aria-label="Close dialog">
+                    <span class="{{ filterName }}-label {{ filterName }}-label--action">Apply Filters</span>
+                    <svg class="{{ filterName }}-icon {{ filterName }}-icon--apply">
+                        <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+                    </svg>
+                </button>
+            </div>
         </div>
     </div>
 </div>
