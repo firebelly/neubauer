@@ -212,11 +212,18 @@ __webpack_require__.r(__webpack_exports__);
 // Source: https://a11y-dialog.netlify.app/
 
 var searchFilters = {
-  init: function init(id) {
-    var dialogContainer = document.querySelector(id);
+  init: function init(name) {
+    var dialogContainer = document.querySelector("#".concat(name));
 
     if (dialogContainer) {
-      var dialog = new a11y_dialog__WEBPACK_IMPORTED_MODULE_0__["default"](dialogContainer);
+      var dialog = new a11y_dialog__WEBPACK_IMPORTED_MODULE_0__["default"](dialogContainer),
+          html = document.documentElement;
+      console.log('test');
+      dialog.on('show', function () {
+        return html.style.overflowY = 'hidden';
+      }, 'hide', function () {
+        return html.style.background = 'red';
+      });
     }
   }
 };
@@ -244,9 +251,8 @@ __webpack_require__.r(__webpack_exports__);
 _utils_appState__WEBPACK_IMPORTED_MODULE_0__["default"].init(); // Components
 
 _components_accordionMenu__WEBPACK_IMPORTED_MODULE_1__["default"].init();
-_components_flyoutContent__WEBPACK_IMPORTED_MODULE_2__["default"].init('nav'); // 
-
-var id = '#resultsFilter_dialog'; //searchFilters.init(id);
+_components_flyoutContent__WEBPACK_IMPORTED_MODULE_2__["default"].init('nav');
+_components_searchFilters__WEBPACK_IMPORTED_MODULE_3__["default"].init('resultsFilter_dialog');
 
 /***/ }),
 

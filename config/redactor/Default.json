@@ -1,6 +1,5 @@
 {
   "buttons": [
-    "html",
     "formatting",
     "bold",
     "italic",
@@ -8,13 +7,19 @@
     "orderedlist",
     "link",
     "image",
-    "video"
+    "video",
+    "html"
   ],
+  "formatting": ["p"],
   "plugins": [
     "fullscreen",
     "video"
   ],
   "linkNewTab": true,
   "toolbarFixed": true,
-  "pastePlainText": true
+  "pastePlainText": true,
+  "pasteLinkTarget": "_blank",
+  "pasteBlockTags": [],
+  "pasteInlineTags": [],
+  "autoparse": false
 }

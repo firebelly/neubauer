@@ -10,9 +10,6 @@ appState.init();
 // Components
 accordionMenu.init();
 flyoutContent.init('nav');
-
-// 
-const id = '#resultsFilter_dialog';
-//searchFilters.init(id);
+searchFilters.init('resultsFilter_dialog');
 
 

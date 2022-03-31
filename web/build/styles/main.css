@@ -481,12 +481,12 @@ img {
 }
 @supports not (aspect-ratio: 1) {
   .profileAsset--16-9 {
-    padding-bottom: calc(16/9 * 100%);
+    padding-bottom: calc("16"/"9" * 100%);
   }
 }
 @supports (aspect-ratio: 1) {
   .profileAsset--16-9 .profileAsset-image {
-    aspect-ratio: 16/9;
+    aspect-ratio: "16"/"9";
   }
 }
 @supports not (aspect-ratio: 1) {
@@ -498,12 +498,12 @@ img {
 }
 @supports not (aspect-ratio: 1) {
   .profileAsset--16-4_5 {
-    padding-bottom: calc(16/4.5 * 100%);
+    padding-bottom: calc("16"/"4.5" * 100%);
   }
 }
 @supports (aspect-ratio: 1) {
   .profileAsset--16-4_5 .profileAsset-image {
-    aspect-ratio: 16/4.5;
+    aspect-ratio: "16"/"4.5";
   }
 }
 @supports not (aspect-ratio: 1) {
@@ -515,12 +515,12 @@ img {
 }
 @supports not (aspect-ratio: 1) {
   .profileAsset--2-3 {
-    padding-bottom: calc(2/3 * 100%);
+    padding-bottom: calc("2"/"3" * 100%);
   }
 }
 @supports (aspect-ratio: 1) {
   .profileAsset--2-3 .profileAsset-image {
-    aspect-ratio: 2/3;
+    aspect-ratio: "2"/"3";
   }
 }
 @supports not (aspect-ratio: 1) {
@@ -532,12 +532,12 @@ img {
 }
 @supports not (aspect-ratio: 1) {
   .profileAsset--1-1 {
-    padding-bottom: calc(1/1 * 100%);
+    padding-bottom: calc("1"/"1" * 100%);
   }
 }
 @supports (aspect-ratio: 1) {
   .profileAsset--1-1 .profileAsset-image {
-    aspect-ratio: 1/1;
+    aspect-ratio: "1"/"1";
   }
 }
 @supports not (aspect-ratio: 1) {
@@ -1699,6 +1699,12 @@ img {
 .resultsFilter-dialog {
   z-index: 2;
   display: flex;
+  overflow-y: scroll;
+}
+@media (min-width: 768px) {
+  .resultsFilter-dialog {
+    overflow-y: auto;
+  }
 }
 .resultsFilter-dialog[aria-hidden=true] {
   display: none;
@@ -1711,12 +1717,21 @@ img {
   background: #800000;
   position: relative;
   margin: auto;
+  width: 100%;
   z-index: 2;
   box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.5);
 }
 @media (min-width: 768px) {
   .resultsFilter-content {
     width: 75%;
+  }
+}
+.resultsFilter-group {
+  margin: 0 0 3em 0;
+}
+@media (min-width: 768px) {
+  .resultsFilter-group--sections {
+    display: none;
   }
 }
 .resultsFilter-controls {
@@ -1836,7 +1851,6 @@ img {
   -ms-flex-alignpack: center;
   -webkit-align-itemspack: center;
   align-items: center;
-  margin: 4em 0 0 0;
 }
 
 /* ---------------------------------------------------------------------

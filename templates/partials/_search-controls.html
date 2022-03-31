@@ -19,7 +19,7 @@
 {% endif %}
 
 {# sprig default vars #}
-{% set overlay, section, tags, query, sort, date = overlay ?? 'off', section ?? '', tags ?? '', query ?? '', sort ?? 'asc', date ?? '' %}
+{% set overlay, section, tags, query, sort, date = overlay ?? 'off', section ?? 'all', tags ?? '', query ?? '', sort ?? 'asc', date ?? '' %}
 {# reset current page if new filter is triggered #}
 {% set page = isSprig and (trigger in filters) ? 1 : (page ?? 1) %}
 {# sprig update url #}
@@ -38,7 +38,7 @@
 {# add relatedParams to params #}
 {% set baseQuery = craft.entries() %}
 
-{% if section %}
+{% if section != 'all' %}
     {% set baseQuery = baseQuery.section(section) %}
 {% endif %}
 
@@ -108,31 +108,26 @@
 
 {# Search Filters #}
 {% set excludeList = ['about-us'] %}
-{% set sectionList = primaryNav.navigationBlock.all() %}
+{% set sectionList = [{'displayText': 'All'}]|merge(primaryNav.navigationBlock.all()) %}
+
 <section class="searchFilters">
     <h2 class="searchFilters-title">Filter the search</h2>
     <ul class="searchTabs">
-        <li class="searchTabs-item">
-            <a 
-                class="searchTabs-trigger{% if not section %} _is-active{% endif %}" 
-                id="section_all"
-                href=""
-                sprig
-                s-val:section=""
-                s-replace="#search_{{ searchId }}_results">
-                <span class="searchTabs-label">All</span>
-            </a>
-        </li>
     {% for tab in sectionList if tab.displayText|slugify not in excludeList %}
         {% set tabName = tab.displayText %} 
         {% set tabSlug = tabName == 'Research' ? 'projects' : tab.displayText|slugify %}
+        {# NOTE: 
+            Persist all active filters on open, close, and apply triggers;
+            this is why we add the tags value to the section trigger below
+        #} 
         <li class="searchTabs-item">
             <a 
                 class="searchTabs-trigger{% if section == tabSlug %} _is-active{% endif %}" 
-                id="section_{{ tabSlug }}"
+                id="section_tab_{{ tabSlug }}"
                 href=""
                 sprig
-                s-val:section="{{ tabSlug }}">
+                s-val:section="{{ tabSlug }}"
+                s-val:tags="{{ tags }}">
                 <span class="searchTabs-label">{{ tabName }}</span>
             </a>
         </li>
@@ -140,9 +135,20 @@
     </ul>
 
     {# dimensions control #}
-    {% set filterList = [{'title': 'Topics', 'tagList': craft.categories.group('topics')}] %}
-    {% set filterName, filterLabel, activeTags, resultsId = 'resultsFilter','Filter Results', tags, "#search_{{ searchId }}_results" %}
-    {{ controls.controlDimensions(filterName,filterLabel,filterList,activeTags,resultsId,overlay) }}
+    {% set filterList = [
+        {
+            'title': 'Sections',
+            'sectionList': sectionList,
+            'activeSection': section
+        },
+        {
+            'title': 'Topics', 
+            'tagList': craft.categories.group('topics'),
+            'activeTags': tags
+        }
+    ] %}
+    {% set filterName, filterLabel,resultsId = 'resultsFilter','Filter Results','#search_{{ searchId }}_results' %}
+    {{ controls.controlDimensions(filterName,filterLabel,filterList,resultsId,overlay) }}
 
     {# sort control #}
     {% set sortName,sortLabel,sortOptions,activeSort = 'searchSort','Sort By Name (A-Z)',['asc','desc'], sort %}

@@ -1,5 +1,11 @@
 {
-  "buttons": ["bold", "italic"],
+  "buttons": ["formatting","bold", "italic","html"],
+  "formatting": ["p"],
+  "linkNewTab": true,
   "toolbarFixed": true,
-  "pastePlainText": true
+  "pastePlainText": true,
+  "pasteLinkTarget": "_blank",
+  "pasteBlockTags": [],
+  "pasteInlineTags": [],
+  "autoparse": false
 }

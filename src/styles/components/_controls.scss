@@ -780,6 +780,11 @@
         &-dialog {
             z-index: 2;
             display: flex;
+            overflow-y: scroll;
+
+            @include breakpoint(sm) {
+                overflow-y: auto;
+            }
 
             &[aria-hidden="true"] {
                 display: none; 
@@ -788,7 +793,7 @@
         }
 
         &-overlay {
-            background-color: rgba(43, 46, 56, 0.9); 
+            background-color: rgba(43, 46, 56, 0.9);
         }
 
         &-content {
@@ -796,11 +801,23 @@
             background: $color-primary;
             position: relative;
             margin: auto;
+            width: 100%;
             z-index: 2; 
             box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.5);
             
             @include breakpoint(sm) {
                 width: 75%;
+            }
+
+        }
+
+        &-group {
+            margin: 0 0 3em 0;
+
+            &--sections {
+                @include breakpoint(sm) {
+                    display: none;
+                }
             }
 
         }
@@ -949,7 +966,6 @@
             @include flexParent();
             @include justifyContent(flex-end);
             @include alignItems(center);
-            margin: 4em 0 0 0;
         }
 
     }

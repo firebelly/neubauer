@@ -32,7 +32,8 @@ $ratio-map: (
             $ratio-y: nth($ratio-list,2);
 
             &--#{$ratio} {
-                $aspect-ratio: math.div(#{$ratio-x},#{$ratio-y});
+                // $aspect-ratio: math.div(#{$ratio-x},#{$ratio-y});
+                $aspect-ratio: math.div($ratio-x,$ratio-y);
                 
                 // If aspect-ratio isn't supported (IE!) use the padding hack
                 @supports not (aspect-ratio: 1) {

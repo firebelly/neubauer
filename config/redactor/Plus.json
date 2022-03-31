@@ -1,6 +1,12 @@
 {
-    "buttons": ["bold", "italic", "link", "unorderedlist", "orderedlist"],
+    "buttons": ["formatting","bold", "italic", "link", "unorderedlist", "orderedlist","html"],
+    "formatting": ["p"],
+    "linkNewTab": true,
     "toolbarFixed": true,
-    "pastePlainText": true
+    "pastePlainText": true,
+    "pasteLinkTarget": "_blank",
+    "pasteBlockTags": [],
+    "pasteInlineTags": [],
+    "autoparse": false
 }
   
