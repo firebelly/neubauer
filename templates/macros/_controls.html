@@ -417,6 +417,7 @@ Section: {{ activeSection }}
             type="button"
             sprig
             s-val:tags="{{ activeTags }}"
+            s-val:section="{{ activeSection }}"
             s-val:overlay="on"
             data-a11y-dialog-show="{{ filterName }}_dialog">
             <span class="{{ filterName }}-label {{ filterName }}-label--headline">{{ filterLabel }}</span>
@@ -454,7 +455,7 @@ Section: {{ activeSection }}
         {# Dialog overlay #}
         <div 
             class="{{ filterName }}-overlay"
-            data-a11y-dialog-hide>
+            data-a11y-dialog-hide="{{ filterName }}_dialog">
         </div>
         {# Dialog content container #}
         <div 
@@ -473,6 +474,7 @@ Section: {{ activeSection }}
                 sprig
                 s-val:overlay="off"
                 s-val:tags="{{ activeTags }}"
+                s-val:section="{{ activeSection }}"
                 data-a11y-dialog-hide="{{ filterName }}_dialog"
                 aria-label="Close dialog">
                 <span class="{{ filterName }}-label {{ filterName }}-label--action">Close</span>

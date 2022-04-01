@@ -33,6 +33,16 @@
 {{ hiddenInput('results', results) }}
 {{ hiddenInput('page', page) }}
 
+{# NOTE:
+This is gross but the dialog.hide() method is not being triggered on close
+due to the sprig component re-render so quickest/dirtiest solution is to inject this tiny
+bit of javascript to assign proper overflow style on the html tag #}
+{% if isSprig %}
+<script>
+    document.documentElement.style.overflowY = "{{ overlay == 'on' ? 'hidden' : '' }}";
+</script>
+{% endif %}
+
 {# BEGIN RESULTING #}
 {# Resource: https://craftcms.com/docs/3.x/relations.html#advanced-relationships #}
 {# add relatedParams to params #}

@@ -218,12 +218,10 @@ var searchFilters = {
     if (dialogContainer) {
       var dialog = new a11y_dialog__WEBPACK_IMPORTED_MODULE_0__["default"](dialogContainer),
           html = document.documentElement;
-      console.log('test');
-      dialog.on('show', function () {
-        return html.style.overflowY = 'hidden';
-      }, 'hide', function () {
-        return html.style.background = 'red';
-      });
+      console.log('test'); // dialog.on(
+      //     'show', () => (html.style.overflowY = 'hidden'),
+      //     'hide', () => (console.log('close'))
+      // );
     }
   }
 };

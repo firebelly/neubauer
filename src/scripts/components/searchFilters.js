@@ -15,10 +15,10 @@ const searchFilters = {
 
             console.log('test');
 
-            dialog.on(
-                'show', () => (html.style.overflowY = 'hidden'),
-                'hide', () => (html.style.background = 'red')
-            );
+            // dialog.on(
+            //     'show', () => (html.style.overflowY = 'hidden'),
+            //     'hide', () => (console.log('close'))
+            // );
 
         }
 
