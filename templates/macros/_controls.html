@@ -243,7 +243,7 @@
    @groupValues {obj} 
    @iconSize {int}    
 #}
-{% macro controlPaginationItem(pageName,currentPage,totalPages,lastPage,groupKey,groupValues,iconSize) %}
+{% macro controlPaginationItem(pageName,currentPage,totalPages,lastPage,groupKey,groupValues) %}
 {% set pageSlug, pageIcons = groupValues.slug, groupValues.icons %}
 
 {% for pageTrigger in groupValues.triggers %}
@@ -264,10 +264,11 @@
         href=""
         sprig
         s-val:page="{{ pageUrl }}"
-        >{{ pageSlug == 'nav' ? pageTrigger|title : pageTrigger }}
+        >
+        <span class="{{ pageName }}-label">{{ pageSlug == 'nav' ? pageTrigger|title : pageTrigger }}</span>
         {% if pageIcons is not null %}
         {% set icon = pageIcons[loop.index0] %}
-        {% set iconPath = "/spritemap.svg#icon-#{icon}-#{iconSize}" %}
+        {% set iconPath = "/spritemap.svg#icon-#{icon}" %}
         <svg class="{{ pageName }}-icon">
             {# <use xlink:href="{{ rev(iconPath) }}"></use> #}
             <use xlink:href="{{ alias('@assetBasePath' ~ iconPath) }}"></use>
@@ -286,14 +287,14 @@
    @pageRange {int} - (optional) var to pass to sprig; spread of page links to display 
    @iconSize {int}  - (optional) 
 #}
-{% macro controlPagination(pageName,pageObj,pageRange = 5,iconSize = 20) %}
+{% macro controlPagination(pageName,pageObj,pageRange = 5) %}
 {% set currentPage, totalPages, lastPage = pageObj.current_page, pageObj.page_info.totalPages, pageObj.page_info.totalPages %}
 <div class="{{ pageName }}"> 
     {% set paginationGroups = {
         'back': {
             'triggers': ['first','previous'], 
             'slug': 'nav', 
-            'icons': ['arrow-end-left','arrow-left']
+            'icons': ['dbl-chevron-left','chevron-left']
         },
         'pages': {
             'triggers': pageObj.page_info.getDynamicRange(pageRange), 
@@ -303,12 +304,12 @@
         'forward': {
             'triggers': ['next','last'], 
             'slug': 'nav',
-            'icons': ['arrow-right','arrow-end-right']
+            'icons': ['chevron-right','dbl-chevron-right']
         }
     }%}
     {% for groupKey, groupValues in paginationGroups %}
     <ul class="{{ pageName }}-group {{ pageName }}-group--{{ groupKey == 'pages' ? 'pages' : 'direction' }}">
-        {{ _self.controlPaginationItem(pageName,currentPage,totalPages,lastPage,groupKey,groupValues,iconSize) }}
+        {{ _self.controlPaginationItem(pageName,currentPage,totalPages,lastPage,groupKey,groupValues) }}
     </ul>
     {% endfor %}
 </div>
@@ -382,6 +383,39 @@
 </ul>
 {% endmacro %}
 
+{# controlDimensionsItem: 
+
+   @filterName {str}  - base styling hook
+   @groupSlug {str}
+   @itemSlug {str}
+   @itemName {str}
+   @isActive {bool}
+#}
+{% macro controlDimensionsItem(filterName,groupSlug,itemSlug,itemName,isActive) %}
+   {% set closePath = "/spritemap.svg#icon-close-20" %}
+   {% set groupId = (groupSlug == 'tags' ? (isActive ? 'remove-tag' : 'add-tag') : groupSlug) %}
+   {% set itemId = "#{groupId}_#{itemSlug}" %}
+    <li class="{{ filterName }}-item">
+        <input 
+            class="{{ filterName }}-input {{ filterName }}-input--faux"
+            id="{{ itemId }}"
+            type="checkbox"
+            sprig
+            name="{{ itemId }}"
+            s-val:{{ groupId }}="{{ itemSlug }}"
+            {{ isActive ? 'checked' : '' }}>
+            <label 
+                class="{{ filterName }}-trigger {{ filterName }}-trigger--tag"
+                for="{{ groupSlug }}_{{ itemSlug }}">
+                <span class="{{ filterName }}-label {{ filterName }}-label--tag">{{ itemName }}</span>
+                
+                <svg class="{{ filterName }}-icon {{ filterName }}-icon--remove">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ closePath) }}"></use>
+                </svg>
+            </label>
+    </li>
+{% endmacro %}
+
 {# controlDimensions: 
    See: styles/components/_controls.scss for styling
 
@@ -395,9 +429,9 @@
 {% macro controlDimensions(filterName,filterLabel,filterList,resultsId,overlay = "off",iconSize = 20) %}
 
 {# If active tags... #}
-{% set activeTags = filterList|map(obj => ('activeTags' in obj|keys ? obj.activeTags : ''))|join('') %} 
+{% set activeTags = filterList|map(obj => (obj.slug == 'tags' ? obj.active : ''))|join('') %} 
 {# If active section... #}
-{% set activeSection = filterList|map(obj => ('activeSection' in obj|keys ? obj.activeSection : ''))|join('') %} 
+{% set activeSection = filterList|map(obj => (obj.slug == 'section' ? obj.active : ''))|join('') %} 
 
 Tags: {{ activeTags }}
 Section: {{ activeSection }}
@@ -485,73 +519,32 @@ Section: {{ activeSection }}
 
             {% if filterList|length %}
             {% for filterGroup in filterList %}
-            <div class="{{ filterName }}-group {{ filterName }}-group--{{ filterGroup.title|slugify }}">
-                <h4 class="{{ filterName }}-title {{ filterName }}-title--group">{{ filterGroup.title }}</h4>
+            {% set groupSlug, groupTitle, groupList = filterGroup.slug, filterGroup.title, filterGroup.list %}
+            {% set excludeList = ['about-us'] %}
+            <div class="{{ filterName }}-group {{ filterName }}-group--{{ groupTitle|slugify }}">
+                <h4 class="{{ filterName }}-title {{ filterName }}-title--group">{{ groupTitle }}</h4>
                 
-                {% if 'sectionList' in filterGroup|keys %}
-                {% set sectionList = filterGroup.sectionList %}
-                {% set excludeList = ['about-us'] %}
                 <ul class="{{ filterName }}-list">
-                    {% for sectionItem in sectionList if sectionItem.displayText|slugify not in excludeList %}
-                    {% set sectionName = sectionItem.displayText %} 
-                    {% set sectionSlug = sectionName == 'Research' ? 'projects' : sectionItem.displayText|slugify %}
-                    {% set isActive = (activeSection == sectionSlug) %}
-                    <li class="{{ filterName }}-item">
-                        <input 
-                            class="{{ filterName }}-input {{ filterName }}-input--faux"
-                            id="section_{{ sectionSlug }}"
-                            type="checkbox"
-                            sprig
-                            name="section_{{ sectionSlug }}"
-                            s-val:section="{{ sectionSlug }}"
-                            s-val:tags="{{ activeTags }}"
-                            {{ isActive ? 'checked' : '' }}>
-                            <label 
-                                class="{{ filterName }}-trigger {{ filterName }}-trigger--tag"
-                                for="section_{{ sectionSlug }}">
-                                <span class="{{ filterName }}-label {{ filterName }}-label--tag">{{ sectionName }}</span>
-                                
-                                <svg class="{{ filterName }}-icon {{ filterName }}-icon--remove">
-                                    <use xlink:href="{{ alias('@assetBasePath' ~ closePath) }}"></use>
-                                </svg>
-                            </label>
-                    </li>
-                    {% endfor %}
+                {% for item in groupList %}
+                {% switch groupSlug %}
+                    {% case 'section' %}
+                    {% if item.displayText|slugify not in excludeList %}
+                    {% set itemName = item.displayText %} 
+                    {% set itemSlug = itemName == 'Research' ? 'projects' : item.displayText|slugify %}
+                    {% set isActive = (activeSection == itemSlug) %}
+                    {{ _self.controlDimensionsItem(filterName,groupSlug,itemSlug,itemName,isActive) }}
+                    {% endif %}
+                    {% case 'tags' %}
+                    {% set itemSlug, itemName = item|slugify, item.title %}
+                    {# If there are activeTags, split the string to create array #}
+                    {% set activeArr = activeTags ? activeTags|split(',') : [] %}
+                    {% set isActive = (activeArr|length and (itemSlug in activeArr)) %}
+                    {{ _self.controlDimensionsItem(filterName,groupSlug,itemSlug,itemName,isActive) }}
+                    {% case 'date' %}
+                    {# TODO: base date list on current section #}
+                {% endswitch %}
+                {% endfor %}
                 </ul>
-                {% endif %}
-
-                {% if 'tagList' in filterGroup|keys %}
-                {# If there are activeTags, split the string to create array #}
-                {% set activeArr = filterGroup.activeTags ? filterGroup.activeTags|split(',') : [] %}
-                {% set tagList = filterGroup.tagList %}
-                <ul class="{{ filterName }}-list">
-                    {% for tagItem in tagList %}
-                    {% set tagSlug, tagTitle = tagItem|slugify, tagItem.title %}
-                    {% set isActive = (activeArr|length and (tagSlug in activeArr)) %}
-                    {% set tagValues = (isActive ? (activeArr|filter((v) => v != tagSlug)) : activeArr|merge([tagSlug]))|join(',') %} 
-                    <li class="{{ filterName }}-item">
-                        <input 
-                            class="{{ filterName }}-input {{ filterName }}-input--faux"
-                            id="tags_{{ tagSlug }}"
-                            type="checkbox"
-                            sprig
-                            name="tags"
-                            s-val:tags="{{ tagValues }}"
-                            {{ isActive ? 'checked' : '' }}>
-                            <label 
-                                class="{{ filterName }}-trigger {{ filterName }}-trigger--tag"
-                                for="tags_{{ tagSlug }}">
-                                <span class="{{ filterName }}-label {{ filterName }}-label--tag">{{ tagTitle }}</span>
-                                
-                                <svg class="{{ filterName }}-icon {{ filterName }}-icon--remove">
-                                    <use xlink:href="{{ alias('@assetBasePath' ~ closePath) }}"></use>
-                                </svg>
-                            </label>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-                
             </div>
             {% endfor %}
             {% endif %}

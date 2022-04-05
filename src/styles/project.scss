@@ -102,7 +102,7 @@ img {
 ------------------------------------------------------------------------ */
 @include assetItem('.profileAsset');
 // @include fieldText('.primarySearch-field');
-@include controlPagination('.searchPagination');
+// @include controlPagination('.searchPagination');
 @include controlTags('.searchTags');
 @include flyoutContent('.primaryNav');
 @include fieldSearch('.primarySearch');
@@ -146,6 +146,8 @@ $sections: (
 
 			background: $theme-secondary;
 			color: $theme-primary;
+
+			@include controlPagination('.searchPagination',$theme-primary,$theme-secondary);
 
 			// Primary selectors
 			.primaryHeader {
@@ -207,6 +209,8 @@ $sections: (
 				}
 
 			}
+
+			
 
 		}
 
@@ -709,21 +713,38 @@ $red-secondary: nth($red-theme,2);
 
 	&-team {
 		margin-bottom: 1em;
+	}
 
-		&-trigger {
-			@include getType('caption');
-		}
-
+	&-caption {
+		@include getType('caption');
 	}
 
 	&-trigger {
 		display: inline-flex;
 	}
 
-	&-date {
-		$mb: math.div(10,16);
-		@include getType('caption');
-		margin-bottom: #{$mb}em;
+	&-dateblock {
+		@include flexParent();
+		margin-bottom: 1em;
+
+		span {
+			@include getType('caption');
+
+			&:nth-of-type(2) {
+
+				&::before {
+					$m-h: 15/12;
+					content: "\25CF";
+					display: inline-flex;
+					margin: 0 #{$m-h}em;
+					position: relative;
+					top: -0.25em;
+					font-size: 0.75em;
+				}
+		
+			}
+		}
+
 	}
 	
 	&-action {
@@ -755,8 +776,28 @@ $red-secondary: nth($red-theme,2);
 
 }
 
+/* ---------------------------------------------------------------------
+  Date Directory - dev only
+------------------------------------------------------------------------ */
+.dateDirectory {
+	font-size: 1rem;
 
+	&-title {
+		@include getType('h3-normal');
+		margin-bottom: 1em;
+	}
 
+	&-list {
+		font-size: 1rem;
+		margin-bottom: 2em;
+	}
+
+	&-name {
+		@include getType('p');
+		font-weight: bold;
+	}
+
+}
 
 
 /* ---------------------------------------------------------------------

@@ -1,0 +1,21 @@
+{% extends "layouts/_base.html" %}
+
+{% block content %}
+{% set section = entry.type|replace('Index','') %}
+
+<div data-section="{{ section }}"></div>
+
+{% switch section %}
+    {% case 'research' %}
+
+    {# TO DO:
+    1. handle cover image
+    2. title
+    3. summary
+    4. directory
+    #}
+
+{% endswitch %}
+
+
+{% endblock %}

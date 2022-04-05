@@ -1,5 +1,6 @@
 {% import 'macros/_controls' as controls %}
 {% import 'macros/_cards' as cards %}
+{% import 'macros/_dates' as dates %}
 
 {% set entry = craft.entries.id(entryId).one() %}
 {% set isSprig = sprig.isRequest %}
@@ -8,22 +9,21 @@
 {# search result limit #}
 {% set limit = limit ?? 10 %}
 {# search filters #}
-{% set filters = ['section','tags','search','sort'] %}
+{% set filters = ['section','add-tag','remove-tag','search','sort'] %}
 {% set trigger = sprig.trigger|split('_')[0] %}
 
-{% if isSprig %}
-{# Tags testing #}
-{% if trigger == 'tags' %}
-    {# {% set overlay = 'on' %} #}
-{% endif %}
-{% endif %}
-
 {# sprig default vars #}
-{% set overlay, section, tags, query, sort, date = overlay ?? 'off', section ?? 'all', tags ?? '', query ?? '', sort ?? 'asc', date ?? '' %}
+{% set overlay, section, query, sort, date = overlay ?? 'off', section ?? 'all', query ?? '', sort ?? 'asc', date ?? '' %}
 {# reset current page if new filter is triggered #}
 {% set page = isSprig and (trigger in filters) ? 1 : (page ?? 1) %}
+{# tag handling: add or remove updates the tags var #}
+{% set tags, addTag, removeTag = tags ?? '', addTag ?? '', removeTag ?? ''%}
+{% if isSprig and (trigger == 'add-tag' or trigger == 'remove-tag') %}
+{% set tagsList = tags ? tags|split(',') : [] %}
+{% set tags = (trigger == 'remove-tag' ? tagsList|filter(v => v != removeTag) : tagsList|merge([addTag]))|join(',') %}
+{% endif %}
 {# sprig update url #}
-{% do sprig.pushUrl('?' ~ {query: query, tags: tags, page: page}|url_encode) %}
+{% do sprig.pushUrl('?' ~ {query: query, section: section, tags: tags, page: page}|url_encode) %}
 {# sprig persistent state #}
 {{ hiddenInput('overlay', overlay) }}
 {{ hiddenInput('section', section) }}
@@ -52,7 +52,7 @@ bit of javascript to assign proper overflow style on the html tag #}
     {% set baseQuery = baseQuery.section(section) %}
 {% endif %}
 
-{# handle tags #}
+{# handle tagged queries #}
 {% if tags %}
     {# get the tag(s) category object #}
     {% set tagArray = tags|split(',') %}
@@ -69,21 +69,8 @@ bit of javascript to assign proper overflow style on the html tag #}
     
 {% endif %}
 
-{# handle filtering/sorting by date #}
-{# source: https://craftcms.stackexchange.com/questions/36292/order-entries-by-multiple-matrix-date-field #}
-{% if date %}
-{# query matrix blocks that have a dateBlock #}
-{# 
-{% set matrixBlocksQuery = craft.matrixBlocks().field('dateBlock') %}
-{% set uniqueDatesSorted = matrixBlocksQuery.all()|map(block => block.yearRange.itemFrom|date('Y'))|unique|sort %}
-
-{% set allEntries = craft.entries
-    .with('dateBlock')
-    .dateBlock(':notempty:')
-    .all()
-%} 
-#}
-{% endif %}
+{% block date_directory %}
+{% endblock %}
 
 {# define sorting #}
 {% set byTitle = 'title ' ~ sort %}
@@ -110,6 +97,7 @@ bit of javascript to assign proper overflow style on the html tag #}
         <div class="pageOpener-desc">{{ entry.openerText }}</div>
     </div>
     {# search form #}
+    {# TODO: on keyup if form is cleared, clear the keyword query #}
     {% set searchName,searchId,searchLabel,hasPlaceholder,isSprig = 'indexSearch','index','Enter keyword(s) here',true,true %}
     <div class="pageOpener-container pageOpener-container--control">
         {{ controls.controlSearch(searchName,searchId,searchLabel,hasPlaceholder,query) }}
@@ -148,15 +136,24 @@ bit of javascript to assign proper overflow style on the html tag #}
     {% set filterList = [
         {
             'title': 'Sections',
-            'sectionList': sectionList,
-            'activeSection': section
+            'slug': 'section',
+            'list': sectionList,
+            'active': section
         },
         {
             'title': 'Topics', 
-            'tagList': craft.categories.group('topics'),
-            'activeTags': tags
+            'slug': 'tags',
+            'list': craft.categories.group('topics'),
+            'active': tags
+        },
+        {
+            'title': 'Dates',
+            'slug': 'date',
+            'list': dates.getDateObject()|json_decode,
+            'active': date
         }
     ] %}
+    
     {% set filterName, filterLabel,resultsId = 'resultsFilter','Filter Results','#search_{{ searchId }}_results' %}
     {{ controls.controlDimensions(filterName,filterLabel,filterList,resultsId,overlay) }}
 

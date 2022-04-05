@@ -1,0 +1,19 @@
+fieldLayouts:
+  4b6b5e0e-4ef4-41ea-a369-c24947fa7596:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 8bd8738f-1331-4f55-b961-d5c2a2e44f53 # Chyron Content
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: chyron
+name: Chyron
+sortOrder: 5

@@ -1,5 +1,9 @@
 {% set env = getenv('ENVIRONMENT') %}
 <footer class="primaryFooter" id="primaryFooter">
+
+    {% include 'partials/_chyron' %}
+
+
 </footer>
 
 <div id="viewportMod" class="viewportMod{{ env == 'dev' ? ' _is-debug' : '' }}"></div>

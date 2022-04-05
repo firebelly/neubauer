@@ -1,0 +1,12 @@
+{
+    "buttons": ["formatting","html"],
+    "formatting": ["p"],
+    "plugins": ["fullscreen", "limiter", "counter"],
+    "limiter": 120,
+    "toolbarFixed": true,
+    "pastePlainText": true,
+    "pasteLinkTarget": "_blank",
+    "pasteBlockTags": [],
+    "pasteInlineTags": [],
+    "autoparse": false
+  }

@@ -1,7 +1,8 @@
 {% extends "layouts/_base.html" %}
 
 {% block content %}
+{% set section = entry.type %}
 
-
+<div data-section="{{ section }}"></div>
 
 {% endblock %}

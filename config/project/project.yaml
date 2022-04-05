@@ -1,4 +1,4 @@
-dateModified: 1648820071
+dateModified: 1649182338
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -58,6 +58,7 @@ meta:
     7e5074b8-9286-4b35-9424-be7fbe9dd19b: Image # Image
     8b1838a3-ba11-4d93-bb4f-ffb4b03082ca: Footer # Footer
     8b7345e3-147e-4357-af25-2ab20084f1b8: 'Featured Label' # Featured Label
+    8bd8738f-1331-4f55-b961-d5c2a2e44f53: 'Chyron Content' # Chyron Content
     8bf1b66f-209a-47fc-83b4-6cd05d70cb02: Year # Year
     8ce822fd-9c12-4dfa-9ef3-42966b9fe46f: 'Phone Number' # Phone Number
     8e497ed8-5673-40b5-a1ca-3f83b9ef05b6: Call-to-Action # Call-to-Action
@@ -85,6 +86,7 @@ meta:
     49f91a58-0c7a-4d84-a70d-fe29b1128987: 'Select an existing "Exhibition," or create a new one.' # Select an existing "Exhibition," or create a new one.
     52e70aed-6264-4441-939c-12b2bd00e0da: __blank__ # __blank__
     58d3215a-f902-4463-af05-977570812e6b: 'Nav Item' # Nav Item
+    59df9c4a-97e3-4b71-bc3d-5dec93aa8c02: Chyron # Chyron
     66a3bd47-7aa6-4023-9c01-4f4b2a2b1bdd: 'Error Index' # Error Index
     68fdccfc-d2f6-4e92-a49c-22f02d67d3b7: Quote # Quote
     69f62ba0-22f7-4f78-a3bc-534d5f8c9b4b: 'Event Speakers' # Event Speakers
@@ -109,7 +111,7 @@ meta:
     307bc9bb-3bc7-45b4-b535-976adc89de97: 'Narrative Block' # Narrative Block
     314d1749-591d-4f88-a382-680ece5d6b71: 'Date Only' # Date Only
     426d3cf9-e094-428a-82c2-66a0874790b8: Appearance # Appearance
-    446e488e-e627-4618-95fe-5cec7146b5ad: Module # Module
+    446e488e-e627-4618-95fe-5cec7146b5ad: Interior # Interior
     447e6245-204b-41fa-91d2-d99b74c5bc72: 'About Index' # About Index
     464d6956-ffb4-4883-a8af-830c2242c869: 'Story Types' # Story Types
     523a11a6-88bd-4fe2-bad0-d9127f8d3e5e: 'Date Range' # Date Range
@@ -148,6 +150,7 @@ meta:
     855892be-aa5a-4894-9a54-6a23890c78da: __blank__ # __blank__
     2098244b-aca8-47e2-98e7-0c0b057e76c9: Projects # Projects
     3723295b-41b7-4592-8163-aeaf690e694f: 'Key Question' # Key Question
+    7308649d-464b-466d-966e-e6199810e79c: Content # Content
     8028473d-ea1d-41ca-a24b-7e636f4225c2: 'Event Type' # Event Type
     51786161-bb39-4ca3-9246-d4f938d1a053: 'Research Index' # Research Index
     54497447-5d94-44d4-aed1-b898e86a9b77: Events # Events
@@ -181,6 +184,7 @@ meta:
     c00a2e11-74cb-4d5b-95f2-1878dee82fee: 'Select an existing "Event," or create a new one.' # Select an existing "Event," or create a new one.
     c9d2a3a1-cf8d-4060-9704-4f800fa8de4e: Attribution # Attribution
     c14d2c78-f58f-45a6-b6d2-beed7ffabb69: 'Story Type' # Story Type
+    c303da71-33df-43f8-81e1-df03e451df54: 'Keyword Filter' # Keyword Filter
     ca62998e-92bf-4a32-be88-8eacd7a4025c: __blank__ # __blank__
     cdc834cd-c6bc-443d-ba86-edc70defd5a0: Location # Location
     cf51bd0c-dc97-4734-9328-2dcbf1c1f311: Homepage # Homepage
@@ -193,15 +197,20 @@ meta:
     d80e45b8-04d1-46ed-acdf-4a78508e73c6: Appearance # Appearance
     d85f10e5-6a53-4c82-956e-f77206b13f99: From # From
     d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d: Homepage # Homepage
+    d2945aeb-f97f-44f8-ae58-958fffbe9f02: Content # Content
     d5943f00-060b-4c27-974e-b57dccb00c41: Title # Title
     da9f5f4f-4753-45ed-a951-351b4cc3cd75: Type # Type
+    da88bbfb-f240-49f6-8efe-58a9b8047396: 'Topic Filter' # Topic Filter
     db13480f-0f0d-476a-95af-c94977ab68f9: 'Events Index' # Events Index
+    dbaa01f2-5af0-41ec-9cab-823d5836031c: Entry # Entry
     dbb74986-f45a-4de0-b349-f466e988a4cb: 'Person Types' # Person Types
     dcb3fab5-053d-4e50-b485-3c29324a8e3d: 'Full Name' # Full Name
     dd463042-99d6-4725-b849-2546454db735: 'Opener Image' # Opener Image
+    de0e5b6f-4865-4dbb-9577-0e8117290eac: 'Section Filter' # Section Filter
     de799ef4-ed53-41ef-b492-3bc203754793: Phone # Phone
     df9b5267-3176-4fe5-821f-ffe2e2e2f686: To # To
     e073e248-18f9-4384-84cf-1c0bb14dcae7: 'Site Info' # Site Info
+    e3ae8533-2aa3-4d52-afd4-0053431703cf: 'Search Question' # Search Question
     e93b9edb-c0f9-454a-b64e-43cd24153a86: 'Featured Exhibition' # Featured Exhibition
     e104f1e4-4334-4b43-80b2-47e3fb3813f7: Heading # Heading
     e8071c4d-c301-40b2-854d-ab756c09d338: 'Person Type Status' # Person Type Status
@@ -215,6 +224,7 @@ meta:
     ef7c75e2-900a-42e2-b700-9e7eee852c3d: Abstract # Abstract
     efbbd4ec-e2c9-4adc-8df6-02610b708a5d: neubauer # neubauer
     f4cd1bcd-70d6-4ea7-9569-9756a49ff60d: Interior # Interior
+    f8e01bd2-0b63-41ef-9b31-2e61b7c0018a: 'Entry Question' # Entry Question
     f8fc100c-a097-4184-a0e8-3f36393711ea: Stories # Stories
     f55f0760-8acb-4022-8920-361ee1e78c67: 'Last Name' # Last Name
     f63afed0-9255-4277-9343-8828fc55c0ad: City # City

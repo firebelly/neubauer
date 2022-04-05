@@ -403,26 +403,19 @@
 /* -------------------------------------------------------------------------------
  Pagination Control: Structure
 ---------------------------------------------------------------------------------- */
-@mixin controlPagination($selector,$icon-size:20px,$default:true) {
+@mixin controlPagination($selector,$color-primary:#000,$color-secondary:#FFF,$icon-size:20px,$default:true) {
     $border-page-size: 1px;
     $border-nav-size: 2px;
     $border-num-size: 1px;
 
     #{$selector} {
         @include flexParent();
+        @include justifyContent(center);
         margin: 2em 0 0;
         width: 100%;
         
         @include breakpoint(md) {
             width: auto;
-        }
-
-        a:link,
-        a:visited,
-        a:hover,
-        a:active {
-            display: block;
-            text-decoration: none;
         }
 
         &-group {
@@ -470,20 +463,17 @@
 
         &-nav {
             $parent: &;
+            @include flexParent;
             margin: 0 0.8em 0 0;
             padding-right: 2em;
             position: relative;
 
-            @include breakpoint(md) {
-                margin: 0 0 0 0.8em;
+            > * {
+                @include flexChild;
             }
 
-            &::after {
-                content: '';
-                display: block;
-                margin: 0.5em 0 0 0;
-                width: 100%;
-                border-bottom: $border-nav-size solid transparent;
+            @include breakpoint(md) {
+                margin: 0 0 0 0.8em;
             }
 
             &._is-inactive {
@@ -499,13 +489,6 @@
         &-num {
             margin: 0 0.5em;
 
-            &::after {
-                content: '';
-                display: block;
-                width: 100%;
-                border-bottom: $border-num-size solid transparent;
-            }
-
             &._is-inactive {
                 pointer-events: none;
             }
@@ -513,17 +496,15 @@
         }
 
         &-icon {
-            display: inline-block;
             height: $icon-size;
             width: $icon-size;
-            position: absolute;
-            right: 0;
+            margin-left: 1em;
         }
     
     }
 
     @if $default != false {
-		@include controlPagination--default($selector);
+		@include controlPagination--default($selector,$color-primary,$color-secondary);
 	}
 
 }
@@ -531,67 +512,52 @@
 /* -------------------------------------------------------------------------------
  Pagination Control: Default Presentation
 ---------------------------------------------------------------------------------- */
-@mixin controlPagination--default($selector) {
-    $border-left-color: getColor('gray',10);
-    $border-bottom-color: getColor('blue');
-    $inactive-color: getColor('gray',10);
-    $nav-default-color: getColor('blue');
-    $num-default-color: getColor('gray',10);
-    $num-inactive-color: getColor('gray');
-    $icon-default-color: getColor('blue');
-    $icon-inactive-color: getColor('gray',10);
+@mixin controlPagination--default($selector,$color-primary,$color-secondary) {
 
     #{$selector} {
 
-        &--pages {
-
-            @include breakpoint(md) {
-                
-                &::before,
-                &::after {
-                    border-left-color: $border-left-color;
-                }
-            }
-        }
-
         &-nav {
             $parent: &;
-            color: $nav-default-color;
+            @include getType('action'); 
+            color: $color-primary;
 
-            &::after {
-                border-bottom-color: $border-bottom-color;
-
-                @at-root {
-                    #{$parent}._is-inactive::after {
-                        border-color: $inactive-color;
-                    }
-                }
+            &:link,
+            &:visited,
+            &:hover,
+            &:active {
+                text-decoration: underline;
+                text-underline-offset: 4px;
             }
 
             &._is-inactive {
-                color: $inactive-color;
+                text-decoration-color: transparent;
             }
 
         }
 
         &-num {
-            color: $num-default-color;
+            @include getType('p'); 
+            color: $color-primary;
+
+            &:link,
+            &:visited,
+            &:hover,
+            &:active {
+                text-decoration: none;
+            }
 
             &._is-inactive {
-                color: $num-inactive-color;
-
-                &::after {
-                    border-bottom-color: $num-inactive-color;
-                }
+                text-decoration: underline;
+                text-underline-offset: 2px;
             }
 
         }
 
         &-icon {
-            fill: $icon-default-color;
+            fill: $color-primary;
 
             #{$selector}-nav._is-inactive & {
-                fill: $icon-inactive-color;
+                
             }
 
         }

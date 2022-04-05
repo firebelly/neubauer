@@ -1,0 +1,86 @@
+{# getDates: 
+   source: https://craftcms.stackexchange.com/questions/36292/order-entries-by-multiple-matrix-date-field
+#}
+{% macro getDateObject() %}
+
+{% set matrixBlocksQuery = craft.matrixBlocks().field('dateBlock') %}
+{% set date_format = 'mm d Y' %}
+{# Single Dates/Times #}
+{% set singleDates = matrixBlocksQuery.all()|filter(block => (block.type == 'dateOnly' or block.type == 'datePlusTime'))|map(block => block.item|date(date_format))|unique|sort %}
+{# Date/Time Ranges #}
+{% set dateRangeQuery = matrixBlocksQuery.all()|filter(block => (block.type == 'dateRange' or block.type == 'datePlusTimeRange')) %}  
+{% set startDates = dateRangeQuery|map(block => block.item.start|date(date_format))|unique|sort %}
+{% set endDates = dateRangeQuery|map(block => block.item.end|date(date_format))|unique|sort %}
+{# Year Ranges: 
+   1. As year range is rendered via custom dropdown field, values are not *actually* stored as dates
+   2. Filter out null data
+#}
+{% set startYears = matrixBlocksQuery.all()|filter(block => block.itemFrom is not null and block.itemFrom.value is not null)|map(block => block.itemFrom.value)|unique|sort %}
+{% set endYears = matrixBlocksQuery.all()|filter(block => block.itemTo is not null and block.itemTo.value is not null)|map(block => block.itemTo.value)|unique|sort %}
+
+{% set dateObject = {
+    'singleDates': singleDates,
+    'startDates': startDates,
+    'endDates': endDates,
+    'startYears': startYears,
+    'endYears': endYears
+}%}
+
+{{ dateObject|json_encode|raw }}
+
+{% endmacro %}
+
+
+
+
+{# listEntriesByDate:
+    Iterate through the dateObj (as defined by getDateObject()), 
+    print date type (e.g. "startDates"), date value, and any entries belonging to it.
+
+    @dateObj {obj}      - _self.getDateObject()
+    @datedEntries {obj} - (optional) defaults to full entry query 
+#}
+{% macro listEntriesByDate(dateObj,datedEntries = null) %}
+
+{% set datedEntries = datedEntries ? datedEntries : craft.entries()
+    .with('dateBlock')
+    .dateBlock(':notempty:')
+    .all()
+%} 
+{% set date_format = 'mm d Y' %}
+
+<div class="dateDirectory">
+    {% for dateKey,dateValues in dateObj %}
+    <h3 class="dateDirectory-title">{{ dateKey }}</h3>
+
+    <ul class="dateDirectory-list">
+        {% for dateName in dateValues %}
+        <li>
+            <strong class="dateDirectory-name">{{ dateName }}</strong>
+            <ul>
+            {% for entry in datedEntries %}
+                {% for d in entry.dateBlock %} 
+                {% switch dateKey %}
+                    {% case 'startYears' %}
+                    {% set thisDate = d.itemFrom is not null ? d.itemFrom : null %}
+                    {% case 'endYears' %}
+                    {% set thisDate = d.itemTo is not null ? d.itemTo : null %}
+                    {% case 'startDates' %}
+                    {% set thisDate = d.item.start is defined and d.item.start is not null ? d.item.start|date(date_format) : null %}
+                    {% case 'endDates' %}
+                    {% set thisDate = d.item.end is defined and d.item.end is not null ? d.item.end|date(date_format) : null %}
+                    {% default %}
+                    {% set thisDate = d.item is not null and (d.item.start is not defined and d.item.end is not defined) ? d.item|date(date_format) : null %}
+                {% endswitch %}
+                {% if thisDate == dateName %}
+                <li><a href="{{ entry.url }}" title="{{ entry.title }}">{{ entry.title }}</a></li>
+                {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</div>
+{% endmacro %}

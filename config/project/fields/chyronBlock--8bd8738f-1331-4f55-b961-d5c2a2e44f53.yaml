@@ -1,0 +1,16 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
+handle: chyronBlock
+instructions: 'Add as many Questions as needed. Rearrange by drag & drop. Entry Questions will link to the designated project, exhibition, or event page; Search Questions will link to the search page with designated filters.'
+name: 'Chyron Content'
+searchable: true
+settings:
+  contentTable: '{{%matrixcontent_chyronblock}}'
+  maxBlocks: ''
+  minBlocks: '1'
+  propagationKeyFormat: null
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

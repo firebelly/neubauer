@@ -19,5 +19,5 @@
  */
 
 return [
-
+    'search/dates/' => ['template' => 'search/_date-directory']
 ];

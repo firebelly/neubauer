@@ -146,9 +146,9 @@ fieldLayouts:
             width: 100
         name: Speakers
         sortOrder: 3
-handle: module
+handle: interior
 hasTitleField: true
-name: Module
+name: Interior
 section: 54497447-5d94-44d4-aed1-b898e86a9b77 # Events
 sortOrder: 1
 titleFormat: null

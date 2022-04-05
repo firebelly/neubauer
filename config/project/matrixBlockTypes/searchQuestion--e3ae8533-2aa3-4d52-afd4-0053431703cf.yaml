@@ -1,0 +1,179 @@
+field: 8bd8738f-1331-4f55-b961-d5c2a2e44f53 # Chyron Content
+fieldLayouts:
+  069d917a-08cc-4c24-8c74-824c378b7d16:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 7308649d-464b-466d-966e-e6199810e79c # Content
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: da88bbfb-f240-49f6-8efe-58a9b8047396 # Topic Filter
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: de0e5b6f-4865-4dbb-9577-0e8117290eac # Section Filter
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: c303da71-33df-43f8-81e1-df03e451df54 # Keyword Filter
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  7308649d-464b-466d-966e-e6199810e79c: # Content
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: itemContent
+    instructions: 'Brief prompt (max 120 chars)'
+    name: Content
+    searchable: false
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Chyron.json
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: ''
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  c303da71-33df-43f8-81e1-df03e451df54: # Keyword Filter
+    columnSuffix: null
+    contentColumnType: string(120)
+    fieldGroup: null
+    handle: keywordFilter
+    instructions: '(Optional) Connect the question to a specific keyword.'
+    name: 'Keyword Filter'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: 30
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  da88bbfb-f240-49f6-8efe-58a9b8047396: # Topic Filter
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: topicFilter
+    instructions: 'Connect the question to specific topics.'
+    name: 'Topic Filter'
+    searchable: false
+    settings:
+      allowLimit: false
+      allowMultipleSources: false
+      allowSelfRelations: false
+      branchLimit: ''
+      limit: null
+      localizeRelations: false
+      selectionLabel: 'Select a topic(s)'
+      showSiteMenu: true
+      source: 'group:44640def-c232-4e0a-b207-660156167038' # Topics
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Categories
+  de0e5b6f-4865-4dbb-9577-0e8117290eac: # Section Filter
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: sectionFilter
+    instructions: '(Optional) Connect the question to a specific section; defaults to all sections.'
+    name: 'Section Filter'
+    searchable: false
+    settings:
+      optgroups: true
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - All
+            -
+              - value
+              - all
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - Projects
+            -
+              - value
+              - projects
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Exhibitions
+            -
+              - value
+              - exhibitions
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - Events
+            -
+              - value
+              - events
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Dropdown
+handle: searchQuestion
+name: 'Search Question'
+sortOrder: 2

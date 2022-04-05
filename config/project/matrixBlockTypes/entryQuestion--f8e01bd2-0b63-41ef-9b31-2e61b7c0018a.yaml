@@ -1,0 +1,83 @@
+field: 8bd8738f-1331-4f55-b961-d5c2a2e44f53 # Chyron Content
+fieldLayouts:
+  76a9ce2f-93eb-4aa3-aff0-668d2baee443:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: d2945aeb-f97f-44f8-ae58-958fffbe9f02 # Content
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: dbaa01f2-5af0-41ec-9cab-823d5836031c # Entry
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  d2945aeb-f97f-44f8-ae58-958fffbe9f02: # Content
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: itemContent
+    instructions: 'Brief prompt (max 120 chars)'
+    name: Content
+    searchable: false
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Chyron.json
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: ''
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  dbaa01f2-5af0-41ec-9cab-823d5836031c: # Entry
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: itemPage
+    instructions: 'Connect the question to a specific project, exhibition, or event.'
+    name: Entry
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      limit: '1'
+      localizeRelations: false
+      selectionLabel: 'Select an entry'
+      showSiteMenu: true
+      source: null
+      sources:
+        - 'section:54497447-5d94-44d4-aed1-b898e86a9b77' # Events
+        - 'section:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
+        - 'section:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Entries
+handle: entryQuestion
+name: 'Entry Question'
+sortOrder: 1

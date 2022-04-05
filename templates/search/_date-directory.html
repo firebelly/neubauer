@@ -1,0 +1,8 @@
+
+{% import 'macros/_dates' as dates %}
+{# This is for dev-testing only #}
+{% block date_directory %}
+{# List dated entries #}
+{% set dateObj = dates.getDateObject()|json_decode %}
+{# {{ dates.listEntriesByDate(dateObj) }} #}
+{% endblock %}
