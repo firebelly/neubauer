@@ -49,6 +49,16 @@ permissions:
   - 'deletepeerentrydrafts:a1ea3cc0-8cb8-43e4-bad0-c6ae57f4a69b' # Homepage
   - 'editpeerentrydrafts:a1ea3cc0-8cb8-43e4-bad0-c6ae57f4a69b' # Homepage
   - 'editentries:a1ea3cc0-8cb8-43e4-bad0-c6ae57f4a69b' # Homepage
+  - 'createentries:3d42007e-9de2-48c6-a935-e29a45fa3f7c' # News
+  - 'publishentries:3d42007e-9de2-48c6-a935-e29a45fa3f7c' # News
+  - 'deleteentries:3d42007e-9de2-48c6-a935-e29a45fa3f7c' # News
+  - 'publishpeerentries:3d42007e-9de2-48c6-a935-e29a45fa3f7c' # News
+  - 'deletepeerentries:3d42007e-9de2-48c6-a935-e29a45fa3f7c' # News
+  - 'editpeerentries:3d42007e-9de2-48c6-a935-e29a45fa3f7c' # News
+  - 'publishpeerentrydrafts:3d42007e-9de2-48c6-a935-e29a45fa3f7c' # News
+  - 'deletepeerentrydrafts:3d42007e-9de2-48c6-a935-e29a45fa3f7c' # News
+  - 'editpeerentrydrafts:3d42007e-9de2-48c6-a935-e29a45fa3f7c' # News
+  - 'editentries:3d42007e-9de2-48c6-a935-e29a45fa3f7c' # News
   - 'createentries:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
   - 'publishentries:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
   - 'deleteentries:d42f1b8d-6335-4a9b-8f81-80061a0faa35' # People
@@ -94,9 +104,14 @@ permissions:
   - 'deletepeerentrydrafts:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
   - 'editpeerentrydrafts:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
   - 'editentries:f8fc100c-a097-4184-a0e8-3f36393711ea' # Stories
+  - 'editglobalset:e073e248-18f9-4384-84cf-1c0bb14dcae7' # Site Info
+  - 'editglobalset:6189b323-6110-479a-85ea-f4d0cf190af5' # Primary Nav
   - 'editglobalset:1762d70d-bae6-49fd-8b8e-ac8f767621d1' # Primary Footer
   - 'editglobalset:66a3bd47-7aa6-4023-9c01-4f4b2a2b1bdd' # Error Index
+  - 'editglobalset:9d3e7bcb-021c-462d-8361-507dc7ffa50b' # Chyron
+  - 'editcategories:d7bc1724-cfca-4d62-8b29-dbb9996201d1' # Event Types
   - 'editcategories:dbb74986-f45a-4de0-b349-f466e988a4cb' # Person Types
+  - 'editcategories:464d6956-ffb4-4883-a8af-830c2242c869' # Story Types
   - 'editcategories:44640def-c232-4e0a-b207-660156167038' # Topics
   - 'saveassetinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
   - 'createfoldersinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
