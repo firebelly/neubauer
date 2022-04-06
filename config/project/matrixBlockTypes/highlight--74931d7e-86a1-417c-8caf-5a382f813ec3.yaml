@@ -1,0 +1,44 @@
+field: b4c86b0f-0134-4afa-8b28-6198a09c626e # Impact Module
+fieldLayouts:
+  ff779306-fbbc-43dc-9208-0a7b542de0c9:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 19776d03-02d1-42a4-babe-c538c874cab1 # Project
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  19776d03-02d1-42a4-babe-c538c874cab1: # Project
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: project
+    instructions: 'Select a project to highlight'
+    name: Project
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      limit: '1'
+      localizeRelations: false
+      selectionLabel: 'Select a project'
+      showSiteMenu: false
+      source: null
+      sources:
+        - 'section:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Entries
+handle: highlight
+name: Highlight
+sortOrder: 2

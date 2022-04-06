@@ -1,0 +1,70 @@
+<style>
+.adminTip-list {
+    margin-left: 2em;
+    margin-bottom: 3em;
+    list-style-type: disc;
+}
+.adminTip-item {
+    margin-bottom: 1em;
+}
+.adminTip-p {
+    margin-bottom: 3em;
+}
+.adminTip-box {
+    margin-top: 0;
+    margin-bottom: 3em;
+    background: #f3f7fc;
+    padding: 1em;
+    border-radius: 10px;
+}
+.adminTip-title {
+    margin: 0 0 14px 0;
+}
+</style>
+
+{% set currentType = element %}
+{% set staff = craft.entries()
+    .section('people') 
+    .search('personType:staff')
+    .all()
+%}
+{% set advisory = craft.entries()
+    .section('people') 
+    .search('personType:faculty-advisory-board')
+    .all()
+%}
+<p class="adminTip-box"><strong>Hint:</strong> To adjust or add a Person Type, go to its admin page, click "Add a type."</p>
+
+<h2 class="adminTip-title"><strong>Our Team</strong></h2>
+{% if staff|length %}
+<ul class="adminTip-list">
+{% for entry in staff %}
+    <li class="adminTip-item">
+        {% if entry.isEditable() %}
+        <a href="{{ entry.cpEditUrl }}">{{ entry }}</a>
+        {% else %}
+        {{ entry }}
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% else %}
+<p class="adminTip-p">There are no staff.
+{% endif %}
+
+<h2 class="adminTip-title"><strong>Faculty Advisory Board</strong></h2>
+{% if advisory|length %}
+<ul class="adminTip-list">
+{% for entry in advisory %}
+    <li class="adminTip-item">
+        {% if entry.isEditable() %}
+        <a href="{{ entry.cpEditUrl }}">{{ entry }}</a>
+        {% else %}
+        {{ entry }}
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% else %}
+<p class="adminTip-p">There are no faculty advisory board members.
+{% endif %}

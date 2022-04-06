@@ -1,0 +1,32 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 37e0e210-2202-421d-8e44-5c51a0756fa5 # About
+handle: impactImage
+instructions: 'Recommended size: 1360px x 700px'
+name: 'Impact Image'
+searchable: true
+settings:
+  allowSelfRelations: false
+  allowUploads: true
+  allowedKinds: null
+  defaultUploadLocationSource: 'volume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  defaultUploadLocationSubpath: about/impact/
+  limit: '1'
+  localizeRelations: false
+  previewMode: full
+  restrictFiles: ''
+  selectionLabel: 'Add an impact image'
+  showSiteMenu: true
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  singleUploadLocationSource: 'volume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  singleUploadLocationSubpath: ''
+  source: null
+  sources: '*'
+  targetSiteId: null
+  useSingleFolder: false
+  validateRelatedElements: false
+  viewMode: large
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Assets

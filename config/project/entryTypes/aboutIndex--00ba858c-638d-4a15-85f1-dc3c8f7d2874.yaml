@@ -48,7 +48,7 @@ fieldLayouts:
             type: craft\fieldlayoutelements\CustomField
             warning: null
             width: 100
-        name: Content
+        name: Opener
         sortOrder: 1
       -
         elements:
@@ -66,16 +66,56 @@ fieldLayouts:
       -
         elements:
           -
-            fieldUid: 592d2e6a-2bb7-4989-9a4a-32917490d422 # Supporters
-            instructions: ''
+            template: control-panel/about/_impact-image.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+          -
+            fieldUid: efcf69a5-9d82-4d07-ac04-5f1ea6865944 # Impact Image
+            instructions: ' '
             label: ' '
             required: ''
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
             width: 100
-        name: Supporters
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            fieldUid: b4df5032-8566-4b5b-8aa6-6345a7e93081
+            instructions: 'Content introducing the Impact section; no character count restriction (Recommended max char: 500). '
+            label: Introduction
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            fieldUid: b4c86b0f-0134-4afa-8b28-6198a09c626e # Impact Module
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            template: control-panel/about/_impact-intro.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Impact
         sortOrder: 3
+      -
+        elements:
+          -
+            template: control-panel/about/_people-section.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: People
+        sortOrder: 4
       -
         elements:
           -
@@ -88,7 +128,20 @@ fieldLayouts:
             warning: null
             width: 100
         name: Visiting
-        sortOrder: 4
+        sortOrder: 5
+      -
+        elements:
+          -
+            fieldUid: 03c99505-27a8-4aa0-b166-32be2e200535 # Card Block
+            instructions: ''
+            label: 'Application Card'
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Application
+        sortOrder: 6
 handle: aboutIndex
 hasTitleField: false
 name: 'About Index'

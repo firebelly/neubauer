@@ -1,0 +1,180 @@
+field: 03c99505-27a8-4aa0-b166-32be2e200535 # Card Block
+fieldLayouts:
+  9a39d4bd-83b7-45e8-98d2-81de5a0082fa:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: be34ca8a-c5ee-41e9-abef-a35dc22b2f53 # Image
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: a1501252-0e3e-4624-b2c3-03172c189638 # Summary
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 0cd40bfe-a035-45b0-bc86-ea4f5aa2ae0b # Downloadable
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 7262daec-b184-417d-a7e4-376944b1e70d # Link
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  0cd40bfe-a035-45b0-bc86-ea4f5aa2ae0b: # Downloadable
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: downloadLink
+    instructions: 'Add PDF documents that can be downloaded by visitors. Add as many as needed.'
+    name: Downloadable
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      allowUploads: true
+      allowedKinds:
+        - pdf
+      defaultUploadLocationSource: 'volume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+      defaultUploadLocationSubpath: about/application/
+      limit: ''
+      localizeRelations: false
+      previewMode: full
+      restrictFiles: '1'
+      selectionLabel: 'Add a PDF'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      singleUploadLocationSource: 'volume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+      singleUploadLocationSubpath: ''
+      source: null
+      sources: '*'
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  7262daec-b184-417d-a7e4-376944b1e70d: # Link
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: actionLink
+    instructions: 'Add as many links as needed'
+    name: Link
+    searchable: false
+    settings:
+      columns:
+        __assoc__:
+          -
+            - 31f863f3-3c37-4273-80b7-b2b01e849db6 # Label
+            -
+              __assoc__:
+                -
+                  - width
+                  - ''
+          -
+            - 5f95a1dc-cfd0-49e6-a422-22c312ec7604 # URL
+            -
+              __assoc__:
+                -
+                  - width
+                  - ''
+      contentTable: '{{%stc_34_actionlink}}'
+      fieldLayout: matrix
+      maxRows: ''
+      minRows: ''
+      placeholderKey: null
+      propagationKeyFormat: null
+      propagationMethod: all
+      selectionLabel: 'Add a link'
+      staticField: ''
+    translationKeyFormat: null
+    translationMethod: site
+    type: verbb\supertable\fields\SuperTableField
+  a1501252-0e3e-4624-b2c3-03172c189638: # Summary
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: cardSummary
+    instructions: ''
+    name: Summary
+    searchable: false
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Abstract.json
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: ''
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  be34ca8a-c5ee-41e9-abef-a35dc22b2f53: # Image
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: cardImage
+    instructions: ''
+    name: Image
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      allowUploads: true
+      allowedKinds: null
+      defaultUploadLocationSource: 'volume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+      defaultUploadLocationSubpath: about/application/
+      limit: '1'
+      localizeRelations: false
+      previewMode: full
+      restrictFiles: ''
+      selectionLabel: 'Add an image'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      singleUploadLocationSource: 'volume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+      singleUploadLocationSubpath: ''
+      source: null
+      sources: '*'
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: large
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+handle: module
+name: Module
+sortOrder: 1

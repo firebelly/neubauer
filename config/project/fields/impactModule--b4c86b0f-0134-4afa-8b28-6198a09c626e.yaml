@@ -1,0 +1,16 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 37e0e210-2202-421d-8e44-5c51a0756fa5 # About
+handle: impactModule
+instructions: 'Add as many or few metrics and highlights as needed. Rearrange by drag & drop. Layout is determined by number & nature of metrics.'
+name: 'Impact Module'
+searchable: true
+settings:
+  contentTable: '{{%matrixcontent_impactmodule}}'
+  maxBlocks: ''
+  minBlocks: ''
+  propagationKeyFormat: null
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix
