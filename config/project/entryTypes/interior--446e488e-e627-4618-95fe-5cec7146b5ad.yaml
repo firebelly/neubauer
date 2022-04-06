@@ -100,6 +100,17 @@ fieldLayouts:
           -
             type: craft\fieldlayoutelements\HorizontalRule
           -
+            fieldUid: 98ff0f93-0148-49ba-8068-9952f61abaa8 # Event Type New
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
             template: control-panel/common/_call-to-actions.html
             type: craft\fieldlayoutelements\Template
             width: 100
@@ -124,14 +135,23 @@ fieldLayouts:
         elements:
           -
             fieldUid: befa4c7d-b94d-49e4-b3a1-857d02a67a3b # Brief description of event
-            instructions: null
-            label: null
-            required: false
+            instructions: ''
+            label: 'Brief event description'
+            required: ''
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
             width: 100
-        name: Summary
+          -
+            fieldUid: b4df5032-8566-4b5b-8aa6-6345a7e93081 # Body
+            instructions: '(Optional) Content for the entry that either exceeds the brief description length requirements, or requires additional formatting; no character count restrictions.'
+            label: 'Full event description'
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
         sortOrder: 2
       -
         elements:

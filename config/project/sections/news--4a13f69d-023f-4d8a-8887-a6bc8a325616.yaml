@@ -1,0 +1,24 @@
+defaultPlacement: end
+enableVersioning: true
+handle: news
+name: News
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  0c99f337-2218-4c6f-b0ad-30589c1ebbc5: # neubauer
+    enabledByDefault: true
+    hasUrls: true
+    template: news/_entry
+    uriFormat: 'about/news/{slug}'
+type: channel

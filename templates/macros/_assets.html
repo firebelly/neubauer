@@ -123,3 +123,29 @@
 
     {{ newImage }}
 {% endmacro %}
+
+{% macro assetVideo(videoName,videoId,videoTitle,filePath,fileName,hasPoster = false) %}
+<div class="{{ videoName }}">
+    <video 
+        class="{{ videoName }}-video"
+        id="{{ videoId }}"
+        {% if hasPoster %}
+        poster="{{ filePath }}/{{ fileName }}.png"
+        {% endif %}
+        controls>
+        <source src="{{ filePath }}/{{ fileName }}.mp4"
+                type="video/mp4">
+        <source src="{{ filePath }}/{{ fileName }}.webm"
+                type="video/webm">
+        Sorry, your browser doesn't support embedded videos.
+    </video>
+
+    {# <div class="{{ videoName }}-poster">
+        <span>{{ videoTitle }}
+            <svg aria-hidden="true" role="presentation"><use xlink:href="#icon-play"/></svg>
+        </span>
+    </div> #}
+</div>
+
+
+{% endmacro %}

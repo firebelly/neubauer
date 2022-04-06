@@ -1,0 +1,45 @@
+field: 98ff0f93-0148-49ba-8068-9952f61abaa8 # Event Type New
+fieldLayouts:
+  b955fdb3-19cc-497b-845d-b8d8fa1ed0c4:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 3a5b1944-c7a4-4022-be4e-e6b33b57c3d5 # __blank__
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  3a5b1944-c7a4-4022-be4e-e6b33b57c3d5: # __blank__
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: item
+    instructions: ''
+    name: __blank__
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      limit: '1'
+      localizeRelations: false
+      selectionLabel: 'Select one Project or Exhibition'
+      showSiteMenu: true
+      source: null
+      sources:
+        - 'section:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
+        - 'section:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Entries
+handle: relatedProjectOrExhibition
+name: 'Connect a Project or Exhibition'
+sortOrder: 2

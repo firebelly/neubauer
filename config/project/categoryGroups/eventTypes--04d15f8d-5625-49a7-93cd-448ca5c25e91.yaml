@@ -1,0 +1,45 @@
+defaultPlacement: end
+fieldLayouts:
+  127250a8-9e53-402e-8321-4d8bddd7b17e:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\TitleField
+            warning: null
+            width: 100
+          -
+            template: control-panel/common/_event-results.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: eventTypes
+name: 'Event Types'
+siteSettings:
+  0c99f337-2218-4c6f-b0ad-30589c1ebbc5: # neubauer
+    hasUrls: false
+    template: null
+    uriFormat: null
+structure:
+  maxLevels: 1
+  uid: bcdeb266-5e6d-4e9b-a5cb-7056df8c9f45

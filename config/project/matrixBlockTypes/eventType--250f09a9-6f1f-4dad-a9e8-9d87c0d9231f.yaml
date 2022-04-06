@@ -1,0 +1,46 @@
+field: 98ff0f93-0148-49ba-8068-9952f61abaa8 # Event Type New
+fieldLayouts:
+  470fc709-c912-41f3-b02d-369bb5104183:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: b03bbb63-c974-457c-b5eb-90d0b7c80318 # __blank__
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  b03bbb63-c974-457c-b5eb-90d0b7c80318: # __blank__
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: item
+    instructions: ''
+    name: __blank__
+    searchable: false
+    settings:
+      allowLimit: false
+      allowMultipleSources: false
+      allowSelfRelations: false
+      branchLimit: '1'
+      limit: null
+      localizeRelations: false
+      selectionLabel: 'Select one event type'
+      showSiteMenu: true
+      source: 'group:04d15f8d-5625-49a7-93cd-448ca5c25e91' # Event Types
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Categories
+handle: eventType
+name: 'Event Type'
+sortOrder: 1

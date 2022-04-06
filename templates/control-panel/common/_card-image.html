@@ -19,16 +19,18 @@
 </style>
 {% set sectionMap = {
     "Stories": "Story",
-    "People": "Person"
+    "People": "Person",
+    "News": "News"
 }%}
 {% set currentSection = element.section|title %}
 {% set currentEntryType = (currentSection in sectionMap|keys) ? sectionMap[currentSection] : currentSection|trim("s") %}
 {% set isExhibition = (currentEntryType == "Exhibition") %}
 {% set isProject = (currentEntryType == "Project") %}
 {% set isPerson = (currentEntryType == "Person") %}
+{% set isNews = (currentEntryType == "News") %}
 
-<h3 class="adminTip-label">{{ currentEntryType }} {{ isProject ? "" : "Card" }} Image</h3>
-<p class="adminTip-desc">Add an image to represent the {{ currentEntryType }} throughout the site.
+<h3 class="adminTip-label">{{ isNews ? "" : currentEntryType }} {{ isProject ? "" : "Card" }} Image</h3>
+<p class="adminTip-desc">Add an image to represent the {{ isNews ? 'entry' : currentEntryType }} throughout the site.
     {% if isExhibition %} If you choose not to add a card image, a center-cropped version of the exhibition's Opener Image will be used by default.{% endif %}
     {% if isProject %}This image will also serve as the project's opener image.{% endif %}
 </p>

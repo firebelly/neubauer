@@ -1,0 +1,46 @@
+{% import 'macros/_assets' as assets %}
+
+<style>
+.adminVideo {
+    max-width: 50%;
+}
+.adminVideo-video {
+    max-width: 100%;
+}
+
+.adminTip-label {
+    color: #596673;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.adminTip-box {
+  background: #f3f7fc;
+  padding: 1em;
+  border-radius: 10px;
+}
+.adminTip-desc {
+    margin-top: 0;
+}
+.adminTip-list {
+    margin-left: 2em;
+    list-style-type: disc;
+}
+</style>
+
+{% set tabList = [] %}
+{% for tab in element.getFieldLayout().getTabs() %}
+    {% set tabName = tab.name %}
+    {% set tabList = tabList|merge([tabName]) %}
+    {% switch tabName %}
+        {% case 'Categories' %}
+        {% case 'Chyron' %}
+    {% endswitch %}
+{% endfor %}
+
+{% set filePath = alias('@assetBasePath') ~ '/videos/tutorials' %}
+
+{% set videoName, videoId, videoTitle, fileName = 'adminVideo', 'categoryEditing','How to Edit Categories','tutorial-category-editing' %}
+
+For development only
+
+{# {{ assets.assetVideo(videoName,videoId,videoTitle,filePath,fileName) }} #}

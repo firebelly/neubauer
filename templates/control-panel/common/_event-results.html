@@ -1,0 +1,50 @@
+<style>
+.adminTip-list {
+    margin-left: 2em;
+    margin-bottom: 3em;
+    list-style-type: disc;
+}
+.adminTip-item {
+    margin-bottom: 1em;
+}
+.adminTip-p {
+    margin-bottom: 3em;
+}
+.adminTip-box {
+    margin-top: 0;
+    margin-bottom: 3em;
+    background: #f3f7fc;
+    padding: 1em;
+    border-radius: 10px;
+}
+.adminTip-title {
+    margin: 0 0 14px 0;
+}
+</style>
+
+{% set currentType = element %}
+{% set events = craft.entries()
+    .section('events') 
+    .search('eventType:' ~ currentType ~ '')
+    .all()
+%}
+<p class="adminTip-box"><strong>Hint:</strong> To assign an Event Type to an Event, go to its admin page, click "Add a type."</p>
+
+{% if currentType.slug %}
+<h2 class="adminTip-title"><strong>Events</strong> tagged "{{ currentType }}:"</h2>
+{% if events|length %}
+<ul class="adminTip-list">
+{% for entry in events %}
+    <li class="adminTip-item">
+        {% if entry.isEditable() %}
+        <a href="{{ entry.cpEditUrl }}">{{ entry }}</a>
+        {% else %}
+        {{ entry }}
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% else %}
+<p class="adminTip-p">There are no events tagged "{{ currentType }}."
+{% endif %}
+{% endif %}

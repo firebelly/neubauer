@@ -48,6 +48,7 @@ mix.js(src`scripts/main.js`, 'web/build/scripts')
 mix.copy(src`images`,'web/build/images')
 mix.copy(src`fonts`,'web/build/fonts')
 mix.copy(src`svgs`,'web/build/svgs')
+mix.copy(src`videos`,'web/build/videos')
 
 let SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 let svgSpriteDestination = publicPath`svgs-defs.svg`;

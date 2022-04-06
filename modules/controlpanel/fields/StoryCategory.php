@@ -6,16 +6,16 @@ use craft\fields\Dropdown;
 class StoryCategory extends Dropdown
 {
 
-	public static function getCategories(): array
+	protected static function getCategories(): array
 	{	
-		$categories = [];
+		$categories = array();
 		$query = \craft\elements\Category::find();
 		$query->group('storyTypes');
+		$results = $query->all();
 
-		foreach ($query->all() as $category) {
+		foreach ($results as $category) {
 			$categories[] = [
-				'id' => json_encode($category->id),
-            	'title' => json_encode($category->title)
+				json_encode($category->slug) => json_encode($category->title)
 			];
 		}
 		return $categories;
@@ -37,13 +37,14 @@ class StoryCategory extends Dropdown
 			'value' => 'testing'
 		];
 
-
 		// Check for matching categories
         if ( $categories ) {
 			foreach ($categories as $category) {
 				$this->options[] = [
-					'label' => $category['title'],
-					'value' => $category['id']
+					'label' => $category,
+					'value' => $category
+					// 'label' => $category['title'],
+					// 'value' => $category['id']
 				];
 			}
 		}
@@ -52,8 +53,8 @@ class StoryCategory extends Dropdown
 
     public function init()
 	{	
-		//$categories = $this->getCategories();
-		$categories = [];
+		$categories = $this->getCategories();
+		//$categories = [];
 		$this->buildDropdown($categories);
 		parent::init();
 	}

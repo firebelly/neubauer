@@ -82,9 +82,9 @@ fieldLayouts:
         elements:
           -
             fieldUid: abf135fc-5443-48d6-bc54-cf819645a909 # Abstract
-            instructions: "**Brief introduction to the project**\r\n\r\nMax characters: 620"
-            label: __blank__
-            required: ''
+            instructions: null
+            label: null
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
