@@ -20,5 +20,5 @@ siteSettings:
     enabledByDefault: true
     hasUrls: true
     template: news/_entry
-    uriFormat: 'about/news/{slug}'
+    uriFormat: 'news/{slug}'
 type: channel

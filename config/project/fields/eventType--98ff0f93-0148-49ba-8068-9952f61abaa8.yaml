@@ -1,12 +1,12 @@
 columnSuffix: null
 contentColumnType: string
 fieldGroup: eb6e4b27-3a81-4da1-8f40-fa29c0f7805c # Event
-handle: eventTypeNew
+handle: eventType
 instructions: 'Assign a Type (e.g. "Book Signing" or "Project") to the Event by selecting an existing type, or creating a new one. If selecting "Project" or "Exhibition," be sure to also connect the event to its Project or Exhibition.'
-name: 'Event Type New'
+name: 'Event Type'
 searchable: true
 settings:
-  contentTable: '{{%matrixcontent_eventtypenew}}'
+  contentTable: '{{%matrixcontent_eventtype}}'
   maxBlocks: '2'
   minBlocks: '1'
   propagationKeyFormat: null

@@ -1,5 +1,5 @@
 fieldLayouts:
-  15bcb220-cf6b-4687-8d99-000b01d4c0d9:
+  a8515bfc-78fb-43ae-a387-356d0bfd6fae:
     tabs:
       -
         elements:
@@ -52,9 +52,9 @@ fieldLayouts:
             width: 100
           -
             fieldUid: d5c86c8a-c961-4fb2-8348-90331ee47da2 # Opener Content
-            instructions: '(Optional) Brief text introducing the entry.'
-            label: ''
-            required: ''
+            instructions: null
+            label: null
+            required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
@@ -79,18 +79,18 @@ fieldLayouts:
       -
         elements:
           -
-            fieldUid: 63a1e9e8-c4a6-4d3e-a317-a8b319be6454 # Teaser
+            fieldUid: 63a1e9e8-c4a6-4d3e-a317-a8b319be6454
             instructions: 'Add content to represent the entry throughout the site. (Max characters: 350)'
-            label: 'Brief description of news entry'
+            label: 'Brief news description'
             required: ''
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
             width: 100
           -
-            fieldUid: b4df5032-8566-4b5b-8aa6-6345a7e93081 # Body
+            fieldUid: b4df5032-8566-4b5b-8aa6-6345a7e93081
             instructions: '(Optional) Content for the entry that either exceeds the brief description length requirements, or requires additional formatting; no character count restrictions.'
-            label: 'Full description of news entry'
+            label: 'Full news description'
             required: ''
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -114,7 +114,7 @@ fieldLayouts:
 handle: interior
 hasTitleField: true
 name: Interior
-section: 4a13f69d-023f-4d8a-8887-a6bc8a325616 # News
+section: 3d42007e-9de2-48c6-a935-e29a45fa3f7c # News
 sortOrder: 1
 titleFormat: null
 titleTranslationKeyFormat: null

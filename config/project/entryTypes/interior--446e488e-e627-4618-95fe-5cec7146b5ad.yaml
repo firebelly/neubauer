@@ -62,45 +62,7 @@ fieldLayouts:
           -
             type: craft\fieldlayoutelements\HorizontalRule
           -
-            fieldUid: 8028473d-ea1d-41ca-a24b-7e636f4225c2 # Event Type
-            instructions: ''
-            label: ''
-            required: ''
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            warning: null
-            width: 100
-          -
-            fieldUid: 4ca3c4c3-a656-4252-a5b3-c2ae5eeea39b # Event Label
-            instructions: ''
-            label: __blank__
-            required: ''
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            warning: null
-            width: 100
-          -
-            fieldUid: 09f28401-5afb-4037-a4d4-988179869f4d # Related Exhibition
-            instructions: 'Connect an exhibition to the event.'
-            label: __blank__
-            required: ''
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            warning: null
-            width: 100
-          -
-            fieldUid: 2d527c5e-9c0d-4cc1-ae6e-7be103ce4ff9 # Related Project
-            instructions: 'Connect a project to the event.'
-            label: __blank__
-            required: ''
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            warning: null
-            width: 100
-          -
-            type: craft\fieldlayoutelements\HorizontalRule
-          -
-            fieldUid: 98ff0f93-0148-49ba-8068-9952f61abaa8 # Event Type New
+            fieldUid: 98ff0f93-0148-49ba-8068-9952f61abaa8 # Event Type
             instructions: null
             label: null
             required: false
@@ -143,7 +105,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: b4df5032-8566-4b5b-8aa6-6345a7e93081 # Body
+            fieldUid: b4df5032-8566-4b5b-8aa6-6345a7e93081
             instructions: '(Optional) Content for the entry that either exceeds the brief description length requirements, or requires additional formatting; no character count restrictions.'
             label: 'Full event description'
             required: ''
@@ -151,7 +113,7 @@ fieldLayouts:
             type: craft\fieldlayoutelements\CustomField
             warning: null
             width: 100
-        name: Content
+        name: Summary
         sortOrder: 2
       -
         elements:

@@ -1,11 +1,11 @@
 field: 8bd8738f-1331-4f55-b961-d5c2a2e44f53 # Chyron Content
 fieldLayouts:
-  76a9ce2f-93eb-4aa3-aff0-668d2baee443:
+  987a3a90-08e4-4c93-884e-9ce5c48f75bd:
     tabs:
       -
         elements:
           -
-            fieldUid: d2945aeb-f97f-44f8-ae58-958fffbe9f02 # Content
+            fieldUid: 24dfedab-186e-4f9c-92c3-d07cec6478bc # Content
             instructions: null
             label: null
             required: false
@@ -14,7 +14,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: dbaa01f2-5af0-41ec-9cab-823d5836031c # Entry
+            fieldUid: b3308f83-ddf3-4cb2-8918-e1fe0fc4c8c6 # Entry
             instructions: null
             label: null
             required: false
@@ -25,8 +25,8 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
-  d2945aeb-f97f-44f8-ae58-958fffbe9f02: # Content
-    columnSuffix: null
+  24dfedab-186e-4f9c-92c3-d07cec6478bc: # Content
+    columnSuffix: qmxexxre
     contentColumnType: text
     fieldGroup: null
     handle: itemContent
@@ -53,7 +53,7 @@ fields:
     translationKeyFormat: null
     translationMethod: none
     type: craft\redactor\Field
-  dbaa01f2-5af0-41ec-9cab-823d5836031c: # Entry
+  b3308f83-ddf3-4cb2-8918-e1fe0fc4c8c6: # Entry
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
@@ -66,7 +66,7 @@ fields:
       limit: '1'
       localizeRelations: false
       selectionLabel: 'Select an entry'
-      showSiteMenu: true
+      showSiteMenu: false
       source: null
       sources:
         - 'section:54497447-5d94-44d4-aed1-b898e86a9b77' # Events

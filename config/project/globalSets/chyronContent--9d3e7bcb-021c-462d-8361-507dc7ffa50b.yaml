@@ -1,5 +1,5 @@
 fieldLayouts:
-  4b6b5e0e-4ef4-41ea-a369-c24947fa7596:
+  38e6a8fa-d616-4460-9740-3fe8c7667cf9:
     tabs:
       -
         elements:
@@ -14,6 +14,6 @@ fieldLayouts:
             width: 100
         name: Content
         sortOrder: 1
-handle: chyron
+handle: chyronContent
 name: Chyron
 sortOrder: 5

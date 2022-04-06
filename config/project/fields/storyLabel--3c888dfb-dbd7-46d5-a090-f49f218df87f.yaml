@@ -1,9 +1,9 @@
-columnSuffix: uptnycbu
+columnSuffix: lqzswjgv
 contentColumnType: string(80)
-fieldGroup: eb6e4b27-3a81-4da1-8f40-fa29c0f7805c # Event
-handle: eventLabel
-instructions: 'Label that describes the type of event, e.g. "Book Signing" '
-name: 'Event Label'
+fieldGroup: 47e78d01-d60c-4623-939e-b212935f0db8 # Story
+handle: storyLabel
+instructions: 'Label that describes the type of story e.g. "Announcement" '
+name: 'Story Label'
 searchable: true
 settings:
   byteLimit: null

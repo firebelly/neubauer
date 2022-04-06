@@ -1,11 +1,11 @@
-field: 98ff0f93-0148-49ba-8068-9952f61abaa8 # Event Type New
+field: 98ff0f93-0148-49ba-8068-9952f61abaa8 # Event Type
 fieldLayouts:
-  b955fdb3-19cc-497b-845d-b8d8fa1ed0c4:
+  bc3cdbaa-b0d8-47d7-ac2b-bb810e286c5e:
     tabs:
       -
         elements:
           -
-            fieldUid: 3a5b1944-c7a4-4022-be4e-e6b33b57c3d5 # __blank__
+            fieldUid: b0266f26-047a-4db0-b20d-5f13e1345649 # __blank__
             instructions: null
             label: null
             required: false
@@ -16,7 +16,7 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
-  3a5b1944-c7a4-4022-be4e-e6b33b57c3d5: # __blank__
+  b0266f26-047a-4db0-b20d-5f13e1345649: # __blank__
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
@@ -28,7 +28,7 @@ fields:
       allowSelfRelations: false
       limit: '1'
       localizeRelations: false
-      selectionLabel: 'Select one Project or Exhibition'
+      selectionLabel: 'Select one project or exhibition'
       showSiteMenu: true
       source: null
       sources:

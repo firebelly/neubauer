@@ -1,6 +1,6 @@
 defaultPlacement: end
 fieldLayouts:
-  127250a8-9e53-402e-8321-4d8bddd7b17e:
+  c46eccc8-0341-4826-bc94-060019f43099:
     tabs:
       -
         elements:
@@ -27,10 +27,6 @@ fieldLayouts:
             type: craft\fieldlayoutelements\TitleField
             warning: null
             width: 100
-          -
-            template: control-panel/common/_event-results.html
-            type: craft\fieldlayoutelements\Template
-            width: 100
         name: Content
         sortOrder: 1
 handle: eventTypes
@@ -42,4 +38,4 @@ siteSettings:
     uriFormat: null
 structure:
   maxLevels: 1
-  uid: bcdeb266-5e6d-4e9b-a5cb-7056df8c9f45
+  uid: aec74a7c-a2f4-4dd3-a3f0-cdb97209335c

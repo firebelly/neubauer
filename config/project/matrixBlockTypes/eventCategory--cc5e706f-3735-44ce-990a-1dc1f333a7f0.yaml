@@ -1,11 +1,11 @@
-field: 98ff0f93-0148-49ba-8068-9952f61abaa8 # Event Type New
+field: 98ff0f93-0148-49ba-8068-9952f61abaa8 # Event Type
 fieldLayouts:
-  470fc709-c912-41f3-b02d-369bb5104183:
+  56f0c60f-e69b-49ec-b189-8b9d604e7497:
     tabs:
       -
         elements:
           -
-            fieldUid: b03bbb63-c974-457c-b5eb-90d0b7c80318 # __blank__
+            fieldUid: 89820bc7-3887-445e-a6b6-90628ee6a78a # __blank__
             instructions: null
             label: null
             required: false
@@ -16,7 +16,7 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
-  b03bbb63-c974-457c-b5eb-90d0b7c80318: # __blank__
+  89820bc7-3887-445e-a6b6-90628ee6a78a: # __blank__
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
@@ -31,9 +31,9 @@ fields:
       branchLimit: '1'
       limit: null
       localizeRelations: false
-      selectionLabel: 'Select one event type'
+      selectionLabel: 'Select an existing type, or create a new one'
       showSiteMenu: true
-      source: 'group:04d15f8d-5625-49a7-93cd-448ca5c25e91' # Event Types
+      source: 'group:d7bc1724-cfca-4d62-8b29-dbb9996201d1' # Event Types
       sources: '*'
       targetSiteId: null
       validateRelatedElements: false
@@ -41,6 +41,6 @@ fields:
     translationKeyFormat: null
     translationMethod: site
     type: craft\fields\Categories
-handle: eventType
-name: 'Event Type'
+handle: eventCategory
+name: 'Assign a Type'
 sortOrder: 1
