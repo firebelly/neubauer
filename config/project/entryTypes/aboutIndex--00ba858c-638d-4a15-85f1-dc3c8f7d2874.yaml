@@ -145,7 +145,7 @@ fieldLayouts:
       -
         elements:
           -
-            fieldUid: 31ccea3a-6188-4659-a373-d53b96a6866e # Publication Module
+            fieldUid: 31ccea3a-6188-4659-a373-d53b96a6866e # Publication Card
             instructions: null
             label: null
             required: false

@@ -13,9 +13,43 @@ fieldLayouts:
             type: craft\fieldlayoutelements\CustomField
             warning: null
             width: 100
+          -
+            fieldUid: 55c446a2-03ec-44b5-90d7-b1ace3db986b # Assign the narrative type, e.g. "Interview" or "Update"
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
         name: Content
         sortOrder: 1
 fields:
+  55c446a2-03ec-44b5-90d7-b1ace3db986b: # Assign the narrative type, e.g. "Interview" or "Update"
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: narrativeType
+    instructions: ''
+    name: 'Assign the narrative type, e.g. "Interview" or "Update"'
+    searchable: false
+    settings:
+      allowLimit: false
+      allowMultipleSources: false
+      allowSelfRelations: false
+      branchLimit: '1'
+      limit: null
+      localizeRelations: false
+      selectionLabel: 'Select one'
+      showSiteMenu: true
+      source: 'group:92afd0f9-75fa-4c34-87cf-55d7e10d1709' # Narrative Types
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Categories
   284b1f37-fd98-47e6-9a1a-1e1b6400a27e: # Select an existing "Story," or create a new one.
     columnSuffix: null
     contentColumnType: string

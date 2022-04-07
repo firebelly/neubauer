@@ -13,6 +13,15 @@ fieldLayouts:
             type: craft\fieldlayoutelements\CustomField
             warning: null
             width: 100
+          -
+            fieldUid: d4d66d55-83b7-4519-9f8b-0f44429b0fcb # Assign the narrative type, e.g. "Interview" or "Update"
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
         name: Content
         sortOrder: 1
 fields:
@@ -39,6 +48,31 @@ fields:
     translationKeyFormat: null
     translationMethod: site
     type: craft\fields\Entries
+  d4d66d55-83b7-4519-9f8b-0f44429b0fcb: # Assign the narrative type, e.g. "Interview" or "Update"
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: narrativeType
+    instructions: ''
+    name: 'Assign the narrative type, e.g. "Interview" or "Update"'
+    searchable: false
+    settings:
+      allowLimit: false
+      allowMultipleSources: false
+      allowSelfRelations: false
+      branchLimit: '1'
+      limit: null
+      localizeRelations: false
+      selectionLabel: 'Select one'
+      showSiteMenu: false
+      source: 'group:92afd0f9-75fa-4c34-87cf-55d7e10d1709' # Narrative Types
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Categories
 handle: exhibitionNarrative
 name: 'Exhibition Narrative'
 sortOrder: 2

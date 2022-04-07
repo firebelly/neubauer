@@ -1,4 +1,4 @@
-dateModified: 1649356857
+dateModified: 1649359133
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -92,7 +92,7 @@ meta:
     24dfedab-186e-4f9c-92c3-d07cec6478bc: Content # Content
     028f51f0-ce87-4a29-9df2-bf30a7cf4783: 'Public Transit' # Public Transit
     29a66baf-c15f-4cd8-bc9a-08825a4ee34d: Date # Date
-    31ccea3a-6188-4659-a373-d53b96a6866e: 'Publication Module' # Publication Module
+    31ccea3a-6188-4659-a373-d53b96a6866e: 'Publication Card' # Publication Card
     31f863f3-3c37-4273-80b7-b2b01e849db6: Label # Label
     34e083b7-1017-43e8-8a33-cb3b0f535740: 'Director''s Statement' # Director's Statement
     37e0e210-2202-421d-8e44-5c51a0756fa5: About # About
@@ -101,6 +101,7 @@ meta:
     47e78d01-d60c-4623-939e-b212935f0db8: Story # Story
     49f91a58-0c7a-4d84-a70d-fe29b1128987: 'Select an existing "Exhibition," or create a new one.' # Select an existing "Exhibition," or create a new one.
     52e70aed-6264-4441-939c-12b2bd00e0da: __blank__ # __blank__
+    55c446a2-03ec-44b5-90d7-b1ace3db986b: 'Assign the narrative type, e.g. "Interview" or "Update"' # Assign the narrative type, e.g. "Interview" or "Update"
     58d3215a-f902-4463-af05-977570812e6b: 'Nav Item' # Nav Item
     63a1e9e8-c4a6-4d3e-a317-a8b319be6454: Teaser # Teaser
     66a3bd47-7aa6-4023-9c01-4f4b2a2b1bdd: 'Error Index' # Error Index
@@ -108,6 +109,7 @@ meta:
     69f62ba0-22f7-4f78-a3bc-534d5f8c9b4b: 'Event Speakers' # Event Speakers
     70f4d9f3-ca18-4e75-aaf3-de2fdea80886: Text # Text
     77e2104f-9397-4206-877a-0aaf7f813485: __blank__ # __blank__
+    77efdc2f-3dce-4ea2-9b83-1740dd641b37: 'Assign the narrative type, e.g. "Interview" or "Update"' # Assign the narrative type, e.g. "Interview" or "Update"
     79d2570f-f700-4de3-a97d-71cfcbb2147e: __blank__ # __blank__
     80bdb7fb-a142-426f-a1cc-9bb2510da412: 'Neubauer Admin' # Neubauer Admin
     83a548ae-9269-46bb-8ee0-4a6929613dd7: Label # Label
@@ -115,6 +117,7 @@ meta:
     84d51659-d55a-4529-bd5d-9c19e31e6fdb: 'Add a link to the media source' # Add a link to the media source
     87ef4cab-5dca-4851-a37f-55955e5d3b85: Details # Details
     90ab227e-755c-40a8-95e5-b154c2284a37: Project # Project
+    92afd0f9-75fa-4c34-87cf-55d7e10d1709: 'Narrative Types' # Narrative Types
     92b6ae63-7c12-4164-b18e-082865cc14d9: 'Navigation ' # Navigation 
     94bfabd6-9486-45b8-b2e4-9f7c4fc77754: Media # Media
     094c3891-3671-46cc-a1e0-25740e798305: Times # Times
@@ -122,6 +125,7 @@ meta:
     98ff0f93-0148-49ba-8068-9952f61abaa8: 'Event Type' # Event Type
     206e479c-63c6-4776-b5f2-709e81c8c2fd: Person # Person
     211d8ffa-e118-477a-9379-becaeefefc0c: Metrics # Metrics
+    234d0e05-8c36-47e1-9abd-923df544c4c6: 'News Narrative' # News Narrative
     249fd232-b192-4cea-86f7-5021537ee990: Name # Name
     277b15b0-89ac-490a-a182-ae5e944cac7c: Speaker # Speaker
     284b1f37-fd98-47e6-9a1a-1e1b6400a27e: 'Select an existing "Story," or create a new one.' # Select an existing "Story," or create a new one.
@@ -138,6 +142,7 @@ meta:
     674ab64e-555a-4055-af9f-7de041bafff6: __blank__ # __blank__
     701cfbb8-e49f-44d4-bb35-4ccf09a62656: Summary # Summary
     712ad535-5310-4cbf-8e0a-625c9dcd2162: Caption # Caption
+    0735be14-c43b-4c21-b1f9-d7e486aa10b0: 'Assign the narrative type, e.g. "Interview" or "Update"' # Assign the narrative type, e.g. "Interview" or "Update"
     818f53aa-3e82-415a-b006-29e756c48c47: Organization # Organization
     840b4f3b-b9bb-4665-8929-9d5969e6c272: Exhibition # Exhibition
     876e2d54-ffa5-4c34-9fda-7c192be75bc8: 'Common Label' # Common Label
@@ -189,6 +194,7 @@ meta:
     a6219b4e-e363-4841-8b3f-214010983360: 'Search Question' # Search Question
     a1501252-0e3e-4624-b2c3-03172c189638: Summary # Summary
     a9037236-9afc-4591-8ab0-5d1ed7c8dac6: 'Alt Text' # Alt Text
+    ab6d1ca2-b382-4307-be36-9436006194d8: __blank__ # __blank__
     abf135fc-5443-48d6-bc54-cf819645a909: Abstract # Abstract
     ad039f29-1b37-466f-8148-84f4a6bad1e2: 'Contact Info' # Contact Info
     ae7b786d-4670-4705-ad8f-15b732234f3d: Image # Image
@@ -220,6 +226,7 @@ meta:
     cf51bd0c-dc97-4734-9328-2dcbf1c1f311: Homepage # Homepage
     d2eef677-ad04-43ad-b73c-1d87978f3538: URL # URL
     d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a: Common # Common
+    d4d66d55-83b7-4519-9f8b-0f44429b0fcb: 'Assign the narrative type, e.g. "Interview" or "Update"' # Assign the narrative type, e.g. "Interview" or "Update"
     d5c86c8a-c961-4fb2-8348-90331ee47da2: 'Opener Content' # Opener Content
     d6d530ae-230b-42de-bb1f-d5c341704755: 'Brief description of story' # Brief description of story
     d7bc1724-cfca-4d62-8b29-dbb9996201d1: 'Event Types' # Event Types

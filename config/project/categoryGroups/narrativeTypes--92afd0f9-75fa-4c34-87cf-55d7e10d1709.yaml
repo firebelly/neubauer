@@ -1,0 +1,41 @@
+defaultPlacement: end
+fieldLayouts:
+  66c64b14-e2c9-4c2f-b753-435d019d19c2:
+    tabs:
+      -
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\TitleField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+handle: narrativeTypes
+name: 'Narrative Types'
+siteSettings:
+  0c99f337-2218-4c6f-b0ad-30589c1ebbc5: # neubauer
+    hasUrls: true
+    template: null
+    uriFormat: 'narrative-types/{slug}'
+structure:
+  maxLevels: 1
+  uid: 0571cedc-b054-42f1-9758-79b3c7da24b0

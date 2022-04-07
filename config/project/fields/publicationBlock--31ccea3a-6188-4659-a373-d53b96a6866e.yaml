@@ -3,7 +3,7 @@ contentColumnType: string
 fieldGroup: 37e0e210-2202-421d-8e44-5c51a0756fa5 # About
 handle: publicationBlock
 instructions: 'Add card modules as needed. Rearrange by drag & drop.'
-name: 'Publication Module'
+name: 'Publication Card'
 searchable: true
 settings:
   contentTable: '{{%matrixcontent_publicationblock}}'

@@ -1,11 +1,11 @@
 field: 307bc9bb-3bc7-45b4-b535-976adc89de97 # Narrative Block
 fieldLayouts:
-  f142aa3c-5af5-4d07-88f7-2ac1b329a3b4:
+  b222a883-2132-4d59-ac3d-654917ec97f5:
     tabs:
       -
         elements:
           -
-            fieldUid: c00a2e11-74cb-4d5b-95f2-1878dee82fee # Select an existing "Event," or create a new one.
+            fieldUid: ab6d1ca2-b382-4307-be36-9436006194d8 # __blank__
             instructions: null
             label: null
             required: false
@@ -14,7 +14,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 77efdc2f-3dce-4ea2-9b83-1740dd641b37 # Assign the narrative type, e.g. "Interview" or "Update"
+            fieldUid: 0735be14-c43b-4c21-b1f9-d7e486aa10b0 # Assign the narrative type, e.g. "Interview" or "Update"
             instructions: null
             label: null
             required: false
@@ -25,7 +25,7 @@ fieldLayouts:
         name: Content
         sortOrder: 1
 fields:
-  77efdc2f-3dce-4ea2-9b83-1740dd641b37: # Assign the narrative type, e.g. "Interview" or "Update"
+  0735be14-c43b-4c21-b1f9-d7e486aa10b0: # Assign the narrative type, e.g. "Interview" or "Update"
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
@@ -50,29 +50,29 @@ fields:
     translationKeyFormat: null
     translationMethod: site
     type: craft\fields\Categories
-  c00a2e11-74cb-4d5b-95f2-1878dee82fee: # Select an existing "Event," or create a new one.
+  ab6d1ca2-b382-4307-be36-9436006194d8: # __blank__
     columnSuffix: null
     contentColumnType: string
     fieldGroup: null
     handle: item
-    instructions: ''
-    name: 'Select an existing "Event," or create a new one.'
+    instructions: 'Select an existing "News," or create a new one.'
+    name: __blank__
     searchable: false
     settings:
       allowSelfRelations: false
       limit: '1'
       localizeRelations: false
-      selectionLabel: 'Add an event'
+      selectionLabel: 'Add a News entry'
       showSiteMenu: true
       source: null
       sources:
-        - 'section:54497447-5d94-44d4-aed1-b898e86a9b77' # Events
+        - 'section:3d42007e-9de2-48c6-a935-e29a45fa3f7c' # News
       targetSiteId: null
       validateRelatedElements: false
       viewMode: null
     translationKeyFormat: null
     translationMethod: site
     type: craft\fields\Entries
-handle: eventNarrative
-name: 'Event Narrative'
-sortOrder: 3
+handle: newsNarrative
+name: 'News Narrative'
+sortOrder: 4
