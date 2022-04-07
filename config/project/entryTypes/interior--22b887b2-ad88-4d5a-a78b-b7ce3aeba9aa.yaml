@@ -79,7 +79,7 @@ fieldLayouts:
       -
         elements:
           -
-            fieldUid: 63a1e9e8-c4a6-4d3e-a317-a8b319be6454
+            fieldUid: 63a1e9e8-c4a6-4d3e-a317-a8b319be6454 # Teaser
             instructions: 'Add content to represent the entry throughout the site. (Max characters: 350)'
             label: 'Brief news description'
             required: ''
@@ -88,7 +88,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: b4df5032-8566-4b5b-8aa6-6345a7e93081
+            fieldUid: b4df5032-8566-4b5b-8aa6-6345a7e93081 # Body
             instructions: '(Optional) Content for the entry that either exceeds the brief description length requirements, or requires additional formatting; no character count restrictions.'
             label: 'Full news description'
             required: ''

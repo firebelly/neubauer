@@ -1,10 +1,10 @@
 columnSuffix: null
 contentColumnType: text
-fieldGroup: d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d # Homepage
-handle: openerTagline
-instructions: "Prominent site tagline, e.g. \"Open to Inquiry\"\r\n\r\nMax characters: 20"
-name: 'Opener Tagline'
-searchable: true
+fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
+handle: body
+instructions: 'Main content for entry; no character count restrictions.'
+name: Body
+searchable: false
 settings:
   availableTransforms: '*'
   availableVolumes: '*'
@@ -14,7 +14,7 @@ settings:
   manualConfig: ''
   purifierConfig: ''
   purifyHtml: '1'
-  redactorConfig: Simple.json
+  redactorConfig: Body.json
   removeEmptyTags: '1'
   removeInlineStyles: '1'
   removeNbsp: '1'

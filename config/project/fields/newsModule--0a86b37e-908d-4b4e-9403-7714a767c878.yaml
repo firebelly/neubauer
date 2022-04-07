@@ -1,0 +1,22 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 37e0e210-2202-421d-8e44-5c51a0756fa5 # About
+handle: newsModule
+instructions: 'Add as many News entries as needed. Rearrange by drag & drop. If none selected, module will be dynamically populated by the most recent News entries.'
+name: 'News Module'
+searchable: true
+settings:
+  allowSelfRelations: false
+  limit: ''
+  localizeRelations: false
+  selectionLabel: 'Add a News entry'
+  showSiteMenu: true
+  source: null
+  sources:
+    - 'section:3d42007e-9de2-48c6-a935-e29a45fa3f7c' # News
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Entries

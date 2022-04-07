@@ -105,7 +105,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: b4df5032-8566-4b5b-8aa6-6345a7e93081
+            fieldUid: b4df5032-8566-4b5b-8aa6-6345a7e93081 # Body
             instructions: '(Optional) Content for the entry that either exceeds the brief description length requirements, or requires additional formatting; no character count restrictions.'
             label: 'Full event description'
             required: ''

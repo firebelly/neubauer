@@ -81,7 +81,7 @@ fieldLayouts:
           -
             type: craft\fieldlayoutelements\HorizontalRule
           -
-            fieldUid: b4df5032-8566-4b5b-8aa6-6345a7e93081
+            fieldUid: b4df5032-8566-4b5b-8aa6-6345a7e93081 # Body
             instructions: 'Content introducing the Impact section; no character count restriction (Recommended max char: 500). '
             label: Introduction
             required: ''
@@ -127,7 +127,7 @@ fieldLayouts:
             type: craft\fieldlayoutelements\CustomField
             warning: null
             width: 100
-        name: Visiting
+        name: 'Visit the Collegium'
         sortOrder: 5
       -
         elements:
@@ -140,8 +140,42 @@ fieldLayouts:
             type: craft\fieldlayoutelements\CustomField
             warning: null
             width: 100
-        name: Application
+        name: 'Application Process'
         sortOrder: 6
+      -
+        elements:
+          -
+            fieldUid: 31ccea3a-6188-4659-a373-d53b96a6866e # Publication Module
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/about/_publications-section.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Publications
+        sortOrder: 7
+      -
+        elements:
+          -
+            fieldUid: 0a86b37e-908d-4b4e-9403-7714a767c878 # News Module
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            template: control-panel/about/_news-section.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: 'News &amp; Announcements'
+        sortOrder: 8
 handle: aboutIndex
 hasTitleField: false
 name: 'About Index'

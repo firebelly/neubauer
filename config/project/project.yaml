@@ -1,4 +1,4 @@
-dateModified: 1649355241
+dateModified: 1649356857
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -11,6 +11,7 @@ email:
   transportType: craft\mailgun\MailgunAdapter
 meta:
   __names__:
+    0a86b37e-908d-4b4e-9403-7714a767c878: 'News Module' # News Module
     00ba858c-638d-4a15-85f1-dc3c8f7d2874: 'About Index' # About Index
     0c6fe226-534a-4703-a928-3b7937eba1db: 'Featured Project' # Featured Project
     0c99f337-2218-4c6f-b0ad-30589c1ebbc5: neubauer # neubauer
@@ -23,6 +24,7 @@ meta:
     1c4b2c81-42c9-4a48-bc45-d96d7cb075a1: Affiliation # Affiliation
     1d5d9084-5116-4341-9273-0e6750188d00: 'Story Narrative' # Story Narrative
     1d2233b4-6057-429d-8554-943383539dcb: Label # Label
+    1dc1a829-2d1a-40ac-a13b-7bdaf0833a08: Link # Link
     1dcbcf8b-88b0-4ed2-83c1-72478538fa6a: 'Exhibition Narrative' # Exhibition Narrative
     2a21450c-2eec-4dd9-8471-32730404d554: __blank__ # __blank__
     2aa7cc76-d234-465e-bccf-a196b38144e4: Email # Email
@@ -49,6 +51,7 @@ meta:
     4defd050-67bf-44b0-a585-e6a0f635921d: Summary # Summary
     4e880cde-b663-435b-98ea-3b28ebd17af7: 'Key Question Content' # Key Question Content
     4f3f74e9-4363-4024-a787-0167c7a8081a: 'Add a link to the registration page' # Add a link to the registration page
+    5b3d76c6-c34a-4630-9901-1c8c7318fd33: Label # Label
     5ba5eada-4ccb-4ca0-a520-75a5754991f9: Caption # Caption
     5c40b73f-d87a-4035-b7a3-070b71bdb617: 'Gallery Image' # Gallery Image
     5f9f5e73-b6cf-46f5-8012-60b8301bff36: Description # Description
@@ -78,6 +81,7 @@ meta:
     0010ba27-d0a4-4950-af7e-f237a1ec9b3b: Bio # Bio
     10ed9c28-61c3-4258-bc65-24b2ecaa7930: Asset # Asset
     12ad0b83-e6ab-4142-9db5-c960ec0dab4d: 'Connect a Project or Exhibition' # Connect a Project or Exhibition
+    12b1855c-a2bd-4c00-a485-0d2b21cdacf3: Downloadable # Downloadable
     13c69d07-19c1-4dc3-af5a-7145671835bc: 'Quote Content' # Quote Content
     15bb1bb5-a683-4cf9-a1b5-3edfe2182dfa: 'Research Index' # Research Index
     15bc16dd-1c9e-43ad-b846-1a41657cc675: 'Nav Name' # Nav Name
@@ -88,6 +92,7 @@ meta:
     24dfedab-186e-4f9c-92c3-d07cec6478bc: Content # Content
     028f51f0-ce87-4a29-9df2-bf30a7cf4783: 'Public Transit' # Public Transit
     29a66baf-c15f-4cd8-bc9a-08825a4ee34d: Date # Date
+    31ccea3a-6188-4659-a373-d53b96a6866e: 'Publication Module' # Publication Module
     31f863f3-3c37-4273-80b7-b2b01e849db6: Label # Label
     34e083b7-1017-43e8-8a33-cb3b0f535740: 'Director''s Statement' # Director's Statement
     37e0e210-2202-421d-8e44-5c51a0756fa5: About # About
@@ -97,6 +102,7 @@ meta:
     49f91a58-0c7a-4d84-a70d-fe29b1128987: 'Select an existing "Exhibition," or create a new one.' # Select an existing "Exhibition," or create a new one.
     52e70aed-6264-4441-939c-12b2bd00e0da: __blank__ # __blank__
     58d3215a-f902-4463-af05-977570812e6b: 'Nav Item' # Nav Item
+    63a1e9e8-c4a6-4d3e-a317-a8b319be6454: Teaser # Teaser
     66a3bd47-7aa6-4023-9c01-4f4b2a2b1bdd: 'Error Index' # Error Index
     68fdccfc-d2f6-4e92-a49c-22f02d67d3b7: Quote # Quote
     69f62ba0-22f7-4f78-a3bc-534d5f8c9b4b: 'Event Speakers' # Event Speakers
@@ -130,6 +136,7 @@ meta:
     539c4bcb-5095-490d-81b8-872d3745551f: 'Card Image' # Card Image
     592d2e6a-2bb7-4989-9a4a-32917490d422: Supporters # Supporters
     674ab64e-555a-4055-af9f-7de041bafff6: __blank__ # __blank__
+    701cfbb8-e49f-44d4-bb35-4ccf09a62656: Summary # Summary
     712ad535-5310-4cbf-8e0a-625c9dcd2162: Caption # Caption
     818f53aa-3e82-415a-b006-29e756c48c47: Organization # Organization
     840b4f3b-b9bb-4665-8929-9d5969e6c272: Exhibition # Exhibition
@@ -190,6 +197,7 @@ meta:
     b0ae2ad9-7257-4cbf-9876-384fbc36354e: 'Street Address' # Street Address
     b0266f26-047a-4db0-b20d-5f13e1345649: __blank__ # __blank__
     b4c86b0f-0134-4afa-8b28-6198a09c626e: 'Impact Module' # Impact Module
+    b4df5032-8566-4b5b-8aa6-6345a7e93081: Body # Body
     b5afa9b0-dd12-4d99-9bdd-fba44a0186a4: End # End
     b9aaff06-fe75-4456-b02d-bc5736565777: 'Provide the length of audio, video, or podcast source' # Provide the length of audio, video, or podcast source
     b45dd5d4-f13d-4da4-a383-147faa04ecdb: Start # Start
@@ -210,6 +218,7 @@ meta:
     cc5e706f-3735-44ce-990a-1dc1f333a7f0: 'Assign a Type' # Assign a Type
     cdc834cd-c6bc-443d-ba86-edc70defd5a0: Location # Location
     cf51bd0c-dc97-4734-9328-2dcbf1c1f311: Homepage # Homepage
+    d2eef677-ad04-43ad-b73c-1d87978f3538: URL # URL
     d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a: Common # Common
     d5c86c8a-c961-4fb2-8348-90331ee47da2: 'Opener Content' # Opener Content
     d6d530ae-230b-42de-bb1f-d5c341704755: 'Brief description of story' # Brief description of story
@@ -220,6 +229,7 @@ meta:
     d80e45b8-04d1-46ed-acdf-4a78508e73c6: Appearance # Appearance
     d85f10e5-6a53-4c82-956e-f77206b13f99: From # From
     d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d: Homepage # Homepage
+    d881a8aa-3ea4-488c-81fb-8d5dc7290b32: Module # Module
     d5943f00-060b-4c27-974e-b57dccb00c41: Title # Title
     da9f5f4f-4753-45ed-a951-351b4cc3cd75: Type # Type
     db13480f-0f0d-476a-95af-c94977ab68f9: 'Events Index' # Events Index
@@ -255,6 +265,7 @@ meta:
     fbf7fd25-1dd4-4ceb-a4d9-c468db28e4c9: Interior # Interior
     fc6b0492-412d-4f80-89fc-b9b73ebdb601: Statistic # Statistic
     fd969c8b-861f-4a69-8f86-4bab475af647: 'Opener Content' # Opener Content
+    fda40138-d4a1-4d3d-b372-f29332e386f0: Image # Image
 plugins:
   blitz:
     edition: standard

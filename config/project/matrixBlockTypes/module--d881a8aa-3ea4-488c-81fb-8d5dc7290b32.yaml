@@ -1,0 +1,180 @@
+field: 31ccea3a-6188-4659-a373-d53b96a6866e # Publication Module
+fieldLayouts:
+  1dc21c2f-4401-4e75-9459-c39f27491bff:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: fda40138-d4a1-4d3d-b372-f29332e386f0 # Image
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 701cfbb8-e49f-44d4-bb35-4ccf09a62656 # Summary
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 12b1855c-a2bd-4c00-a485-0d2b21cdacf3 # Downloadable
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 1dc1a829-2d1a-40ac-a13b-7bdaf0833a08 # Link
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  1dc1a829-2d1a-40ac-a13b-7bdaf0833a08: # Link
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: actionLink
+    instructions: 'Add as many links as needed'
+    name: Link
+    searchable: false
+    settings:
+      columns:
+        __assoc__:
+          -
+            - 5b3d76c6-c34a-4630-9901-1c8c7318fd33 # Label
+            -
+              __assoc__:
+                -
+                  - width
+                  - ''
+          -
+            - d2eef677-ad04-43ad-b73c-1d87978f3538 # URL
+            -
+              __assoc__:
+                -
+                  - width
+                  - ''
+      contentTable: '{{%stc_35_actionlink}}'
+      fieldLayout: matrix
+      maxRows: ''
+      minRows: ''
+      placeholderKey: null
+      propagationKeyFormat: null
+      propagationMethod: all
+      selectionLabel: 'Add a link'
+      staticField: ''
+    translationKeyFormat: null
+    translationMethod: site
+    type: verbb\supertable\fields\SuperTableField
+  12b1855c-a2bd-4c00-a485-0d2b21cdacf3: # Downloadable
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: downloadLink
+    instructions: 'Add PDF documents that can be downloaded by visitors. Add as many as needed.'
+    name: Downloadable
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      allowUploads: true
+      allowedKinds:
+        - pdf
+      defaultUploadLocationSource: 'volume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+      defaultUploadLocationSubpath: about/application/
+      limit: ''
+      localizeRelations: false
+      previewMode: full
+      restrictFiles: '1'
+      selectionLabel: 'Add a PDF'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      singleUploadLocationSource: 'volume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+      singleUploadLocationSubpath: ''
+      source: null
+      sources: '*'
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: list
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+  701cfbb8-e49f-44d4-bb35-4ccf09a62656: # Summary
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: cardSummary
+    instructions: ''
+    name: Summary
+    searchable: false
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Abstract.json
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: ''
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  fda40138-d4a1-4d3d-b372-f29332e386f0: # Image
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: cardImage
+    instructions: ''
+    name: Image
+    searchable: false
+    settings:
+      allowSelfRelations: false
+      allowUploads: true
+      allowedKinds: null
+      defaultUploadLocationSource: 'volume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+      defaultUploadLocationSubpath: about/publication/
+      limit: '1'
+      localizeRelations: false
+      previewMode: full
+      restrictFiles: ''
+      selectionLabel: 'Add an image'
+      showSiteMenu: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      singleUploadLocationSource: 'volume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+      singleUploadLocationSubpath: ''
+      source: null
+      sources: '*'
+      targetSiteId: null
+      useSingleFolder: false
+      validateRelatedElements: false
+      viewMode: large
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Assets
+handle: module
+name: Module
+sortOrder: 1
