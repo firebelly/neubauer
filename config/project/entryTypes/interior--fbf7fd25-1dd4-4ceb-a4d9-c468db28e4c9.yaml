@@ -97,14 +97,23 @@ fieldLayouts:
         elements:
           -
             fieldUid: afd5fc2a-82b5-40f5-908b-f8e679205d29 # Brief description of exhibition
-            instructions: null
-            label: null
-            required: false
+            instructions: ''
+            label: 'Brief exhibition description'
+            required: ''
             tip: null
             type: craft\fieldlayoutelements\CustomField
             warning: null
             width: 100
-        name: Summary
+          -
+            fieldUid: 4defd050-67bf-44b0-a585-e6a0f635921d # Summary
+            instructions: 'This content can be expanded and collapsed by the visitor (it is collapsed by default).'
+            label: 'Full exhibition description'
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
         sortOrder: 2
       -
         elements:

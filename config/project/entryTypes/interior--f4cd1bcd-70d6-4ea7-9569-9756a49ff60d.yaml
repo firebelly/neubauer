@@ -102,7 +102,7 @@ fieldLayouts:
             template: control-panel/projects/_project-summary.html
             type: craft\fieldlayoutelements\Template
             width: 100
-        name: Summary
+        name: Content
         sortOrder: 2
       -
         elements:
