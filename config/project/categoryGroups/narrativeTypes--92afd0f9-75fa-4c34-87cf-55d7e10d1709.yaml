@@ -27,6 +27,10 @@ fieldLayouts:
             type: craft\fieldlayoutelements\TitleField
             warning: null
             width: 100
+          -
+            template: control-panel/common/_narrative-results.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
         name: Content
         sortOrder: 1
 handle: narrativeTypes

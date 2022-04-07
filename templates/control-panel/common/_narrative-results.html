@@ -1,0 +1,51 @@
+<style>
+.adminTip-list {
+    margin-left: 2em;
+    margin-bottom: 3em;
+    list-style-type: disc;
+}
+.adminTip-item {
+    margin-bottom: 1em;
+}
+.adminTip-p {
+    margin-bottom: 3em;
+}
+.adminTip-box {
+    margin-top: 0;
+    margin-bottom: 3em;
+    background: #f3f7fc;
+    padding: 1em;
+    border-radius: 10px;
+}
+.adminTip-title {
+    margin: 0 0 14px 0;
+}
+</style>
+
+{% set currentType = element %}
+{% set matrixBlocksQuery = craft.matrixBlocks().field('narrativeBlock') %}
+{% set currentBlock = matrixBlocksQuery.all()|filter(block => (block.narrativeType == currentType)) %}
+
+{% set narrativeEntries = craft.entries()
+    .with('narrativeBlock')
+    .narrativeBlock(':notempty:')
+    .all()
+%} 
+
+<h2 class="adminTip-title"><strong>Narrative Entries</strong> tagged "{{ currentType }}:"</h2>
+<ul class="adminTip-list">
+{% for entry in narrativeEntries %}
+    {% for b in entry.narrativeBlock if b.narrativeType.one() is not null and b.narrativeType.one().title == currentType %}
+    <li class="adminTip-item">
+        {{ entry.section }}:
+    {% if entry.isEditable() %}
+        <a href="{{ entry.cpEditUrl }}">
+        {{ entry }}
+        </a>
+    {% else %}
+        {{ entry }}
+    {% endif %}
+    </li>
+    {% endfor %}
+{% endfor %}
+</ul>
