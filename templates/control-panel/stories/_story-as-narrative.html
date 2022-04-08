@@ -18,6 +18,9 @@
 .adminTip-title {
     margin: 0 0 14px 0;
 }
+.adminTip-warning {
+    color: #cf1124;
+}
 </style>
 
 {% set currentStory, currentSlug = element, element.slug %}
@@ -53,7 +56,13 @@
         {% else %}
             {{ entry }}
         {% endif %}
-            ({{ entry.narrativeBlock[0].narrativeType[0] }})
+            (
+            {% if entry.narrativeBlock[0].narrativeType|length > 0 %}
+            {{ entry.narrativeBlock[0].narrativeType[0] }}
+            {% else %}
+            <span class="adminTip-warning">Make sure to assign a Narrative Type!</span>
+            {% endif %}
+            )
         </li>
         {% endfor %}
     </ul>
