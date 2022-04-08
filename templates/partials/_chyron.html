@@ -1,4 +1,6 @@
-{% set chyronList = chyron.chyronBlock.all() %}
+{% set chyronList = chyronContent.chyronBlock.all() %}
+
+{% if chyronList %}
 <ul>
 {% for question in chyronList if question.itemContent is not null and question.itemContent != '' %}
 {% set questionType = question.type %}
@@ -18,3 +20,4 @@
 {% endfor %}
     <li>
 </ul>
+{% endif %}

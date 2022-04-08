@@ -1,0 +1,16 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
+handle: socialMediaBlock
+instructions: 'Add as many or few social media accounts as needed; rearrange by drag & drop.'
+name: 'Social Media Block'
+searchable: true
+settings:
+  contentTable: '{{%matrixcontent_socialmediablock}}'
+  maxBlocks: ''
+  minBlocks: ''
+  propagationKeyFormat: null
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

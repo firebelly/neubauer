@@ -1,4 +1,4 @@
-dateModified: 1649438616
+dateModified: 1649449946
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -45,6 +45,7 @@ meta:
     3d42007e-9de2-48c6-a935-e29a45fa3f7c: News # News
     3dd9b99c-cb0a-4c19-b011-525e2fb81430: Intro # Intro
     3e8382d6-a793-41db-bed1-5fa902fc4b33: Image # Image
+    3ea0f193-6608-4555-8564-e2a8a595a248: 'Assign the narrative type, e.g. "Interview" or "Update"' # Assign the narrative type, e.g. "Interview" or "Update"
     3ea2c78d-77d3-4d32-8e59-ee65d76e2cc8: 'Publication Name' # Publication Name
     4a309e71-113e-4d32-b1cf-253702d72281: Label # Label
     4d051939-b6d0-4800-8c01-a156665ad91f: Register # Register
@@ -89,11 +90,13 @@ meta:
     18fb76df-c956-475c-8202-71b47fa72ddb: 'People Index' # People Index
     22b887b2-ad88-4d5a-a78b-b7ce3aeba9aa: Interior # Interior
     24a17e09-26e2-478c-9dfe-bbca0be0122b: 'Select a Neubauer page as the destination' # Select a Neubauer page as the destination
+    24d2f934-5106-4961-a508-9e1c2c0a6523: Link # Link
     24dfedab-186e-4f9c-92c3-d07cec6478bc: Content # Content
     028f51f0-ce87-4a29-9df2-bf30a7cf4783: 'Public Transit' # Public Transit
     29a66baf-c15f-4cd8-bc9a-08825a4ee34d: Date # Date
     31ccea3a-6188-4659-a373-d53b96a6866e: 'Publication Card' # Publication Card
     31f863f3-3c37-4273-80b7-b2b01e849db6: Label # Label
+    32f9b9fa-12d2-4ead-aa7c-293f935d8b49: 'Select an existing "Event," or create a new one.' # Select an existing "Event," or create a new one.
     34e083b7-1017-43e8-8a33-cb3b0f535740: 'Director''s Statement' # Director's Statement
     37e0e210-2202-421d-8e44-5c51a0756fa5: About # About
     38e5dea1-a869-47af-a6c8-f358a344f764: Zip # Zip
@@ -154,6 +157,7 @@ meta:
     1762d70d-bae6-49fd-8b8e-ac8f767621d1: 'Primary Footer' # Primary Footer
     3530a622-54c3-4a05-89a1-490b289f1cec: __blank__ # __blank__
     3672d36f-9790-4efa-a11b-46144c88fe0d: 'Display Text' # Display Text
+    4595f226-a343-454c-a78b-80ad7f939249: 'Assign the narrative type, e.g. "Interview" or "Update"' # Assign the narrative type, e.g. "Interview" or "Update"
     5954c04f-9f0f-49bd-ab19-7f17413ca714: Video # Video
     6189b323-6110-479a-85ea-f4d0cf190af5: 'Primary Nav' # Primary Nav
     6217da4c-403b-4e7c-bfd0-c78365638e41: Citations # Citations
@@ -161,6 +165,7 @@ meta:
     6746fb81-7195-494d-9d0c-4df815f0a944: 'Year Range' # Year Range
     7262daec-b184-417d-a7e4-376944b1e70d: Link # Link
     7426f4ea-af7c-4a85-9784-117b708b8697: __blank__ # __blank__
+    8977d749-6906-4bdc-9aaf-451609ba4d7c: 'Assign the narrative type, e.g. "Interview" or "Update"' # Assign the narrative type, e.g. "Interview" or "Update"
     9649df13-0153-45ec-a469-921435e36fb6: From # From
     9667b568-5c61-43f1-97ab-523933c4c48e: Page # Page
     9906c196-b7f3-460c-98b0-308b1becd435: Video # Video
@@ -183,6 +188,7 @@ meta:
     51786161-bb39-4ca3-9246-d4f938d1a053: 'Research Index' # Research Index
     54497447-5d94-44d4-aed1-b898e86a9b77: Events # Events
     55170991-72d7-4945-8338-4d7eeefd8536: Custom # Custom
+    57708355-0a0c-4feb-859f-63c94368102f: 'Social Media' # Social Media
     59088958-5649-44ab-993b-ae474fef4c67: 'Add a link to the web page' # Add a link to the web page
     98858034-126a-44ae-9de2-5508625e9e84: 'Exhibitions Index' # Exhibitions Index
     a1ea3cc0-8cb8-43e4-bad0-c6ae57f4a69b: Homepage # Homepage
@@ -212,7 +218,9 @@ meta:
     b29919d5-0aa5-4e6a-a38e-29e3e9653ee0: __blank__ # __blank__
     b79984f8-2e51-4b9f-8356-b887f57da8fd: Call-to-Actions # Call-to-Actions
     ba7372d1-df0e-4e4c-8081-62faf2c8bcbb: 'Opener Tagline' # Opener Tagline
+    bab2fab6-030d-4cb9-bdcd-971b52abbe67: __blank__ # __blank__
     bcfd93a5-57c1-4491-bbc0-aca218206183: 'Start Date' # Start Date
+    bd387ad3-9eca-44c7-aeae-486526445991: 'Select an existing "Exhibition," or create a new one.' # Select an existing "Exhibition," or create a new one.
     bd77161e-1841-4cfe-b745-6b2d4e682211: Actions # Actions
     be34ca8a-c5ee-41e9-abef-a35dc22b2f53: Image # Image
     befa4c7d-b94d-49e4-b3a1-857d02a67a3b: 'Brief description of event' # Brief description of event
@@ -247,6 +255,7 @@ meta:
     de799ef4-ed53-41ef-b492-3bc203754793: Phone # Phone
     df9b5267-3176-4fe5-821f-ffe2e2e2f686: To # To
     e073e248-18f9-4384-84cf-1c0bb14dcae7: 'Site Info' # Site Info
+    e2d045e2-3dc6-4cf3-8c04-a45386af6c1a: 'Social Media Block' # Social Media Block
     e87d9e34-bb47-4572-9a96-58f7eb8fa706: 'Section Filter' # Section Filter
     e93b9edb-c0f9-454a-b64e-43cd24153a86: 'Featured Exhibition' # Featured Exhibition
     e104f1e4-4334-4b43-80b2-47e3fb3813f7: Heading # Heading
@@ -269,6 +278,7 @@ meta:
     f381cf42-98f4-4280-9d24-82164617ae1f: 'Person Type' # Person Type
     f3776d53-2d8b-4cc5-9aac-fafbf6dd7049: 'External Link' # External Link
     fa7b84ab-aced-4076-9af6-f7c241f2470f: Text # Text
+    fb52e73d-18c1-4598-bf42-1b39479958df: 'Account e.g. "Facebook" or "Instagram"' # Account e.g. "Facebook" or "Instagram"
     fbf7fd25-1dd4-4ceb-a4d9-c468db28e4c9: Interior # Interior
     fc6b0492-412d-4f80-89fc-b9b73ebdb601: Statistic # Statistic
     fd969c8b-861f-4a69-8f86-4bab475af647: 'Opener Content' # Opener Content
