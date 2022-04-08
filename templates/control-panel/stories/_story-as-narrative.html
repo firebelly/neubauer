@@ -1,0 +1,63 @@
+<style>
+.adminTip-list--0 {
+    margin-left: 2em;
+    list-style-type: disc;
+}
+.adminTip-item {
+    margin-bottom: 1em;
+}
+.adminTip-p {
+    margin-bottom: 3em;
+}
+.adminTip-box--0 {
+    margin-top: 0;
+    background: #f3f7fc;
+    padding: 1em;
+    border-radius: 10px;
+}
+.adminTip-title {
+    margin: 0 0 14px 0;
+}
+</style>
+
+{% set currentStory, currentSlug = element, element.slug %}
+{% set narrativeEntries = craft.entries()
+    .with('narrativeBlock')
+    .narrativeBlock(':notempty:')
+    .all()
+%} 
+{% set isNarrative = false %}
+
+{% set narratives = [] %}
+{% if currentSlug and narrativeEntries %}
+{% for entry in narrativeEntries %}
+    {% set narrativeBlock = entry.narrativeBlock %}
+    {% for b in narrativeBlock %} 
+        {% if b.type == "storyNarrative" and b.item.one() is not null and b.item.one().slug == currentSlug %}
+        {% set isNarrative = true %}
+        {% set narratives = narratives|merge([entry]) %}
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+{% endif %} 
+
+<div class="adminTip-box--0">
+    {% if isNarrative %}
+    <h4><strong>This story appears in the following Narratives:</strong></h4>
+    <ul class="adminTip-list--0">
+        {% for entry in narratives %}
+        <li class="adminTip-item">
+        {{ entry.section }}:
+        {% if entry.isEditable() %}
+            <a href="{{ entry.cpEditUrl }}">{{ entry }}</a>
+        {% else %}
+            {{ entry }}
+        {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>This story does not yet appear in any Narratives.</p> 
+    {% endif %}
+</div>
+
