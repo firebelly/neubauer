@@ -38,15 +38,6 @@ fieldLayouts:
           -
             type: craft\fieldlayoutelements\HorizontalRule
           -
-            fieldUid: c14d2c78-f58f-45a6-b6d2-beed7ffabb69 # Story Type
-            instructions: null
-            label: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            warning: null
-            width: 100
-          -
             template: control-panel/stories/_story-as-narrative.html
             type: craft\fieldlayoutelements\Template
             width: 100
