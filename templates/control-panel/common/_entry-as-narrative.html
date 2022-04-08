@@ -23,12 +23,25 @@
 }
 </style>
 
-{% set currentStory, currentSlug = element, element.slug %}
+{% set currentStory, currentSlug, currentSection = element, element.slug, element.section %}
+{% set sectionSlug = "" %}
+{% switch currentSection %}
+    {% case 'Exhibitions' %}
+        {% set sectionSlug = "exhibition" %}
+    {% case 'Events' %}
+        {% set sectionSlug = "event" %}
+    {% case 'News' %}
+        {% set sectionSlug = "news" %}
+    {% case 'Stories' %}
+        {% set sectionSlug = "story" %}
+{% endswitch %}
+{% set currentType = sectionSlug ~ "Narrative" %}
 {% set narrativeEntries = craft.entries()
     .with('narrativeBlock')
     .narrativeBlock(':notempty:')
     .all()
 %} 
+
 {% set isNarrative = false %}
 
 {% set narratives = {} %}
@@ -36,7 +49,7 @@
 {% for entry in narrativeEntries %}
     {% set narrativeBlock = entry.narrativeBlock %}
     {% for b in narrativeBlock %} 
-        {% if b.type == "storyNarrative" and b.item.one() is not null and b.item.one().slug == currentSlug %}
+        {% if b.type == currentType and b.item.one() is not null and b.item.one().slug == currentSlug %}
         {% set isNarrative = true %}
         {% set item = {
             'title': entry.title,
@@ -50,11 +63,11 @@
 {% endfor %}
 {% endif %} 
 
-<h4><strong>Story as Narratives:</strong></h4>
-<p>To add this story to a Narrative, go to the "Narratives" tab within an Exhibition or Project, and click "+Story Narrative."</p>
+<h4><strong>{{ sectionSlug|title }} as Narrative(s):</strong></h4>
+<p>To add this {{ sectionSlug }} to a Narrative, go to the "Narratives" tab within an Exhibition or Project, and click "+Story Narrative."</p>
 <div class="adminTip-box--0">
     {% if isNarrative %}
-    <h4><strong>This story appears in the following Narratives:</strong></h4>
+    <h4><strong>This {{ sectionSlug }} appears in the following Narratives:</strong></h4>
     <ul class="adminTip-list--0">
         {% for item in narratives %}
         <li class="adminTip-item">
@@ -75,7 +88,7 @@
         {% endfor %}
     </ul>
     {% else %}
-    <p>This story does not yet appear in any Narratives.</p> 
+    <p>This {{ sectionSlug }} does not appear in any Narratives.</p> 
     {% endif %}
 </div>
 

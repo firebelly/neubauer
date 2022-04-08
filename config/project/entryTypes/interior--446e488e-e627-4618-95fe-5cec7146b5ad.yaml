@@ -73,6 +73,12 @@ fieldLayouts:
           -
             type: craft\fieldlayoutelements\HorizontalRule
           -
+            template: control-panel/common/_entry-as-narrative.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
             template: control-panel/common/_call-to-actions.html
             type: craft\fieldlayoutelements\Template
             width: 100
