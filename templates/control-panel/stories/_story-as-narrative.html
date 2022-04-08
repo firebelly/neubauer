@@ -31,14 +31,20 @@
 %} 
 {% set isNarrative = false %}
 
-{% set narratives = [] %}
+{% set narratives = {} %}
 {% if currentSlug and narrativeEntries %}
 {% for entry in narrativeEntries %}
     {% set narrativeBlock = entry.narrativeBlock %}
     {% for b in narrativeBlock %} 
         {% if b.type == "storyNarrative" and b.item.one() is not null and b.item.one().slug == currentSlug %}
         {% set isNarrative = true %}
-        {% set narratives = narratives|merge([entry]) %}
+        {% set item = {
+            'title': entry.title,
+            'url': entry.isEditable() ? entry.cpEditUrl : null,
+            'section': entry.section,
+            'type': b.narrativeType|length > 0 ? b.narrativeType[0].title : null
+        }%}
+        {% set narratives = narratives|merge([item]) %}
         {% endif %}
     {% endfor %}
 {% endfor %}
@@ -50,17 +56,17 @@
     {% if isNarrative %}
     <h4><strong>This story appears in the following Narratives:</strong></h4>
     <ul class="adminTip-list--0">
-        {% for entry in narratives %}
+        {% for item in narratives %}
         <li class="adminTip-item">
-        {{ entry.section }}:
-        {% if entry.isEditable() %}
-            <a href="{{ entry.cpEditUrl }}">{{ entry }}</a>
+        {{ item.section }}:
+        {% if item.url %}
+            <a href="{{ item.url }}">{{ item.title }}</a>
         {% else %}
-            {{ entry }}
+            {{ item.title }}
         {% endif %}
             (
-            {% if entry.narrativeBlock[0].narrativeType|length > 0 %}
-            {{ entry.narrativeBlock[0].narrativeType[0] }}
+            {% if item.type %}
+            {{ item.type }}
             {% else %}
             <span class="adminTip-warning">Make sure to assign a Narrative Type!</span>
             {% endif %}
