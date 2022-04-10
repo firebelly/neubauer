@@ -14,7 +14,7 @@ settings:
   localizeRelations: false
   selectionLabel: 'Add a story type'
   showSiteMenu: true
-  source: 'group:464d6956-ffb4-4883-a8af-830c2242c869' # Story Types
+  source: 'group:464d6956-ffb4-4883-a8af-830c2242c869'
   sources: '*'
   targetSiteId: null
   validateRelatedElements: false
