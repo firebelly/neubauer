@@ -482,12 +482,12 @@ img {
 }
 @supports not (aspect-ratio: 1) {
   .profileAsset--16-9 {
-    padding-bottom: calc("16"/"9" * 100%);
+    padding-bottom: calc(16/9 * 100%);
   }
 }
 @supports (aspect-ratio: 1) {
   .profileAsset--16-9 .profileAsset-image {
-    aspect-ratio: "16"/"9";
+    aspect-ratio: 16/9;
   }
 }
 @supports not (aspect-ratio: 1) {
@@ -499,12 +499,12 @@ img {
 }
 @supports not (aspect-ratio: 1) {
   .profileAsset--16-4_5 {
-    padding-bottom: calc("16"/"4.5" * 100%);
+    padding-bottom: calc(16/4.5 * 100%);
   }
 }
 @supports (aspect-ratio: 1) {
   .profileAsset--16-4_5 .profileAsset-image {
-    aspect-ratio: "16"/"4.5";
+    aspect-ratio: 16/4.5;
   }
 }
 @supports not (aspect-ratio: 1) {
@@ -516,12 +516,12 @@ img {
 }
 @supports not (aspect-ratio: 1) {
   .profileAsset--2-3 {
-    padding-bottom: calc("2"/"3" * 100%);
+    padding-bottom: calc(2/3 * 100%);
   }
 }
 @supports (aspect-ratio: 1) {
   .profileAsset--2-3 .profileAsset-image {
-    aspect-ratio: "2"/"3";
+    aspect-ratio: 2/3;
   }
 }
 @supports not (aspect-ratio: 1) {
@@ -533,12 +533,12 @@ img {
 }
 @supports not (aspect-ratio: 1) {
   .profileAsset--1-1 {
-    padding-bottom: calc("1"/"1" * 100%);
+    padding-bottom: calc(1/1 * 100%);
   }
 }
 @supports (aspect-ratio: 1) {
   .profileAsset--1-1 .profileAsset-image {
-    aspect-ratio: "1"/"1";
+    aspect-ratio: 1/1;
   }
 }
 @supports not (aspect-ratio: 1) {
@@ -1846,19 +1846,8 @@ img {
 /* ---------------------------------------------------------------------
   Global Container Placeholders
 ------------------------------------------------------------------------ */
-@media (min-width: 768px) {
-  .pageOpener-container--control {
-    max-width: 50%;
-  }
-}
-@media (min-width: 768px) {
-  .pageOpener-container--results {
-    display: flex;
-    flex-flow: row wrap;
-  }
-  .pageOpener-container--results > * {
-    flex: 0 1 50%;
-  }
+.featuredProject, .pageOpener {
+  padding: 4em;
 }
 
 /* ---------------------------------------------------------------------
@@ -2136,7 +2125,7 @@ img {
   Primary Content
 ------------------------------------------------------------------------ */
 .primaryContent {
-  padding: 2em 4em 4em 4em;
+  padding: 2em 0 4em 0;
 }
 
 /* ---------------------------------------------------------------------
@@ -2181,33 +2170,9 @@ img {
 }
 
 /* ---------------------------------------------------------------------
-  Page Opener
+  Page Opener SEARCH
+  TODO: update this for search index
 ------------------------------------------------------------------------ */
-.pageOpener {
-  font-size: 1rem;
-  padding: 0 0 4em 0;
-}
-.pageOpener-title {
-  font: normal 6.5em/1.08 "domaine-text", serif;
-  letter-spacing: -0.035em;
-  margin-bottom: 0.3076923077em;
-}
-.pageOpener-container--results {
-  margin-bottom: 4em;
-}
-@media (min-width: 768px) {
-  .pageOpener-container--results {
-    margin-bottom: 12em;
-  }
-}
-.pageOpener--search .pageOpener-subtitle {
-  font: normal 2em/1.5 "apercu", sans-serif;
-  margin-bottom: 1em;
-}
-.pageOpener--search .pageOpener-desc {
-  font: normal 2.4em/1.46 "apercu", sans-serif;
-}
-
 /* ---------------------------------------------------------------------
   Search Filters
 ------------------------------------------------------------------------ */
@@ -2673,6 +2638,211 @@ img {
 .dateDirectory-name {
   font: normal 2em/1.5 "apercu", sans-serif;
   font-weight: bold;
+}
+
+/* ---------------------------------------------------------------------
+  Index Pages
+------------------------------------------------------------------------ */
+.openerImage {
+  overflow: hidden;
+  position: relative;
+  font-size: 1rem;
+}
+@supports not (aspect-ratio: 1) {
+  .openerImage--16-9 {
+    padding-bottom: calc(16/9 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .openerImage--16-9 .openerImage-image {
+    aspect-ratio: 16/9;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .openerImage--16-9 .openerImage-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .openerImage--16-4_5 {
+    padding-bottom: calc(16/4.5 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .openerImage--16-4_5 .openerImage-image {
+    aspect-ratio: 16/4.5;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .openerImage--16-4_5 .openerImage-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .openerImage--2-3 {
+    padding-bottom: calc(2/3 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .openerImage--2-3 .openerImage-image {
+    aspect-ratio: 2/3;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .openerImage--2-3 .openerImage-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .openerImage--1-1 {
+    padding-bottom: calc(1/1 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .openerImage--1-1 .openerImage-image {
+    aspect-ratio: 1/1;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .openerImage--1-1 .openerImage-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+.openerImage-image, .openerImage-video {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+.openerImage {
+  margin: 0 4em;
+}
+
+.pageOpener {
+  display: flex;
+  flex-flow: row wrap;
+}
+.pageOpener > * {
+  flex: 0 1 50%;
+}
+.pageOpener-title {
+  font: normal 12em/1 "domaine-text", serif;
+  letter-spacing: -0.02em;
+  padding-right: 0.1666666667em;
+}
+.pageOpener-desc {
+  font: normal 2.4em/1.46 "apercu", sans-serif;
+  padding-left: 0.8333333333em;
+}
+
+.featuredProject-img {
+  overflow: hidden;
+  position: relative;
+  font-size: 1rem;
+}
+@supports not (aspect-ratio: 1) {
+  .featuredProject-img--16-9 {
+    padding-bottom: calc(16/9 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .featuredProject-img--16-9 .featuredProject-img-image {
+    aspect-ratio: 16/9;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .featuredProject-img--16-9 .featuredProject-img-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .featuredProject-img--16-4_5 {
+    padding-bottom: calc(16/4.5 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .featuredProject-img--16-4_5 .featuredProject-img-image {
+    aspect-ratio: 16/4.5;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .featuredProject-img--16-4_5 .featuredProject-img-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .featuredProject-img--2-3 {
+    padding-bottom: calc(2/3 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .featuredProject-img--2-3 .featuredProject-img-image {
+    aspect-ratio: 2/3;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .featuredProject-img--2-3 .featuredProject-img-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .featuredProject-img--1-1 {
+    padding-bottom: calc(1/1 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .featuredProject-img--1-1 .featuredProject-img-image {
+    aspect-ratio: 1/1;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .featuredProject-img--1-1 .featuredProject-img-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+.featuredProject-img-image, .featuredProject-img-video {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+.featuredProject {
+  background: #1F4D49;
+}
+.featuredProject * {
+  color: #E5FFFD;
+}
+.featuredProject-label {
+  font: normal 6.5em/1.08 "domaine-text", serif;
+  letter-spacing: -0.035em;
+}
+.featuredProject-title {
+  font: normal 4em/1.12 "apercu", sans-serif;
+  letter-spacing: -0.0375em;
+}
+.featuredProject-content {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 8em 0 12em 0;
+}
+.featuredProject-content > * {
+  flex: 0 1 50%;
 }
 
 /* ---------------------------------------------------------------------

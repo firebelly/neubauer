@@ -250,8 +250,9 @@ $sections: (
 
 }
 
-
-
+%gutter {
+	padding: 4em;
+}
 
 /* ---------------------------------------------------------------------
   Header
@@ -503,7 +504,8 @@ $red-secondary: nth($red-theme,2);
   Primary Content
 ------------------------------------------------------------------------ */
 .primaryContent {
-	padding: 2em 4em 4em 4em;
+	// padding: 2em 4em 4em 4em;
+	padding: 2em 0 4em 0;
 }
 
 
@@ -560,54 +562,55 @@ $red-secondary: nth($red-theme,2);
 }
 
 /* ---------------------------------------------------------------------
-  Page Opener
+  Page Opener SEARCH
+  TODO: update this for search index
 ------------------------------------------------------------------------ */
-.pageOpener {
-	$parent: &;
-	font-size: 1rem;
-	padding: 0 0 4em 0;
+// .pageOpener {
+// 	$parent: &;
+// 	font-size: 1rem;
+// 	padding: 0 0 4em 0;
 
-	&-title {
-		$mb: math.div(20,65);
-		@include getType('h1-normal');
-		margin-bottom: #{$mb}em;
-	}
+// 	&-title {
+// 		$mb: math.div(20,65);
+// 		@include getType('h1-normal');
+// 		margin-bottom: #{$mb}em;
+// 	}
 
-	&-container {
+// 	&-container {
 
-		&--results {
-			margin-bottom: 4em;
-			@extend %global-flex--half;
+// 		&--results {
+// 			margin-bottom: 4em;
+// 			@extend %global-flex--half;
 
-			@include breakpoint(sm) {
-				margin-bottom: 12em;
-			}
+// 			@include breakpoint(sm) {
+// 				margin-bottom: 12em;
+// 			}
 
-		}
+// 		}
 
-		&--control {
-			@extend %global-half;
-		}
+// 		&--control {
+// 			@extend %global-half;
+// 		}
 
-	}
+// 	}
 
-	&-subtitle {
+// 	&-subtitle {
 
-		#{$parent}--search & {
-			@include getType('h4-sans');
-			margin-bottom: 1em;
-		}
+// 		#{$parent}--search & {
+// 			@include getType('h4-sans');
+// 			margin-bottom: 1em;
+// 		}
 
-	}
+// 	}
 
-	&-desc {
+// 	&-desc {
 
-		#{$parent}--search & {
-			@include getType('subtitle');
-		}
-	}
+// 		#{$parent}--search & {
+// 			@include getType('subtitle');
+// 		}
+// 	}
 
-}
+// }
 
 /* ---------------------------------------------------------------------
   Search Filters
@@ -733,7 +736,7 @@ $red-secondary: nth($red-theme,2);
 			&:nth-of-type(2) {
 
 				&::before {
-					$m-h: 15/12;
+					$m-h: math.div(15,12);
 					content: "\25CF";
 					display: inline-flex;
 					margin: 0 #{$m-h}em;
@@ -795,6 +798,66 @@ $red-secondary: nth($red-theme,2);
 	&-name {
 		@include getType('p');
 		font-weight: bold;
+	}
+
+}
+
+/* ---------------------------------------------------------------------
+  Index Pages
+------------------------------------------------------------------------ */
+@include assetItem('.openerImage');
+
+.openerImage {
+	margin: 0 4em;
+}
+
+.pageOpener {
+	@extend %gutter;
+	@include flexParent();
+
+	> * {
+		@include flexChild(0 1 50%);
+	}
+
+	&-title {
+		$p: math.div(20,120);
+		@include getType('o-normal');
+		padding-right: #{$p}em;
+	}
+
+	&-desc {
+		$p: math.div(20,24);
+		@include getType('subtitle');
+		padding-left: #{$p}em;
+	}
+	
+}
+
+@include assetItem('.featuredProject-img');
+.featuredProject {
+	@extend %gutter;
+	background: getColor('green');
+
+	* {
+		color: getColor('green',10);
+	}
+
+	&-label {
+		@include getType('h1-normal');
+	}
+
+	&-title {
+		@include getType('h2-sans');
+	}
+
+	&-content {
+		@include flexParent();
+		margin: 8em 0 12em 0;
+
+		> * {
+			@include flexChild(0 1 50%);
+		}
+
 	}
 
 }

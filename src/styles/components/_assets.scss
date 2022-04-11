@@ -28,8 +28,8 @@ $ratio-map: (
         @each $ratio in $ratio-map {
             $ratio-str: str-replace($ratio,'_',$replace:'.');
             $ratio-list: str-split($ratio-str,'-');
-            $ratio-x: nth($ratio-list,1);
-            $ratio-y: nth($ratio-list,2);
+            $ratio-x: string.unquote(nth($ratio-list,1));
+            $ratio-y: string.unquote(nth($ratio-list,2));
 
             &--#{$ratio} {
                 // $aspect-ratio: math.div(#{$ratio-x},#{$ratio-y});

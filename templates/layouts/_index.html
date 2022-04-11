@@ -1,21 +1,84 @@
 {% extends "layouts/_base.html" %}
+{% import 'macros/_assets' as assets %}
 
-{% block content %}
-{% set section = entry.type|replace('Index','') %}
-
-<div data-section="{{ section }}"></div>
-
-{% switch section %}
-    {% case 'research' %}
-
-    {# TO DO:
+{# TO DO:
     1. handle cover image
     2. title
     3. summary
     4. directory
-    #}
+#}
+
+{% block content %}
+{% set section = entry.type|replace('Index','') %}
+{% set sectionName, sectionSlug = section|title, section|slugify %}
+{% set openerImage = entry.openerImage.one() is not null ? entry.openerImage : null %}
+{% set openerContent = entry.openerText is not null ? entry.openerText : null %}
+
+{# TODO: finish imagerX configuration #}
+{% if openerImage %}
+    {% set 
+        imageName,imageVariant,imageObj,imageTransforms,aspectRatioObj,showCaption,imageBlock,imagerX = 
+        'openerImage',null,openerImage,null,{},false,{},true
+    %} 
+{% endif %}
+
+{% if openerImage %}
+<div class="">
+    {{ assets.assetImage(
+        imageName,
+        imageVariant,
+        imageObj,
+        imageTransforms,
+        aspectRatioObj,
+        showCaption,
+        imageBlock, 
+        imagerX) 
+    }}
+</div>
+{% endif %}
+
+<section class="pageOpener">
+    <h1 class="pageOpener-title">{{ sectionName }}</h1>
+    <div class="pageOpener-desc">{{ openerContent ?? '' }}</div>
+</section>
+
+{% switch section %}
+    {% case 'research' %}
+    {% if entry.featuredProject is not null %}
+    {% set feature = entry.featuredProject.one() %}
+    <section class="featuredProject">
+        <h2 class="featuredProject-label">Featured Project</h2>
+        <div class="featuredProject-content">
+            {% set cardImage = feature.cardImage.one() is not null ? feature.cardImage : null %}
+            {% if cardImage %}
+                {% set 
+                    imageName,imageVariant,imageObj,imageTransforms,aspectRatioObj,showCaption,imageBlock,imagerX = 
+                    'featuredProject-img',null,cardImage,null,{},false,{},true
+            %}
+            <div>
+                {{ assets.assetImage(
+                    imageName,
+                    imageVariant,
+                    imageObj,
+                    imageTransforms,
+                    aspectRatioObj,
+                    showCaption,
+                    imageBlock, 
+                    imagerX) 
+                }}
+            </div>
+            {% endif %}
+            <h3 class="featuredProject-title">{{ feature.title }}</h3>
+        </div>
+    </section>
+    {% endif %}
+    {% case 'people' %}
+    
+    {% case 'exhibitions' %}
+
+    {% case 'events' %}
 
 {% endswitch %}
-
+</section>
 
 {% endblock %}
