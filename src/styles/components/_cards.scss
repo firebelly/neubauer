@@ -42,6 +42,10 @@
         &-team {
             margin-bottom: 1em;
 
+            &-title {
+                @include visuallyHide;
+            }
+
             &-item {
                 display: inline-block;
                 @include getType('caption');

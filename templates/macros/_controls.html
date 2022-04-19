@@ -504,6 +504,7 @@ Section: {{ activeSection }} #}
             {# Dialog close #}
             <button 
                 class="{{ filterName }}-trigger {{ filterName }}-trigger--close"
+                id="close_dialog"
                 role="button"
                 type="button"
                 sprig
@@ -557,6 +558,7 @@ Section: {{ activeSection }} #}
             <div class="{{ filterName }}-footer">
                 <button 
                     class="{{ filterName }}-trigger {{ filterName }}-trigger--clear"
+                    id="tags_clear"
                     role="button"
                     type="button"
                     sprig
@@ -566,6 +568,7 @@ Section: {{ activeSection }} #}
 
                 <button 
                     class="{{ filterName }}-trigger {{ filterName }}-trigger--apply"
+                    id="tags_apply"
                     role="button"
                     type="button"
                     sprig

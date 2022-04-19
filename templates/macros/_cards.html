@@ -32,15 +32,18 @@
     {% endif %}
 
     {% if cardEntry.projectTeam|length %}
-    <ul class="{{ cardName }}-team">
-    {% for person in cardEntry.projectTeam %}
-        <li class="{{ cardName }}-team-item">
-            <a 
-                class="{{ cardName }}-team-name"
-                href="#">{{ person }}</a>{% if loop.length > 1 and not loop.last %}&#44; &nbsp;{% endif %}
-        </li>
-    {% endfor %}
-    </ul>
+    <div class="{{ cardName }}-team">
+        <h3 class="{{ cardName }}-team-title">Project Team:</h3>
+        <ul class="{{ cardName }}-team-list">
+        {% for person in cardEntry.projectTeam %}
+            <li class="{{ cardName }}-team-item">
+                <a 
+                    class="{{ cardName }}-team-name"
+                    href="#">{{ person }}</a>{% if loop.length > 1 and not loop.last %}&#44; &nbsp;{% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
     {% endif %}
 
     {% if dateBlock %}

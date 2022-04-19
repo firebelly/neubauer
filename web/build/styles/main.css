@@ -2761,6 +2761,24 @@ img {
 .searchArticle-team {
   margin-bottom: 1em;
 }
+.searchArticle-team-title {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.searchArticle-team-title.focusable:active, .searchArticle-team-title.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
 .searchArticle-team-item {
   display: inline-block;
   font: normal 1.6em/1.56 "apercu", sans-serif;

@@ -7,11 +7,10 @@
 {# set default result count #}
 {% set results = results ?? 0 %}
 {# search result limit #}
-{% set limit = limit ?? 10 %}
+{% set limit = limit ?? 9 %}
 {# search filters #}
-{% set filters = ['section','add-tag','remove-tag','search','sort'] %}
+{% set filters = ['section','tags','add-tag','remove-tag','search','sort'] %}
 {% set trigger = sprig.trigger|split('_')[0] %}
-
 {# sprig default vars #}
 {% set overlay, section, query, sort, date = overlay ?? 'off', section ?? 'all', query ?? '', sort ?? 'asc', date ?? '' %}
 {# reset current page if new filter is triggered #}
@@ -21,8 +20,6 @@
 {% if isSprig and (trigger == 'add-tag' or trigger == 'remove-tag') %}
 {% set tagsList = tags ? tags|split(',') : [] %}
 {% set tags = (trigger == 'remove-tag' ? tagsList|filter(v => v != removeTag) : tagsList|merge([addTag]))|join(',') %}
-
-
 {% endif %}
 {# sprig update url #}
 {% do sprig.pushUrl('?' ~ {query: query, section: section, tags: tags, page: page}|url_encode) %}
