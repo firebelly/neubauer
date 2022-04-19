@@ -1,22 +1,28 @@
-{# actionItem: 
+{# cardArticle 
     See styles/components/_actions.scss for styling
 
     @cardName {str}  - base styling hook
     @cardEntry {obj} - entry object
+    @cardObj {obj}   - wildcard object for storage
 #}
-{% macro cardArticle(cardName,cardEntry,cardVariant = null) %}
-{% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
-{% set entrySection = cardEntry.section|lower %}
+{% macro cardArticle(cardName,cardEntry,cardObj = {}, cardVariant = null) %}
+{% import 'macros/_dates' as dates %}
+{% import 'macros/_assets' as assets %}
+{% import 'macros/_controls' as controls %}
 
+{% set entrySection = cardEntry.section|lower %}
+{% set cardImage = cardEntry.cardImage and cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
+{% set cardTopics = cardEntry.topicList is not null and cardEntry.topicList|length > 0 ? cardEntry.topicList : null %}
+{% set dateBlock = cardEntry.dateBlock is not null and cardEntry.dateBlock|length == 1 ? dates.printDate(cardEntry.dateBlock[0]) : null %}
+{% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
 
 <article class="{{ cardName }}" data-section="{{ entrySection }}">
 
-    {% if cardEntry.cardImage and cardEntry.cardImage.one() is not null %}
-    <img 
-        class="{{ cardName }}-img"
-        src="" />
-    {% else %}
-    <div class="{{ cardName }}-placeholder"></div>
+    {% if cardImage %}
+    {% set assetName = "#{cardName}-asset" %}
+    <div class="{{ assetName }}">
+        {{ assets.assetCard(assetName,cardImage) }}
+    </div>
     {% endif %}
 
     <h3 class="{{ cardName }}-title">{{ cardEntry.title }}</h3>
@@ -30,76 +36,156 @@
     {% for person in cardEntry.projectTeam %}
         <li class="{{ cardName }}-team-item">
             <a 
-                class="{{ cardName }}-caption"
-                href="#">
-                {{ person }}
-            </a>
-            {% if loop.length > 1 and not loop.last %}&#44;{% endif %}
+                class="{{ cardName }}-team-name"
+                href="#">{{ person }}</a>{% if loop.length > 1 and not loop.last %}&#44; &nbsp;{% endif %}
         </li>
     {% endfor %}
     </ul>
     {% endif %}
 
-    {% if cardEntry.dateBlock|length %}
-    {% set dateBlock, dateKeys = cardEntry.dateBlock[0], cardEntry.dateBlock[0]|keys %}
-    
-    {% set hasDateRange = ( dateBlock.item is defined and dateBlock.item is not null and dateBlock.item.start is defined and dateBlock.item.end is defined) and (dateBlock.item.start != '' and dateBlock.item.end != '') %}
-    {% set hasYearRange = (dateBlock.itemFrom is defined and dateBlock.itemTo is defined) and (dateBlock.itemFrom != '' and dateBlock.itemTo != '') %}
-    {% set hasSingleDate = (not hasDateRange and not hasYearRange and dateBlock.item != '') %}
-
-    {% if hasSingleDate or hasDateRange or hasYearRange %}
-    {% set date_format, time_format = 'm.d.Y', 'H:i A' %}
+    {% if dateBlock %}
     <time 
         class="{{ cardName }}-dateblock"
         datetime="">
-        {# Year Range #}
-        {% if hasYearRange %}
-        <span>{{ dateBlock.itemFrom }} &ndash; {{ dateBlock.itemTo }}</span>
-        {% else %}
-        {# Date/Time Range #}
-        {% if hasDateRange %}
-        {% set startDate, endDate = dateBlock.item.start, dateBlock.item.end %}
-
-        <span>{{ startDate|date(date_format) }} &ndash; {{ endDate|date(date_format) }}</span>
-
-        {# Single Date/Time #}
-        {% elseif hasSingleDate %} 
-        {% set hasTime = dateBlock.item|date('H:i') != '00:00' %}
-        <span>{{ dateBlock.item|date(date_format) }}</span>
-        
-        {% if hasTime %}
-        <span class="{{ cardName }}-time">{{ dateBlock.item|date(time_format) }}</span>
-        {% endif %}
-
-        {% endif %}
-        {% endif %}
+        {{ dateBlock }}
     </time>
     {% endif %}
+
+    {% if cardTopics %}
+    {% set isSearch = cardObj is not null and 'isSearch' in cardObj|keys ? cardObj.isSearch : false %}
+    {% set activeTags = cardObj is not null and 'activeTags' in cardObj|keys ? cardObj.activeTags : null %}
+    {% set activeArr = activeTags ? activeTags|split(',') : [] %}
+   
+    <div class="{{ cardName }}-topics">
+        <h3 class="{{ cardName }}-topics-title">Project Topics:</h3>
+        <ul class="{{ cardName }}-topics-list">
+        {% for tag in cardTopics %}
+        {% if isSearch %} 
+            {% set filterName,groupSlug,itemSlug,itemName = "#{cardName}-topics","tags",tag.title|slugify,tag.title %}
+            {% set isActive = (activeArr|length and (itemSlug in activeArr)) %}
+            {{ controls.controlDimensionsItem(filterName,groupSlug,itemSlug,itemName,isActive) }}
+        {% else %}
+            <li class="{{ cardName }}-topics-item">
+                <a 
+                    class="{{ cardName }}-topics-trigger {{ cardName }}-topics-trigger--tag"
+                    href="search?tags={{ tag.slug }}">
+                    <span class="{{ cardName }}-topics-label {{ cardName }}-topics-label--tag">{{ tag }}</span>
+                </a>
+            </li>
+        {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
     {% endif %}
 
-    {% if cardEntry.topicList|length %}
-    <ul class="{{ cardName }}-list">
-    {% for tag in cardEntry.topicList %}
-        <li class="{{ cardName }}-item">
-            <a 
-                class="{{ cardName }}-trigger {{ cardName }}-trigger--tag"
-                href="#">
-                <span class="{{ cardName }}-label {{ cardName }}-label--tag">{{ tag }}</span>
-            </a>
-        </li>
-    {% endfor %}
-    </ul>
-    {% endif %}
-
-    <a 
-        class="{{ cardName }}-action"
-        href="{{ cardEntry.url }}"
-        title=""
-        role="">
-        <span class="{{ cardName }}-action-label">Learn More</span>
-        <svg class="{{ cardName }}-action-icon">
-            <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
-        </svg>
-    </a>
+    <div class="{{ cardName }}-buttons">
+        <a 
+            class="{{ cardName }}-action {{ cardName }}-action--ghost"
+            href="{{ cardEntry.url }}"
+            title=""
+            role="">
+            <span class="{{ cardName }}-action-label">Learn More</span>
+            <svg class="{{ cardName }}-action-icon">
+                <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+            </svg>
+        </a>
+    </div>
 </article>
+{% endmacro %}
+
+
+{# cardFeature
+    See styles/components/_actions.scss for styling
+
+    @cardName {str}  - base styling hook
+    @cardEntry {obj} - entry object
+#}
+{% macro cardFeature(cardEntry,cardLabel,cardVariant = null) %}
+{% import 'macros/_assets' as assets %}
+{% import 'macros/_dates' as dates %}
+
+
+{% set cardImage = cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
+{% set team = cardEntry.projectTeam.all() %}
+{% set topics = cardEntry.topicList.all() %}
+{% set date = cardEntry.dateBlock is not null and cardEntry.dateBlock|length == 1 ? dates.printDate(cardEntry.dateBlock[0]) : null %}
+{% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
+
+
+{# TO DO: abstract this to use for directory cards also #}
+
+<section class="cardFeature{% if cardVariant %} cardFeature--{{ cardVariant }}{% endif %}">
+    <h2 class="cardFeature-label">{{ cardLabel }}</h2>
+    <div class="cardFeature-content">
+        
+        {% if cardImage %}
+            {% set 
+                imageName,imageVariant,imageObj,imageTransforms,aspectRatioObj,showCaption,imageBlock,imagerX = 
+                "cardFeature-img",null,cardImage,null,{},false,{},true
+        %}
+        <div class="cardFeature-asset">
+            {{ assets.assetImage(
+                imageName,
+                imageVariant,
+                imageObj,
+                imageTransforms,
+                aspectRatioObj,
+                showCaption,
+                imageBlock, 
+                imagerX) 
+            }}
+        </div>
+        {% endif %}
+        <div class="cardFeature-details">
+            <h3 class="cardFeature-title">{{ cardEntry.title }}</h3>
+            
+            {% if team|length > 0 %}
+            <div class="featureTeam">
+                <h3 class="featureTeam-title">Project Team:</h3>
+                <ul class="featureTeam-list">
+                    {% for member in team %}
+                    <li class="featureTeam-item">
+                        <a href="{{ member.uri }}">{{ member.title }}</a>{{ loop.last ? '' : ', &nbsp;' }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            
+            {% if topics|length > 0 %}
+            <div class="featureTopics">
+                <h3 class="featureTopics-title">Project Topics:</h3>
+                <ul class="featureTopics-list">
+                    {% for tag in topics %}
+                    <li class="featureTopics-item">
+                        <a 
+                            class="featureTopics-trigger featureTopics-trigger--tag"
+                            href="search?tags={{ tag.slug }}">
+                            <span class="featureTopics-label">{{ tag.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if date %}
+            <div class="cardFeature-date">{{ date }}</div>
+            {% endif %}
+
+            <div class="cardFeature-actions">
+                <a 
+                    class="cardAction cardAction--ghost"
+                    href="{{ cardEntry.url }}"
+                    title=""
+                    role="">
+                    <span class="cardAction-label">Learn More</span>
+                    <svg class="cardAction-icon">
+                        <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 {% endmacro %}

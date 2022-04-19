@@ -7,17 +7,17 @@
   Action Button: Structure
   See templates/macros/_actions.html for markup
 ------------------------------------------------------------------------ */
-@mixin actionButton($selector,$icon-size:20px,$default:true) {
-    $v-padding: 1.4em;   
+@mixin actionButton($selector,$color-primary,$color-secondary,$icon-size:20px,$default:true) {
+    $v-padding: 1.5em;   
     $h-padding: 2em;
+    $border-size: 1px; 
 
     #{$selector} {
-        border-radius: 10px;
-        display: inline-block;
-        padding: $v-padding $h-padding;
-        min-width: 14em;
+        @include flexParent($display:inline-flex,$values:row nowrap);
+        border-radius: 5px;
+        border: $border-size solid transparent;
+        padding: calc(#{$v-padding} - #{$border-size}) calc(#{$h-padding} - #{$border-size});
         font-size: 1rem;
-        text-align: center;
 
         // TODO: make accessible
         // https://www.a11yproject.com/posts/2013-01-25-never-remove-css-outlines/
@@ -32,26 +32,15 @@
 			text-decoration: none;
 		}
 
-        &--ghost {
-            $border-size: 2px;
-            $ghost-padding: calc(#{$v-padding} - #{$border-size}) 0;
-            border: $border-size solid transparent;
-            padding: $ghost-padding;
-        }
-
-        &--hasicon {
-            @include flexParent($display:inline-flex);
+        &-label,
+        &-icon {
+            @include flexChild(0 1 auto);
         }
 
         &-icon {
-            display: inline-block;
+            margin-left: 1em;
             height: $icon-size;
             width: $icon-size;
-            vertical-align: bottom;
-        }
-
-        &-trigger {
-            display: inline-block;
         }
 
         &:hover {
@@ -61,7 +50,7 @@
     }
 
     @if $default != false {
-		@include actionButton--default($selector);
+		@include actionButton--default($selector,$color-primary,$color-secondary);
 	}
 
 }
@@ -69,16 +58,16 @@
 /* -------------------------------------------------------------------------------
  Action Button: Default Presentation
 ---------------------------------------------------------------------------------- */
-@mixin actionButton--default($selector) {
+@mixin actionButton--default($selector,$color-primary,$color-secondary) {
     // Solid palette
     $solid-default-color: getColor('white');
     $solid-inactive-color: getColor('black',10);
     $solid-default-bg: getColor('red');
     $solid-inactive-bg: getColor('gray',10);
     // Ghost palette
-    $ghost-default-color: getColor('red');
+    $ghost-default-color: $color-primary;
     $ghost-inactive-color: getColor('gray',10);
-    $ghost-default-border: getColor('red');
+    $ghost-default-border: $color-primary;
     $ghost-hover-border: transparent;
     // Hover palette
     $hover-color: getColor('black',10);
@@ -88,6 +77,7 @@
 
         &--solid {
             background: $solid-default-bg;
+            border-color: $solid-default-bg;
             color: $solid-default-color;
 
             &._is-inactive {
@@ -110,6 +100,10 @@
                 border-color: $ghost-hover-border;
             }
 
+        }
+
+        &-label {
+            @include getType('action');
         }
 
         &-icon {

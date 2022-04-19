@@ -30,9 +30,6 @@
 
 {% endmacro %}
 
-
-
-
 {# listEntriesByDate:
     Iterate through the dateObj (as defined by getDateObject()), 
     print date type (e.g. "startDates"), date value, and any entries belonging to it.
@@ -83,4 +80,58 @@
     </ul>
     {% endfor %}
 </div>
+{% endmacro %}
+
+{# printDate:
+    @dateObj {obj} - _self.getDateObject()
+#}
+{% macro printDate(dateObj) %}
+{% set dateType = dateObj.type %}
+{% set date_format, time_format = 'm.d.Y', 'h:i A' %}
+{% set thisDate = null %}
+
+{% switch dateType %}
+    {% case 'yearRange' %}
+    {% set startDate = dateObj.itemFrom is not null ? dateObj.itemFrom : null %}
+    {% set endDate = dateObj.itemTo is not null ? dateObj.itemTo : null %}
+    
+    {% if startDate and endDate %}
+    {% set thisDate = "#{startDate} &ndash; #{endDate}" %}
+    {% endif %}
+
+    {% case 'dateRange' %}
+    {% set startDate = dateObj.item.start is defined and dateObj.item.start is not null ? dateObj.item.start|date(date_format) : null %}
+    {% set endDate = dateObj.item.end is defined and dateObj.item.end is not null ? dateObj.item.end|date(date_format) : null %}
+    
+    {% if startDate and endDate %}
+    {% set thisDate = "#{startDate} &ndash; #{endDate}" %}
+    {% endif %}
+
+    {% case 'datePlusTimeRange' %}
+    {% set startDate = dateObj.item.start is defined and dateObj.item.start is not null ? dateObj.item.start|date(date_format) : null %}
+    {% set startTime = dateObj.item.start is defined and dateObj.item.start is not null ? dateObj.item.start|date(time_format) : null %}
+
+    {% set endDate = dateObj.item.end is defined and dateObj.item.end is not null ? dateObj.item.end|date(date_format) : null %}
+    {% set endTime = dateObj.item.end is defined and dateObj.item.end is not null ? dateObj.item.end|date(time_format) : null %}
+    
+    {% if startDate and startTime and endDate and endTime %}
+    {% set thisDate = "#{startDate} <span>&#9679;</span> #{startTime} &ndash; #{endDate} <span>&#9679;</span> #{endTime}" %}
+    {% endif %}
+
+    {% case 'datePlusTime' %}
+    {% set dateOnly = dateObj.item is defined and dateObj.item is not null ? dateObj.item|date(date_format) : null %}
+    {% set timeOnly = dateObj.item is defined and dateObj.item is not null ? dateObj.item|date(time_format) : null %}
+    
+    {% if dateOnly and timeOnly %}
+    {% set thisDate = "#{dateOnly} <span>&#9679;</span> #{timeOnly}" %}
+    {% endif %}
+
+    {% case 'dateByYear' %}
+    {% set thisDate = dateObj.item is defined and dateObj.item is not null ? dateObj.item : null %}
+    
+    {% default %}
+    {% set thisDate = dateObj.item is defined and dateObj.item is not null ? dateObj.item|date(date_format) : null %}
+{% endswitch %}
+
+{{ thisDate ? thisDate|raw : "" }}
 {% endmacro %}

@@ -101,12 +101,9 @@ img {
   @include accordionMenu($selector:'.myAccordion',$icon-size:20px,$default:true);
 ------------------------------------------------------------------------ */
 @include assetItem('.profileAsset');
-// @include fieldText('.primarySearch-field');
-// @include controlPagination('.searchPagination');
-@include controlTags('.searchTags');
+// @include controlTags('.searchTags');
 @include flyoutContent('.primaryNav');
 @include fieldSearch('.primarySearch');
-@include fieldSearch('.indexSearch');
 
 /* ---------------------------------------------------------------------
   Icons
@@ -504,17 +501,86 @@ $red-secondary: nth($red-theme,2);
   Primary Content
 ------------------------------------------------------------------------ */
 .primaryContent {
-	// padding: 2em 4em 4em 4em;
 	padding: 2em 0 4em 0;
 }
 
+/* ---------------------------------------------------------------------
+  Index Pages
+------------------------------------------------------------------------ */
+.openerImage {
+	$image: &;
 
+	@at-root {
+		@include assetItem(#{$image});
+	}
 
+	margin: 0 4em;
+
+}
+
+.pageOpener {
+	@extend %gutter;
+
+	@include breakpoint(sm) {
+		@include flexParent();
+
+		> * {
+			@include flexChild(0 1 50%);
+		}
+	}
+
+	&--search {
+		padding: 0;
+	}
+
+	&-title {
+		$p: math.div(20,120);
+		@include getType('o-normal');
+		padding-right: #{$p}em;
+
+		&--search {
+			$pr: math.div(40,65);
+			@include getType('h1-normal');
+			padding-right: #{$pr}em;
+		}
+
+	}
+
+	&-desc {
+		$p: math.div(20,24);
+		@include getType('subtitle');
+		//padding-left: #{$p}em;
+	}
+	
+}
 
 /* ---------------------------------------------------------------------
   Search Index
 ------------------------------------------------------------------------ */
+.searchOpener {
+	@extend %gutter;
+
+	&-title {
+		@include getType('h4-sans');
+		margin-bottom: 1em;			
+	}
+
+	&-form {
+		@extend %global-half;
+		margin-top: 12em;
+	}
+	
+}
+
+/* ---------------------------------------------------------------------
+  Search Index Form
+------------------------------------------------------------------------ */
 .indexSearch {
+	$search: &;
+
+	@at-root {
+		@include fieldSearch(#{$search});
+	}
 
 	&-field {
 
@@ -552,73 +618,18 @@ $red-secondary: nth($red-theme,2);
 
 }
 
-.searchTags {
-
-	&-icon {
-		height: 20px;
-		width: 20px;
-	}
-
-}
-
 /* ---------------------------------------------------------------------
-  Page Opener SEARCH
-  TODO: update this for search index
------------------------------------------------------------------------- */
-// .pageOpener {
-// 	$parent: &;
-// 	font-size: 1rem;
-// 	padding: 0 0 4em 0;
-
-// 	&-title {
-// 		$mb: math.div(20,65);
-// 		@include getType('h1-normal');
-// 		margin-bottom: #{$mb}em;
-// 	}
-
-// 	&-container {
-
-// 		&--results {
-// 			margin-bottom: 4em;
-// 			@extend %global-flex--half;
-
-// 			@include breakpoint(sm) {
-// 				margin-bottom: 12em;
-// 			}
-
-// 		}
-
-// 		&--control {
-// 			@extend %global-half;
-// 		}
-
-// 	}
-
-// 	&-subtitle {
-
-// 		#{$parent}--search & {
-// 			@include getType('h4-sans');
-// 			margin-bottom: 1em;
-// 		}
-
-// 	}
-
-// 	&-desc {
-
-// 		#{$parent}--search & {
-// 			@include getType('subtitle');
-// 		}
-// 	}
-
-// }
-
-/* ---------------------------------------------------------------------
-  Search Filters
+  Search Filter / Tabs / Dialog
 ------------------------------------------------------------------------ */
 .searchFilters {
+	padding: 0 4em;
 
 	&-title {
 		@include visuallyHide;
+	}
+
+	@at-root {
+		@include controlDialog('.resultsFilter',$red-primary,$red-secondary);
 	}
 
 }
@@ -658,17 +669,14 @@ $red-secondary: nth($red-theme,2);
 }
 
 /* ---------------------------------------------------------------------
-  Search Results Filter
------------------------------------------------------------------------- */
-@include controlDialog('.resultsFilter',$red-primary,$red-secondary);
-
-
-/* ---------------------------------------------------------------------
   Search Results
 ------------------------------------------------------------------------ */
-@include controlTags('.searchArticle',$red-primary,$red-secondary);
-
 .searchResults {
+	padding: 0 4em;
+
+	&-title {
+		@include visuallyHide;
+	}
 
 	&-content {
 		
@@ -690,94 +698,14 @@ $red-secondary: nth($red-theme,2);
 }
 
 .searchArticle {
-	font-size: 1rem;
-	margin: 0 0 6em 0;
+	$article: &;
 
-	@include breakpoint(sm) {
-		margin: 0 0.25em 8em 0.25em;
+	@at-root {
+		@include controlTags(#{$article},$red-primary,$red-secondary);
+		@include cardDirectory(#{$article},$red-primary,$red-secondary);
 	}
-
-	&-title {
-		$mb: math.div(10,20);
-		@include getType('h4-sans');
-		margin-bottom: #{$mb}em;
-	}
-
-	&-img,
-	&-placeholder {
-		margin-bottom: 2em;
-	}
-
-	&-placeholder {
-		background: lightgray;
-		width: 100%;
-		aspect-ratio: 4 / 3;
-	}
-
-	&-team {
-		margin-bottom: 1em;
-	}
-
-	&-caption {
-		@include getType('caption');
-	}
-
-	&-trigger {
-		display: inline-flex;
-	}
-
-	&-dateblock {
-		@include flexParent();
-		margin-bottom: 1em;
-
-		span {
-			@include getType('caption');
-
-			&:nth-of-type(2) {
-
-				&::before {
-					$m-h: math.div(15,12);
-					content: "\25CF";
-					display: inline-flex;
-					margin: 0 #{$m-h}em;
-					position: relative;
-					top: -0.25em;
-					font-size: 0.75em;
-				}
-		
-			}
-		}
-
-	}
-	
-	&-action {
-		@include flexParent($display:inline-flex);
-		border-radius: 5px;
-		border: 1px solid $red-primary;
-		margin-top: 2em;
-		padding: 1.5em 2em 1.5em 2em;
-		color: $red-primary;
-		text-decoration: none;
-		
-		> * {
-			@include flexChild();
-		}
-
-		&-label {
-			$mr: math.div(10,12);
-			@include getType('action');
-			margin-right: #{$mr}em;
-		}
-
-		&-icon {
-			@include icon();
-			fill: $red-primary;
-		}
-
-	}
-
-
 }
+
 
 /* ---------------------------------------------------------------------
   Date Directory - dev only
@@ -802,39 +730,12 @@ $red-secondary: nth($red-theme,2);
 
 }
 
+
+
 /* ---------------------------------------------------------------------
-  Index Pages
+  Cards
 ------------------------------------------------------------------------ */
-@include assetItem('.openerImage');
-
-.openerImage {
-	margin: 0 4em;
-}
-
-.pageOpener {
-	@extend %gutter;
-	@include flexParent();
-
-	> * {
-		@include flexChild(0 1 50%);
-	}
-
-	&-title {
-		$p: math.div(20,120);
-		@include getType('o-normal');
-		padding-right: #{$p}em;
-	}
-
-	&-desc {
-		$p: math.div(20,24);
-		@include getType('subtitle');
-		padding-left: #{$p}em;
-	}
-	
-}
-
-@include assetItem('.featuredProject-img');
-.featuredProject {
+.cardFeature {
 	@extend %gutter;
 	background: getColor('green');
 
@@ -847,7 +748,9 @@ $red-secondary: nth($red-theme,2);
 	}
 
 	&-title {
+		$mb: math.div(20,40);
 		@include getType('h2-sans');
+		margin-bottom: #{$mb}em;
 	}
 
 	&-content {
@@ -856,6 +759,70 @@ $red-secondary: nth($red-theme,2);
 
 		> * {
 			@include flexChild(0 1 50%);
+		}
+	}
+
+	&-details {
+		@include alignSelf(center);
+		padding: 0 4em 0 8em;
+	}
+
+	&-date {
+		@include getType('p');
+		text-align: center;
+	}
+
+	&-actions {
+		@include flexParent();
+		@include justifyContent(center);
+		margin-top: 4em;
+
+		> * {
+			@include flexChild();
+		}
+
+	}
+
+	// Init components
+	@at-root {
+		$research-primary: getColor('green',10);
+		$research-secondary: getColor('green');
+
+		@include controlTags('.featureTopics',$research-primary,$research-secondary);
+		@include assetItem('.cardFeature-img');
+		@include actionButton('.cardAction',$color-primary:$research-primary,$color-secondary:$research-secondary);
+
+		.featureTopics {
+
+			&-title {
+				@include visuallyHide;
+			}
+
+			&-list {
+				@include justifyContent(center);
+			}
+
+			&-trigger {
+				@include getType('fine');
+			}
+
+		}
+
+		.featureTeam {
+
+			&-title {
+				@include visuallyHide;
+			}
+
+			&-list {				
+				@include flexParent();
+				@include justifyContent(center);
+				margin-bottom: 1em;
+			}
+
+			&-item {
+				@include getType('h4-sans');
+			}
 		}
 
 	}

@@ -1,8 +1,54 @@
+{# assetCard: 
+    See: styles/components/_assets.scss for styling
+    ImagerX (https://imager-x.spacecat.ninja/overview.html#features)
+
+    @imageName {str} - base styling hook
+    @imageObj {obj}  - craft image object
+
+    TODO: picture + webp stuffs
+#}
+{% macro assetCard(imageName,imageObj,imageWidth = null,imageHeight = null,aspectRatio = null)%}
+
+    {% set thisImage = imageObj.one() %}
+    {% set thisWidth, thisHeight = thisImage.getWidth(), thisImage.getHeight() %}
+    {% set orientation = (thisWidth == thisHeight) ? 'square' : (thisWidth > thisHeight ? 'landscape' : 'portrait') %}
+    
+    {% set transformWidth, transformHeight = (imageWidth ? imageWidth : 450), (imageHeight ? imageHeight : 350) %}
+
+    {# Prep the image sources #}
+    {% set transformedImages = null %}
+    {% set transformParams = [{ 
+        width: transformWidth, 
+        height: transformHeight, 
+        mode: 'crop' 
+    }] %}
+    {% set transformSettings = {position: '100% 100%', jpegQuality: 72} %}
+    {% if aspectRatio %}
+        {% set transformSettings = transformSettings|merge({'ratio': aspectRatio}) %}
+    {% endif %}
+    {% set imageSource = craft.imager.placeholder({ width: transformWidth, height: transformHeight }) %}
+    {% set transformedImages = craft.imager.transformImage(thisImage,transformParams,transformSettings,{ fillTransforms: true }) %}
+
+    <img 
+        class="{{ imageName }}-image"
+        height="{{ transformHeight }}"
+        width="{{ transformWidth }}"
+        alt="{{ thisImage.altText ?? '' }}"
+        loading="lazy"
+        src="{{ imageSource }}" 
+        sizes="100vw" 
+        srcset="{{ transformedImages ? craft.imager.srcset(transformedImages) : '' }}" />
+
+
+{% endmacro %}
+
+{# NOTE: Macros below are for reference only #}
+
 {# assetImage: 
     See: styles/components/_assets.scss for styling
     Required: 
     -- Imager (https://github.com/aelvan/Imager-Craft/blob/e06b24885dd194a6b0659a66f9333067975b027e/README.md) OR
-    -- ImageX (https://imager-x.spacecat.ninja/overview.html#features)
+    -- ImagerX (https://imager-x.spacecat.ninja/overview.html#features)
 
     @imageName {str}       - base styling hook
     @imageVariant {str}    - (optional) style variant
@@ -89,7 +135,7 @@
             loading="lazy"
             src="{{ imageSource }}" 
             sizes="100vw" 
-            srcset="{{ craft.imager.srcset(transformedImages) }}">
+            srcset="{{ craft.imager.srcset(transformedImages) }}" />
         {% if hasCaption %}
         <figcaption class="{{ imageName }}-caption">
             {{ imageObj.caption }}
@@ -124,6 +170,9 @@
     {{ newImage }}
 {% endmacro %}
 
+{# assetVideo:
+    @videoName
+#}
 {% macro assetVideo(videoName,videoId,videoTitle,filePath,fileName,hasPoster = false) %}
 <div class="{{ videoName }}">
     <video 
@@ -149,3 +198,5 @@
 
 
 {% endmacro %}
+
+

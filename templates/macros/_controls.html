@@ -433,8 +433,8 @@
 {# If active section... #}
 {% set activeSection = filterList|map(obj => (obj.slug == 'section' ? obj.active : ''))|join('') %} 
 
-Tags: {{ activeTags }}
-Section: {{ activeSection }}
+{# Tags: {{ activeTags }}
+Section: {{ activeSection }} #}
 
 {# Icons #}
 {% set plusPath = "/spritemap.svg#icon-plus-#{iconSize}" %}
@@ -494,7 +494,8 @@ Section: {{ activeSection }}
         {# Dialog content container #}
         <div 
             class="{{ filterName }}-content"
-            role="document">
+            role="document"
+            id="{{ filterName }}-content">
             <h3 
                 class="{{ filterName }}-title {{ filterName }}-title--headline"
                 id="{{ filterName }}_dialog_title">
@@ -518,15 +519,19 @@ Section: {{ activeSection }}
             </button>
 
             {% if filterList|length %}
+            {# If there are activeTags, split the string to create array #}
+            {% set activeArr = activeTags ? activeTags|split(',') : [] %}
+            {% set excludeList = ['about-us'] %}
+            
             {% for filterGroup in filterList %}
             {% set groupSlug, groupTitle, groupList = filterGroup.slug, filterGroup.title, filterGroup.list %}
-            {% set excludeList = ['about-us'] %}
             <div class="{{ filterName }}-group {{ filterName }}-group--{{ groupTitle|slugify }}">
                 <h4 class="{{ filterName }}-title {{ filterName }}-title--group">{{ groupTitle }}</h4>
-                
+
                 <ul class="{{ filterName }}-list">
                 {% for item in groupList %}
                 {% switch groupSlug %}
+
                     {% case 'section' %}
                     {% if item.displayText|slugify not in excludeList %}
                     {% set itemName = item.displayText %} 
@@ -534,12 +539,12 @@ Section: {{ activeSection }}
                     {% set isActive = (activeSection == itemSlug) %}
                     {{ _self.controlDimensionsItem(filterName,groupSlug,itemSlug,itemName,isActive) }}
                     {% endif %}
+
                     {% case 'tags' %}
                     {% set itemSlug, itemName = item|slugify, item.title %}
-                    {# If there are activeTags, split the string to create array #}
-                    {% set activeArr = activeTags ? activeTags|split(',') : [] %}
                     {% set isActive = (activeArr|length and (itemSlug in activeArr)) %}
                     {{ _self.controlDimensionsItem(filterName,groupSlug,itemSlug,itemName,isActive) }}
+
                     {% case 'date' %}
                     {# TODO: base date list on current section #}
                 {% endswitch %}

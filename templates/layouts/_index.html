@@ -1,5 +1,7 @@
 {% extends "layouts/_base.html" %}
 {% import 'macros/_assets' as assets %}
+{% import 'macros/_dates' as dates %}
+{% import 'macros/_cards' as cards %}
 
 {# TO DO:
     1. handle cover image
@@ -46,31 +48,8 @@
     {% case 'research' %}
     {% if entry.featuredProject is not null %}
     {% set feature = entry.featuredProject.one() %}
-    <section class="featuredProject">
-        <h2 class="featuredProject-label">Featured Project</h2>
-        <div class="featuredProject-content">
-            {% set cardImage = feature.cardImage.one() is not null ? feature.cardImage : null %}
-            {% if cardImage %}
-                {% set 
-                    imageName,imageVariant,imageObj,imageTransforms,aspectRatioObj,showCaption,imageBlock,imagerX = 
-                    'featuredProject-img',null,cardImage,null,{},false,{},true
-            %}
-            <div>
-                {{ assets.assetImage(
-                    imageName,
-                    imageVariant,
-                    imageObj,
-                    imageTransforms,
-                    aspectRatioObj,
-                    showCaption,
-                    imageBlock, 
-                    imagerX) 
-                }}
-            </div>
-            {% endif %}
-            <h3 class="featuredProject-title">{{ feature.title }}</h3>
-        </div>
-    </section>
+    {% set cardEntry,cardLabel = feature,'Featured Project' %}
+    {{ cards.cardFeature(feature,'Featured Project') }}
     {% endif %}
     {% case 'people' %}
     
