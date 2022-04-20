@@ -53,7 +53,7 @@
     {{ cards.cardFeature(feature,'Featured Project') }}
     {% endif %}
 
-    {{ sprig('partials/_search-controls', {'entryId': entry.id }) }}
+    {{ sprig('partials/_filter-controls', {'entryId': entry.id }) }}
 
     {% case 'people' %}
     

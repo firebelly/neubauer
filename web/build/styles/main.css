@@ -2253,6 +2253,11 @@ img {
   padding: 0 4em;
 }
 .searchFilters-title {
+  font: normal 6.5em/1.08 "domaine-text", serif;
+  letter-spacing: -0.035em;
+  margin: 0.6153846154em 0 1.2307692308em 0;
+}
+.searchFilters-title--hide {
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -2262,7 +2267,7 @@ img {
   position: absolute;
   width: 1px;
 }
-.searchFilters-title.focusable:active, .searchFilters-title.focusable:focus {
+.searchFilters-title--hide.focusable:active, .searchFilters-title--hide.focusable:focus {
   clip: auto;
   height: auto;
   margin: 0;

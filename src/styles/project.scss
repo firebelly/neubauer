@@ -625,7 +625,14 @@ $red-secondary: nth($red-theme,2);
 	padding: 0 4em;
 
 	&-title {
-		@include visuallyHide;
+		$mt: math.div(40,65);
+		$mb: math.div(80,65);
+		@include getType('h1-normal');
+		margin: #{$mt}em 0 #{$mb}em 0;
+
+		&--hide {
+			@include visuallyHide;
+		}
 	}
 
 	@at-root {

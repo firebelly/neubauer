@@ -74,12 +74,6 @@ fieldLayouts:
             type: craft\fieldlayoutelements\CustomField
             warning: null
             width: 100
-          -
-            type: craft\fieldlayoutelements\HorizontalRule
-          -
-            template: control-panel/common/_entry-as-narrative.html
-            type: craft\fieldlayoutelements\Template
-            width: 100
         name: Info
         sortOrder: 1
       -
@@ -107,6 +101,14 @@ fieldLayouts:
       -
         elements:
           -
+            template: control-panel/common/_entry-as-narrative.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Narratives
+        sortOrder: 3
+      -
+        elements:
+          -
             fieldUid: a669cdfe-3072-4a16-b2cc-20c2e4f28eb9 # Spotlight Block
             instructions: "###Add as many spotlights as needed.\r\n\r\nMultiple Key Questions will be translated into slides. See screenshot below for examples."
             label: ' '
@@ -116,7 +118,7 @@ fieldLayouts:
             warning: null
             width: 100
         name: Spotlights
-        sortOrder: 3
+        sortOrder: 4
 handle: interior
 hasTitleField: true
 name: Interior
