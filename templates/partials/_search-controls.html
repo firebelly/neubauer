@@ -2,7 +2,13 @@
 {% import 'macros/_cards' as cards %}
 {% import 'macros/_dates' as dates %}
 
+{# index's entry id should have been passed into sprig partial #}
 {% set entry = craft.entries.id(entryId).one() %}
+
+{# set index-specific vars for conditional content/filtering #}
+{% set indexType = entry.title|replace('Index','')|slugify %}
+{% set isSearchIndex = (indexType == 'search') %}
+{# set sprig req for monitoring #}
 {% set isSprig = sprig.isRequest %}
 {# set default result count #}
 {% set results = results ?? 0 %}
@@ -88,7 +94,8 @@ bit of javascript to assign proper overflow style on the html tag #}
 }%}
 {# END RESULTING #}
 
-{# Page Opener #}
+{% if isSearchIndex %}
+{# Search Page Opener #}
 <section class="searchOpener">
     <h2 class="searchOpener-title">Search</h2>
 
@@ -105,17 +112,28 @@ bit of javascript to assign proper overflow style on the html tag #}
         {{ controls.controlSearch(searchName,searchId,searchLabel,hasPlaceholder,query) }}
     </div>
 </section>
+{% endif %}
 
 {# Search Filters #}
 {% set excludeList = ['about-us'] %}
-{% set sectionList = [{'displayText': 'All'}]|merge(primaryNav.navigationBlock.all()) %}
+
+{% switch indexType %}
+    {% case 'search' %}
+    {% set tabList = [{'displayText': 'All'}]|merge(primaryNav.navigationBlock.all()) %}
+    {% case 'research' %}
+    {% set tabList = [{'title': 'All'},{'title': 'Active Projects'},{'title': 'Completed Projects'}] %}
+    {% case 'people' %}
+    {% set tabList = [{'title': 'All'}]|merge(craft.categories.group('personTypes')) %}    
+{% endswitch %}
 
 <section class="searchFilters">
     <h2 class="searchFilters-title">Filter the search</h2>
+
     <ul class="searchTabs">
-    {% for tab in sectionList if tab.displayText|slugify not in excludeList %}
-        {% set tabName = tab.displayText %} 
-        {% set tabSlug = tabName == 'Research' ? 'projects' : tab.displayText|slugify %}
+    {% for tab in tabList if (isSearchIndex and tab.displayText|slugify not in excludeList) or not isSearchIndex %}
+
+        {% set tabName = isSearchIndex ? tab.displayText : tab.title %} 
+        {% set tabSlug = isSearchIndex ? (tabName == 'Research' ? 'projects' : tab.displayText|slugify) : tabName|slugify %}
         {# NOTE: 
             Persist all active filters on open, close, and apply triggers;
             this is why we add the tags value to the section trigger below
@@ -134,12 +152,13 @@ bit of javascript to assign proper overflow style on the html tag #}
     {% endfor %}
     </ul>
 
+    {% if isSearchIndex %}
     {# dimensions control #}
     {% set filterList = [
         {
             'title': 'Sections',
             'slug': 'section',
-            'list': sectionList,
+            'list': tabList,
             'active': section
         },
         {
@@ -157,6 +176,7 @@ bit of javascript to assign proper overflow style on the html tag #}
     ] %}
     {% set filterName, filterLabel,resultsId = 'resultsFilter','Filter Results','#search_{{ searchId }}_results' %}
     {{ controls.controlDimensions(filterName,filterLabel,filterList,resultsId,overlay) }}
+    {% endif %}
 
     {# sort control #}
     {# {% set sortName,sortLabel,sortOptions,activeSort = 'searchSort','Sort By Name (A-Z)',['asc','desc'], sort %}
@@ -167,6 +187,8 @@ bit of javascript to assign proper overflow style on the html tag #}
 {# RESULTS #}
 <section class="searchResults" id="search_index_results">
     <h2 class="searchResults-title">Results:</h2>
+
+    {% if isSearchIndex %}
     {% if results %}
     <div class="searchResults-content">
         {% set cardObj = {
@@ -180,6 +202,7 @@ bit of javascript to assign proper overflow style on the html tag #}
     </div>
     {% else %}
         No results
+    {% endif %}
     {% endif %}
 </section>
 

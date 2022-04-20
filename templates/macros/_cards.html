@@ -13,11 +13,14 @@
 {% set entrySection = cardEntry.section|lower %}
 {% set cardImage = cardEntry.cardImage and cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
 {% set cardTopics = cardEntry.topicList is not null and cardEntry.topicList|length > 0 ? cardEntry.topicList : null %}
-{% set dateBlock = cardEntry.dateBlock is not null and cardEntry.dateBlock|length == 1 ? dates.printDate(cardEntry.dateBlock[0]) : null %}
+{% set cardDate = cardEntry.dateBlock is not null and cardEntry.dateBlock|length == 1 ? dates.printDate(cardEntry.dateBlock[0]) : null %}
+{% set cardUrl = cardEntry.url %}
+{% set cardTeam = cardEntry.projectTeam is not null and cardEntry.projectTeam|length > 0 ? cardEntry.projectTeam : null %}
 {% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
 
 <article class="{{ cardName }}" data-section="{{ entrySection }}">
 
+    {# Card: Image #}
     {% if cardImage %}
     {% set assetName = "#{cardName}-asset" %}
     <div class="{{ assetName }}">
@@ -25,44 +28,50 @@
     </div>
     {% endif %}
 
-    <h3 class="{{ cardName }}-title">{{ cardEntry.title }}</h3>
+    {# Card: Title  #}
+    <h3 class="{{ cardName }}-title">
+        <a href="{{ cardUrl }}">{{ cardEntry.title }}</a>
+    </h3>
 
     {% if cardEntry.personTitle %}
     <p class="{{ cardName }}-caption">{{ cardEntry.personTitle }}</p>
     {% endif %}
 
-    {% if cardEntry.projectTeam|length %}
+    {# Card: Team #}
+    {% if cardTeam %}
     <div class="{{ cardName }}-team">
         <h3 class="{{ cardName }}-team-title">Project Team:</h3>
         <ul class="{{ cardName }}-team-list">
-        {% for person in cardEntry.projectTeam %}
+        {% for person in cardTeam %}
             <li class="{{ cardName }}-team-item">
                 <a 
                     class="{{ cardName }}-team-name"
-                    href="#">{{ person }}</a>{% if loop.length > 1 and not loop.last %}&#44; &nbsp;{% endif %}
+                    href="{{ person.uri }}">{{ person }}</a>{% if loop.length > 1 and not loop.last %}&#44; &nbsp;{% endif %}
             </li>
         {% endfor %}
         </ul>
     </div>
     {% endif %}
 
-    {% if dateBlock %}
+    {# Card: Date #}
+    {% if cardDate %}
     <time 
         class="{{ cardName }}-dateblock"
         datetime="">
-        {{ dateBlock }}
+        {{ cardDate }}
     </time>
     {% endif %}
 
+    {# Card: Topics #}
     {% if cardTopics %}
     {% set isSearch = cardObj is not null and 'isSearch' in cardObj|keys ? cardObj.isSearch : false %}
     {% set activeTags = cardObj is not null and 'activeTags' in cardObj|keys ? cardObj.activeTags : null %}
     {% set activeArr = activeTags ? activeTags|split(',') : [] %}
-   
     <div class="{{ cardName }}-topics">
         <h3 class="{{ cardName }}-topics-title">Project Topics:</h3>
         <ul class="{{ cardName }}-topics-list">
         {% for tag in cardTopics %}
+        {# If this card lives in the Search directory, handle the topic tags accordingly #}
         {% if isSearch %} 
             {% set filterName,groupSlug,itemSlug,itemName = "#{cardName}-topics","tags",tag.title|slugify,tag.title %}
             {% set isActive = (activeArr|length and (itemSlug in activeArr)) %}
@@ -81,10 +90,11 @@
     </div>
     {% endif %}
 
+    {# Card: Actions #}
     <div class="{{ cardName }}-buttons">
         <a 
             class="{{ cardName }}-action {{ cardName }}-action--ghost"
-            href="{{ cardEntry.url }}"
+            href="{{ cardUrl }}"
             title=""
             role="">
             <span class="{{ cardName }}-action-label">Learn More</span>

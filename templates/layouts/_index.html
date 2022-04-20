@@ -45,12 +45,16 @@
 </section>
 
 {% switch section %}
+    {# Section: Research #}
     {% case 'research' %}
     {% if entry.featuredProject is not null %}
     {% set feature = entry.featuredProject.one() %}
     {% set cardEntry,cardLabel = feature,'Featured Project' %}
     {{ cards.cardFeature(feature,'Featured Project') }}
     {% endif %}
+
+    {{ sprig('partials/_search-controls', {'entryId': entry.id }) }}
+
     {% case 'people' %}
     
     {% case 'exhibitions' %}

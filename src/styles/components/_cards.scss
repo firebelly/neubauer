@@ -24,6 +24,15 @@
             $mb: math.div(10,20);
             @include getType('h4-sans');
             margin-bottom: #{$mb}em;
+
+            a:link,
+            a:visited,
+            a:hover,
+            a:active {
+                color: $color-primary;
+                text-decoration: none;
+            }
+
         }
 
         &-asset {

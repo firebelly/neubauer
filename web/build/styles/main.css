@@ -2676,6 +2676,13 @@ img {
   font: normal 2em/1.5 "apercu", sans-serif;
   margin-bottom: 0.5em;
 }
+.searchArticle-title a:link,
+.searchArticle-title a:visited,
+.searchArticle-title a:hover,
+.searchArticle-title a:active {
+  color: #800000;
+  text-decoration: none;
+}
 .searchArticle-asset {
   margin-bottom: 2em;
 }
