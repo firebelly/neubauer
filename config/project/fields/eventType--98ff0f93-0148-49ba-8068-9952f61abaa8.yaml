@@ -7,7 +7,7 @@ name: 'Event Type'
 searchable: true
 settings:
   contentTable: '{{%matrixcontent_eventtype}}'
-  maxBlocks: '2'
+  maxBlocks: '1'
   minBlocks: '1'
   propagationKeyFormat: null
   propagationMethod: all

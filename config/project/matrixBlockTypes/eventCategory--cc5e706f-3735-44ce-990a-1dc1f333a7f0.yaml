@@ -31,7 +31,7 @@ fields:
       branchLimit: '1'
       limit: null
       localizeRelations: false
-      selectionLabel: 'Select an existing type, or create a new one'
+      selectionLabel: 'Select, replace or add event type'
       showSiteMenu: true
       source: 'group:d7bc1724-cfca-4d62-8b29-dbb9996201d1' # Event Types
       sources: '*'
