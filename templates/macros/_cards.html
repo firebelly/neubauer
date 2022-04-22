@@ -5,7 +5,7 @@
     @cardEntry {obj} - entry object
     @cardObj {obj}   - wildcard object for storage
 #}
-{% macro cardArticle(cardName,cardEntry,cardObj = {}, cardVariant = null) %}
+{% macro cardArticle(cardName,cardEntry,cardObj = {},cardVariant = null) %}
 {% import 'macros/_dates' as dates %}
 {% import 'macros/_assets' as assets %}
 {% import 'macros/_controls' as controls %}
@@ -17,91 +17,120 @@
 {% set cardUrl = cardEntry.url %}
 {% set cardTeam = cardEntry.projectTeam is not null and cardEntry.projectTeam|length > 0 ? cardEntry.projectTeam : null %}
 {% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
+{% set emailPath = "/spritemap.svg#icon-email-20" %}
 
-<article class="{{ cardName }}" data-section="{{ entrySection }}">
+{# Person vars #}
+{% set isBio = (cardName == 'searchBio') %}
+{% set isPeopleDirectory = (cardVariant == 'people') %}
+
+<article class="{{ cardName }}{% if cardVariant %} {{ cardName }}--{{ cardVariant }}{% endif %}" data-section="{{ entrySection }}">
 
     {# Card: Image #}
     {% if cardImage %}
     {% set assetName = "#{cardName}-asset" %}
     <div class="{{ assetName }}">
-        {{ assets.assetCard(assetName,cardImage) }}
-    </div>
-    {% endif %}
-
-    {# Card: Title  #}
-    <h3 class="{{ cardName }}-title">
-        <a href="{{ cardUrl }}">{{ cardEntry.title }}</a>
-    </h3>
-
-    {% if cardEntry.personTitle %}
-    <p class="{{ cardName }}-caption">{{ cardEntry.personTitle }}</p>
-    {% endif %}
-
-    {# Card: Team #}
-    {% if cardTeam %}
-    <div class="{{ cardName }}-team">
-        <h3 class="{{ cardName }}-team-title">Project Team:</h3>
-        <ul class="{{ cardName }}-team-list">
-        {% for person in cardTeam %}
-            <li class="{{ cardName }}-team-item">
-                <a 
-                    class="{{ cardName }}-team-name"
-                    href="{{ person.uri }}">{{ person }}</a>{% if loop.length > 1 and not loop.last %}&#44; &nbsp;{% endif %}
-            </li>
-        {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
-
-    {# Card: Date #}
-    {% if cardDate %}
-    <time 
-        class="{{ cardName }}-dateblock"
-        datetime="">
-        {{ cardDate }}
-    </time>
-    {% endif %}
-
-    {# Card: Topics #}
-    {% if cardTopics %}
-    {% set isSearch = cardObj is not null and 'isSearch' in cardObj|keys ? cardObj.isSearch : false %}
-    {% set activeTags = cardObj is not null and 'activeTags' in cardObj|keys ? cardObj.activeTags : null %}
-    {% set activeArr = activeTags ? activeTags|split(',') : [] %}
-    <div class="{{ cardName }}-topics">
-        <h3 class="{{ cardName }}-topics-title">Project Topics:</h3>
-        <ul class="{{ cardName }}-topics-list">
-        {% for tag in cardTopics %}
-        {# If this card lives in the Search directory, handle the topic tags accordingly #}
-        {% if isSearch %} 
-            {% set filterName,groupSlug,itemSlug,itemName = "#{cardName}-topics","tags",tag.title|slugify,tag.title %}
-            {% set isActive = (activeArr|length and (itemSlug in activeArr)) %}
-            {{ controls.controlDimensionsItem(filterName,groupSlug,itemSlug,itemName,isActive) }}
+        {% if isPeopleDirectory %}
+        {{ assets.assetCard(assetName,cardImage,140,140) }}
         {% else %}
-            <li class="{{ cardName }}-topics-item">
-                <a 
-                    class="{{ cardName }}-topics-trigger {{ cardName }}-topics-trigger--tag"
-                    href="search?tags={{ tag.slug }}">
-                    <span class="{{ cardName }}-topics-label {{ cardName }}-topics-label--tag">{{ tag }}</span>
-                </a>
-            </li>
+        {{ assets.assetCard(assetName,cardImage) }}
         {% endif %}
-        {% endfor %}
-        </ul>
     </div>
+    {% elseif isBio %}
+    <div class="{{ cardName }}-asset--ghost"></div>
     {% endif %}
 
-    {# Card: Actions #}
-    <div class="{{ cardName }}-buttons">
-        <a 
-            class="{{ cardName }}-action {{ cardName }}-action--ghost"
-            href="{{ cardUrl }}"
-            title=""
-            role="">
-            <span class="{{ cardName }}-action-label">Learn More</span>
-            <svg class="{{ cardName }}-action-icon">
-                <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
-            </svg>
-        </a>
+    <div class="{{ cardName }}-details">
+        {# Card: Title  #}
+        <h3 class="{{ cardName }}-title">
+            <a href="{{ cardUrl }}">{{ cardEntry.title }}</a>
+        </h3>
+
+        {# Card: Person Details #}
+        {% if cardEntry.personTitle %}
+        <p class="{{ cardName }}-subtitle" data-person-type="{{ cardEntry.personType[0] }}">{{ cardEntry.personTitle }}</p>
+        {% endif %}
+        {% if cardEntry.personAffiliation %}
+        <p class="{{ cardName }}-caption">{{ cardEntry.personAffiliation }}</p>
+        {% endif %}
+
+        {# Card: Team #}
+        {% if cardTeam %}
+        <div class="{{ cardName }}-team">
+            <h3 class="{{ cardName }}-team-title">Project Team:</h3>
+            <ul class="{{ cardName }}-team-list">
+            {% for person in cardTeam %}
+                <li class="{{ cardName }}-team-item">
+                    <a 
+                        class="{{ cardName }}-team-name"
+                        href="{{ person.uri }}">{{ person }}</a>{% if loop.length > 1 and not loop.last %}&#44; &nbsp;{% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {# Card: Date #}
+        {% if cardDate %}
+        <time 
+            class="{{ cardName }}-dateblock"
+            datetime="">
+            {{ cardDate }}
+        </time>
+        {% endif %}
+
+        {# Card: Topics #}
+        {% if cardTopics %}
+        {% set isSearch = cardObj is not null and 'isSearch' in cardObj|keys ? cardObj.isSearch : false %}
+        {% set activeTags = cardObj is not null and 'activeTags' in cardObj|keys ? cardObj.activeTags : null %}
+        {% set activeArr = activeTags ? activeTags|split(',') : [] %}
+        <div class="{{ cardName }}-topics{% if cardVariant %} {{ cardName }}-topics--{{ cardVariant }}{% endif %}">
+            <h3 class="{{ cardName }}-topics-title">Project Topics:</h3>
+            <ul class="{{ cardName }}-topics-list">
+            {% for tag in cardTopics %}
+            {# If this card lives in the Search directory, handle the topic tags accordingly #}
+            {% if isSearch %} 
+                {% set filterName,groupSlug,itemSlug,itemName = "#{cardName}-topics","tags",tag.title|slugify,tag.title %}
+                {% set isActive = (activeArr|length and (itemSlug in activeArr)) %}
+                {{ controls.controlDimensionsItem(filterName,groupSlug,itemSlug,itemName,isActive) }}
+            {% else %}
+                <li class="{{ cardName }}-topics-item">
+                    <a 
+                        class="{{ cardName }}-topics-trigger {{ cardName }}-topics-trigger--tag"
+                        href="search?tags={{ tag.slug }}">
+                        <span class="{{ cardName }}-topics-label {{ cardName }}-topics-label--tag">{{ tag }}</span>
+                    </a>
+                </li>
+            {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {# Card: Actions #}
+        <div class="{{ cardName }}-buttons">
+            <a 
+                class="{{ cardName }}-action {{ cardName }}-action--{{ isPeopleDirectory ? 'link' : 'ghost' }}"
+                href="{{ cardUrl }}"
+                title=""
+                role="">
+                <span class="{{ cardName }}-action-label">{{ isBio ? 'Full Bio' : 'Learn More' }}</span>
+                <svg class="{{ cardName }}-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+                </svg>
+            </a>
+            {% if cardEntry.personEmail %}
+            <a 
+                class="{{ cardName }}-action {{ cardName }}-action--link"
+                href="mailto:{{ cardEntry.personEmail }}"
+                title=""
+                role="">
+                <span class="{{ cardName }}-action-label">Email</span>
+                <svg class="{{ cardName }}-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ emailPath) }}"></use>
+                </svg>
+            </a>
+            {% endif %}
+        </div>
     </div>
 </article>
 {% endmacro %}
@@ -127,16 +156,16 @@
 
 {# TO DO: abstract this to use for directory cards also #}
 
-<section class="cardFeature{% if cardVariant %} cardFeature--{{ cardVariant }}{% endif %}">
-    <h2 class="cardFeature-label">{{ cardLabel }}</h2>
-    <div class="cardFeature-content">
+<section class="featureArticle{% if cardVariant %} featureArticle--{{ cardVariant }}{% endif %}">
+    <h2 class="featureArticle-label">{{ cardLabel }}</h2>
+    <div class="featureArticle-content">
         
         {% if cardImage %}
             {% set 
                 imageName,imageVariant,imageObj,imageTransforms,aspectRatioObj,showCaption,imageBlock,imagerX = 
-                "cardFeature-img",null,cardImage,null,{},false,{},true
+                "featureArticle-img",null,cardImage,null,{},false,{},true
         %}
-        <div class="cardFeature-asset">
+        <div class="featureArticle-asset">
             {{ assets.assetImage(
                 imageName,
                 imageVariant,
@@ -149,15 +178,15 @@
             }}
         </div>
         {% endif %}
-        <div class="cardFeature-details">
-            <h3 class="cardFeature-title">{{ cardEntry.title }}</h3>
+        <div class="featureArticle-details">
+            <h3 class="featureArticle-title">{{ cardEntry.title }}</h3>
             
             {% if team|length > 0 %}
-            <div class="featureTeam">
-                <h3 class="featureTeam-title">Project Team:</h3>
-                <ul class="featureTeam-list">
+            <div class="featureArticle-team">
+                <h3 class="featureArticle-team-title">Project Team:</h3>
+                <ul class="featureArticle-team-list">
                     {% for member in team %}
-                    <li class="featureTeam-item">
+                    <li class="featureArticle-team-item">
                         <a href="{{ member.uri }}">{{ member.title }}</a>{{ loop.last ? '' : ', &nbsp;' }}
                     </li>
                     {% endfor %}
@@ -166,15 +195,15 @@
             {% endif %}
             
             {% if topics|length > 0 %}
-            <div class="featureTopics">
-                <h3 class="featureTopics-title">Project Topics:</h3>
-                <ul class="featureTopics-list">
+            <div class="featureArticle-topics{% if cardVariant %} featureArticle-topics--{{ cardVariant }}{% endif %}">
+                <h3 class="featureArticle-topics-title">Project Topics:</h3>
+                <ul class="featureArticle-topics-list">
                     {% for tag in topics %}
-                    <li class="featureTopics-item">
+                    <li class="featureArticle-topics-item">
                         <a 
-                            class="featureTopics-trigger featureTopics-trigger--tag"
+                            class="featureArticle-topics-trigger featureArticle-topics-trigger--tag"
                             href="search?tags={{ tag.slug }}">
-                            <span class="featureTopics-label">{{ tag.title }}
+                            <span class="featureArticle-topics-label">{{ tag.title }}
                         </a>
                     </li>
                     {% endfor %}
@@ -183,17 +212,17 @@
             {% endif %}
 
             {% if date %}
-            <div class="cardFeature-date">{{ date }}</div>
+            <div class="featureArticle-date">{{ date }}</div>
             {% endif %}
 
-            <div class="cardFeature-actions">
+            <div class="featureArticle-buttons">
                 <a 
-                    class="cardAction cardAction--ghost"
+                    class="featureArticle-action featureArticle-action--ghost"
                     href="{{ cardEntry.url }}"
                     title=""
                     role="">
-                    <span class="cardAction-label">Learn More</span>
-                    <svg class="cardAction-icon">
+                    <span class="featureArticle-action-label">Learn More</span>
+                    <svg class="featureArticle-action-icon">
                         <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
                     </svg>
                 </a>

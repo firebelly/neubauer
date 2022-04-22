@@ -84,8 +84,43 @@ $theme-map: (
 	'black': (getColor('black'),getColor('white'))
 );
 
+$pages: (
+	'homepage': 'black',
+	'research': 'green',
+	'projects': 'green',
+	'exhibitions': 'gray',
+	'events': 'yellow',
+	'people':'blue',
+	'about': 'red',
+	'search': 'red'
+);
+
 @function getTheme($color) {
 	@return map-get($theme-map, $color);
+}
+
+/* ---------------------------------------------------------------------
+ Themed Property
+ @property {str} - css property to delcare (no quotes)
+ @idx {int}      - 1 (primary color) || 2 (secondary color)
+ @parent {str}   - (optional) parent selector to properly assign property
+------------------------------------------------------------------------ */
+@mixin themedProperty($property,$idx:null,$parent:null) {
+
+	@each $pg, $color in $pages {
+		$theme-color: if($idx == null,transparent,nth(getTheme($color),$idx));
+
+		@if $parent != null {
+			#{$parent}--#{$pg} & {
+				#{$property}: $theme-color;
+			}
+		}
+		@else {
+			&--#{$pg} {
+				#{$property}: $theme-color;
+			}
+		}	
+	}
 }
 
 /* ---------------------------------------------------------------------

@@ -420,18 +420,21 @@
    See: styles/components/_controls.scss for styling
 
    @filterName {str}  - base styling hook
+   @filterVariant {str} - styling variant
    @filterLabel {str} -
    @filterList {arr}  - array of filter objects
    @resultsId {str}   - results namespace to which dimensions apply
    @overlay    {str}  - (on|off) overlay state (sm viewport or larger only)
    @iconSize   {int}  - (optional)
 #}
-{% macro controlDimensions(filterName,filterLabel,filterList,resultsId,overlay = "off",iconSize = 20) %}
+{% macro controlDimensions(filterName,filterVariant = "",filterLabel,filterList,resultsId,overlay = "off",iconSize = 20) %}
 
 {# If active tags... #}
 {% set activeTags = filterList|map(obj => (obj.slug == 'tags' ? obj.active : ''))|join('') %} 
 {# If active section... #}
 {% set activeSection = filterList|map(obj => (obj.slug == 'section' ? obj.active : ''))|join('') %} 
+{# If active project status... #}
+{% set activeProjectStatus = filterList|map(obj => (obj.slug == 'status' ? obj.active : ''))|join('') %} 
 
 {# Tags: {{ activeTags }}
 Section: {{ activeSection }} #}
@@ -442,7 +445,7 @@ Section: {{ activeSection }} #}
 {% set closePath = "/spritemap.svg#icon-close-#{iconSize}" %}
 {% set arrowPath = "/spritemap.svg#icon-arrow-right-#{iconSize}" %}
 
-<div class="{{ filterName }}">
+<div class="{{ filterName }} {{ filterName }}--{{ filterVariant }}">
 
     <div class="{{ filterName }}-controls">
         <button 
@@ -540,6 +543,12 @@ Section: {{ activeSection }} #}
                     {% set isActive = (activeSection == itemSlug) %}
                     {{ _self.controlDimensionsItem(filterName,groupSlug,itemSlug,itemName,isActive) }}
                     {% endif %}
+
+                    {% case 'status' %}
+                    {% set itemName = item.title %} 
+                    {% set itemSlug = item.slug %}
+                    {% set isActive = (activeProjectStatus == itemSlug) %}
+                    {{ _self.controlDimensionsItem(filterName,groupSlug,itemSlug,itemName,isActive) }}
 
                     {% case 'tags' %}
                     {% set itemSlug, itemName = item|slugify, item.title %}

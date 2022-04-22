@@ -48,12 +48,12 @@ $font-primary-file: 'domaine-text-light';
 $font-secondary-name: 'apercu';
 $font-secondary-file: 'apercu-light';
 
-$font-tertiary-name: 'domain-text';
+$font-tertiary-name: 'domain-text-italic';
 $font-tertiary-file: 'domaine-text-lightitalic';
 
 @include getFont($font-primary-name, $font-primary-file);
 @include getFont($font-secondary-name, $font-secondary-file);
-@include getFont($font-tertiary-name, $font-tertiary-file);
+@include getFont($font-tertiary-name, $font-tertiary-file, $isItalic: true);
 
 $font-primary: $font-primary-name, serif;
 $font-secondary: $font-secondary-name, sans-serif;

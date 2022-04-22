@@ -569,7 +569,7 @@
 /* ---------------------------------------------------------------------
   Tags
 ------------------------------------------------------------------------ */
-@mixin controlTags($selector,$color-primary:#000000,$color-secondary:#FFFFFF,$default:true) {
+@mixin controlTags($selector,$color-primary:null,$color-secondary:null,$default:true,$theme:false) {
 
     #{$selector} {
         $gutter-a: math.div(5,14); 
@@ -577,6 +577,12 @@
 
         &-list {
             @include flexParent();
+            content:"list";
+
+            &--feature {
+                @include justifyContent(center);
+            }
+
         }
 
         &-item {
@@ -587,6 +593,10 @@
             &:hover {
                 cursor: pointer;
             }
+            // Show remove icon if active item
+            &._is-active #{$selector}-icon--remove {
+                display: inline-flex;
+            }
         }
 
         &-trigger {
@@ -595,70 +605,13 @@
             &--tag {
                 @include flexParent();
                 @include alignItems(center);
-                
                 border-radius: 100px;
                 border: 1px solid transparent;
                 padding: 0.5em 1em; 
                 font-size: 1rem;
-            }
-
-        }
-
-        &-icon {
-
-            &--remove {
-                height: 20px;
-                width: 20px;
-                margin-left: #{$gutter-a}em;
-            }
-
-        }
-        
-        
-
-    }
-
-    @if $default != false {
-        @include controlTags--default($selector,$color-primary,$color-secondary);
-      }
-
-}
-
-/* -------------------------------------------------------------------------------
- Tag Control: Default Presentation
----------------------------------------------------------------------------------- */
-@mixin controlTags--default($selector,$color-primary,$color-secondary) {
-    
-    #{$selector} {
-
-        &-trigger {
-
-            &--tag { 
-                border-color: $color-primary;
                 z-index: 1;
-
-                &,
-                &:link,
-                &:visited,
-                &:hover,
-                &:active {
-                    color: $color-primary;
-                    text-decoration: none;
-                    
-                    // Color styles applied to a trigger
-                    // whose parent item is hovered AND/OR
-                    // whose previous sibling is a checked input AND/OR
-                    // whose parent item is active
-                    #{$selector}-input--faux:checked + &,
-                    #{$selector}-item._is-active &,
-                    #{$selector}-item:hover & {
-                        color: $color-secondary;
-                        background: $color-primary;
-                    }
-
-                }
-
             }
+
         }
 
         &-input {
@@ -677,29 +630,122 @@
                 &:hover {
                     cursor: pointer;
                 }
-
+                // Show remove icon if checked input
+                &:checked + #{$selector}-trigger #{$selector}-icon--remove {
+                    display: inline-flex;
+                }
             }
-        }
-
-        &-label {
-
-            &--tag {
-                @include getType('fine');
-            }
-
         }
 
         &-icon {
 
             &--remove {
-                fill: $color-secondary;
-                display: none;
-                // Show remove icon if checked input OR active item
-                #{$selector}-input--faux:checked + #{$selector}-trigger &,
-                #{$selector}-item._is-active & {
-                    display: inline-flex;
-                }
+                height: 20px;
+                width: 20px;
+                margin-left: #{$gutter-a}em;
+            }
 
+        }
+        
+    }
+
+    @if $default != false {
+
+        @if $theme == true {
+            @each $pg, $color in $pages {
+                $color-primary: nth(getTheme($color),1);
+                $color-secondary: nth(getTheme($color),2);
+    
+                @at-root {
+                    #{$selector}--#{$pg} {
+                        @include controlTags--default($selector,$color-primary,$color-secondary);
+                    }
+                }
+            }
+        }
+        @else {
+            @include controlTags--default($selector,$color-primary,$color-secondary);          
+        }
+    }
+
+}
+
+/* -------------------------------------------------------------------------------
+ Tag Control: Default Presentation
+ NOTE: bc of theming, use parent ampersand selector with discretion
+---------------------------------------------------------------------------------- */
+@mixin controlTags--default($selector,$color-primary,$color-secondary) {
+
+    #{$selector} {
+
+        // Color styles applied to a trigger
+        // whose parent item is hovered AND/OR
+        // whose parent item is active
+        &-item:hover,
+        &-item._is-active {
+            #{$selector}-trigger--tag {
+                color: $color-secondary;
+                background: $color-primary;
+            }
+        }
+        
+        &-trigger--tag { 
+            border-color: $color-primary;
+            // element is either label or anchor
+            &,
+            &:link,
+            &:visited,
+            &:hover,
+            &:active {
+                color: $color-primary;
+                text-decoration: none;
+            }
+        }
+
+        &-input--faux {
+            // Color styles applied to a trigger
+            // whose previous sibling is a checked input
+            &:checked + #{$selector}-trigger--tag {
+                color: $color-secondary;
+                background: $color-primary;
+            }
+        }
+
+        &-label--tag {
+            @include getType('fine');
+        }
+
+        &-icon--remove {
+            fill: $color-secondary;
+            display: none;
+        }
+
+        // If dialog is parent, reverse color palette
+        /////////////////////////////////////////////
+        &-dialog {
+
+            #{$selector}-trigger--tag {
+                border-color: $color-secondary;
+                z-index: 1;
+
+                &,
+                &:link,
+                &:visited,
+                &:hover,
+                &:active {
+                    color: $color-secondary;
+                }
+            }
+
+            #{$selector}-item:hover #{$selector}-trigger--tag,
+            #{$selector}-item._is-active #{$selector}-trigger--tag,
+            #{$selector}-input--faux:checked + #{$selector}-trigger--tag {
+                color: $color-primary;
+                background: $color-secondary;
+            }
+
+            #{$selector}-icon--remove {
+                fill: $color-primary;
             }
 
         }
@@ -710,32 +756,11 @@
 
 /* ---------------------------------------------------------------------
   Dialog
+  NOTE: See _styleguide.scss for $theme vars
 ------------------------------------------------------------------------ */
-@mixin controlDialog($selector,$color-primary:#000000,$color-secondary:#FFFFFF,$default:true) {
+@mixin controlDialog($selector,$color-primary:null,$color-secondary:null,$default:true,$theme:false) {
 
-    @include controlTags($selector,$color-secondary,$color-primary);
-
-    %trigger--open {
-        $pt: math.div(12,16);
-        $pl: math.div(15,16);
-        $pr: math.div(15,16);
-        $pb: math.div(13,16);
-        $mb: math.div(20,16);
-        @include resetButton;
-        @include getType('caption');
-        border-radius: 2px;
-        border: 1px solid $color-primary;
-        margin-bottom: #{$mb}em;
-        padding: #{$pt}em #{$pr}em #{$pb}em #{$pl}em;
-        width: 100%;
-        color: $color-primary;
-    
-        @include breakpoint(sm) {
-            margin-bottom: 0;
-            width: auto;
-        }
-    
-    }
+    @include controlTags($selector,$color-primary,$color-secondary,$default,$theme);
 
     #{$selector} {
         $parent: &;
@@ -770,7 +795,6 @@
 
         &-content {
             padding: 2em;
-            background: $color-primary;
             position: relative;
             margin: auto;
             width: 100%;
@@ -786,7 +810,8 @@
         &-group {
             margin: 0 0 3em 0;
 
-            &--sections {
+            &--sections,
+            &--project-status {
                 @include breakpoint(sm) {
                     display: none;
                 }
@@ -817,7 +842,24 @@
             }
 
             #{$parent}-controls & {
-                @extend %trigger--open;
+                $pt: math.div(12,16);
+                $pl: math.div(15,16);
+                $pr: math.div(15,16);
+                $pb: math.div(13,16);
+                $mb: math.div(20,16);
+                @include resetButton;
+                @include getType('caption');
+                border-radius: 2px;
+                border: 1px solid transparent;
+                margin-bottom: #{$mb}em;
+                padding: #{$pt}em #{$pr}em #{$pb}em #{$pl}em;
+                width: 100%;
+            
+                @include breakpoint(sm) {
+                    margin-bottom: 0;
+                    width: auto;
+                }
+            
             }
 
             &--close,
@@ -835,7 +877,7 @@
 
             &--apply {
                 border-radius: 5px;
-                border: 1px solid $color-secondary;
+                border: 1px solid transparent;
                 margin-left: 2em;
                 padding: 1.5em 2em 1.5em 2em;
             }
@@ -857,10 +899,6 @@
             height: 20px;
             width: 20px;
             @include flexChild();
-
-            #{$parent}-controls & {
-                fill: $color-primary;
-            }
 
             &--plus {
 
@@ -884,11 +922,6 @@
 
             }
 
-            &--apply,
-            &--close {
-                fill: $color-secondary;
-            }
-
         }
 
         &-title {
@@ -897,14 +930,12 @@
                 $mb: math.div(40,20);
                 @include getType('h4-sans');
                 margin-bottom: #{$mb}em;
-                color: $color-secondary;
             }
 
             &--group {
                 $mb: math.div(15,16);
                 @include getType('caption');
                 margin-bottom: #{$mb}em;
-                color: $color-secondary;
             }
         }
 
@@ -920,9 +951,7 @@
                 $width: math.div(10,12);
                 @include getType('action');
                 margin-right: #{$width}em;
-                color: $color-secondary;
                 text-decoration: underline;
-                text-decoration-color: $color-secondary;
                 text-underline-offset: #{$height}em;
                 text-decoration-thickness: 1px;
 
@@ -943,19 +972,83 @@
     }
 
     @if $default != false {
-        @include controlDialog--default($selector,$color-primary,$color-secondary);
+
+        @if $theme == true {
+            @each $pg, $color in $pages {
+                $color-primary: nth(getTheme($color),1);
+                $color-secondary: nth(getTheme($color),2);
+    
+                @at-root {
+                    #{$selector}--#{$pg} {
+                        @include controlDialog--default($selector,$color-primary,$color-secondary);
+                    }
+                }
+            }
+        }
+        @else {
+            @include controlDialog--default($selector,$color-primary,$color-secondary);
+        }
     }
 
 }
-
 
 /* -------------------------------------------------------------------------------
  Dialog Control: Default Presentation
 ---------------------------------------------------------------------------------- */
 @mixin controlDialog--default($selector,$color-primary,$color-secondary) {
-    
+
     #{$selector} {
-    
+ 
+        &-content {
+            background: $color-primary;
+        }
+
+        &-trigger {
+
+            &--apply {
+                border-color: $color-secondary;
+            }
+        
+        }
+        
+        &-icon {
+            
+            &--apply,
+            &--close {
+                fill: $color-secondary;
+            }
+
+        }
+
+        &-controls {
+
+            #{$selector}-trigger {
+                border-color: $color-primary;
+                color: $color-primary;
+            }
+
+            #{$selector}-icon {
+                fill: $color-primary;
+            }
+
+        }
+
+        &-title {
+            &--headline,
+            &--group {
+                color: $color-secondary;
+            }
+        }
+
+        &-label {
+           
+            &--action {
+                color: $color-secondary;
+                text-decoration-color: $color-secondary;
+            }
+
+        }
+
     }
 
 }

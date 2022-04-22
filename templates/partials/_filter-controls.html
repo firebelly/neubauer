@@ -3,6 +3,7 @@
 {% import 'macros/_dates' as dates %}
 
 {# index's entry id should have been passed into sprig partial #}
+{% set env = getenv('ENVIRONMENT') %}
 {% set entry = craft.entries.id(entryId).one() %}
 
 {# set index-specific vars for conditional content/filtering #}
@@ -19,7 +20,7 @@
 {% set filters = ['section','tags','add-tag','remove-tag','search','sort'] %}
 {% set trigger = sprig.trigger|split('_')[0] %}
 {# sprig default vars #}
-{% set overlay, query, sort, date, status = overlay ?? 'off', query ?? '', sort ?? 'asc', date ?? '', status ?? 'all' %}
+{% set overlay, query, sort, date, status, person = overlay ?? 'off', query ?? '', sort ?? 'asc', date ?? '', status ?? 'all', person ?? 'all' %}
 {% set section = isSearchIndex ? (section ?? 'all') : indexSlug %}
 {# reset current page if new filter is triggered #}
 {% set page = isSprig and (trigger in filters) ? 1 : (page ?? 1) %}
@@ -38,6 +39,7 @@
 {{ hiddenInput('sort', sort) }}
 {{ hiddenInput('date', date) }}
 {{ hiddenInput('status', status) }}
+{{ hiddenInput('person', person) }}
 {{ hiddenInput('results', results) }}
 {{ hiddenInput('page', page) }}
 
@@ -62,25 +64,36 @@ bit of javascript to assign proper overflow style on the html tag #}
 {% endif %}
 
 {# project: status #}
-{% if status != 'all' %}
-    {% set isActiveProject = (status == 'active') %}
-    {% set baseQuery = baseQuery.search('currentStatus:"#{isActiveProject}"') %}
+{% if indexSlug == 'projects' and status != 'all' %}
+    {% set projectStatus = (status == 'active') %}
+    {% set baseQuery = baseQuery.currentStatus(projectStatus) %}
 {% endif %}
 
 {# handle tagged queries #}
 {% if tags %}
-    {# get the tag(s) category object #}
-    {% set tagArray = tags|split(',') %}
-    {% set hasMultipleTags = (tagArray|length > 1) %}
-    {% set category = hasMultipleTags ? [] : craft.categories().group('topics').slug(tags).one() %}
-
-    {% if hasMultipleTags %}
-    {% for tagSlug in tagArray %}
-        {% set category = category|merge([craft.categories().group('topics').slug(tagSlug).one()]) %}
-    {% endfor %}
+    {% set category = craft.categories().group('topics').slug(tags).all() %}
+    {# if people, refine the search based on project teams *and* categories #}
+    {% if section == 'people' %}
+        {% set peopleProjects = craft.entries().section('projects').relatedTo(category) %}
+        {# build list of filtered people ids #}
+        {% set taggedPeopleIds = [] %}
+        {% for p in peopleProjects %}
+            {% set taggedPeopleIds = taggedPeopleIds|merge(p.projectTeam.ids()) %}
+        {% endfor %}
+        {# now query people by specific id list #}
+        {% set baseQuery = baseQuery.id(taggedPeopleIds) %}
+    {% else %}
+        {% set baseQuery = baseQuery.relatedTo(category) %}
     {% endif %}
+{% endif %}
 
-    {% set baseQuery = baseQuery.relatedTo(category) %}
+{# people: person type 
+    IMPORTANT: this needs to follow the tag query
+#}
+{% if person != 'all' %}
+    {% set personSlug = (person == 'staff-leadership') ? 'staff,faculty-advisory-board' : person %}
+    {% set personType = craft.categories().group('personTypes').slug(personSlug).all() %}
+    {% set baseQuery = baseQuery.relatedTo(personType) %}
 {% endif %}
 
 {% block date_directory %}
@@ -102,6 +115,15 @@ bit of javascript to assign proper overflow style on the html tag #}
     'current_page': page
 }%}
 {# END RESULTING #}
+
+<div class="devTesting{{ env == 'dev' ? ' _is-debug' : '' }}">DEV TESTING RESULTS: 
+    <ul>
+        <li>Count: {{ results }}</li>
+        <li>People IDs: {{ peopleIds is defined ? peopleIds|length : 'N/A' }}</li>
+        <li>People Projects: {{ peopleProjects is defined ? peopleProjects|length : 'N/A' }}</li>
+        <li>Tagged People Projects: {{ taggedPeopleIds is defined ? taggedPeopleIds|json_encode : 'N/A' }}</li>
+    </ul>
+</div>
 
 {% if isSearchIndex %}
 {# Search Page Opener #}
@@ -129,17 +151,31 @@ bit of javascript to assign proper overflow style on the html tag #}
 {% switch indexSlug %}
     {% case 'search' %}
     {% set tabList = [{'displayText': 'All'}]|merge(primaryNav.navigationBlock.all()) %}
+    
     {% case 'projects' %}
-    {% set tabList = [{'title': 'All'},{'title': 'Active Projects', 'slug': 'active'},{'title': 'Completed Projects', 'slug': 'completed'}] %}
+    {% set tabList = [
+        {'title': 'All','slug':'all'},
+        {'title': 'Active Projects', 'slug': 'active'},
+        {'title': 'Completed Projects', 'slug': 'completed'}
+    ] %}
     {% set tabFilter = 'status' %}
+    
     {% case 'people' %}
-    {% set tabList = [{'title': 'All'}]|merge(craft.categories.group('personTypes')) %}    
+    {% set peopleList = craft.categories.group('personTypes') %}    
+    {% set tabList = [] %}
+    {% set staffList = ['staff','faculty-advisory-board'] %}
+    {% for personType in peopleList if personType.slug not in staffList %}
+        {% set tabList = tabList|merge([{'title': "#{personType.title}s",'slug':personType.slug }]) %}
+    {% endfor %}
+    {% set tabList = [{'title': 'All','slug':'all'}]|merge(tabList)|merge([{'title':'Staff & Leadership','slug':'staff-leadership'}]) %}
+    {% set tabFilter = 'person' %}
+
+
 {% endswitch %}
 
 <section class="searchFilters">
 
-
-    <h2 class="searchFilters-title{{ indexSlug == 'search' ? ' searchFilters-title--hide' : '' }}">
+    <h2 class="searchFilters-title{{ indexSlug == 'search' or indexSlug == 'people' ? ' searchFilters-title--hide' : '' }}">
     {% switch indexSlug %}
         {% case 'search' %}
         Filter the search
@@ -150,12 +186,12 @@ bit of javascript to assign proper overflow style on the html tag #}
     {% endswitch %}
     </h2>
 
-    <ul class="searchTabs">
+    <ul class="searchTabs searchTabs--{{ indexSlug }}">
     {% for tab in tabList if (isSearchIndex and tab.displayText|slugify not in excludeList) or not isSearchIndex %}
 
         {% set tabName = isSearchIndex ? tab.displayText : tab.title %} 
         {% set tabSlug = isSearchIndex ? (tabName == 'Research' ? 'projects' : tab.displayText|slugify) : ('slug' in tab|keys ? tab.slug : tab.title|slugify) %}
-        {% set activeTab = (indexSlug == 'projects' and status == tabSlug) or (indexSlug == 'search' and section == tabSlug) %}
+        {% set activeTab = (indexSlug == 'projects' and status == tabSlug) or (indexSlug == 'search' and section == tabSlug) or (indexSlug == 'people' and person == tabSlug) %}
         {# NOTE: 
             Persist all active filters on open, close, and apply triggers;
             this is why we add the tags value to the section trigger below
@@ -178,7 +214,6 @@ bit of javascript to assign proper overflow style on the html tag #}
     {% endfor %}
     </ul>
 
-    {% if isSearchIndex %}
     {# dimensions control #}
     {% set filterList = [
         {
@@ -212,9 +247,8 @@ bit of javascript to assign proper overflow style on the html tag #}
         }]) %}
     {% endswitch %}
 
-    {% set filterName, filterLabel,resultsId = 'resultsFilter','Filter Results','#search_{{ searchId }}_results' %}
-    {{ controls.controlDimensions(filterName,filterLabel,filterList,resultsId,overlay) }}
-    {% endif %}
+    {% set filterName,filterVariant,filterLabel,resultsId = 'resultsFilter',indexSlug,'Filter Results','#search_{{ searchId }}_results' %}
+    {{ controls.controlDimensions(filterName,filterVariant,filterLabel,filterList,resultsId,overlay) }}
 
     {# sort control #}
     {# {% set sortName,sortLabel,sortOptions,activeSort = 'searchSort','Sort By Name (A-Z)',['asc','desc'], sort %}
@@ -226,22 +260,22 @@ bit of javascript to assign proper overflow style on the html tag #}
 <section class="searchResults" id="search_index_results">
     <h2 class="searchResults-title">Results:</h2>
 
-    {% if isSearchIndex %}
     {% if results %}
-    <div class="searchResults-content">
+    <div class="searchResults-content{% if indexSlug == 'people' %} searchResults-content--bio{% endif %}">
         {% set cardObj = {
             'isSearch': true,
             'activeTags': filterList|map(obj => (obj.slug == 'tags' ? obj.active : ''))|join('') 
         }%}
         {% for entry in resultsByPage %}
-        {% set cardName,cardEntry = 'searchArticle', entry %}
-        {{ cards.cardArticle(cardName,cardEntry,cardObj) }}
+            {% set cardName = (section == 'people') ? 'searchBio' : 'searchArticle' %}
+            {% set cardEntry,cardVariant = entry,indexSlug %}
+            {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
         {% endfor %}
     </div>
     {% else %}
         No results
     {% endif %}
-    {% endif %}
+  
 </section>
 
 {# PAGINATION #}

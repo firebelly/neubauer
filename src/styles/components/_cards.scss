@@ -10,7 +10,9 @@
   Card Directory: Structure
   See templates/macros/_cards.html for markup
 ------------------------------------------------------------------------ */
-@mixin cardDirectory($selector,$color-primary,$color-secondary,$default:true) {
+@mixin cardDirectory($selector,$color-primary:null,$color-secondary:null,$default:true,$theme:false) {
+
+    @include controlTags(#{$selector}-topics,$color-primary,$color-secondary,$default,$theme);
 
     #{$selector} {
         font-size: 1rem;
@@ -29,7 +31,6 @@
             a:visited,
             a:hover,
             a:active {
-                color: $color-primary;
                 text-decoration: none;
             }
 
@@ -40,12 +41,10 @@
             margin-bottom: 2em;
 
             &-image {
-                
                 @at-root {
                     @include assetItem(#{$asset});
                 }
             }
-
         }
         
         &-team {
@@ -59,17 +58,6 @@
                 display: inline-block;
                 @include getType('caption');
             }
-
-            &-name {
-
-                &:link,
-                &:visited,
-                &:hover,
-                &:active {
-                    color: $color-primary;
-                }
-            }
-
         }
 
         &-caption {
@@ -92,14 +80,8 @@
         }
 
         &-topics {
-            $topics: &;
-
             &-title {
                 @include visuallyHide;
-            }
-
-            @at-root {
-                @include controlTags(#{$topics},$color-primary,$color-secondary);
             }
         }
 
@@ -108,20 +90,26 @@
             margin-top: 1em;
         }
 
-        &-action {
-            $action: &;
-            
-            @at-root {
-                @include actionButton(#{$action},$color-primary,$color-secondary);
-            }
-        
-        }
-
     }
 
     @if $default != false {
-		@include cardDirectory--default($selector,$color-primary,$color-secondary);
-	}
+        @if $theme == true {
+            @each $pg, $color in $pages {
+                $color-primary: nth(getTheme($color),1);
+                $color-secondary: nth(getTheme($color),2);
+    
+                @at-root {
+                    #{$selector}--#{$pg} {
+                        @include cardDirectory--default($selector,$color-primary,$color-secondary);
+                    }
+                }
+            }
+        }
+        @else {
+            @include cardDirectory--default($selector,$color-primary,$color-secondary);
+        }
+    }
+
 
 }
 
@@ -130,7 +118,29 @@
 ---------------------------------------------------------------------------------- */
 @mixin cardDirectory--default($selector,$color-primary,$color-secondary) {
 
+    @include actionButton(#{$selector}-action,$color-primary,$color-secondary);
+
     #{$selector} {
+
+        &-title {
+            a:link,
+            a:visited,
+            a:hover,
+            a:active {
+                color: $color-primary;
+            }
+        }
+
+        &-team {
+            &-name {
+                &:link,
+                &:visited,
+                &:hover,
+                &:active {
+                    color: $color-primary;
+                }
+            }
+        }
 
     }
 
@@ -140,20 +150,110 @@
   Card Feature: Structure
   See templates/macros/_cards.html for markup
 ------------------------------------------------------------------------ */
-@mixin cardFeature($selector,$icon-size:20px,$color-primary:null,$color-secondary:null,$default:true) {
+@mixin cardFeature($selector,$color-primary:null,$color-secondary:null,$default:true,$theme:false) {
    
+    @include controlTags(#{$selector}-topics,$color-primary,$color-secondary,$default,$theme);
+    @include assetItem(#{$selector}-img);
+    
     #{$selector} {
+        padding: 4em;
         font-size: 1rem;
+        content:"#{$selector}";
+    
+        &-label {
+            @include getType('h1-normal');
+        }
+    
+        &-title {
+            $mb: math.div(20,40);
+            @include getType('h2-sans');
+            margin-bottom: #{$mb}em;
+        }
+    
+        &-content {
+            content: "test";
+            @include flexParent();
+            margin: 8em 0 12em 0;
+    
+            > * {
+                @include flexChild(0 1 50%);
+            }
+        }
+    
+        &-details {
+            @include alignSelf(center);
+            padding: 0 4em 0 8em;
+        }
+    
+        &-date {
+            @include getType('p');
+            text-align: center;
+        }
+    
+        &-actions {
+            @include flexParent();
+            @include justifyContent(center);
+            margin-top: 4em;
+    
+            > * {
+                @include flexChild();
+            }
+    
+        }
+        
+        // .featureTopics {
+    
+        //     &-title {
+        //         @include visuallyHide;
+        //     }
 
+        //     &-list {
+        //         @include justifyContent(center);
+        //     }
 
+        //     &-trigger {
+        //         @include getType('fine');
+        //     }
 
+        // }
+
+        &-team {
+
+            &-title {
+                @include visuallyHide;
+            }
+
+            &-list {				
+                @include flexParent();
+                @include justifyContent(center);
+                margin-bottom: 1em;
+            }
+
+            &-item {
+                @include getType('h4-sans');
+            }
+
+        }        
 
     }
 
     @if $default != false {
-		@include cardFeature--default($selector,$color-primary,$color-secondary);
-	}
-
+        @if $theme == true {
+            @each $pg, $color in $pages {
+                $color-primary: nth(getTheme($color),1);
+                $color-secondary: nth(getTheme($color),2);
+    
+                @at-root {
+                    #{$selector}--#{$pg} {
+                        @include cardFeature--default($selector,$color-primary,$color-secondary);
+                    }
+                }
+            }
+        }
+        @else {
+            @include cardFeature--default($selector,$color-primary,$color-secondary);
+        }
+    }
 }
 
 
@@ -162,7 +262,200 @@
 ---------------------------------------------------------------------------------- */
 @mixin cardFeature--default($selector,$color-primary,$color-secondary) {
 
+    @include actionButton(#{$selector}-action,$color-primary,$color-secondary);
+
     #{$selector} {
+        background: $color-primary;
+    
+        * {
+            color: $color-secondary;
+        }
+
+    }
+
+}
+
+/* ---------------------------------------------------------------------
+  Card Bio: Structure
+  See templates/macros/_cards.html for markup
+------------------------------------------------------------------------ */
+@mixin cardBio($selector,$color-primary:null,$color-secondary:null,$default:true,$theme:false) {
+
+    @include controlTags(#{$selector}-topics,$color-primary,$color-secondary,$default,$theme);
+
+    #{$selector} {
+        $image-size: 140px;
+        font-size: 1rem;
+        margin: 0 0 6em 0;
+
+        @include breakpoint(sm) {
+            @include flexParent();
+            border-top: 1px solid $color-primary;
+            border-bottom: 1px solid transparent;
+            margin: 0 0.25em 0 0.25em;
+            padding: 2em 0 4em 0;
+        }
+
+        &-details {
+            $image-diff: calc(100% - $image-size);
+            margin-top: 2em;
+
+            @include breakpoint(sm) {
+                $flex: calc($image-diff - 2em);
+                margin: 0 0 0 2em;
+                @include flexChild(0 1 $flex);
+            }
+
+        }
+
+        &-title {
+            $mb: math.div(10,20);
+            @include getType('h4-sans');
+            margin-bottom: #{$mb}em;
+
+            a:link,
+            a:visited,
+            a:hover,
+            a:active {
+                text-decoration: none;
+            }
+
+        }
+
+        &-subtitle {
+            $mb: math.div(10,20);
+            //@include getType('h4-italic');
+            @include getType('caption');
+            font-style: italic;
+            margin-bottom: #{$mb}em;
+
+            a:link,
+            a:visited,
+            a:hover,
+            a:active {
+                text-decoration: none;
+            }
+        }
+
+        &-asset {
+            $asset: &;
+
+            @include breakpoint(sm) {
+                // TODO: not this
+                height: $image-size;
+                width: $image-size;
+                @include flexChild(0 1 $image-size);
+
+                &--ghost {
+                    margin-left: -2em;
+                }
+
+            }
+
+            &-image {
+                @at-root {
+                    @include assetItem(#{$asset});
+                }
+            }
+
+        }
+        
+        &-team {
+            margin-bottom: 1em;
+
+            &-title {
+                @include visuallyHide;
+            }
+
+            &-item {
+                display: inline-block;
+                @include getType('caption');
+            }
+        }
+
+        &-caption {
+            @include getType('caption');
+        }
+
+        &-dateblock {
+            $mb: math.div(10,16);
+            @include getType('caption');
+            display: block;
+            margin-bottom: #{$mb}em;
+
+            // Time circle
+            span {
+                display: inline-block;
+                font-size: 0.75em;
+                vertical-align: text-top;
+            }
+
+        }
+
+        &-topics {
+            &-title {
+                @include visuallyHide;
+            }
+        }
+
+        &-buttons {
+            // action container
+            margin-top: 1em;
+        }
+
+    }
+
+    @if $default != false {
+        @if $theme == true {
+            @each $pg, $color in $pages {
+                $color-primary: nth(getTheme($color),1);
+                $color-secondary: nth(getTheme($color),2);
+    
+                @at-root {
+                    #{$selector}--#{$pg} {
+                        @include cardBio--default($selector,$color-primary,$color-secondary);
+                    }
+                }
+            }
+        }
+        @else {
+            @include cardBio--default($selector,$color-primary,$color-secondary);
+        }
+    }
+
+
+}
+
+/* -------------------------------------------------------------------------------
+ Card Bio: Default Presentation
+---------------------------------------------------------------------------------- */
+@mixin cardBio--default($selector,$color-primary,$color-secondary) {
+
+    @include actionButton(#{$selector}-action,$color-primary,$color-secondary);
+
+    #{$selector} {
+        border-top-color: $color-primary;
+        border-bottom-color: $color-primary;
+
+        &-title {
+            a:link,
+            a:visited,
+            a:hover,
+            a:active {
+                color: $color-primary;
+            }
+        }
+
+        &-team {
+            &-name {
+                &:link,
+                &:visited,
+                &:hover,
+                &:active {
+                    color: $color-primary;
+                }
+            }
+        }
 
     }
 

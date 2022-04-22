@@ -14,10 +14,14 @@
 
     #{$selector} {
         @include flexParent($display:inline-flex,$values:row nowrap);
-        border-radius: 5px;
-        border: $border-size solid transparent;
-        padding: calc(#{$v-padding} - #{$border-size}) calc(#{$h-padding} - #{$border-size});
         font-size: 1rem;
+        margin-right: 4em;
+
+        &--ghost {
+            border-radius: 5px;
+            border: $border-size solid transparent;
+            padding: calc(#{$v-padding} - #{$border-size}) calc(#{$h-padding} - #{$border-size});
+        }
 
         // TODO: make accessible
         // https://www.a11yproject.com/posts/2013-01-25-never-remove-css-outlines/
@@ -59,45 +63,44 @@
  Action Button: Default Presentation
 ---------------------------------------------------------------------------------- */
 @mixin actionButton--default($selector,$color-primary,$color-secondary) {
-    // Solid palette
-    $solid-default-color: getColor('white');
-    $solid-inactive-color: getColor('black',10);
-    $solid-default-bg: getColor('red');
-    $solid-inactive-bg: getColor('gray',10);
-    // Ghost palette
-    $ghost-default-color: $color-primary;
-    $ghost-inactive-color: getColor('gray',10);
-    $ghost-default-border: $color-primary;
-    $ghost-hover-border: transparent;
-    // Hover palette
-    $hover-color: getColor('black',10);
-    $hover-bg: getColor('yellow',10);
 
     #{$selector} {
 
-        &--solid {
-            background: $solid-default-bg;
-            border-color: $solid-default-bg;
-            color: $solid-default-color;
+        &--link {
+            color: $color-primary;
 
-            &._is-inactive {
-                background: $solid-inactive-bg;
-                color: $solid-inactive-color;
+            &:link,
+            &:visited,
+            &:hover,
+            &:active {
+                text-decoration: underline;
+                text-underline-offset: 4px;
+                text-decoration-color: $color-primary;
+            }
+
+            #{$selector}-icon {
+                fill: $color-primary;
             }
 
         }
 
         &--ghost {
-            border-color: $ghost-default-border;
-            color: $ghost-default-color;
-
-            &._is-inactive {
-                border-color: $ghost-inactive-color;
-                color: $ghost-inactive-color;
-            }
+            border-color: $color-primary;
+            color: $color-primary;
 
             &:hover {
-                border-color: $ghost-hover-border;
+                border-color: $color-secondary;
+                background: $color-primary;
+                color: $color-secondary;
+
+                #{$selector}-icon {
+                    fill: $color-secondary;
+                }
+
+            }
+
+            #{$selector}-icon {
+                fill: $color-primary;
             }
 
         }
@@ -106,40 +109,10 @@
             @include getType('action');
         }
 
-        &-icon {
-            
-            #{$selector}--solid & {
-                fill: $solid-default-color;
-            }
-
-            #{$selector}--solid._is-inactive & {
-                fill: $solid-inactive-color;
-            }
-
-            #{$selector}--ghost & {
-                fill: $ghost-default-color;
-            }
-
-            #{$selector}--ghost._is-inactive & {
-                fill: $ghost-inactive-color;
-            }
-
-            #{$selector}:hover & {
-                fill: $hover-color;
-            }
-
-        }
-
         &-trigger {  
             text-align: center;
             text-decoration: none;
         }
-
-        &:hover {
-            @include boxShadow(0,1px,5px,rgba($hover-color,.6));
-            background: $hover-bg;
-            color: $hover-color;
-		}
 
     }
 

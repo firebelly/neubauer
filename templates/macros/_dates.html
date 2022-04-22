@@ -92,8 +92,8 @@
 
 {% switch dateType %}
     {% case 'yearRange' %}
-    {% set startDate = dateObj.itemFrom is not null ? dateObj.itemFrom : null %}
-    {% set endDate = dateObj.itemTo is not null ? dateObj.itemTo : null %}
+    {% set startDate = (dateObj.itemFrom is not null and dateObj.itemFrom != '') ? dateObj.itemFrom : null %}
+    {% set endDate = (dateObj.itemTo is not null and dateObj.itemTo != '') ? dateObj.itemTo : null %}
     
     {% if startDate and endDate %}
     {% set thisDate = "#{startDate} &ndash; #{endDate}" %}
