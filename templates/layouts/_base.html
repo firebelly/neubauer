@@ -3,8 +3,8 @@
 
 {% include 'partials/_head' %}
 
-{% set cleanSection = entry.getSection()|replace('Index','')|slugify %}
-{% set currentSection = cleanSection == 'projects' ? 'research' : cleanSection %}
+{% set currentSection = entry.getSection()|replace('Index','')|slugify %}
+
 
 <body class="primaryTheme primaryTheme--{{ currentSection }}">
     <a class="skip-link" href="#primaryContent">

@@ -79,6 +79,7 @@ $theme-map: (
 	'red': (getColor('red'),getColor('red',10)),
 	'yellow': (getColor('gray'),getColor('yellow')),
 	'green': (getColor('green'),getColor('green',10)),
+	'olive': (getColor('green',30),getColor('green',20)),
 	'blue': (getColor('blue'),getColor('blue',10)),
 	'gray': (getColor('gray'),getColor('gray',10)),
 	'black': (getColor('black'),getColor('white'))
@@ -87,7 +88,7 @@ $theme-map: (
 $pages: (
 	'homepage': 'black',
 	'research': 'green',
-	'projects': 'green',
+	'projects': 'olive',
 	'exhibitions': 'gray',
 	'events': 'yellow',
 	'people':'blue',

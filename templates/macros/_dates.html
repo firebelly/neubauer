@@ -82,6 +82,51 @@
 </div>
 {% endmacro %}
 
+
+{# toTheTimeMachine: #}
+{% macro toTheTimeMachine(baseQuery,future = true) %}
+    {% set timeMachineIds = [] %}
+    {% set date_format = 'Y-m-d' %}
+    {% set today = now|date('Y-m-d') %}
+    {% set datedEntries = baseQuery
+        .with('dateBlock')
+        .dateBlock(':notempty:')
+        .all()
+    %} 
+    {% for entry in datedEntries if entry.dateBlock[0] != "" %}
+        {% set dateObj =  entry.dateBlock[0] %}
+        {% set dateType = dateObj.type %}
+        {% set thisDate = null %}
+        {% switch dateType %} 
+            {% case 'yearRange' %}
+            {% set thisDate = (dateObj.itemTo is not null and dateObj.itemTo != '') ? dateObj.itemTo : null %}
+
+            {% case 'dateRange' %}
+            {% set thisDate = dateObj.item.end is defined and dateObj.item.end is not null ? dateObj.item.end|date(date_format) : null %}
+    
+            {% case 'datePlusTimeRange' %}
+            {% set thisDate = dateObj.item.end is defined and dateObj.item.end is not null ? dateObj.item.end|date(date_format) : null %}
+           
+            {% case 'datePlusTime' %}
+            {% set thisDate = dateObj.item is defined and dateObj.item is not null ? dateObj.item|date(date_format) : null %}
+
+            {% case 'dateByYear' %}
+            {% set thisDate = dateObj.item is defined and dateObj.item is not null ? dateObj.item : null %}
+
+            {% case 'dateOnly' %}
+            {% set thisDate = dateObj.item is defined and dateObj.item is not null ? dateObj.item|date(date_format) : null %}
+        {% endswitch %}
+
+        {% if thisDate and ((future and today <= thisDate) or (not future and today > thisDate)) %}
+            {# {% set dateList = dateList|merge(["#{entry.slug}_#{thisDate}"]) %} #}
+            {% set timeMachineIds = timeMachineIds|merge([entry.id]) %}
+        {% endif %}
+    {% endfor %}
+
+    {{ timeMachineIds|json_encode }}
+{% endmacro %}
+
+
 {# printDate:
     @dateObj {obj} - _self.getDateObject()
 #}

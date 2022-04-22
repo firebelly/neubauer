@@ -54,7 +54,7 @@
         <ul class="primaryPages">
         {% for navItem in navList if navItem.page not in excludeList %}
             <li class="primaryPages-item">
-                <a class="primaryPages-trigger" href="{{ navItem.page[0].uri }}">
+                <a class="primaryPages-trigger" href="/{{ navItem.page[0].uri }}">
                     <span class="primaryPages-label">{{ navItem.displayText }}</span>
                     <svg 
                         class="primaryPages-icon"

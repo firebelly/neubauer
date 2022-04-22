@@ -720,9 +720,11 @@
             display: none;
         }
 
-        // If dialog is parent, reverse color palette
-        /////////////////////////////////////////////
-        &-dialog {
+        // If dialog or callout is parent, reverse color palette
+        // NOTE: hyphen specifics here, eh
+        ////////////////////////////////////////////////////////
+        &-dialog,
+        &--callout {
 
             #{$selector}-trigger--tag {
                 border-color: $color-secondary;

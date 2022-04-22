@@ -171,51 +171,70 @@
         }
     
         &-content {
-            content: "test";
-            @include flexParent();
             margin: 8em 0 12em 0;
-    
-            > * {
-                @include flexChild(0 1 50%);
+            
+            @include breakpoint(sm) {
+                @include flexParent();
+
+                > * {
+                    @include flexChild(0 1 50%);
+                }
             }
+            
         }
     
+        &-asset {
+            margin-bottom: 2em;
+            @include breakpoint(sm) {
+                margin-bottom: 0;
+            }
+        }
+
         &-details {
             @include alignSelf(center);
-            padding: 0 4em 0 8em;
+
+            @include breakpoint(sm) {
+                padding: 0 4em 0 8em;
+            }
+
         }
     
         &-date {
             @include getType('p');
-            text-align: center;
+            
+            @include breakpoint(sm) {
+                text-align: center;
+            }
         }
     
-        &-actions {
+        &-buttons {
             @include flexParent();
-            @include justifyContent(center);
             margin-top: 4em;
     
             > * {
                 @include flexChild();
             }
+
+            @include breakpoint(sm) {
+                @include justifyContent(center);
+            }
     
         }
-        
-        // .featureTopics {
+
+        &-topics {
+
+            &-title {
+                @include visuallyHide;
+            }
     
-        //     &-title {
-        //         @include visuallyHide;
-        //     }
+            &-list {
 
-        //     &-list {
-        //         @include justifyContent(center);
-        //     }
+                @include breakpoint(sm) {
+                    @include justifyContent(center);
+                }
+            }
 
-        //     &-trigger {
-        //         @include getType('fine');
-        //     }
-
-        // }
+        }
 
         &-team {
 
@@ -225,8 +244,11 @@
 
             &-list {				
                 @include flexParent();
-                @include justifyContent(center);
                 margin-bottom: 1em;
+
+                @include breakpoint(sm) {
+                    @include justifyContent(center);
+                }
             }
 
             &-item {
@@ -245,7 +267,7 @@
     
                 @at-root {
                     #{$selector}--#{$pg} {
-                        @include cardFeature--default($selector,$color-primary,$color-secondary);
+                        @include cardFeature--default(#{$selector},$color-primary,$color-secondary);
                     }
                 }
             }
@@ -262,13 +284,48 @@
 ---------------------------------------------------------------------------------- */
 @mixin cardFeature--default($selector,$color-primary,$color-secondary) {
 
-    @include actionButton(#{$selector}-action,$color-primary,$color-secondary);
+    @include actionButton(#{$selector}-action,$color-secondary,$color-primary);
 
     #{$selector} {
         background: $color-primary;
-    
-        * {
+
+        &-label,
+        &-title,
+        &-date {
             color: $color-secondary;
+        }
+    
+        &-team {
+
+            &-item {
+                color: $color-secondary;
+            }
+
+            a:link,
+            a:visited,
+            a:hover,
+            a:active {
+                color: $color-secondary;
+            }
+
+        }
+
+        &-topics {
+    
+            &-trigger {
+                @include getType('fine');
+            }
+    
+        }
+
+        &-buttons {
+            @include flexParent();
+            @include justifyContent(center);
+            margin-top: 4em;
+    
+            > * {
+                @include flexChild();
+            }
         }
 
     }

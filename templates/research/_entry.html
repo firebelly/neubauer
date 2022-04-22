@@ -1,22 +1,184 @@
-Single Project
+{% extends "layouts/_base.html" %}
+{% import 'macros/_assets' as assets %}
+{% import 'macros/_dates' as dates %}
+{% import 'macros/_cards' as cards %}
 
-{% set currentProject = entry %}
-{% set searchSlug = 'ida-applebroog' %}
+{% block content %}
+
+{% set cardTitle = entry.title %}
+{% set cardImage = entry.cardImage and entry.cardImage.one() is not null ? entry.cardImage : null %}
+{% set cardTopics = entry.topicList is not null and entry.topicList|length > 0 ? entry.topicList : null %}
+{% set cardDate = entry.dateBlock is not null and entry.dateBlock|length == 1 ? dates.printDate(entry.dateBlock[0]) : null %}
+{% set cardUrl = entry.url %}
+{% set cardTeam = entry.projectTeam is not null and entry.projectTeam|length > 0 ? entry.projectTeam : null %}
+
+{% set spotlightBlock = entry.spotlightBlock is not null and entry.spotlightBlock|length > 0 ? entry.spotlightBlock.all() : null %}
+{% set narrativeBlock = entry.narrativeBlock is not null and entry.narrativeBlock|length > 0 ? entry.narrativeBlock.all() : null %}
+
+{% set citationList = entry.citationList is not null and entry.citationList|length > 0 ? entry.citationList.all() : null %}
 
 
+{% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
+{% set emailPath = "/spritemap.svg#icon-email-20" %}
+{% set expandPath = "/spritemap.svg#icon-plus-20" %}
+
+
+{% if cardImage %}
+    {% set 
+        imageName,imageVariant,imageObj,imageTransforms,aspectRatioObj,showCaption,imageBlock,imagerX = 
+        'interiorOpen-asset',null,cardImage,null,{},true,{},true
+    %} 
+{% endif %}
+
+<section class="interiorOpen">
+    
+    <div class="interiorOpen-details">
+        <h1 class="interiorOpen-subtitle">Research Project</h1>
+        <h2 class="interiorOpen-title">{{ cardTitle }}</h2>
+        {% if cardTeam|length > 0 %}
+        <div class="interiorOpen-team">
+            <h3 class="interiorOpen-team-title">Project Team:</h3>
+            <ul class="interiorOpen-team-list">
+                {% for member in cardTeam %}
+                <li class="interiorOpen-team-item">
+                    <a href="{{ member.uri }}">{{ member.title }}</a>{{ loop.last ? '' : ', &nbsp;' }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if cardDate %}
+        <div class="interiorOpen-date">{{ cardDate }}</div>
+        {% endif %}
+
+        <ul class="interiorOpen-menu">
+        {% set menuList = ['Summary','Team','Narrative'] %}
+        {% if citationList %}
+        {% set menuList = menuList|merge(['Reading List']) %}
+        {% endif %}
+            {% for menuItem in menuList %}
+            {% set menuHandle = menuItem|camel %}
+            <li class="interiorOpen-menu-item">
+                <a href="#{{ menuHandle }}">{{ menuItem }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if cardImage %}
+    
+        {{ assets.assetImage(
+            imageName,
+            imageVariant,
+            imageObj,
+            imageTransforms,
+            aspectRatioObj,
+            showCaption,
+            imageBlock, 
+            imagerX) 
+        }}
+    </div>
+    {% endif %}
+  
+</section>
+
+{% if spotlightBlock %}
+{% set spotlightCount = spotlightBlock|length %}
+<section class="interiorSpotlight">
+    <h3 class="interiorSpotlight-subtitle">Key Questions</h3>
+    <ul class="interiorSpotlight-list">
+    {% for spotlight in spotlightBlock if spotlight.type == 'question' %}
+        <li class="interiorSpotlight-item">{{ spotlight.body }}</li>
+    {% endfor %}
+    </ul>
+</section>
+{% endif %}
+
+<section class="interiorSummary" id="summary">
+    <h3 class="interiorSummary-title">Project Summary</h3>
+    <div class="interiorSummary-details">
+    {% if entry.abstract %}
+        <div class="interiorSummary-abstract">{{ entry.abstract }}</div>
+    {% endif %}
+
+    {% if entry.summary %}
+        <a class="interiorSummary-accordion" href="" role="">
+            <span class="interiorSummary-accordion-label">Full Summary</span>
+            <svg class="interiorSummary-accordion-icon">
+                <use xlink:href="{{ alias('@assetBasePath' ~ expandPath) }}"></use>
+            </svg>
+        </a>
+        <div class="interiorSummary-full">{{ entry.summary }}</div>
+    {% endif %}
+
+    {% if cardTopics %}
+    <div class="interiorSummary-topics">
+         <h3 class="interiorSummary-subtitle">Tags</h3>
+        <ul class="interiorSummary-topics-list">
+        {% for topic in cardTopics %}
+            <li class="interiorSummary-topics-item">
+                <a class="interiorSummary-topics-trigger interiorSummary-topics-trigger--tag">
+                    <span class="interiorSummary-topics-label">{{ topic|title }}</span>
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    </div>
+</section>
+
+<section class="interiorTeam" id="team">
+    <h3 class="interiorSummary-title">Research Team</h3>
+    <div>
+    {% for member in cardTeam %}
+        <article class="teamCard">
+            <h4 class="teamCard-title">{{ member }}</h4>
+        </article>
+    {% endfor %}
+    </div>
+</section>
+
+{% if narrativeBlock %}
+<section class="interiorNarrative" id="narrative">
+    <h3 class="interiorSummary-title">Project Narrative</h3>
+    <div>
+    {% for narrative in narrativeBlock %}
+        <article class="narrativeCard">
+            <h4 class="narrativeCard-title">{{ narrative.item[0].title }}</h4>
+        
+        </article>
+    {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<section class="interiorSpotlight">
+
+</section>
+
+{% if citationList %}
+<section class="interiorCitation" id="readingList">
+
+</section>
+{% endif %}
+
+<section class="interiorMore">
+
+</section>
+
+{% endblock %}
+{# {% set searchSlug = 'ida-applebroog' %}
 {% set exhibitionList = craft.entries()
     .section('exhibitions') 
 %}
-
 {% set exhibitions = craft.entries()
     .section('exhibitions') 
     .search('relatedProject:' ~ entry ~ '')
     .all()
-%}
-
-
+%} 
 {% set projectTeam = entry.projectTeam %}
-
 {% for person in projectTeam %}
     {{ person }}
 {% endfor %}
@@ -24,9 +186,9 @@ Single Project
 {% for x in exhibitions %}
     X: {{ x }}
 {% endfor %}
-
 {% for item in exhibitionList if item.relatedProject|length and item.relatedProject.one().title == entry.title %}
     {% set relatedProject = item.relatedProject.one() %}
     ex slug: {{ item.slug }}
     project slug: {{ relatedProject.slug }} 
 {% endfor %}
+#}

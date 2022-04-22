@@ -1,4 +1,4 @@
-dateModified: 1650604982
+dateModified: 1650633739
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -34,6 +34,7 @@ meta:
     2d527c5e-9c0d-4cc1-ae6e-7be103ce4ff9: 'Related Project' # Related Project
     2df2bcc7-46c7-49b5-be7b-b0ade6314496: 'Search Index' # Search Index
     2eb1c876-ef17-46cc-bc9d-811c0340374d: Start # Start
+    2f012216-a100-443c-8429-2beaca326326: Participant # Participant
     2f76f1b1-c207-4e5f-9dd7-3908a2282e41: Page # Page
     2fcce12f-270f-466d-8676-063396ea0bd9: Topics # Topics
     3a220011-959c-43c1-a8b3-5aacb1d67b31: __blank__ # __blank__
@@ -47,6 +48,7 @@ meta:
     3e8382d6-a793-41db-bed1-5fa902fc4b33: Image # Image
     3ea0f193-6608-4555-8564-e2a8a595a248: 'Assign the narrative type, e.g. "Interview" or "Update"' # Assign the narrative type, e.g. "Interview" or "Update"
     3ea2c78d-77d3-4d32-8e59-ee65d76e2cc8: 'Publication Name' # Publication Name
+    03fbd17e-234a-4876-9ec0-0e89393c7c4a: 'Event Participants' # Event Participants
     4a309e71-113e-4d32-b1cf-253702d72281: Label # Label
     4d051939-b6d0-4800-8c01-a156665ad91f: Register # Register
     4defd050-67bf-44b0-a585-e6a0f635921d: Summary # Summary
@@ -179,6 +181,7 @@ meta:
     89820bc7-3887-445e-a6b6-90628ee6a78a: __blank__ # __blank__
     89898bb6-5352-4199-b2d8-5ed46c0bbf43: 'Keyword Filter' # Keyword Filter
     157444bb-e53a-4eb4-a588-09fb7710813d: 'Location Block' # Location Block
+    198900a7-3433-43ef-b9a5-cfee98196320: Bio # Bio
     244011b6-03f3-45fa-b766-21bc4c70b758: Body # Body
     855892be-aa5a-4894-9a54-6a23890c78da: __blank__ # __blank__
     2098244b-aca8-47e2-98e7-0c0b057e76c9: Projects # Projects
@@ -278,6 +281,7 @@ meta:
     fb52e73d-18c1-4598-bf42-1b39479958df: 'Account e.g. "Facebook" or "Instagram"' # Account e.g. "Facebook" or "Instagram"
     fbf7fd25-1dd4-4ceb-a4d9-c468db28e4c9: Interior # Interior
     fc6b0492-412d-4f80-89fc-b9b73ebdb601: Statistic # Statistic
+    fc62009c-d589-4a28-a538-ae226077c431: Name # Name
     fd969c8b-861f-4a69-8f86-4bab475af647: 'Opener Content' # Opener Content
     fda40138-d4a1-4d3d-b372-f29332e386f0: Image # Image
 plugins:

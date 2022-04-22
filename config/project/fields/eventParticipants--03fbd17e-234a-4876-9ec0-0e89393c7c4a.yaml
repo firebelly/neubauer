@@ -1,0 +1,16 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: eb6e4b27-3a81-4da1-8f40-fa29c0f7805c # Event
+handle: eventParticipants
+instructions: 'Add as many participants as needed.'
+name: 'Event Participants'
+searchable: true
+settings:
+  contentTable: '{{%matrixcontent_eventparticipants}}'
+  maxBlocks: ''
+  minBlocks: ''
+  propagationKeyFormat: null
+  propagationMethod: all
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

@@ -23,14 +23,13 @@
 {% set overlay, query, sort, date = overlay ?? 'off', query ?? '', sort ?? 'asc', date ?? '' %}
 {% set section = isSearchIndex ? (section ?? 'all') : indexSlug %}
 {# idx-specific filters #}
-{% set status = status ?? '' %}
-{% set person = person ?? '' %}
-{% set shindig = shindig ?? '' %}
-{% if isSearchIndex %}
-    {% set status = status ?? 'all' %}
-    {% set person = person ?? 'all' %}
-{% endif %}
+{% set status = status ?? 'all' %}
+{% set person = person ?? 'all' %}
+{% set shindig = shindig ?? 'upcoming' %}
 
+{% if indexSlug == 'people' %}
+    {% set limit = '14' %}
+{% endif %}
 
 {# reset current page if new filter is triggered #}
 {% set page = isSprig and (trigger in filters) ? 1 : (page ?? 1) %}
@@ -107,21 +106,17 @@ bit of javascript to assign proper overflow style on the html tag #}
     {% set baseQuery = baseQuery.relatedTo(personType) %}
 {% endif %}
 
-{% if shindig %}
-    {% switch shindig %}
-    {% case 'upcoming' %}
-    
-
-    {% case 'past' %}
-
-    {% case 'directors' %} 
-    DIRECTOR
+{% if indexSlug == 'events' and shindig %}
+    {% if shindig == 'directors' %} 
     {% set eventType = craft.categories().group('eventTypes').slug('directors-lecture').one() %}
     {% set baseQuery = baseQuery.relatedTo(eventType) %}
-    
-    {% endswitch %}
-{% endif %}
+    {% else %}
+    {% set isFuture = (shindig == 'upcoming') %}
+    {% set timedIds = dates.toTheTimeMachine(baseQuery,isFuture) %}
+    {% set baseQuery = baseQuery.id(timedIds|json_decode) %}
 
+    {% endif %}
+{% endif %}
 
 {% block date_directory %}
 {# date directory is solely for dev testing #}
@@ -133,6 +128,8 @@ bit of javascript to assign proper overflow style on the html tag #}
 {# get results #}
 {# TODO: exclude index pages from query #}
 {% set currentResults = (query ? baseQuery.search(query) : baseQuery).orderBy(byTitleExcludeArticles).limit(limit) %}
+
+
 {# define pagination #}
 {% set pageInfo = sprig.paginate(currentResults, page) %}
 {% set results = currentResults|length %}
@@ -204,8 +201,6 @@ bit of javascript to assign proper overflow style on the html tag #}
         {'title': 'Director\'s Lectures', 'slug': 'directors'}
     ] %}
     {% set tabFilter = 'shindig' %}
-
-
 
 {% endswitch %}
 

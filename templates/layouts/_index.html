@@ -50,7 +50,7 @@
     {% if entry.featuredProject is not null %}
     {% set feature = entry.featuredProject.one() %}
     {% set cardEntry,cardLabel = feature,'Featured Project' %}
-    {{ cards.cardFeature(feature,'Featured Project','projects') }}
+    {{ cards.cardFeature(feature,'Featured Project','projectFeature','callout') }}
     {% endif %}
 
     {{ sprig('partials/_filter-controls', {'entryId': entry.id }) }}

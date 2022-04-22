@@ -89,7 +89,7 @@ img {
 		color: white;
 		font-weight: bold;
 		width: 50%;
-		//display: none;
+		display: none;
 	}
 	
 }
@@ -142,24 +142,24 @@ img {
   $primary: nth($theme,1);
   $secondary: nth($theme,2);
 ------------------------------------------------------------------------ */
-$sections: (
-	'homepage':'black',
-	'research': 'green',
-	'projects': 'green',
-	'exhibitions': 'gray',
-	'events': 'yellow',
-	'people':'blue',
-	'about': 'red',
-	'search': 'red'
-);
+// $sections: (
+// 	'homepage':'black',
+// 	'research': 'green',
+// 	'projects': 'olive',
+// 	'exhibitions': 'gray',
+// 	'events': 'yellow',
+// 	'people':'blue',
+// 	'about': 'red',
+// 	'search': 'red'
+// );
 
 // Themed body class
 .primaryTheme {
 
-	@each $section, $color in $sections {
+	@each $pg, $color in $pages {
 		$theme: getTheme($color);
 
-		&--#{$section} {
+		&--#{$pg} {
 			$theme-primary: nth($theme,1);
 			$theme-secondary: nth($theme,2);
 
@@ -520,10 +520,40 @@ $red-secondary: nth($red-theme,2);
 }
 
 /* ---------------------------------------------------------------------
+  Primary Footer
+------------------------------------------------------------------------ */
+.primaryFooter {
+	
+}
+
+.primaryContact {
+	@include flexParent();
+	min-height: 500px;
+
+	> * {
+		@include flexChild(0 1 50%);
+	}
+
+	&-social {
+		background: getColor('red',10);
+	}
+
+	&-news {
+		background: getColor('red');
+	}
+
+}
+
+.primaryCoda {
+	background: getColor('black');
+	height: 500px;
+}
+
+/* ---------------------------------------------------------------------
   Primary Content
 ------------------------------------------------------------------------ */
 .primaryContent {
-	padding: 2em 0 4em 0;
+	padding: 2em 0 8em 0;
 }
 
 /* ---------------------------------------------------------------------
@@ -764,11 +794,11 @@ $red-secondary: nth($red-theme,2);
 /* ---------------------------------------------------------------------
   Feature Cards	
 ------------------------------------------------------------------------ */
-.featureArticle {
+.projectFeature {
 	$feature: &;
 
 	@at-root {
-		@include cardFeature(#{$feature},$theme:true);
+		@include cardFeature(#{$feature},getColor('green'),getColor('green',10));
 	}
 }
 
@@ -795,105 +825,6 @@ $red-secondary: nth($red-theme,2);
 	}
 
 }
-
-
-
-
-
-//.cardFeature {
-	// @extend %gutter;
-	// background: getColor('green');
-
-	// * {
-	// 	color: getColor('green',10);
-	// }
-
-	// &-label {
-	// 	@include getType('h1-normal');
-	// }
-
-	// &-title {
-	// 	$mb: math.div(20,40);
-	// 	@include getType('h2-sans');
-	// 	margin-bottom: #{$mb}em;
-	// }
-
-	// &-content {
-	// 	@include flexParent();
-	// 	margin: 8em 0 12em 0;
-
-	// 	> * {
-	// 		@include flexChild(0 1 50%);
-	// 	}
-	// }
-
-	// &-details {
-	// 	@include alignSelf(center);
-	// 	padding: 0 4em 0 8em;
-	// }
-
-	// &-date {
-	// 	@include getType('p');
-	// 	text-align: center;
-	// }
-
-	// &-actions {
-	// 	@include flexParent();
-	// 	@include justifyContent(center);
-	// 	margin-top: 4em;
-
-	// 	> * {
-	// 		@include flexChild();
-	// 	}
-
-	// }
-
-	// // Init components
-	// @at-root {
-	// 	$research-primary: getColor('green',10);
-	// 	$research-secondary: getColor('green');
-
-	// 	// @include controlTags('.featureTopics',$research-primary,$research-secondary);
-	// 	// @include assetItem('.cardFeature-img');
-	// 	// @include actionButton('.cardAction',$color-primary:$research-primary,$color-secondary:$research-secondary);
-
-	// 	.featureTopics {
-
-	// 		&-title {
-	// 			@include visuallyHide;
-	// 		}
-
-	// 		&-list {
-	// 			@include justifyContent(center);
-	// 		}
-
-	// 		&-trigger {
-	// 			@include getType('fine');
-	// 		}
-
-	// 	}
-
-	// 	.featureTeam {
-
-	// 		&-title {
-	// 			@include visuallyHide;
-	// 		}
-
-	// 		&-list {				
-	// 			@include flexParent();
-	// 			@include justifyContent(center);
-	// 			margin-bottom: 1em;
-	// 		}
-
-	// 		&-item {
-	// 			@include getType('h4-sans');
-	// 		}
-	// 	}
-
-	// }
-
-//}
-
 
 /* ---------------------------------------------------------------------
   Person
@@ -934,4 +865,225 @@ $red-secondary: nth($red-theme,2);
 
 .profileBody {
 	font-size: 2.4em;
+}
+
+
+/* ---------------------------------------------------------------------
+  Interior Pages
+------------------------------------------------------------------------ */
+.interiorOpen {
+	padding: 0 8em 5em 8em;
+	@include flexParent($display:flex,$values:row nowrap);
+	@include justifyContent(center);
+	@include alignItems(center);
+	position: relative;
+
+	> * {
+		@include flexChild(0 1 50%);
+	}
+
+	&-details {
+		//@include flexChild(1 1 auto);
+		padding-right: 8em;
+		text-align: center;
+	}
+
+	&-asset {
+		//@include flexChild(0 1 50%);
+		// todo
+		overflow: hidden;
+		height: 700px;
+	}
+
+	&-title {
+		$mb: math.div(40,65);
+		@include getType('h1-normal');
+		margin-bottom: #{$mb}em;
+	}
+
+	&-subtitle {
+		@include getType('caption');
+	}
+
+	&-team {
+		&-title {
+			@include visuallyHide;
+		}
+
+		&-list {				
+			@include flexParent();
+			@include justifyContent(center);
+			margin-bottom: 1em;
+		}
+
+		&-item {
+			@include getType('caption');
+
+			a:link,
+            a:visited,
+            a:hover,
+            a:active {
+                color: getColor('green',30);
+            }
+
+		}
+
+	}
+
+	&-date {
+		@include getType('caption');
+	}
+
+	&-menu {
+		@include flexParent();
+		position: absolute;
+		bottom: 5em; //todo
+    	margin: 0 4em 0 4em;
+    	width: calc(50% - 24em);
+		@include justifyContent(space-around);
+		scroll-behavior: smooth; // todo
+
+		&-item {
+			@include flexChild(0 1 auto);
+			@include getType('action');
+
+			a:link,
+            a:visited,
+            a:hover,
+            a:active {
+                color: getColor('green',30);
+				text-decoration: none;
+            }
+		}
+
+	}
+
+}
+
+.interiorSpotlight {
+	background:  #51594A; //todo
+	height: 900px;
+
+	* {
+		color: getColor('green',20);
+	}
+
+	&-subtitle {
+		@include getType('h3-sans');
+		text-align: center;
+	}
+
+	&-list {
+		@include flexParent($display:flex,$values:row nowrap);
+		@include justifyContent(center);
+		@include alignItems(center);
+		text-align: center;
+	}
+
+	&-item {
+		@include getType('h1-italic');
+		
+		font-style: italic;
+		max-width: 810px;
+
+	}
+
+}
+
+.interiorSummary {
+	@include flexParent($display:flex,$values:row nowrap);
+	@include justifyContent(center);
+	padding: 4em 4em 16em 4em;
+
+	> * {
+		@include flexChild(0 1 50%);
+	}
+
+	&-title {
+		@include getType('h1-normal');
+	}
+
+	&-subtitle {
+		$pad: math.div(20,28);
+		@include getType('h3-sans');
+		padding: #{$pad}em 0;
+	}
+
+	&-details {
+		@include getType('subtitle');
+	}
+
+	&-abstract {
+	
+	}
+
+	&-accordion {
+		@include flexParent();
+		border-top: 1px solid getColor('green',30);
+		border-bottom: 1px solid getColor('green',30);
+		display: block;
+		margin-top: 4em;
+		padding: 2em 0;
+		width: 100%;
+		font-size: 1rem;
+
+		&:link,
+		&:visited,
+		&:hover,
+		&:active {
+			color: getColor('green',30);
+			text-decoration: none;
+		}
+
+		> * {
+			@include flexChild(0 1 auto);
+		}
+
+		&-label {
+			@include getType('h3-sans');
+			flex-grow: 1;
+		}
+
+		&-icon {
+			height: 20px;
+			width: 20px;
+			fill: getColor('green',30);
+		}
+	}
+
+	&-full {
+		@include visuallyHide;
+	}
+
+	&-topics {
+		font-size: 1rem;
+		$detail-topics: &;
+		@at-root {
+			@include controlTags(#{$detail-topics},getColor('green',30),getColor('green',20));
+		}
+		&-label {
+			@include getType('fine');
+		}
+
+	}
+
+}
+
+.interiorTeam {
+	border-top: 1px solid getColor('green',30);
+
+}
+
+.teamCard {
+	&-title {
+		@include getType('h3-sans');
+	}
+}
+
+.narrativeCard {
+
+	&-title {
+		@include getType('caption');
+	}
+
 }

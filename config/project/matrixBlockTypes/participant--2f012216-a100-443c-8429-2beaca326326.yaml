@@ -1,0 +1,78 @@
+field: 03fbd17e-234a-4876-9ec0-0e89393c7c4a # Event Participants
+fieldLayouts:
+  a753ad39-b0b5-46c1-b05b-3b32fb4e464d:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: fc62009c-d589-4a28-a538-ae226077c431 # Name
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 198900a7-3433-43ef-b9a5-cfee98196320 # Bio
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  198900a7-3433-43ef-b9a5-cfee98196320: # Bio
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: speakerBio
+    instructions: ''
+    name: Bio
+    searchable: false
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: ''
+      purifyHtml: '1'
+      redactorConfig: Event.json
+      removeEmptyTags: '1'
+      removeInlineStyles: '1'
+      removeNbsp: '1'
+      showHtmlButtonForNonAdmins: ''
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  fc62009c-d589-4a28-a538-ae226077c431: # Name
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: speakerName
+    instructions: ''
+    name: Name
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: participant
+name: Participant
+sortOrder: 1
