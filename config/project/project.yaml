@@ -1,4 +1,4 @@
-dateModified: 1650604848
+dateModified: 1650604914
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -126,7 +126,6 @@ meta:
     94bfabd6-9486-45b8-b2e4-9f7c4fc77754: Media # Media
     094c3891-3671-46cc-a1e0-25740e798305: Times # Times
     95ffdab7-fa54-4df5-97e6-d7bb1088a352: Image # Image
-    98ff0f93-0148-49ba-8068-9952f61abaa8: 'Event Type Old' # Event Type Old
     206e479c-63c6-4776-b5f2-709e81c8c2fd: Person # Person
     211d8ffa-e118-477a-9379-becaeefefc0c: Metrics # Metrics
     234d0e05-8c36-47e1-9abd-923df544c4c6: 'News Narrative' # News Narrative
@@ -228,7 +227,6 @@ meta:
     c9d2a3a1-cf8d-4060-9704-4f800fa8de4e: Attribution # Attribution
     c14d2c78-f58f-45a6-b6d2-beed7ffabb69: 'Story Type' # Story Type
     ca62998e-92bf-4a32-be88-8eacd7a4025c: __blank__ # __blank__
-    cc5e706f-3735-44ce-990a-1dc1f333a7f0: 'Assign a Type' # Assign a Type
     cdc834cd-c6bc-443d-ba86-edc70defd5a0: Location # Location
     cf51bd0c-dc97-4734-9328-2dcbf1c1f311: Homepage # Homepage
     d2eef677-ad04-43ad-b73c-1d87978f3538: URL # URL

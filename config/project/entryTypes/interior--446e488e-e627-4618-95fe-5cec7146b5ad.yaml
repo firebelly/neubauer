@@ -49,7 +49,7 @@ fieldLayouts:
           -
             type: craft\fieldlayoutelements\HorizontalRule
           -
-            fieldUid: 98ff0f93-0148-49ba-8068-9952f61abaa8 # Event Type Old
+            fieldUid: 98ff0f93-0148-49ba-8068-9952f61abaa8
             instructions: null
             label: null
             required: false
