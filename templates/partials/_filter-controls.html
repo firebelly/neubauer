@@ -20,8 +20,18 @@
 {% set filters = ['section','tags','add-tag','remove-tag','search','sort'] %}
 {% set trigger = sprig.trigger|split('_')[0] %}
 {# sprig default vars #}
-{% set overlay, query, sort, date, status, person = overlay ?? 'off', query ?? '', sort ?? 'asc', date ?? '', status ?? 'all', person ?? 'all' %}
+{% set overlay, query, sort, date = overlay ?? 'off', query ?? '', sort ?? 'asc', date ?? '' %}
 {% set section = isSearchIndex ? (section ?? 'all') : indexSlug %}
+{# idx-specific filters #}
+{% set status = status ?? '' %}
+{% set person = person ?? '' %}
+{% set shindig = shindig ?? '' %}
+{% if isSearchIndex %}
+    {% set status = status ?? 'all' %}
+    {% set person = person ?? 'all' %}
+{% endif %}
+
+
 {# reset current page if new filter is triggered #}
 {% set page = isSprig and (trigger in filters) ? 1 : (page ?? 1) %}
 {# tag handling: add or remove updates the tags var #}
@@ -40,6 +50,7 @@
 {{ hiddenInput('date', date) }}
 {{ hiddenInput('status', status) }}
 {{ hiddenInput('person', person) }}
+{{ hiddenInput('shindig', shindig) }}
 {{ hiddenInput('results', results) }}
 {{ hiddenInput('page', page) }}
 
@@ -90,11 +101,27 @@ bit of javascript to assign proper overflow style on the html tag #}
 {# people: person type 
     IMPORTANT: this needs to follow the tag query
 #}
-{% if person != 'all' %}
+{% if person and person != 'all' %}
     {% set personSlug = (person == 'staff-leadership') ? 'staff,faculty-advisory-board' : person %}
     {% set personType = craft.categories().group('personTypes').slug(personSlug).all() %}
     {% set baseQuery = baseQuery.relatedTo(personType) %}
 {% endif %}
+
+{% if shindig %}
+    {% switch shindig %}
+    {% case 'upcoming' %}
+    
+
+    {% case 'past' %}
+
+    {% case 'directors' %} 
+    DIRECTOR
+    {% set eventType = craft.categories().group('eventTypes').slug('directors-lecture').one() %}
+    {% set baseQuery = baseQuery.relatedTo(eventType) %}
+    
+    {% endswitch %}
+{% endif %}
+
 
 {% block date_directory %}
 {# date directory is solely for dev testing #}
@@ -170,6 +197,15 @@ bit of javascript to assign proper overflow style on the html tag #}
     {% set tabList = [{'title': 'All','slug':'all'}]|merge(tabList)|merge([{'title':'Staff & Leadership','slug':'staff-leadership'}]) %}
     {% set tabFilter = 'person' %}
 
+    {% case 'events' %}
+    {% set tabList = [
+        {'title': 'Upcoming Events', 'slug': 'upcoming'},
+        {'title': 'Past Events', 'slug': 'past'},
+        {'title': 'Director\'s Lectures', 'slug': 'directors'}
+    ] %}
+    {% set tabFilter = 'shindig' %}
+
+
 
 {% endswitch %}
 
@@ -191,7 +227,11 @@ bit of javascript to assign proper overflow style on the html tag #}
 
         {% set tabName = isSearchIndex ? tab.displayText : tab.title %} 
         {% set tabSlug = isSearchIndex ? (tabName == 'Research' ? 'projects' : tab.displayText|slugify) : ('slug' in tab|keys ? tab.slug : tab.title|slugify) %}
-        {% set activeTab = (indexSlug == 'projects' and status == tabSlug) or (indexSlug == 'search' and section == tabSlug) or (indexSlug == 'people' and person == tabSlug) %}
+        {% set activeTab = (indexSlug == 'projects' and status == tabSlug) or 
+            (indexSlug == 'search' and section == tabSlug) or 
+            (indexSlug == 'people' and person == tabSlug) or
+            (indexSlug == 'events' and shindig == tabSlug)
+        %}
         {# NOTE: 
             Persist all active filters on open, close, and apply triggers;
             this is why we add the tags value to the section trigger below

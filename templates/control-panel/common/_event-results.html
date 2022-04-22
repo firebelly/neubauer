@@ -22,10 +22,15 @@
 }
 </style>
 
-{% set currentType = element %}
 {% set events = craft.entries()
     .section('events') 
     .search('eventType:' ~ currentType ~ '')
+    .all()
+%}
+
+{% set events = craft.entries()
+    .section('events') 
+    .relatedTo(currentType)
     .all()
 %}
 <p class="adminTip-box"><strong>Hint:</strong> To assign an Event Type to an Event, go to its admin page, click "Add a type."</p>

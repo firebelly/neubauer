@@ -63,6 +63,9 @@
 
     {% case 'events' %}
 
+    {{ sprig('partials/_filter-controls', {'entryId': entry.id }) }}
+
+
 {% endswitch %}
 </section>
 

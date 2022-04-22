@@ -1,0 +1,24 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: eb6e4b27-3a81-4da1-8f40-fa29c0f7805c # Event
+handle: eventTypeNew
+instructions: 'Assign a Type (e.g. "Book Signing" or "Panel") to the Event by selecting an existing type, or creating a new one. This is the label that will display above the Event''s title within the Event card.'
+name: 'Event Type New'
+searchable: true
+settings:
+  allowLimit: false
+  allowMultipleSources: false
+  allowSelfRelations: false
+  branchLimit: '1'
+  limit: null
+  localizeRelations: false
+  selectionLabel: 'Select, replace or add event type'
+  showSiteMenu: true
+  source: 'group:d7bc1724-cfca-4d62-8b29-dbb9996201d1' # Event Types
+  sources: '*'
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Categories

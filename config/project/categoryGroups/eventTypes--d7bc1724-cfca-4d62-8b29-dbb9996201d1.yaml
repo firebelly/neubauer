@@ -27,6 +27,12 @@ fieldLayouts:
             type: craft\fieldlayoutelements\TitleField
             warning: null
             width: 100
+          -
+            type: craft\fieldlayoutelements\HorizontalRule
+          -
+            template: control-panel/common/_event-results.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
         name: Content
         sortOrder: 1
 handle: eventTypes

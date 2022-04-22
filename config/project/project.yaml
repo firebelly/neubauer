@@ -1,4 +1,4 @@
-dateModified: 1650480483
+dateModified: 1650604045
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -53,6 +53,7 @@ meta:
     4e880cde-b663-435b-98ea-3b28ebd17af7: 'Key Question Content' # Key Question Content
     4f3f74e9-4363-4024-a787-0167c7a8081a: 'Add a link to the registration page' # Add a link to the registration page
     5b3d76c6-c34a-4630-9901-1c8c7318fd33: Label # Label
+    5b21ae4c-444a-4f59-a5d6-d9df75464d2a: 'Public Schema' # Public Schema
     5ba5eada-4ccb-4ca0-a520-75a5754991f9: Caption # Caption
     5c40b73f-d87a-4035-b7a3-070b71bdb617: 'Gallery Image' # Gallery Image
     5f9f5e73-b6cf-46f5-8012-60b8301bff36: Description # Description
@@ -91,6 +92,7 @@ meta:
     24a17e09-26e2-478c-9dfe-bbca0be0122b: 'Select a Neubauer page as the destination' # Select a Neubauer page as the destination
     24d2f934-5106-4961-a508-9e1c2c0a6523: Link # Link
     24dfedab-186e-4f9c-92c3-d07cec6478bc: Content # Content
+    026c8ffa-efc4-440b-857e-4e83572400a8: 'Event Type New' # Event Type New
     028f51f0-ce87-4a29-9df2-bf30a7cf4783: 'Public Transit' # Public Transit
     29a66baf-c15f-4cd8-bc9a-08825a4ee34d: Date # Date
     31ccea3a-6188-4659-a373-d53b96a6866e: 'Publication Card' # Publication Card
@@ -124,7 +126,7 @@ meta:
     94bfabd6-9486-45b8-b2e4-9f7c4fc77754: Media # Media
     094c3891-3671-46cc-a1e0-25740e798305: Times # Times
     95ffdab7-fa54-4df5-97e6-d7bb1088a352: Image # Image
-    98ff0f93-0148-49ba-8068-9952f61abaa8: 'Event Type' # Event Type
+    98ff0f93-0148-49ba-8068-9952f61abaa8: 'Event Type Old' # Event Type Old
     206e479c-63c6-4776-b5f2-709e81c8c2fd: Person # Person
     211d8ffa-e118-477a-9379-becaeefefc0c: Metrics # Metrics
     234d0e05-8c36-47e1-9abd-923df544c4c6: 'News Narrative' # News Narrative

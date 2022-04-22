@@ -1,12 +1,12 @@
 columnSuffix: null
 contentColumnType: string
 fieldGroup: eb6e4b27-3a81-4da1-8f40-fa29c0f7805c # Event
-handle: eventType
+handle: eventTypeOld
 instructions: 'Assign a Type (e.g. "Book Signing" or "Panel") to the Event by selecting an existing type, or creating a new one. This is the label that will display above the Event''s title within the Event card.'
-name: 'Event Type'
+name: 'Event Type Old'
 searchable: true
 settings:
-  contentTable: '{{%matrixcontent_eventtype}}'
+  contentTable: '{{%matrixcontent_eventtypeold}}'
   maxBlocks: '1'
   minBlocks: '1'
   propagationKeyFormat: null
