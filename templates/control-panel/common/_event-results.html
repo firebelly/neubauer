@@ -21,7 +21,7 @@
     margin: 0 0 14px 0;
 }
 </style>
-
+{% set currentType = element %}
 {% set events = craft.entries()
     .section('events') 
     .search('eventType:' ~ currentType ~ '')
