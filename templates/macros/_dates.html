@@ -118,7 +118,7 @@
         {% endswitch %}
 
         {% if thisDate and ((future and today <= thisDate) or (not future and today > thisDate)) %}
-            {# {% set dateList = dateList|merge(["#{entry.slug}_#{thisDate}"]) %} #}
+            
             {% set timeMachineIds = timeMachineIds|merge([entry.id]) %}
         {% endif %}
     {% endfor %}

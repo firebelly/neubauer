@@ -715,10 +715,6 @@ img {
 ------------------------------------------------------------------------ */
 /* ---------------------------------------------------------------------
   Theme
-
-  $theme: getTheme($color);
-  $primary: nth($theme,1);
-  $secondary: nth($theme,2);
 ------------------------------------------------------------------------ */
 .primaryTheme--homepage {
   background: #FFFFFF;
@@ -1899,6 +1895,7 @@ img {
 
 /* ---------------------------------------------------------------------
   Global Container Placeholders
+  eh these are kinda dum
 ------------------------------------------------------------------------ */
 @media (min-width: 768px) {
   .searchOpener-form {
@@ -2207,7 +2204,7 @@ img {
   Primary Content
 ------------------------------------------------------------------------ */
 .primaryContent {
-  padding: 2em 0 8em 0;
+  padding: 2em 0 0 0;
 }
 
 /* ---------------------------------------------------------------------
@@ -2306,6 +2303,9 @@ img {
 }
 .pageOpener--search {
   padding: 0;
+}
+.pageOpener--research {
+  padding-bottom: 16em;
 }
 .pageOpener-title {
   font: normal 12em/1 "domaine-text", serif;
@@ -5915,6 +5915,7 @@ img {
   font: normal 4em/1.12 "apercu", sans-serif;
   letter-spacing: -0.0375em;
   margin-bottom: 0.5em;
+  text-align: center;
 }
 .projectFeature-content {
   margin: 8em 0 12em 0;
@@ -6114,6 +6115,404 @@ img {
 .projectFeature-buttons > * {
   flex: 0 1 auto;
 }
+.projectFeature-action {
+  margin-right: 0;
+}
+
+.personFeature-topics-list {
+  display: flex;
+  flex-flow: row wrap;
+  content: "list";
+}
+.personFeature-topics-list--feature {
+  justify-content: center;
+}
+.personFeature-topics-item {
+  flex: 0 1 auto;
+  margin: 0 1em 1em 0;
+  position: relative;
+}
+.personFeature-topics-item:hover {
+  cursor: pointer;
+}
+.personFeature-topics-item._is-active .personFeature-topics-icon--remove {
+  display: inline-flex;
+}
+.personFeature-topics-trigger {
+  display: block;
+}
+.personFeature-topics-trigger--tag {
+  display: flex;
+  flex-flow: row wrap;
+  -webkit-box-alignpack: center;
+  -ms-flex-alignpack: center;
+  -webkit-align-itemspack: center;
+  align-items: center;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  z-index: 1;
+}
+.personFeature-topics-input--faux {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  opacity: 0;
+  z-index: 2;
+}
+.personFeature-topics-input--faux:hover {
+  cursor: pointer;
+}
+.personFeature-topics-input--faux:checked + .personFeature-topics-trigger .personFeature-topics-icon--remove {
+  display: inline-flex;
+}
+.personFeature-topics-icon--remove {
+  height: 20px;
+  width: 20px;
+  margin-left: 0.3571428571em;
+}
+
+.personFeature-topics-item:hover .personFeature-topics-trigger--tag, .personFeature-topics-item._is-active .personFeature-topics-trigger--tag {
+  color: #E5E8FF;
+  background: #1C2AA7;
+}
+.personFeature-topics-trigger--tag {
+  border-color: #1C2AA7;
+}
+.personFeature-topics-trigger--tag, .personFeature-topics-trigger--tag:link, .personFeature-topics-trigger--tag:visited, .personFeature-topics-trigger--tag:hover, .personFeature-topics-trigger--tag:active {
+  color: #1C2AA7;
+  text-decoration: none;
+}
+.personFeature-topics-input--faux:checked + .personFeature-topics-trigger--tag {
+  color: #E5E8FF;
+  background: #1C2AA7;
+}
+.personFeature-topics-label--tag {
+  font: normal 1.4em/1.43 "apercu", sans-serif;
+}
+.personFeature-topics-icon--remove {
+  fill: #E5E8FF;
+  display: none;
+}
+.personFeature-topics-dialog .personFeature-topics-trigger--tag, .personFeature-topics--callout .personFeature-topics-trigger--tag {
+  border-color: #E5E8FF;
+  z-index: 1;
+}
+.personFeature-topics-dialog .personFeature-topics-trigger--tag, .personFeature-topics-dialog .personFeature-topics-trigger--tag:link, .personFeature-topics-dialog .personFeature-topics-trigger--tag:visited, .personFeature-topics-dialog .personFeature-topics-trigger--tag:hover, .personFeature-topics-dialog .personFeature-topics-trigger--tag:active, .personFeature-topics--callout .personFeature-topics-trigger--tag, .personFeature-topics--callout .personFeature-topics-trigger--tag:link, .personFeature-topics--callout .personFeature-topics-trigger--tag:visited, .personFeature-topics--callout .personFeature-topics-trigger--tag:hover, .personFeature-topics--callout .personFeature-topics-trigger--tag:active {
+  color: #E5E8FF;
+}
+.personFeature-topics-dialog .personFeature-topics-item:hover .personFeature-topics-trigger--tag,
+.personFeature-topics-dialog .personFeature-topics-item._is-active .personFeature-topics-trigger--tag,
+.personFeature-topics-dialog .personFeature-topics-input--faux:checked + .personFeature-topics-trigger--tag, .personFeature-topics--callout .personFeature-topics-item:hover .personFeature-topics-trigger--tag,
+.personFeature-topics--callout .personFeature-topics-item._is-active .personFeature-topics-trigger--tag,
+.personFeature-topics--callout .personFeature-topics-input--faux:checked + .personFeature-topics-trigger--tag {
+  color: #1C2AA7;
+  background: #E5E8FF;
+}
+.personFeature-topics-dialog .personFeature-topics-icon--remove, .personFeature-topics--callout .personFeature-topics-icon--remove {
+  fill: #1C2AA7;
+}
+
+.personFeature-img {
+  overflow: hidden;
+  position: relative;
+  font-size: 1rem;
+}
+@supports not (aspect-ratio: 1) {
+  .personFeature-img--16-9 {
+    padding-bottom: calc(16/9 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .personFeature-img--16-9 .personFeature-img-image {
+    aspect-ratio: 16/9;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .personFeature-img--16-9 .personFeature-img-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .personFeature-img--16-4_5 {
+    padding-bottom: calc(16/4.5 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .personFeature-img--16-4_5 .personFeature-img-image {
+    aspect-ratio: 16/4.5;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .personFeature-img--16-4_5 .personFeature-img-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .personFeature-img--2-3 {
+    padding-bottom: calc(2/3 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .personFeature-img--2-3 .personFeature-img-image {
+    aspect-ratio: 2/3;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .personFeature-img--2-3 .personFeature-img-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .personFeature-img--1-1 {
+    padding-bottom: calc(1/1 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .personFeature-img--1-1 .personFeature-img-image {
+    aspect-ratio: 1/1;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .personFeature-img--1-1 .personFeature-img-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+.personFeature-img-image, .personFeature-img-video {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+.personFeature {
+  padding: 4em;
+  font-size: 1rem;
+  content: ".personFeature";
+}
+.personFeature-label {
+  font: normal 6.5em/1.08 "domaine-text", serif;
+  letter-spacing: -0.035em;
+}
+.personFeature-title {
+  font: normal 4em/1.12 "apercu", sans-serif;
+  letter-spacing: -0.0375em;
+  margin-bottom: 0.5em;
+  text-align: center;
+}
+.personFeature-content {
+  margin: 8em 0 12em 0;
+}
+@media (min-width: 768px) {
+  .personFeature-content {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .personFeature-content > * {
+    flex: 0 1 50%;
+  }
+}
+.personFeature-asset {
+  margin-bottom: 2em;
+}
+@media (min-width: 768px) {
+  .personFeature-asset {
+    margin-bottom: 0;
+  }
+}
+.personFeature-details {
+  align-self: center;
+}
+@media (min-width: 768px) {
+  .personFeature-details {
+    padding: 0 4em 0 8em;
+  }
+}
+.personFeature-date {
+  font: normal 2em/1.5 "apercu", sans-serif;
+}
+@media (min-width: 768px) {
+  .personFeature-date {
+    text-align: center;
+  }
+}
+.personFeature-buttons {
+  display: flex;
+  flex-flow: row wrap;
+  margin-top: 4em;
+}
+.personFeature-buttons > * {
+  flex: 0 1 auto;
+}
+@media (min-width: 768px) {
+  .personFeature-buttons {
+    justify-content: center;
+  }
+}
+.personFeature-topics-title {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.personFeature-topics-title.focusable:active, .personFeature-topics-title.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+@media (min-width: 768px) {
+  .personFeature-topics-list {
+    justify-content: center;
+  }
+}
+.personFeature-team-title {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.personFeature-team-title.focusable:active, .personFeature-team-title.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.personFeature-team-list {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 1em;
+}
+@media (min-width: 768px) {
+  .personFeature-team-list {
+    justify-content: center;
+  }
+}
+.personFeature-team-item {
+  font: normal 2em/1.5 "apercu", sans-serif;
+}
+
+.personFeature-action {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  font-size: 1rem;
+  margin-right: 4em;
+}
+.personFeature-action--ghost {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: calc(1.5em - 1px) calc(2em - 1px);
+}
+.personFeature-action:focus {
+  outline: none;
+}
+.personFeature-action:link, .personFeature-action:visited, .personFeature-action:hover, .personFeature-action:active {
+  text-decoration: none;
+}
+.personFeature-action-label, .personFeature-action-icon {
+  flex: 0 1 auto;
+}
+.personFeature-action-icon {
+  margin-left: 1em;
+  height: 20px;
+  width: 20px;
+}
+.personFeature-action:hover {
+  cursor: pointer;
+}
+
+.personFeature-action--link {
+  color: #E5E8FF;
+}
+.personFeature-action--link:link, .personFeature-action--link:visited, .personFeature-action--link:hover, .personFeature-action--link:active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  -webkit-text-decoration-color: #E5E8FF;
+          text-decoration-color: #E5E8FF;
+}
+.personFeature-action--link .personFeature-action-icon {
+  fill: #E5E8FF;
+}
+.personFeature-action--ghost {
+  border-color: #E5E8FF;
+  color: #E5E8FF;
+}
+.personFeature-action--ghost:hover {
+  border-color: #1C2AA7;
+  background: #E5E8FF;
+  color: #1C2AA7;
+}
+.personFeature-action--ghost:hover .personFeature-action-icon {
+  fill: #1C2AA7;
+}
+.personFeature-action--ghost .personFeature-action-icon {
+  fill: #E5E8FF;
+}
+.personFeature-action-label {
+  font: normal 1.2em/1.67 "apercu", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: inherit;
+  text-transform: uppercase;
+}
+.personFeature-action-trigger {
+  text-align: center;
+  text-decoration: none;
+}
+
+.personFeature {
+  background: #1C2AA7;
+}
+.personFeature-label, .personFeature-title, .personFeature-date {
+  color: #E5E8FF;
+}
+.personFeature-team-item {
+  color: #E5E8FF;
+}
+.personFeature-team a:link,
+.personFeature-team a:visited,
+.personFeature-team a:hover,
+.personFeature-team a:active {
+  color: #E5E8FF;
+}
+.personFeature-topics-trigger {
+  font: normal 1.4em/1.43 "apercu", sans-serif;
+}
+.personFeature-buttons {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin-top: 4em;
+}
+.personFeature-buttons > * {
+  flex: 0 1 auto;
+}
+.personFeature-action {
+  margin-right: 0;
+}
 
 /* ---------------------------------------------------------------------
   Date Directory - dev only
@@ -6172,37 +6571,58 @@ img {
 /* ---------------------------------------------------------------------
   Interior Pages
 ------------------------------------------------------------------------ */
-.interiorOpen {
+.interiorIntro {
   padding: 0 8em 5em 8em;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
-  -webkit-box-alignpack: center;
-  -ms-flex-alignpack: center;
-  -webkit-align-itemspack: center;
-  align-items: center;
-  position: relative;
 }
-.interiorOpen > * {
+.interiorIntro--people {
+  padding-top: 12em;
+  padding-bottom: 16em;
+}
+.interiorIntro > * {
   flex: 0 1 50%;
 }
-.interiorOpen-details {
+.interiorIntro-details {
   padding-right: 8em;
   text-align: center;
 }
-.interiorOpen-asset {
-  overflow: hidden;
-  height: 700px;
+@media (min-width: 768px) {
+  .interiorIntro--projects .interiorIntro-details {
+    display: flex;
+    flex-flow: column;
+  }
 }
-.interiorOpen-title {
+.interiorIntro-asset {
+  overflow: hidden;
+}
+.interiorIntro-placeholder {
+  background: lightgray;
+  height: 700px;
+  width: 640px;
+}
+.interiorIntro-caption {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+  padding: 1.25em 2.5em 0 0;
+}
+.interiorIntro-title {
   font: normal 6.5em/1.08 "domaine-text", serif;
   letter-spacing: -0.035em;
   margin-bottom: 0.6153846154em;
 }
-.interiorOpen-subtitle {
-  font: normal 1.6em/1.56 "apercu", sans-serif;
+.interiorIntro--people .interiorIntro-title {
+  margin-bottom: 0.3076923077em;
 }
-.interiorOpen-team-title {
+.interiorIntro-subtitle {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+  margin-bottom: 1.25em;
+}
+.interiorIntro-prompt {
+  font: normal 2.8em/1.25 "apercu", sans-serif;
+  margin-bottom: 2.8571428571em;
+}
+.interiorIntro-team-title {
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -6212,7 +6632,7 @@ img {
   position: absolute;
   width: 1px;
 }
-.interiorOpen-team-title.focusable:active, .interiorOpen-team-title.focusable:focus {
+.interiorIntro-team-title.focusable:active, .interiorIntro-team-title.focusable:focus {
   clip: auto;
   height: auto;
   margin: 0;
@@ -6220,47 +6640,81 @@ img {
   position: static;
   width: auto;
 }
-.interiorOpen-team-list {
+.interiorIntro-team-list {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   margin-bottom: 1em;
 }
-.interiorOpen-team-item {
+.interiorIntro-team-item {
   font: normal 1.6em/1.56 "apercu", sans-serif;
 }
-.interiorOpen-team-item a:link,
-.interiorOpen-team-item a:visited,
-.interiorOpen-team-item a:hover,
-.interiorOpen-team-item a:active {
+.interiorIntro--people .interiorIntro-team-item a:link,
+.interiorIntro--people .interiorIntro-team-item a:visited,
+.interiorIntro--people .interiorIntro-team-item a:hover,
+.interiorIntro--people .interiorIntro-team-item a:active {
+  color: #E5E8FF;
+}
+.interiorIntro--projects .interiorIntro-team-item a:link,
+.interiorIntro--projects .interiorIntro-team-item a:visited,
+.interiorIntro--projects .interiorIntro-team-item a:hover,
+.interiorIntro--projects .interiorIntro-team-item a:active {
   color: #51594A;
 }
-.interiorOpen-date {
+.interiorIntro-date {
   font: normal 1.6em/1.56 "apercu", sans-serif;
 }
-.interiorOpen-menu {
+.interiorIntro-menu {
   display: flex;
   flex-flow: row wrap;
-  position: absolute;
-  bottom: 5em;
-  margin: 0 4em 0 4em;
-  width: calc(50% - 24em);
-  justify-content: space-around;
+  justify-content: center;
   scroll-behavior: smooth;
 }
-.interiorOpen-menu-item {
+.interiorIntro-menu--projects {
+  flex-grow: 1;
+  -webkit-box-alignpack: end;
+  -ms-flex-alignpack: end;
+  -webkit-align-itemspack: end;
+  align-items: end;
+}
+.interiorIntro-menu-item {
   flex: 0 1 auto;
   font: normal 1.2em/1.67 "apercu", sans-serif;
   letter-spacing: 0.1em;
   text-decoration: inherit;
   text-transform: uppercase;
+  margin: 0 2em;
 }
-.interiorOpen-menu-item a:link,
-.interiorOpen-menu-item a:visited,
-.interiorOpen-menu-item a:hover,
-.interiorOpen-menu-item a:active {
-  color: #51594A;
+.interiorIntro-menu-item a:link,
+.interiorIntro-menu-item a:visited,
+.interiorIntro-menu-item a:hover,
+.interiorIntro-menu-item a:active {
   text-decoration: none;
+}
+.interiorIntro--people .interiorIntro-menu-item a:link,
+.interiorIntro--people .interiorIntro-menu-item a:visited,
+.interiorIntro--people .interiorIntro-menu-item a:hover,
+.interiorIntro--people .interiorIntro-menu-item a:active {
+  color: #1C2AA7;
+}
+.interiorIntro--projects .interiorIntro-menu-item a:link,
+.interiorIntro--projects .interiorIntro-menu-item a:visited,
+.interiorIntro--projects .interiorIntro-menu-item a:hover,
+.interiorIntro--projects .interiorIntro-menu-item a:active {
+  color: #51594A;
+}
+
+.interiorCover-frame {
+  margin: 0 4em;
+}
+.interiorCover-placeholder {
+  width: 1360px;
+  height: 700px;
+  background: lightgray;
+}
+.interiorCover-caption {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+  padding: 2.5em 0 0 0;
 }
 
 .interiorSpotlight {
@@ -6292,35 +6746,137 @@ img {
 }
 
 .interiorSummary {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
+  border-top: 1px solid transparent;
   padding: 4em 4em 16em 4em;
 }
-.interiorSummary > * {
-  flex: 0 1 50%;
+.interiorSummary--people {
+  border-color: #1C2AA7;
+}
+.interiorSummary--projects {
+  border-color: #51594A;
+}
+@media (min-width: 768px) {
+  .interiorSummary {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+  }
+  .interiorSummary > * {
+    flex: 0 1 50%;
+  }
 }
 .interiorSummary-title {
   font: normal 6.5em/1.08 "domaine-text", serif;
   letter-spacing: -0.035em;
 }
-.interiorSummary-subtitle {
-  font: normal 2.8em/1.25 "apercu", sans-serif;
-  padding: 0.7142857143em 0;
+.interiorSummary-title--people, .interiorSummary-title--exhibitions {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
-.interiorSummary-details {
+.interiorSummary-title--people.focusable:active, .interiorSummary-title--people.focusable:focus, .interiorSummary-title--exhibitions.focusable:active, .interiorSummary-title--exhibitions.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.interiorSummary-placeholder {
+  width: 100%;
+  height: 100%;
+  background: lightgray;
+}
+.interiorSummary-frame--projects {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.interiorSummary-frame--projects.focusable:active, .interiorSummary-frame--projects.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.interiorSummary-placeholder {
+  background: lightgray;
+  height: 640px;
+  width: 640px;
+}
+.interiorSummary-caption {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+  padding: 1.25em 2.5em 0 0;
+}
+.interiorSummary-main {
+  margin-left: 4em;
+}
+.interiorSummary-redactor {
   font: normal 2.4em/1.46 "apercu", sans-serif;
+  margin: 0 0 1.6666666667em 0;
+}
+.interiorSummary-redactor a:link,
+.interiorSummary-redactor a:visited,
+.interiorSummary-redactor a:hover,
+.interiorSummary-redactor a:active {
+  text-underline-offset: 5px;
+}
+.interiorSummary--projects .interiorSummary-redactor a:link,
+.interiorSummary--projects .interiorSummary-redactor a:visited,
+.interiorSummary--projects .interiorSummary-redactor a:hover,
+.interiorSummary--projects .interiorSummary-redactor a:active {
+  color: #51594A;
+}
+.interiorSummary--people .interiorSummary-redactor a:link,
+.interiorSummary--people .interiorSummary-redactor a:visited,
+.interiorSummary--people .interiorSummary-redactor a:hover,
+.interiorSummary--people .interiorSummary-redactor a:active {
+  color: #1C2AA7;
+}
+.interiorSummary-redactor em {
+  font-style: italic;
+}
+.interiorSummary-redactor--body._is-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.interiorSummary-redactor--body._is-hidden.focusable:active, .interiorSummary-redactor--body._is-hidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
 }
 .interiorSummary-accordion {
   display: flex;
   flex-flow: row wrap;
-  border-top: 1px solid #51594A;
-  border-bottom: 1px solid #51594A;
+  border-top: 1px solid transparent;
   display: block;
   margin-top: 4em;
   padding: 2em 0;
   width: 100%;
   font-size: 1rem;
+}
+.interiorSummary-accordion--projects {
+  border-color: #51594A;
 }
 .interiorSummary-accordion:link, .interiorSummary-accordion:visited, .interiorSummary-accordion:hover, .interiorSummary-accordion:active {
   color: #51594A;
@@ -6336,28 +6892,24 @@ img {
 .interiorSummary-accordion-icon {
   height: 20px;
   width: 20px;
+}
+.interiorSummary-accordion--projects .interiorSummary-accordion-icon {
   fill: #51594A;
 }
-.interiorSummary-full {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-}
-.interiorSummary-full.focusable:active, .interiorSummary-full.focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  width: auto;
-}
 .interiorSummary-topics {
+  border-top: 1px solid transparent;
+  margin-top: 4em;
   font-size: 1rem;
+}
+.interiorSummary-topics--projects {
+  border-color: #51594A;
+}
+.interiorSummary-topics--people {
+  border-color: #1C2AA7;
+}
+.interiorSummary-topics-subtitle {
+  font: normal 2.8em/1.25 "apercu", sans-serif;
+  padding: 0.7142857143em 0;
 }
 .interiorSummary-topics-list {
   display: flex;
@@ -6417,61 +6969,426 @@ img {
   margin-left: 0.3571428571em;
 }
 
-.interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag, .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag {
+.interiorSummary-topics--homepage .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag, .interiorSummary-topics--homepage .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag {
+  color: #FFFFFF;
+  background: #000000;
+}
+.interiorSummary-topics--homepage .interiorSummary-topics-trigger--tag {
+  border-color: #000000;
+}
+.interiorSummary-topics--homepage .interiorSummary-topics-trigger--tag, .interiorSummary-topics--homepage .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--homepage .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--homepage .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--homepage .interiorSummary-topics-trigger--tag:active {
+  color: #000000;
+  text-decoration: none;
+}
+.interiorSummary-topics--homepage .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #FFFFFF;
+  background: #000000;
+}
+.interiorSummary-topics--homepage .interiorSummary-topics-label--tag {
+  font: normal 1.4em/1.43 "apercu", sans-serif;
+}
+.interiorSummary-topics--homepage .interiorSummary-topics-icon--remove {
+  fill: #FFFFFF;
+  display: none;
+}
+.interiorSummary-topics--homepage .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--homepage .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag {
+  border-color: #FFFFFF;
+  z-index: 1;
+}
+.interiorSummary-topics--homepage .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--homepage .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--homepage .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--homepage .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--homepage .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:active, .interiorSummary-topics--homepage .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag, .interiorSummary-topics--homepage .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--homepage .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--homepage .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--homepage .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:active {
+  color: #FFFFFF;
+}
+.interiorSummary-topics--homepage .interiorSummary-topics-dialog .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--homepage .interiorSummary-topics-dialog .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--homepage .interiorSummary-topics-dialog .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag, .interiorSummary-topics--homepage .interiorSummary-topics--callout .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--homepage .interiorSummary-topics--callout .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--homepage .interiorSummary-topics--callout .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #000000;
+  background: #FFFFFF;
+}
+.interiorSummary-topics--homepage .interiorSummary-topics-dialog .interiorSummary-topics-icon--remove, .interiorSummary-topics--homepage .interiorSummary-topics--callout .interiorSummary-topics-icon--remove {
+  fill: #000000;
+}
+
+.interiorSummary-topics--research .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag, .interiorSummary-topics--research .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag {
+  color: #E5FFFD;
+  background: #1F4D49;
+}
+.interiorSummary-topics--research .interiorSummary-topics-trigger--tag {
+  border-color: #1F4D49;
+}
+.interiorSummary-topics--research .interiorSummary-topics-trigger--tag, .interiorSummary-topics--research .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--research .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--research .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--research .interiorSummary-topics-trigger--tag:active {
+  color: #1F4D49;
+  text-decoration: none;
+}
+.interiorSummary-topics--research .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #E5FFFD;
+  background: #1F4D49;
+}
+.interiorSummary-topics--research .interiorSummary-topics-label--tag {
+  font: normal 1.4em/1.43 "apercu", sans-serif;
+}
+.interiorSummary-topics--research .interiorSummary-topics-icon--remove {
+  fill: #E5FFFD;
+  display: none;
+}
+.interiorSummary-topics--research .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--research .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag {
+  border-color: #E5FFFD;
+  z-index: 1;
+}
+.interiorSummary-topics--research .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--research .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--research .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--research .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--research .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:active, .interiorSummary-topics--research .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag, .interiorSummary-topics--research .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--research .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--research .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--research .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:active {
+  color: #E5FFFD;
+}
+.interiorSummary-topics--research .interiorSummary-topics-dialog .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--research .interiorSummary-topics-dialog .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--research .interiorSummary-topics-dialog .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag, .interiorSummary-topics--research .interiorSummary-topics--callout .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--research .interiorSummary-topics--callout .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--research .interiorSummary-topics--callout .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #1F4D49;
+  background: #E5FFFD;
+}
+.interiorSummary-topics--research .interiorSummary-topics-dialog .interiorSummary-topics-icon--remove, .interiorSummary-topics--research .interiorSummary-topics--callout .interiorSummary-topics-icon--remove {
+  fill: #1F4D49;
+}
+
+.interiorSummary-topics--projects .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag, .interiorSummary-topics--projects .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag {
   color: #E5E8E3;
   background: #51594A;
 }
-.interiorSummary-topics-trigger--tag {
+.interiorSummary-topics--projects .interiorSummary-topics-trigger--tag {
   border-color: #51594A;
 }
-.interiorSummary-topics-trigger--tag, .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics-trigger--tag:active {
+.interiorSummary-topics--projects .interiorSummary-topics-trigger--tag, .interiorSummary-topics--projects .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--projects .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--projects .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--projects .interiorSummary-topics-trigger--tag:active {
   color: #51594A;
   text-decoration: none;
 }
-.interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+.interiorSummary-topics--projects .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
   color: #E5E8E3;
   background: #51594A;
 }
-.interiorSummary-topics-label--tag {
+.interiorSummary-topics--projects .interiorSummary-topics-label--tag {
   font: normal 1.4em/1.43 "apercu", sans-serif;
 }
-.interiorSummary-topics-icon--remove {
+.interiorSummary-topics--projects .interiorSummary-topics-icon--remove {
   fill: #E5E8E3;
   display: none;
 }
-.interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag {
+.interiorSummary-topics--projects .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--projects .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag {
   border-color: #E5E8E3;
   z-index: 1;
 }
-.interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:active, .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag, .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:active {
+.interiorSummary-topics--projects .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--projects .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--projects .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--projects .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--projects .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:active, .interiorSummary-topics--projects .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag, .interiorSummary-topics--projects .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--projects .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--projects .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--projects .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:active {
   color: #E5E8E3;
 }
-.interiorSummary-topics-dialog .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
-.interiorSummary-topics-dialog .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
-.interiorSummary-topics-dialog .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag, .interiorSummary-topics--callout .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
-.interiorSummary-topics--callout .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
-.interiorSummary-topics--callout .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+.interiorSummary-topics--projects .interiorSummary-topics-dialog .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--projects .interiorSummary-topics-dialog .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--projects .interiorSummary-topics-dialog .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag, .interiorSummary-topics--projects .interiorSummary-topics--callout .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--projects .interiorSummary-topics--callout .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--projects .interiorSummary-topics--callout .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
   color: #51594A;
   background: #E5E8E3;
 }
-.interiorSummary-topics-dialog .interiorSummary-topics-icon--remove, .interiorSummary-topics--callout .interiorSummary-topics-icon--remove {
+.interiorSummary-topics--projects .interiorSummary-topics-dialog .interiorSummary-topics-icon--remove, .interiorSummary-topics--projects .interiorSummary-topics--callout .interiorSummary-topics-icon--remove {
   fill: #51594A;
+}
+
+.interiorSummary-topics--exhibitions .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag, .interiorSummary-topics--exhibitions .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag {
+  color: #F6F4F4;
+  background: #3F3606;
+}
+.interiorSummary-topics--exhibitions .interiorSummary-topics-trigger--tag {
+  border-color: #3F3606;
+}
+.interiorSummary-topics--exhibitions .interiorSummary-topics-trigger--tag, .interiorSummary-topics--exhibitions .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--exhibitions .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--exhibitions .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--exhibitions .interiorSummary-topics-trigger--tag:active {
+  color: #3F3606;
+  text-decoration: none;
+}
+.interiorSummary-topics--exhibitions .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #F6F4F4;
+  background: #3F3606;
+}
+.interiorSummary-topics--exhibitions .interiorSummary-topics-label--tag {
+  font: normal 1.4em/1.43 "apercu", sans-serif;
+}
+.interiorSummary-topics--exhibitions .interiorSummary-topics-icon--remove {
+  fill: #F6F4F4;
+  display: none;
+}
+.interiorSummary-topics--exhibitions .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--exhibitions .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag {
+  border-color: #F6F4F4;
+  z-index: 1;
+}
+.interiorSummary-topics--exhibitions .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--exhibitions .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--exhibitions .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--exhibitions .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--exhibitions .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:active, .interiorSummary-topics--exhibitions .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag, .interiorSummary-topics--exhibitions .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--exhibitions .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--exhibitions .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--exhibitions .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:active {
+  color: #F6F4F4;
+}
+.interiorSummary-topics--exhibitions .interiorSummary-topics-dialog .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--exhibitions .interiorSummary-topics-dialog .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--exhibitions .interiorSummary-topics-dialog .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag, .interiorSummary-topics--exhibitions .interiorSummary-topics--callout .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--exhibitions .interiorSummary-topics--callout .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--exhibitions .interiorSummary-topics--callout .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #3F3606;
+  background: #F6F4F4;
+}
+.interiorSummary-topics--exhibitions .interiorSummary-topics-dialog .interiorSummary-topics-icon--remove, .interiorSummary-topics--exhibitions .interiorSummary-topics--callout .interiorSummary-topics-icon--remove {
+  fill: #3F3606;
+}
+
+.interiorSummary-topics--events .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag, .interiorSummary-topics--events .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag {
+  color: #FFF2B2;
+  background: #3F3606;
+}
+.interiorSummary-topics--events .interiorSummary-topics-trigger--tag {
+  border-color: #3F3606;
+}
+.interiorSummary-topics--events .interiorSummary-topics-trigger--tag, .interiorSummary-topics--events .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--events .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--events .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--events .interiorSummary-topics-trigger--tag:active {
+  color: #3F3606;
+  text-decoration: none;
+}
+.interiorSummary-topics--events .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #FFF2B2;
+  background: #3F3606;
+}
+.interiorSummary-topics--events .interiorSummary-topics-label--tag {
+  font: normal 1.4em/1.43 "apercu", sans-serif;
+}
+.interiorSummary-topics--events .interiorSummary-topics-icon--remove {
+  fill: #FFF2B2;
+  display: none;
+}
+.interiorSummary-topics--events .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--events .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag {
+  border-color: #FFF2B2;
+  z-index: 1;
+}
+.interiorSummary-topics--events .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--events .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--events .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--events .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--events .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:active, .interiorSummary-topics--events .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag, .interiorSummary-topics--events .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--events .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--events .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--events .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:active {
+  color: #FFF2B2;
+}
+.interiorSummary-topics--events .interiorSummary-topics-dialog .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--events .interiorSummary-topics-dialog .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--events .interiorSummary-topics-dialog .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag, .interiorSummary-topics--events .interiorSummary-topics--callout .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--events .interiorSummary-topics--callout .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--events .interiorSummary-topics--callout .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #3F3606;
+  background: #FFF2B2;
+}
+.interiorSummary-topics--events .interiorSummary-topics-dialog .interiorSummary-topics-icon--remove, .interiorSummary-topics--events .interiorSummary-topics--callout .interiorSummary-topics-icon--remove {
+  fill: #3F3606;
+}
+
+.interiorSummary-topics--people .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag, .interiorSummary-topics--people .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag {
+  color: #E5E8FF;
+  background: #1C2AA7;
+}
+.interiorSummary-topics--people .interiorSummary-topics-trigger--tag {
+  border-color: #1C2AA7;
+}
+.interiorSummary-topics--people .interiorSummary-topics-trigger--tag, .interiorSummary-topics--people .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--people .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--people .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--people .interiorSummary-topics-trigger--tag:active {
+  color: #1C2AA7;
+  text-decoration: none;
+}
+.interiorSummary-topics--people .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #E5E8FF;
+  background: #1C2AA7;
+}
+.interiorSummary-topics--people .interiorSummary-topics-label--tag {
+  font: normal 1.4em/1.43 "apercu", sans-serif;
+}
+.interiorSummary-topics--people .interiorSummary-topics-icon--remove {
+  fill: #E5E8FF;
+  display: none;
+}
+.interiorSummary-topics--people .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--people .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag {
+  border-color: #E5E8FF;
+  z-index: 1;
+}
+.interiorSummary-topics--people .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--people .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--people .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--people .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--people .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:active, .interiorSummary-topics--people .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag, .interiorSummary-topics--people .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--people .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--people .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--people .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:active {
+  color: #E5E8FF;
+}
+.interiorSummary-topics--people .interiorSummary-topics-dialog .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--people .interiorSummary-topics-dialog .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--people .interiorSummary-topics-dialog .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag, .interiorSummary-topics--people .interiorSummary-topics--callout .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--people .interiorSummary-topics--callout .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--people .interiorSummary-topics--callout .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #1C2AA7;
+  background: #E5E8FF;
+}
+.interiorSummary-topics--people .interiorSummary-topics-dialog .interiorSummary-topics-icon--remove, .interiorSummary-topics--people .interiorSummary-topics--callout .interiorSummary-topics-icon--remove {
+  fill: #1C2AA7;
+}
+
+.interiorSummary-topics--about .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag, .interiorSummary-topics--about .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag {
+  color: #FFE5E6;
+  background: #800000;
+}
+.interiorSummary-topics--about .interiorSummary-topics-trigger--tag {
+  border-color: #800000;
+}
+.interiorSummary-topics--about .interiorSummary-topics-trigger--tag, .interiorSummary-topics--about .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--about .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--about .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--about .interiorSummary-topics-trigger--tag:active {
+  color: #800000;
+  text-decoration: none;
+}
+.interiorSummary-topics--about .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #FFE5E6;
+  background: #800000;
+}
+.interiorSummary-topics--about .interiorSummary-topics-label--tag {
+  font: normal 1.4em/1.43 "apercu", sans-serif;
+}
+.interiorSummary-topics--about .interiorSummary-topics-icon--remove {
+  fill: #FFE5E6;
+  display: none;
+}
+.interiorSummary-topics--about .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--about .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag {
+  border-color: #FFE5E6;
+  z-index: 1;
+}
+.interiorSummary-topics--about .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--about .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--about .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--about .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--about .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:active, .interiorSummary-topics--about .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag, .interiorSummary-topics--about .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--about .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--about .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--about .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:active {
+  color: #FFE5E6;
+}
+.interiorSummary-topics--about .interiorSummary-topics-dialog .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--about .interiorSummary-topics-dialog .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--about .interiorSummary-topics-dialog .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag, .interiorSummary-topics--about .interiorSummary-topics--callout .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--about .interiorSummary-topics--callout .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--about .interiorSummary-topics--callout .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #800000;
+  background: #FFE5E6;
+}
+.interiorSummary-topics--about .interiorSummary-topics-dialog .interiorSummary-topics-icon--remove, .interiorSummary-topics--about .interiorSummary-topics--callout .interiorSummary-topics-icon--remove {
+  fill: #800000;
+}
+
+.interiorSummary-topics--search .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag, .interiorSummary-topics--search .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag {
+  color: #FFE5E6;
+  background: #800000;
+}
+.interiorSummary-topics--search .interiorSummary-topics-trigger--tag {
+  border-color: #800000;
+}
+.interiorSummary-topics--search .interiorSummary-topics-trigger--tag, .interiorSummary-topics--search .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--search .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--search .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--search .interiorSummary-topics-trigger--tag:active {
+  color: #800000;
+  text-decoration: none;
+}
+.interiorSummary-topics--search .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #FFE5E6;
+  background: #800000;
+}
+.interiorSummary-topics--search .interiorSummary-topics-label--tag {
+  font: normal 1.4em/1.43 "apercu", sans-serif;
+}
+.interiorSummary-topics--search .interiorSummary-topics-icon--remove {
+  fill: #FFE5E6;
+  display: none;
+}
+.interiorSummary-topics--search .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--search .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag {
+  border-color: #FFE5E6;
+  z-index: 1;
+}
+.interiorSummary-topics--search .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag, .interiorSummary-topics--search .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--search .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--search .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--search .interiorSummary-topics-dialog .interiorSummary-topics-trigger--tag:active, .interiorSummary-topics--search .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag, .interiorSummary-topics--search .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:link, .interiorSummary-topics--search .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:visited, .interiorSummary-topics--search .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:hover, .interiorSummary-topics--search .interiorSummary-topics--callout .interiorSummary-topics-trigger--tag:active {
+  color: #FFE5E6;
+}
+.interiorSummary-topics--search .interiorSummary-topics-dialog .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--search .interiorSummary-topics-dialog .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--search .interiorSummary-topics-dialog .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag, .interiorSummary-topics--search .interiorSummary-topics--callout .interiorSummary-topics-item:hover .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--search .interiorSummary-topics--callout .interiorSummary-topics-item._is-active .interiorSummary-topics-trigger--tag,
+.interiorSummary-topics--search .interiorSummary-topics--callout .interiorSummary-topics-input--faux:checked + .interiorSummary-topics-trigger--tag {
+  color: #800000;
+  background: #FFE5E6;
+}
+.interiorSummary-topics--search .interiorSummary-topics-dialog .interiorSummary-topics-icon--remove, .interiorSummary-topics--search .interiorSummary-topics--callout .interiorSummary-topics-icon--remove {
+  fill: #800000;
 }
 
 .interiorSummary-topics-label {
   font: normal 1.4em/1.43 "apercu", sans-serif;
 }
-
-.interiorTeam {
-  border-top: 1px solid #51594A;
+.interiorSummary-action {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  font-size: 1rem;
+  margin-right: 4em;
+}
+.interiorSummary-action--ghost {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: calc(1.5em - 1px) calc(2em - 1px);
+}
+.interiorSummary-action:focus {
+  outline: none;
+}
+.interiorSummary-action:link, .interiorSummary-action:visited, .interiorSummary-action:hover, .interiorSummary-action:active {
+  text-decoration: none;
+}
+.interiorSummary-action-label, .interiorSummary-action-icon {
+  flex: 0 1 auto;
+}
+.interiorSummary-action-icon {
+  margin-left: 1em;
+  height: 20px;
+  width: 20px;
+}
+.interiorSummary-action:hover {
+  cursor: pointer;
 }
 
-.teamCard-title {
-  font: normal 2.8em/1.25 "apercu", sans-serif;
+.interiorSummary-action--link {
+  color: #1C2AA7;
+}
+.interiorSummary-action--link:link, .interiorSummary-action--link:visited, .interiorSummary-action--link:hover, .interiorSummary-action--link:active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  -webkit-text-decoration-color: #1C2AA7;
+          text-decoration-color: #1C2AA7;
+}
+.interiorSummary-action--link .interiorSummary-action-icon {
+  fill: #1C2AA7;
+}
+.interiorSummary-action--ghost {
+  border-color: #1C2AA7;
+  color: #1C2AA7;
+}
+.interiorSummary-action--ghost:hover {
+  border-color: #E5E8FF;
+  background: #1C2AA7;
+  color: #E5E8FF;
+}
+.interiorSummary-action--ghost:hover .interiorSummary-action-icon {
+  fill: #E5E8FF;
+}
+.interiorSummary-action--ghost .interiorSummary-action-icon {
+  fill: #1C2AA7;
+}
+.interiorSummary-action-label {
+  font: normal 1.2em/1.67 "apercu", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: inherit;
+  text-transform: uppercase;
+}
+.interiorSummary-action-trigger {
+  text-align: center;
+  text-decoration: none;
 }
 
-.narrativeCard-title {
-  font: normal 1.6em/1.56 "apercu", sans-serif;
+.interiorSummary-action-label {
+  font: normal 1.2em/1.67 "apercu", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: inherit;
+  text-transform: uppercase;
+}
+.interiorSummary-action-icon {
+  height: 20px;
+  width: 20px;
+  fill: #1C2AA7;
+}
+.interiorSummary-buttons--stack .interiorSummary-action-icon {
+  fill: #3F3606;
+}
+.interiorSummary-buttons--stack .interiorSummary-action {
+  display: flex;
+  margin-bottom: 1.25em;
+}
+.interiorSummary-buttons--stack .interiorSummary-action:link, .interiorSummary-buttons--stack .interiorSummary-action:visited, .interiorSummary-buttons--stack .interiorSummary-action:hover, .interiorSummary-buttons--stack .interiorSummary-action:active {
+  color: #3F3606;
+  -webkit-text-decoration-color: #3F3606;
+          text-decoration-color: #3F3606;
 }
 
 /* main.scss */

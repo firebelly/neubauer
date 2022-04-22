@@ -30,9 +30,10 @@
     %} 
 {% endif %}
 
-<section class="interiorOpen">
+<section class="interiorOpen interiorOpen--pair">
     
     <div class="interiorOpen-details">
+
         <h1 class="interiorOpen-subtitle">Research Project</h1>
         <h2 class="interiorOpen-title">{{ cardTitle }}</h2>
         {% if cardTeam|length > 0 %}
@@ -53,7 +54,12 @@
         {% endif %}
 
         <ul class="interiorOpen-menu">
-        {% set menuList = ['Summary','Team','Narrative'] %}
+        {% set menuList = ['Summary','Team'] %}
+
+        {% if narrativeBlock %}
+        {% set menuList = menuList|merge(['Narrative']) %}
+        {% endif %}
+
         {% if citationList %}
         {% set menuList = menuList|merge(['Reading List']) %}
         {% endif %}
@@ -114,7 +120,7 @@
 
     {% if cardTopics %}
     <div class="interiorSummary-topics">
-         <h3 class="interiorSummary-subtitle">Tags</h3>
+         <h3 class="interiorSummary-subtitle">Topics</h3>
         <ul class="interiorSummary-topics-list">
         {% for topic in cardTopics %}
             <li class="interiorSummary-topics-item">

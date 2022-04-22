@@ -1,7 +1,7 @@
 columnSuffix: null
 contentColumnType: text
 fieldGroup: 840b4f3b-b9bb-4665-8929-9d5969e6c272 # Exhibition
-handle: exhbitionSummary
+handle: exhibitionAbstract
 instructions: 'Max characters: 675'
 name: 'Brief description of exhibition'
 searchable: true

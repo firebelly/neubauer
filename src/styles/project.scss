@@ -137,22 +137,7 @@ img {
 
 /* ---------------------------------------------------------------------
   Theme
-
-  $theme: getTheme($color);
-  $primary: nth($theme,1);
-  $secondary: nth($theme,2);
 ------------------------------------------------------------------------ */
-// $sections: (
-// 	'homepage':'black',
-// 	'research': 'green',
-// 	'projects': 'olive',
-// 	'exhibitions': 'gray',
-// 	'events': 'yellow',
-// 	'people':'blue',
-// 	'about': 'red',
-// 	'search': 'red'
-// );
-
 // Themed body class
 .primaryTheme {
 
@@ -239,6 +224,7 @@ img {
 
 /* ---------------------------------------------------------------------
   Global Container Placeholders
+  eh these are kinda dum
 ------------------------------------------------------------------------ */
 %global {
 
@@ -553,7 +539,11 @@ $red-secondary: nth($red-theme,2);
   Primary Content
 ------------------------------------------------------------------------ */
 .primaryContent {
-	padding: 2em 0 8em 0;
+	//padding: 2em 0 8em 0;
+
+	padding: 2em 0 0 0;
+
+
 }
 
 /* ---------------------------------------------------------------------
@@ -578,11 +568,15 @@ $red-secondary: nth($red-theme,2);
 
 		> * {
 			@include flexChild(0 1 50%);
-		}
+		}	
 	}
 
 	&--search {
 		padding: 0;
+	}
+
+	&--research {
+		padding-bottom: 16em;
 	}
 
 	&-title {
@@ -802,6 +796,13 @@ $red-secondary: nth($red-theme,2);
 	}
 }
 
+.personFeature {
+	$feature: &;
+
+	@at-root {
+		@include cardFeature(#{$feature},getColor('blue'),getColor('blue',10));
+	}
+}
 
 /* ---------------------------------------------------------------------
   Date Directory - dev only
@@ -871,38 +872,72 @@ $red-secondary: nth($red-theme,2);
 /* ---------------------------------------------------------------------
   Interior Pages
 ------------------------------------------------------------------------ */
-.interiorOpen {
+.interiorIntro {
+	$parent: &;
 	padding: 0 8em 5em 8em;
 	@include flexParent($display:flex,$values:row nowrap);
 	@include justifyContent(center);
-	@include alignItems(center);
-	position: relative;
+
+	&--people  {
+		padding-top: 12em;
+		padding-bottom: 16em;
+	}
 
 	> * {
 		@include flexChild(0 1 50%);
 	}
 
 	&-details {
-		//@include flexChild(1 1 auto);
 		padding-right: 8em;
 		text-align: center;
+
+		#{$parent}--projects & {
+			@include breakpoint(sm) {
+				@include flexParent($display:flex,$values:column);
+			}
+		}
 	}
 
 	&-asset {
-		//@include flexChild(0 1 50%);
 		// todo
 		overflow: hidden;
+	}
+
+	&-placeholder {
+		background: lightgray;
 		height: 700px;
+		width: 640px;
+	}
+
+	&-caption {
+		$pt: math.div(20,16);
+		$pr: math.div(40,16);
+		@include getType('caption');
+		padding: #{$pt}em #{$pr}em 0 0;
 	}
 
 	&-title {
-		$mb: math.div(40,65);
+		$mb-lg: math.div(40,65);
+		$mb-sm: math.div(20,65);
 		@include getType('h1-normal');
-		margin-bottom: #{$mb}em;
+		margin-bottom: #{$mb-lg}em;
+
+		#{$parent}--people & {
+			margin-bottom: #{$mb-sm}em;
+		}
+
 	}
 
 	&-subtitle {
+		$mb: math.div(20,16);
 		@include getType('caption');
+		margin-bottom: #{$mb}em;
+	}
+
+	&-prompt {
+		$mb: math.div(80,28);
+		@include getType('h3-sans');
+		margin-bottom: #{$mb}em;
 	}
 
 	&-team {
@@ -923,7 +958,14 @@ $red-secondary: nth($red-theme,2);
             a:visited,
             a:hover,
             a:active {
-                color: getColor('green',30);
+
+				#{$parent}--people & {
+					color: getColor('blue',10);
+				}
+
+				#{$parent}--projects & {
+                	color: getColor('green',30);
+				}
             }
 
 		}
@@ -936,26 +978,56 @@ $red-secondary: nth($red-theme,2);
 
 	&-menu {
 		@include flexParent();
-		position: absolute;
-		bottom: 5em; //todo
-    	margin: 0 4em 0 4em;
-    	width: calc(50% - 24em);
-		@include justifyContent(space-around);
+		@include justifyContent(center);
 		scroll-behavior: smooth; // todo
+	
+		&--projects {
+			flex-grow: 1;
+			@include alignItems(end);
+		}
 
 		&-item {
 			@include flexChild(0 1 auto);
 			@include getType('action');
+			margin: 0 2em;
 
 			a:link,
             a:visited,
             a:hover,
             a:active {
-                color: getColor('green',30);
+
+				#{$parent}--people & {
+					color: getColor('blue');
+				}
+
+				#{$parent}--projects & {
+					color: getColor('green',30);
+				}
+
 				text-decoration: none;
             }
 		}
 
+	}
+
+}
+
+.interiorCover {
+
+	&-frame {
+		margin: 0 4em;
+	}
+
+	&-placeholder {
+		width: 1360px;
+		height: 700px;
+		background:lightgray;
+	}
+
+	&-caption {
+		$pt: math.div(40,16);
+		@include getType('caption');
+		padding: #{$pt}em 0 0 0;
 	}
 
 }
@@ -991,41 +1063,112 @@ $red-secondary: nth($red-theme,2);
 }
 
 .interiorSummary {
-	@include flexParent($display:flex,$values:row nowrap);
-	@include justifyContent(center);
+	$summary: &;
+	border-top: 1px solid transparent;
 	padding: 4em 4em 16em 4em;
 
-	> * {
-		@include flexChild(0 1 50%);
+	&--people {
+		border-color: getColor('blue');
+	}
+
+	&--projects {
+		border-color: getColor('green',30);
+	}
+
+	@include breakpoint(sm) {
+		@include flexParent($display:flex,$values:row nowrap);
+		@include justifyContent(center);
+
+		> * {
+			@include flexChild(0 1 50%);
+		}
 	}
 
 	&-title {
 		@include getType('h1-normal');
+
+		&--people,
+		&--exhibitions {
+			@include visuallyHide;
+		}
 	}
 
-	&-subtitle {
-		$pad: math.div(20,28);
-		@include getType('h3-sans');
-		padding: #{$pad}em 0;
+	&-placeholder {
+		width: 100%;
+		height: 100%;
+		background: lightgray; //todo
 	}
 
-	&-details {
-		@include getType('subtitle');
-	}
-
-	&-abstract {
+	&-frame {
 	
+		&--projects {
+			@include visuallyHide;
+		}
+	}
+
+	&-placeholder {
+		background: lightgray;
+		height: 640px;
+		width: 640px;
+	}
+
+	&-caption {
+		$pt: math.div(20,16);
+		$pr: math.div(40,16);
+		@include getType('caption');
+		padding: #{$pt}em #{$pr}em 0 0;
+	}
+
+	&-main {
+		margin-left: 4em;
+	}
+
+	&-redactor {
+		$mb: math.div(40,24);
+		@include getType('subtitle');
+		margin: 0 0 #{$mb}em 0;
+
+		a:link,
+		a:visited,
+		a:hover,
+		a:active {
+			text-underline-offset: 5px;
+
+			#{$summary}--projects & {
+				color: getColor('green',30);
+			}
+			#{$summary}--people & {
+				color: getColor('blue');
+			}
+		}	
+
+		em {
+			font-style: italic;
+		}
+	
+		&--body {
+
+			&._is-hidden {
+				@include visuallyHide;
+			}
+
+		}
+
 	}
 
 	&-accordion {
+		$accordion: &;
 		@include flexParent();
-		border-top: 1px solid getColor('green',30);
-		border-bottom: 1px solid getColor('green',30);
+		border-top: 1px solid transparent;
 		display: block;
 		margin-top: 4em;
 		padding: 2em 0;
 		width: 100%;
 		font-size: 1rem;
+
+		&--projects {
+			border-color: getColor('green',30);
+		}
 
 		&:link,
 		&:visited,
@@ -1047,43 +1190,77 @@ $red-secondary: nth($red-theme,2);
 		&-icon {
 			height: 20px;
 			width: 20px;
-			fill: getColor('green',30);
-		}
-	}
 
-	&-full {
-		@include visuallyHide;
+			#{$accordion}--projects & {
+				fill: getColor('green',30);
+			}
+			
+		}
 	}
 
 	&-topics {
+		$topics: &;
+		border-top: 1px solid transparent;
+		margin-top:4em;
 		font-size: 1rem;
-		$detail-topics: &;
-		@at-root {
-			@include controlTags(#{$detail-topics},getColor('green',30),getColor('green',20));
+
+		&--projects {
+			border-color: getColor('green',30);
 		}
+
+		&--people {
+			border-color: getColor('blue');
+		}
+
+		&-subtitle {
+			$pad: math.div(20,28);
+			@include getType('h3-sans');
+			padding: #{$pad}em 0;
+		}
+
+		@at-root {
+			@include controlTags(#{$topics},$default:true,$theme:true);
+		}
+
 		&-label {
 			@include getType('fine');
 		}
-
 	}
 
-}
+	&-action {
+		$action: &;
+		@at-root {
+			@include actionButton(#{$action},getColor('blue'),getColor('blue',10));
+		}
+		&-label {
+			@include getType('action');
+		}
 
-.interiorTeam {
-	border-top: 1px solid getColor('green',30);
+		&-icon {
+			height: 20px;
+			width: 20px;
+			fill: getColor('blue');
 
-}
+			#{$summary}-buttons--stack & {
+				fill: getColor('gray');
+			}
+		}
 
-.teamCard {
-	&-title {
-		@include getType('h3-sans');
-	}
-}
+		#{$summary}-buttons--stack & {
+			$mb: math.div(20,16);
+			display: flex;
+			margin-bottom: #{$mb}em;
 
-.narrativeCard {
+			&:link,
+			&:visited,
+			&:hover,
+			&:active {
+				color: getColor('gray');
+				text-decoration-color: getColor('gray');
+			}
 
-	&-title {
-		@include getType('caption');
+		}
+
 	}
 
 }

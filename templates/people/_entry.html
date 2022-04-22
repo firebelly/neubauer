@@ -1,34 +1,108 @@
 
 {% extends "layouts/_base.html" %}
-{# {% import 'macros/_assets' as assets %} #}
+{% import 'macros/_dates' as dates %}
+{% import 'macros/_cards' as cards %}
+{% import 'macros/_assets' as assets %}
 {% import 'macros/_controls' as controls %}
 
 {% block content %}
+{% set cardTitle = entry.title %}
+{% set cardImage = entry.cardImage and entry.cardImage.one() is not null ? entry.cardImage : null %}
+{% set cardTitleTag = entry.personTitle %}
+{% set cardAffiliation = entry.personAffiliation %}
+{% set cardEmail = entry.personEmail %}
+{% set emailPath = "/spritemap.svg#icon-email-20" %}
+{% set cardSummary = entry.personSummary %}
+{% set citationList = entry.citationList in not null and entry.citationList|length > 0 ? entry.citationList : null %}
 {# Define projects associated with Person #}
 {% set projectList = craft.entries()
     .section('projects')
     .search('projectTeam:' ~ entry ~'')
     .all()
 %}
-
-{% set topicList = [] %}
+{% set cardTopics = [] %}
 {% for project in projectList if project.topicList is not null %}
-    {% set topicList = topicList|merge(project.topicList) %}
+    {% set cardTopics = cardTopics|merge(project.topicList) %}
 {% endfor %}
 
-{% if topicList is not null %}
-Topics:
-{{ controls.controlTags('topicList',topicList) }}
-{% endif %}
+<section class="interiorOpen interiorOpen--center">
+    <div class="interiorOpen-details">
+        <h1 class="interiorOpen-subtitle">{{ cardTitleTag }}</h1>
+        <h2 class="interiorOpen-title">{{ cardTitle }}</h2>
+        
+        <div class="interiorOpen-blurb">
+            {{ cardAffiliation }}
+        </div>
 
-Testing Images
+        {# {% if cardDate %}
+        <div class="interiorOpen-date">{{ cardDate }}</div>
+        {% endif %} #}
 
-{{ entry.title }}
-{{ entry.personEmail }}
+        <ul class="interiorOpen-menu">
+        {% set menuList = ['Bio','Projects'] %}
+        {% if citationList %}
+        {% set menuList = menuList|merge(['Publications']) %}
+        {% endif %}
+            {% for menuItem in menuList %}
+            {% set menuHandle = menuItem|camel %}
+            <li class="interiorOpen-menu-item">
+                <a href="#{{ menuHandle }}">{{ menuItem }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
 
-{{ entry.personSummary }}
+<section class="interiorBio" id="bio">
 
-{% set imageName, imageVariant, imageObj = 'profileAsset', 'interior', entry.cardImage %}
+    <div class="interioBio-frame">
+        <div class="interiorBio-placeholder">
+            {# image goes here #}
+        </div>
+    </div>
+
+    <div class="interiorBio-main">
+        <div class="interiorBio-redactor">{{ cardSummary|raw }}</div>
+
+        <div class="interiorBio-buttons">
+            <a 
+                class="interiorBio-action interiorBio-action--link"
+                href="mailto:{{ cardEmail }}"
+                title=""
+                role="">
+                <span class="interiorBio-action-label">{{ cardEmail }}</span>
+                <svg class="interiorBio-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ emailPath) }}"></use>
+                </svg>
+            </a>
+        </div>
+
+        {% if cardTopics %}
+        <div class="interiorBio-topics">
+            <h3 class="interiorBio-topics-subtitle">Topics</h3>
+            <ul class="interiorBio-topics-list">
+            {% for topic in cardTopics %}
+                <li class="interiorBio-topics-item">
+                    <a class="interiorBio-topics-trigger interiorBio-topics-trigger--tag">
+                        <span class="interiorBio-topics-label">{{ topic|title }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+    {% set projectEntry = projectList[0] %}
+    {{ cards.cardFeature(projectEntry,'Projects','personFeature') }}
+
+
+
+{# {% set imageName, imageVariant, imageObj = 'profileAsset', 'interior', entry.cardImage %}
 {% set imageTransforms = [
     { width: 675 }, 
     { width: 500 }, 
@@ -36,21 +110,7 @@ Testing Images
     { width: 300 } 
 ]%}
 {% set aspectRatioObj,showCaption,imageBlock = {},false,{} %}
-{% set imagerX = false %}
+{% set imagerX = false %} #}
 
-<div class="contentContainer">
-    <div class="profileContainer">
-        {# {{ assets.assetImage(imageName,imageVariant,imageObj,imageTransforms,aspectRatioObj,showCaption,imageBlock,imagerX) }} #}
-        <div class="profileBody">
-        {{ entry.summary }}
-        </div>
-    </div>
 
-    <div>
-    Projects:
-    {% for project in projectList %}
-        {{ project.title }}            
-    {% endfor %}
-    </div>
-</div>
 {% endblock %}

@@ -168,6 +168,7 @@
             $mb: math.div(20,40);
             @include getType('h2-sans');
             margin-bottom: #{$mb}em;
+            text-align: center;
         }
     
         &-content {
@@ -326,6 +327,10 @@
             > * {
                 @include flexChild();
             }
+        }
+
+        &-action {
+            margin-right: 0;
         }
 
     }

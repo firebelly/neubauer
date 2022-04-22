@@ -142,10 +142,9 @@
     @cardName {str}  - base styling hook
     @cardEntry {obj} - entry object
 #}
-{% macro cardFeature(cardEntry,cardLabel,cardName,cardVariant = null) %}
+{% macro cardFeature(cardEntry,cardLabel,cardName,cardVariant = null,cardId = null) %}
 {% import 'macros/_assets' as assets %}
 {% import 'macros/_dates' as dates %}
-
 
 {% set cardImage = cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
 {% set team = cardEntry.projectTeam.all() %}
@@ -155,7 +154,7 @@
 
 {# TO DO: abstract this to use for directory cards also #}
 
-<section class="{{ cardName }}{% if cardVariant %} {{ cardName }}--{{ cardVariant }}{% endif %}">
+<section class="{{ cardName }}{% if cardVariant %} {{ cardName }}--{{ cardVariant }}{% endif %}" id="{{ cardId }}">
     <h2 class="{{ cardName }}-label">{{ cardLabel }}</h2>
     <div class="{{ cardName }}-content">
         
@@ -186,7 +185,7 @@
                 <ul class="{{ cardName }}-team-list">
                     {% for member in team %}
                     <li class="{{ cardName }}-team-item">
-                        <a href="{{ member.uri }}">{{ member.title }}</a>{{ loop.last ? '' : ', &nbsp;' }}
+                        <a href="{{ siteUrl }}{{ member.uri }}">{{ member.title }}</a>{{ loop.last ? '' : ', &nbsp;' }}
                     </li>
                     {% endfor %}
                 </ul>

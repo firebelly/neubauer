@@ -1,8 +1,241 @@
 {% extends "layouts/_base.html" %}
 
+{% import 'macros/_dates' as dates %}
+{% import 'macros/_cards' as cards %}
+{% import 'macros/_assets' as assets %}
+{% import 'macros/_controls' as controls %}
+
 {% block content %}
-{% set section = entry.type %}
+{# Global Vars #}
+{% set entrySection = entry.section|slugify %}
+{% set entryTitle = entry.title %}
+{% set openerImage = entry.openerImage and entry.openerImage.one() is not null ? entry.openerImage : null %}
+{% set cardImage = entry.cardImage and entry.cardImage.one() is not null ? entry.cardImage : null %}
+{% set citationList = entry.citationList is not null and entry.citationList|length > 0 ? entry.citationList : null %}
+{% set topicList = entry.topicList is not null and entry.topicList|length > 0 ? entry.topicList : null %}
+{% set entrySubtitle = (entry.personTitle is not null and entry.personTitle != "") ? entry.personTitle : 
+                    ((entrySection == 'projects') ? 'Research Project' : 'Exhibition') %}
+{% set entryDate = (entry.dateBlock is not null and entry.dateBlock[0] != '') ? dates.printDate(entry.dateBlock[0]) : null %}
+{% set spotlightBlock = entry.spotlightBlock is not null and entry.spotlightBlock|length > 0 ? entry.spotlightBlock.all() : null %}
+{% set narrativeBlock = entry.narrativeBlock is not null and entry.narrativeBlock|length > 0 ? entry.narrativeBlock.all() : null %}
 
-<div data-section="{{ section }}"></div>
+{% set abstract = entry.abstract is not null and entry.abstract != '' ? entry.abstract : 
+                (entry.exhibitionAbstract is not null and entry.exhibitionAbstract != '' ? entry.exhibitionAbstract: null) %}
 
-{% endblock %}
+{% set body = entry.summary is not null and entry.summary != '' ? entry.summary :
+                (entry.personSummary is not null and entry.personSummary != "" ? entry.personSummary : null) %}
+
+{% set actionBlock = (entry.actionBlock is not null and entry.actionBlock[0] != '') ? entry.actionBlock : null %}
+
+{# Icons #}
+{% set emailPath = "/spritemap.svg#icon-email-20" %}
+{% set expandPath = "/spritemap.svg#icon-plus-20" %}
+{% set downloadPath = "/spritemap.svg#icon-download-20" %}
+
+{# Person-Specifics #}
+{% set affiliation = entry.personAffiliation is not null and entry.personAffiliation != "" ? entry.personAffiliation : null %}
+{% set email = entry.personEmail is not null and entry.personEmail != "" ? entry.personEmail : null %}
+
+{# Project-Specifics #}
+{% set team = entry.projectTeam is not null and entry.projectTeam|length > 0 ? entry.projectTeam : null %}
+
+
+{% set menuList = [] %}
+{% switch entrySection %}
+
+    {% case 'people' %}
+    {# Define projects associated with Person #}
+    {% set projectList = craft.entries()
+        .section('projects')
+        .search('projectTeam:' ~ entry ~'')
+        .all()
+    %}
+    {% set topicList = [] %}
+    {% for project in projectList if project.topicList is not null %}
+        {% set topicList = topicList|merge(project.topicList) %}
+    {% endfor %}
+
+    {% set menuList = menuList|merge(['Bio','Projects']) %}
+    {% if citationList %}
+    {% set menuList = menuList|merge(['Publications']) %}
+    {% endif %}
+
+    {% case 'projects' %}
+
+    {% set menuList = menuList|merge(['Summary','Team']) %}
+    {% if narrativeBlock %}
+    {% set menuList = menuList|merge(['Narrative']) %}
+    {% endif %}
+
+{% endswitch %}
+
+<section class="interiorIntro interiorIntro--{{ entrySection }}">
+    <div class="interiorIntro-details">
+        <h1 class="interiorIntro-subtitle">{{ entrySubtitle }}</h1>
+        <h2 class="interiorIntro-title">{{ entryTitle }}</h2>
+        
+        {% if affiliation %}
+        <div class="interiorIntro-prompt">
+            {{ affiliation }}
+        </div>
+        {% endif %}
+
+        {% if team %}
+        <div class="interiorIntro-team">
+            <h3 class="interiorIntro-team-title">Project Team:</h3>
+            <ul class="interiorIntro-team-list">
+                {% for member in team %}
+                <li class="interiorIntro-team-item">
+                    <a href="{{ member.uri }}">{{ member.title }}</a>{{ loop.last ? '' : ', &nbsp;' }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if entryDate %}
+        <div class="interiorIntro-date">{{ entryDate }}</div>
+        {% endif %}
+        
+        {% if menuList %}
+        <ul class="interiorIntro-menu interiorIntro-menu--{{ entrySection }}">
+            {% for menuItem in menuList %}
+            {% set menuHandle = menuItem|camel %}
+            <li class="interiorIntro-menu-item">
+                <a href="#{{ menuHandle }}">{{ menuItem }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    
+    {% if entrySection == 'projects' and cardImage %}
+    <div class="interiorIntro-asset">
+        <div class="interiorIntro-frame">
+            <div class="interiorIntro-placeholder"></div>
+            <div class="interiorIntro-caption">Nulla sollicitudin ornare ullamcorper. Duis sollicitudin, libero nec malesuada gravida. Purus purus lobortis mi, sit amet imperdiet ex massa in felis.</div>
+        </div>
+    </div>
+    {% endif %}
+</section>
+
+{% if spotlightBlock %}
+{% set spotlightCount = spotlightBlock|length %}
+{# TODO: slides #}
+<section class="interiorSpotlight">
+    <h3 class="interiorSpotlight-subtitle">Key Questions</h3>
+    <ul class="interiorSpotlight-list">
+    {% for spotlight in spotlightBlock if spotlight.type == 'question' %}
+        <li class="interiorSpotlight-item">{{ spotlight.body }}</li>
+    {% endfor %}
+    </ul>
+</section>
+{% endif %}
+
+{% if openerImage %}
+<div class="interiorCover-frame">
+    <div class="interiorCover-placeholder"></div>
+    {# <img class="interiorCover-frame-img" src="{{ openerImage.one() }}" /> #}
+    <div class="interiorCover-caption">{{ openerImage.caption }}</div>
+</div>
+{% endif %}
+
+{% set summaryId = (entrySection == 'people' ? 'bio' : (entrySection == 'projects' ? 'summary' : 'Exhibition')) %}
+{% set summaryTitle = (entrySection == 'people' ? 'Biography' : (entrySection == 'projects' ? 'Project Summary' : 'Exhibition Summary')) %}
+
+<section class="interiorSummary interiorSummary--{{ entrySection }}" id="{{ summaryId }}">
+
+    <h3 class="interiorSummary-title interiorSummary-title--{{ entrySection }}">{{ summaryTitle }}</h3>
+
+    <div class="interiorSummary-frame interiorSummary-frame--{{ entrySection }}">
+        {% if entrySection == 'people' %}
+        <div class="interiorSummary-placeholder">{# image goes here #}</div>
+        <div class="interiorSummary-caption">Photo by: ornare ullamcorper.</div>
+        {% endif %}
+        {% if entrySection == 'exhibitions' %}
+        {% if actionBlock %}
+        <div class="interiorSummary-buttons interiorSummary-buttons--stack">
+            {% for item in actionBlock %}
+            {% set actionType = item.type %}
+            {# {{ actionType }}: {{ item.actionURL[0] }} #}
+            <a 
+                class="interiorSummary-action interiorSummary-action--link"
+                href=""
+                title=""
+                role="">
+                <span class="interiorSummary-action-label">{% if item.actionText %}{{ item.actionText }}{% endif %}</span>
+                <svg class="interiorSummary-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ downloadPath) }}"></use>
+                </svg>
+            </a>
+            
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="interiorSummary-main">
+
+        {% if abstract %}
+        <div class="interiorSummary-redactor interiorSummary-redactor--abstract">{{ abstract|raw }}</div>
+        {% endif %}
+
+        {% if body %}
+        {% set isAccordion = (body and abstract) %}
+
+        {% if isAccordion %}
+        {# <a class="interiorSummary-accordion interiorSummary-accordion--{{ entrySection }}" href="" role="">
+            <span class="interiorSummary-accordion-label">Full Summary</span>
+            <svg class="interiorSummary-accordion-icon">
+                <use xlink:href="{{ alias('@assetBasePath' ~ expandPath) }}"></use>
+            </svg>
+        </a> #}
+        {% endif %}
+
+        <div class="interiorSummary-redactor interiorSummary-redactor--body">{{ body|raw }}</div>
+        {% endif %}
+
+        {% if email %}
+        <div class="interiorSummary-buttons">
+            <a 
+                class="interiorSummary-action interiorSummary-action--link"
+                href="mailto:{{ email }}"
+                title=""
+                role="">
+                <span class="interiorSummary-action-label">{{ email }}</span>
+                <svg class="interiorSummary-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ emailPath) }}"></use>
+                </svg>
+            </a>
+        </div>
+        {% endif %}
+
+        {% if topicList %}
+        <div class="interiorSummary-topics interiorSummary-topics--{{ entrySection }}">
+            <h3 class="interiorSummary-topics-subtitle">Topics</h3>
+            <ul class="interiorSummary-topics-list">
+            {% for topic in topicList %}
+                <li class="interiorSummary-topics-item">
+                    <a 
+                        class="interiorSummary-topics-trigger interiorSummary-topics-trigger--tag"
+                        href="/search?tags={{ topic|slugify }}">
+                        <span class="interiorSummary-topics-label">{{ topic|title }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% if entrySection == 'people' %}
+{% set projectEntry = projectList[0] %}
+{{ cards.cardFeature(projectEntry,'Projects','personFeature','callout','projects') }}
+{% endif %}
+
+
+
+
+{%  endblock %}
