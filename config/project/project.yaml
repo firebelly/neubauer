@@ -1,4 +1,4 @@
-dateModified: 1650604914
+dateModified: 1650604982
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -92,7 +92,7 @@ meta:
     24a17e09-26e2-478c-9dfe-bbca0be0122b: 'Select a Neubauer page as the destination' # Select a Neubauer page as the destination
     24d2f934-5106-4961-a508-9e1c2c0a6523: Link # Link
     24dfedab-186e-4f9c-92c3-d07cec6478bc: Content # Content
-    026c8ffa-efc4-440b-857e-4e83572400a8: 'Event Type New' # Event Type New
+    026c8ffa-efc4-440b-857e-4e83572400a8: 'Event Type' # Event Type
     028f51f0-ce87-4a29-9df2-bf30a7cf4783: 'Public Transit' # Public Transit
     29a66baf-c15f-4cd8-bc9a-08825a4ee34d: Date # Date
     31ccea3a-6188-4659-a373-d53b96a6866e: 'Publication Card' # Publication Card

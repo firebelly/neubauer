@@ -58,7 +58,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 026c8ffa-efc4-440b-857e-4e83572400a8 # Event Type New
+            fieldUid: 026c8ffa-efc4-440b-857e-4e83572400a8 # Event Type
             instructions: null
             label: null
             required: false
