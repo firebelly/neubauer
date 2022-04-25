@@ -43,6 +43,8 @@
 
 {# Exhibition Specifics #}
 {% set gallery = entry.galleryImage is not null and entry.galleryImage|length > 0 ? entry.galleryImage.all() : null %}
+{% set relatedProject = entry.relatedProject is not null and entry.relatedProject|length > 0 ? entry.relatedProject.one() : null %}
+
 
 {# Featured Explore Entries 
     1. Look for Featured Entries on Index
@@ -305,6 +307,25 @@
         {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
     {% endfor %}
     </div>
+</section>
+{% endif %}
+
+{% if relatedProject %}
+<section class="interiorRelated interiorRelated--{{ entrySection }}">
+    <h3 class="interiorRelated-subtitle">This exhibition is part of</h3>
+    <h3 class="interiorRelated-title">{{ relatedProject.title }}</h3>
+    {% set relatedTeam = relatedProject.projectTeam is not null and relatedProject.projectTeam|length > 0 ? relatedProject.projectTeam : null %}
+    {% if relatedTeam %}
+    <div class="interiorRelated-team">
+        <ul class="interiorRelated-team-list">
+            {% for member in relatedTeam %}
+            <li class="interiorIntro-team-item">
+                <a href="{{ member.uri }}">{{ member.title }}</a>{{ loop.last ? '' : ', &nbsp;' }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 </section>
 {% endif %}
 
