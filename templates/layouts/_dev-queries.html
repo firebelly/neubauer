@@ -1,0 +1,47 @@
+{% import 'macros/_dates' as dates %}
+{% import 'macros/_cards' as cards %}
+{% import 'macros/_assets' as assets %}
+{% import 'macros/_controls' as controls %}
+
+{% block content %}
+<h2>Project with Spotlights</h2>
+{% set projectsWithSpotlights = craft.entries()
+    .section('projects')
+    .with('spotlightBlock')
+    .narrativeBlock(':notempty:')
+    .all()
+%} 
+{% for e in projectsWithSpotlights if e.spotlightBlock|length > 0 %}
+<div>
+    <a href="{{ e.uri }}">{{ e.uri }}</a>
+    {% set questions = [] %}
+    {% set quotes = [] %}
+    {% for b in e.spotlightBlock %}
+    {% set spotlightType = b.type %}
+    {% switch spotlightType %}
+    {% case 'question' %}
+    {% set questions = questions|merge([b]) %}
+    {% case 'quote ' %}
+    {% set quotes = quotes|merge([b]) %}
+    {% endswitch %}
+    {% endfor %}
+    <span>Questions: {{ questions|length }}</span>
+    <span>Quotes: {{ quotes|length }}</span>
+</div>
+{% endfor %}
+
+<h2>Project with Narratives</h2>
+ {% set projectsWithNarratives = craft.entries()
+    .section('projects')
+    .with('narrativeBlock')
+    .narrativeBlock(':notempty:')
+    .all()
+%} 
+{% for e in projectsWithNarratives if e.narrativeBlock|length > 0 %}
+<div>
+    <a href="{{ e.uri }}">{{ e.uri }}</a>
+    <span>({{ e.narrativeBlock|length}})</span>
+</div>
+{% endfor %}
+
+{% endblock %}

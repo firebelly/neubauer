@@ -25,20 +25,73 @@
 {% set body = entry.summary is not null and entry.summary != '' ? entry.summary :
                 (entry.personSummary is not null and entry.personSummary != "" ? entry.personSummary : null) %}
 
-{% set actionBlock = (entry.actionBlock is not null and entry.actionBlock[0] != '') ? entry.actionBlock : null %}
+{% set actionBlock = (entry.actionBlock is not null and entry.actionBlock|length > 0 and entry.actionBlock[0] != '') ? entry.actionBlock : null %}
 
 {# Icons #}
 {% set emailPath = "/spritemap.svg#icon-email-20" %}
 {% set expandPath = "/spritemap.svg#icon-plus-20" %}
 {% set downloadPath = "/spritemap.svg#icon-download-20" %}
+{% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
 
 {# Person-Specifics #}
 {% set affiliation = entry.personAffiliation is not null and entry.personAffiliation != "" ? entry.personAffiliation : null %}
 {% set email = entry.personEmail is not null and entry.personEmail != "" ? entry.personEmail : null %}
+{% set personType = entry.personType is not null and entry.personType != "" ? entry.personType : null %}
 
 {# Project-Specifics #}
 {% set team = entry.projectTeam is not null and entry.projectTeam|length > 0 ? entry.projectTeam : null %}
 
+{# Exhibition Specifics #}
+{% set gallery = entry.galleryImage is not null and entry.galleryImage|length > 0 ? entry.galleryImage.all() : null %}
+
+{# Featured Explore Entries 
+    1. Look for Featured Entries on Index
+    2. If no Featured Entries, select them randomly
+    3. Ensure no entry redundancy based on entry ids
+#}
+{% set featureExplore = false %}
+{% set primaryFeature, secondaryFeature, randomFeature = null, null, null %}
+{% switch entrySection %}
+    {% case 'projects' %}
+    {% set featureExplore = true %}
+    {% set featureIndex = 'researchIndex' %}
+    {% set featureKey1 = 'featuredProject' %}
+    {% set featureKey2 = 'secondaryFeaturedProject' %}
+
+    {% case 'exhibitions' %}
+    {% set featureExplore = true %}
+    {% set featureIndex = 'exhibitionsIndex' %}
+    {% set featureKey1 = 'featuredExhibition' %}
+    {% set featureKey2 = 'secondaryFeaturedExhibition' %}
+{% endswitch %}
+
+{% if featureExplore %}
+    {% set currentId = entry.id %}
+    {% set indexQuery = craft.entries.section(featureIndex).one() %}
+    {% set randomQuery = craft.entries.section(entrySection).order('RAND()').limit(10) %}
+    {# avoid redundancy by exludling ids #}
+    {% set feature1 = (indexQuery[featureKey1]|length > 0 and indexQuery[featureKey1].one().id != currentId) ? indexQuery[featureKey1].one() : null %}
+    {% set feature2 = (indexQuery[featureKey2]|length > 0 and indexQuery[featureKey2].one().id != currentId) ? indexQuery[featureKey2].one() : null %}
+    
+    {% set primaryFeature = feature1 ? feature1 : (feature2 ? feature2 : randomQuery.id('not ' ~ currentId).one() ) %}
+    {% set secondaryFeature = (feature2 and primaryFeature.id != feature2.id) ? feature2 : randomQuery.id('and, not ' ~ currentId ~ ', not ' ~ primaryFeature.id).one() %}
+    {% set randomFeature = randomQuery.id('and, not ' ~ currentId ~ ', not ' ~ primaryFeature.id ~ ', not ' ~ secondaryFeature.id).one() %}
+{% endif %}
+                      
+{# Spotlights #}
+{% set keyQuestions = [] %}
+{% set keyQuotes = [] %}
+{% if spotlightBlock %}
+    {% for spotlight in spotlightBlock %}
+        {% set spotlightType = spotlight.type %}
+        {% switch spotlightType %}
+        {% case 'question' %}
+        {% set keyQuestions = keyQuestions|merge([spotlight]) %}
+        {% case 'quote ' %}
+        {% set keyQuotes = keyQuotes|merge([spotlight]) %}
+        {% endswitch %}
+    {% endfor %}
+{% endif %}
 
 {% set menuList = [] %}
 {% switch entrySection %}
@@ -55,7 +108,10 @@
         {% set topicList = topicList|merge(project.topicList) %}
     {% endfor %}
 
-    {% set menuList = menuList|merge(['Bio','Projects']) %}
+    {% set menuList = menuList|merge(['Bio']) %}
+    {% if projectList %}
+    {% set menuList = menuList|merge(['Projects']) %}
+    {% endif %}
     {% if citationList %}
     {% set menuList = menuList|merge(['Publications']) %}
     {% endif %}
@@ -71,7 +127,7 @@
 
 <section class="interiorIntro interiorIntro--{{ entrySection }}">
     <div class="interiorIntro-details">
-        <h1 class="interiorIntro-subtitle">{{ entrySubtitle }}</h1>
+        <h1 class="interiorIntro-subtitle">{{ entrySubtitle }}{% if personType %}, {% if entryDate %}{{ entryDate }} {% endif %}{{ personType[0] }}{% endif %}</h1>
         <h2 class="interiorIntro-title">{{ entryTitle }}</h2>
         
         {% if affiliation %}
@@ -93,7 +149,7 @@
         </div>
         {% endif %}
 
-        {% if entryDate %}
+        {% if entryDate and entrySection != 'people' %}
         <div class="interiorIntro-date">{{ entryDate }}</div>
         {% endif %}
         
@@ -119,14 +175,15 @@
     {% endif %}
 </section>
 
-{% if spotlightBlock %}
-{% set spotlightCount = spotlightBlock|length %}
+{# Key Questions #}
+{% if keyQuestions %}
+{% set questionCount = keyQuestions|length %}
 {# TODO: slides #}
-<section class="interiorSpotlight">
-    <h3 class="interiorSpotlight-subtitle">Key Questions</h3>
+<section class="interiorSpotlight interiorSpotlight--questions interiorSpotlight--{{ entrySection }}">
+    <h3 class="interiorSpotlight-subtitle">Key Question{{ questionCount > 1 ? 's' : '' }}</h3>
     <ul class="interiorSpotlight-list">
-    {% for spotlight in spotlightBlock if spotlight.type == 'question' %}
-        <li class="interiorSpotlight-item">{{ spotlight.body }}</li>
+    {% for question in keyQuestions %}
+        <li class="interiorSpotlight-item">{{ question.body }}</li>
     {% endfor %}
     </ul>
 </section>
@@ -176,6 +233,10 @@
     </div>
 
     <div class="interiorSummary-main">
+
+        {% if entrySection == 'people' and not abstract and not body %}
+        <div class="interiorSummary-redactor">Bio coming soon</div>
+        {% endif %}
 
         {% if abstract %}
         <div class="interiorSummary-redactor interiorSummary-redactor--abstract">{{ abstract|raw }}</div>
@@ -230,12 +291,182 @@
     </div>
 </section>
 
-{% if entrySection == 'people' %}
+{% if entrySection == 'people' and projectList %}
 {% set projectEntry = projectList[0] %}
 {{ cards.cardFeature(projectEntry,'Projects','personFeature','callout','projects') }}
 {% endif %}
 
+{% if team %}
+<section class="interiorTeam interiorTeam--{{ entrySection }}" id="team">
+    <h3 class="interiorTeam-title">Research Team</h3>
+    <div class="interiorTeam-list">
+    {% for member in team %}
+        {% set cardName,cardEntry,cardObj,cardVariant = 'interiorTeam-item',member,{},'' %}
+        {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+    {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{% if gallery %}
+<section class="interiorGallery interiorGallery--{{ entrySection }}">
+    <h3 class="interiorNarrative-title">Gallery</h3>
+    {% for galleryImage in gallery %}
+    {# {{ galleryImage.getWidth() }} #}
+    {# {{ assets.assetCard('galleryThumb',galleryImage,335,335) }} #}
+    {% endfor %}
+</section>
+{% endif %}
+
+{% if narrativeBlock %}
+<section class="interiorNarrative interiorNarrative--{{ entrySection }}" id="narrative">
+    <h3 class="interiorNarrative-title">{{ entrySection == 'projects' ? 'Project' : 'Exhibition' }} Narrative</h3>
+    {% set narratives = {} %}
+    
+    {% for n_obj in narrativeBlock %}
+        {# default to "update" if narrative type does not exist #}
+        {% set n_type = n_obj.narrativeType|length > 0 ? n_obj.narrativeType[0]|slugify : 'update' %}
+        {% set obj_arr = n_type in narratives|keys ? narratives[n_type] : [] %}
+        {% set narratives = narratives|merge({
+            (n_type): obj_arr|merge([n_obj.item[0]])
+        }) %}
+    {% endfor %}
+
+    <div class="tabList tabList--narrative tabList--{{ entrySection }}" role="tablist">
+        <button 
+            class="tabList-item"
+            type="button"
+            role="tab"
+            aria-selected="true"
+            aria-controls="all-tab"
+            id="all">All</button>
+
+        
+        {% for tabSlug, objs in narratives|reverse %}
+        {% set tabTitle = tabSlug|title %}
+        <button 
+            class="tabList-item"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="{{ tabSlug }}-tab"
+            id="{{ tabSlug }}"
+            tabindex="-1">{{ "#{tabTitle}s" }}</button>
+        </li>
+        {% endfor %}
+    </div>
+    
+    {% set allCount = narrativeBlock|length %}
+    <div 
+        class="tabPanel{% if allCount > 3 %} tabPanel--4{% endif %}"
+        tabindex="0"
+        role="tabpanel"
+        id="all-tab"
+        aria-labelledby="all">
+
+        {% for n in narrativeBlock %}
+        {# default to "Update" if narr type does not exist #}
+        {% set type = n.narrativeType|length > 0 ? n.narrativeType[0].title : 'Update' %}
+        {% set narrative = n.item[0] %}
+        {% set cardName,cardEntry,cardObj,cardVariant = 'tabPanel-item',narrative,{},'' %}
+            {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+        {% endfor %}
+    </div>
+
+    {% for type, objs in narratives %}
+    {% set tabSlug = type|slugify %}
+    {% set objCount = objs|length %}
+    <div 
+        class="tabPanel{% if objCount > 3 %} tabPanel--4{% endif %} _is-hidden"
+        tabindex="0"
+        role="tabpanel"
+        id="{{ tabSlug }}-tab"
+        aria-labelledby="{{ tabSlug }}">
+
+        {% for narrative in objs %}
+            {% set cardName,cardEntry,cardObj,cardVariant = 'tabPanel-item',narrative,{},'' %}
+            {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+        {% endfor %}
+
+    </div>
+    {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{# Key Quotes #}
+{% if keyQuotes %}
+{% set quoteCount = keyQuotes|length %}
+{# TODO: slides #}
+<section class="interiorSpotlight interiorSpotlight--quotes interiorSpotlight--{{ entrySection }}">
+    <h3 class="interiorSpotlight-subtitle">Key Quotes</h3>
+    <div class="interiorSpotlight-list">
+    {% for quote in keyQuotes %}
+        <article class="interiorSpotlight-item">
+            {% if quote.image is not null and quote.image.one() %}
+            <figure class="interiorSpotlight-asset">
+                <img src="{{ quote.image.one() }}" />
+                <figcaption>{{ quote.image.caption }}</figcaption>
+            </figure>
+            {% endif %}
+            <div class="interiorSpotlight-redactor">
+                {{ quote.body|raw }}
+            </div>            
+            <div class="interiorSpotlight-attribution">
+                {{ quote.attribution }}
+            </div>
+        </article>
+    {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{# Feature Explore #}
+{% if featureExplore %}
+<section class="interiorExplore">
+    <h3 class="interiorExplore-title">Explore</h3>
+    
+    {% set featureList = [primaryFeature,secondaryFeature] %}
+    {% for feature in featureList %}
+    {% set featureType = loop.first ? 'primary' : 'secondary' %}
+        <article class="interiorExplore-feature interiorExplore-feature--{{ featureType }}">
+            <h4 class="interiorExplore-feature-label">
+            {% if featureType == 'primary' %}
+                Featured {{ entrySection == 'projects' ? 'Project' : 'Exhibition' }}
+            {% else %}
+                Continue Exploring
+            {% endif %}
+            </h4>
+            <h5 class="interiorExplore-feature-title">{{ feature.title }}</h5>
+            <a 
+                class="interiorExplore-action interiorExplore-action--link"
+                href="{{ siteUrl }}/{{ feature.uri }}">
+                <span 
+                    class="interiorExplore-action-label">
+                    Explore
+                </span>
+                <svg 
+                    class="interiorExplore-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+                </svg> 
+            </a>
+        </article>
+    {% endfor %}
+    {% if randomFeature %}
+        <article class="interiorExplore-feature interiorExplore-feature--random">
+            <a class="interiorExplore-big" href="{{ siteUrl }}/{{ randomFeature.uri }}">
+                <span class="interiorExplore-big-label">Open To Inquiry</span>
+                <svg 
+                    class="interiorExplore-big-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+                </svg> 
+            </a>
+        </article>
+    {% endif %}
+    
+</section>
 
 
+{% endif %}
 
 {%  endblock %}

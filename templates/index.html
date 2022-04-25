@@ -1,88 +1,182 @@
 {% extends "layouts/_base.html" %}
 
+{% import 'macros/_dates' as dates %}
+{% import 'macros/_cards' as cards %}
+{% import 'macros/_assets' as assets %}
+{% import 'macros/_controls' as controls %}
+
 {% block content %}
-<h1>Homepage</h1>
+{% set openerImage = entry.homepageCover is not null and entry.homepageCover|length > 0 ? entry.homepageCover.one() : null %}
+{% set openerSrc = "#{siteUrl}#{openerImage.url}" %}
+{% set openerTagline = entry.openerTagline is not null ? entry.openerTagline : null %}
+{% set openerPrompt = entry.openerPrompt is not null ? entry.openerPrompt : null %}
 
-<div>
-<h2>Data Tests</h2>
+{# Icons #}
+{% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
 
+{# Features #}
+{% set projectFeature, exFeature = null, null %}
+{% set featureEntries = {
+    'researchIndex': {
+        'slug': 'projects',
+        'fields': ['featuredProject','secondaryFeaturedProject']
+    },
+    'exhibitionsIndex': {
+        'slug': 'exhibitions',
+        'fields': ['featuredExhibition','secondaryFeaturedExhibition']
+    }
+}%}
 
+{% for key, obj in featureEntries %}
+    {% set slug, primary, secondary = obj.slug, obj.fields[0], obj.fields[1] %}
+    {% set indexQuery = craft.entries.section(key).one() %}
+    {% set randomQuery = craft.entries.section(slug).order('RAND()').limit(10) %}
+    {# avoid redundancy by excluding ids #}
+    {% set feature1 = indexQuery[primary]|length > 0 ? indexQuery[primary].one() : null %}
+    {% set feature2 = indexQuery[secondary]|length > 0 ? indexQuery[secondary].one() : null %}
+    
+    {% set primaryFeature = feature1 ? feature1 : (feature2 ? feature2 : randomQuery.one() ) %}
+    {% set secondaryFeature = (feature2 and primaryFeature.id != feature2.id) ? feature2 : randomQuery.id('not ' ~ primaryFeature.id).one() %}
+    {% set randomFeature = randomQuery.id('and, not ' ~ primaryFeature.id ~ ', not ' ~ secondaryFeature.id).one() %}
 
+    {% set featureObj = {
+        'features': {
+            'primary': primaryFeature, 
+            'secondary': secondaryFeature,
+            'random': randomFeature
+        }
+    }%}
 
-{% set projectsQuery = craft.entries.section('Projects') %}
-{% set allProjects = projectsQuery.all() %}
+    {% set featureEntries = featureEntries|merge({ (key): featureObj }) %}
 
-<div>
-    Projects:
-    <ul>
-    {% for project in allProjects %}
-        <li>{{ project }}</li>
-    {% endfor %}
-    </ul>
-</div>
-
-
-
-{% set categoryList = craft.categories.group('Topics') %}
-<div>
-    Categories
-    <ul>
-    {% for category in categoryList %}
-        <li>{{ category }}</li>
-    {% endfor %}
-    </ul>
-</div>
-
-<div>   
-    Projects by category
-    {% for category in categoryList %}
-    {% set projectsByCategory = craft.entries
-        .relatedTo(category)
-        .all() %}
-
-    {# {% set entries = craft.entries()
-    .relatedTo(myCategoryA)
-    .andRelatedTo(myCategoryB)
-    .all() %} #}
-
-
-    <ul>
-        <li>
-            <strong>{{ category }}</strong>
-            <ul>
-            {% for project in projectsByCategory %}
-                <li>{{ category }}: {{ project }}</li>
-            {% endfor %}
-            </ul>
-        </li>
-    </ul>
-    {% endfor %}
-</div>
-
-{% set peopleQuery = craft.entries.section('People') %}
-{% set allPeople = peopleQuery.all() %}
-
-<div>
-    People:
-    <ul>
-    {% for person in allPeople %}
-        <li>{{ person }}: 
-            {% for type in person.personType if type.level != 1 %}
-            {{ type.parent }}: {{ type.title }}
-            {% endfor %}
-        </li>
-    {% endfor %}
-    </ul>
-</div>
-
-
-</div>
-
-
-{% set newsStories = craft.entries().section('stories').search('storyCategory:news').all() %}
-NEWS
-{% for story in newsStories %}
-    {{ story }}
 {% endfor %}
+
+<section class="homepageCover">
+    <div class="homepageCover-title">
+        <h1 class="homepageCover-tagline">{{ openerTagline|striptags('<em>')|raw }}</h1>
+        <h2 class="homepageCover-prompt">{{ openerPrompt|raw }}</h2>
+    </div>
+    <div class="homepageCover-asset parallax" style='background-image: url({{ openerSrc }});'></div>
+</section>
+
+<section class="homepageExplore">
+    {% set primaryProject = featureEntries['researchIndex']['features']['primary'] %}
+    {% set primaryEx = featureEntries['exhibitionsIndex']['features']['primary'] %}
+    {% set secondaryProject = featureEntries['researchIndex']['features']['secondary'] %}
+    {% set secondaryEx = featureEntries['exhibitionsIndex']['features']['secondary'] %}
+
+    {# TODO: ENTRY SLIDER #}
+
+    <article class="homepageExplore-feature homepageExplore-feature--project">
+        <h4 class="homepageExplore-feature-label">Research Project</h4>
+        <h5 class="homepageExplore-feature-title">{{ primaryProject.title }}</h5>
+        <a 
+            class="homepageExplore-action homepageExplore-action--link"
+            href="{{ siteUrl }}/{{ primaryProject.uri }}">
+            <span class="homepageExplore-action-label">Learn More</span>
+            <svg 
+                class="homepageExplore-action-icon">
+                <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+            </svg> 
+        </a>
+    </article>
+    
+    <article class="homepageExplore-feature homepageExplore-feature--exhibition">
+        <h4 class="homepageExplore-feature-label">Exhibition</h4>
+        <h5 class="homepageExplore-feature-title">{{ primaryEx.title }}</h5>
+        <a 
+            class="homepageExplore-action homepageExplore-action--link"
+            href="{{ siteUrl }}/{{ primaryEx.uri }}">
+            <span class="homepageExplore-action-label">Learn More</span>
+            <svg 
+                class="homepageExplore-action-icon">
+                <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+            </svg> 
+        </a>
+    </article>
+    
+    <article class="homepageExplore-feature homepageExplore-feature--project">
+        <h4 class="homepageExplore-feature-label">Research Project</h4>
+        <h5 class="homepageExplore-feature-title">{{ secondaryProject.title }}</h5>
+        <a 
+            class="homepageExplore-action homepageExplore-action--link"
+            href="{{ siteUrl }}/{{ secondaryProject.uri }}">
+            <span class="homepageExplore-action-label">Learn More</span>
+            <svg 
+                class="homepageExplore-action-icon">
+                <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+            </svg> 
+        </a>
+    </article>
+</section>
+
+<section class="homepageEntries homepageEntries--people">
+    <div class="homepageEntries-intro">
+        <h2 class="homepageEntries-title">2021-2022 Visiting Fellows</h2>
+        <div class="homepageEntries-desc">
+            <div class="homepageEntries-body">
+                The best minds from around the world converge at the Collegium: academics, artists, and boundary-breaking practitioners who all share a deep commitment to collaboration.
+            </div>
+            <a 
+                class="homepageEntries-action homepageEntries-action--link"
+                href="{{ siteUrl }}/{{ secondaryProject.uri }}">
+                <span class="homepageEntries-action-label">Learn More</span>
+                <svg 
+                    class="homepageEntries-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+                </svg>
+            </a>
+        </div>
+    </div>
+    <div class="homepageEntries-list">
+    {% set fellows = craft.entries()
+        .section('people') 
+        .search('personType:visiting-fellow' ~ ' AND personTypeStatus:current')
+        .all()
+    %}
+    {% for person in fellows %}
+        {% set cardName,cardEntry,cardObj,cardVariant = 'currentFellow',person,{},'homepage' %}
+        {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+    {% endfor %}
+    </div>
+</section>
+
+{% set eventsIntro = craft.entries.section('eventsIndex').one().openerText is not null and craft.entries.section('eventsIndex').one().openerText != '' ? craft.entries.section('eventsIndex').one().openerText : 'this is intro text' %}
+{% set eventsQuery = craft.entries.section('events') %}
+{% set timedIds = dates.toTheTimeMachine(eventsQuery,true) %}
+{% set upcomingEvents = eventsQuery.id(timedIds|json_decode) %}
+<section class="homepageEntries homepageEntries--events">
+    <div class="homepageEntries-intro">
+        <h2 class="homepageEntries-title">Events</h2>
+        <div class="homepageEntries-desc">
+            <div class="homepageEntries-body">
+                {{ eventsIntro }}
+            </div>
+            <a 
+                class="homepageEntries-action homepageEntries-action--link"
+                href="{{ siteUrl }}/{{ secondaryProject.uri }}">
+                <span class="homepageEntries-action-label">Learn More</span>
+                <svg 
+                    class="homepageEntries-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <div class="homepageEntries-list">
+    {% for event in upcomingEvents %}
+        {% set cardName,cardEntry,cardObj,cardVariant = 'upcomingEvent',event,{},'homepage' %}
+        {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+    {% endfor %} 
+    </div>
+</section>
+
+<section class="homepageEntries homepageEntries--news">
+    <div class="homepageEntries-intro">
+        <h2 class="homepageEntries-title">News &amp; Announcements</h2>
+
+    </div>
+</section>
 
 {% endblock %}

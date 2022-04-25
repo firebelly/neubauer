@@ -47,13 +47,15 @@
 {% switch section %}
     {# Section: Research #}
     {% case 'research' %}
-    {% if entry.featuredProject is not null %}
-    {% set feature = entry.featuredProject.one() %}
+    {% set feature = entry.featuredProject is not null and entry.featuredProject|length > 0 ? entry.featuredProject.one() : null %}
+    {% if feature %}
     {% set cardEntry,cardLabel = feature,'Featured Project' %}
     {{ cards.cardFeature(feature,'Featured Project','projectFeature','callout') }}
     {% endif %}
 
     {{ sprig('partials/_filter-controls', {'entryId': entry.id }) }}
+
+   
 
     {% case 'people' %}
 

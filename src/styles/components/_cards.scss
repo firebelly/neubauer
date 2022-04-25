@@ -34,6 +34,10 @@
                 text-decoration: none;
             }
 
+            &--top {
+                @include totallyHide;
+            }
+
         }
 
         &-asset {
@@ -62,6 +66,10 @@
 
         &-caption {
             @include getType('caption');
+        }
+
+        &-redactor {
+            @include totallyHide;
         }
 
         &-dateblock {

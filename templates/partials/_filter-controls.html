@@ -283,7 +283,7 @@ bit of javascript to assign proper overflow style on the html tag #}
     {% endswitch %}
 
     {% set filterName,filterVariant,filterLabel,resultsId = 'resultsFilter',indexSlug,'Filter Results','#search_{{ searchId }}_results' %}
-    {{ controls.controlDimensions(filterName,filterVariant,filterLabel,filterList,resultsId,overlay) }}
+    {{ controls.controlDimensions(filterName,filterVariant,filterLabel,filterList,resultsId,sort,overlay) }}
 
     {# sort control #}
     {# {% set sortName,sortLabel,sortOptions,activeSort = 'searchSort','Sort By Name (A-Z)',['asc','desc'], sort %}

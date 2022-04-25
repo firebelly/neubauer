@@ -427,7 +427,7 @@
    @overlay    {str}  - (on|off) overlay state (sm viewport or larger only)
    @iconSize   {int}  - (optional)
 #}
-{% macro controlDimensions(filterName,filterVariant = "",filterLabel,filterList,resultsId,overlay = "off",iconSize = 20) %}
+{% macro controlDimensions(filterName,filterVariant = "",filterLabel,filterList,resultsId,sort,overlay = "off",iconSize = 20) %}
 
 {# If active tags... #}
 {% set activeTags = filterList|map(obj => (obj.slug == 'tags' ? obj.active : ''))|join('') %} 
@@ -441,7 +441,8 @@ Section: {{ activeSection }} #}
 
 {# Icons #}
 {% set plusPath = "/spritemap.svg#icon-plus-#{iconSize}" %}
-{% set caretPath = "/spritemap.svg#icon-caret-down-#{iconSize}" %}
+{% set caretDnPath = "/spritemap.svg#icon-caret-down-#{iconSize}" %}
+{% set caretUpPath = "/spritemap.svg#icon-caret-up-#{iconSize}" %}
 {% set closePath = "/spritemap.svg#icon-close-#{iconSize}" %}
 {% set arrowPath = "/spritemap.svg#icon-arrow-right-#{iconSize}" %}
 
@@ -463,19 +464,30 @@ Section: {{ activeSection }} #}
                 <use xlink:href="{{ alias('@assetBasePath' ~ plusPath) }}"></use>
             </svg>
             <svg class="{{ filterName }}-icon {{ filterName }}-icon--caret">
-                <use xlink:href="{{ alias('@assetBasePath' ~ caretPath) }}"></use>
+                <use xlink:href="{{ alias('@assetBasePath' ~ caretDnPath) }}"></use>
             </svg>
         </button>
-
+        {% set sortOptions = ['asc','desc'] %}
         <button 
             class="{{ filterName }}-trigger {{ filterName }}-trigger--sort"
             role="button"
-            type="button">
-            <span class="{{ filterName }}-label {{ filterName }}-label--headline">Sort By Name (A-Z)</span>
+            type="button"
+            aria-label="Sort Alphabetically by Title"
+            id="sort"
+            sprig
+            s-trigger="click"
+            s-val:sort="{{ sortOptions|filter((option) => option != sort)|join('') }}"
+            >
+            <span class="{{ filterName }}-label {{ filterName }}-label--headline">Sort By Name {% if sort == 'asc' %}(A-Z){% else %}(Z-A){% endif %}</span>
             <svg class="{{ filterName }}-icon {{ filterName }}-icon--caret">
-                <use xlink:href="{{ alias('@assetBasePath' ~ caretPath) }}"></use>
+                {% if sort == 'asc' %}
+                <use xlink:href="{{ alias('@assetBasePath' ~ caretDnPath) }}"></use>
+                {% else %}
+                <use xlink:href="{{ alias('@assetBasePath' ~ caretUpPath) }}"></use>
+                {% endif %}
             </svg>
         </button>
+
     </div>
    
     {# NOTE: 

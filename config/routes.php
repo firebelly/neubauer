@@ -19,5 +19,6 @@
  */
 
 return [
-    'search/dates/' => ['template' => 'search/_date-directory']
+    'search/dates/' => ['template' => 'search/_date-directory'],
+    'dev/' => ['template' => 'layouts/_dev-queries']
 ];

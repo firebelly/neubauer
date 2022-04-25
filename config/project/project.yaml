@@ -1,4 +1,4 @@
-dateModified: 1650662255
+dateModified: 1650850405
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -254,6 +254,7 @@ meta:
     dd463042-99d6-4725-b849-2546454db735: 'Opener Image' # Opener Image
     de799ef4-ed53-41ef-b492-3bc203754793: Phone # Phone
     df9b5267-3176-4fe5-821f-ffe2e2e2f686: To # To
+    e02f3d02-531b-4e6b-b166-b7e5436594ee: 'Secondary Featured Project' # Secondary Featured Project
     e073e248-18f9-4384-84cf-1c0bb14dcae7: 'Site Info' # Site Info
     e2d045e2-3dc6-4cf3-8c04-a45386af6c1a: 'Social Media Block' # Social Media Block
     e87d9e34-bb47-4572-9a96-58f7eb8fa706: 'Section Filter' # Section Filter
@@ -282,6 +283,7 @@ meta:
     fbf7fd25-1dd4-4ceb-a4d9-c468db28e4c9: Interior # Interior
     fc6b0492-412d-4f80-89fc-b9b73ebdb601: Statistic # Statistic
     fc62009c-d589-4a28-a538-ae226077c431: Name # Name
+    fd1a450a-1f47-4168-8ca3-5ef56c735385: 'Homepage Cover' # Homepage Cover
     fd969c8b-861f-4a69-8f86-4bab475af647: 'Opener Content' # Opener Content
     fda40138-d4a1-4d3d-b372-f29332e386f0: Image # Image
 plugins:

@@ -267,6 +267,8 @@ img {
 	@include justifyContent(space-between);
 	padding: 2em;
 	font-size: 1rem;
+	position: relative;
+	z-index: 10;
 
 	@include breakpoint(sm) {
 		padding-left: 4em;
@@ -513,8 +515,10 @@ $red-secondary: nth($red-theme,2);
 }
 
 .primaryContact {
+	$contact: &;
 	@include flexParent();
 	min-height: 500px;
+	border-top: 1px solid getColor('red');
 
 	> * {
 		@include flexChild(0 1 50%);
@@ -522,11 +526,100 @@ $red-secondary: nth($red-theme,2);
 
 	&-social {
 		background: getColor('red',10);
+		padding: 4em;
+		color: getColor('red');
 	}
 
 	&-news {
 		background: getColor('red');
+		padding: 4em;
+		color: getColor('white');
 	}
+
+	&-legend,
+	&-title {
+		@include getType('h3-normal');
+	}
+
+	&-title {
+		$mb: math.div(10,30);
+		margin-bottom: #{$mb}em;
+	}
+
+	&-legend {
+		$mb: math.div(20,30);
+		margin-bottom: #{$mb}em;
+	}
+
+	&-prompt {
+		@include getType('subtitle');
+	}
+
+	&-field {
+		position: relative;
+
+		&--email {
+			@include flexParent();
+
+			> * {
+				@include flexChild(0 1 auto);
+			}
+
+		}
+
+	}
+
+	&-button {
+		$button: &;
+		@include resetButton;
+		width: 140px;
+
+		@at-root {
+			@include actionButton(#{$button},getColor('white'),getColor('red'));
+		}
+
+		#{$contact}-field--email & {
+			margin-right: 0;
+		}
+
+	}	
+
+	&-input {
+		$mb: math.div(20,16);
+		$pt: math.div(12,16);
+		$pb: math.div(13,16);
+		$pl: math.div(15,16);
+		@include getType('caption');
+		border: none;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		background: rgba(255, 229, 230, 0.1);
+		border-bottom: 1px solid getColor('white');
+		margin-bottom: #{$mb}em;
+		padding: #{$pt}em 0 #{$pb}em #{$pl}em;
+		
+
+		&--name {
+			width: 100%;
+		}
+
+		&--email {
+			flex-grow: 1;
+			margin-right: #{$mb}em;
+			margin-bottom: 0;
+		}
+
+	}
+
+	&-label {
+		$top: math.div(12,16);
+		$left: math.div(15,16);
+		position: absolute;
+		left: #{$left}em;
+		top: #{$top}em;
+		@include getType('caption');
+	}
+
 
 }
 
@@ -543,6 +636,9 @@ $red-secondary: nth($red-theme,2);
 
 	padding: 2em 0 0 0;
 
+	&--homepage {
+		padding-top: 0;
+	}
 
 }
 
@@ -782,8 +878,11 @@ $red-secondary: nth($red-theme,2);
 	@at-root {
 		@include cardBio(#{$bio},$theme:true);
 	}
-}
 
+	&-title--top {
+		@include totallyHide;
+	}
+}
 
 /* ---------------------------------------------------------------------
   Feature Cards	
@@ -1035,13 +1134,21 @@ $red-secondary: nth($red-theme,2);
 .interiorSpotlight {
 	background:  #51594A; //todo
 	height: 900px;
+	@include flexParent($display:flex,$values:column nowrap);
+	@include justifyContent(center);
+
+	> * {
+		@include flexChild();
+	}
 
 	* {
 		color: getColor('green',20);
 	}
 
 	&-subtitle {
+		$mb: math.div(20,30);
 		@include getType('h3-sans');
+		margin-bottom: #{$mb}em;
 		text-align: center;
 	}
 
@@ -1264,3 +1371,627 @@ $red-secondary: nth($red-theme,2);
 	}
 
 }
+
+.interiorTeam {
+	$team: &;
+	border-top: 1px solid transparent;
+	padding: 4em 4em 16em 4em;
+
+	&--projects {
+		border-color: getColor('green',30);
+	}
+
+	&-title {
+		$mb: math.div(80,65);
+		@include getType('h1-normal');
+		margin-bottom: #{$mb}em;
+	}
+
+	// Cards
+	&-list {
+		@include breakpoint(sm) {
+			@include flexParent();
+		}
+	}
+	
+	&-item {
+		border-top: 1px solid transparent;
+
+		#{$team}--projects & {
+			border-color: getColor('green',30);
+		}
+
+		@include breakpoint(sm) {
+			@include flexChild(0 1 50%);
+			margin-bottom: 4em;
+		}
+
+		&-title {
+			padding: 2em 0;
+			@include getType('h3-sans');
+
+			&--btm {
+				@include totallyHide;
+			}
+
+			a:link,
+			a:visited,
+			a:hover,
+			a:active {
+				text-decoration: none;
+
+				#{$team}--projects & {
+					color: getColor('green',30);
+				}
+			
+			}	
+
+		}
+		
+		&-details {
+
+			@include breakpoint(sm) {
+				max-width: 460px;
+			}
+			
+		}
+
+		&-subtitle {
+			$mb: math.div(10,16);
+			@include getType('caption');
+			margin-bottom: #{$mb}em;
+			font-weight: bold;
+		}
+
+		&-caption {
+			@include totallyHide;
+		}
+
+		&-redactor {
+			$mb: math.div(20,16);
+			@include getType('caption');
+			//max-word 285
+			margin-bottom: #{$mb}em;
+
+			a:link,
+			a:visited,
+			a:hover,
+			a:active {
+				text-decoration: underline;
+
+				#{$team}--projects & {
+					color: getColor('green',30);
+				}
+			
+			}	
+
+		}
+
+		&-asset {
+			margin-bottom: 2em;
+
+			&-image {
+				height: 400px;
+				width: 675px;
+			}
+
+		}
+
+		&-action {
+			$action: &;
+			@include actionButton(#{$action},getColor('green',30),getColor('green',20));
+
+			&:nth-of-type(2) {
+				@include totallyHide;
+			}
+
+		}
+
+	}
+
+}
+
+.interiorNarrative {
+	$narrative: &;
+	border-top: 1px solid transparent;
+	padding: 4em 4em 16em 4em;
+
+	&--projects {
+		border-color: getColor('green',30);
+	}
+
+	&--exhibitions {
+		border-color: getColor('gray');
+	}
+
+	&-title {
+		$mb: math.div(80,65);
+		@include getType('h1-normal');
+		margin-bottom: #{$mb}em;
+	}
+}	
+
+.interiorExplore {
+	$explore: &;
+	border-top: 1px solid transparent;
+	background: getColor('white');
+
+	&--projects {
+		border-color: getColor('green',30);
+	}
+
+	&--exhibitions {
+		border-color: getColor('gray');
+	}
+
+	@include breakpoint(sm) {
+		height: 600px; // TODO
+		@include flexParent();
+		@include justifyContent(center);
+		@include alignItems(center);
+
+		> * {
+			@include flexChild(0 1 33.333%);
+		}
+	}
+
+	&-title {
+		@include visuallyHide;
+	}
+
+	&-feature {
+		@include flexParent($display:flex,$values:column wrap);
+		@include justifyContent(center);
+		@include alignItems(center);
+		height: 100%;
+		padding: 0 6em;
+		text-align: center;
+
+		&-label {
+			$mb: math.div(20,16);
+			@include getType('caption');
+			margin-bottom: #{$mb}em;
+		}
+		&-title {
+			$mb: math.div(40,28);
+			@include getType('h3-sans');
+			margin-bottom: #{$mb}em;
+		}
+		&--random {
+			background: getColor('blue');
+		}
+	}
+
+	&-action {
+		$action: &;
+		@at-root {
+			@include actionButton(#{$action},getColor('green',30),getColor('green',20));
+		}
+		#{$explore} & {
+			margin-right: 0;
+		}
+	}
+
+	&-big {
+
+		&:link,
+		&:visited,
+		&:hover,
+		&:active {
+			text-decoration: none;
+		}
+
+		&-label {
+			@include getType('h2-sans');
+			color: getColor('white');
+		}
+
+		&-icon {
+			display: block;
+			height: 70px;
+			width: 70px;
+			fill: getColor('white');
+			margin: 0 auto;
+		}
+
+	}
+
+}	
+
+/* ---------------------------------------------------------------------
+  Narratives Tabs
+------------------------------------------------------------------------ */
+.tabList {
+	$tabs: &;
+	@include flexParent;
+	border-bottom: 1px solid transparent;
+	margin-bottom: 4em;
+
+	&--projects {
+		border-bottom-color: getColor('green',30);
+	}
+
+	&--exhibitions {
+		border-bottom-color: getColor('black',10);
+	}
+
+	&-item {
+		@include resetButton;
+		$pb: math.div(10,28);
+		$mr: math.div(40,28);
+		@include getType('h3-sans');
+		border-bottom: 10px solid transparent;
+		padding-bottom: #{$pb}em;
+		margin-right: #{$mr}em;
+
+		
+		&:hover,
+		&[role="tab"][aria-selected="true"] {
+			#{$tabs}--projects & {
+				border-bottom-color: getColor('green',30);
+			}
+			#{$tabs}--exhibitions & {
+				border-bottom-color: getColor('black',10);
+			}
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		#{$tabs}--projects & {
+			color: getColor('green',30);
+		}
+
+	}
+}
+
+.tabPanel {
+	$tab-panel: &;
+	@include flexParent();
+
+	&[role="tabpanel"]._is-hidden {
+		display: none;
+	}
+
+	&-item {
+		// TODO: fix spacing
+		$panel-item: &;
+		@include flexChild(0 1 30%);
+
+		#{$tab-panel}--4 & {
+			@include flexChild(0 1 20%);
+		}
+
+		@at-root {
+			@include cardDirectory(#{$panel-item},getColor('gray'),getColor('gray',10));
+	
+		}
+	}
+}
+
+/* ---------------------------------------------------------------------
+  Gallery
+------------------------------------------------------------------------ */
+.interiorGallery {
+	$gallery: &;
+	border-top: 1px solid transparent;
+	padding: 4em 4em 16em 4em;
+
+	&--exhibitions {
+		border-color: getColor('gray');
+	}
+
+	&-title {
+		$mb: math.div(80,65);
+		@include getType('h1-normal');
+		margin-bottom: #{$mb}em;
+	}
+
+
+}	
+
+/* ---------------------------------------------------------------------
+  Homepage
+------------------------------------------------------------------------ */
+.homepageCover {
+	$cover-height: 900px;
+	
+	@include breakpoint(sm) {
+		height: $cover-height;
+	}
+
+	&-title {
+		top: 185px;
+		left: 200px;
+		position: relative;
+		z-index: 10;
+		color: getColor('white');
+
+		@include breakpoint(sm) {
+			width: 900px;
+		}
+	}
+
+	&-tagline {
+		$mb: math.div(20,120);
+		@include getType('o-normal');
+		margin-bottom: #{$mb}em;
+
+		em {
+			//@include getType('o-italic');
+			font-family: $font-tertiary;
+			font-style: italic; //todo
+			letter-spacing: -0.03em;
+		}
+		
+	}
+
+	&-prompt {
+		@include getType('subtitle');
+		@include breakpoint(sm) {
+			width: 600px;
+		}
+	}
+
+	&-asset {
+		// todo
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+		position: fixed;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+		background-size: cover;
+		background-blend-mode: multiply;
+		background-attachment: fixed;
+		filter: blur(5px);
+
+		@include breakpoint(sm) {
+			height: $cover-height;
+		}
+
+	}
+
+}
+
+.homepageFeatures {
+	height: 820px;
+	position: relative;
+	z-index: 10;
+	background-color: white;
+}
+
+.homepageExplore {
+	$explore: &;
+	border-top: 1px solid transparent;
+	background: getColor('white');
+	position: relative;
+
+	&--projects {
+		border-color: getColor('green',30);
+	}
+
+	&--exhibitions {
+		border-color: getColor('gray');
+	}
+
+	@include breakpoint(sm) {
+		height: 600px; // TODO
+		@include flexParent();
+		@include justifyContent(center);
+		@include alignItems(center);
+
+		> * {
+			@include flexChild(0 1 33.333%);
+		}
+	}
+
+	&-title {
+		@include visuallyHide;
+	}
+
+	&-feature {
+		@include flexParent($display:flex,$values:column wrap);
+		@include justifyContent(center);
+		@include alignItems(center);
+		height: 100%;
+		padding: 0 6em;
+		text-align: center;
+
+		&-label {
+			$mb: math.div(20,16);
+			@include getType('caption');
+			margin-bottom: #{$mb}em;
+		}
+		&-title {
+			$mb: math.div(40,28);
+			@include getType('h3-sans');
+			margin-bottom: #{$mb}em;
+		}
+		&--random {
+			background: getColor('blue');
+		}
+	}
+
+	&-action {
+		$action: &;
+		@at-root {
+			@include actionButton(#{$action},getColor('green',30),getColor('green',20));
+		}
+		#{$explore} & {
+			margin-right: 0;
+		}
+	}
+
+	&-big {
+
+		&:link,
+		&:visited,
+		&:hover,
+		&:active {
+			text-decoration: none;
+		}
+
+		&-label {
+			@include getType('h2-sans');
+			color: getColor('white');
+		}
+
+		&-icon {
+			display: block;
+			height: 70px;
+			width: 70px;
+			fill: getColor('white');
+			margin: 0 auto;
+		}
+
+	}
+
+}	
+
+.homepageEntries {
+	$entries: &;
+	padding: 4em;
+	position: relative;
+
+	&--people {
+		background: getColor('blue',10); 
+	}
+
+	&--events {
+		background: getColor('yellow'); 
+	}
+
+	&--news {
+		background: getColor('red',10);
+	}
+
+	&-intro {
+		@include flexParent();
+		margin-bottom: 8em;
+
+		> * {
+			@include flexChild(0 1 50%);
+		}
+
+	}
+
+	&-title {
+		@include getType('h1-normal');
+
+		#{$entries}--people & {
+			color: getColor('blue');
+		}
+
+		#{$entries}--news & {
+			color: getColor('red');
+		}
+		
+	}
+
+	&-body {
+		$mb: math.div(20,16);
+		@include getType('subtitle');
+		margin-bottom: #{$mb}em;
+
+		#{$entries}--people & {
+			color: getColor('blue');
+		}
+	}
+
+	&-list {
+		@include flexParent();
+
+		> * {
+			@include flexChild(0 1 30%);
+		}
+
+	}
+
+	&-action {
+		$action: &;
+		@at-root {
+			@include actionButton(#{$action},getColor('blue'),getColor('blue',10));
+		}
+
+		#{$entries}--events & {
+			color: getColor('yellow',10);
+			text-decoration-color: getColor('yellow',10);
+			
+			&-icon {
+				fill: getColor('yellow',10);
+			}
+		}
+
+	}
+
+
+}
+
+.currentFellow {
+	$fellow: &;
+	border-top: 1px solid transparent;
+
+	&--homepage {
+		border-color: getColor('blue');
+	}
+
+	@at-root {
+		@include cardDirectory(#{$fellow},getColor('blue'),getColor('blue',10));
+	}
+
+	&-title--btm {
+		@include totallyHide;
+	}
+
+	&-title--top {
+		@include totallyShow;
+		padding: 1em 0;
+	}
+
+	&-details {
+		color: getColor('blue');
+	}
+
+	&-subtitle {
+		@include getType('caption');		
+	}
+
+	&-dateblock {
+		@include totallyHide;
+	}
+
+}
+
+.upcomingEvent {
+	$event: &;
+	border-top: 1px solid transparent;
+
+	&--homepage {
+		border-color: getColor('yellow',10);
+	}
+
+	@at-root {
+		@include cardDirectory(#{$event},getColor('yellow',10),getColor('yellow'));
+	}
+
+	// &-title--top {
+	// 	@include totallyShow;
+	// 	padding: 1em 0;
+	// }
+
+	&-details {
+		color: getColor('yellow',10);
+	}
+
+	&-subtitle {
+		@include getType('caption');		
+	}
+
+}
+
+/* ---------------------------------------------------------------------
+  Newsletter
+------------------------------------------------------------------------ */

@@ -2,8 +2,46 @@
 <footer class="primaryFooter" id="primaryFooter">
 
     <div class="primaryContact">
-        <div class="primaryContact-social"></div>
-        <div class="primaryContact-news"></div>
+        <div class="primaryContact-social">
+            <h3 class="primaryContact-title">Stay Connected</h3>
+            <p class="primaryContact-prompt">Get updates on our research, art, and events.</p>
+            {# social goes here #}
+        </div>
+        <div class="primaryContact-news">
+            <form class="primaryContact-form">
+                <fieldset class="primaryContact-fieldset">
+                    <legend class="primaryContact-legend">Sign up for our newsletter</legend>
+                    <div class="primaryContact-field">
+                        <input 
+                            id="newsletter_name" 
+                            class="primaryContact-input primaryContact-input--name" 
+                            name="newsletter_name" 
+                            type="text" />
+                        <label 
+                            class="primaryContact-label" 
+                            for="newsletter_name">Full Name</label>
+                    </div>  
+                    <div class="primaryContact-field primaryContact-field--email">
+                        <input 
+                            id="newsletter_email" 
+                            class="primaryContact-input primaryContact-input--email" 
+                            name="newsletter_email" 
+                            type="text" />
+                        <label 
+                            class="primaryContact-label" 
+                            for="newsletter_email">Email</label>
+                        <button 
+                            class="primaryContact-button primaryContact-button--ghost" 
+                            id="newsletter_submit" 
+                            name="newsletter_submit" 
+                            role="submit">
+                            <span class="primaryContact-button-label">Subscribe</span>
+                        </button>
+                    </div>  
+
+                </fieldset>
+            </form>
+        </div>
     </div>
     {# Chyron #}
     {# {% include 'partials/_chyron' %} #}

@@ -16,14 +16,27 @@
 {% set cardDate = cardEntry.dateBlock is not null and cardEntry.dateBlock|length == 1 ? dates.printDate(cardEntry.dateBlock[0]) : null %}
 {% set cardUrl = cardEntry.url %}
 {% set cardTeam = cardEntry.projectTeam is not null and cardEntry.projectTeam|length > 0 ? cardEntry.projectTeam : null %}
+
+{% set cardAbstract = cardEntry.abstract is not null and cardEntry.abstract != '' ? cardEntry.abstract : 
+                (cardEntry.exhibitionAbstract is not null and cardEntry.exhibitionAbstract != '' ? cardEntry.exhibitionAbstract: null) %}
+
+{% set cardBody = cardEntry.summary is not null and cardEntry.summary != '' ? cardEntry.summary :
+                (cardEntry.personSummary is not null and cardEntry.personSummary != "" ? cardEntry.personSummary : null) %}
+
 {% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
 {% set emailPath = "/spritemap.svg#icon-email-20" %}
+
 
 {# Person vars #}
 {% set isBio = (cardName == 'searchBio') %}
 {% set isPeopleDirectory = (cardVariant == 'people') %}
 
 <article class="{{ cardName }}{% if cardVariant %} {{ cardName }}--{{ cardVariant }}{% endif %}" data-section="{{ entrySection }}">
+
+    {# Card: Title Top  #}
+    <h3 class="{{ cardName }}-title {{ cardName }}-title--top">
+        <a href="{{ cardUrl }}">{{ cardEntry.title }}</a>
+    </h3>
 
     {# Card: Image #}
     {% if cardImage %}
@@ -41,7 +54,7 @@
 
     <div class="{{ cardName }}-details">
         {# Card: Title  #}
-        <h3 class="{{ cardName }}-title">
+        <h3 class="{{ cardName }}-title {{ cardName }}-title--btm">
             <a href="{{ cardUrl }}">{{ cardEntry.title }}</a>
         </h3>
 
@@ -51,6 +64,18 @@
         {% endif %}
         {% if cardEntry.personAffiliation %}
         <p class="{{ cardName }}-caption">{{ cardEntry.personAffiliation }}</p>
+        {% endif %}
+
+        {% if cardAbstract %}
+        <div class="{{ cardName }}-redactor {{ cardName }}-redactor--abstract">
+            {{ cardAbstract|raw }}
+        </div>
+        {% endif %}
+
+        {% if cardBody %}
+        <div class="{{ cardName }}-redactor {{ cardName }}-redactor--body">
+            {{ cardBody|raw }}
+        </div>
         {% endif %}
 
         {# Card: Team #}
@@ -146,7 +171,7 @@
 {% import 'macros/_assets' as assets %}
 {% import 'macros/_dates' as dates %}
 
-{% set cardImage = cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
+{% set cardImage = cardEntry.cardImage and cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
 {% set team = cardEntry.projectTeam.all() %}
 {% set topics = cardEntry.topicList.all() %}
 {% set date = cardEntry.dateBlock is not null and cardEntry.dateBlock|length == 1 ? dates.printDate(cardEntry.dateBlock[0]) : null %}

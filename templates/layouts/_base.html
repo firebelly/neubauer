@@ -5,7 +5,6 @@
 
 {% set currentSection = entry.getSection()|replace('Index','')|slugify %}
 
-
 <body class="primaryTheme primaryTheme--{{ currentSection }}">
     <a class="skip-link" href="#primaryContent">
         Skip to content
@@ -27,7 +26,7 @@
         {% include 'partials/_nav' %}
     </header>
 
-    <main class="primaryContent" id="primaryContent" tabindex="-1">     
+    <main class="primaryContent{% if entry.slug == 'homepage' %} primaryContent--homepage{% endif %}" id="primaryContent" tabindex="-1">     
         {% block content %}
         {% endblock %}
     </main>

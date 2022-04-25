@@ -1,15 +1,15 @@
 columnSuffix: null
 contentColumnType: string
 fieldGroup: d3d4b2ba-3a6c-4a4d-bdf6-aac972ad191a # Common
-handle: secondaryFeaturedExhibition
-instructions: '(Optional) Select an existing Exhibition, or create a new one, to display within the footer across individual Exhibition pages. Defaults to a randomly selected project.'
-name: 'Secondary Featured Exhibition'
+handle: secondaryFeaturedProject
+instructions: '(Optional) Select an existing Project, or create a new one, to display within the footer across individual Project pages. Defaults to a randomly selected project.'
+name: 'Secondary Featured Project'
 searchable: true
 settings:
   allowSelfRelations: false
   limit: '1'
   localizeRelations: false
-  selectionLabel: 'Add a featured exhibition'
+  selectionLabel: 'Add a featured project'
   showSiteMenu: true
   source: null
   sources:

@@ -415,6 +415,7 @@
         width: 100%;
         
         @include breakpoint(md) {
+            margin-bottom: 8em;
             width: auto;
         }
 
@@ -817,6 +818,11 @@
                 @include breakpoint(sm) {
                     display: none;
                 }
+            }
+
+            // Hide date for now
+            &--dates {
+                display: none;
             }
 
         }

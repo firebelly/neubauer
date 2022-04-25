@@ -1,0 +1,32 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d # Homepage
+handle: homepageCover
+instructions: 'Min size: 1440px x 940px'
+name: 'Homepage Cover'
+searchable: false
+settings:
+  allowSelfRelations: false
+  allowUploads: true
+  allowedKinds: null
+  defaultUploadLocationSource: 'volume:84b1efbb-d314-43e3-8fb5-fc6af1012146' # Common
+  defaultUploadLocationSubpath: homepage/
+  limit: '1'
+  localizeRelations: false
+  previewMode: full
+  restrictFiles: ''
+  selectionLabel: 'Add a homepage cover image'
+  showSiteMenu: true
+  showUnpermittedFiles: false
+  showUnpermittedVolumes: false
+  singleUploadLocationSource: 'volume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
+  singleUploadLocationSubpath: ''
+  source: null
+  sources: '*'
+  targetSiteId: null
+  useSingleFolder: false
+  validateRelatedElements: false
+  viewMode: large
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Assets
