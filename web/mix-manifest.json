@@ -2,7 +2,6 @@
     "/build/scripts/spritemap.js": "/build/scripts/spritemap.js?id=164c4c658f9eb07c6521825443db1dd1",
     "/build/scripts/main.js": "/build/scripts/main.js?id=a3e1f18f2f3b735f15625d0b88448918",
     "/build/scripts/manifest.js": "/build/scripts/manifest.js?id=5b146026d602d1c7edde0ac09ee95d92",
-    "/build/styles/main.css": "/build/styles/main.css?id=33a478b80219933ed13fdb553902a70b",
     "/build/scripts/vendor.js": "/build/scripts/vendor.js?id=f1c9a31076147e70992774f5b9b631aa",
     "/build/images/.DS_Store": "/build/images/.DS_Store?id=a5c74e9c489ea7a65e52ff6f9ce33784",
     "/build/fonts/.DS_Store": "/build/fonts/.DS_Store?id=eabcf559aa7f613da2e5f418a72034b2",
@@ -21,5 +20,6 @@
     "/build/svgs/icon-search-20.svg": "/build/svgs/icon-search-20.svg?id=dbd894e316d3ce080760cb29ba4326d4",
     "/build/svgs/logo-neubauer.svg": "/build/svgs/logo-neubauer.svg?id=cf9b5cc20b4c62972bf09067e0901413",
     "/build/videos/.DS_Store": "/build/videos/.DS_Store?id=08d64e1f9a81716cc133f85ad441757e",
-    "/build/spritemap.svg": "/build/spritemap.svg?id=933ad6f1f150896709fdb26f2f33b3ea"
+    "/build/spritemap.svg": "/build/spritemap.svg?id=933ad6f1f150896709fdb26f2f33b3ea",
+    "/build/styles/main.css": "/build/styles/main.css?id=322342e3ee74de2b389e33f111822fc6"
 }

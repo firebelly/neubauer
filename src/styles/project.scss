@@ -826,6 +826,41 @@ $red-secondary: nth($red-theme,2);
 		@include controlDialog(#{$filter},$theme:true);
 	}
 
+	&-controls {
+		#{$filter}--exhibitions  & {
+			
+		}
+	}
+
+	&-trigger--filter {
+
+		#{$filter}--exhibitions  & {
+			display: none;
+		}
+	}
+
+	&-layout {
+		$layout: &;
+		@include flexParent();
+		@include alignItems(center);
+	
+		@at-root {
+			@include controlLayout(#{$layout},$height:2.5em,$width:2.5em);
+		}
+
+		&-title {
+			$mr: math.div(25,16);
+			@include getType('caption');
+			font-weight: bold;
+			margin: 0 #{$mr}em 0 0;
+		}
+
+		&-name {
+			@include getType('caption');
+		}
+
+	}
+
 }
 
 
@@ -841,21 +876,46 @@ $red-secondary: nth($red-theme,2);
 
 	&-content {
 		
-		@include breakpoint(sm) {
-			@include flexParent();
-			margin-left: -0.25em;
+		&._is-grid {
+			@include breakpoint(sm) {
+				@include flexParent();
+				margin-left: -0.25em;
 
-			> * {
-				$thirds: math.div(100,30) * 10%;
-				$margin: 0.5em;
-				$percent: calc($thirds - $margin);
-				@include flexChild(0 1 #{$percent});
+				> * {
+					$thirds: math.div(100,30) * 10%;
+					$margin: 0.5em;
+					$percent: calc($thirds - $margin);
+					@include flexChild(0 1 #{$percent});
+				}
+
+				&--bio > * {
+					$margin: 0.5em;
+					$percent: calc(50% - $margin);
+					@include flexChild(0 1 #{$percent});
+				}
+
 			}
+		}
 
-			&--bio > * {
-				$margin: 0.5em;
-				$percent: calc(50% - $margin);
-				@include flexChild(0 1 #{$percent});
+		&._is-list {
+
+			.searchArticle {
+				@include flexParent();
+				border-top: 1px solid getColor('gray');
+				padding: 2em 0;
+				margin: 0;
+
+				> * {
+					@include flexChild();
+				}
+			
+				&-asset {
+					//TODO
+					width: 200px;
+					height: 200px;
+					margin: 0 2em 0 0;
+				}
+				
 			}
 
 		}
@@ -870,6 +930,7 @@ $red-secondary: nth($red-theme,2);
 	@at-root {
 		@include cardDirectory(#{$article},$theme:true);
 	}
+
 }
 
 .searchBio {

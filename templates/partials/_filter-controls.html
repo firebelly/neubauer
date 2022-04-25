@@ -20,12 +20,13 @@
 {% set filters = ['section','tags','add-tag','remove-tag','search','sort'] %}
 {% set trigger = sprig.trigger|split('_')[0] %}
 {# sprig default vars #}
-{% set overlay, query, sort, date = overlay ?? 'off', query ?? '', sort ?? 'asc', date ?? '' %}
+{% set overlay, query, sort, date, layout = overlay ?? 'off', query ?? '', sort ?? 'asc', date ?? '', layout ?? 'grid' %}
 {% set section = isSearchIndex ? (section ?? 'all') : indexSlug %}
 {# idx-specific filters #}
 {% set status = status ?? 'all' %}
 {% set person = person ?? 'all' %}
 {% set shindig = shindig ?? 'upcoming' %}
+{% set show = show ?? 'all' %}
 
 {% if indexSlug == 'people' %}
     {% set limit = '14' %}
@@ -47,9 +48,11 @@
 {{ hiddenInput('tags', tags) }}
 {{ hiddenInput('sort', sort) }}
 {{ hiddenInput('date', date) }}
+{{ hiddenInput('layout', layout) }}
 {{ hiddenInput('status', status) }}
 {{ hiddenInput('person', person) }}
 {{ hiddenInput('shindig', shindig) }}
+{{ hiddenInput('show', show) }}
 {{ hiddenInput('results', results) }}
 {{ hiddenInput('page', page) }}
 
@@ -106,6 +109,7 @@ bit of javascript to assign proper overflow style on the html tag #}
     {% set baseQuery = baseQuery.relatedTo(personType) %}
 {% endif %}
 
+{# events: upcoming/past events #}
 {% if indexSlug == 'events' and shindig %}
     {% if shindig == 'directors' %} 
     {% set eventType = craft.categories().group('eventTypes').slug('directors-lecture').one() %}
@@ -114,8 +118,14 @@ bit of javascript to assign proper overflow style on the html tag #}
     {% set isFuture = (shindig == 'upcoming') %}
     {% set timedIds = dates.toTheTimeMachine(baseQuery,isFuture) %}
     {% set baseQuery = baseQuery.id(timedIds|json_decode) %}
-
     {% endif %}
+{% endif %}
+
+{# exhibitinos: upcoming/past exhibitinos #}
+{% if indexSlug == 'exhibitions' and show and show != 'all' %}
+    {% set isFuture = (show == 'upcoming') %}
+    {% set timedIds = dates.toTheTimeMachine(baseQuery,isFuture) %}
+    {% set baseQuery = baseQuery.id(timedIds|json_decode) %}
 {% endif %}
 
 {% block date_directory %}
@@ -128,7 +138,6 @@ bit of javascript to assign proper overflow style on the html tag #}
 {# get results #}
 {# TODO: exclude index pages from query #}
 {% set currentResults = (query ? baseQuery.search(query) : baseQuery).orderBy(byTitleExcludeArticles).limit(limit) %}
-
 
 {# define pagination #}
 {% set pageInfo = sprig.paginate(currentResults, page) %}
@@ -202,6 +211,14 @@ bit of javascript to assign proper overflow style on the html tag #}
     ] %}
     {% set tabFilter = 'shindig' %}
 
+    {% case 'exhibitions' %}
+    {% set tabList = [
+        {'title': 'All','slug':'all'},
+        {'title': 'Current &amp; Upcoming', 'slug': 'upcoming'},
+        {'title': 'Past Exhibitions', 'slug': 'past'}
+    ] %}
+    {% set tabFilter = 'show' %}
+
 {% endswitch %}
 
 <section class="searchFilters">
@@ -214,6 +231,8 @@ bit of javascript to assign proper overflow style on the html tag #}
         Project Directory
         {% case 'people' %}
         People Directory
+        {% case 'exhibitions' %}
+        Exhibitions Directory
     {% endswitch %}
     </h2>
 
@@ -225,7 +244,8 @@ bit of javascript to assign proper overflow style on the html tag #}
         {% set activeTab = (indexSlug == 'projects' and status == tabSlug) or 
             (indexSlug == 'search' and section == tabSlug) or 
             (indexSlug == 'people' and person == tabSlug) or
-            (indexSlug == 'events' and shindig == tabSlug)
+            (indexSlug == 'events' and shindig == tabSlug) or
+            (indexSlug == 'exhibitions' and show == tabSlug)
         %}
         {# NOTE: 
             Persist all active filters on open, close, and apply triggers;
@@ -243,7 +263,7 @@ bit of javascript to assign proper overflow style on the html tag #}
                 s-val:{{ tabFilter }}="{{ tabSlug }}"
                 {% endif %}
                 >
-                <span class="searchTabs-label">{{ tabName }}</span>
+                <span class="searchTabs-label">{{ tabName|raw }}</span>
             </a>
         </li>
     {% endfor %}
@@ -283,11 +303,7 @@ bit of javascript to assign proper overflow style on the html tag #}
     {% endswitch %}
 
     {% set filterName,filterVariant,filterLabel,resultsId = 'resultsFilter',indexSlug,'Filter Results','#search_{{ searchId }}_results' %}
-    {{ controls.controlDimensions(filterName,filterVariant,filterLabel,filterList,resultsId,sort,overlay) }}
-
-    {# sort control #}
-    {# {% set sortName,sortLabel,sortOptions,activeSort = 'searchSort','Sort By Name (A-Z)',['asc','desc'], sort %}
-    {{ controls.controlSort(sortName,sortLabel,sortOptions,activeSort) }} #}
+    {{ controls.controlDimensions(filterName,filterVariant,filterLabel,filterList,resultsId,sort,layout,overlay) }}
 
 </section>
 
@@ -296,11 +312,14 @@ bit of javascript to assign proper overflow style on the html tag #}
     <h2 class="searchResults-title">Results:</h2>
 
     {% if results %}
-    <div class="searchResults-content{% if indexSlug == 'people' %} searchResults-content--bio{% endif %}">
+    <div class="searchResults-content{% if indexSlug == 'people' %} searchResults-content--bio{% endif %}{{ layout == 'grid' ? ' _is-grid' : ' _is-list' }}">
         {% set cardObj = {
             'isSearch': true,
             'activeTags': filterList|map(obj => (obj.slug == 'tags' ? obj.active : ''))|join('') 
         }%}
+        {% if indexSlug == 'exhibitions' %}
+        {# add featured ex here #}
+        {% endif %}
         {% for entry in resultsByPage %}
             {% set cardName = (section == 'people') ? 'searchBio' : 'searchArticle' %}
             {% set cardEntry,cardVariant = entry,indexSlug %}

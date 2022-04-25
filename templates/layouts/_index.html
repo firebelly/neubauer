@@ -24,7 +24,7 @@
     %} 
 {% endif %}
 
-{% if openerImage %}
+{% if openerImage and section != "exhibitions" %}
 <div class="">
     {{ assets.assetImage(
         imageName,
@@ -55,13 +55,13 @@
 
     {{ sprig('partials/_filter-controls', {'entryId': entry.id }) }}
 
-   
-
     {% case 'people' %}
 
     {{ sprig('partials/_filter-controls', {'entryId': entry.id }) }}
     
     {% case 'exhibitions' %}
+
+    {{ sprig('partials/_filter-controls', {'entryId': entry.id }) }}
 
     {% case 'events' %}
 

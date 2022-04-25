@@ -3474,6 +3474,146 @@ img {
           text-decoration-color: #FFE5E6;
 }
 
+.resultsFilter--exhibitions .resultsFilter-trigger--filter {
+  display: none;
+}
+.resultsFilter-layout {
+  display: flex;
+  flex-flow: row wrap;
+  -webkit-box-alignpack: center;
+  -ms-flex-alignpack: center;
+  -webkit-align-itemspack: center;
+  align-items: center;
+}
+.resultsFilter-layout-title {
+  margin: 0 0 1em 0;
+}
+.resultsFilter-layout-title--right {
+  text-align: right;
+}
+.resultsFilter-layout-list {
+  display: inline-flex;
+  flex-flow: row wrap;
+}
+.resultsFilter-layout-item {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 0 1 auto;
+  -webkit-box-alignpack: center;
+  -ms-flex-alignpack: center;
+  -webkit-align-itemspack: center;
+  align-items: center;
+  font-size: 1rem;
+}
+.resultsFilter-layout-item:not(:first-child)::before {
+  content: "";
+  border-left: 1px solid transparent;
+  height: 16px;
+  margin: 0 0 0 1em;
+  padding: 0 0 0 1em;
+}
+.resultsFilter-layout-name {
+  margin: 0 0 0 0.5em;
+}
+.resultsFilter-layout-ghost {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.resultsFilter-layout-ghost.focusable:active, .resultsFilter-layout-ghost.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.resultsFilter-layout-control {
+  height: 2.5em;
+  margin: 0.2em;
+  width: 2.5em;
+  position: relative;
+}
+.resultsFilter-layout-control-icon {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  fill: black;
+}
+.resultsFilter-layout-label--faux .resultsFilter-layout-control-icon {
+  display: none;
+  visibility: hidden;
+}
+.resultsFilter-layout-input, .resultsFilter-layout-label {
+  display: block;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.resultsFilter-layout-label {
+  z-index: 1;
+  position: relative;
+}
+.resultsFilter-layout-label--faux {
+  border: 2px solid transparent;
+  border-radius: 100%;
+}
+.resultsFilter-layout-input {
+  width: 250%;
+  opacity: 0;
+  z-index: 2;
+  position: absolute;
+}
+.resultsFilter-layout-input:checked + .resultsFilter-layout-label--faux::after {
+  display: block;
+  content: "";
+  height: 15px;
+  width: 15px;
+  position: relative;
+  top: 3px;
+  left: 3px;
+  border-radius: 100%;
+}
+.resultsFilter-layout-input:hover {
+  cursor: pointer;
+}
+
+.resultsFilter-layout-item:not(:first-child)::before {
+  border-left-color: #F6F4F4;
+}
+.resultsFilter-layout-input:checked + .resultsFilter-layout-label--faux::after {
+  background: #151515;
+}
+.resultsFilter-layout-label--faux {
+  border-color: #151515;
+  background-color: transparent;
+}
+.resultsFilter-layout-icon {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  fill: black;
+}
+.resultsFilter-layout-label--faux .resultsFilter-layout-icon {
+  display: none;
+  visibility: hidden;
+}
+
+.resultsFilter-layout-title {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+  font-weight: bold;
+  margin: 0 1.5625em 0 0;
+}
+.resultsFilter-layout-name {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+}
+
 /* ---------------------------------------------------------------------
   Search Results
 ------------------------------------------------------------------------ */
@@ -3499,17 +3639,32 @@ img {
   width: auto;
 }
 @media (min-width: 768px) {
-  .searchResults-content {
+  .searchResults-content._is-grid {
     display: flex;
     flex-flow: row wrap;
     margin-left: -0.25em;
   }
-  .searchResults-content > * {
+  .searchResults-content._is-grid > * {
     flex: 0 1 calc(33.3333333333% - 0.5em);
   }
-  .searchResults-content--bio > * {
+  .searchResults-content._is-grid--bio > * {
     flex: 0 1 calc(50% - 0.5em);
   }
+}
+.searchResults-content._is-list .searchArticle {
+  display: flex;
+  flex-flow: row wrap;
+  border-top: 1px solid #151515;
+  padding: 2em 0;
+  margin: 0;
+}
+.searchResults-content._is-list .searchArticle > * {
+  flex: 0 1 auto;
+}
+.searchResults-content._is-list .searchArticle-asset {
+  width: 200px;
+  height: 200px;
+  margin: 0 2em 0 0;
 }
 
 .searchArticle-topics-list {

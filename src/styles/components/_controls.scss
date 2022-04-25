@@ -252,13 +252,14 @@
         }
         
         &-list {
-            @include flexParent();
+            @include flexParent($display:inline-flex);
         }
         
         &-item {
             @include flexParent();
             @include flexChild();
             @include alignItems(center);
+            font-size: 1rem;
 
             &:not(:first-child)::before {
                 content: '';
@@ -273,59 +274,15 @@
             margin: 0 0 0 0.5em;
         }
 
+        &-ghost {
+            @include visuallyHide;
+        }
+
         &-control {
             height: $height;
             margin: 0.2em;
             width: $width;
             position: relative;
-
-            &-input, &-label {
-                display: block;
-                height: 100%;
-                width: 100%;
-                left: 0;
-                top: 0;
-            }
-
-            &-input {
-                width: $triggerThreshold;
-                opacity: 0;
-                z-index: 2;
-                position: absolute;
-
-                &:checked + #{$selector}-label--faux {
-                    height: calc(100% - #{$border-size});
-                    width:  calc(100% - #{$border-size});
-
-                    &::after {
-                        display: block;
-                        content: '';
-                        height: $radio-size;
-                        width: $radio-size;
-                        position: relative;
-                        top: 3px;
-                        left: 3px;
-                        border-radius: 100%;
-                    }
-
-                }
-
-                &:hover {
-                    cursor: pointer;
-                }
-
-            }
-
-            &-label {
-                z-index: 1;
-                position: relative;
-                
-                &--faux {
-                    border: $border-size solid transparent;
-                    border-radius: 100%;
-                }
-
-            }
 
             &-icon {
                 display: inline-block;
@@ -339,16 +296,59 @@
 
             }
 
+        }
 
-            &-ghost {
-                @include visuallyHide;
+        &-input, &-label {
+            display: block;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+        }
+
+        &-label {
+            z-index: 1;
+            position: relative;
+            
+            &--faux {
+                border: $border-size solid transparent;
+                border-radius: 100%;
+            }
+
+        }
+
+        &-input {
+            width: $triggerThreshold;
+            opacity: 0;
+            z-index: 2;
+            position: absolute;
+
+            &:checked + #{$selector}-label--faux {
+                // height: calc(100% - #{$border-size});
+                // width:  calc(100% - #{$border-size});
+
+                &::after {
+                    display: block;
+                    content: '';
+                    height: $radio-size;
+                    width: $radio-size;
+                    position: relative;
+                    top: 3px;
+                    left: 3px;
+                    border-radius: 100%;
+                }
+
+            }
+
+            &:hover {
+                cursor: pointer;
             }
 
         }
     }
 
     @if $default != false {
-		@include controlLayout--default($selector);
+		@include controlLayout--default($selector,$icon-size);
 	}
 
 }
@@ -356,7 +356,7 @@
 /* -------------------------------------------------------------------------------
  Layout Control: Default Presentation
 ---------------------------------------------------------------------------------- */
-@mixin controlLayout--default($selector) {
+@mixin controlLayout--default($selector,$icon-size) {
 
     $item-border-color: getColor('gray',10);
     $label-border-color: getColor('black',10);

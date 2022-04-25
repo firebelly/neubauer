@@ -427,7 +427,7 @@
    @overlay    {str}  - (on|off) overlay state (sm viewport or larger only)
    @iconSize   {int}  - (optional)
 #}
-{% macro controlDimensions(filterName,filterVariant = "",filterLabel,filterList,resultsId,sort,overlay = "off",iconSize = 20) %}
+{% macro controlDimensions(filterName,filterVariant = "",filterLabel,filterList,resultsId,sort,layout,overlay = "off",iconSize = 20) %}
 
 {# If active tags... #}
 {% set activeTags = filterList|map(obj => (obj.slug == 'tags' ? obj.active : ''))|join('') %} 
@@ -448,6 +448,7 @@ Section: {{ activeSection }} #}
 
 <div class="{{ filterName }} {{ filterName }}--{{ filterVariant }}">
 
+    {# CRITERIA #}
     <div class="{{ filterName }}-controls">
         <button 
             class="{{ filterName }}-trigger {{ filterName }}-trigger--filter"
@@ -467,6 +468,15 @@ Section: {{ activeSection }} #}
                 <use xlink:href="{{ alias('@assetBasePath' ~ caretDnPath) }}"></use>
             </svg>
         </button>
+
+        {# LAYOUT #}
+        <div class="{{ filterName }}-layout">
+            <h4 class="{{ filterName }}-layout-title">Toggle View</h4>
+            {% set layoutName,layoutOptions,activeLayout,layoutVariant = "#{filterName}-layout",['grid','list'],layout,'' %}
+            {{ _self.controlLayout(layoutName,layoutOptions,activeLayout,layoutVariant) }}
+        </div>
+
+        {# SORT #}
         {% set sortOptions = ['asc','desc'] %}
         <button 
             class="{{ filterName }}-trigger {{ filterName }}-trigger--sort"
