@@ -10,7 +10,7 @@
    @searchVariant {str} - (optional)
 #}
 {% macro controlSearch(searchName,searchId,searchLabel,hasPlaceholder = false,searchQuery = null,isIndex = true,searchVariant = null) %}
-<form class="{{ searchName }}{% if searchVariant is not null %} {{ searchName }}--{{ searchVariant }}{% endif %}" method="post" action="search?query={{ searchQuery }}">
+<form class="{{ searchName }}{% if searchVariant is not null %} {{ searchName }}--{{ searchVariant }}{% endif %}" method="post" action="{{ siteUrl }}search?query={{ searchQuery }}">
     <div class="{{ searchName }}-field">
         <label 
             for="search_{{ searchId }}" 

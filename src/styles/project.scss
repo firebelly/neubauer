@@ -842,24 +842,27 @@ $red-secondary: nth($red-theme,2);
 
 	&-layout {
 		$layout: &;
-		@include flexParent();
-		@include alignItems(center);
-	
+		display: none;
+
 		@at-root {
 			@include controlLayout(#{$layout},$height:2.5em,$width:2.5em);
 		}
 
-		&-title {
-			$mr: math.div(25,16);
-			@include getType('caption');
-			font-weight: bold;
-			margin: 0 #{$mr}em 0 0;
-		}
+		#{$filter}--exhibitions & {
+			@include flexParent();
+			@include alignItems(center);
 
-		&-name {
-			@include getType('caption');
-		}
+			&-title {
+				$mr: math.div(25,16);
+				@include getType('caption');
+				font-weight: bold;
+				margin: 0 #{$mr}em 0 0;
+			}
 
+			&-name {
+				@include getType('caption');
+			}
+		}
 	}
 
 }
@@ -1719,6 +1722,40 @@ $results: '.searchResults';
 	}
 
 }	
+
+.interiorRelated {
+	padding: 0 8em;
+
+	@include breakpoint(sm) {
+		@include flexParent();
+
+		> * {
+			@include flexChild();
+		}
+	}
+
+	&-subtitle {
+		$mb: math.div(20,30);
+		@include getType('h3-italic');
+		font-style: italic;
+		margin: 0 0 #{$mb}em 0;
+	}
+
+	&-title {
+		$mb: math.div(20,40);
+		@include getType('h2-sans');
+		margin-bottom: #{$mb}em;
+	
+		&--hidden {
+			@include visuallyHide;
+		}
+	}
+
+}
+
+// .relatedArticle {
+// 	@include card
+// }
 
 /* ---------------------------------------------------------------------
   Narratives Tabs
