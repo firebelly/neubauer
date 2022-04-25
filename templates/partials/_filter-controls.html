@@ -223,7 +223,7 @@ bit of javascript to assign proper overflow style on the html tag #}
 
 <section class="searchFilters">
 
-    <h2 class="searchFilters-title{{ indexSlug == 'search' or indexSlug == 'people' ? ' searchFilters-title--hide' : '' }}">
+    <h2 class="searchFilters-title{{ indexSlug == 'search' or indexSlug == 'people' or indexSlug == 'exhibitions' ? ' searchFilters-title--hide' : '' }}">
     {% switch indexSlug %}
         {% case 'search' %}
         Filter the search

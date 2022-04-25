@@ -2450,7 +2450,7 @@ img {
 .pageOpener--search {
   padding: 0;
 }
-.pageOpener--research {
+.pageOpener--exhibitions, .pageOpener--research {
   padding-bottom: 16em;
 }
 .pageOpener-title {
