@@ -211,24 +211,30 @@
         <div class="interiorSummary-placeholder">{# image goes here #}</div>
         <div class="interiorSummary-caption">Photo by: ornare ullamcorper.</div>
         {% endif %}
+
         {% if entrySection == 'exhibitions' %}
         {% if actionBlock %}
         <div class="interiorSummary-buttons interiorSummary-buttons--stack">
             {% for item in actionBlock %}
             {% set actionType = item.type %}
-            {# {{ actionType }}: {{ item.actionURL[0] }} #}
+            {% set actionURL = item.actionURL %}
+            {% set actionPDF = (actionType == 'download' and actionURL|length > 0) ? actionURL.one().url : null %}
+            
             <a 
                 class="interiorSummary-action interiorSummary-action--link"
-                href=""
+                href="{% if actionPDF %}{{ actionPDF }}{% endif %}"
                 title=""
-                role="">
+                role=""
+                {% if actionPDF %}
+                download
+                {% endif %}>
                 <span class="interiorSummary-action-label">{% if item.actionText %}{{ item.actionText }}{% endif %}</span>
                 <svg class="interiorSummary-action-icon">
                     <use xlink:href="{{ alias('@assetBasePath' ~ downloadPath) }}"></use>
                 </svg>
             </a>
-            
             {% endfor %}
+
         </div>
         {% endif %}
         {% endif %}
