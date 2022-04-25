@@ -867,6 +867,7 @@ $red-secondary: nth($red-theme,2);
 /* ---------------------------------------------------------------------
   Search Results
 ------------------------------------------------------------------------ */
+$results: '.searchResults';
 .searchResults {
 	padding: 0 4em;
 
@@ -895,6 +896,7 @@ $red-secondary: nth($red-theme,2);
 				}
 
 			}
+
 		}
 
 		&._is-list {
@@ -929,6 +931,64 @@ $red-secondary: nth($red-theme,2);
 
 	@at-root {
 		@include cardDirectory(#{$article},$theme:true);
+	}
+
+	&--exhibitions {
+		#{$article}-topics {
+			display: none;
+		}
+	}
+
+	&--feature {
+		
+		#{$results}-content._is-grid & {
+			flex-basis: 100%;
+		}
+
+		#{$article}-details {
+			color: getColor('gray');
+
+			a:link,
+			a:visited,
+			a:hover,
+			a:active {
+				color: getColor('gray');
+			}
+
+		}
+
+		#{$results}-content._is-grid & {
+
+			#{$article}-details {
+				@include flexParent($display:flex,$values:column wrap);
+				@include justifyContent(center);
+				@include alignItems(center);
+			}
+
+			#{$article}-title {
+				@include getType('h2-sans');
+			}
+
+			#{$article}-dateblock {
+				@include getType('p');
+			}
+		}
+
+		#{$article}-topics {
+			display: none;
+		}
+
+		$action: #{$article}-action;
+		@include actionButton(#{$action},getColor('gray'),getColor('gray',10));
+
+	}
+
+	&-asset {
+
+		#{$results}-content._is-grid & {
+			width: 100%;
+			height: auto;
+		}
 	}
 
 }

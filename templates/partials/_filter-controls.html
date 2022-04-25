@@ -317,10 +317,19 @@ bit of javascript to assign proper overflow style on the html tag #}
             'isSearch': true,
             'activeTags': filterList|map(obj => (obj.slug == 'tags' ? obj.active : ''))|join('') 
         }%}
+        {% set exhibitionFeature = null %}
         {% if indexSlug == 'exhibitions' %}
-        {# add featured ex here #}
+        {% set featureQuery = craft.entries.section('exhibitionsIndex').one()['featuredExhibition'] %}
+        {% if featureQuery|length > 0 %}
+            {# Feature Exhibition #}
+            {% set exhibitionFeature = featureQuery.one() %}
+            {# TODO: if feature, update asset card dims #}
+            {% set cardName,cardVariant,cardObj = 'searchArticle','feature',{} %}
+            {{ cards.cardArticle(cardName,exhibitionFeature,cardObj,cardVariant) }}
+            {% endif %}
         {% endif %}
-        {% for entry in resultsByPage %}
+        {# if feature ex, exclude it from bulk results #}
+        {% for entry in resultsByPage if not exhibitionFeature or entry.id != exhibitionFeature.id  %}
             {% set cardName = (section == 'people') ? 'searchBio' : 'searchArticle' %}
             {% set cardEntry,cardVariant = entry,indexSlug %}
             {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
