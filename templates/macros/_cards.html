@@ -180,7 +180,7 @@
 {# TO DO: abstract this to use for directory cards also #}
 
 <section class="{{ cardName }}{% if cardVariant %} {{ cardName }}--{{ cardVariant }}{% endif %}" id="{{ cardId }}">
-    <h2 class="{{ cardName }}-label">{{ cardLabel }}</h2>
+    <h2 class="{{ cardName }}-label{% if cardVariant == 'related' %} {{ cardName }}-label--hidden{% endif %}">{{ cardLabel }}</h2>
     <div class="{{ cardName }}-content">
         
         {% if cardImage %}
@@ -202,6 +202,9 @@
         </div>
         {% endif %}
         <div class="{{ cardName }}-details">
+            {% if cardVariant == 'related' %}
+                <h3 class="{{ cardName }}-subtitle">{{ cardLabel }}</h3>
+            {% endif %}
             <h3 class="{{ cardName }}-title">{{ cardEntry.title }}</h3>
             
             {% if team|length > 0 %}

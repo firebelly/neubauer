@@ -313,31 +313,8 @@
 {% if relatedProject %}
 <section class="interiorRelated interiorRelated--{{ entrySection }}">
     <h3 class="interiorRelated-title interiorRelated-title--hidden">Related Project</h3>
-    <p class="interiorRelated-subtitle">This exhibition is part of</p>
-    
-    {% set cardName,cardVariant,cardObj = 'relatedArticle','related',{} %}
-    {{ cards.cardArticle(cardName,relatedProject,cardObj,cardVariant) }}
-
-    {# <div class="interiorRelated-details">
-       
-        <h3 class="interiorRelated-title">{{ relatedProject.title }}</h3>
-        {% set relatedTeam = relatedProject.projectTeam is not null and relatedProject.projectTeam|length > 0 ? relatedProject.projectTeam : null %}
-        {% if relatedTeam %}
-        <div class="interiorRelated-team">
-            <ul class="interiorRelated-team-list">
-                {% for member in relatedTeam %}
-                <li class="interiorIntro-team-item">
-                    <a href="{{ member.uri }}">{{ member.title }}</a>{{ loop.last ? '' : ', &nbsp;' }}
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
-    </div>
-
-    <div class="interiorRelated-asset">
-
-    </div> #}
+    {% set cardName,cardVariant,cardLabel,cardObj = 'relatedArticle','related','This exhibition is part of',{} %}
+    {{ cards.cardFeature(relatedProject,cardLabel,cardName,cardVariant) }}
 </section>
 {% endif %}
 

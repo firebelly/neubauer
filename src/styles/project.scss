@@ -1028,6 +1028,60 @@ $results: '.searchResults';
 	}
 }
 
+.relatedArticle {
+	$related: &;
+	padding-top: 0;
+
+	@at-root {
+		@include cardFeature(#{$related},getColor('gray',10),getColor('gray'));
+	}
+
+	&-label {
+		&--hidden {
+			@include totallyHide;
+		}
+	}
+
+	&-subtitle {
+		$mb: math.div(20,30);
+		@include getType('h3-italic');
+		font-style: italic;
+		margin: 0 0 #{$mb}em 0;
+	}
+
+	&-content {
+		@include flexParent($display:flex,$values:row-reverse nowrap);
+		margin-top: 0;
+	}
+
+	&-details {
+		* {
+			text-align: left;
+		}
+	}
+
+	&-buttons,
+	&-team-list {
+		@include justifyContent(flex-start);
+	}
+
+	&-topics {
+		$topics: &;
+		
+		@at-root {
+			@include controlTags(#{$topics},getColor('gray'),getColor('gray',10));
+		}
+		&-list {
+			@include justifyContent(flex-start);
+		}
+
+		&-label {
+			@include getType('fine');
+		}
+	}
+
+}
+
 /* ---------------------------------------------------------------------
   Date Directory - dev only
 ------------------------------------------------------------------------ */
@@ -1724,38 +1778,13 @@ $results: '.searchResults';
 }	
 
 .interiorRelated {
-	padding: 0 8em;
-
-	@include breakpoint(sm) {
-		@include flexParent();
-
-		> * {
-			@include flexChild();
-		}
-	}
-
-	&-subtitle {
-		$mb: math.div(20,30);
-		@include getType('h3-italic');
-		font-style: italic;
-		margin: 0 0 #{$mb}em 0;
-	}
 
 	&-title {
-		$mb: math.div(20,40);
-		@include getType('h2-sans');
-		margin-bottom: #{$mb}em;
-	
 		&--hidden {
 			@include visuallyHide;
 		}
 	}
-
 }
-
-// .relatedArticle {
-// 	@include card
-// }
 
 /* ---------------------------------------------------------------------
   Narratives Tabs
