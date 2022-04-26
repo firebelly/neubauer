@@ -83,49 +83,79 @@
 {% endmacro %}
 
 
+{% macro getDateByType(dateObj,dateType) %}
+    {% set date_format = 'Y-m-d' %}
+    {% set thisDate = null%}
+    {% switch dateType %} 
+        {% case 'yearRange' %}
+        {% set thisDate = (dateObj.itemTo.value is not null and dateObj.itemTo.value != '') ? dateObj.itemTo.value : null %}
+
+        {% case 'dateRange' %}
+        {% set thisDate = dateObj.item.end is defined and dateObj.item.end is not null ? dateObj.item.end|date(date_format) : null %}
+
+        {% case 'datePlusTimeRange' %}
+        {% set thisDate = dateObj.item.end is defined and dateObj.item.end is not null ? dateObj.item.end|date(date_format) : null %}
+        
+        {% case 'datePlusTime' %}
+        {% set thisDate = dateObj.item is defined and dateObj.item is not null ? dateObj.item|date(date_format) : null %}
+
+        {% case 'dateByYear' %}
+        {% set thisDate = dateObj.item is defined and dateObj.item is not null ? dateObj.item.value : null %}
+
+        {% case 'dateOnly' %}
+        {% set thisDate = dateObj.item is defined and dateObj.item is not null ? dateObj.item|date(date_format) : null %}
+    {% endswitch %}
+
+    {{ thisDate|json_encode|raw }}
+
+{% endmacro %}
+
 {# toTheTimeMachine: #}
 {% macro toTheTimeMachine(baseQuery,future = true) %}
     {% set timeMachineIds = [] %}
+    {% set sortedIds = [] %}
     {% set date_format = 'Y-m-d' %}
     {% set today = now|date('Y-m-d') %}
     {% set datedEntries = baseQuery
         .with('dateBlock')
         .dateBlock(':notempty:')
         .all()
-    %} 
+    %}     
     {% for entry in datedEntries if entry.dateBlock[0] != "" %}
         {% set dateObj =  entry.dateBlock[0] %}
         {% set dateType = dateObj.type %}
-        {% set thisDate = null %}
-        {% switch dateType %} 
-            {% case 'yearRange' %}
-            {% set thisDate = (dateObj.itemTo is not null and dateObj.itemTo != '') ? dateObj.itemTo : null %}
+        {% set thisDate = _self.getDateByType(dateObj,dateType)|json_decode %}
 
-            {% case 'dateRange' %}
-            {% set thisDate = dateObj.item.end is defined and dateObj.item.end is not null ? dateObj.item.end|date(date_format) : null %}
-    
-            {% case 'datePlusTimeRange' %}
-            {% set thisDate = dateObj.item.end is defined and dateObj.item.end is not null ? dateObj.item.end|date(date_format) : null %}
-           
-            {% case 'datePlusTime' %}
-            {% set thisDate = dateObj.item is defined and dateObj.item is not null ? dateObj.item|date(date_format) : null %}
-
-            {% case 'dateByYear' %}
-            {% set thisDate = dateObj.item is defined and dateObj.item is not null ? dateObj.item : null %}
-
-            {% case 'dateOnly' %}
-            {% set thisDate = dateObj.item is defined and dateObj.item is not null ? dateObj.item|date(date_format) : null %}
-        {% endswitch %}
+        {% if '-' not in thisDate %}
+        {# eh, normalize years-only #}
+        {% set thisDate = "#{thisDate}-01-01" %}
+        {% endif %}
 
         {% if thisDate and ((future and today <= thisDate) or (not future and today > thisDate)) %}
-            
             {% set timeMachineIds = timeMachineIds|merge([entry.id]) %}
+            {# {% set sortedIds = sortedIds|merge([{sortDate: thisDate, sortId: entry.id}]) %} #}
+            {# {% set sortedIds = sortedIds|merge([{(entryId): thisDate}]) %} #}
         {% endif %}
     {% endfor %}
+
+    {# {% set timeMachineIds = timeMachineIds|merge(sortedIds|sort((a,b) => a.sortDate <=> b.sortDate)|column('sortId')) %}  #}
+
+    {# {% for entryId in sortedIds|sort((a,b) => a|keys[0] <=> b|keys[0]) %} 
+        {% set timeMachineIds = timeMachineIds|merge([entryId]) %}
+    {% endfor %} #}
 
     {{ timeMachineIds|json_encode }}
 {% endmacro %}
 
+
+{# sortByDate: #}
+{% macro sortByDate(baseQuery) %}
+
+    {# {% for fruit in baseQuery|sort((a, b) => a.quantity <=> b.quantity)|column('name') %}
+        {{ fruit }}
+    {% endfor %} #}
+
+{% endmacro %}
 
 {# printDate:
     @dateObj {obj} - _self.getDateObject()

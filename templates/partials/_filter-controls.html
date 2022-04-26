@@ -70,6 +70,7 @@ bit of javascript to assign proper overflow style on the html tag #}
 {# Resource: https://craftcms.com/docs/3.x/relations.html#advanced-relationships #}
 {# add relatedParams to params #}
 {% set baseQuery = craft.entries() %}
+{% set sortedByDate = (section == 'events') %}
 
 {# indices: section #}
 {% if section != 'all' %}
@@ -121,11 +122,11 @@ bit of javascript to assign proper overflow style on the html tag #}
     {% endif %}
 {% endif %}
 
-{# exhibitinos: upcoming/past exhibitinos #}
+{# exhibitions: upcoming/past exhibitinos #}
 {% if indexSlug == 'exhibitions' and show and show != 'all' %}
     {% set isFuture = (show == 'upcoming') %}
     {% set timedIds = dates.toTheTimeMachine(baseQuery,isFuture) %}
-    {% set baseQuery = baseQuery.id(timedIds|json_decode) %}
+    {% set baseQuery = baseQuery.id(timedIds|json_decode) %} #}
 {% endif %}
 
 {% block date_directory %}
@@ -137,7 +138,11 @@ bit of javascript to assign proper overflow style on the html tag #}
 {% set byTitleExcludeArticles = "(CASE WHEN `title` LIKE 'The %' THEN SUBSTRING(`title`, 5) WHEN `title` LIKE 'A %' THEN SUBSTRING(`title`, 3) ELSE `title` END)" ~ sort %}
 {# get results #}
 {# TODO: exclude index pages from query #}
+{% if sortedByDate %}
+{% set currentResults = (query ? baseQuery.search(query) : baseQuery).limit(limit) %}
+{% else %}
 {% set currentResults = (query ? baseQuery.search(query) : baseQuery).orderBy(byTitleExcludeArticles).limit(limit) %}
+{% endif %}
 
 {# define pagination #}
 {% set pageInfo = sprig.paginate(currentResults, page) %}

@@ -1,4 +1,4 @@
-dateModified: 1650850405
+dateModified: 1651010069
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -52,6 +52,7 @@ meta:
     4a309e71-113e-4d32-b1cf-253702d72281: Label # Label
     4d051939-b6d0-4800-8c01-a156665ad91f: Register # Register
     4defd050-67bf-44b0-a585-e6a0f635921d: Summary # Summary
+    4e97e2e3-89b1-41ce-81d2-5cd65f1b36c4: Title # Title
     4e880cde-b663-435b-98ea-3b28ebd17af7: 'Key Question Content' # Key Question Content
     4f3f74e9-4363-4024-a787-0167c7a8081a: 'Add a link to the registration page' # Add a link to the registration page
     5b3d76c6-c34a-4630-9901-1c8c7318fd33: Label # Label

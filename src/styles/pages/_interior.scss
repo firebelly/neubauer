@@ -1,0 +1,143 @@
+/* _interior.scss */
+
+/* ---------------------------------------------------------------------
+ Interior-specific  declarations
+------------------------------------------------------------------------ */
+@use "utils/_utils" as *;
+@use "components/__components" as *;
+@use "sass:math";
+
+@forward 'project';
+
+
+/* ---------------------------------------------------------------------
+ Interior Module
+ - e.g. About Impact Module
+------------------------------------------------------------------------ */
+.interiorMod {
+	$mod: &;
+	border-top: 1px solid transparent;
+	padding: 4em 4em 16em 4em;
+
+	&--about {
+		border-color: getColor('red');
+	}
+
+	&-title {
+		@include getType('h1-normal');
+	}
+
+	&-wrap {
+		padding-top: 8em;
+	}
+
+	&-frame {
+		
+		&--impact {
+			width: 100%;
+		}
+
+		&-placeholder {
+			height: 700px; // todo
+			width: 100%;
+			background-color: lightgray;
+		}
+
+	}
+
+	&-main {
+
+		@include breakpoint(sm) {
+			@include flexParent();
+			@include justifyContent(flex-end);
+		}
+		
+		&-content {
+			@include flexChild(0 1 50%);
+		}
+
+	}
+
+	&-redactor {
+		$mb: math.div(40,24);
+		@include getType('subtitle');
+		margin: 0 0 #{$mb}em 0;
+
+		a:link,
+		a:visited,
+		a:hover,
+		a:active {
+			text-underline-offset: 5px;
+
+			#{$mod}--about & {
+				color: getColor('red');
+			}
+		}	
+
+		em {
+			font-style: italic;
+		}
+	
+		&--body {
+
+			&._is-hidden {
+				@include visuallyHide;
+			}
+
+		}
+
+	}
+
+    &-matrix {
+        @include flexParent();
+
+        @include breakpoint(sm) {
+            > * {
+                @include flexChild()
+            }
+        }
+    }
+
+	&-card {
+		$card: &;
+		@at-root {
+			@include cardDirectory(#{$card},getColor('red'),getColor('red',10));
+		}
+        flex-basis: 50%;
+	}
+
+	&-metric {
+
+		&-stat {
+			@include getType('o-normal');
+		}
+
+		&-caption {
+			@include getType('caption');
+		}
+
+	}
+
+    &-list {
+
+        &--4 {
+            @include flexParent();
+            > * {
+                @include flexChild(0 1 25%);
+            }
+        }
+
+        &--3 {
+            @include flexParent();
+            > * {
+                @include flexChild(0 1 33.333%);
+            }
+        }
+
+    }
+
+}
+
+.miniCards {
+
+}

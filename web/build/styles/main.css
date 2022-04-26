@@ -2193,7 +2193,6 @@ img {
 .primaryContact {
   display: flex;
   flex-flow: row wrap;
-  min-height: 500px;
   border-top: 1px solid #800000;
 }
 .primaryContact > * {
@@ -2201,12 +2200,12 @@ img {
 }
 .primaryContact-social {
   background: #FFE5E6;
-  padding: 4em;
+  padding: 4em 4em 8.4em 4em;
   color: #800000;
 }
 .primaryContact-news {
   background: #800000;
-  padding: 4em;
+  padding: 4em 4em 8.4em 4em;
   color: #FFFFFF;
 }
 .primaryContact-legend, .primaryContact-title {
@@ -3474,6 +3473,9 @@ img {
           text-decoration-color: #FFE5E6;
 }
 
+.resultsFilter--events .resultsFilter-controls {
+  display: none;
+}
 .resultsFilter--exhibitions .resultsFilter-trigger--filter {
   display: none;
 }
@@ -7652,6 +7654,12 @@ img {
 .interiorIntro--projects .interiorIntro-menu-item a:active {
   color: #51594A;
 }
+.interiorIntro--about .interiorIntro-menu-item a:link,
+.interiorIntro--about .interiorIntro-menu-item a:visited,
+.interiorIntro--about .interiorIntro-menu-item a:hover,
+.interiorIntro--about .interiorIntro-menu-item a:active {
+  color: #800000;
+}
 
 .interiorCover-frame {
   margin: 0 4em;
@@ -7710,6 +7718,10 @@ img {
 }
 .interiorSummary--projects {
   border-color: #51594A;
+}
+.interiorSummary--about {
+  padding: 8em 0 0 0;
+  border: none;
 }
 @media (min-width: 768px) {
   .interiorSummary {
@@ -10177,6 +10189,462 @@ img {
 /* ---------------------------------------------------------------------
   Newsletter
 ------------------------------------------------------------------------ */
+/* _interior.scss */
+/* ---------------------------------------------------------------------
+ Interior-specific  declarations
+------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------
+ Interior Module
+ - e.g. About Impact Module
+------------------------------------------------------------------------ */
+.interiorMod {
+  border-top: 1px solid transparent;
+  padding: 4em 4em 16em 4em;
+}
+.interiorMod--about {
+  border-color: #800000;
+}
+.interiorMod-title {
+  font: normal 6.5em/1.08 "domaine-text", serif;
+  letter-spacing: -0.035em;
+}
+.interiorMod-wrap {
+  padding-top: 8em;
+}
+.interiorMod-frame--impact {
+  width: 100%;
+}
+.interiorMod-frame-placeholder {
+  height: 700px;
+  width: 100%;
+  background-color: lightgray;
+}
+@media (min-width: 768px) {
+  .interiorMod-main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+  }
+}
+.interiorMod-main-content {
+  flex: 0 1 50%;
+}
+.interiorMod-redactor {
+  font: normal 2.4em/1.46 "apercu", sans-serif;
+  margin: 0 0 1.6666666667em 0;
+}
+.interiorMod-redactor a:link,
+.interiorMod-redactor a:visited,
+.interiorMod-redactor a:hover,
+.interiorMod-redactor a:active {
+  text-underline-offset: 5px;
+}
+.interiorMod--about .interiorMod-redactor a:link,
+.interiorMod--about .interiorMod-redactor a:visited,
+.interiorMod--about .interiorMod-redactor a:hover,
+.interiorMod--about .interiorMod-redactor a:active {
+  color: #800000;
+}
+.interiorMod-redactor em {
+  font-style: italic;
+}
+.interiorMod-redactor--body._is-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.interiorMod-redactor--body._is-hidden.focusable:active, .interiorMod-redactor--body._is-hidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.interiorMod-matrix {
+  display: flex;
+  flex-flow: row wrap;
+}
+@media (min-width: 768px) {
+  .interiorMod-matrix > * {
+    flex: 0 1 auto;
+  }
+}
+.interiorMod-card {
+  flex-basis: 50%;
+}
+.interiorMod-card-topics-list {
+  display: flex;
+  flex-flow: row wrap;
+  content: "list";
+}
+.interiorMod-card-topics-list--feature {
+  justify-content: center;
+}
+.interiorMod-card-topics-item {
+  flex: 0 1 auto;
+  margin: 0 1em 1em 0;
+  position: relative;
+}
+.interiorMod-card-topics-item:hover {
+  cursor: pointer;
+}
+.interiorMod-card-topics-item._is-active .interiorMod-card-topics-icon--remove {
+  display: inline-flex;
+}
+.interiorMod-card-topics-trigger {
+  display: block;
+}
+.interiorMod-card-topics-trigger--tag {
+  display: flex;
+  flex-flow: row wrap;
+  -webkit-box-alignpack: center;
+  -ms-flex-alignpack: center;
+  -webkit-align-itemspack: center;
+  align-items: center;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  z-index: 1;
+}
+.interiorMod-card-topics-input--faux {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  opacity: 0;
+  z-index: 2;
+}
+.interiorMod-card-topics-input--faux:hover {
+  cursor: pointer;
+}
+.interiorMod-card-topics-input--faux:checked + .interiorMod-card-topics-trigger .interiorMod-card-topics-icon--remove {
+  display: inline-flex;
+}
+.interiorMod-card-topics-icon--remove {
+  height: 20px;
+  width: 20px;
+  margin-left: 0.3571428571em;
+}
+
+.interiorMod-card-topics-item:hover .interiorMod-card-topics-trigger--tag, .interiorMod-card-topics-item._is-active .interiorMod-card-topics-trigger--tag {
+  color: #FFE5E6;
+  background: #800000;
+}
+.interiorMod-card-topics-trigger--tag {
+  border-color: #800000;
+}
+.interiorMod-card-topics-trigger--tag, .interiorMod-card-topics-trigger--tag:link, .interiorMod-card-topics-trigger--tag:visited, .interiorMod-card-topics-trigger--tag:hover, .interiorMod-card-topics-trigger--tag:active {
+  color: #800000;
+  text-decoration: none;
+}
+.interiorMod-card-topics-input--faux:checked + .interiorMod-card-topics-trigger--tag {
+  color: #FFE5E6;
+  background: #800000;
+}
+.interiorMod-card-topics-label--tag {
+  font: normal 1.4em/1.43 "apercu", sans-serif;
+}
+.interiorMod-card-topics-icon--remove {
+  fill: #FFE5E6;
+  display: none;
+}
+.interiorMod-card-topics-dialog .interiorMod-card-topics-trigger--tag, .interiorMod-card-topics--callout .interiorMod-card-topics-trigger--tag {
+  border-color: #FFE5E6;
+  z-index: 1;
+}
+.interiorMod-card-topics-dialog .interiorMod-card-topics-trigger--tag, .interiorMod-card-topics-dialog .interiorMod-card-topics-trigger--tag:link, .interiorMod-card-topics-dialog .interiorMod-card-topics-trigger--tag:visited, .interiorMod-card-topics-dialog .interiorMod-card-topics-trigger--tag:hover, .interiorMod-card-topics-dialog .interiorMod-card-topics-trigger--tag:active, .interiorMod-card-topics--callout .interiorMod-card-topics-trigger--tag, .interiorMod-card-topics--callout .interiorMod-card-topics-trigger--tag:link, .interiorMod-card-topics--callout .interiorMod-card-topics-trigger--tag:visited, .interiorMod-card-topics--callout .interiorMod-card-topics-trigger--tag:hover, .interiorMod-card-topics--callout .interiorMod-card-topics-trigger--tag:active {
+  color: #FFE5E6;
+}
+.interiorMod-card-topics-dialog .interiorMod-card-topics-item:hover .interiorMod-card-topics-trigger--tag,
+.interiorMod-card-topics-dialog .interiorMod-card-topics-item._is-active .interiorMod-card-topics-trigger--tag,
+.interiorMod-card-topics-dialog .interiorMod-card-topics-input--faux:checked + .interiorMod-card-topics-trigger--tag, .interiorMod-card-topics--callout .interiorMod-card-topics-item:hover .interiorMod-card-topics-trigger--tag,
+.interiorMod-card-topics--callout .interiorMod-card-topics-item._is-active .interiorMod-card-topics-trigger--tag,
+.interiorMod-card-topics--callout .interiorMod-card-topics-input--faux:checked + .interiorMod-card-topics-trigger--tag {
+  color: #800000;
+  background: #FFE5E6;
+}
+.interiorMod-card-topics-dialog .interiorMod-card-topics-icon--remove, .interiorMod-card-topics--callout .interiorMod-card-topics-icon--remove {
+  fill: #800000;
+}
+
+.interiorMod-card {
+  font-size: 1rem;
+  margin: 0 0 6em 0;
+}
+@media (min-width: 768px) {
+  .interiorMod-card {
+    margin: 0 0.25em 8em 0.25em;
+  }
+}
+.interiorMod-card-title {
+  font: normal 2em/1.5 "apercu", sans-serif;
+  margin-bottom: 0.5em;
+}
+.interiorMod-card-title a:link,
+.interiorMod-card-title a:visited,
+.interiorMod-card-title a:hover,
+.interiorMod-card-title a:active {
+  text-decoration: none;
+}
+.interiorMod-card-title--top {
+  display: none;
+  visibility: hidden;
+}
+.interiorMod-card-asset {
+  margin-bottom: 2em;
+}
+.interiorMod-card-asset {
+  overflow: hidden;
+  position: relative;
+  font-size: 1rem;
+}
+@supports not (aspect-ratio: 1) {
+  .interiorMod-card-asset--16-9 {
+    padding-bottom: calc(16/9 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .interiorMod-card-asset--16-9 .interiorMod-card-asset-image {
+    aspect-ratio: 16/9;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorMod-card-asset--16-9 .interiorMod-card-asset-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorMod-card-asset--16-4_5 {
+    padding-bottom: calc(16/4.5 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .interiorMod-card-asset--16-4_5 .interiorMod-card-asset-image {
+    aspect-ratio: 16/4.5;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorMod-card-asset--16-4_5 .interiorMod-card-asset-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorMod-card-asset--2-3 {
+    padding-bottom: calc(2/3 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .interiorMod-card-asset--2-3 .interiorMod-card-asset-image {
+    aspect-ratio: 2/3;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorMod-card-asset--2-3 .interiorMod-card-asset-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorMod-card-asset--1-1 {
+    padding-bottom: calc(1/1 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .interiorMod-card-asset--1-1 .interiorMod-card-asset-image {
+    aspect-ratio: 1/1;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorMod-card-asset--1-1 .interiorMod-card-asset-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+.interiorMod-card-asset-image, .interiorMod-card-asset-video {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+.interiorMod-card-team {
+  margin-bottom: 1em;
+}
+.interiorMod-card-team-title {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.interiorMod-card-team-title.focusable:active, .interiorMod-card-team-title.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.interiorMod-card-team-item {
+  display: inline-block;
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+}
+.interiorMod-card-caption {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+}
+.interiorMod-card-redactor {
+  display: none;
+  visibility: hidden;
+}
+.interiorMod-card-dateblock {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+  display: block;
+  margin-bottom: 0.625em;
+}
+.interiorMod-card-dateblock span {
+  display: inline-block;
+  font-size: 0.75em;
+  vertical-align: text-top;
+}
+.interiorMod-card-topics-title {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.interiorMod-card-topics-title.focusable:active, .interiorMod-card-topics-title.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.interiorMod-card-buttons {
+  margin-top: 1em;
+}
+
+.interiorMod-card-action {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  font-size: 1rem;
+  margin-right: 4em;
+}
+.interiorMod-card-action--ghost {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: calc(1.5em - 1px) calc(2em - 1px);
+}
+.interiorMod-card-action:focus {
+  outline: none;
+}
+.interiorMod-card-action:link, .interiorMod-card-action:visited, .interiorMod-card-action:hover, .interiorMod-card-action:active {
+  text-decoration: none;
+}
+.interiorMod-card-action-label, .interiorMod-card-action-icon {
+  flex: 0 1 auto;
+}
+.interiorMod-card-action-icon {
+  margin-left: 1em;
+  height: 20px;
+  width: 20px;
+}
+.interiorMod-card-action:hover {
+  cursor: pointer;
+}
+
+.interiorMod-card-action--link {
+  color: #800000;
+}
+.interiorMod-card-action--link:link, .interiorMod-card-action--link:visited, .interiorMod-card-action--link:hover, .interiorMod-card-action--link:active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  -webkit-text-decoration-color: #800000;
+          text-decoration-color: #800000;
+}
+.interiorMod-card-action--link .interiorMod-card-action-icon {
+  fill: #800000;
+}
+.interiorMod-card-action--ghost {
+  border-color: #800000;
+  color: #800000;
+}
+.interiorMod-card-action--ghost:hover {
+  border-color: #FFE5E6;
+  background: #800000;
+  color: #FFE5E6;
+}
+.interiorMod-card-action--ghost:hover .interiorMod-card-action-icon {
+  fill: #FFE5E6;
+}
+.interiorMod-card-action--ghost .interiorMod-card-action-icon {
+  fill: #800000;
+}
+.interiorMod-card-action-label {
+  font: normal 1.2em/1.67 "apercu", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: inherit;
+  text-transform: uppercase;
+}
+.interiorMod-card-action-trigger {
+  text-align: center;
+  text-decoration: none;
+}
+
+.interiorMod-card-title a:link,
+.interiorMod-card-title a:visited,
+.interiorMod-card-title a:hover,
+.interiorMod-card-title a:active {
+  color: #800000;
+}
+.interiorMod-card-team-name:link, .interiorMod-card-team-name:visited, .interiorMod-card-team-name:hover, .interiorMod-card-team-name:active {
+  color: #800000;
+}
+
+.interiorMod-metric-stat {
+  font: normal 12em/1 "domaine-text", serif;
+  letter-spacing: -0.02em;
+}
+.interiorMod-metric-caption {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+}
+.interiorMod-list--4 {
+  display: flex;
+  flex-flow: row wrap;
+}
+.interiorMod-list--4 > * {
+  flex: 0 1 25%;
+}
+.interiorMod-list--3 {
+  display: flex;
+  flex-flow: row wrap;
+}
+.interiorMod-list--3 > * {
+  flex: 0 1 33.333%;
+}
+
 /* main.scss */
 
 /*# sourceMappingURL=main.css.map*/

@@ -517,7 +517,6 @@ $red-secondary: nth($red-theme,2);
 .primaryContact {
 	$contact: &;
 	@include flexParent();
-	min-height: 500px;
 	border-top: 1px solid getColor('red');
 
 	> * {
@@ -526,13 +525,13 @@ $red-secondary: nth($red-theme,2);
 
 	&-social {
 		background: getColor('red',10);
-		padding: 4em;
+		padding: 4em 4em 8.4em 4em;
 		color: getColor('red');
 	}
 
 	&-news {
 		background: getColor('red');
-		padding: 4em;
+		padding: 4em 4em 8.4em 4em;
 		color: getColor('white');
 	}
 
@@ -830,6 +829,12 @@ $red-secondary: nth($red-theme,2);
 	&-controls {
 		#{$filter}--exhibitions  & {
 			
+		}
+	}
+
+	&-controls {
+		#{$filter}--events  & {
+			display: none;
 		}
 	}
 
@@ -1282,6 +1287,10 @@ $results: '.searchResults';
 					color: getColor('green',30);
 				}
 
+				#{$parent}--about & {
+					color: getColor('red');
+				}
+
 				text-decoration: none;
             }
 		}
@@ -1359,6 +1368,11 @@ $results: '.searchResults';
 
 	&--projects {
 		border-color: getColor('green',30);
+	}
+
+	&--about {
+		padding: 8em 0 0 0;
+		border: none;
 	}
 
 	@include breakpoint(sm) {
@@ -1550,6 +1564,7 @@ $results: '.searchResults';
 	}
 
 }
+
 
 .interiorTeam {
 	$team: &;

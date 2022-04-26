@@ -119,19 +119,6 @@ fieldLayouts:
       -
         elements:
           -
-            fieldUid: 0d4ed8f4-2f3b-4320-89ac-8225fbc867d3 # Directions
-            instructions: null
-            label: null
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            warning: null
-            width: 100
-        name: 'Visit the Collegium'
-        sortOrder: 5
-      -
-        elements:
-          -
             fieldUid: 03c99505-27a8-4aa0-b166-32be2e200535 # Card Block
             instructions: ''
             label: 'Application Card'
@@ -141,6 +128,19 @@ fieldLayouts:
             warning: null
             width: 100
         name: 'Application Process'
+        sortOrder: 5
+      -
+        elements:
+          -
+            fieldUid: 0d4ed8f4-2f3b-4320-89ac-8225fbc867d3 # Directions
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: 'Visit the Collegium'
         sortOrder: 6
       -
         elements:
@@ -174,7 +174,7 @@ fieldLayouts:
             template: control-panel/about/_news-section.html
             type: craft\fieldlayoutelements\Template
             width: 100
-        name: 'News &amp; Announcements'
+        name: 'News & Announcements'
         sortOrder: 8
 handle: aboutIndex
 hasTitleField: false

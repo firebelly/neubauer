@@ -67,6 +67,9 @@
 
     {{ sprig('partials/_filter-controls', {'entryId': entry.id }) }}
 
+    {% case 'about' %}
+    {% include 'about/_landing' %}    
+
 
 {% endswitch %}
 </section>

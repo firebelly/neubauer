@@ -1,0 +1,322 @@
+{% import 'macros/_dates' as dates %}
+{% import 'macros/_cards' as cards %}
+{% import 'macros/_assets' as assets %}
+{% import 'macros/_controls' as controls %}
+
+{% set entrySection = entry.section|replace('Index','')|slugify %}
+{% set excludeMenu = ['opener'] %}
+{% set menuList = entry.getFieldLayout().getTabs() %}
+
+<section class="interiorIntro interiorIntro--{{ entrySection }}">
+    {% if menuList %}
+    <ul class="interiorIntro-menu interiorIntro-menu--{{ entrySection }}">
+        {% for menuItem in menuList if menuItem.name|slugify not in excludeMenu %}
+        {% set menuName,menuHandle = menuItem.name,menuItem.name|camel %}
+        <li class="interiorIntro-menu-item">
+            <a href="#{{ menuHandle }}">{{ menuName }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</section>
+
+{# About Us Interior Modules #}
+{% for menuItem in menuList if menuItem.name|slugify not in excludeMenu %}
+{% set modName,modHandle,modSlug = menuItem.name,menuItem.name|camel,menuItem.name|slugify %}
+{% set modFields = menuItem.getFields() %}
+
+{% switch modSlug %}
+
+{% case 'director-s-statement' %}
+{% set statement = entry.directorsStatement is not null and entry.directorsStatement|length > 0 ? entry.directorsStatement[0] : null %}
+{% set abstract = statement and statement.intro != '' ? statement.intro : null %}      
+{% set body = statement and statement.full != '' ? statement.full : null %}
+{% set statementImage = statement and (statement.image is not null and statement.image.one()) ? statement.image : null %}
+
+<section class="interiorMod interiorMod--{{ entrySection }} interiorMod--{{ modSlug }}" id="{{ modHandle }}">
+
+    <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
+
+    <div class="interiorSummary interiorSummary--{{ entrySection }}">
+        <div class="interiorSummary-frame interiorSummary-frame--{{ entrySection }}">
+            <div class="interiorSummary-placeholder">{# image goes here #}</div>
+            <div class="interiorSummary-caption">Photo by: ornare ullamcorper.</div>
+        </div>
+        <div class="interiorSummary-main">
+
+            {% if abstract %}
+            <div class="interiorSummary-redactor interiorSummary-redactor--abstract">{{ abstract|raw }}</div>
+            {% endif %}
+
+            {% if body %}
+            {% set isAccordion = (body and abstract) %}
+
+            {% if isAccordion %}
+            {# <a class="interiorSummary-accordion interiorSummary-accordion--{{ entrySection }}" href="" role="">
+                <span class="interiorSummary-accordion-label">Full Summary</span>
+                <svg class="interiorSummary-accordion-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ expandPath) }}"></use>
+                </svg>
+            </a> #}
+            {% endif %}
+
+            <div class="interiorSummary-redactor interiorSummary-redactor--body">{{ body|raw }}</div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% case 'impact' %}   
+{% set body = entry.body is not null and entry.body != '' ? entry.body : null %}
+{% set impactImage = entry.impactImage is not null and entry.impactImage.one() ? entry.impactImage : null %}
+{% set impactCount = entry.impactModule is not null ? entry.impactModule|length : null %}
+{% set impactModule = impactCount ? entry.impactModule : null %}
+
+<section class="interiorMod interiorMod--{{ entrySection }} interiorMod--{{ modSlug }}" id="{{ modHandle }}">
+
+    <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
+
+    <div class="interiorMod-wrap interiorMod-wrap--{{ modSlug }}">
+        <div class="interiorMod-frame interiorMod-frame--{{ modSlug }}">
+            <div class="interiorMod-frame-placeholder">{# image goes here #}
+                {% if impactImage %}<img src="" />{% endif %}
+            </div>
+            <div class="interiorMod-frame-caption">Photo by: ornare ullamcorper.</div>
+        </div>
+        <div class="interiorMod-main interiorMod-main--{{ modSlug }}">
+            <div class="interiorMod-main-content">
+                {% if body %}
+                <div class="interiorMod-redactor interiorMod-redactor--body">{{ body|raw }}</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% if impactModule %}
+
+    {# {% set metricList = [] %}
+    {% set highlightList = [] %}
+    {% for mtx in impactModule if mtx.type == 'metrics' %}
+        {% set metricList = metricList|merge([mtx]) %}
+    {% endfor %}
+    {% for mtx in impactModule if mtx.type == 'highlight' %}
+        {% set highlightList = highlightList|merge([mtx]) %}
+    {% endfor %} 
+    {% set metricCount, highlightCount = metricList|length, highlightList|length %}
+    #}
+
+    {# Build impact matrix rows #}
+    {% set metricCount, highlightCount = 0, 0 %}
+    {% set rowObj = [] %}
+    {% for mtx in impactModule %}
+        {% set type = mtx.type %}
+        {% set rowCount = rowObj|length + 1 %}
+        {% set rowKey = "row" ~ rowCount %}
+        {% switch type %}
+            {% case 'metrics' %}
+            {% set metricCount = metricCount + 1 %}
+            {% set rowObj = rowObj|merge({
+                (rowKey): [mtx]
+            }) %}
+            {% case 'highlights' %}
+            {% set highlightCount = highlightCount + 1 %}
+        {% endswitch %}
+    {% endfor %}
+
+    <div class="interiorMod-matrix interiorMod-matrix--{{ impactCount }}">
+        {% for row, metricList in rowObj %}
+        <div class="interiorMod-row interiorMod-row--{{ row }}">
+            
+            {# <div class="interiorMod-item">    
+                {% if metricCount > 0 %}
+                {% for mtx in metricList|slice(0,6) %}
+                <aside class="interiorMod-metric">
+                    <strong class="interiorMod-metric-stat">{{ mtx.statistic }}</strong>
+                    <div class="interiorMod-metric-caption">{{ mtx.caption }}</div>
+                </aside>
+                {% endfor %}
+                {% endif %}
+            </div>
+            {% if highlightCount > 0 and metricCount > 0 %}
+                {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-card',mtx.project[0],{'showContent': false},'highlight' %}
+                {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+            {% endif %} #}
+        </div>
+        {% endfor %}
+    </div>
+
+    {# {% for mtx in impactModule %}
+    {% set type = mtx.type %}
+    {% switch type %}
+        {% case 'metrics' %}
+        <aside class="interiorMod-metric">
+            <strong class="interiorMod-metric-stat">{{ mtx.statistic }}</strong>
+            <div class="interiorMod-metric-caption">{{ mtx.caption }}</div>
+        </aside>
+        {% case 'highlight' %}
+        {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-card',mtx.project[0],{'showContent': false},'highlight' %}
+        {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+    {% endswitch %}
+    {% endfor %} #}
+    </div>
+    {% endif %}
+</section>
+
+{% case 'people' %}  
+{% set staff = craft.entries().section('people') .search('personType:staff').all() %}
+{% set advisors = craft.entries().section('people') .search('personType:faculty-advisory-board').all() %}
+{% if staff or advisors %}
+<section class="interiorMod interiorMod--{{ entrySection }} interiorMod--{{ modSlug }}" id="{{ modHandle }}">
+
+    <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
+
+    {% if staff %}
+    <section class="interiorMod-people interiorMod-people--staff">
+        <h4 class="interiorMod-subtitle">Our Team</h4>
+        <div class="interiorMod-list interiorMod-list--4">
+            {% for person in staff %}
+            {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-card',person,{'showContent': false},'staff' %}
+            {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+    {% if advisors %}
+    <section class="interiorMod-people interiorMod-people--advisors">
+        <h4 class="interiorMod-subtitle">Faculty Advisory Board</h4>
+        <div class="interiorMod-list interiorMod-list--4">
+            {% for person in advisors %}
+            {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-card',person,{'showContent': false},'advisors' %}
+            {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</section>
+{% endif %}
+
+{% case 'application-process' %} 
+{% set appCards = entry.cardBlock is not null and entry.cardBlock|length > 0 ? entry.cardBlock : null %}
+{% if appCards %}
+<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modHandle }}">
+    <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
+
+    <div class="interiorMod-list interiorMod-list--3">
+    {% for card in appCards %}
+   
+    {% set title = card.cardTitle != '' ? card.cardTitle : null %}
+    {% set summary = card.cardSummary != '' ? card.cardSummary : null %}
+    {% set image = card.cardImage|length > 0 ? card.cardImage : null %}
+    {% set dnld = card.downloadLink|length > 0 ? card.downloadLink.one() : null %}
+    {% set actionLabel = card.actionLink.actionText != '' ?  card.actionLink.actionText : null %}
+    {% set actionURL = card.actionLink.actionURL != '' ?  card.actionLink.actionURL : null %}
+    <article class="miniCard">
+        {% if title %}
+        <h3 class="miniCard-title">{{ title }}</h3>
+        {% endif %}
+        {% if image %}
+        <img class="miniCard-img" src="{{ card.cardImage.one().url }}" />
+        {% endif %}
+        {% if summary %}
+        <div class="miniCard-summary">{{ summary }}</div>
+        {% endif %}
+        {% if dnld %}
+        <a href="{{ dnld.url }}">{{ dnld.title }}</a>
+        {% endif %}
+        {% if actionLabel and actionURL %}
+        <a 
+            class="miniCard-action miniCard-action--link"
+            href="{{ actionURL }}"
+            title=""
+            role="">
+            <span class="miniCard-action-label">{{ actionLabel }}</span>
+            {# <svg class="interiorSummary-action-icon">
+                <use xlink:href="{{ alias('@assetBasePath' ~ emailPath) }}"></use>
+            </svg> #}
+        </a>
+        {% endif %}
+    </article>
+    {% endfor %}
+</section>
+{% endif %}
+
+{% case 'visit-the-collegium' %}
+{% set directions = entry.directions is not null and entry.directions|length > 0 ? entry.directions : null %}
+
+<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modHandle }}">
+    <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
+    
+    {% if directions %}
+    {% set details = directions.details != "" ? directions.details : null %}
+    {% set car = directions.car != "" ? directions.car : null %}
+    {% set transit = directions.publicTransit != "" ? directions.publicTransit : null %}
+    <div>
+        {{ details ?? details }}
+    </div>
+    <div>
+        <h4>By Car</h4>
+        {{ car ? car }}
+    </div>
+    <div>
+        <h4>Public Transit</h4>
+        {{ transit ? transit }}
+    </div>
+    {% endif %}
+</section>
+
+{% case 'news-announcements' %}
+{% set news = craft.entries().section('news').all() %}
+<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modHandle }}">
+    <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
+    <div class="interiorMod-list interiorMod-list--4">
+        {% for card in news %}
+        {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-card',card,{'showContent': false},'news' %}
+        {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+        {% endfor %}
+    </div>
+</section>
+
+{% case 'publications' %}
+{% set pubs = entry.publicationBlock is not null and entry.publicationBlock|length > 0 ? entry.publicationBlock : null %}
+<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modHandle }}">
+    <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
+    <div class="interiorMod-list interiorMod-list--4">
+        {% for card in pubs %}
+        {% set title = card.cardTitle != '' ? card.cardTitle : null %}
+        {% set summary = card.cardSummary != '' ? card.cardSummary : null %}
+        {% set image = card.cardImage|length > 0 ? card.cardImage : null %}
+        {% set dnld = card.downloadLink|length > 0 ? card.downloadLink.one() : null %}
+        {% set actionLabel = card.actionLink.actionText != '' ?  card.actionLink.actionText : null %}
+        {% set actionURL = card.actionLink.actionURL != '' ?  card.actionLink.actionURL : null %}
+        <article class="miniCard">
+            {% if title %}
+            <h3 class="miniCard-title">{{ title }}</h3>
+            {% endif %}
+            {% if image %}
+            <img class="miniCard-img" src="{{ card.cardImage.one().url }}" />
+            {% endif %}
+            {% if summary %}
+            <div class="miniCard-summary">{{ summary }}</div>
+            {% endif %}
+            {% if dnld %}
+            <a href="{{ dnld.url }}">{{ dnld.title }}</a>
+            {% endif %}
+            {% if actionLabel and actionURL %}
+            <a 
+                class="miniCard-action miniCard-action--link"
+                href="{{ actionURL }}"
+                title=""
+                role="">
+                <span class="miniCard-action-label">{{ actionLabel }}</span>
+                {# <svg class="interiorSummary-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ emailPath) }}"></use>
+                </svg> #}
+            </a>
+            {% endif %}
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+{% endswitch %}
+{% endfor %}

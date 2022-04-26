@@ -66,6 +66,9 @@
         <p class="{{ cardName }}-caption">{{ cardEntry.personAffiliation }}</p>
         {% endif %}
 
+        {# Card: Main Content #}
+        {% set showContent = cardObj and 'showContent' in cardObj|keys ? cardObj['showContent'] : true %}
+        {% if showContent %}
         {% if cardAbstract %}
         <div class="{{ cardName }}-redactor {{ cardName }}-redactor--abstract">
             {{ cardAbstract|raw }}
@@ -76,6 +79,7 @@
         <div class="{{ cardName }}-redactor {{ cardName }}-redactor--body">
             {{ cardBody|raw }}
         </div>
+        {% endif %}
         {% endif %}
 
         {# Card: Team #}
