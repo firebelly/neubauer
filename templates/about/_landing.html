@@ -94,7 +94,7 @@
 
     {% if impactModule %}
 
-    {# {% set metricList = [] %}
+    {% set metricList = [] %}
     {% set highlightList = [] %}
     {% for mtx in impactModule if mtx.type == 'metrics' %}
         {% set metricList = metricList|merge([mtx]) %}
@@ -103,61 +103,25 @@
         {% set highlightList = highlightList|merge([mtx]) %}
     {% endfor %} 
     {% set metricCount, highlightCount = metricList|length, highlightList|length %}
-    #}
-
-    {# Build impact matrix rows #}
-    {% set metricCount, highlightCount = 0, 0 %}
-    {% set rowObj = [] %}
-    {% for mtx in impactModule %}
-        {% set type = mtx.type %}
-        {% set rowCount = rowObj|length + 1 %}
-        {% set rowKey = "row" ~ rowCount %}
-        {% switch type %}
-            {% case 'metrics' %}
-            {% set metricCount = metricCount + 1 %}
-            {% set rowObj = rowObj|merge({
-                (rowKey): [mtx]
-            }) %}
-            {% case 'highlights' %}
-            {% set highlightCount = highlightCount + 1 %}
-        {% endswitch %}
-    {% endfor %}
-
+   
     <div class="interiorMod-matrix interiorMod-matrix--{{ impactCount }}">
-        {% for row, metricList in rowObj %}
-        <div class="interiorMod-row interiorMod-row--{{ row }}">
-            
-            {# <div class="interiorMod-item">    
-                {% if metricCount > 0 %}
-                {% for mtx in metricList|slice(0,6) %}
+        <div class="interiorMod-list interiorMod-list--2">
+            <div class="interiorMod-list interiorMod-list--2">
+                {% for mtx in metricList %}
                 <aside class="interiorMod-metric">
                     <strong class="interiorMod-metric-stat">{{ mtx.statistic }}</strong>
                     <div class="interiorMod-metric-caption">{{ mtx.caption }}</div>
                 </aside>
                 {% endfor %}
-                {% endif %}
             </div>
-            {% if highlightCount > 0 and metricCount > 0 %}
+            <div class="interiorMod-list interiorMod-list--2">
+                {% for mtx in highlightList %}
                 {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-card',mtx.project[0],{'showContent': false},'highlight' %}
                 {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
-            {% endif %} #}
+                {% endfor %}
+            </div>
         </div>
-        {% endfor %}
-    </div>
-
-    {# {% for mtx in impactModule %}
-    {% set type = mtx.type %}
-    {% switch type %}
-        {% case 'metrics' %}
-        <aside class="interiorMod-metric">
-            <strong class="interiorMod-metric-stat">{{ mtx.statistic }}</strong>
-            <div class="interiorMod-metric-caption">{{ mtx.caption }}</div>
-        </aside>
-        {% case 'highlight' %}
-        {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-card',mtx.project[0],{'showContent': false},'highlight' %}
-        {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
-    {% endswitch %}
-    {% endfor %} #}
+        
     </div>
     {% endif %}
 </section>

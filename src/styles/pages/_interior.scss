@@ -120,6 +120,13 @@
 
     &-list {
 
+        &--2 {
+            @include flexParent();
+            > * {
+                @include flexChild(0 1 50%);
+            }
+        }
+
         &--4 {
             @include flexParent();
             > * {

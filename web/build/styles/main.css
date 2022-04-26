@@ -10630,6 +10630,13 @@ img {
 .interiorMod-metric-caption {
   font: normal 1.6em/1.56 "apercu", sans-serif;
 }
+.interiorMod-list--2 {
+  display: flex;
+  flex-flow: row wrap;
+}
+.interiorMod-list--2 > * {
+  flex: 0 1 50%;
+}
 .interiorMod-list--4 {
   display: flex;
   flex-flow: row wrap;
