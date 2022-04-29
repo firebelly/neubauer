@@ -5,6 +5,7 @@ import accordionMenu from './components/accordionMenu';
 import flyoutContent from './components/flyoutContent';
 import searchFilters from './components/searchFilters';
 import parallaxImages from './components/parallaxImages';
+import contentCarousel from './components/contentCarousel';
 
 // Inits
 appState.init();
@@ -19,3 +20,4 @@ if (document.querySelectorAll('[role="tablist"]').length > 0 ) {
 }
 
 parallaxImages.init();
+contentCarousel.init({'group': 3});

@@ -212,6 +212,7 @@
                 name="layout-toggle"
                 sprig
                 s-val:layout="{{ layout }}"
+                s-indicator="#indicator"
                 {% if activeLayout == layout %}checked{% endif %}
                 />
             <label class="{{ layoutName }}-label {{ layoutName }}-label--{{ hasIcons ? 'svg' : 'faux' }}" for="{{ layout }}View">
@@ -264,6 +265,7 @@
         href=""
         sprig
         s-val:page="{{ pageUrl }}"
+        s-indicator="#indicator"
         >
         <span class="{{ pageName }}-label">{{ pageSlug == 'nav' ? pageTrigger|title : pageTrigger }}</span>
         {% if pageIcons is not null %}
@@ -487,6 +489,7 @@ Section: {{ activeSection }} #}
             sprig
             s-trigger="click"
             s-val:sort="{{ sortOptions|filter((option) => option != sort)|join('') }}"
+            s-indicator="#indicator"
             >
             <span class="{{ filterName }}-label {{ filterName }}-label--headline">Sort By Name {% if sort == 'asc' %}(A-Z){% else %}(Z-A){% endif %}</span>
             <svg class="{{ filterName }}-icon {{ filterName }}-icon--caret">

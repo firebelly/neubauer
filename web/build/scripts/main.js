@@ -118,6 +118,134 @@ var accordionMenu = {
 
 /***/ }),
 
+/***/ "./src/scripts/components/contentCarousel.js":
+/*!***************************************************!*\
+  !*** ./src/scripts/components/contentCarousel.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// contentCarousel  
+
+/*
+Adapted from:
+https://dev.to/jasonwebb/how-to-build-a-more-accessible-carousel-or-slider-35lp
+*/
+//
+var contentCarousel = {
+  init: function init(options) {
+    this.carousel = document.querySelector('[data-carousel]');
+    this.previousButton = this.carousel.querySelector('[data-carousel-prev]');
+    this.nextButton = this.carousel.querySelector('[data-carousel-next]');
+    this.slideNav = this.carousel.querySelector('[data-carousel-nav]');
+    this.slidesContainer = this.carousel.querySelector('[data-carousel-slides]');
+    this.slides = this.slidesContainer.querySelectorAll('[data-carousel-item]');
+    this.slideDots = this.slideNav.querySelectorAll('[data-carousel-button]');
+    this.leftIndex = 0;
+    this.slideGap = 5;
+    this.slideGroup = options.group != null ? options.group : 3;
+    this.slideCount = this.slides.length;
+    this.bind();
+  },
+  previousSlide: function previousSlide() {
+    var self = this;
+
+    if (self.leftIndex > 0) {
+      self.goToSlide(self.leftIndex - 1);
+    } else {
+      self.goToSlide(self.slideCount - 1);
+    }
+  },
+  nextSlide: function nextSlide() {
+    var self = this;
+
+    if (self.leftIndex < self.slideCount - 1) {
+      self.goToSlide(self.leftIndex + 1);
+    } else {
+      self.goToSlide(0);
+    }
+  },
+  goToSlide: function goToSlide(nextLeftIndex) {
+    var self = this; // Smoothly scroll to the requested slide
+
+    self.slidesContainer.animate({
+      scrollLeft: self.slidesContainer.offsetWidth / 3 * nextLeftIndex
+    }, {
+      duration: 200
+    }); // Unset aria-current attribute from any slide dots that have it
+
+    self.slideDots.forEach(function (dot) {
+      dot.removeAttribute('aria-current');
+    }); // Set aria-current attribute on the correct slide dot
+
+    self.slideDots[nextLeftIndex].setAttribute('aria-current', true); // Update the record of the left-most slide
+
+    self.leftIndex = nextLeftIndex; // Update each slide so that the ones that are now off-screen are fully hidden.
+
+    self.hideNonVisibleSlides();
+  },
+  // hideNonVisibleSlides
+  // Fully hide non-visible slides by adding aria-hidden="true" and tabindex="-1" when they go out of view
+  hideNonVisibleSlides: function hideNonVisibleSlides() {
+    var self = this; // Start by hiding all the slides and their content
+
+    self.slides.forEach(function (slide) {
+      slide.setAttribute('aria-hidden', true);
+      slide.querySelectorAll('a, button, select, input, textarea, [tabindex="0"]').forEach(function (focusableElement) {
+        focusableElement.setAttribute('tabindex', -1);
+      });
+    }); // Slide Group = number of slides visible at a time
+    // Ensure the left-most slide group is visible
+
+    var slideDiff = self.slideCount - self.slideGroup;
+
+    if (self.leftIndex < slideDiff) {
+      for (var i = self.leftIndex; i < self.leftIndex + self.slideGroup; i++) {
+        self.slides[i].removeAttribute('aria-hidden');
+        self.slides[i].querySelectorAll('a, button, select, input, textarea, [tabindex="0"]').forEach(function (focusableElement) {
+          focusableElement.removeAttribute('tabindex');
+        });
+      }
+    } else {
+      // Since scrolling stops when the carousel reaches the last 3 slides 
+      // ensure last 3 slides stay visible until the user wraps or goes backwards.
+      for (var i = slideDiff; i < self.slideCount; i++) {
+        self.slides[i].removeAttribute('aria-hidden');
+        self.slides[i].querySelectorAll('a, button, select, input, textarea, [tabindex="0"]').forEach(function (focusableElement) {
+          focusableElement.removeAttribute('tabindex');
+        });
+      }
+    }
+  },
+  bind: function bind() {
+    var self = this; // Set up previous/next button behaviors
+
+    self.previousButton.addEventListener('click', function (e) {
+      return self.previousSlide();
+    });
+    self.nextButton.addEventListener('click', function (e) {
+      return self.nextSlide();
+    }); // Ensure that all non-visible slides are impossible to reach.
+
+    self.hideNonVisibleSlides(); // Set up the slide dot behaviors
+
+    self.slideDots.forEach(function (dot) {
+      dot.addEventListener('click', function (e) {
+        var clickedDot = e.target,
+            navItem = clickedDot.parentElement,
+            dotIndex = Array.from(self.slideNav.children).indexOf(navItem);
+        self.goToSlide(dotIndex);
+      });
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (contentCarousel);
+
+/***/ }),
+
 /***/ "./src/scripts/components/flyoutContent.js":
 /*!*************************************************!*\
   !*** ./src/scripts/components/flyoutContent.js ***!
@@ -250,8 +378,7 @@ var searchFilters = {
 
     if (dialogContainer) {
       var dialog = new a11y_dialog__WEBPACK_IMPORTED_MODULE_0__["default"](dialogContainer),
-          html = document.documentElement;
-      console.log('test'); // dialog.on(
+          html = document.documentElement; // dialog.on(
       //     'show', () => (html.style.overflowY = 'hidden'),
       //     'hide', () => (console.log('close'))
       // );
@@ -530,7 +657,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_flyoutContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/flyoutContent */ "./src/scripts/components/flyoutContent.js");
 /* harmony import */ var _components_searchFilters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/searchFilters */ "./src/scripts/components/searchFilters.js");
 /* harmony import */ var _components_parallaxImages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/parallaxImages */ "./src/scripts/components/parallaxImages.js");
+/* harmony import */ var _components_contentCarousel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/contentCarousel */ "./src/scripts/components/contentCarousel.js");
 // Import local dependencies
+
 
 
 
@@ -549,6 +678,9 @@ if (document.querySelectorAll('[role="tablist"]').length > 0) {
 }
 
 _components_parallaxImages__WEBPACK_IMPORTED_MODULE_5__["default"].init();
+_components_contentCarousel__WEBPACK_IMPORTED_MODULE_6__["default"].init({
+  'group': 3
+});
 
 /***/ }),
 

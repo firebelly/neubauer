@@ -1,44 +1,92 @@
+
+
 {# assetCard: 
     See: styles/components/_assets.scss for styling
     ImagerX (https://imager-x.spacecat.ninja/overview.html#features)
 
     @imageName {str} - base styling hook
     @imageObj {obj}  - craft image object
+    @imageSizes {obj} - {'sm': [width,height], 'lg': [width,height]}
 
-    TODO: picture + webp stuffs
+    // Known Aspect Ratio (skip height)
+    { width: 800, ratio: 16/9 }
+
+    // Crop-only
+    { width: 600, height: 600, mode: 'croponly', position: '20% 65%' }
+
+    // Crop-zoom
+    { width: 600, height: 600, mode: 'crop', position: '20% 65%', cropZoom: 1.5 }
+
+    // Letterbox
+    { width: 600, height: 600, mode: 'letterbox', letterbox: { color: '#000', opacity: 0 }}
+
+    // Effects, including: grayscale, negative, blur, sharpen, gamma and colorize
+    { effects: { sharpen: true, gamma: 1.4, colorize: '#ff9933' } }
+
+    TODO: 
+    - webp integration
 #}
-{% macro assetCard(imageName,imageObj,imageWidth = null,imageHeight = null,aspectRatio = null)%}
+{% macro assetCard(imageName,imageObj,imageSizes = null,aspectRatio = null) %}
 
     {% set thisImage = imageObj.one() %}
     {% set thisWidth, thisHeight = thisImage.getWidth(), thisImage.getHeight() %}
     {% set orientation = (thisWidth == thisHeight) ? 'square' : (thisWidth > thisHeight ? 'landscape' : 'portrait') %}
     
-    {% set transformWidth, transformHeight = (imageWidth ? imageWidth : 450), (imageHeight ? imageHeight : 350) %}
+    {% set defaultWidth, defaultHeight = 450, 350 %}
+    {% set lgSizeObj, transformSmSizes = [],[] %}
+    {% set smSizeObj, transformLgSizes = [],[] %}
+    {% set smThreshhold, lgThreshhold = 767, 768 %}
+
+    {% if imageSizes %}
+        {% set smWidth, smHeight = imageSizes['sm'][0], imageSizes['sm'][1] %}
+        {% set lgWidth, lgHeight = imageSizes['lg'][0], imageSizes['lg'][1] %}
+        {% set smRatio, lgRatio = (smWidth/smHeight), (lgWidth/lgHeight) %}
+        {% set defaultWidth, defaultHeight = lgWidth, lgHeight %}
+        {# Detect low-quality images and calculate new height based on best possible width #}
+        {# {% if thisWidth < lgWidth %}
+            {% set lgWidth, lgHeight = thisWidth, thisWidth*lgRatio %}
+        {% endif %} #}
+
+        {% set smSizeObj = [
+            {'width': smWidth,'height': smHeight},
+            {'width': smThreshhold, 'ratio': smRatio}
+        ]%}
+        {% set lgSizeObj = [
+            {'width': lgWidth,'height': lgHeight},
+            {'width': lgThreshhold, 'ratio': lgRatio}
+        ]%}
+    {% endif %}
+
+    {# Fill the transform size arrays #}
+    {% if lgSizeObj %}
+        {% set transformLgSizes = transformLgSizes|merge(lgSizeObj) %}
+    {% endif %}
+    {% if smSizeObj %}
+        {% set transformSmSizes = transformSmSizes|merge(smSizeObj) %}
+    {% endif %}
 
     {# Prep the image sources #}
-    {% set transformedImages = null %}
-    {% set transformParams = [{ 
-        width: transformWidth, 
-        height: transformHeight, 
-        mode: 'crop' 
-    }] %}
-    {% set transformSettings = {position: '100% 100%', jpegQuality: 72} %}
-    {% if aspectRatio %}
-        {% set transformSettings = transformSettings|merge({'ratio': aspectRatio}) %}
-    {% endif %}
-    {% set imageSource = craft.imager.placeholder({ width: transformWidth, height: transformHeight }) %}
-    {% set transformedImages = craft.imager.transformImage(thisImage,transformParams,transformSettings,{ fillTransforms: true }) %}
+    {% set transformSettings = {mode: 'crop', position: thisImage.focalPoint(), jpegQuality: 72} %}
+    {% set imageSource = craft.imager.placeholder({ width: defaultWidth, height: defaultHeight }) %}
 
+    {% set transformedSm = craft.imager.transformImage(thisImage,transformSmSizes,transformSettings,{ fillTransforms: true }) %}
+    {% set transformedLg = craft.imager.transformImage(thisImage,transformLgSizes,transformSettings,{ fillTransforms: true }) %}
+    {% set transformedImgs = transformedSm|merge(transformedLg) %}
+
+    {# Accommodate different ratios across small and large images via sourcing #}
+    <source 
+        srcset="{{ transformedSm ? transformedSm | srcset : '' }}"
+        media="(max-width: 767px)">
+    <source 
+        srcset="{{ transformedLg ? transformedLg | srcset : '' }}" 
+        media="(min-width: 768px)">
     <img 
         class="{{ imageName }}-image"
-        height="{{ transformHeight }}"
-        width="{{ transformWidth }}"
         alt="{{ thisImage.altText ?? '' }}"
         loading="lazy"
         src="{{ imageSource }}" 
         sizes="100vw" 
-        srcset="{{ transformedImages ? craft.imager.srcset(transformedImages) : '' }}" />
-
+        srcset="{{ transformedImgs ? transformedImgs | srcset : '' }}" />
 
 {% endmacro %}
 

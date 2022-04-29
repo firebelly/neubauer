@@ -13,8 +13,6 @@ const searchFilters = {
             const dialog = new A11yDialog(dialogContainer),
                   html   = document.documentElement;
 
-            console.log('test');
-
             // dialog.on(
             //     'show', () => (html.style.overflowY = 'hidden'),
             //     'hide', () => (console.log('close'))

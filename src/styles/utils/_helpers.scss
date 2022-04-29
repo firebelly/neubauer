@@ -79,8 +79,10 @@ $vendors: -webkit-,-moz-,-ms-,-ms-input-,-o-;
 @mixin visuallyShow {
 	clip: auto;
 	height: auto;
+	margin: 0;
 	width: auto;
 	overflow: visible;
+	position: static;
 }
 
 @mixin imageReplace {

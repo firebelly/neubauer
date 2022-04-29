@@ -1,3 +1,4 @@
+{% import 'macros/_utils' as utils %}
 {% import 'macros/_controls' as controls %}
 {% import 'macros/_cards' as cards %}
 {% import 'macros/_dates' as dates %}
@@ -267,6 +268,7 @@ bit of javascript to assign proper overflow style on the html tag #}
                 {% if tabFilter is defined %}
                 s-val:{{ tabFilter }}="{{ tabSlug }}"
                 {% endif %}
+                s-indicator="#indicator"
                 >
                 <span class="searchTabs-label">{{ tabName|raw }}</span>
             </a>
@@ -312,33 +314,48 @@ bit of javascript to assign proper overflow style on the html tag #}
 
 </section>
 
+<div id="indicator" class="searchIndicator"></div>
+
 {# RESULTS #}
 <section class="searchResults" id="search_index_results">
     <h2 class="searchResults-title">Results:</h2>
 
     {% if results %}
-    <div class="searchResults-content{% if indexSlug == 'people' %} searchResults-content--bio{% endif %}{{ layout == 'grid' ? ' _is-grid' : ' _is-list' }}">
+    <div class="searchResults-content searchResults-content--{{ indexSlug }}{% if indexSlug == 'exhibitions' %}{{ layout == 'grid' ? ' _is-grid' : ' _is-list' }}{% endif %}">
         {% set cardObj = {
             'isSearch': true,
             'activeTags': filterList|map(obj => (obj.slug == 'tags' ? obj.active : ''))|join('') 
         }%}
         {% set exhibitionFeature = null %}
         {% if indexSlug == 'exhibitions' %}
-        {% set featureQuery = craft.entries.section('exhibitionsIndex').one()['featuredExhibition'] %}
-        {% if featureQuery|length > 0 %}
-            {# Feature Exhibition #}
-            {% set exhibitionFeature = featureQuery.one() %}
-            {# TODO: if feature, update asset card dims #}
-            {% set cardName,cardVariant,cardObj = 'searchArticle','feature',{} %}
-            {{ cards.cardArticle(cardName,exhibitionFeature,cardObj,cardVariant) }}
+            {% set featureQuery = craft.entries.section('exhibitionsIndex').one()['featuredExhibition'] %}
+            {% if featureQuery|length > 0 %}
+                {# Feature Exhibition #}
+                {% set exhibitionFeature = featureQuery.one() %}
+                {# TODO: if feature, update asset card dims #}
+                {% set cardName,cardVariant = 'searchArticle','feature' %}
+                {% set featureSizes = utils.getAssetSizes('exhibitions','feature') %}
+                {% set cardObj = cardObj|merge({
+                    'assetSizes': featureSizes,
+                    'cardVariant': cardVariant
+                })%}
+                {{ cards.cardArticle(cardName,exhibitionFeature,cardObj) }}
             {% endif %}
         {% endif %}
-        {# if feature ex, exclude it from bulk results #}
+        {# exclude feature ex from bulk results #}
+
+        {% set cardName = (section == 'people') ? 'searchBio' : 'searchArticle' %}
+        {% set sectionKey, contextKey = section, isSearchIndex ? 'search' : 'directory' %}
+        {% set assetSizes = utils.getAssetSizes(sectionKey,contextKey) %}
+        {% set cardObj = cardObj|merge({
+            'assetSizes': assetSizes,
+            'cardVariant': indexSlug,
+            'showContent': (section == 'people') ? false : true
+        })%}
         {% for entry in resultsByPage if not exhibitionFeature or entry.id != exhibitionFeature.id  %}
-            {% set cardName = (section == 'people') ? 'searchBio' : 'searchArticle' %}
-            {% set cardEntry,cardVariant = entry,indexSlug %}
-            {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+            {{ cards.cardArticle(cardName,entry,cardObj) }}
         {% endfor %}
+
     </div>
     {% else %}
         No results

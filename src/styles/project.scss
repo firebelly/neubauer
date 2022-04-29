@@ -516,11 +516,15 @@ $red-secondary: nth($red-theme,2);
 
 .primaryContact {
 	$contact: &;
-	@include flexParent();
 	border-top: 1px solid getColor('red');
 
-	> * {
-		@include flexChild(0 1 50%);
+	@include breakpoint(sm) {
+		@include flexParent();
+
+		> * {
+			@include flexChild(0 1 50%);
+		}
+
 	}
 
 	&-social {
@@ -558,10 +562,14 @@ $red-secondary: nth($red-theme,2);
 		position: relative;
 
 		&--email {
-			@include flexParent();
 
-			> * {
-				@include flexChild(0 1 auto);
+
+			@include breakpoint(sm) {
+				@include flexParent();
+
+				> * {
+					@include flexChild(0 1 auto);
+				}
 			}
 
 		}
@@ -596,16 +604,21 @@ $red-secondary: nth($red-theme,2);
 		border-bottom: 1px solid getColor('white');
 		margin-bottom: #{$mb}em;
 		padding: #{$pt}em 0 #{$pb}em #{$pl}em;
-		
+		width: 100%;
 
 		&--name {
-			width: 100%;
+			//width: 100%;
 		}
 
-		&--email {
-			flex-grow: 1;
+		&--email {	
 			margin-right: #{$mb}em;
-			margin-bottom: 0;
+
+			@include breakpoint(sm) {
+				margin-bottom: 0;
+				width: auto;
+				flex-grow: 1;
+			}
+
 		}
 
 	}
@@ -760,332 +773,7 @@ $red-secondary: nth($red-theme,2);
 
 }
 
-/* ---------------------------------------------------------------------
-  Search Filter / Tabs / Dialog
------------------------------------------------------------------------- */
-.searchFilters {
-	padding: 0 4em;
 
-	&-title {
-		$mt: math.div(40,65);
-		$mb: math.div(80,65);
-		@include getType('h1-normal');
-		margin: #{$mt}em 0 #{$mb}em 0;
-
-		&--hide {
-			@include visuallyHide;
-		}
-	}
-
-}
-
-.searchTabs {
-	$parent: &;
-	display: none;
-	
-	@include breakpoint(sm) {
-		@include flexParent();
-		margin-bottom: 4em;
-		border-bottom: 1px solid transparent;
-		padding-bottom: 1.7em;
-		@include themedProperty(border-bottom-color,1);
-
-		&--people {
-			margin-top: 6em;
-		}
-
-		> * {
-			@include flexChild();
-		}
-	}
-
-	&-item {
-		margin-right: 4em;	
-	}
-
-	&-trigger {
-		$height: math.div(10,28);
-		@include getType('h3-sans');
-		text-decoration-color: transparent;
-		text-underline-offset: #{$height}em;
-		text-decoration-thickness: #{$height}em;
-
-		&:hover,
-		&._is-active {
-			@include themedProperty(text-decoration-color,1,$parent);
-		}
-
-	}
-
-}
-
-.resultsFilter {
-	$filter: &;
-
-	@at-root {
-		@include controlDialog(#{$filter},$theme:true);
-	}
-
-	&-controls {
-		#{$filter}--exhibitions  & {
-			
-		}
-	}
-
-	&-controls {
-		#{$filter}--events  & {
-			display: none;
-		}
-	}
-
-	&-trigger--filter {
-
-		#{$filter}--exhibitions  & {
-			display: none;
-		}
-	}
-
-	&-layout {
-		$layout: &;
-		display: none;
-
-		@at-root {
-			@include controlLayout(#{$layout},$height:2.5em,$width:2.5em);
-		}
-
-		#{$filter}--exhibitions & {
-			@include flexParent();
-			@include alignItems(center);
-
-			&-title {
-				$mr: math.div(25,16);
-				@include getType('caption');
-				font-weight: bold;
-				margin: 0 #{$mr}em 0 0;
-			}
-
-			&-name {
-				@include getType('caption');
-			}
-		}
-	}
-
-}
-
-
-/* ---------------------------------------------------------------------
-  Search Results
------------------------------------------------------------------------- */
-$results: '.searchResults';
-.searchResults {
-	padding: 0 4em;
-
-	&-title {
-		@include visuallyHide;
-	}
-
-	&-content {
-		
-		&._is-grid {
-			@include breakpoint(sm) {
-				@include flexParent();
-				margin-left: -0.25em;
-
-				> * {
-					$thirds: math.div(100,30) * 10%;
-					$margin: 0.5em;
-					$percent: calc($thirds - $margin);
-					@include flexChild(0 1 #{$percent});
-				}
-
-				&--bio > * {
-					$margin: 0.5em;
-					$percent: calc(50% - $margin);
-					@include flexChild(0 1 #{$percent});
-				}
-
-			}
-
-		}
-
-		&._is-list {
-
-			.searchArticle {
-				@include flexParent();
-				border-top: 1px solid getColor('gray');
-				padding: 2em 0;
-				margin: 0;
-
-				> * {
-					@include flexChild();
-				}
-			
-				&-asset {
-					//TODO
-					width: 200px;
-					height: 200px;
-					margin: 0 2em 0 0;
-				}
-				
-			}
-
-		}
-
-	}
-
-}
-
-.searchArticle {
-	$article: &;
-
-	@at-root {
-		@include cardDirectory(#{$article},$theme:true);
-	}
-
-	&--exhibitions {
-		#{$article}-topics {
-			display: none;
-		}
-	}
-
-	&--feature {
-		
-		#{$results}-content._is-grid & {
-			flex-basis: 100%;
-		}
-
-		#{$article}-details {
-			color: getColor('gray');
-
-			a:link,
-			a:visited,
-			a:hover,
-			a:active {
-				color: getColor('gray');
-			}
-
-		}
-
-		#{$results}-content._is-grid & {
-
-			#{$article}-details {
-				@include flexParent($display:flex,$values:column wrap);
-				@include justifyContent(center);
-				@include alignItems(center);
-			}
-
-			#{$article}-title {
-				@include getType('h2-sans');
-			}
-
-			#{$article}-dateblock {
-				@include getType('p');
-			}
-		}
-
-		#{$article}-topics {
-			display: none;
-		}
-
-		$action: #{$article}-action;
-		@include actionButton(#{$action},getColor('gray'),getColor('gray',10));
-
-	}
-
-	&-asset {
-
-		#{$results}-content._is-grid & {
-			width: 100%;
-			height: auto;
-		}
-	}
-
-}
-
-.searchBio {
-	$bio: &;
-
-	@at-root {
-		@include cardBio(#{$bio},$theme:true);
-	}
-
-	&-title--top {
-		@include totallyHide;
-	}
-}
-
-/* ---------------------------------------------------------------------
-  Feature Cards	
------------------------------------------------------------------------- */
-.projectFeature {
-	$feature: &;
-
-	@at-root {
-		@include cardFeature(#{$feature},getColor('green'),getColor('green',10));
-	}
-}
-
-.personFeature {
-	$feature: &;
-
-	@at-root {
-		@include cardFeature(#{$feature},getColor('blue'),getColor('blue',10));
-	}
-}
-
-.relatedArticle {
-	$related: &;
-	padding-top: 0;
-
-	@at-root {
-		@include cardFeature(#{$related},getColor('gray',10),getColor('gray'));
-	}
-
-	&-label {
-		&--hidden {
-			@include totallyHide;
-		}
-	}
-
-	&-subtitle {
-		$mb: math.div(20,30);
-		@include getType('h3-italic');
-		font-style: italic;
-		margin: 0 0 #{$mb}em 0;
-	}
-
-	&-content {
-		@include flexParent($display:flex,$values:row-reverse nowrap);
-		margin-top: 0;
-	}
-
-	&-details {
-		* {
-			text-align: left;
-		}
-	}
-
-	&-buttons,
-	&-team-list {
-		@include justifyContent(flex-start);
-	}
-
-	&-topics {
-		$topics: &;
-		
-		@at-root {
-			@include controlTags(#{$topics},getColor('gray'),getColor('gray',10));
-		}
-		&-list {
-			@include justifyContent(flex-start);
-		}
-
-		&-label {
-			@include getType('fine');
-		}
-	}
-
-}
 
 /* ---------------------------------------------------------------------
   Date Directory - dev only
@@ -1152,152 +840,6 @@ $results: '.searchResults';
 }
 
 
-/* ---------------------------------------------------------------------
-  Interior Pages
------------------------------------------------------------------------- */
-.interiorIntro {
-	$parent: &;
-	padding: 0 8em 5em 8em;
-	@include flexParent($display:flex,$values:row nowrap);
-	@include justifyContent(center);
-
-	&--people  {
-		padding-top: 12em;
-		padding-bottom: 16em;
-	}
-
-	> * {
-		@include flexChild(0 1 50%);
-	}
-
-	&-details {
-		padding-right: 8em;
-		text-align: center;
-
-		#{$parent}--projects & {
-			@include breakpoint(sm) {
-				@include flexParent($display:flex,$values:column);
-			}
-		}
-	}
-
-	&-asset {
-		// todo
-		overflow: hidden;
-	}
-
-	&-placeholder {
-		background: lightgray;
-		height: 700px;
-		width: 640px;
-	}
-
-	&-caption {
-		$pt: math.div(20,16);
-		$pr: math.div(40,16);
-		@include getType('caption');
-		padding: #{$pt}em #{$pr}em 0 0;
-	}
-
-	&-title {
-		$mb-lg: math.div(40,65);
-		$mb-sm: math.div(20,65);
-		@include getType('h1-normal');
-		margin-bottom: #{$mb-lg}em;
-
-		#{$parent}--people & {
-			margin-bottom: #{$mb-sm}em;
-		}
-
-	}
-
-	&-subtitle {
-		$mb: math.div(20,16);
-		@include getType('caption');
-		margin-bottom: #{$mb}em;
-	}
-
-	&-prompt {
-		$mb: math.div(80,28);
-		@include getType('h3-sans');
-		margin-bottom: #{$mb}em;
-	}
-
-	&-team {
-		&-title {
-			@include visuallyHide;
-		}
-
-		&-list {				
-			@include flexParent();
-			@include justifyContent(center);
-			margin-bottom: 1em;
-		}
-
-		&-item {
-			@include getType('caption');
-
-			a:link,
-            a:visited,
-            a:hover,
-            a:active {
-
-				#{$parent}--people & {
-					color: getColor('blue',10);
-				}
-
-				#{$parent}--projects & {
-                	color: getColor('green',30);
-				}
-            }
-
-		}
-
-	}
-
-	&-date {
-		@include getType('caption');
-	}
-
-	&-menu {
-		@include flexParent();
-		@include justifyContent(center);
-		scroll-behavior: smooth; // todo
-	
-		&--projects {
-			flex-grow: 1;
-			@include alignItems(end);
-		}
-
-		&-item {
-			@include flexChild(0 1 auto);
-			@include getType('action');
-			margin: 0 2em;
-
-			a:link,
-            a:visited,
-            a:hover,
-            a:active {
-
-				#{$parent}--people & {
-					color: getColor('blue');
-				}
-
-				#{$parent}--projects & {
-					color: getColor('green',30);
-				}
-
-				#{$parent}--about & {
-					color: getColor('red');
-				}
-
-				text-decoration: none;
-            }
-		}
-
-	}
-
-}
 
 .interiorCover {
 
@@ -1357,213 +899,6 @@ $results: '.searchResults';
 
 }
 
-.interiorSummary {
-	$summary: &;
-	border-top: 1px solid transparent;
-	padding: 4em 4em 16em 4em;
-
-	&--people {
-		border-color: getColor('blue');
-	}
-
-	&--projects {
-		border-color: getColor('green',30);
-	}
-
-	&--about {
-		padding: 8em 0 0 0;
-		border: none;
-	}
-
-	@include breakpoint(sm) {
-		@include flexParent($display:flex,$values:row nowrap);
-		@include justifyContent(center);
-
-		> * {
-			@include flexChild(0 1 50%);
-		}
-	}
-
-	&-title {
-		@include getType('h1-normal');
-
-		&--people,
-		&--exhibitions {
-			@include visuallyHide;
-		}
-	}
-
-	&-placeholder {
-		width: 100%;
-		height: 100%;
-		background: lightgray; //todo
-	}
-
-	&-frame {
-	
-		&--projects {
-			@include visuallyHide;
-		}
-	}
-
-	&-placeholder {
-		background: lightgray;
-		height: 640px;
-		width: 640px;
-	}
-
-	&-caption {
-		$pt: math.div(20,16);
-		$pr: math.div(40,16);
-		@include getType('caption');
-		padding: #{$pt}em #{$pr}em 0 0;
-	}
-
-	&-main {
-		margin-left: 4em;
-	}
-
-	&-redactor {
-		$mb: math.div(40,24);
-		@include getType('subtitle');
-		margin: 0 0 #{$mb}em 0;
-
-		a:link,
-		a:visited,
-		a:hover,
-		a:active {
-			text-underline-offset: 5px;
-
-			#{$summary}--projects & {
-				color: getColor('green',30);
-			}
-			#{$summary}--people & {
-				color: getColor('blue');
-			}
-		}	
-
-		em {
-			font-style: italic;
-		}
-	
-		&--body {
-
-			&._is-hidden {
-				@include visuallyHide;
-			}
-
-		}
-
-	}
-
-	&-accordion {
-		$accordion: &;
-		@include flexParent();
-		border-top: 1px solid transparent;
-		display: block;
-		margin-top: 4em;
-		padding: 2em 0;
-		width: 100%;
-		font-size: 1rem;
-
-		&--projects {
-			border-color: getColor('green',30);
-		}
-
-		&:link,
-		&:visited,
-		&:hover,
-		&:active {
-			color: getColor('green',30);
-			text-decoration: none;
-		}
-
-		> * {
-			@include flexChild(0 1 auto);
-		}
-
-		&-label {
-			@include getType('h3-sans');
-			flex-grow: 1;
-		}
-
-		&-icon {
-			height: 20px;
-			width: 20px;
-
-			#{$accordion}--projects & {
-				fill: getColor('green',30);
-			}
-			
-		}
-	}
-
-	&-topics {
-		$topics: &;
-		border-top: 1px solid transparent;
-		margin-top:4em;
-		font-size: 1rem;
-
-		&--projects {
-			border-color: getColor('green',30);
-		}
-
-		&--people {
-			border-color: getColor('blue');
-		}
-
-		&-subtitle {
-			$pad: math.div(20,28);
-			@include getType('h3-sans');
-			padding: #{$pad}em 0;
-		}
-
-		@at-root {
-			@include controlTags(#{$topics},$default:true,$theme:true);
-		}
-
-		&-label {
-			@include getType('fine');
-		}
-	}
-
-	&-action {
-		$action: &;
-		@at-root {
-			@include actionButton(#{$action},getColor('blue'),getColor('blue',10));
-		}
-		&-label {
-			@include getType('action');
-		}
-
-		&-icon {
-			height: 20px;
-			width: 20px;
-			fill: getColor('blue');
-
-			#{$summary}-buttons--stack & {
-				fill: getColor('gray');
-			}
-		}
-
-		#{$summary}-buttons--stack & {
-			$mb: math.div(20,16);
-			display: flex;
-			margin-bottom: #{$mb}em;
-
-			&:link,
-			&:visited,
-			&:hover,
-			&:active {
-				color: getColor('gray');
-				text-decoration-color: getColor('gray');
-			}
-
-		}
-
-	}
-
-}
 
 
 .interiorTeam {
@@ -2198,3 +1533,20 @@ $results: '.searchResults';
 /* ---------------------------------------------------------------------
   Newsletter
 ------------------------------------------------------------------------ */
+
+
+/* ---------------------------------------------------------------------
+  Carousel
+------------------------------------------------------------------------ */
+.carousel {
+
+	[aria-hidden="true"] {
+		display: none; //todo
+	}
+
+	.sr-only {
+		pointer-events: none;
+		// prevent bubble ups
+	}
+
+}

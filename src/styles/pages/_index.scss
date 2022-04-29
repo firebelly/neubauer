@@ -1,0 +1,346 @@
+/* _index.scss */
+
+/* ---------------------------------------------------------------------
+ Index-specific  declarations
+------------------------------------------------------------------------ */
+@use "utils/_utils" as *;
+@use "components/__components" as *;
+@use "sass:math";
+
+@forward 'project';
+
+
+/* ---------------------------------------------------------------------
+  Search Filter / Tabs / Dialog
+------------------------------------------------------------------------ */
+.searchFilters {
+	padding: 0 4em;
+
+	&-title {
+		$mt: math.div(40,65);
+		$mb: math.div(80,65);
+		@include getType('h1-normal');
+		margin: #{$mt}em 0 #{$mb}em 0;
+
+		&--hide {
+			@include visuallyHide;
+		}
+	}
+
+}
+
+// Loading indicator
+.searchIndicator {
+
+	&.htmx-request {
+		// Fade following sibs
+		// (search results and pagination)
+		~ * {
+			opacity: 0.3;
+		}
+
+	}
+
+}
+
+.searchTabs {
+	$parent: &;
+	display: none;
+	
+	@include breakpoint(sm) {
+		@include flexParent();
+		margin-bottom: 4em;
+		border-bottom: 1px solid transparent;
+		padding-bottom: 1.7em;
+		@include themedProperty(border-bottom-color,1);
+
+		&--people {
+			margin-top: 6em;
+		}
+
+		> * {
+			@include flexChild();
+		}
+	}
+
+	&-item {
+		margin-right: 4em;	
+	}
+
+	&-trigger {
+		$height: math.div(10,28);
+		@include getType('h3-sans');
+		text-decoration-color: transparent;
+		text-underline-offset: #{$height}em;
+		text-decoration-thickness: #{$height}em;
+
+		&:hover,
+		&._is-active {
+			@include themedProperty(text-decoration-color,1,$parent);
+		}
+
+	}
+
+}
+
+.resultsFilter {
+	$filter: &;
+
+	@at-root {
+		@include controlDialog(#{$filter},$theme:true);
+	}
+
+	&-controls {
+		#{$filter}--exhibitions  & {
+			
+		}
+	}
+
+	&-controls {
+		#{$filter}--events  & {
+			display: none;
+		}
+	}
+
+	&-trigger--filter {
+
+		#{$filter}--exhibitions  & {
+			display: none;
+		}
+	}
+
+	&-layout {
+		$layout: &;
+		display: none;
+
+		@at-root {
+			@include controlLayout(#{$layout},$height:2.5em,$width:2.5em);
+		}
+
+		#{$filter}--exhibitions & {
+			@include flexParent();
+			@include alignItems(center);
+
+			&-title {
+				$mr: math.div(25,16);
+				@include getType('caption');
+				font-weight: bold;
+				margin: 0 #{$mr}em 0 0;
+			}
+
+			&-name {
+				@include getType('caption');
+			}
+		}
+	}
+
+}
+
+/* ---------------------------------------------------------------------
+  Search Results
+------------------------------------------------------------------------ */
+$results: '.searchResults';
+.searchResults {
+	padding: 0 4em;
+
+	&-title {
+		@include visuallyHide;
+	}
+
+	&-content {
+        $margin: 0.5em;
+        $thirds: math.div(100,30) * 10%;
+        $halves-percent: calc(50% - $margin);
+        $thirds-percent: calc($thirds - $margin);
+        
+        @include breakpoint(sm) {
+            @include flexParent();
+            margin-left: -0.25em;
+
+            > * {
+                @include flexChild(0 1 #{$halves-percent});
+            }
+        }
+		
+		&._is-grid {
+
+		}
+
+		&._is-list {
+
+			.searchArticle {
+				@include flexParent();
+				border-top: 1px solid getColor('gray');
+				padding: 2em 0;
+				margin: 0;
+
+				> * {
+					@include flexChild();
+				}
+			
+				&-asset {
+					//TODO
+					width: 200px;
+					height: 200px;
+					margin: 0 2em 0 0;
+				}
+				
+			}
+
+		}
+
+	}
+
+}
+
+.searchArticle {
+	$article: &;
+
+	@at-root {
+		@include cardDirectory(#{$article},$theme:true);
+	}
+
+	&--exhibitions {
+		#{$article}-topics {
+			display: none;
+		}
+	}
+
+	&--feature {
+		
+		#{$results}-content._is-grid & {
+			flex-basis: 100%;
+		}
+
+		#{$article}-details {
+			color: getColor('gray');
+
+			a:link,
+			a:visited,
+			a:hover,
+			a:active {
+				color: getColor('gray');
+			}
+
+		}
+
+		#{$results}-content._is-grid & {
+
+			#{$article}-details {
+				@include flexParent($display:flex,$values:column wrap);
+				@include justifyContent(center);
+				@include alignItems(center);
+			}
+
+			#{$article}-title {
+				@include getType('h2-sans');
+			}
+
+			#{$article}-dateblock {
+				@include getType('p');
+			}
+		}
+
+		#{$article}-topics {
+			display: none;
+		}
+
+		$action: #{$article}-action;
+		@include actionButton(#{$action},getColor('gray'),getColor('gray',10));
+
+	}
+
+	&-asset {
+
+		#{$results}-content._is-grid & {
+			width: 100%;
+			height: auto;
+		}
+	}
+
+}
+
+.searchBio {
+	$bio: &;
+
+	@at-root {
+		@include cardBio(#{$bio},$theme:true);
+	}
+
+	&-title--top {
+		@include totallyHide;
+	}
+}
+
+/* ---------------------------------------------------------------------
+  Feature Cards	
+------------------------------------------------------------------------ */
+.projectFeature {
+	$feature: &;
+
+	@at-root {
+		@include cardFeature(#{$feature},getColor('green'),getColor('green',10));
+	}
+}
+
+.personFeature {
+	$feature: &;
+
+	@at-root {
+		@include cardFeature(#{$feature},getColor('blue'),getColor('blue',10));
+	}
+}
+
+.relatedArticle {
+	$related: &;
+	padding-top: 0;
+
+	@at-root {
+		@include cardFeature(#{$related},getColor('gray',10),getColor('gray'));
+	}
+
+	&-label {
+		&--hidden {
+			@include totallyHide;
+		}
+	}
+
+	&-subtitle {
+		$mb: math.div(20,30);
+		@include getType('h3-italic');
+		font-style: italic;
+		margin: 0 0 #{$mb}em 0;
+	}
+
+	&-content {
+		@include flexParent($display:flex,$values:row-reverse nowrap);
+		margin-top: 0;
+	}
+
+	&-details {
+		* {
+			text-align: left;
+		}
+	}
+
+	&-buttons,
+	&-team-list {
+		@include justifyContent(flex-start);
+	}
+
+	&-topics {
+		$topics: &;
+		
+		@at-root {
+			@include controlTags(#{$topics},getColor('gray'),getColor('gray',10));
+		}
+		&-list {
+			@include justifyContent(flex-start);
+		}
+
+		&-label {
+			@include getType('fine');
+		}
+	}
+
+}

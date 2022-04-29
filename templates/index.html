@@ -1,9 +1,11 @@
 {% extends "layouts/_base.html" %}
 
+{% import 'macros/_utils' as utils %}
 {% import 'macros/_dates' as dates %}
 {% import 'macros/_cards' as cards %}
 {% import 'macros/_assets' as assets %}
 {% import 'macros/_controls' as controls %}
+{% import 'macros/_carousels' as carousels %}
 
 {% block content %}
 {% set openerImage = entry.homepageCover is not null and entry.homepageCover|length > 0 ? entry.homepageCover.one() : null %}
@@ -134,10 +136,24 @@
         .search('personType:visiting-fellow' ~ ' AND personTypeStatus:current')
         .all()
     %}
-    {% for person in fellows %}
-        {% set cardName,cardEntry,cardObj,cardVariant = 'currentFellow',person,{},'homepage' %}
-        {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
-    {% endfor %}
+    {% set personSizes = utils.getAssetSizes('people','homepage') %}
+    {% set personObj = {
+        'assetSizes': personSizes,
+        'cardVariant': 'homepage'
+    } %}
+    {# {% for person in fellows %}
+        {{ cards.cardArticle(cardName,cardEntry,cardObj) }}
+    {% endfor %} #}
+
+    {% set slideObj = {
+        'slides': fellows,
+        'group': 3,
+        'cardName': 'currentFellow',
+        'cardObj': personObj 
+    }%}
+
+    {{ carousels.cardCarousel(slideObj) }}
+
     </div>
 </section>
 
@@ -154,7 +170,7 @@
             </div>
             <a 
                 class="homepageEntries-action homepageEntries-action--link"
-                href="{{ siteUrl }}/{{ secondaryProject.uri }}">
+                href="{{ siteUrl }}events">
                 <span class="homepageEntries-action-label">Learn More</span>
                 <svg 
                     class="homepageEntries-action-icon">
@@ -165,8 +181,10 @@
     </div>
 
     <div class="homepageEntries-list">
+    {% set eventSizes = utils.getAssetSizes('events','homepage') %}
+    {% set eventObj = {'assetSizes': eventSizes} %}
     {% for event in upcomingEvents %}
-        {% set cardName,cardEntry,cardObj,cardVariant = 'upcomingEvent',event,{},'homepage' %}
+        {% set cardName,cardEntry,cardObj,cardVariant = 'upcomingEvent',event,eventObj,'homepage' %}
         {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
     {% endfor %} 
     </div>

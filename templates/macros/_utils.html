@@ -1,0 +1,174 @@
+{# _utils.html
+    NOTE: These macros would be better on the backend but
+    in the interest of time, they are here.
+#}
+
+{# getAssetSizes 
+    Returns encoded object containing size arrays
+
+    @sectionKey {str}  
+    @contextKey {str}
+#}
+{% macro getAssetSizes(sectionKey,contextKey) %}
+
+    {% set assetSizeMap = {
+        'projects': {
+            'opener': {
+                'sm': [280,200],
+                'lg': [1360,480]
+            },
+            'directory': {
+                'sm': [280,200],
+                'lg': [450,350]
+            },
+            'feature': {
+                'sm': [280,200],
+                'lg': [675,675]
+            },
+            'interior': {
+                'sm': [280,200],
+                'lg': [640,700]
+            },
+            'question': {
+                'sm': [320,640],
+                'lg': [1440,900]
+            },
+            'quote': {
+                'sm': [280,280],
+                'lg': [640,640]
+            },  
+            'card': {
+                'sm': [255,180],
+                'lg': [675,400]
+            }
+        },
+        'people': {
+            'homepage': {
+                'sm': [255,255],
+                'lg': [435,400]
+            },
+            'directory': {
+                'sm': [280,205],
+                'lg': [140,140]
+            },
+            'interior': {
+                'sm': [280,280],
+                'lg': [640,640]
+            },
+            'card': {
+                'sm': [255,255],
+                'lg': [675,400]
+            }
+        },
+        'exhibitions': {
+            'feature': {
+                'sm': [320,220],
+                'lg': [1440,600]
+            },
+            'directory-grid': {
+                'sm': [280,280],
+                'lg': [800,'auto']
+            },
+            'directory-list': {
+                'sm': [70,70],
+                'lg': [200,200]  
+            },
+            'interior': {
+                'sm': [320,220],
+                'lg': [1360,700]
+            },
+            'related': {
+                'sm': [280,200],
+                'lg': [640,620]
+            },
+            'gallery': {
+                'sm': [135,135],
+                'lg': [335,335]
+            },
+            'overlay': {
+                'sm': ['100%','auto'],
+                'lg': ['100%','auto']
+            }
+        },
+        'events': {
+            'homepage': {
+                'sm': [255,180],
+                'lg': [450,350]
+            },
+            'opener': {
+                'sm': [280,200],
+                'lg': [1360,480]
+            },
+            'directory': {
+                'sm': [280,200],
+                'lg': [675,400]
+            },
+            'interior': {
+                'sm': [280,200],
+                'lg': [675,400]
+            },
+            'card': {
+                'sm': [255,180],
+                'lg': [675,400]
+            }
+        },
+        'about': {
+            'opener': {
+                'sm': [280,200],
+                'lg': [1360,480]
+            },
+            'director': {
+                'sm': [280,280],
+                'lg': [640,640]
+            },
+            'impact': {
+                'sm': [280,250],
+                'lg': [1360,700]
+            },
+            'project': {
+                'sm': [255,180],
+                'lg': [675,400]
+            },
+            'people': {
+                'sm': [280,280],
+                'lg': [335,335]
+            },
+            'visit': {
+                'sm': [280,280],
+                'lg': [640,640]
+            },
+            'publications': {
+                'sm': [260,180],
+                'lg': [640,400]
+            }
+        },
+        'news': {
+            'opener': {
+                'sm': [280,200],
+                'lg': [1360,480]
+            },
+            'interior': {
+                'sm': [280,200],
+                'lg': [675,400]
+            },
+            'card': {
+                'sm': [255,180],
+                'lg': [675,400]
+            }
+        },
+        'search': {
+            'sm': [280,200],
+            'lg': [450,350]
+        },
+        'narrative': {
+            'sm': [255,180],
+            'lg': [675,400]
+        }
+
+    }%}
+
+    {% set assetSizes = (sectionKey in assetSizeMap|keys and contextKey in assetSizeMap[sectionKey]|keys) ? assetSizeMap[sectionKey][contextKey] : [] %}
+    
+    {{ assetSizes|json_encode|raw }}
+
+{% endmacro %}

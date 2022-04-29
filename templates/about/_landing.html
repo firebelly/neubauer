@@ -167,40 +167,10 @@
 
     <div class="interiorMod-list interiorMod-list--3">
     {% for card in appCards %}
-   
-    {% set title = card.cardTitle != '' ? card.cardTitle : null %}
-    {% set summary = card.cardSummary != '' ? card.cardSummary : null %}
-    {% set image = card.cardImage|length > 0 ? card.cardImage : null %}
-    {% set dnld = card.downloadLink|length > 0 ? card.downloadLink.one() : null %}
-    {% set actionLabel = card.actionLink.actionText != '' ?  card.actionLink.actionText : null %}
-    {% set actionURL = card.actionLink.actionURL != '' ?  card.actionLink.actionURL : null %}
-    <article class="miniCard">
-        {% if title %}
-        <h3 class="miniCard-title">{{ title }}</h3>
-        {% endif %}
-        {% if image %}
-        <img class="miniCard-img" src="{{ card.cardImage.one().url }}" />
-        {% endif %}
-        {% if summary %}
-        <div class="miniCard-summary">{{ summary }}</div>
-        {% endif %}
-        {% if dnld %}
-        <a href="{{ dnld.url }}">{{ dnld.title }}</a>
-        {% endif %}
-        {% if actionLabel and actionURL %}
-        <a 
-            class="miniCard-action miniCard-action--link"
-            href="{{ actionURL }}"
-            title=""
-            role="">
-            <span class="miniCard-action-label">{{ actionLabel }}</span>
-            {# <svg class="interiorSummary-action-icon">
-                <use xlink:href="{{ alias('@assetBasePath' ~ emailPath) }}"></use>
-            </svg> #}
-        </a>
-        {% endif %}
-    </article>
+    {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-cardlette',card,{},'application' %}
+    {{ cards.cardMini(cardName,cardEntry,cardObj,cardVariant) }}
     {% endfor %}
+    </div>
 </section>
 {% endif %}
 
@@ -246,38 +216,8 @@
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
     <div class="interiorMod-list interiorMod-list--4">
         {% for card in pubs %}
-        {% set title = card.cardTitle != '' ? card.cardTitle : null %}
-        {% set summary = card.cardSummary != '' ? card.cardSummary : null %}
-        {% set image = card.cardImage|length > 0 ? card.cardImage : null %}
-        {% set dnld = card.downloadLink|length > 0 ? card.downloadLink.one() : null %}
-        {% set actionLabel = card.actionLink.actionText != '' ?  card.actionLink.actionText : null %}
-        {% set actionURL = card.actionLink.actionURL != '' ?  card.actionLink.actionURL : null %}
-        <article class="miniCard">
-            {% if title %}
-            <h3 class="miniCard-title">{{ title }}</h3>
-            {% endif %}
-            {% if image %}
-            <img class="miniCard-img" src="{{ card.cardImage.one().url }}" />
-            {% endif %}
-            {% if summary %}
-            <div class="miniCard-summary">{{ summary }}</div>
-            {% endif %}
-            {% if dnld %}
-            <a href="{{ dnld.url }}">{{ dnld.title }}</a>
-            {% endif %}
-            {% if actionLabel and actionURL %}
-            <a 
-                class="miniCard-action miniCard-action--link"
-                href="{{ actionURL }}"
-                title=""
-                role="">
-                <span class="miniCard-action-label">{{ actionLabel }}</span>
-                {# <svg class="interiorSummary-action-icon">
-                    <use xlink:href="{{ alias('@assetBasePath' ~ emailPath) }}"></use>
-                </svg> #}
-            </a>
-            {% endif %}
-        </article>
+        {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-cardlette',card,{},'publications' %}
+        {{ cards.cardMini(cardName,cardEntry,cardObj,cardVariant) }}
         {% endfor %}
     </div>
 </section>

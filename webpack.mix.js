@@ -25,10 +25,13 @@ mix.browserSync({
 mix.sass(src`styles/main.scss`, 'web/build/styles');
 // Critical CSS
 // Config homepage and index page templates
+// TODO new tmpl structure
 const pageTemplates = ['about','research','people','events','exhibitions','search'];
 const pageUrls = [];
-pageUrls.push( { url: '/', template: 'index' });
-pageTemplates.forEach(page => pageUrls.push({url:`/${page}`, template: '_index' }) );
+// pageUrls.push( { url: '/', template: 'index' });
+// pageTemplates.forEach(page => pageUrls.push({url:`/${page}`, template: '_index' }) );
+pageTemplates.forEach(page => pageUrls.push({url:`/${page}`, template: 'layouts/_index' }) );
+pageUrls.push({url:'/', template: 'index'});
 
 mix.criticalCss({
   enabled: mix.inProduction(),

@@ -1,16 +1,19 @@
 {# cardArticle 
-    See styles/components/_actions.scss for styling
+    See styles/components/_cards.scss for styling
 
     @cardName {str}  - base styling hook
     @cardEntry {obj} - entry object
     @cardObj {obj}   - wildcard object for storage
+    @cardVariant {str} - styling variant hook
 #}
 {% macro cardArticle(cardName,cardEntry,cardObj = {},cardVariant = null) %}
+{% import 'macros/_utils' as utils %}
 {% import 'macros/_dates' as dates %}
 {% import 'macros/_assets' as assets %}
 {% import 'macros/_controls' as controls %}
 
 {% set entrySection = cardEntry.section|lower %}
+{% set cardVariant = cardObj is not null and 'cardVariant' in cardObj|keys ? cardObj['cardVariant'] : null %}
 {% set cardImage = cardEntry.cardImage and cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
 {% set cardTopics = cardEntry.topicList is not null and cardEntry.topicList|length > 0 ? cardEntry.topicList : null %}
 {% set cardDate = cardEntry.dateBlock is not null and cardEntry.dateBlock|length == 1 ? dates.printDate(cardEntry.dateBlock[0]) : null %}
@@ -26,7 +29,6 @@
 {% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
 {% set emailPath = "/spritemap.svg#icon-email-20" %}
 
-
 {# Person vars #}
 {% set isBio = (cardName == 'searchBio') %}
 {% set isPeopleDirectory = (cardVariant == 'people') %}
@@ -41,13 +43,14 @@
     {# Card: Image #}
     {% if cardImage %}
     {% set assetName = "#{cardName}-asset" %}
-    <div class="{{ assetName }}">
-        {% if isPeopleDirectory %}
-        {{ assets.assetCard(assetName,cardImage,140,140) }}
+    {% set assetSizes = cardObj is not null and 'assetSizes' in cardObj|keys ? cardObj['assetSizes']|json_decode : null %}
+    <picture class="{{ assetName }}">
+        {% if assetSizes %}
+        {{ assets.assetCard(assetName,cardImage,assetSizes) }}
         {% else %}
         {{ assets.assetCard(assetName,cardImage) }}
         {% endif %}
-    </div>
+    </picture>
     {% elseif isBio %}
     <div class="{{ cardName }}-asset--ghost"></div>
     {% endif %}
@@ -166,15 +169,19 @@
 
 
 {# cardFeature
-    See styles/components/_actions.scss for styling
+    See styles/components/_cards.scss for styling
 
     @cardName {str}  - base styling hook
     @cardEntry {obj} - entry object
+    @cardObj {obj}   - wildcard object for storage
 #}
-{% macro cardFeature(cardEntry,cardLabel,cardName,cardVariant = null,cardId = null) %}
+{% macro cardFeature(cardName,cardEntry,cardObj = {}) %}
 {% import 'macros/_assets' as assets %}
 {% import 'macros/_dates' as dates %}
 
+{% set cardVariant = cardObj is not null and 'cardVariant' in cardObj|keys ? cardObj['cardVariant'] : null %}
+{% set cardLabel = cardObj is not null and 'cardLabel' in cardObj|keys ? cardObj['cardLabel'] : null %}
+{% set cardId = cardObj is not null and 'cardId' in cardObj|keys ? cardObj['cardId'] : null %}
 {% set cardImage = cardEntry.cardImage and cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
 {% set team = cardEntry.projectTeam.all() %}
 {% set topics = cardEntry.topicList.all() %}
@@ -188,23 +195,17 @@
     <div class="{{ cardName }}-content">
         
         {% if cardImage %}
-            {% set 
-                imageName,imageVariant,imageObj,imageTransforms,aspectRatioObj,showCaption,imageBlock,imagerX = 
-                "#{cardName}-img",null,cardImage,null,{},false,{},true
-        %}
-        <div class="{{ cardName }}-asset">
-            {{ assets.assetImage(
-                imageName,
-                imageVariant,
-                imageObj,
-                imageTransforms,
-                aspectRatioObj,
-                showCaption,
-                imageBlock, 
-                imagerX) 
-            }}
-        </div>
+        {% set assetName = "#{cardName}-asset" %}
+        {% set assetSizes = cardObj is not null and 'assetSizes' in cardObj|keys ? cardObj['assetSizes']|json_decode : null %}
+        <picture class="{{ assetName }}">
+            {% if assetSizes %}
+            {{ assets.assetCard(assetName,cardImage,assetSizes) }}
+            {% else %}
+            {{ assets.assetCard(assetName,cardImage) }}
+            {% endif %}
+        </picture>
         {% endif %}
+
         <div class="{{ cardName }}-details">
             {% if cardVariant == 'related' %}
                 <h3 class="{{ cardName }}-subtitle">{{ cardLabel }}</h3>
@@ -260,4 +261,72 @@
         </div>
     </div>
 </section>
+{% endmacro %}
+
+{# cardMini
+    See styles/components/_cards.scss for styling
+
+    @cardName {str}  - base styling hook
+    @cardEntry {obj} - entry object
+    @cardObj {obj}   - wildcard object for storage
+    @cardVariant {str} - styling variant hook
+#}
+{% macro cardMini(cardName,cardEntry,cardObj = {},cardVariant = null) %}
+{% import 'macros/_assets' as assets %}
+
+{% set title = cardEntry.cardTitle != '' ? cardEntry.cardTitle : null %}
+{% set summary = cardEntry.cardSummary != '' ? cardEntry.cardSummary : null %}
+{% set image = cardEntry.cardImage is not null and cardEntry.cardImage|length > 0 ? cardEntry.cardImage : null %}
+{% set dnld = cardEntry.downloadLink|length > 0 ? cardEntry.downloadLink.one() : null %}
+{% set actionLabel = cardEntry.actionLink.actionText != '' ?  cardEntry.actionLink.actionText : null %}
+{% set actionURL = cardEntry.actionLink.actionURL != '' ?  cardEntry.actionLink.actionURL : null %}
+{% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
+{% set dnldPath = "/spritemap.svg#icon-download-20" %}
+
+<article class="{{ cardName }}">
+
+    {% if image %}
+    <div class="{{ cardName }}-asset">
+        {% set cardName,cardImage = "#{cardName}-asset",image %}
+        {% set assetSizes = cardObj is not null and 'assetSizes' in cardObj|keys ? cardObj['assetSizes']|json_decode : null %}
+        {% if assetSizes %}
+            {{ assets.assetCard(cardName,cardImage,assetSizes) }}
+        {% else %}
+            {{ assets.assetCard(cardName,cardImage) }}
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if title %}
+    <h3 class="{{ cardName }}-title">{{ title }}</h3>
+    {% endif %}
+
+    {% if summary %}
+    <div class="{{ cardName }}-summary">{{ summary }}</div>
+    {% endif %}
+    {% if dnld %}
+    <a
+        class="{{ cardName }}-action {{ cardName }}-action--link"
+        href="{{ dnld.url }}"
+        title=""
+        role="">
+        <span class="{{ cardName }}-action-label">{{ dnld.title }}</span>
+        <svg class="{{ cardName }}-action-icon">
+            <use xlink:href="{{ alias('@assetBasePath' ~ dnldPath) }}"></use>
+        </svg>
+    </a>
+    {% endif %}
+    {% if actionLabel and actionURL %}
+    <a 
+        class="{{ cardName }}-action {{ cardName }}-action--link"
+        href="{{ actionURL }}"
+        title=""
+        role="">
+        <span class="{{ cardName }}-action-label">{{ actionLabel }}</span>
+        <svg class="{{ cardName }}-action-icon">
+            <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+        </svg>
+    </a>
+    {% endif %}
+</article>
 {% endmacro %}

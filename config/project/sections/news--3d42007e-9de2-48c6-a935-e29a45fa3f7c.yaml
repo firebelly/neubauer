@@ -19,6 +19,6 @@ siteSettings:
   0c99f337-2218-4c6f-b0ad-30589c1ebbc5: # neubauer
     enabledByDefault: true
     hasUrls: true
-    template: news/_entry
-    uriFormat: 'about/news/{slug}'
+    template: layouts/_interior.html
+    uriFormat: 'news/{slug}'
 type: channel

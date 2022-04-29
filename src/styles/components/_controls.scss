@@ -466,8 +466,10 @@
             $parent: &;
             @include flexParent;
             margin: 0 0.8em 0 0;
-            padding-right: 2em;
+            padding: 1.5em;
             position: relative;
+            border: 1px solid transparent;
+            border-radius: 5px;
 
             > * {
                 @include flexChild;
@@ -475,6 +477,8 @@
 
             @include breakpoint(md) {
                 margin: 0 0 0 0.8em;
+                padding: 0 2em 0 0;
+                border: none;
             }
 
             &._is-inactive {
@@ -482,6 +486,14 @@
 
                 &:hover {
                     cursor: default;
+                }
+            }
+
+            #{$selector}-label {
+                @include visuallyHide;
+            
+                @include breakpoint(sm) {
+                    @include visuallyShow;
                 }
             }
 
@@ -499,7 +511,10 @@
         &-icon {
             height: $icon-size;
             width: $icon-size;
-            margin-left: 1em;
+
+            @include breakpoint(sm) {
+                margin-left: 1em;
+            }
         }
     
     }
@@ -520,6 +535,7 @@
         &-nav {
             $parent: &;
             @include getType('action'); 
+            border-color: $color-primary;
             color: $color-primary;
 
             &:link,

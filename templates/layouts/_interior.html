@@ -1,5 +1,6 @@
 {% extends "layouts/_base.html" %}
 
+{% import 'macros/_utils' as utils %}
 {% import 'macros/_dates' as dates %}
 {% import 'macros/_cards' as cards %}
 {% import 'macros/_assets' as assets %}
@@ -13,17 +14,24 @@
 {% set cardImage = entry.cardImage and entry.cardImage.one() is not null ? entry.cardImage : null %}
 {% set citationList = entry.citationList is not null and entry.citationList|length > 0 ? entry.citationList : null %}
 {% set topicList = entry.topicList is not null and entry.topicList|length > 0 ? entry.topicList : null %}
+{% set eventType = entry.eventType is not null and entry.eventType|length > 0 ? entry.eventType[0] : null %}
 {% set entrySubtitle = (entry.personTitle is not null and entry.personTitle != "") ? entry.personTitle : 
-                    ((entrySection == 'projects') ? 'Research Project' : 'Exhibition') %}
+                    (entrySection == 'projects' ? 'Research Project' : 
+                    entrySection == 'events' ? ( eventType ?? 'Events' ) : 
+                    entrySection|title) %}
 {% set entryDate = (entry.dateBlock is not null and entry.dateBlock[0] != '') ? dates.printDate(entry.dateBlock[0]) : null %}
 {% set spotlightBlock = entry.spotlightBlock is not null and entry.spotlightBlock|length > 0 ? entry.spotlightBlock.all() : null %}
 {% set narrativeBlock = entry.narrativeBlock is not null and entry.narrativeBlock|length > 0 ? entry.narrativeBlock.all() : null %}
 
 {% set abstract = entry.abstract is not null and entry.abstract != '' ? entry.abstract : 
-                (entry.exhibitionAbstract is not null and entry.exhibitionAbstract != '' ? entry.exhibitionAbstract: null) %}
+                (entry.exhibitionAbstract is not null and entry.exhibitionAbstract != '' ? entry.exhibitionAbstract: 
+                entry.teaser is not null and entry.teaser != '' ? entry.teaser: 
+                null) %}
 
 {% set body = entry.summary is not null and entry.summary != '' ? entry.summary :
-                (entry.personSummary is not null and entry.personSummary != "" ? entry.personSummary : null) %}
+                (entry.personSummary is not null and entry.personSummary != "" ? entry.personSummary : 
+                entry.body is not null and entry.body != '' ? entry.body: 
+                null) %}
 
 {% set actionBlock = (entry.actionBlock is not null and entry.actionBlock|length > 0 and entry.actionBlock[0] != '') ? entry.actionBlock : null %}
 
@@ -199,17 +207,42 @@
 </div>
 {% endif %}
 
-{% set summaryId = (entrySection == 'people' ? 'bio' : (entrySection == 'projects' ? 'summary' : 'Exhibition')) %}
-{% set summaryTitle = (entrySection == 'people' ? 'Biography' : (entrySection == 'projects' ? 'Project Summary' : 'Exhibition Summary')) %}
+{# todo: streamline this #}
+{% set summaryId, summaryTitle = '',''%}
+{% switch entrySection %}
+    {% case 'people' %}
+    {% set summaryId, summaryTitle = 'bio','Biography' %}
+    {% case 'projects' %}
+    {% set summaryId, summaryTitle = 'summary','Project Summary' %}
+    {% case 'exhibitions' %}
+    {% set summaryId, summaryTitle = 'exhibition','Exhibition Summary' %}
+    {% case 'events' %}
+    {% set summaryId, summaryTitle = 'event','Event Summary' %}
+    {% case 'news' %}
+    {% set summaryId, summaryTitle = 'news','News Summary' %}
+{% endswitch %}
 
 <section class="interiorSummary interiorSummary--{{ entrySection }}" id="{{ summaryId }}">
 
     <h3 class="interiorSummary-title interiorSummary-title--{{ entrySection }}">{{ summaryTitle }}</h3>
 
+    {% set showFrame = (entrySection in ['people','exhibitions','events']) %}
+    {% if showFrame %}
     <div class="interiorSummary-frame interiorSummary-frame--{{ entrySection }}">
-        {% if entrySection == 'people' %}
-        <div class="interiorSummary-placeholder">{# image goes here #}</div>
-        <div class="interiorSummary-caption">Photo by: ornare ullamcorper.</div>
+
+        {% if entrySection in ['people','events'] %}
+        {% if cardImage %}
+        {% set imageCaption = cardImage.one().caption ? cardImage.one().caption : null %}
+        <{{ imageCaption ? 'figure' : 'picture' }} class="interiorSummary-asset">
+            {% set interiorSizes = utils.getAssetSizes(entrySection,'interior')|json_decode %}
+            {% set imageName,imageObj = "interiorSummary-asset",cardImage %}
+            {{ assets.assetCard(imageName,imageObj,interiorSizes) }}
+
+            {% if imageCaption %}
+            <figcaption class="interiorSummary-caption">{{ imageCaption }}</figcaption>
+            {% endif %}
+        </{{ imageCaption ? 'figure' : 'picture' }}>
+        {% endif %}
         {% endif %}
 
         {% if entrySection == 'exhibitions' %}
@@ -239,6 +272,7 @@
         {% endif %}
         {% endif %}
     </div>
+    {% endif %}
 
     <div class="interiorSummary-main">
 
@@ -300,8 +334,15 @@
 </section>
 
 {% if entrySection == 'people' and projectList %}
-{% set projectEntry = projectList[0] %}
-{{ cards.cardFeature(projectEntry,'Projects','personFeature','callout','projects') }}
+{% set projectFeature = projectList[0] %}
+{% set featureSizes = utils.getAssetSizes('projects','feature') %}
+{% set featureObj = {
+    'assetSizes': featureSizes,
+    'cardVariant': 'callout',
+    'cardLabel': 'Projects',
+    'cardId': 'projects'
+}%}
+{{ cards.cardFeature('personFeature',projectFeature,featureObj) }}
 {% endif %}
 
 {% if team %}
