@@ -1,3 +1,4 @@
+{% import 'macros/_utils' as utils %}
 {% import 'macros/_dates' as dates %}
 {% import 'macros/_cards' as cards %}
 {% import 'macros/_assets' as assets %}
@@ -115,9 +116,15 @@
                 {% endfor %}
             </div>
             <div class="interiorMod-list interiorMod-list--2">
+                {% set highlightName = 'interiorMod-card' %}
+                {% set highlightObj = {
+                    'cardVariant': 'highlight',
+                    'showContent': false,
+                    'assetSizes': utils.getAssetSizes('about','impact')
+                }%}
                 {% for mtx in highlightList %}
-                {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-card',mtx.project[0],{'showContent': false},'highlight' %}
-                {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+                {% set highlightEntry = mtx.project[0] %}
+                {{ cards.cardArticle(highlightName,highlightEntry,highlightObj) }}
                 {% endfor %}
             </div>
         </div>
@@ -138,9 +145,14 @@
     <section class="interiorMod-people interiorMod-people--staff">
         <h4 class="interiorMod-subtitle">Our Team</h4>
         <div class="interiorMod-list interiorMod-list--4">
-            {% for person in staff %}
-            {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-card',person,{'showContent': false},'staff' %}
-            {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+            {% set staffName = 'interiorMod-card' %}
+            {% set staffObj = {
+                'cardVariant': 'staff',
+                'showContent': false,
+                'assetSizes': utils.getAssetSizes('about','people')
+            }%}
+            {% for staffEntry in staff %}
+            {{ cards.cardArticle(staffName,staffEntry,staffObj) }}
             {% endfor %}
         </div>
     </section>
@@ -149,9 +161,14 @@
     <section class="interiorMod-people interiorMod-people--advisors">
         <h4 class="interiorMod-subtitle">Faculty Advisory Board</h4>
         <div class="interiorMod-list interiorMod-list--4">
-            {% for person in advisors %}
-            {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-card',person,{'showContent': false},'advisors' %}
-            {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+            {% set advisorName = 'interiorMod-card' %}
+            {% set advisorObj = {
+                'cardVariant': 'advisors',
+                'showContent': false,
+                'assetSizes': utils.getAssetSizes('about','people')
+            }%}
+            {% for advisorEntry in advisors %}
+            {{ cards.cardArticle(advisorName,advisorEntry,advisorObj) }}
             {% endfor %}
         </div>
     </section>
@@ -166,10 +183,15 @@
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
 
     <div class="interiorMod-list interiorMod-list--3">
-    {% for card in appCards %}
-    {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-cardlette',card,{},'application' %}
-    {{ cards.cardMini(cardName,cardEntry,cardObj,cardVariant) }}
-    {% endfor %}
+        {% set appName = 'interiorMod-cardlette' %}
+        {% set appObj = {
+            'cardVariant': 'application',
+            'showContent': false,
+            'assetSizes': utils.getAssetSizes('about','publications')
+        }%}
+        {% for appEntry in appCards %}
+            {{ cards.cardMini(appName,appEntry,appObj) }}
+        {% endfor %}
     </div>
 </section>
 {% endif %}
@@ -203,9 +225,14 @@
 <section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modHandle }}">
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
     <div class="interiorMod-list interiorMod-list--4">
-        {% for card in news %}
-        {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-card',card,{'showContent': false},'news' %}
-        {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+        {% set newsName = 'interiorMod-card' %}
+        {% set newsObj = {
+            'cardVariant': 'news',
+            'showContent': false,
+            'assetSizes': utils.getAssetSizes('about','news')
+        }%}
+        {% for newsEntry in news %}
+            {{ cards.cardArticle(newsName,newsEntry,newsObj) }}
         {% endfor %}
     </div>
 </section>
@@ -215,9 +242,14 @@
 <section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modHandle }}">
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
     <div class="interiorMod-list interiorMod-list--4">
-        {% for card in pubs %}
-        {% set cardName,cardEntry,cardObj,cardVariant = 'interiorMod-cardlette',card,{},'publications' %}
-        {{ cards.cardMini(cardName,cardEntry,cardObj,cardVariant) }}
+        {% set pubName = 'interiorMod-cardlette' %}
+        {% set pubObj = {
+            'cardVariant': 'publications',
+            'showContent': false,
+            'assetSizes': utils.getAssetSizes('about','publications')
+        }%}
+        {% for pubEntry in pubs %}
+        {{ cards.cardMini(pubName,pubEntry,pubObj) }}
         {% endfor %}
     </div>
 </section>

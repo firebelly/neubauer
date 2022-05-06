@@ -3,7 +3,7 @@ contentColumnType: string
 fieldGroup: d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d # Homepage
 handle: homepageCover
 instructions: 'Min size: 1440px x 940px'
-name: 'Homepage Cover'
+name: 'Opener Image'
 searchable: false
 settings:
   allowSelfRelations: false

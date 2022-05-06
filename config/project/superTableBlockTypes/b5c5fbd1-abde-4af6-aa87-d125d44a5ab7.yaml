@@ -1,0 +1,67 @@
+field: d331a1d5-ba85-455a-93aa-5e011407f146 # Fellows Call-to-Action Card
+fieldLayouts:
+  3818a303-3e61-4210-97d0-85dcaff043f7:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: ccadc864-aaf1-4652-a050-cda6111fdb89 # Large Prompt
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: adce5df3-632e-4623-8e1f-a778043c1e46 # Link Label
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  adce5df3-632e-4623-8e1f-a778043c1e46: # Link Label
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: action
+    instructions: ''
+    name: 'Link Label'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  ccadc864-aaf1-4652-a050-cda6111fdb89: # Large Prompt
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: prompt
+    instructions: ''
+    name: 'Large Prompt'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText

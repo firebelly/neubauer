@@ -5,7 +5,8 @@ import accordionMenu from './components/accordionMenu';
 import flyoutContent from './components/flyoutContent';
 import searchFilters from './components/searchFilters';
 import parallaxImages from './components/parallaxImages';
-import contentCarousel from './components/contentCarousel';
+import scrollCarousel from './components/scrollCarousel';
+import scrollChyron from './components/scrollChyron';
 
 // Inits
 appState.init();
@@ -20,4 +21,31 @@ if (document.querySelectorAll('[role="tablist"]').length > 0 ) {
 }
 
 parallaxImages.init();
-contentCarousel.init({'group': 3});
+
+// Homepage Carousels:
+const peopleCarousel = new scrollCarousel({
+    _id: 'people'
+});
+if ( peopleCarousel.carousel !== null ) {
+    peopleCarousel.init();
+}
+const eventsCarousel = new scrollCarousel({
+    _id: 'events'
+});
+if ( eventsCarousel.carousel !== null ) {
+    eventsCarousel.init();
+}
+const newsCarousel = new scrollCarousel({
+    _id: 'news'
+});
+if ( newsCarousel.carousel !== null ) {
+    newsCarousel.init();
+}
+
+// Chyron
+const footerChyron = new scrollChyron({
+    _id: 'footer'
+});
+if ( footerChyron.chyron !== null ) {
+    footerChyron.init();
+}

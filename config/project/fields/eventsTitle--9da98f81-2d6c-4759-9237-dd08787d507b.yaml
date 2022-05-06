@@ -1,0 +1,19 @@
+columnSuffix: zwxlztar
+contentColumnType: text
+fieldGroup: d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d # Homepage
+handle: eventsTitle
+instructions: ''
+name: 'Events Title'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: ''
+  columnType: null
+  initialRows: '4'
+  multiline: ''
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

@@ -45,7 +45,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: fd1a450a-1f47-4168-8ca3-5ef56c735385 # Homepage Cover
+            fieldUid: fd1a450a-1f47-4168-8ca3-5ef56c735385 # Opener Image
             instructions: null
             label: null
             required: false
@@ -53,8 +53,101 @@ fieldLayouts:
             type: craft\fieldlayoutelements\CustomField
             warning: null
             width: 100
-        name: Content
+        name: Opener
         sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: 14d1f316-5665-4da2-9fbf-c22d8ffebe54 # Fellows Title
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 38cdc29d-cc98-47b5-8728-53fe05993451 # Fellows Opener
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: d331a1d5-ba85-455a-93aa-5e011407f146 # Fellows Call-to-Action Card
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: People
+        sortOrder: 2
+      -
+        elements:
+          -
+            fieldUid: 9da98f81-2d6c-4759-9237-dd08787d507b # Events Title
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 919a85e0-4d9e-4a24-aa8c-547f9e75db78 # Events Opener
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 88b1b83b-5d07-4d25-8f33-e7b649fb94a2 # Events Call-to-Action Card
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Events
+        sortOrder: 3
+      -
+        elements:
+          -
+            fieldUid: cd771379-c3a4-4044-b3aa-e3ea6f8d9f5e # News Title
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 1b62f4ff-8978-47ab-bed9-91124528f89c # News Opener
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 04d98b59-37cd-4a03-ba69-f903dd27a38a # News Call-to-Action Card
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: News
+        sortOrder: 4
 handle: homepage
 hasTitleField: false
 name: Homepage

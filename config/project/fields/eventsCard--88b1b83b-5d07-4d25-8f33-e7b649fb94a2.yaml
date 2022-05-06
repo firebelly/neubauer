@@ -1,0 +1,36 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d # Homepage
+handle: eventsCard
+instructions: 'Action labels for the final card in slider'
+name: 'Events Call-to-Action Card'
+searchable: false
+settings:
+  columns:
+    __assoc__:
+      -
+        - 895cade9-effc-4de7-860a-b7f103945b5c # Large Prompt
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 314be203-86a0-4636-a647-6af3749c6e97 # Link Label
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_eventscard}}'
+  fieldLayout: table
+  maxRows: '1'
+  minRows: ''
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: ''
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

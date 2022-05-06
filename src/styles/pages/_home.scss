@@ -1,0 +1,233 @@
+/* _home.scss */
+
+/* ---------------------------------------------------------------------
+ Homepage-specific  declarations
+------------------------------------------------------------------------ */
+@use "utils/_utils" as *;
+@use "components/__components" as *;
+@use "sass:math";
+
+@forward 'project';
+
+
+/* ---------------------------------------------------------------------
+  Homepage
+------------------------------------------------------------------------ */
+.homepageCover {
+	$sm-nav-height: 80px;
+	$sm-asset-height: 900px;
+	$sm-cover-height: calc($sm-asset-height - $sm-nav-height);
+	
+	@include breakpoint(sm) {
+		height: $sm-cover-height;
+		margin-bottom: -12px; // account for image blur
+	}
+
+	&-title {
+		top: 185px;
+		left: 200px;
+		position: relative;
+		z-index: 10;
+		color: getColor('white');
+
+		@include breakpoint(sm) {
+			width: 900px;
+		}
+	}
+
+	&-tagline {
+		$mb: math.div(20,120);
+		@include getType('o-normal');
+		margin-bottom: #{$mb}em;
+
+		em {
+			//@include getType('o-italic');
+			font-family: $font-tertiary;
+			font-style: italic; //todo
+			letter-spacing: -0.03em;
+		}
+		
+	}
+
+	&-prompt {
+		@include getType('subtitle');
+		@include breakpoint(sm) {
+			width: 600px;
+		}
+	}
+
+	&-asset {
+		// todo
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+		position: fixed;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+		background-size: cover;
+		background-blend-mode: multiply;
+		background-attachment: fixed;
+		filter: blur(15px);
+
+		@include breakpoint(sm) {
+			height: $sm-asset-height;
+			width: 1440px;
+		}
+
+	}
+
+	&-action {
+		$action: &;
+		@include resetButton;
+		margin-top: 4em;
+
+		@at-root {
+			@include actionButton(#{$action},getColor('white'),getColor('white'));
+		}
+		
+		&--ghost {
+			background: transparent;
+		}
+
+		&-label {
+			@include visuallyHide;
+		}
+
+		&-icon {
+			margin-left: 0;
+			height: 20px;
+			width: 20px;
+		}
+
+	}
+
+}
+
+.homepageEntries {
+	$entries: &;
+	padding: 4em 0 4em 4em;
+	position: relative;
+
+	&--people {
+		background: getColor('blue',10); 
+	}
+
+	&--events {
+		background: getColor('yellow'); 
+	}
+
+	&--news {
+		background: getColor('red',10);
+	}
+
+	&-intro {
+		margin-bottom: 6em;
+
+		@include breakpoint(sm) {
+			@include flexParent();
+			margin-bottom: 8em;
+			padding-right: 12em;
+			
+			> * {
+				@include flexChild(0 1 50%);
+			}
+		}
+	}
+
+	&-title {
+		$mb: math.div(20,65);
+		@include getType('h1-normal');
+		margin-bottom: #{$mb}em;
+
+		#{$entries}--people & {
+			color: getColor('blue');
+		}
+
+		#{$entries}--news & {
+			color: getColor('red');
+		}
+
+		@include breakpoint(sm) {
+			margin-bottom: 0;
+		}
+		
+	}
+
+	&-body {
+		$mb: math.div(20,16);
+		@include getType('subtitle');
+		margin-bottom: #{$mb}em;
+
+		#{$entries}--people & {
+			color: getColor('blue');
+		}
+	}
+
+	&-list {
+		@include flexParent();
+
+		> * {
+			@include flexChild(0 1 30%);
+		}
+
+	}
+
+	&-action {
+		$action: &;
+
+		@at-root {
+			#{$entries}--events {
+				@include actionButton(#{$action},getColor('yellow',10),getColor('yellow'));
+			}
+			#{$entries}--people {
+				@include actionButton(#{$action},getColor('blue'),getColor('blue',10));
+			}
+		}
+
+	}
+
+
+}
+
+/* ---------------------------------------------------------------------
+  Carousels
+------------------------------------------------------------------------ */
+@include carouselScroller('.homepageCarousel');
+@include cardCarousel('.peopleSlide',getColor('blue'),getColor('blue',10));
+@include cardCarousel('.eventsSlide',getColor('yellow',10),getColor('yellow'));
+@include cardCarousel('.newsSlide',getColor('red'),getColor('red',10));
+@include cardMiniFeature('.homepageFeatures',getColor('black'));
+
+.homepageFeatures {
+	z-index: 10;	
+}
+
+.homepageCarousel {
+	$carousel: &;
+
+	&--features {
+		margin-bottom: 0;	
+		// Camoflauge the scroll
+		background-color: getColor('blue',10);
+	}
+
+	&-button,
+	&-nav {
+
+		#{$carousel}--features & {
+			@include totallyHide;
+		}
+	}
+
+	&-slides {
+
+		#{$carousel}--features & {
+			height: 820px;
+			padding-bottom: 0;
+		}
+	}
+
+}
+
+

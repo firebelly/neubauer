@@ -1,14 +1,8 @@
 {% extends "layouts/_base.html" %}
+{% import 'macros/_utils' as utils %}
 {% import 'macros/_assets' as assets %}
 {% import 'macros/_dates' as dates %}
 {% import 'macros/_cards' as cards %}
-
-{# TO DO:
-    1. handle cover image
-    2. title
-    3. summary
-    4. directory
-#}
 
 {% block content %}
 {% set section = entry.type|replace('Index','') %}
@@ -16,27 +10,17 @@
 {% set openerImage = entry.openerImage.one() is not null ? entry.openerImage : null %}
 {% set openerContent = entry.openerText is not null ? entry.openerText : null %}
 
-{# TODO: finish imagerX configuration #}
-{% if openerImage %}
-    {% set 
-        imageName,imageVariant,imageObj,imageTransforms,aspectRatioObj,showCaption,imageBlock,imagerX = 
-        'openerImage',null,openerImage,null,{},false,{},true
-    %} 
-{% endif %}
-
 {% if openerImage and section != "exhibitions" %}
-<div class="">
-    {{ assets.assetImage(
-        imageName,
-        imageVariant,
-        imageObj,
-        imageTransforms,
-        aspectRatioObj,
-        showCaption,
-        imageBlock, 
-        imagerX) 
-    }}
-</div>
+{% set openerName = 'openerImage' %}
+{% set sectionKey, contextKey = (sectionSlug == 'research' ? 'projects' : sectionSlug), 'opener' %}
+{% set openerSizes = utils.getAssetSizes('projects','opener')|json_decode %}
+<picture class="{{ openerName }}">
+    {% if openerSizes %}
+    {{ assets.assetCard(openerName,openerImage,openerSizes) }}
+    {% else %}
+    {{ assets.assetCard(openerName,openerImage) }}
+    {% endif %}
+</picture>
 {% endif %}
 
 <section class="pageOpener pageOpener--{{ sectionSlug }}">
@@ -49,8 +33,12 @@
     {% case 'research' %}
     {% set feature = entry.featuredProject is not null and entry.featuredProject|length > 0 ? entry.featuredProject.one() : null %}
     {% if feature %}
-    {% set cardEntry,cardLabel = feature,'Featured Project' %}
-    {{ cards.cardFeature(feature,'Featured Project','projectFeature','callout') }}
+    {% set cardObj = {
+        'cardVariant': 'callout',
+        'cardLabel': 'Featured Project',
+        'assetSizes': utils.getAssetSizes('projects','feature')
+    }%}
+    {{ cards.cardFeature('projectFeature',feature,cardObj) }}
     {% endif %}
 
     {{ sprig('partials/_filter-controls', {'entryId': entry.id }) }}

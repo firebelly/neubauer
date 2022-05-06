@@ -1,51 +1,197 @@
 {# cardCarousel: 
     @slideObj {obj}
 #}
-{% macro cardCarousel(slideObj) %}
+{% macro cardCarousel(carouselName,slideObj) %}
 {% import 'macros/_cards' as cards %}
+{# Carousel vars #}
+{% set carouselVariant = slideObj.variant is not null ? slideObj.variant : null %}
 {% set slides = slideObj.slides is not null ? slideObj.slides : [] %}
 {% set slideCount = slides|length %}
 {% set slideGroup = slideObj.group is not null ? slideObj.group : 3 %}
+{# Card vars #}
+{% set cardName = slideObj.cardName is not null ? slideObj.cardName : '' %}
+{% set cardObj = slideObj.cardObj is not null ? slideObj.cardObj : [] %}
+{% set cardCall = slideObj.cardCall is not null ? slideObj.cardCall : null %}
+{# Icon vars #}
+{% set arrowLeftPath = "/spritemap.svg#icon-arrow-left-20" %}
+{% set arrowRightPath = "/spritemap.svg#icon-arrow-right-20" %}
+{% set dotEmptyPath = "/spritemap.svg#icon-dot-empty" %}
+{% set dotFilledPath = "/spritemap.svg#icon-dot-filled" %}
 <section 
-  class="carousel" 
-  id="carousel" 
-  data-carousel 
+  class="{{ carouselName }}{% if carouselVariant %} {{ carouselName }}--{{ carouselVariant }}{% endif %}" 
+  id="carousel-{{ carouselVariant ?? '' }}" 
+  data-carousel="{{ carouselVariant }}"
   aria-label="carousel">
 
-  <p class="sr-only">Carousel with {{ slideGroup }} slides shown at a time. Use the Previous and Next buttons to navigate, or the slide dot buttons at the end to jump to slides.</p>
+	<p class="{{ carouselName }}-legend">Carousel with {{ slideGroup }} slides shown at a time. Use the Previous and Next buttons to navigate, or the slide dot buttons at the end to jump to slides.</p>
   
-  <button class="previous" data-carousel-prev>
-    <span class="fas fa-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous slides</span>
-  </button>
+  	<a
+	  	class="{{ carouselName }}-button {{ carouselName }}-button--control" 
+		href="#{{ cardName }}-{{ slideCount - 1 }}"
+		data-carousel-prev>
+		<span class="{{ carouselName }}-button-label">Previous slides</span>
+		<svg class="{{ carouselName }}-button-icon">
+			<use xlink:href="{{ alias('@assetBasePath' ~ arrowLeftPath) }}"></use>
+		</svg>
+  	</a>
 
-  <button class="next" data-carousel-next>
-    <span class="fas fa-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next slides</span>
-  </button>
+	<a 
+		class="{{ carouselName }}-button {{ carouselName }}-button--control" 
+		href="#{{ cardName }}-0"
+		data-carousel-next>
+		<span class="{{ carouselName }}-button-label">Next slides</span>
+		<svg class="{{ carouselName }}-button-icon">
+			<use xlink:href="{{ alias('@assetBasePath' ~ arrowRightPath) }}"></use>
+		</svg>
+  	</a>
+
+	<div 
+		class="{{ carouselName }}-frame" 
+		data-carousel-frame>
+		<div 
+			class="{{ carouselName }}-slides {{ carouselName }}-slides--{{ slideGroup }}" 
+			data-carousel-count="{{ slideCount }}"
+			data-carousel-slides="{{ slideGroup }}">
+			
+			{% for slide in slides %}
+				{% set cardObj = cardObj|merge({
+					'attrs': {
+						'role': 'group',
+						'aria-label': "slide #{loop.index} of #{slideCount}",
+						'data-carousel-item': ''
+					},
+					'trimContent': 200
+				}) %}
+				{{ cards.cardArticle(cardName,slide,cardObj) }}
+			{% endfor %}
+
+			{% if cardCall %}
+			{% set prompt = slideObj.cardCall.prompt %}
+			{% set action = slideObj.cardCall.action %}
+			<div class="{{ carouselName }}-call">
+				<div class="{{ carouselName }}-call-prompt">{{ prompt }}</div>
+				<a 
+					class="{{ carouselName }}-call-action {{ carouselName }}-call-action--link"
+					href="{{ siteUrl }}">
+					<span class="{{ carouselName }}-call-action-label">{{ action }}</span>
+					<svg class="{{ carouselName }}-call-action-icon">
+						<use xlink:href="{{ alias('@assetBasePath' ~ arrowRightPath) }}"></use>
+					</svg>
+				</a>
+			</div>
+			{% endif %}
+		</div>
+	</div>
   
-  <div class="slides" data-carousel-slides>
-	{% set cardName = slideObj.cardName is not null ? slideObj.cardName : '' %}
-	{% set cardObj = slideObj.cardObj is not null ? slideObj.cardObj : {} %}
-    
-	{% for slide in slides %}
-    {% set idx = loop.index %}
-    <div class="slide" role="group" aria-label="slide {{ idx }} of {{ slideCount }}" data-carousel-item>
-        {{ cards.cardArticle(cardName,slide,cardObj) }}
-    </div>
-    {% endfor %}
-  </div>
-  
-  <ul class="navigation" data-carousel-nav>
-    {% for dot in range(1, slideCount) %}
-    <li>
-      <button 
-        {% if loop.first %}aria-current="true"{% endif %}
-        data-carousel-button>
-        <span class="sr-only">Go to slide {{ dot }}</span>
-      </button>
-    </li>
-	{% endfor %}
-  </ul>
+	<ul
+		class="{{ carouselName }}-nav" 
+		data-carousel-nav>
+		{% for dot in range(1, slideCount) %}
+		<li class="{{ carouselName }}-nav-item">
+			<button 
+				class="{{ carouselName }}-button {{ carouselName }}-button--nav"
+				{% if loop.first %}aria-current="true"{% endif %}
+				data-carousel-button>
+				<span class="{{ carouselName }}-button-label">Go to slide {{ dot }}</span>
+				<svg class="{{ carouselName }}-button-icon {{ carouselName }}-button-icon--inactive">
+					<use xlink:href="{{ alias('@assetBasePath' ~ dotEmptyPath) }}"></use>
+				</svg>
+				<svg class="{{ carouselName }}-button-icon {{ carouselName }}-button-icon--active">
+					<use xlink:href="{{ alias('@assetBasePath' ~ dotFilledPath) }}"></use>
+				</svg>
+			</button>
+		</li>
+		{% endfor %}
+  	</ul>
 </section>
 {% endmacro %}
+
+
+{# featureCarousel: 
+    @slideObj {obj}
+#}
+{% macro featureCarousel(carouselName,slideObj) %}
+{% import 'macros/_cards' as cards %}
+{% set carouselVariant = slideObj.variant is not null ? slideObj.variant : null %}
+{% set slides = slideObj.slides is not null ? slideObj.slides : [] %}
+{% set slideCount = slides|length %}
+{% set slideGroup = slideObj.group is not null ? slideObj.group : 3 %}
+{% set isScrollable = slideObj.scrollable is not null ? slideObj.scrollable : false %}
+{% set arrowLeftPath = "/spritemap.svg#icon-arrow-left-20" %}
+{% set arrowRightPath = "/spritemap.svg#icon-arrow-right-20" %}
+{% set dotEmptyPath = "/spritemap.svg#icon-dot-empty" %}
+{% set dotFilledPath = "/spritemap.svg#icon-dot-filled" %}
+<section 
+  class="{{ carouselName }}{% if carouselVariant %} {{ carouselName }}--{{ carouselVariant }}{% endif %}" 
+  id="carousel-{{ carouselVariant ?? '' }}" 
+  data-carousel="{{ carouselVariant }}"
+  aria-label="carousel">
+
+	<p class="{{ carouselName }}-legend">Carousel with {{ slideGroup }} slides shown at a time. Use the Previous and Next buttons to navigate, or the slide dot buttons at the end to jump to slides.</p>
+  
+  	<button 
+	  	class="{{ carouselName }}-button {{ carouselName }}-button--control" 
+		data-carousel-prev>
+		<span class="{{ carouselName }}-button-label">Previous slides</span>
+		<svg class="{{ carouselName }}-button-icon">
+			<use xlink:href="{{ alias('@assetBasePath' ~ arrowLeftPath) }}"></use>
+		</svg>
+  	</button>
+
+	<button 
+		class="{{ carouselName }}-button {{ carouselName }}-button--control" 
+		data-carousel-next>
+		<span class="{{ carouselName }}-button-label">Next slides</span>
+		<svg class="{{ carouselName }}-button-icon">
+			<use xlink:href="{{ alias('@assetBasePath' ~ arrowRightPath) }}"></use>
+		</svg>
+  	</button>
+
+	<div 
+		class="{{ carouselName }}-frame {{ carouselName }}-frame--features{% if isScrollable %} _is-scrollable{% endif %}" 
+		data-carousel-frame>
+		<div 
+			class="{{ carouselName }}-slides {{ carouselName }}-slides--{{ slideGroup }}" 
+			data-carousel-count="{{ slideCount }}"
+			data-carousel-slides="{{ slideGroup }}">
+			
+			{% set cardName = slideObj.cardName is not null ? slideObj.cardName : '' %}
+			{% set cardObj = 'cardObj' in slideObj|keys ? slideObj.cardObj : {} %}
+			{% for slide in slides %}
+			{% set cardObj = cardObj|merge({
+				'attrs': {
+					'role': 'group',
+					'aria-label': "slide #{loop.index} of #{slideCount}",
+					'data-carousel-item': ''
+				}
+			}) %}
+			{{ cards.cardMiniFeature(cardName,slide,cardObj) }}
+			{% endfor %}
+		</div>
+	</div>
+  
+	<ul
+		class="{{ carouselName }}-nav" 
+		data-carousel-nav>
+		{% for dot in range(1, slideCount) %}
+		<li class="{{ carouselName }}-nav-item">
+			<button 
+				class="{{ carouselName }}-button {{ carouselName }}-button--nav"
+				{% if loop.first %}aria-current="true"{% endif %}
+				data-carousel-button>
+				<span class="{{ carouselName }}-button-label">Go to slide {{ dot }}</span>
+				<svg class="{{ carouselName }}-button-icon {{ carouselName }}-button-icon--inactive">
+					<use xlink:href="{{ alias('@assetBasePath' ~ dotEmptyPath) }}"></use>
+				</svg>
+				<svg class="{{ carouselName }}-button-icon {{ carouselName }}-button-icon--active">
+					<use xlink:href="{{ alias('@assetBasePath' ~ dotFilledPath) }}"></use>
+				</svg>
+			</button>
+		</li>
+		{% endfor %}
+  	</ul>
+</section>
+{% endmacro %}
+
+
+

@@ -1,0 +1,67 @@
+field: 88b1b83b-5d07-4d25-8f33-e7b649fb94a2 # Events Call-to-Action Card
+fieldLayouts:
+  9f79532f-30bc-430e-98ba-7ff807f49434:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 895cade9-effc-4de7-860a-b7f103945b5c # Large Prompt
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 314be203-86a0-4636-a647-6af3749c6e97 # Link Label
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  314be203-86a0-4636-a647-6af3749c6e97: # Link Label
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: action
+    instructions: ''
+    name: 'Link Label'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  895cade9-effc-4de7-860a-b7f103945b5c: # Large Prompt
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: prompt
+    instructions: ''
+    name: 'Large Prompt'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText

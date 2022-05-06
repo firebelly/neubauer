@@ -5,7 +5,27 @@
         <div class="primaryContact-social">
             <h3 class="primaryContact-title">Stay Connected</h3>
             <p class="primaryContact-prompt">Get updates on our research, art, and events.</p>
-            {# social goes here #}
+            {% set socialBlock = siteInfo.socialMediaBlock.all() %}
+            <ul class="socialNav">
+                {% for social in socialBlock %}
+                {% set socialName, socialSlug, socialLink = social.itemLabel, social.itemLabel|slugify, social.itemLink %}
+                {% set socialIcon = "social-#{socialSlug}" %}
+                <li class="socialNav-item">
+                    <a 
+                        class="socialNav-go socialNav-go--link" 
+                        href="{% if socialSlug == 'email' %}mailto:{% endif %}{{ socialLink }}"
+                        target="_blank">
+                        <span class="socialNav-go-label">{{ socialName }}</span>
+                        <svg 
+                            class="socialNav-go-icon"
+                            role="presentation">
+                            {% set svgPath = "/spritemap.svg#icon-#{socialIcon}" %}
+                            <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
+                        </svg> 
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
         <div class="primaryContact-news">
             <form class="primaryContact-form">
@@ -44,12 +64,77 @@
         </div>
     </div>
     {# Chyron #}
-    {# {% include 'partials/_chyron' %} #}
+    {% include 'partials/_chyron' %}
 
-    <div class="primaryCoda">
+    <div class="footerNav">
+        <div class="footerNav-section">
+            <a class="footerNav-logo footerNav-logo--chicago" href="{{ siteUrl }}">
+                <span class="footerNav-logo-title">{{ siteInfo.commonLabel }}</span>
+                <svg 
+                    class="footerNav-logo-icon footerNav-logo-icon--chicago" 
+                    role="img">
+                    <title>University of Chicago Logo</title>
+                    <desc>{{ siteInfo.commonLabel }}</desc>
+                    {% set chicagoLogoPath = "/spritemap.svg#logo-uchicago" %}
+                    <use xlink:href="{{ alias('@assetBasePath' ~ chicagoLogoPath) }}"></use>       
+                </svg> 
+            </a>
+            <a class="footerNav-logo footerNav-logo--neubauer" href="{{ siteUrl }}">
+                <span class="footerNav-logo-title">{{ siteInfo.commonLabel }}</span>
+                <svg 
+                    class="footerNav-logo-icon footerNav-logo-icon--neubauer" 
+                    role="img">
+                    <title>Neubauer Collegium Logo</title>
+                    <desc>{{ siteInfo.commonLabel }}</desc>
+                    {% set neubauerLogoPath = "/spritemap.svg#logo-neubauer" %}
+                    <use xlink:href="{{ alias('@assetBasePath' ~ neubauerLogoPath) }}"></use>       
+                </svg> 
+            </a>
+        </div>
 
-    </dfiv
-
+        <div class="footerNav-section footerNav-section--more">
+            <h3 class="footerNav-title">Discover More</h3>
+            {% set navLinks = primaryFooter.discoverMore.all() %}
+            <ul class="footerNav-list">
+            {% for navItem in navLinks %}
+            {% set actionBlock = navItem.callToAction.one() %}
+            {% set actionType = actionBlock.type %}
+            {% set actionUrl = actionType == 'externalLink' ? actionBlock.item : actionBlock.item[0].url %}
+                <li class="footerNav-item">
+                    <a 
+                        class="footerNav-go footerNav-go--link" 
+                        href="{{ actionUrl }}{% if actionType == 'internalLink' and actionBlock.anchor != '' %}{{ actionBlock.anchor }}{% endif %}"
+                        {% if actionType == 'externalLink' %}
+                        target="_blank"
+                        {% endif %}>
+                        <span class="footerNav-go-label">{{ navItem.heading }}</span>
+                        <svg 
+                            class="footerNav-go-icon"
+                            role="presentation">
+                            {% set svgPath = "/spritemap.svg#icon-arrow-right-20" %}
+                            <use xlink:href="{{ alias('@assetBasePath' ~ svgPath) }}"></use>       
+                        </svg> 
+                    </a>
+                    <span class="footerNav-desc">{{ navItem.body }}</span>
+                </li>
+            {% endfor %}
+            </ul>
+            {% set contactBlock = primaryFooter.contactInfo.one() %}
+            <address class="footerContact">
+                <ul class="footerContact-item">
+                    <li>{{ contactBlock.streetAddress }}</li>
+                    <li>{{ contactBlock.location }}</li>
+                </ul>
+                <ul class="footerContact-item">
+                    <li><tel>{{ contactBlock.phoneNumber }}</tel></li>
+                    <li>{{ contactBlock.faxNumber }}</li>
+                </ul>
+                <ul class="footerContact-item">
+                    <li><a href="mailto:{{ contactBlock.emailAddress }}">{{ contactBlock.emailAddress }}</a></li>
+                </ul>
+            </address>
+        <div class="footerCopyright">&copy; 2022 The University of Chicago</div>
+    </div>
 </footer>
 
 <div id="viewportMod" class="viewportMod{{ env == 'dev' ? ' _is-debug' : '' }}"></div>

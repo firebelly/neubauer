@@ -1,4 +1,4 @@
-dateModified: 1651079801
+dateModified: 1651856123
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -20,6 +20,7 @@ meta:
     0e3da5e7-ca13-4d64-8432-9224cfd0eade: __blank__ # __blank__
     01aee8f9-1a88-4c82-b1ae-372cd5805db7: Exhibitions # Exhibitions
     1b5ff85e-b240-4399-b573-d707fe1c03da: 'Discover More' # Discover More
+    1b62f4ff-8978-47ab-bed9-91124528f89c: 'News Opener' # News Opener
     1b346868-16dd-435c-b0ff-d4319de58b94: 'Date Block' # Date Block
     1c4b2c81-42c9-4a48-bc45-d96d7cb075a1: Affiliation # Affiliation
     1d5d9084-5116-4341-9273-0e6750188d00: 'Story Narrative' # Story Narrative
@@ -29,6 +30,7 @@ meta:
     2a21450c-2eec-4dd9-8471-32730404d554: __blank__ # __blank__
     2aa7cc76-d234-465e-bccf-a196b38144e4: Email # Email
     2af1e335-4b67-463a-90e3-79430cc1f266: End # End
+    2b2fd15a-7756-4bfb-aa5b-32060728e2c9: 'Large Prompt' # Large Prompt
     2bd4c98a-17ca-44f2-bb7c-1a21e5b924b9: Address # Address
     2c03794c-ee5d-433d-9d1c-7c7d3cc3dd81: Appearance # Appearance
     2d527c5e-9c0d-4cc1-ae6e-7be103ce4ff9: 'Related Project' # Related Project
@@ -51,6 +53,7 @@ meta:
     03fbd17e-234a-4876-9ec0-0e89393c7c4a: 'Event Participants' # Event Participants
     4a309e71-113e-4d32-b1cf-253702d72281: Label # Label
     4d051939-b6d0-4800-8c01-a156665ad91f: Register # Register
+    04d98b59-37cd-4a03-ba69-f903dd27a38a: 'News Call-to-Action Card' # News Call-to-Action Card
     4defd050-67bf-44b0-a585-e6a0f635921d: Summary # Summary
     4e97e2e3-89b1-41ce-81d2-5cd65f1b36c4: Title # Title
     4e880cde-b663-435b-98ea-3b28ebd17af7: 'Key Question Content' # Key Question Content
@@ -80,6 +83,7 @@ meta:
     9a9e267a-3735-42d9-8ab5-7ea1111a74ff: Label # Label
     9b9a218b-d1b8-4129-946e-251494e3ce7c: 'Email Address' # Email Address
     9d3e7bcb-021c-462d-8361-507dc7ffa50b: Chyron # Chyron
+    9da98f81-2d6c-4759-9237-dd08787d507b: 'Events Title' # Events Title
     9e51d37e-cb29-45a1-b1fe-bcb0812e573b: State # State
     09f28401-5afb-4037-a4d4-988179869f4d: 'Related Exhibition' # Related Exhibition
     9fd3f9eb-43e9-41a0-860d-cc3ad5d91231: 'Search Index' # Search Index
@@ -87,6 +91,7 @@ meta:
     10ed9c28-61c3-4258-bc65-24b2ecaa7930: Asset # Asset
     12b1855c-a2bd-4c00-a485-0d2b21cdacf3: Downloadable # Downloadable
     13c69d07-19c1-4dc3-af5a-7145671835bc: 'Quote Content' # Quote Content
+    14d1f316-5665-4da2-9fbf-c22d8ffebe54: 'Fellows Title' # Fellows Title
     15bb1bb5-a683-4cf9-a1b5-3edfe2182dfa: 'Research Index' # Research Index
     15bc16dd-1c9e-43ad-b846-1a41657cc675: 'Nav Name' # Nav Name
     15e90b86-4c9d-4654-b994-f245970468f0: 'Full Summary' # Full Summary
@@ -103,6 +108,7 @@ meta:
     32f9b9fa-12d2-4ead-aa7c-293f935d8b49: 'Select an existing "Event," or create a new one.' # Select an existing "Event," or create a new one.
     34e083b7-1017-43e8-8a33-cb3b0f535740: 'Director''s Statement' # Director's Statement
     37e0e210-2202-421d-8e44-5c51a0756fa5: About # About
+    38cdc29d-cc98-47b5-8728-53fe05993451: 'Fellows Opener' # Fellows Opener
     38e5dea1-a869-47af-a6c8-f358a344f764: Zip # Zip
     40a4b8f6-206e-4664-86a2-9a6e0d2c1213: 'Date + Time' # Date + Time
     47e78d01-d60c-4623-939e-b212935f0db8: Story # Story
@@ -124,6 +130,7 @@ meta:
     84b1efbb-d314-43e3-8fb5-fc6af1012146: Common # Common
     84d51659-d55a-4529-bd5d-9c19e31e6fdb: 'Add a link to the media source' # Add a link to the media source
     87ef4cab-5dca-4851-a37f-55955e5d3b85: Details # Details
+    88b1b83b-5d07-4d25-8f33-e7b649fb94a2: 'Events Call-to-Action Card' # Events Call-to-Action Card
     90ab227e-755c-40a8-95e5-b154c2284a37: Project # Project
     92afd0f9-75fa-4c34-87cf-55d7e10d1709: 'Narrative Types' # Narrative Types
     92b6ae63-7c12-4164-b18e-082865cc14d9: 'Navigation ' # Navigation 
@@ -138,6 +145,7 @@ meta:
     284b1f37-fd98-47e6-9a1a-1e1b6400a27e: 'Select an existing "Story," or create a new one.' # Select an existing "Story," or create a new one.
     299c0b84-1414-493a-9423-7c2e905e0080: 'Secondary Featured Exhibition' # Secondary Featured Exhibition
     307bc9bb-3bc7-45b4-b535-976adc89de97: 'Narrative Block' # Narrative Block
+    314be203-86a0-4636-a647-6af3749c6e97: 'Link Label' # Link Label
     314d1749-591d-4f88-a382-680ece5d6b71: 'Date Only' # Date Only
     426d3cf9-e094-428a-82c2-66a0874790b8: Appearance # Appearance
     446e488e-e627-4618-95fe-5cec7146b5ad: Interior # Interior
@@ -155,6 +163,8 @@ meta:
     881a793e-ef76-462e-aad9-1bc0ae20165b: Module # Module
     881ab662-b053-4f99-bee8-9bd994ffad04: 'End Date' # End Date
     895c9d65-27aa-4819-a434-9afd5ff0f4b5: Appearance # Appearance
+    895cade9-effc-4de7-860a-b7f103945b5c: 'Large Prompt' # Large Prompt
+    919a85e0-4d9e-4a24-aa8c-547f9e75db78: 'Events Opener' # Events Opener
     924a4513-9457-4f10-9576-090824a1a843: 'Social Media' # Social Media
     957fc412-43c2-4b06-abfd-3e9716989769: __blank__ # __blank__
     1762d70d-bae6-49fd-8b8e-ac8f767621d1: 'Primary Footer' # Primary Footer
@@ -172,6 +182,7 @@ meta:
     9649df13-0153-45ec-a469-921435e36fb6: From # From
     9667b568-5c61-43f1-97ab-523933c4c48e: Page # Page
     9906c196-b7f3-460c-98b0-308b1becd435: Video # Video
+    9975ee29-08bc-4983-bc8e-02db8da51be6: 'Link Label' # Link Label
     18400b36-d7ac-4476-aa8e-11f567a13e44: Interior # Interior
     19776d03-02d1-42a4-babe-c538c874cab1: Project # Project
     36019fd7-eb81-4dc0-af12-15575833ecf5: Appearance # Appearance
@@ -206,6 +217,7 @@ meta:
     ab6d1ca2-b382-4307-be36-9436006194d8: __blank__ # __blank__
     abf135fc-5443-48d6-bc54-cf819645a909: Abstract # Abstract
     ad039f29-1b37-466f-8148-84f4a6bad1e2: 'Contact Info' # Contact Info
+    adce5df3-632e-4623-8e1f-a778043c1e46: 'Link Label' # Link Label
     ae7b786d-4670-4705-ad8f-15b732234f3d: Image # Image
     aedd6f62-b9cc-4d66-9965-3e1e2b461ab4: 'Internal Link' # Internal Link
     afd5fc2a-82b5-40f5-908b-f8e679205d29: 'Brief description of exhibition' # Brief description of exhibition
@@ -232,6 +244,8 @@ meta:
     c9d2a3a1-cf8d-4060-9704-4f800fa8de4e: Attribution # Attribution
     c14d2c78-f58f-45a6-b6d2-beed7ffabb69: 'Story Type' # Story Type
     ca62998e-92bf-4a32-be88-8eacd7a4025c: __blank__ # __blank__
+    ccadc864-aaf1-4652-a050-cda6111fdb89: 'Large Prompt' # Large Prompt
+    cd771379-c3a4-4044-b3aa-e3ea6f8d9f5e: 'News Title' # News Title
     cdc834cd-c6bc-443d-ba86-edc70defd5a0: Location # Location
     cf51bd0c-dc97-4734-9328-2dcbf1c1f311: Homepage # Homepage
     d2eef677-ad04-43ad-b73c-1d87978f3538: URL # URL
@@ -245,6 +259,7 @@ meta:
     d42f1b8d-6335-4a9b-8f81-80061a0faa35: People # People
     d80e45b8-04d1-46ed-acdf-4a78508e73c6: Appearance # Appearance
     d85f10e5-6a53-4c82-956e-f77206b13f99: From # From
+    d331a1d5-ba85-455a-93aa-5e011407f146: 'Fellows Call-to-Action Card' # Fellows Call-to-Action Card
     d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d: Homepage # Homepage
     d881a8aa-3ea4-488c-81fb-8d5dc7290b32: Module # Module
     d5943f00-060b-4c27-974e-b57dccb00c41: Title # Title
@@ -262,6 +277,7 @@ meta:
     e87d9e34-bb47-4572-9a96-58f7eb8fa706: 'Section Filter' # Section Filter
     e93b9edb-c0f9-454a-b64e-43cd24153a86: 'Featured Exhibition' # Featured Exhibition
     e104f1e4-4334-4b43-80b2-47e3fb3813f7: Heading # Heading
+    e292ec8c-d404-4e7d-a79e-1738bee431ac: 'Internal Anchor' # Internal Anchor
     e8071c4d-c301-40b2-854d-ab756c09d338: 'Person Type Status' # Person Type Status
     e75102dc-d05f-4089-bd59-28bf186610f9: __blank__ # __blank__
     e411160c-4119-4cd7-9b04-9921a260e03a: Status # Status
@@ -285,7 +301,7 @@ meta:
     fbf7fd25-1dd4-4ceb-a4d9-c468db28e4c9: Interior # Interior
     fc6b0492-412d-4f80-89fc-b9b73ebdb601: Statistic # Statistic
     fc62009c-d589-4a28-a538-ae226077c431: Name # Name
-    fd1a450a-1f47-4168-8ca3-5ef56c735385: 'Homepage Cover' # Homepage Cover
+    fd1a450a-1f47-4168-8ca3-5ef56c735385: 'Opener Image' # Opener Image
     fd969c8b-861f-4a69-8f86-4bab475af647: 'Opener Content' # Opener Content
     fda40138-d4a1-4d3d-b372-f29332e386f0: Image # Image
 plugins:

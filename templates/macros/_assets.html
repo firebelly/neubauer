@@ -27,19 +27,27 @@
     - webp integration
 #}
 {% macro assetCard(imageName,imageObj,imageSizes = null,aspectRatio = null) %}
-
-    {% set thisImage = imageObj.one() %}
+    {# dum check to prevent unknown method in gallery #}
+    {% set thisImage = imageName == 'artGallery' ? imageObj :  imageObj.one() %}
+    
     {% set thisWidth, thisHeight = thisImage.getWidth(), thisImage.getHeight() %}
+    {% set thisRatio = (thisWidth/thisHeight) %}
+
     {% set orientation = (thisWidth == thisHeight) ? 'square' : (thisWidth > thisHeight ? 'landscape' : 'portrait') %}
     
     {% set defaultWidth, defaultHeight = 450, 350 %}
-    {% set lgSizeObj, transformSmSizes = [],[] %}
-    {% set smSizeObj, transformLgSizes = [],[] %}
+    {% set transformSmSizes, transformLgSizes = [],[] %}
     {% set smThreshhold, lgThreshhold = 767, 768 %}
 
     {% if imageSizes %}
         {% set smWidth, smHeight = imageSizes['sm'][0], imageSizes['sm'][1] %}
         {% set lgWidth, lgHeight = imageSizes['lg'][0], imageSizes['lg'][1] %}
+
+        {# Handle auto sizing #}
+        {% if lgHeight == 'auto' %}
+            {% set lgHeight = lgWidth*thisRatio %}
+        {% endif %} 
+
         {% set smRatio, lgRatio = (smWidth/smHeight), (lgWidth/lgHeight) %}
         {% set defaultWidth, defaultHeight = lgWidth, lgHeight %}
         {# Detect low-quality images and calculate new height based on best possible width #}
@@ -47,24 +55,24 @@
             {% set lgWidth, lgHeight = thisWidth, thisWidth*lgRatio %}
         {% endif %} #}
 
-        {% set smSizeObj = [
+        {% set transformSmSizes = [
             {'width': smWidth,'height': smHeight},
             {'width': smThreshhold, 'ratio': smRatio}
         ]%}
-        {% set lgSizeObj = [
+        {% set transformLgSizes = [
             {'width': lgWidth,'height': lgHeight},
             {'width': lgThreshhold, 'ratio': lgRatio}
         ]%}
     {% endif %}
 
-    {# Fill the transform size arrays #}
-    {% if lgSizeObj %}
-        {% set transformLgSizes = transformLgSizes|merge(lgSizeObj) %}
-    {% endif %}
+    {# Fill the transform size arrays
     {% if smSizeObj %}
         {% set transformSmSizes = transformSmSizes|merge(smSizeObj) %}
     {% endif %}
-
+    {% if lgSizeObj %}
+        {% set transformLgSizes = transformLgSizes|merge(lgSizeObj) %}
+    {% endif %} #}
+    
     {# Prep the image sources #}
     {% set transformSettings = {mode: 'crop', position: thisImage.focalPoint(), jpegQuality: 72} %}
     {% set imageSource = craft.imager.placeholder({ width: defaultWidth, height: defaultHeight }) %}
@@ -81,6 +89,8 @@
         srcset="{{ transformedLg ? transformedLg | srcset : '' }}" 
         media="(min-width: 768px)">
     <img 
+        data-sm-testing="{{ transformSmSizes|json_encode }}"
+        data-lg-testing="{{ transformLgSizes|json_encode }}"
         class="{{ imageName }}-image"
         alt="{{ thisImage.altText ?? '' }}"
         loading="lazy"
@@ -89,6 +99,29 @@
         srcset="{{ transformedImgs ? transformedImgs | srcset : '' }}" />
 
 {% endmacro %}
+
+{# applyEffects: 
+    See: styles/components/_assets.scss for styling
+    Required: ImageX (https://imager-x.spacecat.ninja/overview.html#features)
+    Usage (to increase performance or simplify tmpl code): 
+    
+    @imageObj     {obj} - craft image obj
+    @imageEffects {obj} - { modulate: [110, 100, 100], colorBlend: ['#ffcc33', 0.3], gamma: 1.2 }
+    @imageSizes   {obj} - {'sm': [width,height], 'lg': [width,height]}
+#}
+{% macro applyEffects(imageObj,imageEffects,imageSizes = null) %}
+
+    {% set imageWidth, imageHeight = imageObj.getWidth(), imageObj.getHeight() %}
+
+    {% set newImage = craft.imager.transformImage(imageObj, { 
+        width: imageWidth, 
+        height: imageHeight, 
+        effects: imageEffects,
+        jpegQuality: 72 }) %}
+
+    {{ newImage }}
+{% endmacro %}
+
 
 {# NOTE: Macros below are for reference only #}
 
@@ -194,29 +227,7 @@
 
 {% endmacro %}
 
-{# assetImageWithEffects: 
-    See: styles/components/_assets.scss for styling
-    Required: ImageX (https://imager-x.spacecat.ninja/overview.html#features)
-    Usage (to increase performance or simplify tmpl code): 
-    {% set newImage = _self.assetImageWithEffects(imageObj) %}
-    {{ _self.assetImage(imageName,imageObj) }}
 
-    @imageObj {obj} - craft image object
-    @imageWidth {int}
-    @imageHeight {int}
-    @imageQuality {int} 
-    @imageEffects {obj} - e.g. { modulate: [110, 100, 100], colorBlend: ['#ffcc33', 0.3], gamma: 1.2 }
-#}
-{% macro assetImageWithEffects(imageObj,imageWidth = 1600,imageHeight = 1600,imageQuality = 95,imageEffects = {}) %}
-
-    {% set newImage = craft.imager.transformImage(imageObj, { 
-        width: imageWidth, 
-        height: imageHeight, 
-        effects: imageEffects,
-        jpegQuality: imageQuality }) %}
-
-    {{ newImage }}
-{% endmacro %}
 
 {# assetVideo:
     @videoName
@@ -246,5 +257,3 @@
 
 
 {% endmacro %}
-
-

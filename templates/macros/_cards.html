@@ -4,9 +4,8 @@
     @cardName {str}  - base styling hook
     @cardEntry {obj} - entry object
     @cardObj {obj}   - wildcard object for storage
-    @cardVariant {str} - styling variant hook
 #}
-{% macro cardArticle(cardName,cardEntry,cardObj = {},cardVariant = null) %}
+{% macro cardArticle(cardName,cardEntry,cardObj = {}) %}
 {% import 'macros/_utils' as utils %}
 {% import 'macros/_dates' as dates %}
 {% import 'macros/_assets' as assets %}
@@ -14,26 +13,57 @@
 
 {% set entrySection = cardEntry.section|lower %}
 {% set cardVariant = cardObj is not null and 'cardVariant' in cardObj|keys ? cardObj['cardVariant'] : null %}
-{% set cardImage = cardEntry.cardImage and cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
+
+{# Meta #}
 {% set cardTopics = cardEntry.topicList is not null and cardEntry.topicList|length > 0 ? cardEntry.topicList : null %}
 {% set cardDate = cardEntry.dateBlock is not null and cardEntry.dateBlock|length == 1 ? dates.printDate(cardEntry.dateBlock[0]) : null %}
+{% set cardLocation = (cardEntry.locationBlock is not null and cardEntry.locationBlock|length > 0 ) ? cardEntry.locationBlock.all() : null %}
 {% set cardUrl = cardEntry.url %}
 {% set cardTeam = cardEntry.projectTeam is not null and cardEntry.projectTeam|length > 0 ? cardEntry.projectTeam : null %}
 
+{# Main content #}
+{% set cardImage = cardEntry.cardImage and cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
 {% set cardAbstract = cardEntry.abstract is not null and cardEntry.abstract != '' ? cardEntry.abstract : 
-                (cardEntry.exhibitionAbstract is not null and cardEntry.exhibitionAbstract != '' ? cardEntry.exhibitionAbstract: null) %}
+                cardEntry.exhibitionAbstract is not null and cardEntry.exhibitionAbstract != '' ? cardEntry.exhibitionAbstract :
+                cardEntry.teaser is not null and cardEntry.teaser != '' ? cardEntry.teaser :
+                (cardEntry.eventSummary is not null and cardEntry.eventSummary != '' ? cardEntry.eventSummary : null) %}
 
 {% set cardBody = cardEntry.summary is not null and cardEntry.summary != '' ? cardEntry.summary :
+                cardEntry.body is not null and cardEntry.body != "" ? cardEntry.body :
                 (cardEntry.personSummary is not null and cardEntry.personSummary != "" ? cardEntry.personSummary : null) %}
 
+{# Icons #}
 {% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
 {% set emailPath = "/spritemap.svg#icon-email-20" %}
 
-{# Person vars #}
-{% set isBio = (cardName == 'searchBio') %}
-{% set isPeopleDirectory = (cardVariant == 'people') %}
+{# Person-specific #}
+{% set isBio = (entrySection == 'people') %}
+{% set isPeopleDirectory = (cardVariant == 'people' and cardName != 'peopleSlide' ) %}
 
-<article class="{{ cardName }}{% if cardVariant %} {{ cardName }}--{{ cardVariant }}{% endif %}" data-section="{{ entrySection }}">
+{# Event-specific #}
+{# ugh #}
+{% set isEventSlide = (cardName == 'eventsSlide') %}
+{% set eventType = cardEntry.eventType is not null and cardEntry.eventType|length > 0 ? cardEntry.eventType[0] : null %}
+
+{# News-specific #}
+{# ugh #}
+{% set isNewsSlide = (cardName == 'newsSlide') %}
+
+{# Exhibitions-specific #}
+{% set isFeatureExhibition = cardObj is not null and 'isFeature' in cardObj|keys ? cardObj['isFeature'] : false %}
+{% set isExhibitionDirectory = (entrySection == 'exhibitions' and not isFeatureExhibition) %}
+
+{# Supplemental Attributes, e.g. carousel attrs #}
+{% set cardAttrs = cardObj is not null and 'attrs' in cardObj|keys ? cardObj['attrs'] : null %}
+{% set cardClass = cardAttrs and 'class' in cardAttrs|keys ? cardAttrs['class'] : null %}
+
+<article 
+    class="{{ cardName }}{% if cardVariant %} {{ cardName }}--{{ cardVariant }}{% endif %}{% if cardClass %} {{ cardClass }}{% endif %}" 
+    {% if cardAttrs %}
+    {% for attr,val in cardAttrs if attr != 'class' %}
+    {{ attr }}="{{ val }}"
+    {% endfor %}
+    {% endif %}>
 
     {# Card: Title Top  #}
     <h3 class="{{ cardName }}-title {{ cardName }}-title--top">
@@ -41,7 +71,7 @@
     </h3>
 
     {# Card: Image #}
-    {% if cardImage %}
+    {% if cardImage and not isNewsSlide %}
     {% set assetName = "#{cardName}-asset" %}
     {% set assetSizes = cardObj is not null and 'assetSizes' in cardObj|keys ? cardObj['assetSizes']|json_decode : null %}
     <picture class="{{ assetName }}">
@@ -56,6 +86,25 @@
     {% endif %}
 
     <div class="{{ cardName }}-details">
+
+        {# Card: Event Type #}
+        {% if eventType %}
+        <div class="{{ cardName }}-subtitle">{{ eventType }}</div>
+        {% endif %}
+
+        {# Card: Feature Exhibition #}
+        {% if isFeatureExhibition or cardClass == '_is-feature' %}
+        <div class="{{ cardName }}-subtitle">Upcoming</div>
+        {% endif %}
+
+        {% if cardDate and isNewsSlide %}
+        <time 
+            class="{{ cardName }}-dateblock"
+            datetime="">
+            {{ cardDate }}
+        </time>
+        {% endif %}
+
         {# Card: Title  #}
         <h3 class="{{ cardName }}-title {{ cardName }}-title--btm">
             <a href="{{ cardUrl }}">{{ cardEntry.title }}</a>
@@ -63,7 +112,7 @@
 
         {# Card: Person Details #}
         {% if cardEntry.personTitle %}
-        <p class="{{ cardName }}-subtitle" data-person-type="{{ cardEntry.personType[0] }}">{{ cardEntry.personTitle }}</p>
+        <p class="{{ cardName }}-subtitle">{{ cardEntry.personTitle }}</p>
         {% endif %}
         {% if cardEntry.personAffiliation %}
         <p class="{{ cardName }}-caption">{{ cardEntry.personAffiliation }}</p>
@@ -71,14 +120,20 @@
 
         {# Card: Main Content #}
         {% set showContent = cardObj and 'showContent' in cardObj|keys ? cardObj['showContent'] : true %}
-        {% if showContent %}
+        {% set trimContent = cardObj and 'trimContent' in cardObj|keys ? cardObj['trimContent'] : false %}
+        {% set trimAbstract = trimContent and cardAbstract ? (cardAbstract|length > trimContent ? cardAbstract|slice(0,trimContent + 1)|split(' ')|slice(0,-1)|join(' ') ~ '...' : cardAbstract ) : null %}
+        {% set trimBody = trimContent and cardBody ? (cardBody|length > trimContent ? cardBody|slice(0,trimContent + 1)|split(' ')|slice(0,-1)|join(' ') ~ '...' : cardBody ) : null %}
+
+        {% if showContent and not isEventSlide and not isNewsSlide %}
         {% if cardAbstract %}
+        {% set cardAbstract = trimAbstract ?? cardAbstract %}
         <div class="{{ cardName }}-redactor {{ cardName }}-redactor--abstract">
             {{ cardAbstract|raw }}
         </div>
         {% endif %}
 
         {% if cardBody %}
+        {% set cardBody = trimBody ?? cardBody %}
         <div class="{{ cardName }}-redactor {{ cardName }}-redactor--body">
             {{ cardBody|raw }}
         </div>
@@ -102,12 +157,28 @@
         {% endif %}
 
         {# Card: Date #}
-        {% if cardDate %}
+        {% if cardDate and not isNewsSlide %}
         <time 
             class="{{ cardName }}-dateblock"
             datetime="">
             {{ cardDate }}
         </time>
+        {% endif %}
+
+        {% if cardLocation %}
+        {% for name in cardLocation if name.type == 'locationName' %}
+        <div class="{{ cardName }}-subtitle">{{ name.item }}</div>
+        {% endfor %}
+        {% endif %}
+
+        {# Slide Card: Content #}
+        {% if showContent and (isEventSlide or isNewsSlide) %}
+        {% if cardAbstract %}
+        {% set cardAbstract = trimAbstract ?? cardAbstract %}
+        <div class="{{ cardName }}-redactor {{ cardName }}-redactor--abstract">
+            {{ cardAbstract|raw }}
+        </div>
+        {% endif %}
         {% endif %}
 
         {# Card: Topics #}
@@ -139,18 +210,28 @@
         {% endif %}
 
         {# Card: Actions #}
+        {% set actionList = cardEntry.actionBlock is not null and cardEntry.actionBlock|length > 0 ? cardEntry.actionBlock.all() : null %}
+        {# interest of time, just grab one #}
+        {% set actionItem = actionList ? actionList[0] : null %}
+        {% set actionType = actionItem ? actionItem.type : null %}
+        {% set actionLabel = actionType and actionType == 'register' ? 'Register' : (isBio ? 'Full Bio' : 'Learn More') %}
+        {% set actionUrl   = actionType ? actionItem.actionURL : cardUrl %}
+        {% set isExternal = (actionType and (actionType == 'register' or actionType == 'custom')) %}
         <div class="{{ cardName }}-buttons">
             <a 
-                class="{{ cardName }}-action {{ cardName }}-action--{{ isPeopleDirectory ? 'link' : 'ghost' }}"
-                href="{{ cardUrl }}"
+                class="{{ cardName }}-action {{ cardName }}-action--{{ isPeopleDirectory or isNewsSlide or isExhibitionDirectory ? 'link' : 'ghost' }}"
+                href="{{ actionUrl }}"
                 title=""
-                role="">
-                <span class="{{ cardName }}-action-label">{{ isBio ? 'Full Bio' : 'Learn More' }}</span>
+                role=""
+                {% if isExternal %}
+                target="_blank"
+                {% endif %}>
+                <span class="{{ cardName }}-action-label">{{ actionLabel }}</span>
                 <svg class="{{ cardName }}-action-icon">
                     <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
                 </svg>
             </a>
-            {% if cardEntry.personEmail %}
+            {% if cardEntry.personEmail and isPeopleDirectory %}
             <a 
                 class="{{ cardName }}-action {{ cardName }}-action--link"
                 href="mailto:{{ cardEntry.personEmail }}"
@@ -182,6 +263,7 @@
 {% set cardVariant = cardObj is not null and 'cardVariant' in cardObj|keys ? cardObj['cardVariant'] : null %}
 {% set cardLabel = cardObj is not null and 'cardLabel' in cardObj|keys ? cardObj['cardLabel'] : null %}
 {% set cardId = cardObj is not null and 'cardId' in cardObj|keys ? cardObj['cardId'] : null %}
+{% set cardImage = null %}
 {% set cardImage = cardEntry.cardImage and cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
 {% set team = cardEntry.projectTeam.all() %}
 {% set topics = cardEntry.topicList.all() %}
@@ -328,5 +410,59 @@
         </svg>
     </a>
     {% endif %}
+</article>
+{% endmacro %}
+
+
+{# cardMiniFeature
+    See styles/components/_cards.scss for styling
+
+    @cardName {str}  - base styling hook
+    @cardEntry {obj} - entry object
+    @cardObj {obj}   - wildcard object for storage
+#}
+{% macro cardMiniFeature(cardName,cardEntry,cardObj = {}) %}
+{% import 'macros/_assets' as assets %}
+
+{% set cardAttrs = cardObj is not null and 'attrs' in cardObj|keys ? cardObj['attrs'] : null %}
+{% set cardVariant = cardObj is not null and 'variant' in cardObj|keys ? cardObj['variant'] : null %}
+{% set cardTitle = cardEntry.title %}
+{% set sectionSlug = cardEntry.section|slugify %}
+{% set cardLabel = sectionSlug == 'projects' ? 'Research Project' : 'Exhibition' %}
+{% set spotlights = cardEntry.spotlightBlock is not null and cardEntry.spotlightBlock|length > 0 ? cardEntry.spotlightBlock.all() : null %}
+{% set arrowRightPath = "/spritemap.svg#icon-arrow-right-20" %}
+
+{# Apply effects to the image #}
+{% set cardImage = cardEntry.cardImage is not null and cardEntry.cardImage|length > 0 ? cardEntry.cardImage : null %}
+{% set imageUrl, dominantColor = null, null %}
+{% if cardImage %}
+{% set imageObj = cardImage.one() %}
+{% set dominantColor = craft.imager.getDominantColor(imageObj) %}
+{% set imageEffects = { grayscale: true, gamma: 1.5 } %}
+{% set imageUrl = assets.applyEffects(imageObj,imageEffects) %}
+{% endif %}
+<article 
+    class="{{ cardName }}{% if cardVariant %} {{ cardName }}--{{ cardVariant }}{% endif %}"
+    data-color="{% if dominantColor %}{{ dominantColor }}{% endif %}"
+    {% if cardAttrs %}
+    {% for attr,val in cardAttrs %}
+    {{ attr }}="{{ val }}"
+    {% endfor %}
+    {% endif %}
+    {% if imageUrl %}style='background-image: url({{imageUrl}});'{% endif %}>
+    <h4 class="{{ cardName }}-label">{{ cardLabel }}</h4>
+    <h5 class="{{ cardName }}-title">{{ cardTitle }}</h5>
+    {% for item in spotlights if item.type == 'question' %}
+    <div class="{{ cardName }}-question">{{ item.body }}</div>
+    {% endfor %}
+    <a 
+        class="{{ cardName }}-action {{ cardName }}-action--ghost"
+        href="{{ siteUrl }}/{{ cardEntry.uri }}">
+        <span class="{{ cardName }}-action-label">Learn More</span>
+        <svg 
+            class="{{ cardName }}-action-icon">
+            <use xlink:href="{{ alias('@assetBasePath' ~ arrowRightPath) }}"></use>
+        </svg> 
+    </a>
 </article>
 {% endmacro %}

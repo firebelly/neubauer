@@ -1,0 +1,36 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d # Homepage
+handle: peopleCard
+instructions: 'Action labels for the final card in slider'
+name: 'Fellows Call-to-Action Card'
+searchable: false
+settings:
+  columns:
+    __assoc__:
+      -
+        - ccadc864-aaf1-4652-a050-cda6111fdb89 # Large Prompt
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - adce5df3-632e-4623-8e1f-a778043c1e46 # Link Label
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_peoplecard}}'
+  fieldLayout: table
+  maxRows: '1'
+  minRows: ''
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: ''
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

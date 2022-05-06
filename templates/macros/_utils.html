@@ -140,6 +140,10 @@
             'publications': {
                 'sm': [260,180],
                 'lg': [640,400]
+            },
+            'news': {
+                'sm': [260,180],
+                'lg': [640,640]
             }
         },
         'news': {
@@ -157,12 +161,17 @@
             }
         },
         'search': {
-            'sm': [280,200],
-            'lg': [450,350]
+            'card': {
+                'sm': [280,200],
+                'lg': [450,350]
+            }
         },
         'narrative': {
-            'sm': [255,180],
-            'lg': [675,400]
+            'card': {
+                'sm': [255,180],
+                'lg': [675,400]
+            }
+            
         }
 
     }%}
@@ -171,4 +180,13 @@
     
     {{ assetSizes|json_encode|raw }}
 
+{% endmacro %}
+
+{# NOTE: should be a custom filter #}
+{% macro pluralizeStr(str) %}
+    {% if str ends with 'y' %}
+    {{ str[:-1] ~ "ies" }}
+    {% else %}
+    {{ "#{str}s" }}
+    {% endif %}
 {% endmacro %}

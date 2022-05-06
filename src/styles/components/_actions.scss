@@ -7,10 +7,11 @@
   Action Button: Structure
   See templates/macros/_actions.html for markup
 ------------------------------------------------------------------------ */
-@mixin actionButton($selector,$color-primary,$color-secondary,$icon-size:20px,$default:true) {
+@mixin actionButton($selector,$color-primary,$color-secondary,$default:true) {
     $v-padding: 1.5em;   
     $h-padding: 2em;
     $border-size: 1px; 
+    $icon-size: 20px;
 
     #{$selector} {
         @include flexParent($display:inline-flex,$values:row nowrap);
@@ -21,6 +22,36 @@
             border-radius: 5px;
             border: $border-size solid transparent;
             padding: calc(#{$v-padding} - #{$border-size}) calc(#{$h-padding} - #{$border-size});
+            position: relative;
+
+            // prevent jumps on hover
+            &::after {
+                transition: border-color 0.5s ease-in;
+                content: "";
+                position: absolute;
+                top: -5px;
+                left: -5px;
+                width: calc(100% + 2px);
+                height: calc(100% + 2px);
+                border: 4px solid transparent;
+                border-radius: 9px; // account for border diff
+            }
+        }
+
+        &--link {
+            position: relative;
+
+            // prevent jumps on hover
+            &::after {
+                transition: all 0.5s ease-in;
+                content: "";
+                position: absolute;
+                top: -4px;
+                left: -4px;
+                width: calc(100% + 8px);
+                height: calc(100% + 12px);
+                background: none;
+            }
         }
 
         // TODO: make accessible
@@ -38,6 +69,8 @@
 
         &-label,
         &-icon {
+            position: relative;
+            z-index: 1;
             @include flexChild(0 1 auto);
         }
 
@@ -78,6 +111,21 @@
                 text-decoration-color: $color-primary;
             }
 
+            &:hover {
+                color: getColor('white');
+                text-decoration-color: getColor('white');;
+                text-decoration-thickness: 4px;
+
+                &::after {
+                    background: getColor('red');
+                }
+
+                #{$selector}-icon {
+                    fill: getColor('white');
+                }
+                
+            }
+
             #{$selector}-icon {
                 fill: $color-primary;
             }
@@ -89,12 +137,16 @@
             color: $color-primary;
 
             &:hover {
-                border-color: $color-secondary;
-                background: $color-primary;
-                color: $color-secondary;
+                background: getColor('red');
+                color: getColor('white');
+                border-color: getColor('red');
+
+                &::after {
+                    border-color: getColor('white');
+                }
 
                 #{$selector}-icon {
-                    fill: $color-secondary;
+                    fill: getColor('white');
                 }
 
             }
@@ -113,243 +165,6 @@
             text-align: center;
             text-decoration: none;
         }
-
-    }
-
-}
-
-/* -------------------------------------------------------------------------------
- Action Link: Structure
- See templates/macros/_actions.html for markup
----------------------------------------------------------------------------------- */
-@mixin actionLink($selector,$icon-size:20px,$default: true) {
-    $border-size: 2px;
-
-    #{$selector} {
-        padding: 0.3em 0 0 0;
-        font-size: 1rem;
-        
-        &:link,
-		&:visited,
-		&:hover,
-		&:active {
-			text-decoration: none;
-		}
-
-        &--hasicon {
-            @include flexParent($display:inline-flex);
-        }
-
-        &-trigger {
-            position: relative; 
-
-            &::after {
-                content: "";
-                width: 100%;
-                bottom: 0;
-                left: 0;
-                position: absolute;
-                border-bottom: $border-size solid transparent;
-            }
-        
-        }
-
-        &-icon {
-            @include flexChild();
-            height: $icon-size;
-            margin-left: 0.5em;
-            width: $icon-size;
-        }
-
-    }
-
-    @if $default != false {
-		@include actionLink--default($selector);
-	}
-
-}
-
-/* -------------------------------------------------------------------------------
- Action Link: Default Presentation
----------------------------------------------------------------------------------- */
-@mixin actionLink--default($selector) {
-    // Link palette
-    $link-default-color: getColor('blue');
-    $link-inactive-color: getColor('gray',10);
-    $link-hover-color: getColor('black',10);
-    $link-hover-bg: getColor('yellow',10);
-    $link-shadow-color: getColor('black');
-    // Border palette
-    $border-default-color: getColor('blue');
-    $border-inactive-color: getColor('gray',10);
-    $border-hover-color: transparent;
-    // Icon palette
-    $icon-default-color: getColor('blue');
-    $icon-inactive-color: getColor('gray',10);
-    $icon-hover-color: getColor('black',10);
-
-    #{$selector} {
-        
-        &:link,
-        &:visited,
-        &:hover,
-        &:active {
-            color: $link-default-color;
-        }
-
-        &._is-inactive {
-            color: $link-inactive-color;
-        }
-
-        &-trigger {
-
-            &::after {
-                border-color: $border-default-color;
-        
-                #{$selector}._is-inactive & {
-                    border-color: $border-inactive-color;
-                }
-
-                #{$selector}:hover & {
-                    border-color: $border-hover-color;
-                }
-
-            }
-        
-        }
-
-        &-icon {
-            fill: $icon-default-color;
-
-            #{$selector}._is-inactive & {
-                fill: $icon-inactive-color;
-            }
-
-            #{$selector}:hover & {
-                fill: $icon-hover-color;
-            }
-
-        }
-
-        &:hover {
-            @include boxShadow(0,1px,5px,rgba($link-shadow-color,.6));
-            background: $link-hover-bg;
-            color: $link-hover-color;
-        }
-
-    }
-
-}
-
-/* -------------------------------------------------------------------------------
- Action Icon: Structure
- See templates/macros/_actions.html for markup
----------------------------------------------------------------------------------- */
-@mixin actionIcon($selector,$size:50px,$icon-size:30px,$default:true) {
-    $border-size: 2px;
-
-    #{$selector} {
-        border-radius: 100%;
-        height: $size;
-        width: $size;
-        padding: 0;
-        font-size: 1rem;
-
-        &-trigger {
-            @include visuallyHide;
-        }
-        
-        &-icon {
-            height: $icon-size;
-            width: $icon-size;
-        }
-        
-        &--ghost {
-            border: $border-size solid transparent;
-        }
-
-        &:hover {
-			cursor: pointer;
-		}
-    
-    }
-
-    @if $default != false {
-		@include actionIcon--default($selector);
-	}
-
-}
-
-/* -------------------------------------------------------------------------------
- Action Icon: Default Presentation
----------------------------------------------------------------------------------- */
-@mixin actionIcon-default($selector) {
-    // Solid palette
-    $solid-default-color: getColor('white');
-    $solid-inactive-color: getColor('black',10);
-    $solid-default-bg: getColor('red');
-    $solid-inactive-bg: getColor('gray',10);
-    // Ghost palette
-    $ghost-default-color: getColor('red');
-    $ghost-inactive-color: getColor('gray',10);
-    $ghost-default-border: getColor('red');
-    $ghost-hover-border: transparent;
-    // Hover palette
-    $hover-color: getColor('black',10);
-    $hover-bg: getColor('yellow',10);
-
-    #{$selector} {
-
-        &--solid {
-            background: $solid-default-bg;
-
-            &._is-inactive {
-                background: $solid-inactive-bg;
-            }
-        }
-
-        &--ghost {
-            border-color: $ghost-default-color;
-            color: $ghost-default-color;
-
-            &._is-inactive {
-                border-color: $ghost-inactive-color;
-            }
-
-            &:hover {
-                border-color: $ghost-hover-border;
-            }
-        }
-
-        &-icon {
-            
-            #{$selector}--solid & {
-                fill: $solid-default-color;
-            }
-
-            #{$selector}--solid._is-inactive & {
-                fill: $solid-inactive-color;
-            }
-
-            #{$selector}--ghost & {
-                fill: $ghost-default-color;
-            }
-
-            #{$selector}--ghost._is-inactive & {
-                fill: $ghost-inactive-color;
-            }
-
-            #{$selector}:hover & {
-                fill: $hover-color;
-            }
-
-        }
-
-        &:hover {
-            @include boxShadow(0,1px,5px,rgba($hover-color,.6)); 
-			cursor: pointer;
-            background: $hover-bg;
-		}
 
     }
 

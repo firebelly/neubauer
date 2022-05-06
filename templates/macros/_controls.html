@@ -447,6 +447,7 @@ Section: {{ activeSection }} #}
 {% set caretUpPath = "/spritemap.svg#icon-caret-up-#{iconSize}" %}
 {% set closePath = "/spritemap.svg#icon-close-#{iconSize}" %}
 {% set arrowPath = "/spritemap.svg#icon-arrow-right-#{iconSize}" %}
+{% set sortTogglePath = "/spritemap.svg#icon-sort-toggle" %}
 
 <div class="{{ filterName }} {{ filterName }}--{{ filterVariant }}">
 
@@ -493,11 +494,12 @@ Section: {{ activeSection }} #}
             >
             <span class="{{ filterName }}-label {{ filterName }}-label--headline">Sort By Name {% if sort == 'asc' %}(A-Z){% else %}(Z-A){% endif %}</span>
             <svg class="{{ filterName }}-icon {{ filterName }}-icon--caret">
-                {% if sort == 'asc' %}
+                <use xlink:href="{{ alias('@assetBasePath' ~ sortTogglePath) }}"></use>
+                {# {% if sort == 'asc' %}
                 <use xlink:href="{{ alias('@assetBasePath' ~ caretDnPath) }}"></use>
                 {% else %}
                 <use xlink:href="{{ alias('@assetBasePath' ~ caretUpPath) }}"></use>
-                {% endif %}
+                {% endif %} #}
             </svg>
         </button>
 

@@ -1,0 +1,542 @@
+/* _carousels.scss */
+@use "../utils/_utils" as *;
+@use "_assets" as *;
+@use "_controls" as *;
+@use "_actions" as *;
+@use "sass:string";
+@use "sass:math";
+
+/* ---------------------------------------------------------------------
+  Carousel Scroller: Structure
+  See templates/macros/_carousels.html for markup
+------------------------------------------------------------------------ */
+@mixin carouselScroller($selector,$default:true) {
+
+    #{$selector} {        
+        font-size: 1rem;
+        margin-bottom: 11em;
+
+        &-frame {
+            overflow: hidden;
+        }
+          
+        &-slides {
+            display: flex;
+            padding: 0 4em 1em 0;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+
+            &::-webkit-scrollbar {
+                width: 10px;
+                height: 10px;
+            }
+            
+            &::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                background: transparent;
+            }
+            
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            $slide-preview: 2em;
+            > * {
+                scroll-snap-align: start;
+                flex-shrink: 0;
+                transform-origin: center center;
+                transform: scale(1);
+                transition: transform 0.5s;
+                position: relative;
+                // Calculate slide width based on preview
+                width: calc(100% - #{$slide-preview});
+            }
+
+            // Calculate slide width based on slide hook
+            @include breakpoint(sm) {
+                
+                @for $i from 1 through 4 {
+                    $p: '%';
+                    $sm-width: math.div(100,$i);
+                    
+                    &--#{$i} {
+                        > * {
+                            width: calc(#{$sm-width}#{$p} - #{$slide-preview});
+                        }
+                    }
+                }
+            }
+
+        }
+
+        &-legend {
+            @include visuallyHide;
+        }
+    
+        &-button {
+            $button: &;
+            @include resetButton;
+    
+            &--control {
+                border: 1px solid transparent;
+                border-radius: 5px;
+                display: inline-flex;
+                position: relative;
+                margin: 0 1em 2em 0;
+                padding: 1.5em;
+
+                // prevent jumps on hover
+                &::after {
+                    transition: border-color 0.5s ease-in;
+                    content: "";
+                    position: absolute;
+                    top: -5px;
+                    left: -5px;
+                    width: calc(100% + 2px);
+                    height: calc(100% + 2px);
+                    border: 4px solid transparent;
+                    border-radius: 9px; // account for border diff
+                }
+
+                &:hover {
+                    background: getColor('red');
+                    color: getColor('white');
+                    border-color: getColor('red');
+    
+                    &::after {
+                        border-color: getColor('white');
+                    }
+    
+                    #{$button}-icon {
+                        fill: getColor('white');
+                    }
+    
+                }    
+
+            }	
+    
+            &:hover {
+                cursor: pointer;
+            }
+
+            &-label {
+                @include visuallyHide;
+            }
+    
+            &-label,
+            &-icon {
+                pointer-events: none; // prevent bubble ups
+            }
+    
+            &-icon {
+                height: 20px;
+                width: 20px;
+            }
+    
+        }
+    
+        &-nav {
+            @include visuallyHide;
+        }
+
+        &-call {
+            @include flexParent($display: flex, $values: column wrap);
+            @include justifyContent(center);
+            @include alignItems(center);
+            @include flexChild(1 0 auto);
+            border: 1px solid transparent;
+            margin-right: 0;
+            padding: 4em;
+    
+            > * {
+                @include flexChild();
+            }
+
+            &-prompt {
+                $mb: math.div(20,28);
+                @include getType('h3-sans');
+                margin-bottom: #{$mb}em;
+                text-align: center;
+            }
+        }	
+
+    }
+
+    @if $default != false {
+        @include carouselScroller--default($selector);
+    }
+
+}
+
+/* -------------------------------------------------------------------------------
+Carousel Scroller: Default Presentation
+---------------------------------------------------------------------------------- */
+@mixin carouselScroller--default($selector) {
+
+    #{$selector} {
+        
+        &-slides {
+            scrollbar-width: thin;
+            // Camoflauge the scrollbar (FF, Chrome)
+            #{$selector}--people & {
+                scrollbar-color: getColor('blue',10) transparent;
+                &::-webkit-scrollbar-thumb {
+                    background: getColor('blue',10);
+                }
+            }
+            #{$selector}--events & {
+                scrollbar-color: getColor('yellow') transparent;
+                &::-webkit-scrollbar-thumb {
+                    background: getColor('yellow');
+                }
+            }   
+            #{$selector}--news & {
+                scrollbar-color: getColor('red',10) transparent;
+                &::-webkit-scrollbar-thumb {
+                    background: getColor('red',10);
+                }
+            }
+        }
+
+        &-button {
+
+            &--control {
+
+                #{$selector}--people & {
+                    border-color: getColor('blue');
+                }
+                #{$selector}--events & {
+                    border-color: getColor('yellow',10);
+                }
+                #{$selector}--news & {
+                    border-color: getColor('red');
+                }
+            }	
+
+            &-icon {
+
+                &--active {
+                    @include totallyHide;
+                }
+                
+                [aria-current="true"] & {
+
+                    &--active {
+                        @include totallyShow;
+                    }
+
+                    &--inactive {
+                        @include totallyHide;
+                    }
+
+                }
+
+                #{$selector}--people & {
+                    fill: getColor('blue');
+                }
+
+                #{$selector}--events & {
+                    fill: getColor('yellow',10);
+                }
+
+                #{$selector}--news & {
+                    fill: getColor('red');
+                }
+    
+            }
+        }
+
+        &-call {
+            $call: &;
+
+            #{$selector}--people & {
+                border-color: getColor('blue');
+                color: getColor('blue');
+                @include actionButton(#{$call}-action,getColor('blue'),getColor('blue',10));
+            }
+            #{$selector}--events & {
+                border-color: getColor('yellow',10);
+                color: getColor('yellow',10);
+                @include actionButton(#{$call}-action,getColor('yellow',10),getColor('yellow'));
+            }
+            #{$selector}--news & {
+                border-color: getColor('red');
+                color: getColor('red');
+                @include actionButton(#{$call}-action,getColor('red'),getColor('red',10));
+            }
+        }	
+
+
+    }
+
+}
+
+/* ---------------------------------------------------------------------
+  Carousel Slider: Structure
+  See templates/macros/_cards.html for markup
+  // NOTE: not in use; mistook functionality
+------------------------------------------------------------------------ */
+@mixin carouselSlider($selector,$color-primary:null,$color-secondary:null,$default:true,$theme:false) {
+
+    #{$selector} {        
+        font-size: 1rem;
+
+        &[draggable] {
+            &:hover {
+                cursor: grab;
+            }
+        }
+
+        &--news {
+            $width: calc(100vw / 1.5);
+            width: $width;
+        }
+
+        &-legend {
+            @include visuallyHide;
+        }
+    
+        &-button {
+            $button: &;
+            @include resetButton;
+    
+            &--control {
+                border: 1px solid transparent;
+                border-radius: 5px;
+                position: relative;
+                margin: 0 1em 2em 0;
+                padding: 1.5em;
+
+                &._is-hidden {
+                    //@include totallyHide;
+                }
+
+                // prevent jumps on hover
+                &::after {
+                    transition: border-color 0.5s ease-in;
+                    content: "";
+                    position: absolute;
+                    top: -5px;
+                    left: -5px;
+                    width: calc(100% + 2px);
+                    height: calc(100% + 2px);
+                    border: 4px solid transparent;
+                    border-radius: 9px; // account for border diff
+                }
+
+                &:hover {
+                    background: getColor('red');
+                    color: getColor('white');
+                    border-color: getColor('red');
+    
+                    &::after {
+                        border-color: getColor('white');
+                    }
+    
+                    #{$button}-icon {
+                        fill: getColor('white');
+                    }
+    
+                }    
+
+            }	
+    
+            &:hover {
+                cursor: pointer;
+            }
+    
+            &-label {
+                @include visuallyHide;
+            }
+    
+            &-label,
+            &-icon {
+                pointer-events: none; // prevent bubble ups
+            }
+    
+            &-icon {
+                height: 20px;
+                width: 20px;
+            }
+    
+        }
+    
+        &-nav {
+
+            &._is-off {
+                @include totallyHide;
+            }
+
+            @include flexParent();
+
+            > * {
+                @include flexChild(0 1 auto);
+            }
+
+        }
+
+        // slide vars
+        $slide-margin: 0.5em;
+        // magic arbitrary values that provide 
+        // *just* enough preview of upcoming slide
+        $xs-slide-preview: 10em; 
+        $sm-slide-preview: 8em; 
+        $xs-feature-slide-preview: 10em;
+        $sm-feature-slide-preview: 12em;
+
+        &-frame {
+            overflow: hidden;
+            position: relative;
+
+            &._is-scrollable {
+                overflow-x: scroll;
+            }    
+
+            &--features {
+                @include breakpoint(lg) {
+                    height: 820px;
+                }
+            }
+
+            // News carousel does not meet edge of viewport
+            #{$selector}--news & {  
+                //margin-right: 4em;
+            }
+
+        }
+    
+        &-slides {
+            // Transform translateX applied via contentCarousel.js
+            @include flexParent($display:flex,$values:row nowrap);
+            transition: 0.5s ease-in-out;
+            -webkit-transition: 0.5s ease-in-out;
+            transform: translateX(0);
+            -webkit-transform:translateX(0);
+
+            #{$selector}-frame--features & {
+                height: 100%;
+                //@include alignItems(center);
+            }
+
+            $xs-slide-width: calc(100vw - #{$xs-slide-preview});
+            > * {
+                @include flexChild(0 0 #{$xs-slide-width});
+            }
+            
+            @include breakpoint(sm) {
+                @for $i from 1 through 4 {
+                    $sm-width: math.div(100,$i);
+                    $sm-slide-width: calc(#{$sm-width}vw - #{$sm-slide-preview});
+                    $sm-feature-slide-width: calc(#{$sm-width}vw - #{$sm-feature-slide-preview});
+                    $p: '%';
+
+                    &--#{$i} {
+                        // important that the slide width is relative to viewport width here
+                        > * {
+                            @include flexChild(0 0 #{$sm-slide-width});
+
+                            // News slides do not extent the viewport
+                            #{$selector}--news & {
+                                @include flexChild(0 0 #{$sm-width}#{$p});
+                            }
+
+                            #{$selector}-frame--features & {
+                                @include flexChild(0 0 #{$sm-feature-slide-width});
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @if $default != false {
+        @if $theme == true {
+            @each $pg, $color in $pages {
+                $color-primary: nth(getTheme($color),1);
+                $color-secondary: nth(getTheme($color),2);
+    
+                @at-root {
+                    #{$selector}--#{$pg} {
+                        @include carousel--default($selector,$color-primary,$color-secondary);
+                    }
+                }
+            }
+        }
+        @else {
+            @include carousel--default($selector,$color-primary,$color-secondary);
+        }
+    }
+
+}
+
+/* -------------------------------------------------------------------------------
+ Carousel Slider: Default Presentation
+---------------------------------------------------------------------------------- */
+@mixin carouselSlider--default($selector,$color-primary,$color-secondary) {
+
+    #{$selector} {
+
+        #{$selector}--people & {
+            border-color: getColor('blue');
+        }
+
+        #{$selector}--events & {
+            border-color: getColor('yellow',10);
+        }
+
+        &-button {
+
+            &--control {
+
+                #{$selector}--people & {
+                    border-color: getColor('blue');
+                }
+                #{$selector}--events & {
+                    border-color: getColor('yellow',10);
+                }
+                #{$selector}--news & {
+                    border-color: getColor('red');
+                }
+            }	
+
+            &-icon {
+
+                &--active {
+                    @include totallyHide;
+                }
+                
+                [aria-current="true"] & {
+
+                    &--active {
+                        @include totallyShow;
+                    }
+
+                    &--inactive {
+                        @include totallyHide;
+                    }
+
+                }
+
+                #{$selector}--people & {
+                    fill: getColor('blue');
+                }
+
+                #{$selector}--events & {
+                    fill: getColor('yellow',10);
+                }
+
+                #{$selector}--news & {
+                    fill: getColor('red');
+                }
+    
+            }
+        }
+
+    }
+
+}

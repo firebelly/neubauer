@@ -1,0 +1,36 @@
+/* _gallery.scss */
+
+/* ---------------------------------------------------------------------
+ Gallery-specific  declarations
+------------------------------------------------------------------------ */
+@use "utils/_utils" as *;
+@use "components/__components" as *;
+@use "sass:math";
+
+@forward 'project';
+
+
+/* ---------------------------------------------------------------------
+  Thumbs
+------------------------------------------------------------------------ */
+.artGallery {
+    @include flexParent();
+    $margin: 0.25em;
+    $total-margin: $margin * 2;
+    margin-left: $total-margin;
+
+    > * {
+        $xs-width: calc(50% - $total-margin);
+        @include flexChild(0 1 #{$xs-width});
+        margin: 0 $margin $total-margin $margin;
+    }
+
+    @include breakpoint(sm) {
+        $sm-width: calc(25% - $total-margin);
+        > * {
+            @include flexChild(0 1 #{$sm-width});
+        }
+        
+    }
+
+}

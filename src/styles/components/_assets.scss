@@ -21,10 +21,12 @@ $ratio-map: (
 @mixin assetItem($selector,$default:true) {
     
     #{$selector} {
+        display: block;
         overflow: hidden;
         position: relative;
         font-size: 1rem; // standardize sizing 
 
+        // NOTE: scrap this, this was early testing
         @each $ratio in $ratio-map {
             $ratio-str: str-replace($ratio,'_',$replace:'.');
             $ratio-list: str-split($ratio-str,'-');

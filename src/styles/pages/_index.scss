@@ -120,6 +120,11 @@
 		#{$filter}--exhibitions & {
 			@include flexParent();
 			@include alignItems(center);
+			margin-bottom: 2em;
+
+			@include breakpoint(sm) {
+				margin-bottom: 0;
+			}
 
 			&-title {
 				$mr: math.div(25,16);
@@ -143,11 +148,17 @@ $results: '.searchResults';
 .searchResults {
 	padding: 0 4em;
 
+	&--exhibitions {
+		margin: 4em 0 0 0;
+		padding: 0;
+	}
+
 	&-title {
 		@include visuallyHide;
 	}
 
 	&-content {
+		$content: 7;
         $margin: 0.5em;
         $thirds: math.div(100,30) * 10%;
         $halves-percent: calc(50% - $margin);
@@ -160,29 +171,60 @@ $results: '.searchResults';
             > * {
                 @include flexChild(0 1 #{$halves-percent});
             }
+
+			&--search,
+			&--projects {
+				> * {
+					@include flexChild(0 1 #{$thirds-percent});
+				}
+			}
+
+			&--exhibitions {
+				$x-margin: 8em;
+				$halves-percent: calc(50% - $x-margin);
+				> * {
+					@include flexChild(0 1 #{$halves-percent});
+				}
+
+			}
+
+
         }
 		
 		&._is-grid {
+			margin-left: 0;
+
+			// .searchArticle {
+			// 	width: 50%;
+			// }
 
 		}
 
 		&._is-list {
+			display: block;
+			padding: 0 4em;
 
 			.searchArticle {
-				@include flexParent();
+				@include flexParent($display: flex, $values: row nowrap);
 				border-top: 1px solid getColor('gray');
 				padding: 2em 0;
 				margin: 0;
+
 
 				> * {
 					@include flexChild();
 				}
 			
 				&-asset {
-					//TODO
-					width: 200px;
-					height: 200px;
+					// fix these
+					height: 70px;
+					width: 70px;
 					margin: 0 2em 0 0;
+
+					@include breakpoint(sm) {
+						height: 200px;
+						width: 200px;
+					}
 				}
 				
 			}
@@ -200,18 +242,52 @@ $results: '.searchResults';
 		@include cardDirectory(#{$article},$theme:true);
 	}
 
+
+
 	&--exhibitions {
+		margin: 0 2em 8em 2em;
+
+		@include breakpoint(sm) {
+			margin: 0 4em 8em 4em;
+		}
+
 		#{$article}-topics {
 			display: none;
 		}
+
+		#{$results}-content._is-grid & {
+			// In grid view, hide article if feature in list
+			&._is-feature {
+				display: none;
+			}
+
+			#{$article}-buttons {
+				display: none;
+			}
+		}
+
+		#{$results}-content._is-list & {
+
+			// #{$article}-subtitle {
+			// 	$mb: math.div(20,16);
+			// 	@include getType('caption');
+			// 	margin-bottom: #{$mb}em;
+			// }
+
+			#{$article}-title {
+				@include getType('h3-normal');
+			}
+
+			#{$article}-dateblock {
+				$mb: math.div(40,16);
+				margin-bottom: #{$mb}em;
+			}
+		}
+
 	}
 
 	&--feature {
 		
-		#{$results}-content._is-grid & {
-			flex-basis: 100%;
-		}
-
 		#{$article}-details {
 			color: getColor('gray');
 
@@ -224,7 +300,26 @@ $results: '.searchResults';
 
 		}
 
+		#{$article}-subtitle {
+			$mb: math.div(20,16);
+			@include getType('caption');
+			margin-bottom: #{$mb}em;
+		}
+
+		#{$article}-topics {
+			display: none;
+		}
+
+		// Exhibition Feature: Grid View
 		#{$results}-content._is-grid & {
+			flex-basis: 100%;
+			margin-left: 0;
+			margin-right: 0;
+			width: 100%;
+
+			#{$article}-asset {
+				margin-bottom: 4em;
+			}
 
 			#{$article}-details {
 				@include flexParent($display:flex,$values:column wrap);
@@ -234,15 +329,22 @@ $results: '.searchResults';
 
 			#{$article}-title {
 				@include getType('h2-sans');
+				text-align: center;
 			}
 
 			#{$article}-dateblock {
 				@include getType('p');
+				margin-bottom: 0;
 			}
-		}
 
-		#{$article}-topics {
-			display: none;
+			#{$article}-buttons {
+				margin: 4em 0 0 0;
+			}
+
+			#{$article}-action {
+				margin: 0;
+			}
+			
 		}
 
 		$action: #{$article}-action;

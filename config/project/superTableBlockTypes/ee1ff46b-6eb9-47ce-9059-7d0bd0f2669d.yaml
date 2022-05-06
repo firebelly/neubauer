@@ -1,0 +1,67 @@
+field: 04d98b59-37cd-4a03-ba69-f903dd27a38a # News Call-to-Action Card
+fieldLayouts:
+  c87bca6a-5817-4e92-81f6-06f2460307e5:
+    tabs:
+      -
+        elements:
+          -
+            fieldUid: 2b2fd15a-7756-4bfb-aa5b-32060728e2c9 # Large Prompt
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: 9975ee29-08bc-4983-bc8e-02db8da51be6 # Link Label
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Content
+        sortOrder: 1
+fields:
+  2b2fd15a-7756-4bfb-aa5b-32060728e2c9: # Large Prompt
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: prompt
+    instructions: ''
+    name: 'Large Prompt'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  9975ee29-08bc-4983-bc8e-02db8da51be6: # Link Label
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: action
+    instructions: ''
+    name: 'Link Label'
+    searchable: false
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: ''
+      columnType: null
+      initialRows: '4'
+      multiline: ''
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText

@@ -201,9 +201,19 @@
 
 {% if openerImage %}
 <div class="interiorCover-frame">
-    <div class="interiorCover-placeholder"></div>
-    {# <img class="interiorCover-frame-img" src="{{ openerImage.one() }}" /> #}
-    <div class="interiorCover-caption">{{ openerImage.caption }}</div>
+    {# <div class="interiorCover-placeholder"></div> #}
+    {% if openerImage %}
+    {% set openerName = 'interiorCover-asset' %}
+    {% set openerSizes = utils.getAssetSizes(entrySection,'interior')|json_decode %}
+    <picture class="{{ openerName }}">
+        {% if openerSizes %}
+        {{ assets.assetCard(openerName,openerImage,openerSizes) }}
+        {% else %}
+        {{ assets.assetCard(openerName,openerImage) }}
+        {% endif %}
+    </picture>
+    {% endif %}
+    <div class="interiorCover-caption">{{ openerImage.one().caption }}</div>
 </div>
 {% endif %}
 
@@ -314,7 +324,7 @@
         </div>
         {% endif %}
 
-        {% if topicList %}
+        {% if topicList and entrySection != 'exhibitions' %}
         <div class="interiorSummary-topics interiorSummary-topics--{{ entrySection }}">
             <h3 class="interiorSummary-topics-subtitle">Topics</h3>
             <ul class="interiorSummary-topics-list">
@@ -368,10 +378,23 @@
 {% if gallery %}
 <section class="interiorGallery interiorGallery--{{ entrySection }}">
     <h3 class="interiorNarrative-title">Gallery</h3>
-    {% for galleryImage in gallery %}
-    {# {{ galleryImage.getWidth() }} #}
-    {# {{ assets.assetCard('galleryThumb',galleryImage,335,335) }} #}
-    {% endfor %}
+    {% set galleryName = 'artGallery' %}
+    {% set gallerySizes = utils.getAssetSizes(entrySection,'gallery')|json_decode %}
+    <ul class="{{ galleryName }}">
+        {% for galleryImage in gallery %}
+        <li class="{{ galleryName }}-thumb">
+            <a href="#" title="View large image" data-gallery>
+                <picture class="{{ galleryName }}-asset">
+                {% if gallerySizes %}
+                    {{ assets.assetCard(galleryName,galleryImage,gallerySizes) }}
+                    {% else %}
+                    {{ assets.assetCard(galleryName,galleryImage) }}
+                {% endif %}
+                </picture>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
 </section>
 {% endif %}
 
@@ -398,9 +421,9 @@
             aria-controls="all-tab"
             id="all">All</button>
 
-        
         {% for tabSlug, objs in narratives|reverse %}
-        {% set tabTitle = tabSlug|title %}
+        {% set tabTitle = tabSlug|replace('-',' ')|title %}
+        {% set pluralTitle = utils.pluralizeStr(tabTitle) %}
         <button 
             class="tabList-item"
             type="button"
@@ -408,12 +431,17 @@
             aria-selected="false"
             aria-controls="{{ tabSlug }}-tab"
             id="{{ tabSlug }}"
-            tabindex="-1">{{ "#{tabTitle}s" }}</button>
+            tabindex="-1">{{ "#{pluralTitle}" }}</button>
         </li>
         {% endfor %}
     </div>
     
     {% set allCount = narrativeBlock|length %}
+    {% set narrativeName = 'tabPanel-item' %}
+    {% set narrativeObj = {
+        'assetSizes': utils.getAssetSizes('narrative','card')
+    } %}
+
     <div 
         class="tabPanel{% if allCount > 3 %} tabPanel--4{% endif %}"
         tabindex="0"
@@ -423,10 +451,9 @@
 
         {% for n in narrativeBlock %}
         {# default to "Update" if narr type does not exist #}
-        {% set type = n.narrativeType|length > 0 ? n.narrativeType[0].title : 'Update' %}
-        {% set narrative = n.item[0] %}
-        {% set cardName,cardEntry,cardObj,cardVariant = 'tabPanel-item',narrative,{},'' %}
-            {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+        {# {% set type = n.narrativeType|length > 0 ? n.narrativeType[0].title : 'Update' %} #}
+            {% set narrativeEntry = n.item[0] %}
+            {{ cards.cardArticle(narrativeName,narrativeEntry,narrativeObj) }}
         {% endfor %}
     </div>
 
@@ -441,8 +468,7 @@
         aria-labelledby="{{ tabSlug }}">
 
         {% for narrative in objs %}
-            {% set cardName,cardEntry,cardObj,cardVariant = 'tabPanel-item',narrative,{},'' %}
-            {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+            {{ cards.cardArticle(narrativeName,narrative,narrativeObj) }}
         {% endfor %}
 
     </div>

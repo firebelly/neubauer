@@ -118,134 +118,6 @@ var accordionMenu = {
 
 /***/ }),
 
-/***/ "./src/scripts/components/contentCarousel.js":
-/*!***************************************************!*\
-  !*** ./src/scripts/components/contentCarousel.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-// contentCarousel  
-
-/*
-Adapted from:
-https://dev.to/jasonwebb/how-to-build-a-more-accessible-carousel-or-slider-35lp
-*/
-//
-var contentCarousel = {
-  init: function init(options) {
-    this.carousel = document.querySelector('[data-carousel]');
-    this.previousButton = this.carousel.querySelector('[data-carousel-prev]');
-    this.nextButton = this.carousel.querySelector('[data-carousel-next]');
-    this.slideNav = this.carousel.querySelector('[data-carousel-nav]');
-    this.slidesContainer = this.carousel.querySelector('[data-carousel-slides]');
-    this.slides = this.slidesContainer.querySelectorAll('[data-carousel-item]');
-    this.slideDots = this.slideNav.querySelectorAll('[data-carousel-button]');
-    this.leftIndex = 0;
-    this.slideGap = 5;
-    this.slideGroup = options.group != null ? options.group : 3;
-    this.slideCount = this.slides.length;
-    this.bind();
-  },
-  previousSlide: function previousSlide() {
-    var self = this;
-
-    if (self.leftIndex > 0) {
-      self.goToSlide(self.leftIndex - 1);
-    } else {
-      self.goToSlide(self.slideCount - 1);
-    }
-  },
-  nextSlide: function nextSlide() {
-    var self = this;
-
-    if (self.leftIndex < self.slideCount - 1) {
-      self.goToSlide(self.leftIndex + 1);
-    } else {
-      self.goToSlide(0);
-    }
-  },
-  goToSlide: function goToSlide(nextLeftIndex) {
-    var self = this; // Smoothly scroll to the requested slide
-
-    self.slidesContainer.animate({
-      scrollLeft: self.slidesContainer.offsetWidth / 3 * nextLeftIndex
-    }, {
-      duration: 200
-    }); // Unset aria-current attribute from any slide dots that have it
-
-    self.slideDots.forEach(function (dot) {
-      dot.removeAttribute('aria-current');
-    }); // Set aria-current attribute on the correct slide dot
-
-    self.slideDots[nextLeftIndex].setAttribute('aria-current', true); // Update the record of the left-most slide
-
-    self.leftIndex = nextLeftIndex; // Update each slide so that the ones that are now off-screen are fully hidden.
-
-    self.hideNonVisibleSlides();
-  },
-  // hideNonVisibleSlides
-  // Fully hide non-visible slides by adding aria-hidden="true" and tabindex="-1" when they go out of view
-  hideNonVisibleSlides: function hideNonVisibleSlides() {
-    var self = this; // Start by hiding all the slides and their content
-
-    self.slides.forEach(function (slide) {
-      slide.setAttribute('aria-hidden', true);
-      slide.querySelectorAll('a, button, select, input, textarea, [tabindex="0"]').forEach(function (focusableElement) {
-        focusableElement.setAttribute('tabindex', -1);
-      });
-    }); // Slide Group = number of slides visible at a time
-    // Ensure the left-most slide group is visible
-
-    var slideDiff = self.slideCount - self.slideGroup;
-
-    if (self.leftIndex < slideDiff) {
-      for (var i = self.leftIndex; i < self.leftIndex + self.slideGroup; i++) {
-        self.slides[i].removeAttribute('aria-hidden');
-        self.slides[i].querySelectorAll('a, button, select, input, textarea, [tabindex="0"]').forEach(function (focusableElement) {
-          focusableElement.removeAttribute('tabindex');
-        });
-      }
-    } else {
-      // Since scrolling stops when the carousel reaches the last 3 slides 
-      // ensure last 3 slides stay visible until the user wraps or goes backwards.
-      for (var i = slideDiff; i < self.slideCount; i++) {
-        self.slides[i].removeAttribute('aria-hidden');
-        self.slides[i].querySelectorAll('a, button, select, input, textarea, [tabindex="0"]').forEach(function (focusableElement) {
-          focusableElement.removeAttribute('tabindex');
-        });
-      }
-    }
-  },
-  bind: function bind() {
-    var self = this; // Set up previous/next button behaviors
-
-    self.previousButton.addEventListener('click', function (e) {
-      return self.previousSlide();
-    });
-    self.nextButton.addEventListener('click', function (e) {
-      return self.nextSlide();
-    }); // Ensure that all non-visible slides are impossible to reach.
-
-    self.hideNonVisibleSlides(); // Set up the slide dot behaviors
-
-    self.slideDots.forEach(function (dot) {
-      dot.addEventListener('click', function (e) {
-        var clickedDot = e.target,
-            navItem = clickedDot.parentElement,
-            dotIndex = Array.from(self.slideNav.children).indexOf(navItem);
-        self.goToSlide(dotIndex);
-      });
-    });
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (contentCarousel);
-
-/***/ }),
-
 /***/ "./src/scripts/components/flyoutContent.js":
 /*!*************************************************!*\
   !*** ./src/scripts/components/flyoutContent.js ***!
@@ -355,6 +227,222 @@ var parallaxImages = {
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (parallaxImages);
+
+/***/ }),
+
+/***/ "./src/scripts/components/scrollCarousel.js":
+/*!**************************************************!*\
+  !*** ./src/scripts/components/scrollCarousel.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+// scrollCarousel  
+// Initialize with options
+// const peopleCarousel = new scrollCarousel({
+//     _id: 'people'
+// });
+// if ( peopleCarousel.carousel !== null ) {
+//     peopleCarousel.init();
+// }
+//
+var scrollCarousel = /*#__PURE__*/function () {
+  function scrollCarousel(options) {
+    _classCallCheck(this, scrollCarousel);
+
+    this.options = options || null;
+    this._id = this.options._id; // Parent container
+
+    this.carousel = this._id !== null ? document.querySelector("[data-carousel=\"".concat(this._id, "\"]")) : null;
+
+    if (this.carousel !== null) {
+      // Els
+      this.previousButton = this.carousel.querySelector('[data-carousel-prev]');
+      this.nextButton = this.carousel.querySelector('[data-carousel-next]');
+      this.slideFrame = this.carousel.querySelector('[data-carousel-frame]');
+      this.slideContainer = this.carousel.querySelector('[data-carousel-slides]');
+      this.slides = this.slideContainer.querySelectorAll('[data-carousel-item]'); // Ints
+
+      this._current = 0;
+      this._count = this.slides.length;
+    }
+  }
+
+  _createClass(scrollCarousel, [{
+    key: "goToSlide",
+    value: function goToSlide(_idx) {
+      var self = this;
+
+      var _slideOffset = self.slides[_idx].offsetLeft,
+          _slideLeft = _slideOffset + self.slides[_idx].offsetWidth,
+          _parentOffset = self.slideContainer.offsetLeft,
+          _parentLeft = _parentOffset + self.slideContainer.offsetWidth;
+
+      self.slideContainer.scrollLeft = _slideOffset - _parentOffset;
+    }
+  }, {
+    key: "previousSlide",
+    value: function previousSlide(e) {
+      var self = this;
+      e.preventDefault();
+
+      var _prev = self._current - 1;
+
+      self._current = _prev < 0 ? self._count - 1 : _prev;
+      self.goToSlide(self._current);
+    }
+  }, {
+    key: "nextSlide",
+    value: function nextSlide(e) {
+      e.preventDefault();
+      var self = this;
+
+      var _next = self._current + 1;
+
+      self._current = _next < this._count ? _next : 0;
+      self.goToSlide(self._current);
+    }
+  }, {
+    key: "startSlide",
+    value: function startSlide(e) {
+      e.preventDefault();
+      var self = this;
+      console.log('start');
+    }
+  }, {
+    key: "stopSlide",
+    value: function stopSlide(e) {
+      e.preventDefault();
+      var self = this;
+      console.log('stop');
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      var self = this; // Set up previous/next button behaviors
+
+      self.previousButton.addEventListener('click', function (e) {
+        return self.previousSlide(e);
+      });
+      self.nextButton.addEventListener('click', function (e) {
+        return self.nextSlide(e);
+      });
+      self.slideContainer.addEventListener("mouseover", function (e) {
+        return self.startSlide(e);
+      });
+      self.slideContainer.addEventListener("mouseover", function (e) {
+        return self.stopSlide(e);
+      });
+    }
+  }]);
+
+  return scrollCarousel;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (scrollCarousel);
+
+/***/ }),
+
+/***/ "./src/scripts/components/scrollChyron.js":
+/*!************************************************!*\
+  !*** ./src/scripts/components/scrollChyron.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+// scrollChyron
+var scrollChyron = /*#__PURE__*/function () {
+  function scrollChyron(options) {
+    _classCallCheck(this, scrollChyron);
+
+    this.options = options || null;
+    this._id = this.options._id;
+    this.chyron = this._id !== null ? document.querySelector("[data-chyron=\"".concat(this._id, "\"]")) : null;
+    this._scrollable = true;
+    this._paused = false;
+    this._reset = '_is-resetting';
+  }
+
+  _createClass(scrollChyron, [{
+    key: "pauseScroll",
+    value: function pauseScroll() {
+      var self = this;
+      self._paused = !self._paused;
+    }
+  }, {
+    key: "resetScroll",
+    value: function resetScroll() {
+      var self = this;
+      self.chyron.classList.add(self._reset);
+      self.chyron.scrollTo(0, 0);
+      self.chyron.classList.remove(self._reset);
+      self.scrollInterval = setInterval(function () {
+        return self.autoScroll();
+      }, 15);
+    }
+  }, {
+    key: "autoScroll",
+    value: function autoScroll() {
+      var self = this;
+      var currentLeft = self.chyron.scrollLeft,
+          chyronWidth = self.chyron.scrollWidth - self.chyron.offsetWidth; // update scrollable bool based on scroll position
+
+      self._scrollable = currentLeft !== chyronWidth;
+
+      if (self._paused) {
+        return;
+      }
+
+      console.log('scrolling...'); // if we've reached the end of the chyron, 
+      // clear the interval, and reset 
+
+      if (!self._scrollable) {
+        clearInterval(self.scrollInterval);
+        self.resetScroll();
+      }
+
+      self.chyron.scrollTo(self.chyron.scrollLeft + 1, 0);
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      var self = this;
+      window.addEventListener('load', function () {
+        self.chyron.addEventListener("mouseover", function () {
+          return self.pauseScroll();
+        });
+        self.chyron.addEventListener("mouseout", function () {
+          return self.pauseScroll();
+        });
+        self.scrollInterval = setInterval(function () {
+          return self.autoScroll();
+        }, 15);
+      });
+    }
+  }]);
+
+  return scrollChyron;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (scrollChyron);
 
 /***/ }),
 
@@ -657,8 +745,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_flyoutContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/flyoutContent */ "./src/scripts/components/flyoutContent.js");
 /* harmony import */ var _components_searchFilters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/searchFilters */ "./src/scripts/components/searchFilters.js");
 /* harmony import */ var _components_parallaxImages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/parallaxImages */ "./src/scripts/components/parallaxImages.js");
-/* harmony import */ var _components_contentCarousel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/contentCarousel */ "./src/scripts/components/contentCarousel.js");
+/* harmony import */ var _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/scrollCarousel */ "./src/scripts/components/scrollCarousel.js");
+/* harmony import */ var _components_scrollChyron__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/scrollChyron */ "./src/scripts/components/scrollChyron.js");
 // Import local dependencies
+
 
 
 
@@ -677,10 +767,40 @@ if (document.querySelectorAll('[role="tablist"]').length > 0) {
   _components_tabbedContent__WEBPACK_IMPORTED_MODULE_1__["default"].init();
 }
 
-_components_parallaxImages__WEBPACK_IMPORTED_MODULE_5__["default"].init();
-_components_contentCarousel__WEBPACK_IMPORTED_MODULE_6__["default"].init({
-  'group': 3
+_components_parallaxImages__WEBPACK_IMPORTED_MODULE_5__["default"].init(); // Homepage Carousels:
+
+var peopleCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_6__["default"]({
+  _id: 'people'
 });
+
+if (peopleCarousel.carousel !== null) {
+  peopleCarousel.init();
+}
+
+var eventsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_6__["default"]({
+  _id: 'events'
+});
+
+if (eventsCarousel.carousel !== null) {
+  eventsCarousel.init();
+}
+
+var newsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_6__["default"]({
+  _id: 'news'
+});
+
+if (newsCarousel.carousel !== null) {
+  newsCarousel.init();
+} // Chyron
+
+
+var footerChyron = new _components_scrollChyron__WEBPACK_IMPORTED_MODULE_7__["default"]({
+  _id: 'footer'
+});
+
+if (footerChyron.chyron !== null) {
+  footerChyron.init();
+}
 
 /***/ }),
 

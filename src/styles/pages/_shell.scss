@@ -1,0 +1,658 @@
+/* _shell.scss */
+
+/* ---------------------------------------------------------------------
+ Shell-specific  declarations
+------------------------------------------------------------------------ */
+@use "utils/_utils" as *;
+@use "components/__components" as *;
+@use "sass:math";
+
+@forward 'project';
+
+/* ---------------------------------------------------------------------
+  Header
+------------------------------------------------------------------------ */
+.primaryHeader {
+	@include flexParent();
+	@include justifyContent(space-between);
+	padding: 2em;
+	font-size: 1rem;
+	position: relative;
+	z-index: 10;
+
+	@include breakpoint(sm) {
+		padding-left: 4em;
+		padding-right: 3em;
+		background-blend-mode: multiply;
+		-webkit-backdrop-filter: blur(50px);
+  		backdrop-filter: blur(50px);
+	}
+
+	> * {
+		@include flexChild(0 1 auto);
+	}
+
+	&-title {
+		@include visuallyHide;
+	}
+
+	&-icon {
+		height: 40px;
+		width: 140px;
+	}
+
+}
+
+/* ---------------------------------------------------------------------
+  Navigation
+------------------------------------------------------------------------ */
+$red-theme: getTheme('red');
+$red-primary: nth($red-theme,1);
+$red-secondary: nth($red-theme,2);
+
+.primaryNav {
+	$parent: &;
+	// Persistent "open nav" mobile theme
+	$red-theme: getTheme('red');
+	$red-primary: nth($red-theme,1);
+	$red-secondary: nth($red-theme,2);
+
+	position: relative;
+	font-size: 1rem;
+
+	// Open / Close triggers
+	&-trigger {
+		@include flexParent();
+		@include justifyContent(flex-end);
+
+		&:link,
+		&:visited,
+		&:hover,
+		&:active {
+			text-decoration: none;
+		}
+
+		&--open {
+			#{$parent}._is-open & {
+				@include visuallyHide;
+			}
+		}
+
+		&--close {
+			color: $red-secondary;
+		}
+		
+		&-label {
+			display: inline-block;
+			margin: 0 1em 0 0;
+			@include getType('action');
+			text-decoration: underline;
+			text-underline-offset: 0.5em;
+		}
+
+		&-icon {
+			width: 20px;
+            height: 20px;
+
+			#{$parent}-trigger--close & {
+				fill: $red-secondary;
+			}
+			
+		}
+
+	}
+
+	// Open nav state logo and its els
+	&-logo {
+		@include flexParent();
+		margin: 0 0 6em 0;
+		font-size: 1rem;
+	
+		> * {
+			@include flexChild(0 1 50%);
+		}
+	
+		&-title {
+			@include visuallyHide;
+		}
+	
+		&-icon {
+			height: 40px;
+			width: 140px;
+			fill: $red-secondary;
+		}
+
+	}
+
+	// Open nav state content
+	&-content {
+		padding: 2em;
+		background: $red-primary;
+		color: $red-secondary;
+
+		@include breakpoint(sm) {
+			@include flexParent;
+			@include justifyContent(space-between);
+			@include alignItems(center);
+			padding: 0;
+			background: none;
+		}
+
+	}
+
+	&-title {
+		$mb: math.div(20,14);
+		@include getType('fine');
+		margin: 0 0 #{$mb}em 0;
+	}
+
+	// Hide these elements in larger vws
+	&-trigger,
+	&-trigger-label,
+	&-title,
+	&-logo {
+		@include breakpoint(sm) {
+			display: none;
+		}
+	}
+
+}
+
+.primaryPages {
+	font-size: 1rem;
+	margin: 0 0 6.6em;
+
+	@include breakpoint(sm) {
+		@include flexParent;
+		margin-bottom: 0;
+	}
+
+	&-item {
+
+		@include breakpoint(sm) {
+			margin-right: 4em;
+		}
+
+	}
+
+	&-trigger {
+		@include flexParent();
+		@include alignItems(center);
+		@include getType('h2-sans');
+		$gutter: math.div(10,40);
+		border-bottom: 1px solid $red-secondary;
+		padding-bottom: #{$gutter}em;
+		margin-bottom: #{$gutter}em;
+		color: $red-secondary;
+		text-decoration: none;
+
+		> * {
+			@include flexChild();
+		}
+
+		@include breakpoint(sm) {
+			@include getType('caption');
+			border-bottom: none;
+			padding: 0;
+			margin: 0;
+			text-decoration: none;
+		}
+	}
+
+	&-label {
+		flex-grow: 1;
+	}
+
+	&-icon {
+		width: 20px;
+        height: 20px;
+		fill: $red-secondary;
+
+		@include breakpoint(sm) {
+			display: none;
+		}
+	}
+}
+
+.primarySearch {
+
+	&-field {
+		
+		@include breakpoint(sm) {
+		    display: none;
+		}	
+
+		&-input {
+			border-bottom-color: getColor('red',10);
+			background-color: getColor('red',20);
+			color: getColor('red',10);
+
+			&::placeholder {
+				color: getColor('red',10);
+			}
+		}
+
+	}
+
+	&-submit {
+		border-color: getColor('red',10);
+
+		&-label {
+			@include visuallyHide;
+		}
+
+		&-icon {
+			fill: getColor('red',10);
+
+			@include breakpoint(sm) {
+				fill: getColor('gray');
+			}
+		}
+
+		@include breakpoint(sm) {
+			border: none;
+			padding: 0;
+		}
+
+	}
+
+}
+
+/* ---------------------------------------------------------------------
+  Primary Footer
+------------------------------------------------------------------------ */
+.primaryFooter {
+	
+}
+
+.primaryContact {
+	$contact: &;
+	border-top: 1px solid getColor('red');
+
+	@include breakpoint(sm) {
+		@include flexParent();
+
+		> * {
+			@include flexChild(0 1 50%);
+		}
+
+	}
+
+	&-social {
+		background: getColor('red',10);
+		padding: 4em 4em 8.4em 4em;
+		color: getColor('red');
+	}
+
+	&-news {
+		background: getColor('red');
+		padding: 4em 4em 8.4em 4em;
+		color: getColor('white');
+	}
+
+	&-legend,
+	&-title {
+		@include getType('h3-normal');
+	}
+
+	&-title {
+		$mb: math.div(10,30);
+		margin-bottom: #{$mb}em;
+	}
+
+	&-legend {
+		$mb: math.div(20,30);
+		margin-bottom: #{$mb}em;
+	}
+
+	&-prompt {
+		$mb: math.div(20,24);
+		@include getType('subtitle');
+		margin-bottom: #{$mb}em;
+	}
+
+	&-field {
+		position: relative;
+
+		&--email {
+
+
+			@include breakpoint(sm) {
+				@include flexParent();
+
+				> * {
+					@include flexChild(0 1 auto);
+				}
+			}
+
+		}
+
+	}
+
+	&-button {
+		$button: &;
+		@include resetButton;
+		width: 140px;
+
+		@at-root {
+			@include actionButton(#{$button},getColor('white'),getColor('red'));
+		}
+
+		#{$contact}-field--email & {
+			margin-right: 0;
+		}
+
+	}	
+
+	&-input {
+		$mb: math.div(20,16);
+		$pt: math.div(12,16);
+		$pb: math.div(13,16);
+		$pl: math.div(15,16);
+		@include getType('caption');
+		border: none;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		background: rgba(255, 229, 230, 0.1);
+		border-bottom: 1px solid getColor('white');
+		margin-bottom: #{$mb}em;
+		padding: #{$pt}em 0 #{$pb}em #{$pl}em;
+		width: 100%;
+
+		&--name {
+			//width: 100%;
+		}
+
+		&--email {	
+			margin-right: #{$mb}em;
+
+			@include breakpoint(sm) {
+				margin-bottom: 0;
+				width: auto;
+				flex-grow: 1;
+			}
+
+		}
+
+	}
+
+	&-label {
+		$top: math.div(12,16);
+		$left: math.div(15,16);
+		position: absolute;
+		left: #{$left}em;
+		top: #{$top}em;
+		@include getType('caption');
+	}
+
+
+}
+
+.socialNav {
+	@include flexParent();
+
+	&-item {
+		@include flexChild();
+		margin-right: 2em;
+	}
+
+	&-go {
+
+		&-label {
+			@include visuallyHide;
+		}
+
+		&:link,
+		&:visited,
+		&:hover,
+		&:active {
+			color: getColor('red');
+		}
+
+		&-icon {
+			height: 20px;
+			width: 20px;
+			fill: getColor('red');
+		}
+
+	}
+
+}
+
+.chyronContainer {
+	border-bottom: 1px solid getColor('white');
+	padding: 2em 2em 1em 2em;
+	background: getColor('black');	
+}
+
+.chyronList {
+	// enable scroll
+	display: flex;
+	overflow-y: hidden;
+	overflow-x: scroll;
+	scrollbar-width: thin;
+	scrollbar-color: getColor('black') transparent;
+	opacity: 1;
+	transition: opacity 0.3s ease-in;
+
+	&::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+	
+	&::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		background: getColor('black');
+	}
+	
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	&._is-resetting {
+		opacity: 0;
+	}
+
+	* {
+		color: getColor('white');
+	}
+
+	&-item {
+		$mr: math.div(15,16);
+		@include flexChild(0 1 auto);
+		@include getType('caption');
+		flex-shrink: 0;
+		position: relative;
+		margin-right: #{$mr}em;
+
+		&:first-of-type {
+			$pl: math.div(20,16);
+			padding-left: #{$pl}em;
+		}
+
+		&::before {
+			content: "";//"\2B24";
+			height: 5px;
+			width: 5px;
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 1.5em;
+			background: getColor('white');
+			border-radius: 100%;
+			font-size: 1rem;
+		}
+
+		&-go {
+
+			&:link,
+			&:visited,
+			&:hover,
+			&:active {
+				text-decoration: none;
+			}
+
+		}
+
+	}
+
+}
+
+.footerNav {
+	padding: 2em;
+	background: getColor('black');
+	color: getColor('white');
+
+	@include breakpoint(sm) {
+		@include flexParent();
+		@include alignItems(flex-start);
+		padding: 4em 4em 8em 4em;
+	}
+
+	&-section {
+		@include breakpoint(sm) {
+			@include flexChild(0 1 50%);
+			@include flexParent($display:flex,$values:row wrap);
+		}
+
+		@include breakpoint(lg) {
+			&--more {
+				padding-right: 4em;
+			}
+		}
+
+	}
+
+	&-title {
+		@include getType('h4-italic');
+
+		@include breakpoint(sm) {
+			@include flexChild(0 1 100%);
+			margin-bottom: 1em;
+		}
+		@include breakpoint(lg) {
+			flex-basis: 120px;
+			margin: 0 2em 0 0;
+		}
+	}
+
+	&-list {
+
+		@include breakpoint(sm) {
+			$title-width: calc(120px + 4em);
+			$width: calc(100% - #{$title-width});
+			@include justifyContent(space-between);
+			@include flexChild(1 1 #{$width});
+			display: flex;	
+		}
+	}
+
+	&-item {
+		margin-bottom: 2.5em;
+		@include breakpoint(sm) {
+			@include flexChild(0 1 130px);
+			margin-right: 3em;
+		}
+	}
+
+	&-desc {
+		@include getType('fine');
+		display: block;
+	}
+
+	&-go {
+		$action: &;
+		$mb: math.div(5,12);
+		margin-bottom: #{$mb}em;
+		
+		@include breakpoint(sm) {
+			$mb: math.div(10,12);
+			margin-bottom: #{$mb}em;
+		}
+
+		&:link,
+		&:visited,
+		&:hover,
+		&:active {
+			color: getColor('white');
+		}
+
+		@at-root {
+			@include actionButton(#{$action},getColor('white'),getColor('white'));
+		}
+
+		&-icon {
+			fill: getColor('white');
+		}
+
+	}
+
+	&-logo {
+		display: inline-flex;
+		margin-bottom: 5em;
+		
+		&--chicago {
+			padding-right: 0.7em;
+			height: 100%;
+			border-right: 1px solid getColor('white');
+		}
+
+		&--neubauer {
+			padding-left: 0.7em;
+		}
+
+		&-title {
+			@include visuallyHide;
+		}
+
+		&-icon {
+			fill: getColor('white');
+
+			&--chicago {
+				width: 154px;
+				height: 31px;
+			}
+
+			&--neubauer {
+				width: 109px;
+				height: 31px;
+			}
+
+		}
+
+	}
+
+}
+
+.footerContact {
+	margin-bottom: 4em;
+
+	@include breakpoint(sm) {
+		@include flexChild(0 1 100%);
+	}
+
+	&-item {
+		margin-bottom: 2em;
+
+		> * {
+			@include getType('fine');
+		}
+
+		* {
+			color: getColor('white');
+
+			&:link,
+			&:visited,
+			&:hover,
+			&:active {
+				color: getColor('white');
+			}
+
+		}
+	}
+
+}
+
+
+.footerCopyright {
+	@include getType('fine');
+}

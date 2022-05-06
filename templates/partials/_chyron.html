@@ -1,23 +1,33 @@
 {% set chyronList = chyronContent.chyronBlock.all() %}
 
 {% if chyronList %}
-<ul>
-{% for question in chyronList if question.itemContent is not null and question.itemContent != '' %}
-{% set questionType = question.type %}
-    <li>
-    {% switch questionType %}
-        {% case 'entryQuestion' %}
-        <a href="{{ question.itemPage[0].uri }}">{{ question.itemContent|striptags }}</a>
-        {% case 'searchQuestion' %}   
-        {% set topicList = [] %}
-        {% for topic in question.topicFilter.all() if topic is not null and topic != '' %}
-            {% set topicList = topicList|merge([topic.slug]) %}
-        {% endfor %}
-        {% set query, section, tags = question.keywordFilter, question.sectionFilter.value, topicList|join(',') %}
-        {% set searchFilter = {query: query, section: section, tags: tags} %}
-        <a href="search?{{ searchFilter|url_encode }}">{{ question.itemContent|striptags }}</a>
-    {% endswitch %} 
-{% endfor %}
-    <li>
-</ul>
+<div class="chyronContainer">
+    <ul class="chyronList" data-chyron="footer">
+    {% for question in chyronList if question.itemContent is not null and question.itemContent != '' %}
+    {% set questionType = question.type %}
+        <li class="chyronList-item">
+        {% switch questionType %}
+            {% case 'entryQuestion' %}
+            <a 
+                class="chyronList-item-go" 
+                href="{{ question.itemPage[0].uri }}">
+                {{ question.itemContent|striptags }}
+            </a>
+            {% case 'searchQuestion' %}   
+            {% set topicList = [] %}
+            {% for topic in question.topicFilter.all() if topic is not null and topic != '' %}
+                {% set topicList = topicList|merge([topic.slug]) %}
+            {% endfor %}
+            {% set query, section, tags = question.keywordFilter, question.sectionFilter.value, topicList|join(',') %}
+            {% set searchFilter = {query: query, section: section, tags: tags} %}
+            <a 
+                class="chyronList-item-go" 
+                href="search?{{ searchFilter|url_encode }}">
+                {{ question.itemContent|striptags }}
+            </a>
+        {% endswitch %} 
+        </li>
+    {% endfor %}
+    </ul>
+</div>
 {% endif %}

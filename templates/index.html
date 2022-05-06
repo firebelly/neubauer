@@ -14,7 +14,8 @@
 {% set openerPrompt = entry.openerPrompt is not null ? entry.openerPrompt : null %}
 
 {# Icons #}
-{% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
+{% set arrowRightPath = "/spritemap.svg#icon-arrow-right-20" %}
+{% set arrowDownPath = "/spritemap.svg#icon-arrow-down-20" %}
 
 {# Features #}
 {% set projectFeature, exFeature = null, null %}
@@ -48,153 +49,116 @@
             'random': randomFeature
         }
     }%}
-
     {% set featureEntries = featureEntries|merge({ (key): featureObj }) %}
-
 {% endfor %}
 
 <section class="homepageCover">
     <div class="homepageCover-title">
         <h1 class="homepageCover-tagline">{{ openerTagline|striptags('<em>')|raw }}</h1>
         <h2 class="homepageCover-prompt">{{ openerPrompt|raw }}</h2>
+        <button 
+            class="homepageCover-action homepageCover-action--ghost"
+            data-intro-trigger>
+            <span class="homepageCover-action-label">Click Me</span>
+            <svg 
+                class="homepageCover-action-icon">
+                <use xlink:href="{{ alias('@assetBasePath' ~ arrowDownPath) }}"></use>
+            </svg>
+        </button>
     </div>
     <div class="homepageCover-asset parallax" style='background-image: url({{ openerSrc }});'></div>
 </section>
 
 <section class="homepageExplore">
-    {% set primaryProject = featureEntries['researchIndex']['features']['primary'] %}
-    {% set primaryEx = featureEntries['exhibitionsIndex']['features']['primary'] %}
-    {% set secondaryProject = featureEntries['researchIndex']['features']['secondary'] %}
-    {% set secondaryEx = featureEntries['exhibitionsIndex']['features']['secondary'] %}
-
-    {# TODO: ENTRY SLIDER #}
-
-    <article class="homepageExplore-feature homepageExplore-feature--project">
-        <h4 class="homepageExplore-feature-label">Research Project</h4>
-        <h5 class="homepageExplore-feature-title">{{ primaryProject.title }}</h5>
-        <a 
-            class="homepageExplore-action homepageExplore-action--link"
-            href="{{ siteUrl }}/{{ primaryProject.uri }}">
-            <span class="homepageExplore-action-label">Learn More</span>
-            <svg 
-                class="homepageExplore-action-icon">
-                <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
-            </svg> 
-        </a>
-    </article>
-    
-    <article class="homepageExplore-feature homepageExplore-feature--exhibition">
-        <h4 class="homepageExplore-feature-label">Exhibition</h4>
-        <h5 class="homepageExplore-feature-title">{{ primaryEx.title }}</h5>
-        <a 
-            class="homepageExplore-action homepageExplore-action--link"
-            href="{{ siteUrl }}/{{ primaryEx.uri }}">
-            <span class="homepageExplore-action-label">Learn More</span>
-            <svg 
-                class="homepageExplore-action-icon">
-                <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
-            </svg> 
-        </a>
-    </article>
-    
-    <article class="homepageExplore-feature homepageExplore-feature--project">
-        <h4 class="homepageExplore-feature-label">Research Project</h4>
-        <h5 class="homepageExplore-feature-title">{{ secondaryProject.title }}</h5>
-        <a 
-            class="homepageExplore-action homepageExplore-action--link"
-            href="{{ siteUrl }}/{{ secondaryProject.uri }}">
-            <span class="homepageExplore-action-label">Learn More</span>
-            <svg 
-                class="homepageExplore-action-icon">
-                <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
-            </svg> 
-        </a>
-    </article>
+    {% set featureSet = [
+        featureEntries['researchIndex']['features']['primary'],
+        featureEntries['exhibitionsIndex']['features']['primary'],
+        featureEntries['researchIndex']['features']['secondary'],
+        featureEntries['exhibitionsIndex']['features']['secondary']
+    ]%}
+    {% set featureSlideObj = {
+        'cardName': 'homepageFeatures',
+        'variant': 'features',
+        'slides': featureSet,
+        'group': 2,
+        'scrollable': true
+    }%}
+    {{ carousels.featureCarousel('homepageCarousel',featureSlideObj) }}
 </section>
 
-<section class="homepageEntries homepageEntries--people">
-    <div class="homepageEntries-intro">
-        <h2 class="homepageEntries-title">2021-2022 Visiting Fellows</h2>
-        <div class="homepageEntries-desc">
-            <div class="homepageEntries-body">
-                The best minds from around the world converge at the Collegium: academics, artists, and boundary-breaking practitioners who all share a deep commitment to collaboration.
-            </div>
-            <a 
-                class="homepageEntries-action homepageEntries-action--link"
-                href="{{ siteUrl }}/{{ secondaryProject.uri }}">
-                <span class="homepageEntries-action-label">Learn More</span>
-                <svg 
-                    class="homepageEntries-action-icon">
-                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
-                </svg>
-            </a>
-        </div>
-    </div>
-    <div class="homepageEntries-list">
-    {% set fellows = craft.entries()
+{% for tab in entry.getFieldLayout().getTabs() if tab.name|slugify != 'opener' %}
+{% set tabName, tabSlug = tab.name, tab.name|slugify %}
+{% set tabTitle, tabOpener = "#{tabSlug}Title", "#{tabSlug}Opener" %}
+{% set tabIndex = tabSlug == 'news' ? 'news': "#{tabSlug}Index" %}
+{# TODO: news goes to /about #}
+{% set tabURL = craft.entries().section(tabIndex).one().uri %}
+{% set cardPrompt, cardAction = entry["#{tabSlug}Card"]['prompt'], entry["#{tabSlug}Card"]['action'] %}
+
+{% set cardObj = {
+    'assetSizes': utils.getAssetSizes(tabSlug,'homepage'),
+    'cardVariant': tabSlug
+}%}
+{% set slideObj = {
+    'variant': tabSlug,
+    'cardName': "#{tabSlug}Slide",
+    'cardObj': cardObj,
+    'cardCall': {
+        'prompt': cardPrompt,
+        'action': cardAction
+    }
+}%}
+
+{% switch tabSlug %}
+{% case 'people' %}
+    {% set tabEntries = craft.entries()
         .section('people') 
         .search('personType:visiting-fellow' ~ ' AND personTypeStatus:current')
         .all()
     %}
-    {% set personSizes = utils.getAssetSizes('people','homepage') %}
-    {% set personObj = {
-        'assetSizes': personSizes,
-        'cardVariant': 'homepage'
-    } %}
-    {# {% for person in fellows %}
-        {{ cards.cardArticle(cardName,cardEntry,cardObj) }}
-    {% endfor %} #}
+    {% set slideObj = slideObj|merge({
+        'slides': tabEntries,
+        'group': 3
+    }) %}
+{% case 'events' %}
+    {% set eventsQuery = craft.entries.section('events') %}
+    {% set timedIds = dates.toTheTimeMachine(eventsQuery,true) %}
+    {% set eventCount = timedIds|length %}
+    {# TODO #}
+    {% if eventCount < 10 %}{% endif %}
+    {% set tabEntries = eventsQuery.id(timedIds|json_decode) %}
+    
+    {% set slideObj = slideObj|merge({
+        'slides': tabEntries,
+        'group': 3
+    }) %}
+{% case 'news' %}
+    {% set newsQuery = craft.entries.section('news') %}
+    {% set tabEntries = newsQuery[:10] %}
+    {% set slideObj = slideObj|merge({
+        'slides': tabEntries,
+        'group': 4
+    }) %}
+{% endswitch %}
 
-    {% set slideObj = {
-        'slides': fellows,
-        'group': 3,
-        'cardName': 'currentFellow',
-        'cardObj': personObj 
-    }%}
-
-    {{ carousels.cardCarousel(slideObj) }}
-
-    </div>
-</section>
-
-{% set eventsIntro = craft.entries.section('eventsIndex').one().openerText is not null and craft.entries.section('eventsIndex').one().openerText != '' ? craft.entries.section('eventsIndex').one().openerText : 'this is intro text' %}
-{% set eventsQuery = craft.entries.section('events') %}
-{% set timedIds = dates.toTheTimeMachine(eventsQuery,true) %}
-{% set upcomingEvents = eventsQuery.id(timedIds|json_decode) %}
-<section class="homepageEntries homepageEntries--events">
+<section class="homepageEntries homepageEntries--{{ tabSlug }}">
     <div class="homepageEntries-intro">
-        <h2 class="homepageEntries-title">Events</h2>
+        <h2 class="homepageEntries-title">{{ entry[tabTitle] }}</h2>
         <div class="homepageEntries-desc">
-            <div class="homepageEntries-body">
-                {{ eventsIntro }}
-            </div>
+            {% if entry[tabOpener] %}
+            <div class="homepageEntries-body">{{ entry[tabOpener] }}</div>
             <a 
                 class="homepageEntries-action homepageEntries-action--link"
-                href="{{ siteUrl }}events">
+                href="{{ siteUrl }}{{ tabURL }}">
                 <span class="homepageEntries-action-label">Learn More</span>
                 <svg 
                     class="homepageEntries-action-icon">
-                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowRightPath) }}"></use>
                 </svg>
             </a>
+            {% endif %}
         </div>
     </div>
-
-    <div class="homepageEntries-list">
-    {% set eventSizes = utils.getAssetSizes('events','homepage') %}
-    {% set eventObj = {'assetSizes': eventSizes} %}
-    {% for event in upcomingEvents %}
-        {% set cardName,cardEntry,cardObj,cardVariant = 'upcomingEvent',event,eventObj,'homepage' %}
-        {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
-    {% endfor %} 
-    </div>
+    {{ carousels.cardCarousel('homepageCarousel',slideObj) }}
 </section>
-
-<section class="homepageEntries homepageEntries--news">
-    <div class="homepageEntries-intro">
-        <h2 class="homepageEntries-title">News &amp; Announcements</h2>
-
-    </div>
-</section>
-
+{% endfor %}
 {% endblock %}
