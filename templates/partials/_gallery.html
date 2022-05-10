@@ -1,0 +1,110 @@
+{% import 'macros/_utils' as utils %}
+{% import 'macros/_assets' as assets %}
+
+{# SPRIG for gallery modal #}
+{% set isSprig = sprig.isRequest %}
+{% set overlay = overlay ?? 'off' %}
+{% set current = current ?? '' %}
+{{ hiddenInput('overlay', overlay) }}
+{{ hiddenInput('current', current) }}
+{% if isSprig %}
+<script>
+    isOverlay = "{{ overlay == 'on' ? true : false }}";
+    document.documentElement.style.overflowY = isOverlay ? 'hidden' : '';
+</script>
+{% endif %}
+
+{% set entry = craft.entries.id(entryId).one() %}
+{% set entrySection = entry.getSection()|slugify %}
+{% set gallery = entry.galleryImage.all() %}
+{% set galleryTitle, galleryName, dialogName = entry.title, 'artGallery', 'artModal' %}
+
+<section class="interiorGallery interiorGallery--{{ entrySection }}">
+    <h3 class="interiorNarrative-title">Gallery</h3>
+    {% set gallerySizes = utils.getAssetSizes(entrySection,'gallery')|json_decode %}
+
+    <ul class="{{ galleryName }}">
+        {% for galleryImage in gallery %}
+        {% set imgId = "gallery_#{galleryImage.id}" %}
+        <li class="{{ galleryName }}-thumb">
+            <a 
+                href=""
+                title="View large image" 
+                sprig
+                s-val:overlay="on"
+                s-val:current="{{ imgId }}"
+                data-a11y-dialog-show="artModal_dialog"
+                data-trigger-id="{{ imgId }}">
+                <picture class="{{ galleryName }}-asset">
+                {% if gallerySizes %}
+                    {{ assets.assetCard(galleryName,galleryImage,gallerySizes) }}
+                    {% else %}
+                    {{ assets.assetCard(galleryName,galleryImage) }}
+                {% endif %}
+                </picture>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+
+<div 
+    class="{{ dialogName }}-dialog"
+    id="{{ dialogName }}_dialog"
+    aria-labelledby="{{ dialogName }}_dialog_title"
+    aria-hidden={{ overlay == "on" ? "false" : "true" }}>
+    <div 
+        class="{{ dialogName }}-overlay" 
+        data-a11y-dialog-hide="{{ dialogName }}_dialog">
+    </div>
+    <div 
+        class="{{ dialogName }}-content" 
+        id="{{ dialogName }}_content" 
+        role="document">
+        <h3 
+            class="{{ dialogName }}-title"
+            id="{{ dialogName }}_dialog_title">
+            {{ galleryTitle }} Gallery
+        </h3>
+        
+        <button 
+            id="close_dialog" 
+            class="{{ dialogName }}-trigger {{ dialogName }}-trigger--close" 
+            role="button" 
+            type="button" 
+            sprig="" 
+            s-val:overlay="off" 
+            s-val:current=""
+            data-a11y-dialog-hide="{{ dialogName }}_dialog" 
+            aria-label="Close dialog">
+            <span class="{{ dialogName }}-trigger-label">Close</span>
+            <svg class="{{ dialogName }}-trigger-icon">
+                <use xlink:href="/build/spritemap.svg#icon-close-70"></use>
+            </svg>
+        </button>
+        
+        {% set overlaySizes = utils.getAssetSizes(entrySection,'overlay')|json_decode %}
+        <ul 
+            class="{{ dialogName }}-list"
+            id="{{ dialogName }}_list">
+            {% for galleryImage in gallery %}
+            {% set imgId = "gallery_#{galleryImage.id}" %}
+            {% set imgCaption = galleryImage.caption != '' ? galleryImage.caption : null %}
+            <li 
+                class="{{ dialogName }}-item{{ current == imgId ? ' _is-current' : '' }}" 
+                id="{{ imgId }}">
+                <picture class="{{ dialogName }}-asset">
+                {% if overlaySizes %}
+                    {{ assets.assetCard(dialogName,galleryImage,overlaySizes) }}
+                    {% else %}
+                    {{ assets.assetCard(dialogName,galleryImage) }}
+                {% endif %}
+                </picture>
+                {% if imgCaption %}
+                <div class="{{ dialogName }}-caption">{{ imgCaption }}</div>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

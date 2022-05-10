@@ -354,6 +354,7 @@
     @cardVariant {str} - styling variant hook
 #}
 {% macro cardMini(cardName,cardEntry,cardObj = {},cardVariant = null) %}
+{% import 'macros/_utils' as utils %}
 {% import 'macros/_assets' as assets %}
 
 {% set title = cardEntry.cardTitle != '' ? cardEntry.cardTitle : null %}
@@ -369,10 +370,10 @@
 
     {% if image %}
     <div class="{{ cardName }}-asset">
-        {% set cardName,cardImage = "#{cardName}-asset",image %}
+        {% set assetName,assetImage = "#{cardName}-asset",image %}
         {% set assetSizes = cardObj is not null and 'assetSizes' in cardObj|keys ? cardObj['assetSizes']|json_decode : null %}
         {% if assetSizes %}
-            {{ assets.assetCard(cardName,cardImage,assetSizes) }}
+            {{ assets.assetCard(assetName,assetImage,assetSizes) }}
         {% else %}
             {{ assets.assetCard(cardName,cardImage) }}
         {% endif %}

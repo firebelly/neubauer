@@ -315,16 +315,35 @@ $red-secondary: nth($red-theme,2);
 		position: relative;
 
 		&--email {
-
-
 			@include breakpoint(sm) {
 				@include flexParent();
+			}
+		}
 
-				> * {
-					@include flexChild(0 1 auto);
+		&--name {
+			@include breakpoint(sm) {
+				@include flexParent($display:flex,$values:row nowrap);
+			}
+			> * {
+				@include flexChild(0 1 50%);
+			}
+		}
+
+		&--email {
+			> * {
+				@include flexChild(0 1 auto);
+			}
+		}
+
+		&--duo {
+			@include breakpoint(sm) {
+				&:nth-of-type(1) {
+					margin-right: 1em;
+				}
+				&:nth-of-type(2) {
+					margin-left: 1em;
 				}
 			}
-
 		}
 
 	}
@@ -358,10 +377,6 @@ $red-secondary: nth($red-theme,2);
 		margin-bottom: #{$mb}em;
 		padding: #{$pt}em 0 #{$pb}em #{$pl}em;
 		width: 100%;
-
-		&--name {
-			//width: 100%;
-		}
 
 		&--email {	
 			margin-right: #{$mb}em;
@@ -523,11 +538,12 @@ $red-secondary: nth($red-theme,2);
 	}
 
 	&-title {
+		$mb: math.div(20,20);
 		@include getType('h4-italic');
+		margin-bottom: #{$mb}em;
 
 		@include breakpoint(sm) {
 			@include flexChild(0 1 100%);
-			margin-bottom: 1em;
 		}
 		@include breakpoint(lg) {
 			flex-basis: 120px;

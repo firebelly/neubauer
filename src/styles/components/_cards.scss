@@ -561,17 +561,16 @@
 ------------------------------------------------------------------------ */
 @mixin cardMini($selector,$color-primary:null,$color-secondary:null,$default:true,$theme:false) {
 
+    @include actionButton(#{$selector}-action,$color-primary,$color-secondary);
+
     #{$selector} {
         $image-width: 640px;
         font-size: 1rem;
         margin: 0 0 6em 0;
-
-        @include flexParent($display:flex,$values:column nowrap);
-        margin: 0 0.25em 0 0.25em;
         padding: 2em 0 4em 0;
-        
-        > * {
-            @include flexChild();
+
+        @include breakpoint(sm) {
+            margin: 0 0.25em 0 0.25em;
         }
 
         &-title {

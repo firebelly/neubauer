@@ -31,16 +31,29 @@
             <form class="primaryContact-form">
                 <fieldset class="primaryContact-fieldset">
                     <legend class="primaryContact-legend">Sign up for our newsletter</legend>
-                    <div class="primaryContact-field">
-                        <input 
-                            id="newsletter_name" 
-                            class="primaryContact-input primaryContact-input--name" 
-                            name="newsletter_name" 
-                            type="text" />
-                        <label 
-                            class="primaryContact-label" 
-                            for="newsletter_name">Full Name</label>
+                    <div class="primaryContact-field primaryContact-field--name"> 
+                        <div class="primaryContact-field primaryContact-field--duo">
+                            <input 
+                                id="newsletter_firstname" 
+                                class="primaryContact-input primaryContact-input--name" 
+                                name="newsletter_firstname" 
+                                type="text" />
+                            <label 
+                                class="primaryContact-label" 
+                                for="newsletter_firstname">First Name</label>
+                        </div>
+                        <div class="primaryContact-field primaryContact-field--duo">
+                            <input 
+                                id="newsletter_lastname" 
+                                class="primaryContact-input primaryContact-input--name" 
+                                name="newsletter_lastname" 
+                                type="text" />
+                            <label 
+                                class="primaryContact-label" 
+                                for="newsletter_lastname">Last Name</label>
+                        </div>      
                     </div>  
+                
                     <div class="primaryContact-field primaryContact-field--email">
                         <input 
                             id="newsletter_email" 
@@ -50,6 +63,7 @@
                         <label 
                             class="primaryContact-label" 
                             for="newsletter_email">Email</label>
+
                         <button 
                             class="primaryContact-button primaryContact-button--ghost" 
                             id="newsletter_submit" 
@@ -57,7 +71,7 @@
                             role="submit">
                             <span class="primaryContact-button-label">Subscribe</span>
                         </button>
-                    </div>  
+                    </div>                  
 
                 </fieldset>
             </form>

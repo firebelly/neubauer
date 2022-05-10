@@ -39,11 +39,16 @@
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
 
     <div class="interiorSummary interiorSummary--{{ entrySection }}">
-        <div class="interiorSummary-frame interiorSummary-frame--{{ entrySection }}">
-            <div class="interiorSummary-placeholder">{# image goes here #}</div>
-            <div class="interiorSummary-caption">Photo by: ornare ullamcorper.</div>
-        </div>
-        <div class="interiorSummary-main">
+        <figure class="interiorSummary-frame interiorSummary-frame--{{ entrySection }}">
+            <picture>
+            {% if statementImage %}
+                {% set statementSizes = utils.getAssetSizes('about','director')|json_decode %}
+                {{ assets.assetCard('interiorSummary-frame',statementImage,statementSizes) }}
+            {% endif %}
+            <picture>
+            <figcaption class="interiorSummary-caption">{{ statementImage.caption }}</figcaption>
+        </figure>
+        <div class="interiorSummary-main interiorSummary-main--directors">
 
             {% if abstract %}
             <div class="interiorSummary-redactor interiorSummary-redactor--abstract">{{ abstract|raw }}</div>
@@ -78,12 +83,15 @@
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
 
     <div class="interiorMod-wrap interiorMod-wrap--{{ modSlug }}">
-        <div class="interiorMod-frame interiorMod-frame--{{ modSlug }}">
-            <div class="interiorMod-frame-placeholder">{# image goes here #}
-                {% if impactImage %}<img src="" />{% endif %}
-            </div>
-            <div class="interiorMod-frame-caption">Photo by: ornare ullamcorper.</div>
-        </div>
+        <figure class="interiorMod-frame interiorMod-frame--{{ modSlug }}">
+            <picture class="interiorMod-asset">
+                {% if impactImage %}  
+                {% set impactSizes = utils.getAssetSizes('about','impact')|json_decode %}
+                {{ assets.assetCard('interiorMod-asset',impactImage,impactSizes) }}
+                {% endif %}
+            </picture>
+            <figcaption class="interiorMod-frame-caption">This is my caption{{ impactImage.caption }}</figcaption>
+        </figure>
         <div class="interiorMod-main interiorMod-main--{{ modSlug }}">
             <div class="interiorMod-main-content">
                 {% if body %}
@@ -115,7 +123,7 @@
                 </aside>
                 {% endfor %}
             </div>
-            <div class="interiorMod-list interiorMod-list--2">
+            <div class="interiorMod-list interiorMod-list--highlight">
                 {% set highlightName = 'interiorMod-card' %}
                 {% set highlightObj = {
                     'cardVariant': 'highlight',

@@ -50,7 +50,7 @@
 {% set team = entry.projectTeam is not null and entry.projectTeam|length > 0 ? entry.projectTeam : null %}
 
 {# Exhibition Specifics #}
-{% set gallery = entry.galleryImage is not null and entry.galleryImage|length > 0 ? entry.galleryImage.all() : null %}
+{% set hasGallery = entry.galleryImage is not null and entry.galleryImage|length > 0 ? true : false %}
 {% set relatedProject = entry.relatedProject is not null and entry.relatedProject|length > 0 ? entry.relatedProject.one() : null %}
 
 
@@ -375,27 +375,8 @@
 </section>
 {% endif %}
 
-{% if gallery %}
-<section class="interiorGallery interiorGallery--{{ entrySection }}">
-    <h3 class="interiorNarrative-title">Gallery</h3>
-    {% set galleryName = 'artGallery' %}
-    {% set gallerySizes = utils.getAssetSizes(entrySection,'gallery')|json_decode %}
-    <ul class="{{ galleryName }}">
-        {% for galleryImage in gallery %}
-        <li class="{{ galleryName }}-thumb">
-            <a href="#" title="View large image" data-gallery>
-                <picture class="{{ galleryName }}-asset">
-                {% if gallerySizes %}
-                    {{ assets.assetCard(galleryName,galleryImage,gallerySizes) }}
-                    {% else %}
-                    {{ assets.assetCard(galleryName,galleryImage) }}
-                {% endif %}
-                </picture>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
-</section>
+{% if hasGallery %}
+    {{ sprig('partials/_gallery', {'entryId': entry.id}) }}
 {% endif %}
 
 {% if narrativeBlock %}

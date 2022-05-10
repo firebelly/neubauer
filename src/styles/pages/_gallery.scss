@@ -34,3 +34,108 @@
     }
 
 }
+
+
+/* ---------------------------------------------------------------------
+  Modal Gallery
+------------------------------------------------------------------------ */
+.artModal {
+    $parent: &;
+    
+    &-dialog,
+    &-overlay {
+        top: 0; 
+        right: 0; 
+        bottom: 0; 
+        left: 0; 
+        position: fixed;
+    }
+
+    &-dialog {
+        z-index: 2;
+        display: flex;
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+        &[aria-hidden="true"] {
+            display: none; 
+        }
+
+    }
+
+    &-overlay {
+        background-color: rgba(0,0,0,0.9);
+    }
+
+    &-content {
+        padding: 8em 2em;
+        margin: auto;
+        width: 100%;
+        position: relative;
+        z-index: 2; 
+      
+        @include breakpoint(sm) {
+            max-width: 1440px;
+            padding: 8em 0;
+        }
+
+    }
+
+    &-title {
+        @include visuallyHide;
+    }
+
+    &-trigger {
+        @include flexParent();
+        @include alignItems(center);
+        @include resetButton;
+        position: fixed;
+        top: 2em;
+        right: 4em;
+        font-size: 1rem;
+
+        @include breakpoint(md) {
+            top: 8em;
+            right: 8em;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &-label {
+            @include visuallyHide;
+        }
+
+        &-icon {
+            height: 40px;
+            width: 40px;
+            @include flexChild();
+            fill: getColor('white');
+
+            @include breakpoint(md) {
+                height: 70px;
+                width: 70px;
+            }
+        }
+
+    }
+
+    &-list {
+        max-width: 735px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    &-item {
+        margin-bottom: 8em;
+    }
+
+    &-caption {
+        $pad: math.div(20,16);
+        @include getType('caption');
+        padding: #{$pad}em 0 0 0;
+        color: getColor('white');
+    }
+
+}

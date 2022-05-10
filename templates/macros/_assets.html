@@ -28,22 +28,35 @@
 #}
 {% macro assetCard(imageName,imageObj,imageSizes = null,aspectRatio = null) %}
     {# dum check to prevent unknown method in gallery #}
-    {% set thisImage = imageName == 'artGallery' ? imageObj :  imageObj.one() %}
+    {% set thisImage = (imageName == 'artGallery' or imageName == 'artModal') ? imageObj :  imageObj.one() %}
     
     {% set thisWidth, thisHeight = thisImage.getWidth(), thisImage.getHeight() %}
-    {% set thisRatio = (thisWidth/thisHeight) %}
 
-    {% set orientation = (thisWidth == thisHeight) ? 'square' : (thisWidth > thisHeight ? 'landscape' : 'portrait') %}
+    {# default square to landscape #}
+    {% set orientation = (thisWidth < thisHeight) ? 'portrait' : 'landscape' %}
+    {% set thisRatio = orientation == 'portrait' ? (thisWidth/thisHeight) : (thisHeight/thisWidth) %}
     
     {% set defaultWidth, defaultHeight = 450, 350 %}
     {% set transformSmSizes, transformLgSizes = [],[] %}
     {% set smThreshhold, lgThreshhold = 767, 768 %}
+    {% set portraitThreshhold, landscapeThreshhold = 575, 735 %}
 
     {% if imageSizes %}
         {% set smWidth, smHeight = imageSizes['sm'][0], imageSizes['sm'][1] %}
         {% set lgWidth, lgHeight = imageSizes['lg'][0], imageSizes['lg'][1] %}
 
-        {# Handle auto sizing #}
+        {# Handle full width sizing based on orientation #}
+        {% if smWidth == '100%' %}
+            {% set smWidth = (orientation == 'portrait') ? portraitThreshhold : landscapeThreshhold %}
+        {% endif %}
+        {% if lgWidth == '100%' %}
+            {% set lgWidth = (orientation == 'portrait') ? portraitThreshhold : landscapeThreshhold %}
+        {% endif %}
+        {# Handle small auto sizing #}
+        {% if smHeight == 'auto' %}
+            {% set smHeight = smWidth*thisRatio %}
+        {% endif %} 
+        {# Handle large auto sizing #}
         {% if lgHeight == 'auto' %}
             {% set lgHeight = lgWidth*thisRatio %}
         {% endif %} 
@@ -89,6 +102,8 @@
         srcset="{{ transformedLg ? transformedLg | srcset : '' }}" 
         media="(min-width: 768px)">
     <img 
+        data-dims="{{ thisWidth }}x{{ thisHeight }}"
+        data-orientation-testing="{{ orientation }}"
         data-sm-testing="{{ transformSmSizes|json_encode }}"
         data-lg-testing="{{ transformLgSizes|json_encode }}"
         class="{{ imageName }}-image"

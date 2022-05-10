@@ -3,7 +3,7 @@ import appState from './utils/appState';
 import tabbedContent from './components/tabbedContent';
 import accordionMenu from './components/accordionMenu';
 import flyoutContent from './components/flyoutContent';
-import searchFilters from './components/searchFilters';
+import dialogContent from './components/dialogContent';
 import parallaxImages from './components/parallaxImages';
 import scrollCarousel from './components/scrollCarousel';
 import scrollChyron from './components/scrollChyron';
@@ -14,12 +14,20 @@ appState.init();
 // Components
 accordionMenu.init();
 flyoutContent.init('nav');
-searchFilters.init('resultsFilter_dialog');
+dialogContent.init({
+    id: 'resultsFilter',
+    gallery: false
+});
+dialogContent.init({
+    id: 'artModal',
+    gallery: true
+});
 
 if (document.querySelectorAll('[role="tablist"]').length > 0 ) {
     tabbedContent.init();
 }
 
+// Homepage Parallax
 parallaxImages.init();
 
 // Homepage Carousels:

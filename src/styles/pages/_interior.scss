@@ -215,6 +215,9 @@
 	}
 
 	&-frame {
+		@include breakpoint(sm) {
+			margin-right: 4em;
+		}
 	
 		&--projects {
 			@include visuallyHide;
@@ -226,12 +229,6 @@
 		@include justifyContent(flex-end);
 	}
 
-	&-placeholder {
-		background: lightgray;
-		height: 640px;
-		width: 640px;
-	}
-
 	&-caption {
 		$pt: math.div(20,16);
 		$pr: math.div(40,16);
@@ -240,11 +237,13 @@
 	}
 
 	&-main {
-		margin-left: 4em;
+	
+		&--directors {
+			flex-basis: 100%;
+		}
 
         #{$summary}--news & {
 			flex-basis: 100%;
-            margin-left: 0;
 		}
 
 	}
@@ -461,6 +460,15 @@
 		@include getType('h1-normal');
 	}
 
+	&-subtitle {
+		$mv: math.div(20,40);
+		$mt: math.div(80,40);
+		@include getType('h2-sans');
+		border-top: 1px solid getColor('red');
+		margin-top: #{$mt}em;
+		padding: #{$mv}em 0;
+	}
+
 	&-wrap {
 		padding-top: 8em;
 	}
@@ -477,6 +485,16 @@
 			background-color: lightgray;
 		}
 
+		&-caption {
+			@include getType('caption');
+			display: inline-flex;
+		}
+
+	}
+
+	&-asset {
+		display: block;
+		margin-bottom: 4em;
 	}
 
 	&-main {
@@ -485,7 +503,11 @@
 			@include flexParent();
 			@include justifyContent(flex-end);
 		}
-		
+
+		&--impact {
+			margin-top: -3em;//ew
+		}
+
 		&-content {
 			@include flexChild(0 1 50%);
 		}
@@ -541,6 +563,8 @@
 	}
 
 	&-metric {
+		margin-bottom: 4em;
+		max-width: 295px;
 
 		&-stat {
 			@include getType('o-normal');
@@ -553,26 +577,52 @@
 	}
 
     &-list {
+		$margin-total: 0.5em;
+		
+		@include breakpoint(sm) {
+			margin-top: 6em;
+		}
 
         &--2 {
             @include flexParent();
             > * {
-                @include flexChild(0 1 50%);
+                @include flexChild(1 1 50%);
             }
         }
 
         &--4 {
-            @include flexParent();
-            > * {
-                @include flexChild(0 1 25%);
-            }
+
+			@include breakpoint(sm) {
+				@include flexParent();
+				> * {
+					@include flexChild(0 1 calc(25% - #{$margin-total}));
+				}
+			}
+
         }
 
         &--3 {
+
+			@include breakpoint(sm) {
+				@include flexParent();
+				> * {
+					@include flexChild(0 1 calc(33.333% - #{$margin-total}));
+				}
+			}
+        }
+
+		&--highlight {
             @include flexParent();
-            > * {
-                @include flexChild(0 1 33.333%);
-            }
+
+			> * {
+				flex-basis: 100%;
+			}
+
+			@include breakpoint(sm) {
+				> * {
+					@include flexChild(1 1 50%);
+				}
+			}
         }
 
     }
@@ -583,6 +633,8 @@
         @at-root {
             @include cardMini(#{$cardlette},getColor('red'),getColor('red',10));
         }
+
+		// @include flexParent($display:flex,$values:column nowrap);
 
     }
 

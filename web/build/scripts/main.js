@@ -118,6 +118,56 @@ var accordionMenu = {
 
 /***/ }),
 
+/***/ "./src/scripts/components/dialogContent.js":
+/*!*************************************************!*\
+  !*** ./src/scripts/components/dialogContent.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var a11y_dialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! a11y-dialog */ "./node_modules/a11y-dialog/dist/a11y-dialog.esm.js");
+// dialogContent
+// Source: https://a11y-dialog.netlify.app/
+
+var dialogContent = {
+  init: function init(options) {
+    var dialogId = options.id,
+        dialogContainer = document.querySelector("#".concat(dialogId, "_dialog")),
+        isGallery = options.gallery;
+
+    if (dialogContainer) {
+      var dialog = new a11y_dialog__WEBPACK_IMPORTED_MODULE_0__["default"](dialogContainer),
+          html = document.documentElement; // overflow settings are incompatible with sprig 
+      // for reasons I don't have time to figure out
+      // html.style.overflowY = 'hidden' (probs a race condition)
+
+      dialog.on('show', function (el, e) {
+        if (isGallery) {
+          var galleryContent = dialogContainer.querySelector("#".concat(dialogId, "_content")),
+              galleryList = dialogContainer.querySelector("#".concat(dialogId, "_list")),
+              currentId = e.currentTarget.getAttribute('data-trigger-id'),
+              currentItem = galleryList.querySelector("#".concat(currentId));
+          var currentOffset = currentItem.offsetTop;
+          console.log('open', dialogContainer.scrollTop);
+          document.location.hash = "#".concat(currentId); // galleryContent.addEventListener("scroll", event => {
+          //     console.log(`scrollTop: ${galleryContent.scrollTop}`);
+          // });
+          // //dialogContainer.scrollTo(0,currentOffset);
+          // currentItem.addEventListener('load', () => {
+          //     console.log('load');
+          // });
+        }
+      });
+    }
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dialogContent);
+
+/***/ }),
+
 /***/ "./src/scripts/components/flyoutContent.js":
 /*!*************************************************!*\
   !*** ./src/scripts/components/flyoutContent.js ***!
@@ -446,37 +496,6 @@ var scrollChyron = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./src/scripts/components/searchFilters.js":
-/*!*************************************************!*\
-  !*** ./src/scripts/components/searchFilters.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var a11y_dialog__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! a11y-dialog */ "./node_modules/a11y-dialog/dist/a11y-dialog.esm.js");
-// searchFilters
-// Source: https://a11y-dialog.netlify.app/
-
-var searchFilters = {
-  init: function init(name) {
-    var dialogContainer = document.querySelector("#".concat(name));
-
-    if (dialogContainer) {
-      var dialog = new a11y_dialog__WEBPACK_IMPORTED_MODULE_0__["default"](dialogContainer),
-          html = document.documentElement; // dialog.on(
-      //     'show', () => (html.style.overflowY = 'hidden'),
-      //     'hide', () => (console.log('close'))
-      // );
-    }
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (searchFilters);
-
-/***/ }),
-
 /***/ "./src/scripts/components/tabbedContent.js":
 /*!*************************************************!*\
   !*** ./src/scripts/components/tabbedContent.js ***!
@@ -743,7 +762,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_tabbedContent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/tabbedContent */ "./src/scripts/components/tabbedContent.js");
 /* harmony import */ var _components_accordionMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/accordionMenu */ "./src/scripts/components/accordionMenu.js");
 /* harmony import */ var _components_flyoutContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/flyoutContent */ "./src/scripts/components/flyoutContent.js");
-/* harmony import */ var _components_searchFilters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/searchFilters */ "./src/scripts/components/searchFilters.js");
+/* harmony import */ var _components_dialogContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/dialogContent */ "./src/scripts/components/dialogContent.js");
 /* harmony import */ var _components_parallaxImages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/parallaxImages */ "./src/scripts/components/parallaxImages.js");
 /* harmony import */ var _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/scrollCarousel */ "./src/scripts/components/scrollCarousel.js");
 /* harmony import */ var _components_scrollChyron__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/scrollChyron */ "./src/scripts/components/scrollChyron.js");
@@ -761,11 +780,19 @@ _utils_appState__WEBPACK_IMPORTED_MODULE_0__["default"].init(); // Components
 
 _components_accordionMenu__WEBPACK_IMPORTED_MODULE_2__["default"].init();
 _components_flyoutContent__WEBPACK_IMPORTED_MODULE_3__["default"].init('nav');
-_components_searchFilters__WEBPACK_IMPORTED_MODULE_4__["default"].init('resultsFilter_dialog');
+_components_dialogContent__WEBPACK_IMPORTED_MODULE_4__["default"].init({
+  id: 'resultsFilter',
+  gallery: false
+});
+_components_dialogContent__WEBPACK_IMPORTED_MODULE_4__["default"].init({
+  id: 'artModal',
+  gallery: true
+});
 
 if (document.querySelectorAll('[role="tablist"]').length > 0) {
   _components_tabbedContent__WEBPACK_IMPORTED_MODULE_1__["default"].init();
-}
+} // Homepage Parallax
+
 
 _components_parallaxImages__WEBPACK_IMPORTED_MODULE_5__["default"].init(); // Homepage Carousels:
 

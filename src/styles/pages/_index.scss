@@ -157,6 +157,12 @@ $results: '.searchResults';
 		@include visuallyHide;
 	}
 
+	&-apology {
+		$mb: math.div(80,24);
+		@include getType('subtitle');
+		margin-bottom: #{$mb}em;
+	}
+
 	&-content {
 		$content: 7;
         $margin: 0.5em;

@@ -67,7 +67,7 @@ class scrollChyron {
     
         window.addEventListener('load',() => {
 
-            self.chyron.addEventListener("mouseover", () => self.pauseScroll() );
+            self.chyron.addEventListener("mouseover", () => self.pauseScroll(), );
             self.chyron.addEventListener("mouseout", () => self.pauseScroll() );
 
             self.scrollInterval = setInterval(() => self.autoScroll(), 15);
