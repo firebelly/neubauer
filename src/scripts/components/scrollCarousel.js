@@ -101,8 +101,8 @@ class scrollCarousel {
         self.previousButton.addEventListener('click', (e) => self.previousSlide(e) );
         self.nextButton.addEventListener('click', (e) => self.nextSlide(e) );
 
-        self.slideContainer.addEventListener("mouseover", (e) => self.startSlide(e) );
-        self.slideContainer.addEventListener("mouseover", (e) => self.stopSlide(e) );
+        // self.slideContainer.addEventListener("mouseover", (e) => self.startSlide(e) );
+        // self.slideContainer.addEventListener("mouseover", (e) => self.stopSlide(e) );
         
     }
 

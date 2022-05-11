@@ -1,15 +1,18 @@
 // Import local dependencies
 import appState from './utils/appState';
+import appForms from './utils/appForms';
 import tabbedContent from './components/tabbedContent';
 import accordionMenu from './components/accordionMenu';
 import flyoutContent from './components/flyoutContent';
 import dialogContent from './components/dialogContent';
-import parallaxImages from './components/parallaxImages';
+import parallaxContent from './components/parallaxContent';
 import scrollCarousel from './components/scrollCarousel';
 import scrollChyron from './components/scrollChyron';
 
 // Inits
 appState.init();
+
+appForms.init();
 
 // Components
 accordionMenu.init();
@@ -28,7 +31,12 @@ if (document.querySelectorAll('[role="tablist"]').length > 0 ) {
 }
 
 // Homepage Parallax
-parallaxImages.init();
+const homepageCover = new parallaxContent({
+    _id: 'cover'
+});
+if ( homepageCover.images !== null || homepageCover.titles !== null ) {
+    homepageCover.init();
+}
 
 // Homepage Carousels:
 const peopleCarousel = new scrollCarousel({

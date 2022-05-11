@@ -9,7 +9,10 @@
 
 {% block content %}
 {% set openerImage = entry.homepageCover is not null and entry.homepageCover|length > 0 ? entry.homepageCover.one() : null %}
-{% set openerSrc = "#{siteUrl}#{openerImage.url}" %}
+{% set openerSizes = utils.getAssetSizes('homepage','opener')|json_decode %}
+{% set resizedOpenerImage = assets.assetSrc(openerImage,openerSizes) %}
+{% set openerSrc = resizedOpenerImage %}
+
 {% set openerTagline = entry.openerTagline is not null ? entry.openerTagline : null %}
 {% set openerPrompt = entry.openerPrompt is not null ? entry.openerPrompt : null %}
 
@@ -18,6 +21,8 @@
 {% set arrowDownPath = "/spritemap.svg#icon-arrow-down-20" %}
 
 {# Features #}
+{% set keyFeature = entry.homepageProjectFeature is not null and entry.homepageProjectFeature|length > 0 ? entry.homepageProjectFeature.one() : null %}
+    
 {% set projectFeature, exFeature = null, null %}
 {% set featureEntries = {
     'researchIndex': {
@@ -52,13 +57,17 @@
     {% set featureEntries = featureEntries|merge({ (key): featureObj }) %}
 {% endfor %}
 
-<section class="homepageCover">
-    <div class="homepageCover-title">
+<section 
+    class="homepageCover" 
+    data-parallax-container="cover">
+    <div 
+        class="homepageCover-title" 
+        data-parallax-title="cover">
         <h1 class="homepageCover-tagline">{{ openerTagline|striptags('<em>')|raw }}</h1>
         <h2 class="homepageCover-prompt">{{ openerPrompt|raw }}</h2>
         <button 
             class="homepageCover-action homepageCover-action--ghost"
-            data-intro-trigger>
+            data-parallax-title-trigger="cover">
             <span class="homepageCover-action-label">Click Me</span>
             <svg 
                 class="homepageCover-action-icon">
@@ -66,10 +75,50 @@
             </svg>
         </button>
     </div>
-    <div class="homepageCover-asset parallax" style='background-image: url({{ openerSrc }});'></div>
+
+    {% if keyFeature %}
+    {% set spotlightBlock = keyFeature.spotlightBlock is not null and keyFeature.spotlightBlock|length > 0 ? keyFeature.spotlightBlock.all() : null %}
+    {% set keyQuestions = [] %}
+    {% if spotlightBlock %}  
+        {% for spotlight in spotlightBlock %}
+            {% set spotlightType = spotlight.type %}
+            {% if spotlightType == 'question' %}
+            {% set keyQuestions = keyQuestions|merge([spotlight]) %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <div 
+        class="homepageFeature"
+        data-parallax-feature="cover">
+        <article class="homepageFeature-article">
+            <h3 class="homepageFeature-label">Research Project</h3>
+            <h4 class="homepageFeature-title">{{ keyFeature.title }}</h4>
+            {% if keyQuestions %}
+            {# let's just select the 1st one #}
+            {% set question = keyQuestions[0] %}
+            <div class="homepageFeature-question">{{ question.body }}</div>
+            {% endif %}
+            <a 
+                class="homepageFeature-action homepageFeature-action--ghost"
+                href="{{ siteUrl }}{{ keyFeature.uri }}"
+                title="">
+                <span class="homepageFeature-action-label">Learn More</span>
+                <svg class="homepageFeature-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowRightPath) }}"></use>
+                </svg>
+            </a>
+        </article>
+    </div>
+    {% endif %}
+
+    <div 
+        class="homepageCover-asset" 
+        style='background-image: url({{ openerSrc|trim }});'
+        data-parallax-image="cover"></div>
+
 </section>
 
-<section class="homepageExplore">
+{# <section class="homepageExplore">
     {% set featureSet = [
         featureEntries['researchIndex']['features']['primary'],
         featureEntries['exhibitionsIndex']['features']['primary'],
@@ -84,7 +133,7 @@
         'scrollable': true
     }%}
     {{ carousels.featureCarousel('homepageCarousel',featureSlideObj) }}
-</section>
+</section> #}
 
 {% for tab in entry.getFieldLayout().getTabs() if tab.name|slugify != 'opener' %}
 {% set tabName, tabSlug = tab.name, tab.name|slugify %}

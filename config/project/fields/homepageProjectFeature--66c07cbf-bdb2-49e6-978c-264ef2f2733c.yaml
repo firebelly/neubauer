@@ -1,0 +1,22 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d # Homepage
+handle: homepageProjectFeature
+instructions: 'Add a project to feature on the homepage'
+name: 'Homepage Project Feature'
+searchable: true
+settings:
+  allowSelfRelations: false
+  limit: '1'
+  localizeRelations: false
+  selectionLabel: ''
+  showSiteMenu: true
+  source: null
+  sources:
+    - 'section:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: null
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Entries

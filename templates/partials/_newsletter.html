@@ -1,0 +1,103 @@
+{# Mailchimp Signup Form #}
+
+<div
+    id="mc_embed_signup"
+    class="primaryContact-news">
+    
+    <form 
+        action="https://uchicago.us15.list-manage.com/subscribe/post?u=41468719d37c56fff66b526a9&amp;amp;id=af93c8210c" 
+        method="post" 
+        id="mc-embedded-subscribe-form" 
+        name="mc-embedded-subscribe-form" 
+        class="contactForm validate" 
+        target="_blank" 
+        novalidate>
+        <fieldset 
+            id="mc_embed_signup_scroll"
+            class="contactForm-fieldset">
+            <legend class="contactForm-legend">Sign up for our newsletter</legend>
+
+            <div class="contactForm-field contactForm-field--name"> 
+                <div class="contactForm-field contactForm-field--duo">
+                    <input 
+                        id="mce-FNAME"
+                        class="contactForm-input contactForm-input--name required" 
+                        name="FNAME"
+                        type="text"
+                        data-global-field="input" />
+                    <label 
+                        class="contactForm-label" 
+                        for="mce-FNAME">First Name</label>
+                </div>
+                <div class="contactForm-field contactForm-field--duo">
+                    <input 
+                        id="mce-LNAME" 
+                        class="contactForm-input contactForm-input--name" 
+                        name="LNAME" 
+                        type="text"
+                        data-global-field="input" />
+                    <label 
+                        class="contactForm-label" 
+                        for="mce-LNAME">Last Name</label>
+                </div>      
+            </div>  
+
+            <div class="contactForm-field contactForm-field--affiliation">
+                <select 
+                    name="MMERGE6" 
+                    class="contactForm-select required" 
+                    id="mce-MMERGE6"
+                    data-global-field="select">
+                    <option value=""></option>
+                    <option value="Faculty Member">Faculty Member</option>
+                    <option value="Graduate Student">Graduate Student</option>
+                    <option value="Undergraduate Student">Undergraduate Student</option>
+                    <option value="Alumna/Alumnus">Alumna/Alumnus</option>
+                    <option value="Staff">Staff</option>
+                    <option value="None, Hyde Park Community Member">None, Hyde Park Community Member</option>
+                    <option value="None of the Above">None of the Above</option>
+                </select>
+                <label
+                    class="contactForm-label"
+                    for="mce-MMERGE6">University of Chicago Affiliation
+                </label>
+                {% set caretPath = "/spritemap.svg#icon-caret-down-20" %}
+                <svg class="contactForm-icon">
+					<use xlink:href="{{ alias('@assetBasePath' ~ caretPath) }}"></use>
+				</svg>
+            </div>
+
+            <div class="contactForm-field contactForm-field--email">
+                <input 
+                    id="mce-EMAIL" 
+                    class="contactForm-input contactForm-input--email required email" 
+                    name="EMAIL"
+                    type="text"
+                    data-global-field="input" />
+                <label 
+                    class="contactForm-label" 
+                    for="mce-EMAIL">Email</label>
+
+                <div id="mce-responses" class="clear">
+                    <div class="response" id="mce-error-response" style="display:none"></div>
+                    <div class="response" id="mce-success-response" style="display:none"></div>
+                </div><!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="b_41468719d37c56fff66b526a9_af93c8210c" tabindex="-1" value="">
+                </div>
+
+                <div class="contactForm-button contactForm-button--ghost">
+                    <input 
+                        id="mc-embedded-subscribe" 
+                        class="contactForm-button-label contactForm-button-label--mce button"
+                        type="submit" 
+                        value="Subscribe" 
+                        name="subscribe" />
+                </div>
+
+            </div>                  
+
+        </fieldset>
+    </form>
+</div>

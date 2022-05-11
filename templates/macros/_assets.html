@@ -137,6 +137,22 @@
     {{ newImage }}
 {% endmacro %}
 
+{# assetSrc: #}
+{% macro assetSrc(imageObj,imageSizes) %}
+    {% set thisImage = imageObj %}
+    {% set thisWidth, thisHeight = thisImage.getWidth(), thisImage.getHeight() %}
+    {% set smWidth, smHeight = imageSizes['sm'][0], imageSizes['sm'][1] %}
+    {% set lgWidth, lgHeight = imageSizes['lg'][0], imageSizes['lg'][1] %}
+    {% set newImage = craft.imager.transformImage(imageObj, { 
+        mode: 'crop',
+        position: thisImage.focalPoint(),
+        width: lgWidth, 
+        height: lgHeight, 
+        jpegQuality: 72 }) %}
+    {{ newImage }}
+{% endmacro %}
+
+
 
 {# NOTE: Macros below are for reference only #}
 

@@ -122,3 +122,152 @@
     }
 
 }
+
+/* -------------------------------------------------------------------------------
+ Global Field
+---------------------------------------------------------------------------------- */
+@mixin globalField($selector) {
+
+	#{$selector} {
+		font-size: 1rem;
+
+		&-field {
+			position: relative;
+
+			// &._is-error::after,
+			// &._is-valid::after {
+			// 	$size: 30px;
+			// 	content: '';
+			// 	height: $size;
+			// 	margin-top: math.div($size,2) * -1;
+			// 	width: $size;
+			// 	position: absolute;
+			// 	right: 10px;
+			// 	top: 50%;
+			// }
+
+			// &._is-error::after {
+			// 	background: url(#{$svg-path}icon-alert-red-30.svg);
+			// }
+
+			// &._is-valid::after {
+			// 	background: url(#{$svg-path}icon-check-green-30.svg);
+			// }
+
+		}
+
+		&-label {
+            $label: &;
+
+			$top: math.div(12,16);
+            $left: math.div(15,16);
+            position: absolute;
+            z-index: 1;
+            left: #{$left}em;
+            top: #{$top}em;
+            @include getType('caption');
+
+			@at-root {
+                #{$selector}-select._has-value + #{$label},
+				#{$selector}-input._has-value + #{$label},
+				#{$selector}-textarea._has-value + #{$label},
+				#{$selector}-input:focus + #{$label},
+				#{$selector}-textarea:focus + #{$label} {
+                    $left: math.div(15,12);
+                    left: #{$left}em;
+					top: 3px;
+					@include getType('micro');	
+				}
+			}
+		}
+
+        &-input, 
+        &-select,
+        &-textarea {
+            $mb: math.div(20,16);
+            $pt: math.div(18,16);
+            $pb: math.div(5,16);
+            $pl: math.div(15,16);
+            @include getType('caption');
+            border: none;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            background: rgba(255, 229, 230, 0.1);
+            border-bottom: 1px solid getColor('white');
+            color: getColor('white');
+            margin-bottom: #{$mb}em;
+            padding: #{$pt}em 0 #{$pb}em #{$pl}em;
+            width: 100%;
+
+            &:focus:not(#{$selector}-select) {
+                padding-bottom: 0;
+				border-width: 5px;
+			}
+
+            // TO DO: 
+			// https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible
+			&:focus-visible {
+				outline: none;
+			}
+
+            // #{$selector}-item._is-error & {
+            //     border-color: getColor('red',10);
+            //     border-width: 3px;
+            // }
+            // #{$selector}-item._is-valid & {
+            //     border-color: getColor('green');
+            //     border-width: 3px;
+            // }
+
+        }
+
+        &-select {
+            position: relative;
+            z-index: 2;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+
+            option {
+                padding: 0;
+            }
+        }
+
+
+        &-button {
+            $button: &;
+            @include resetButton;
+            width: 140px;
+            position: relative;
+
+            &-label {
+
+                // Style the Mailchimp submit "label" input
+                &--mce {
+                    border: none;
+                    display: block;
+                    height: 100%;
+                    padding: 0;
+                    width: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    background: none;
+                    outline: none;
+                    color: getColor('white');
+                    text-align: center;
+                    -webkit-appearance: none;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+
+        }
+
+	}
+
+}

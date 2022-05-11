@@ -27,55 +27,9 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="primaryContact-news">
-            <form class="primaryContact-form">
-                <fieldset class="primaryContact-fieldset">
-                    <legend class="primaryContact-legend">Sign up for our newsletter</legend>
-                    <div class="primaryContact-field primaryContact-field--name"> 
-                        <div class="primaryContact-field primaryContact-field--duo">
-                            <input 
-                                id="newsletter_firstname" 
-                                class="primaryContact-input primaryContact-input--name" 
-                                name="newsletter_firstname" 
-                                type="text" />
-                            <label 
-                                class="primaryContact-label" 
-                                for="newsletter_firstname">First Name</label>
-                        </div>
-                        <div class="primaryContact-field primaryContact-field--duo">
-                            <input 
-                                id="newsletter_lastname" 
-                                class="primaryContact-input primaryContact-input--name" 
-                                name="newsletter_lastname" 
-                                type="text" />
-                            <label 
-                                class="primaryContact-label" 
-                                for="newsletter_lastname">Last Name</label>
-                        </div>      
-                    </div>  
-                
-                    <div class="primaryContact-field primaryContact-field--email">
-                        <input 
-                            id="newsletter_email" 
-                            class="primaryContact-input primaryContact-input--email" 
-                            name="newsletter_email" 
-                            type="text" />
-                        <label 
-                            class="primaryContact-label" 
-                            for="newsletter_email">Email</label>
+        
+        {% include 'partials/_newsletter' %}
 
-                        <button 
-                            class="primaryContact-button primaryContact-button--ghost" 
-                            id="newsletter_submit" 
-                            name="newsletter_submit" 
-                            role="submit">
-                            <span class="primaryContact-button-label">Subscribe</span>
-                        </button>
-                    </div>                  
-
-                </fieldset>
-            </form>
-        </div>
     </div>
     {# Chyron #}
     {% include 'partials/_chyron' %}
@@ -144,7 +98,8 @@
                     <li>{{ contactBlock.faxNumber }}</li>
                 </ul>
                 <ul class="footerContact-item">
-                    <li><a href="mailto:{{ contactBlock.emailAddress }}">{{ contactBlock.emailAddress }}</a></li>
+                    <li class="footerContact-item-email"><a href="mailto:{{ contactBlock.emailAddress }}">{{ contactBlock.emailAddress }}</a></li>
+                    <li class="footerContact-item-accessibility"><a href="https://accessibility.uchicago.edu" target="_blank">Accessibility</a></li>
                 </ul>
             </address>
         <div class="footerCopyright">&copy; 2022 The University of Chicago</div>

@@ -13,8 +13,8 @@
     class="{{ accordionName }}" 
     id="{{ accordionName }}"
     data-accordion-container="{{ accordionName }}"
-    data-accordion-multiple="{{ allowMultiple ?? false }}" 
-    data-accordion-toggle="{{ allowToggle ?? false }}">
+    data-accordion-multiple="{{ allowMultiple ? 'true' : 'false' }}" 
+    data-accordion-toggle="{{ allowToggle ? 'true' : 'false' }}">
 
 {% for idx, accordion in accordionList %}
     <h3 class="{{ accordionName }}-title">
@@ -31,10 +31,10 @@
             <span class="{{ accordionName }}-icon">
                 {% set expandIcon, contractIcon = "/spritemap.svg#icon-#{expandIconName}", "/spritemap.svg#icon-#{contractIconName}" %}
                 <svg class="{{ accordionName }}-toggle {{ accordionName }}-toggle--expand" role="presentation">
-                    <use xlink:href="{{ rev(expandIcon) }}"></use>
+                    <use xlink:href="{{ alias('@assetBasePath' ~ expandIcon) }}"></use>       
                 </svg> 
                 <svg class="{{ accordionName }}-toggle {{ accordionName }}-toggle--contract" role="presentation">
-                    <use xlink:href="{{ rev(contractIcon) }}"></use>
+                    <use xlink:href="{{ alias('@assetBasePath' ~ contractIcon) }}"></use>       
                 </svg> 
             </span>
             {% endif %}

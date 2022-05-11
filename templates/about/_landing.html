@@ -3,6 +3,7 @@
 {% import 'macros/_cards' as cards %}
 {% import 'macros/_assets' as assets %}
 {% import 'macros/_controls' as controls %}
+{% import 'macros/_menus' as menus %}
 
 {% set entrySection = entry.section|replace('Index','')|slugify %}
 {% set excludeMenu = ['opener'] %}
@@ -49,24 +50,23 @@
             <figcaption class="interiorSummary-caption">{{ statementImage.caption }}</figcaption>
         </figure>
         <div class="interiorSummary-main interiorSummary-main--directors">
-
+            {% set isAccordion = (body and abstract) %}
             {% if abstract %}
             <div class="interiorSummary-redactor interiorSummary-redactor--abstract">{{ abstract|raw }}</div>
             {% endif %}
 
             {% if body %}
-            {% set isAccordion = (body and abstract) %}
-
             {% if isAccordion %}
-            {# <a class="interiorSummary-accordion interiorSummary-accordion--{{ entrySection }}" href="" role="">
-                <span class="interiorSummary-accordion-label">Full Summary</span>
-                <svg class="interiorSummary-accordion-icon">
-                    <use xlink:href="{{ alias('@assetBasePath' ~ expandPath) }}"></use>
-                </svg>
-            </a> #}
-            {% endif %}
-
+            {% set panelList = [
+                {
+                    'heading': 'Full Statement',
+                    'body': body|raw
+                }
+            ] %}
+            {{ menus.accordionMenu('panelStatement',panelList,true,true,'expand-20','contract-20') }}
+            {% else %}
             <div class="interiorSummary-redactor interiorSummary-redactor--body">{{ body|raw }}</div>
+            {% endif %}
             {% endif %}
         </div>
     </div>
@@ -211,19 +211,44 @@
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
     
     {% if directions %}
+    {% set map = entry.cardImage is not null and entry.cardImage|length > 0 ? entry.cardImage : null %}
     {% set details = directions.details != "" ? directions.details : null %}
     {% set car = directions.car != "" ? directions.car : null %}
     {% set transit = directions.publicTransit != "" ? directions.publicTransit : null %}
-    <div>
-        {{ details ?? details }}
-    </div>
-    <div>
-        <h4>By Car</h4>
-        {{ car ? car }}
-    </div>
-    <div>
-        <h4>Public Transit</h4>
-        {{ transit ? transit }}
+    
+    <div class="interiorMod-list interiorMod-list--visit">
+
+        {% if map %}
+        {% set visitSizes = utils.getAssetSizes('about','visit')|json_decode %}
+        <figure class="interiorMod-map">
+            {% if visitSizes %}
+            {% set visitName,visitImage = "interiorMod-asset",map %}
+            <picture>
+            {{ assets.assetCard(visitName,visitImage,visitSizes) }}
+            </picture>
+            {% endif %}
+        </figure>
+        {% endif %}
+
+        <div class="interiorMod-directions">
+            <div>
+                {{ details ?? details|raw }}
+            </div>
+            
+            {% set panelList = [
+                {
+                    'heading': 'By Car',
+                    'body': car
+                },
+                {
+                    'heading': 'Public Transit',
+                    'body': transit
+                },
+            ] %}
+
+            {{ menus.accordionMenu('panelDirections',panelList,false,true,'expand-20','contract-20') }}
+
+        </div>
     </div>
     {% endif %}
 </section>

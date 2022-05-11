@@ -447,6 +447,8 @@
  Interior Module
  - e.g. About Impact Module
 ------------------------------------------------------------------------ */
+
+
 .interiorMod {
 	$mod: &;
 	border-top: 1px solid transparent;
@@ -625,7 +627,43 @@
 			}
         }
 
+		&--visit {
+
+			@include breakpoint(sm) {
+				
+				@include flexParent();
+				> * {
+					$gap: 4.5;
+					$margin: math.div(4.5,2);
+					&:nth-child(1) {
+						margin-right: #{$margin}em;
+					}
+					&:nth-child(2) {
+						margin-left: #{$margin}em;
+					}
+					@include flexChild(1 1 calc(50% - #{$gap}em));
+				}
+			}
+		}
+
     }
+
+	&-map {
+
+	}
+
+	&-directions {
+		$mb: math.div(40,24);
+		
+		> * {
+			@include getType('subtitle');
+		}
+
+		p {
+			margin-bottom: #{$mb}em;
+		}
+
+	}
 
     &-cardlette {
         $cardlette: &;
@@ -640,4 +678,28 @@
 
 }
 
+@include accordionMenu('.panelDirections',$icon-size:20px, $default:false);
+@include accordionMenu('.panelStatement',$icon-size:20px, $default:false);
+.panelStatement,
+.panelDirections {
 
+	&-name {
+		@include getType('h3-sans');
+	}
+
+	&-trigger {
+		border-color: getColor('red');
+		color: getColor('red');
+	}
+
+	&-toggle {
+		fill: getColor('red');
+	}
+
+	&-content {
+		> * {
+			@include getType('subtitle');
+		}
+	}
+
+}

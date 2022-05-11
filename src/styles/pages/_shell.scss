@@ -262,9 +262,29 @@ $red-secondary: nth($red-theme,2);
   Primary Footer
 ------------------------------------------------------------------------ */
 .primaryFooter {
-	
+	position: relative;
+	z-index: 1; //wut
 }
 
+/* ---------------------------------------------------------------------
+  Newsletter Test
+------------------------------------------------------------------------ */
+.newsletterTest {
+	background: black;
+	height: 800px;
+	width: 100%;
+	color: white;
+	font-size: 1rem;
+
+	.mc-field-group {
+		@include getType('caption');
+	}
+
+}
+
+/* ---------------------------------------------------------------------
+ Contact
+------------------------------------------------------------------------ */
 .primaryContact {
 	$contact: &;
 	border-top: 1px solid getColor('red');
@@ -290,7 +310,6 @@ $red-secondary: nth($red-theme,2);
 		color: getColor('white');
 	}
 
-	&-legend,
 	&-title {
 		@include getType('h3-normal');
 	}
@@ -300,19 +319,27 @@ $red-secondary: nth($red-theme,2);
 		margin-bottom: #{$mb}em;
 	}
 
-	&-legend {
-		$mb: math.div(20,30);
-		margin-bottom: #{$mb}em;
-	}
-
 	&-prompt {
 		$mb: math.div(20,24);
 		@include getType('subtitle');
 		margin-bottom: #{$mb}em;
 	}
 
+}
+
+@include globalField('.contactForm');
+
+.contactForm {
+	$form: &;
+
+	&-legend {
+		$mb: math.div(20,30);
+		@include getType('h3-normal');
+		margin-bottom: #{$mb}em;
+	}
+
+	// Contact form
 	&-field {
-		position: relative;
 
 		&--email {
 			@include breakpoint(sm) {
@@ -335,6 +362,11 @@ $red-secondary: nth($red-theme,2);
 			}
 		}
 
+		&--affiliation {
+
+
+		}
+
 		&--duo {
 			@include breakpoint(sm) {
 				&:nth-of-type(1) {
@@ -350,33 +382,29 @@ $red-secondary: nth($red-theme,2);
 
 	&-button {
 		$button: &;
-		@include resetButton;
-		width: 140px;
 
 		@at-root {
 			@include actionButton(#{$button},getColor('white'),getColor('red'));
 		}
 
-		#{$contact}-field--email & {
+		#{$form}-field--email & {
 			margin-right: 0;
 		}
 
 	}	
 
+	&-icon {
+		height: 20px;
+		width: 20px;
+		position: absolute;
+		right: 1.5em;
+		top: 50%;
+		margin-top: -20px;
+		fill: getColor('white');
+	}
+
 	&-input {
 		$mb: math.div(20,16);
-		$pt: math.div(12,16);
-		$pb: math.div(13,16);
-		$pl: math.div(15,16);
-		@include getType('caption');
-		border: none;
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
-		background: rgba(255, 229, 230, 0.1);
-		border-bottom: 1px solid getColor('white');
-		margin-bottom: #{$mb}em;
-		padding: #{$pt}em 0 #{$pb}em #{$pl}em;
-		width: 100%;
 
 		&--email {	
 			margin-right: #{$mb}em;
@@ -390,16 +418,6 @@ $red-secondary: nth($red-theme,2);
 		}
 
 	}
-
-	&-label {
-		$top: math.div(12,16);
-		$left: math.div(15,16);
-		position: absolute;
-		left: #{$left}em;
-		top: #{$top}em;
-		@include getType('caption');
-	}
-
 
 }
 
@@ -568,6 +586,7 @@ $red-secondary: nth($red-theme,2);
 			@include flexChild(0 1 130px);
 			margin-right: 3em;
 		}
+
 	}
 
 	&-desc {
@@ -664,6 +683,12 @@ $red-secondary: nth($red-theme,2);
 			}
 
 		}
+
+		&-email {
+			$mb: math.div(5,14);
+			margin-bottom: #{$mb}em;
+		}
+
 	}
 
 }

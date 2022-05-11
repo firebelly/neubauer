@@ -15,44 +15,67 @@
 ------------------------------------------------------------------------ */
 .homepageCover {
 	$sm-nav-height: 80px;
-	$sm-asset-height: 900px;
-	$sm-cover-height: calc($sm-asset-height - $sm-nav-height);
-	
+	$sm-asset-height: 940px;
+	$sm-asset-width: 1441px; //ew
+	$sm-cover-height: 820px;
+	height: 100vw;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+
 	@include breakpoint(sm) {
 		height: $sm-cover-height;
-		margin-bottom: -12px; // account for image blur
+		//margin-bottom: -12px; // account for image blur
 	}
 
 	&-title {
-		top: 185px;
-		left: 200px;
+		padding: 0 2em;
+		top: 92px;
 		position: relative;
-		z-index: 10;
+		z-index: 2;
 		color: getColor('white');
+		transform: translate3d(0,0,0);
 
 		@include breakpoint(sm) {
 			width: 900px;
+			top: 185px;
+			left: 200px;
 		}
+
+		&._is-sliding {
+			transition: transform 2s ease-in;
+		}
+
 	}
 
 	&-tagline {
-		$mb: math.div(20,120);
-		@include getType('o-normal');
+		$mb: math.div(20,65);
+		@include getType('h1-normal');
 		margin-bottom: #{$mb}em;
+		text-align: center;
 
 		em {
-			//@include getType('o-italic');
 			font-family: $font-tertiary;
 			font-style: italic; //todo
 			letter-spacing: -0.03em;
+		}
+
+		@include breakpoint(sm) {
+			$mb: math.div(20,120);
+			@include getType('o-normal');
+			text-align: left;
 		}
 		
 	}
 
 	&-prompt {
-		@include getType('subtitle');
+		@include getType('caption');
+		text-align: center;
+
 		@include breakpoint(sm) {
 			width: 600px;
+			@include getType('subtitle');
+			text-align: left;
 		}
 	}
 
@@ -69,10 +92,16 @@
 		background-blend-mode: multiply;
 		background-attachment: fixed;
 		filter: blur(15px);
+		transform: translate3d(0,0,0);
 
 		@include breakpoint(sm) {
 			height: $sm-asset-height;
-			width: 1440px;
+			width: $sm-asset-width;
+		}
+
+		&._is-sliding {
+			filter: blur(0);
+			transition: transform 2s ease-in, filter 2s ease-in;
 		}
 
 	}
@@ -80,14 +109,22 @@
 	&-action {
 		$action: &;
 		@include resetButton;
-		margin-top: 4em;
+		
 
 		@at-root {
 			@include actionButton(#{$action},getColor('white'),getColor('white'));
 		}
 		
 		&--ghost {
+			display: block;
+			margin: 4em auto 0 auto;
 			background: transparent;
+
+			@include breakpoint(sm) {
+				margin-left: 0;
+				margin-right: 0;
+			}
+
 		}
 
 		&-label {
@@ -104,10 +141,72 @@
 
 }
 
+.homepageFeature {
+	$feature: &;
+	@include flexParent($display:flex,$values:row nowrap);
+	@include justifyContent(center);
+	@include alignItems(center);
+	// TODO: fix these dims
+	height: calc(100vw - 8em);
+	width: calc(100vw - 8em);
+	top: 100%;
+	left: 4em;
+	position: absolute;
+	z-index: 2;
+	transform: translate3d(0,0,0);
+	background: getColor('green',30);
+	color: getColor('green',20);
+	font-size: 1rem;
+	text-align: center;
+
+	&._is-sliding {
+		transition: transform 2s ease-in;
+	}
+
+	@include breakpoint(sm) {
+		height: 675px;
+		width: 675px;
+		left: auto;
+		right: 4em;
+		padding: 0 8em;
+	}
+
+	&-label {
+		$mb: math.div(20,16);
+		@include getType('caption');
+		margin-bottom: #{$mb}em;
+	}
+
+	&-title {
+		$mb: math.div(20,40);
+		@include getType('h3-sans');
+		margin-bottom: #{$mb}em;
+		text-align: center;
+	}
+
+	&-question {
+		$mb: math.div(20,40);
+		@include getType('h3-italic');
+		margin-bottom: #{$mb}em;
+		text-align: center;
+	}
+
+	@include actionButton(#{$feature}-action,getColor('green',20),getColor('green',20));
+
+	&-action {
+		#{$feature} & {
+			margin-right: 0;
+		}
+	}
+
+}
+
+
 .homepageEntries {
 	$entries: &;
 	padding: 4em 0 4em 4em;
 	position: relative;
+	z-index: 2; // obfuscate the parallax cover
 
 	&--people {
 		background: getColor('blue',10); 
@@ -223,8 +322,12 @@
 	&-slides {
 
 		#{$carousel}--features & {
-			height: 820px;
 			padding-bottom: 0;
+
+			@include breakpoint(sm) {
+				height: 820px;
+			}
+
 		}
 	}
 

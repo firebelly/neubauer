@@ -247,36 +247,161 @@ var flyoutContent = {
 
 /***/ }),
 
-/***/ "./src/scripts/components/parallaxImages.js":
-/*!**************************************************!*\
-  !*** ./src/scripts/components/parallaxImages.js ***!
-  \**************************************************/
+/***/ "./src/scripts/components/parallaxContent.js":
+/*!***************************************************!*\
+  !*** ./src/scripts/components/parallaxContent.js ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var parallaxImages = {
-  init: function init() {
-    var parallaxables = document.querySelectorAll('.parallax');
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-    function runParallaxLoop() {
-      requestAnimationFrame(runParallaxLoop);
-      parallax();
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var parallaxContent = /*#__PURE__*/function () {
+  function parallaxContent(options) {
+    var _this$state;
+
+    _classCallCheck(this, parallaxContent);
+
+    this.options = options || null;
+    this._id = this.options._id;
+    this.images = this._id !== null ? document.querySelectorAll("[data-parallax-image=\"".concat(this._id, "\"]")) : null;
+    this.containers = this._id !== null ? document.querySelectorAll("[data-parallax-container=\"".concat(this._id, "\"]")) : null; // Parallax state: _default, _active, _done
+
+    this._state = (_this$state = this.state) !== null && _this$state !== void 0 ? _this$state : '_default'; // Styling hook for transitions
+
+    this._isSliding = '_is-sliding';
+    this._imagePad = 33;
+  }
+
+  _createClass(parallaxContent, [{
+    key: "isContentInView",
+    value: function isContentInView(el) {
+      var self = this;
+      var pageTop = window.scrollY,
+          pageBottom = pageTop + window.innerHeight,
+          elTop = el.offsetTop,
+          elBottom = elTop + el.offsetHeight;
+      return pageTop < elBottom;
     }
+  }, {
+    key: "translateContent",
+    value: function translateContent(el, distance) {
+      var self = this;
 
-    function parallax() {
-      parallaxables.forEach(function (parallaxable) {
-        var distance = window.scrollY * 0.5;
-        parallaxable.style.transform = "translate3d(0,-".concat(distance, "px, 0)");
+      if (self._state !== '_default') {
+        el.classList.add(self._isSliding);
+      }
+
+      el.style.transform = "translate3d(0,-".concat(distance, "px, 0)");
+    }
+  }, {
+    key: "slideState",
+    value: function slideState() {
+      var self = this;
+
+      function slideThings(container) {
+        var title = container.querySelector("[data-parallax-title=\"".concat(self._id, "\"]")),
+            image = container.querySelector("[data-parallax-image=\"".concat(self._id, "\"]")),
+            feature = container.querySelector("[data-parallax-feature=\"".concat(self._id, "\"]")),
+            header = document.querySelector("[data-parallax-header=\"".concat(self._id, "\"]"));
+
+        if (self._state === '_active') {
+          if (title !== null) {
+            var headerHeight = header.offsetHeight,
+                titleDistance = title.offsetTop + title.offsetHeight + headerHeight;
+            self.translateContent(title, titleDistance);
+          }
+
+          if (image !== null) {
+            var imageDistance = self._imagePad;
+            self.translateContent(image, imageDistance);
+          }
+
+          if (feature !== null) {
+            var featureDistance = feature.offsetTop;
+            self.translateContent(feature, featureDistance);
+          }
+
+          feature.addEventListener('transitionend', function () {
+            self._state = '_done';
+            container.addEventListener('click', function (el) {
+              el.stopPropagation();
+              slideThings(container);
+            });
+          });
+        }
+
+        if (self._state === '_done') {
+          var slideables = [title, image, feature];
+          slideables.forEach(function (el) {
+            self.translateContent(el, 0);
+          });
+          feature.addEventListener('transitionend', function () {
+            self._state = '_default';
+            slideables.forEach(function (el) {
+              el.classList.remove(self._isSliding);
+            });
+          });
+        }
+      }
+
+      self.containers.forEach(function (el) {
+        var trigger = el.querySelector("[data-parallax-title-trigger=\"".concat(self._id, "\"]"));
+
+        if (trigger !== null) {
+          trigger.addEventListener('click', function () {
+            self._state = '_active';
+            slideThings(el);
+          });
+        }
       });
     }
+  }, {
+    key: "defaultState",
+    value: function defaultState() {
+      var self = this;
+      self.images.forEach(function (image) {
+        var container = image.closest("[data-parallax-container=\"".concat(self._id, "\"]"));
+        document.addEventListener('scroll', function () {
+          var distance = window.scrollY * 0.5; // Throttle the scroll event
 
-    runParallaxLoop();
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (parallaxImages);
+          window.requestAnimationFrame(function () {
+            // Enable the parallax only when visible
+            var enableParallax = self.isContentInView(container);
+
+            if (enableParallax && self._state === '_default') {
+              self.translateContent(image, distance);
+            }
+          });
+        });
+      });
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      var self = this;
+
+      if (self.images !== null) {
+        self.defaultState();
+      }
+
+      if (self.containers !== null) {
+        self.slideState();
+      }
+    }
+  }]);
+
+  return parallaxContent;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (parallaxContent);
 
 /***/ }),
 
@@ -385,13 +510,8 @@ var scrollCarousel = /*#__PURE__*/function () {
       });
       self.nextButton.addEventListener('click', function (e) {
         return self.nextSlide(e);
-      });
-      self.slideContainer.addEventListener("mouseover", function (e) {
-        return self.startSlide(e);
-      });
-      self.slideContainer.addEventListener("mouseover", function (e) {
-        return self.stopSlide(e);
-      });
+      }); // self.slideContainer.addEventListener("mouseover", (e) => self.startSlide(e) );
+      // self.slideContainer.addEventListener("mouseover", (e) => self.stopSlide(e) );
     }
   }]);
 
@@ -428,10 +548,23 @@ var scrollChyron = /*#__PURE__*/function () {
     this.chyron = this._id !== null ? document.querySelector("[data-chyron=\"".concat(this._id, "\"]")) : null;
     this._scrollable = true;
     this._paused = false;
+    this._viewable = false;
     this._reset = '_is-resetting';
+    this._interval = 20;
   }
 
   _createClass(scrollChyron, [{
+    key: "isChyronInView",
+    value: function isChyronInView(el) {
+      var self = this;
+      var pageTop = window.scrollY,
+          pageBottom = pageTop + window.innerHeight,
+          elTop = el.offsetTop,
+          elBottom = elTop + el.offsetHeight; // this isn't calculating properly
+
+      return pageTop < elBottom; //return ((pageTop < elTop) && (pageBottom > elBottom));
+    }
+  }, {
     key: "pauseScroll",
     value: function pauseScroll() {
       var self = this;
@@ -446,7 +579,7 @@ var scrollChyron = /*#__PURE__*/function () {
       self.chyron.classList.remove(self._reset);
       self.scrollInterval = setInterval(function () {
         return self.autoScroll();
-      }, 15);
+      }, self._interval);
     }
   }, {
     key: "autoScroll",
@@ -461,7 +594,7 @@ var scrollChyron = /*#__PURE__*/function () {
         return;
       }
 
-      console.log('scrolling...'); // if we've reached the end of the chyron, 
+      console.log('chyron...'); // if we've reached the end of the chyron, 
       // clear the interval, and reset 
 
       if (!self._scrollable) {
@@ -476,15 +609,22 @@ var scrollChyron = /*#__PURE__*/function () {
     value: function init() {
       var self = this;
       window.addEventListener('load', function () {
-        self.chyron.addEventListener("mouseover", function () {
+        self.chyron.addEventListener('mouseover', function () {
           return self.pauseScroll();
         });
-        self.chyron.addEventListener("mouseout", function () {
+        self.chyron.addEventListener('mouseout', function () {
           return self.pauseScroll();
         });
+        var chyron = self.chyron; // let view = self.isChyronInView(chyron);
+
         self.scrollInterval = setInterval(function () {
           return self.autoScroll();
-        }, 15);
+        }, self._interval); // document.addEventListener('scroll', function() {
+        //     self._viewable = self.isChyronInView(self.chyron);
+        //     // Throttle, and scroll chyron only when visible
+        //     window.requestAnimationFrame(function() {
+        //     });
+        // });
       });
     }
   }]);
@@ -759,14 +899,16 @@ var tabbedContent = {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_appState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/appState */ "./src/scripts/utils/appState.js");
-/* harmony import */ var _components_tabbedContent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/tabbedContent */ "./src/scripts/components/tabbedContent.js");
-/* harmony import */ var _components_accordionMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/accordionMenu */ "./src/scripts/components/accordionMenu.js");
-/* harmony import */ var _components_flyoutContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/flyoutContent */ "./src/scripts/components/flyoutContent.js");
-/* harmony import */ var _components_dialogContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/dialogContent */ "./src/scripts/components/dialogContent.js");
-/* harmony import */ var _components_parallaxImages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/parallaxImages */ "./src/scripts/components/parallaxImages.js");
-/* harmony import */ var _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/scrollCarousel */ "./src/scripts/components/scrollCarousel.js");
-/* harmony import */ var _components_scrollChyron__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/scrollChyron */ "./src/scripts/components/scrollChyron.js");
+/* harmony import */ var _utils_appForms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/appForms */ "./src/scripts/utils/appForms.js");
+/* harmony import */ var _components_tabbedContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/tabbedContent */ "./src/scripts/components/tabbedContent.js");
+/* harmony import */ var _components_accordionMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/accordionMenu */ "./src/scripts/components/accordionMenu.js");
+/* harmony import */ var _components_flyoutContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/flyoutContent */ "./src/scripts/components/flyoutContent.js");
+/* harmony import */ var _components_dialogContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/dialogContent */ "./src/scripts/components/dialogContent.js");
+/* harmony import */ var _components_parallaxContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/parallaxContent */ "./src/scripts/components/parallaxContent.js");
+/* harmony import */ var _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/scrollCarousel */ "./src/scripts/components/scrollCarousel.js");
+/* harmony import */ var _components_scrollChyron__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/scrollChyron */ "./src/scripts/components/scrollChyron.js");
 // Import local dependencies
+
 
 
 
@@ -776,27 +918,35 @@ __webpack_require__.r(__webpack_exports__);
 
  // Inits
 
-_utils_appState__WEBPACK_IMPORTED_MODULE_0__["default"].init(); // Components
+_utils_appState__WEBPACK_IMPORTED_MODULE_0__["default"].init();
+_utils_appForms__WEBPACK_IMPORTED_MODULE_1__["default"].init(); // Components
 
-_components_accordionMenu__WEBPACK_IMPORTED_MODULE_2__["default"].init();
-_components_flyoutContent__WEBPACK_IMPORTED_MODULE_3__["default"].init('nav');
-_components_dialogContent__WEBPACK_IMPORTED_MODULE_4__["default"].init({
+_components_accordionMenu__WEBPACK_IMPORTED_MODULE_3__["default"].init();
+_components_flyoutContent__WEBPACK_IMPORTED_MODULE_4__["default"].init('nav');
+_components_dialogContent__WEBPACK_IMPORTED_MODULE_5__["default"].init({
   id: 'resultsFilter',
   gallery: false
 });
-_components_dialogContent__WEBPACK_IMPORTED_MODULE_4__["default"].init({
+_components_dialogContent__WEBPACK_IMPORTED_MODULE_5__["default"].init({
   id: 'artModal',
   gallery: true
 });
 
 if (document.querySelectorAll('[role="tablist"]').length > 0) {
-  _components_tabbedContent__WEBPACK_IMPORTED_MODULE_1__["default"].init();
+  _components_tabbedContent__WEBPACK_IMPORTED_MODULE_2__["default"].init();
 } // Homepage Parallax
 
 
-_components_parallaxImages__WEBPACK_IMPORTED_MODULE_5__["default"].init(); // Homepage Carousels:
+var homepageCover = new _components_parallaxContent__WEBPACK_IMPORTED_MODULE_6__["default"]({
+  _id: 'cover'
+});
 
-var peopleCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_6__["default"]({
+if (homepageCover.images !== null || homepageCover.titles !== null) {
+  homepageCover.init();
+} // Homepage Carousels:
+
+
+var peopleCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_7__["default"]({
   _id: 'people'
 });
 
@@ -804,7 +954,7 @@ if (peopleCarousel.carousel !== null) {
   peopleCarousel.init();
 }
 
-var eventsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_6__["default"]({
+var eventsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_7__["default"]({
   _id: 'events'
 });
 
@@ -812,7 +962,7 @@ if (eventsCarousel.carousel !== null) {
   eventsCarousel.init();
 }
 
-var newsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_6__["default"]({
+var newsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_7__["default"]({
   _id: 'news'
 });
 
@@ -821,13 +971,60 @@ if (newsCarousel.carousel !== null) {
 } // Chyron
 
 
-var footerChyron = new _components_scrollChyron__WEBPACK_IMPORTED_MODULE_7__["default"]({
+var footerChyron = new _components_scrollChyron__WEBPACK_IMPORTED_MODULE_8__["default"]({
   _id: 'footer'
 });
 
 if (footerChyron.chyron !== null) {
   footerChyron.init();
 }
+
+/***/ }),
+
+/***/ "./src/scripts/utils/appForms.js":
+/*!***************************************!*\
+  !*** ./src/scripts/utils/appForms.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// appForms
+var appForms = {
+  fields: null,
+  init: function init() {
+    var fields = document.querySelectorAll("[data-global-field]");
+    var _value = '_has-value';
+    fields.forEach(function (el) {
+      if (el.dataset.globalField === 'input') {
+        el.addEventListener('keyup', function (e) {
+          var inputValue = e.target.value;
+
+          if (inputValue !== '') {
+            e.target.classList.add(_value);
+          } else {
+            e.target.classList.remove(_value);
+          }
+        });
+      }
+
+      if (el.dataset.globalField === 'select') {
+        el.addEventListener('change', function (e) {
+          var inputValue = e.target.value;
+
+          if (inputValue !== '') {
+            e.target.classList.add(_value);
+          } else {
+            e.target.classList.remove(_value);
+          }
+        });
+      }
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (appForms);
 
 /***/ }),
 

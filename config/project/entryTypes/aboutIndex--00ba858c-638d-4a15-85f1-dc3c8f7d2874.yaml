@@ -132,6 +132,15 @@ fieldLayouts:
       -
         elements:
           -
+            fieldUid: 539c4bcb-5095-490d-81b8-872d3745551f # Card Image
+            instructions: 'Add an image of a map to aid in directions (Min size: 640px x 640px).'
+            label: 'Visit Image'
+            required: ''
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
             fieldUid: 0d4ed8f4-2f3b-4320-89ac-8225fbc867d3 # Directions
             instructions: null
             label: null

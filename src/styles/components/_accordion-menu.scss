@@ -25,10 +25,11 @@
             @include flexParent();
             @include alignItems(center);
             border-top: $border-size solid transparent;
-            padding: 1em;
+            padding: 2em 0;
             width: 100%;
             outline: none;
             background: none;
+            font-size: 1rem;
             text-align: left;
 
             &::-moz-focus-inner {
@@ -70,7 +71,7 @@
         }
 
         &-panel {
-            padding: 1em;
+       
             /* Edge bug - still relevant? */
             &[hidden] {
                 display: none;
@@ -80,7 +81,7 @@
     }
 
     @if $default != false {
-		@include menuAccordion--default($selector);
+		@include accordionMenu--default($selector);
 	}
 
 }
