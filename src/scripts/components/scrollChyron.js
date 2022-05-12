@@ -28,16 +28,6 @@ class scrollChyron {
             bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
             bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
-
-        // let pageTop    = window.scrollY,
-        //     pageBottom = pageTop + window.innerHeight,
-        //     elTop      = el.offsetTop,
-        //     elBottom   = elTop + el.offsetHeight;
-
-        // this isn't calculating properly
-        // return ( pageTop < elBottom );
-
-        //return ((pageTop < elTop) && (pageBottom > elBottom));
        
     }
 
