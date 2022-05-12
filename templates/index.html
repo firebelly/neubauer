@@ -8,11 +8,14 @@
 {% import 'macros/_carousels' as carousels %}
 
 {% block content %}
+
+{# Opener Image #}
 {% set openerImage = entry.homepageCover is not null and entry.homepageCover|length > 0 ? entry.homepageCover.one() : null %}
 {% set openerSizes = utils.getAssetSizes('homepage','opener')|json_decode %}
 {% set resizedOpenerImage = assets.assetSrc(openerImage,openerSizes) %}
 {% set openerSrc = resizedOpenerImage %}
 
+{# Opener Text #}
 {% set openerTagline = entry.openerTagline is not null ? entry.openerTagline : null %}
 {% set openerPrompt = entry.openerPrompt is not null ? entry.openerPrompt : null %}
 
@@ -118,13 +121,14 @@
 
 </section>
 
-{# <section class="homepageExplore">
+<section class="homepageExplore">
     {% set featureSet = [
         featureEntries['researchIndex']['features']['primary'],
         featureEntries['exhibitionsIndex']['features']['primary'],
         featureEntries['researchIndex']['features']['secondary'],
         featureEntries['exhibitionsIndex']['features']['secondary']
     ]%}
+    
     {% set featureSlideObj = {
         'cardName': 'homepageFeatures',
         'variant': 'features',
@@ -133,7 +137,7 @@
         'scrollable': true
     }%}
     {{ carousels.featureCarousel('homepageCarousel',featureSlideObj) }}
-</section> #}
+</section>
 
 {% for tab in entry.getFieldLayout().getTabs() if tab.name|slugify != 'opener' %}
 {% set tabName, tabSlug = tab.name, tab.name|slugify %}

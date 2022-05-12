@@ -437,33 +437,49 @@
 {% set cardImage = cardEntry.cardImage is not null and cardEntry.cardImage|length > 0 ? cardEntry.cardImage : null %}
 {% set imageUrl, dominantColor = null, null %}
 {% if cardImage %}
-{% set imageObj = cardImage.one() %}
+{% set imageObj = cardImage %}
 {% set dominantColor = craft.imager.getDominantColor(imageObj) %}
-{% set imageEffects = { grayscale: true, gamma: 1.5 } %}
-{% set imageUrl = assets.applyEffects(imageObj,imageEffects) %}
+{% set dynamicColor = false %}
+{# {% set imageEffects = { grayscale: true, gamma: 1.5 } %} #}
+{# {% set imageEffects = { gamma: 1.5 } %}
+{% set imageUrl = assets.applyEffects(imageObj,imageEffects) %} #}
+{% set featureSizes = cardObj is not null and 'assetSizes' in cardObj|keys ? cardObj['assetSizes']|json_decode : null %}
 {% endif %}
 <article 
     class="{{ cardName }}{% if cardVariant %} {{ cardName }}--{{ cardVariant }}{% endif %}"
-    data-color="{% if dominantColor %}{{ dominantColor }}{% endif %}"
+    {% if dominantColor and dynamicColor %}
+    data-color-test="{{ dominantColor }}"
+    {% endif %}
     {% if cardAttrs %}
     {% for attr,val in cardAttrs %}
     {{ attr }}="{{ val }}"
     {% endfor %}
+    {% endif %}>
+
+    {% if imageObj %}
+    <div class="{{ cardName }}-overlay">{# color overlay #}</div>
+    <picture class="{{ cardName }}-asset">
+        {{ assets.assetCard("#{cardName}-asset",imageObj,featureSizes) }} 
+    </picture>
     {% endif %}
-    {% if imageUrl %}style='background-image: url({{imageUrl}});'{% endif %}>
-    <h4 class="{{ cardName }}-label">{{ cardLabel }}</h4>
-    <h5 class="{{ cardName }}-title">{{ cardTitle }}</h5>
-    {% for item in spotlights if item.type == 'question' %}
-    <div class="{{ cardName }}-question">{{ item.body }}</div>
-    {% endfor %}
-    <a 
-        class="{{ cardName }}-action {{ cardName }}-action--ghost"
-        href="{{ siteUrl }}/{{ cardEntry.uri }}">
-        <span class="{{ cardName }}-action-label">Learn More</span>
-        <svg 
-            class="{{ cardName }}-action-icon">
-            <use xlink:href="{{ alias('@assetBasePath' ~ arrowRightPath) }}"></use>
-        </svg> 
-    </a>
+
+    <div class="{{ cardName }}-content">
+        <h4 class="{{ cardName }}-label">{{ cardLabel }}</h4>
+        <h5 class="{{ cardName }}-title">
+            <a href="{{ siteUrl }}/{{ cardEntry.uri }}">{{ cardTitle }}</a>
+        </h5>
+        {% for item in spotlights if item.type == 'question' %}
+        <div class="{{ cardName }}-question">{{ item.body }}</div>
+        {% endfor %}
+        <a 
+            class="{{ cardName }}-action {{ cardName }}-action--ghost"
+            href="{{ siteUrl }}/{{ cardEntry.uri }}">
+            <span class="{{ cardName }}-action-label">Learn More</span>
+            <svg 
+                class="{{ cardName }}-action-icon">
+                <use xlink:href="{{ alias('@assetBasePath' ~ arrowRightPath) }}"></use>
+            </svg> 
+        </a>
+    </div>
 </article>
 {% endmacro %}

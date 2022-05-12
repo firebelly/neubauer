@@ -653,13 +653,23 @@
 @mixin cardMiniFeature($selector,$color-primary:null,$color-secondary:null,$default:true,$theme:false) {
 
     #{$selector} {
-        height: 100%;
-        padding: 4em 16em 4em 4em;
+        //height: 100%;
+        padding: 0.5em;
+
+        @include breakpoint(sm) {
+            padding: 4em 16em 4em 4em;
+        }
 
         &-label {
-            $mb: math.div(20,16);
+            $mb: math.div(10,16);
             @include getType('caption');
             margin-bottom: #{$mb}em;
+
+            @include breakpoint(sm) {
+                $mb: math.div(20,16);
+                margin-bottom: #{$mb}em;
+            }
+
         }
         
         &-title {
@@ -678,6 +688,7 @@
                 @include actionButton(#{$action},getColor('black'),getColor('green',20));
             }
             margin: 4em 0 0 0;
+
         }
 
     }

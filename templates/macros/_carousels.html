@@ -112,6 +112,7 @@
 #}
 {% macro featureCarousel(carouselName,slideObj) %}
 {% import 'macros/_cards' as cards %}
+{% import 'macros/_utils' as utils %}
 {% set carouselVariant = slideObj.variant is not null ? slideObj.variant : null %}
 {% set slides = slideObj.slides is not null ? slideObj.slides : [] %}
 {% set slideCount = slides|length %}
@@ -157,13 +158,15 @@
 			
 			{% set cardName = slideObj.cardName is not null ? slideObj.cardName : '' %}
 			{% set cardObj = 'cardObj' in slideObj|keys ? slideObj.cardObj : {} %}
+			{% set featureSizes = utils.getAssetSizes('homepage','feature') %}
 			{% for slide in slides %}
 			{% set cardObj = cardObj|merge({
 				'attrs': {
 					'role': 'group',
 					'aria-label': "slide #{loop.index} of #{slideCount}",
 					'data-carousel-item': ''
-				}
+				},
+				'assetSizes': featureSizes
 			}) %}
 			{{ cards.cardMiniFeature(cardName,slide,cardObj) }}
 			{% endfor %}

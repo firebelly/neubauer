@@ -2434,6 +2434,8 @@ img {
   Primary Content
 ------------------------------------------------------------------------ */
 .primaryContent {
+  position: relative;
+  z-index: 1;
   padding: 2em 0 0 0;
 }
 .primaryContent--homepage {
@@ -6427,12 +6429,21 @@ img {
 }
 
 .homepageFeatures {
-  height: 100%;
-  padding: 4em 16em 4em 4em;
+  padding: 0.5em;
+}
+@media (min-width: 768px) {
+  .homepageFeatures {
+    padding: 4em 16em 4em 4em;
+  }
 }
 .homepageFeatures-label {
   font: normal 1.6em/1.56 "apercu", sans-serif;
-  margin-bottom: 1.25em;
+  margin-bottom: 0.625em;
+}
+@media (min-width: 768px) {
+  .homepageFeatures-label {
+    margin-bottom: 1.25em;
+  }
 }
 .homepageFeatures-title {
   font: normal 2.8em/1.25 "apercu", sans-serif;
@@ -6670,8 +6681,197 @@ img {
   color: #000000;
 }
 
+.homepageExplore {
+  position: relative;
+  top: 1em;
+}
+
 .homepageFeatures {
   z-index: 10;
+  background: #FFFFFF;
+}
+.homepageFeatures:nth-child(1) {
+  background: #FF9F99;
+}
+.homepageFeatures:nth-child(1) .homepageFeatures-label,
+.homepageFeatures:nth-child(1) .homepageFeatures-title,
+.homepageFeatures:nth-child(1) .homepageFeatures-title a,
+.homepageFeatures:nth-child(1) .homepageFeatures-question {
+  color: #330805;
+}
+.homepageFeatures:nth-child(2) {
+  background: #E5B760;
+}
+.homepageFeatures:nth-child(2) .homepageFeatures-label,
+.homepageFeatures:nth-child(2) .homepageFeatures-title,
+.homepageFeatures:nth-child(2) .homepageFeatures-title a,
+.homepageFeatures:nth-child(2) .homepageFeatures-question {
+  color: #1A150D;
+}
+.homepageFeatures:nth-child(3) {
+  background: #DED8CC;
+}
+.homepageFeatures:nth-child(3) .homepageFeatures-label,
+.homepageFeatures:nth-child(3) .homepageFeatures-title,
+.homepageFeatures:nth-child(3) .homepageFeatures-title a,
+.homepageFeatures:nth-child(3) .homepageFeatures-question {
+  color: #4D3608;
+}
+.homepageFeatures:nth-child(4) {
+  background: #1E1E1E;
+}
+.homepageFeatures:nth-child(4) .homepageFeatures-label,
+.homepageFeatures:nth-child(4) .homepageFeatures-title,
+.homepageFeatures:nth-child(4) .homepageFeatures-title a,
+.homepageFeatures:nth-child(4) .homepageFeatures-question {
+  color: #FFFFFF;
+}
+.homepageFeatures:nth-child(5) {
+  background: #FFFFFF;
+}
+.homepageFeatures:nth-child(5) .homepageFeatures-label,
+.homepageFeatures:nth-child(5) .homepageFeatures-title,
+.homepageFeatures:nth-child(5) .homepageFeatures-title a,
+.homepageFeatures:nth-child(5) .homepageFeatures-question {
+  color: #151515;
+}
+.homepageFeatures-title a:link,
+.homepageFeatures-title a:visited,
+.homepageFeatures-title a:active {
+  text-decoration: none;
+}
+.homepageFeatures-title a:hover {
+  text-decoration: underline;
+}
+.homepageFeatures-content {
+  padding: 2em 2em 4em 2em;
+  position: relative;
+  z-index: 2;
+}
+.homepageFeatures:nth-child(1) .homepageFeatures-action {
+  border-color: #330805;
+}
+.homepageFeatures:nth-child(1) .homepageFeatures-action-label {
+  color: #330805;
+}
+.homepageFeatures:nth-child(1) .homepageFeatures-action-icon {
+  fill: #330805;
+}
+.homepageFeatures:nth-child(1) .homepageFeatures-action:hover-label {
+  color: #FFFFFF;
+}
+.homepageFeatures:nth-child(1) .homepageFeatures-action:hover-icon {
+  fill: #FFFFFF;
+}
+.homepageFeatures:nth-child(2) .homepageFeatures-action {
+  border-color: #1A150D;
+}
+.homepageFeatures:nth-child(2) .homepageFeatures-action-label {
+  color: #1A150D;
+}
+.homepageFeatures:nth-child(2) .homepageFeatures-action-icon {
+  fill: #1A150D;
+}
+.homepageFeatures:nth-child(2) .homepageFeatures-action:hover-label {
+  color: #FFFFFF;
+}
+.homepageFeatures:nth-child(2) .homepageFeatures-action:hover-icon {
+  fill: #FFFFFF;
+}
+.homepageFeatures:nth-child(3) .homepageFeatures-action {
+  border-color: #4D3608;
+}
+.homepageFeatures:nth-child(3) .homepageFeatures-action-label {
+  color: #4D3608;
+}
+.homepageFeatures:nth-child(3) .homepageFeatures-action-icon {
+  fill: #4D3608;
+}
+.homepageFeatures:nth-child(3) .homepageFeatures-action:hover-label {
+  color: #FFFFFF;
+}
+.homepageFeatures:nth-child(3) .homepageFeatures-action:hover-icon {
+  fill: #FFFFFF;
+}
+.homepageFeatures:nth-child(4) .homepageFeatures-action {
+  border-color: #FFFFFF;
+}
+.homepageFeatures:nth-child(4) .homepageFeatures-action-label {
+  color: #FFFFFF;
+}
+.homepageFeatures:nth-child(4) .homepageFeatures-action-icon {
+  fill: #FFFFFF;
+}
+.homepageFeatures:nth-child(4) .homepageFeatures-action:hover-label {
+  color: #FFFFFF;
+}
+.homepageFeatures:nth-child(4) .homepageFeatures-action:hover-icon {
+  fill: #FFFFFF;
+}
+.homepageFeatures:nth-child(5) .homepageFeatures-action {
+  border-color: #151515;
+}
+.homepageFeatures:nth-child(5) .homepageFeatures-action-label {
+  color: #151515;
+}
+.homepageFeatures:nth-child(5) .homepageFeatures-action-icon {
+  fill: #151515;
+}
+.homepageFeatures:nth-child(5) .homepageFeatures-action:hover-label {
+  color: #FFFFFF;
+}
+.homepageFeatures:nth-child(5) .homepageFeatures-action:hover-icon {
+  fill: #FFFFFF;
+}
+@media (min-width: 768px) {
+  .homepageFeatures-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 2;
+    width: 100%;
+    opacity: 0.8;
+  }
+  .homepageFeatures:nth-child(1) .homepageFeatures-overlay {
+    background: #FF9F99;
+  }
+  .homepageFeatures:nth-child(2) .homepageFeatures-overlay {
+    background: #E5B760;
+  }
+  .homepageFeatures:nth-child(3) .homepageFeatures-overlay {
+    background: #DED8CC;
+  }
+  .homepageFeatures:nth-child(4) .homepageFeatures-overlay {
+    background: #1E1E1E;
+  }
+  .homepageFeatures:nth-child(5) .homepageFeatures-overlay {
+    background: #FFFFFF;
+  }
+}
+@media (min-width: 768px) {
+  .homepageFeatures-asset {
+    bottom: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .homepageFeatures-asset-image {
+    -o-object-fit: cover;
+       object-fit: cover;
+    height: 100%;
+    width: 100%;
+    filter: blur(15px);
+    transition: filter 2s ease-in-out;
+  }
+  .homepageFeatures:hover .homepageFeatures-asset-image {
+    filter: blur(5px);
+    transition: filter 2s ease-in-out;
+  }
 }
 
 .homepageCarousel--features {

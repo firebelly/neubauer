@@ -141,6 +141,7 @@
 
 }
 
+// TODO: rename this
 .homepageFeature {
 	$feature: &;
 	@include flexParent($display:flex,$values:row nowrap);
@@ -298,8 +299,141 @@
 @include cardCarousel('.newsSlide',getColor('red'),getColor('red',10));
 @include cardMiniFeature('.homepageFeatures',getColor('black'));
 
+.homepageExplore {
+	// eh, some calculation is off 
+	// and this covers an exposed sliver
+	position: relative;
+	top: 1em;
+}
+
 .homepageFeatures {
+	$features: &;
 	z-index: 10;	
+	background: getColor('white');
+
+	// height: 640px;
+	// width: 265px;
+
+	$feature-colors: (
+		(#FF9F99,#330805),
+		(#E5B760, #1A150D),
+		(#DED8CC, #4D3608),
+		(#1E1E1E, #FFFFFF),
+		(#FFFFFF, #151515)
+	);
+
+	@for $i from 1 through 5 {
+
+		&:nth-child(#{$i}) {
+			background: nth(nth($feature-colors,$i),1);
+			
+			#{$features}-label,
+			#{$features}-title,
+			#{$features}-title a,
+			#{$features}-question {
+				color: nth(nth($feature-colors,$i),2);
+			}
+		}
+
+	}
+
+	&-title {
+
+		a:link,
+		a:visited,
+		a:active {
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&-content {
+		padding: 2em 2em 4em 2em;
+		position: relative;
+		z-index: 2;
+	}
+
+	&-action {
+
+		@for $i from 1 through 5 {
+
+			#{$features}:nth-child(#{$i}) & {
+				$color: nth(nth($feature-colors,$i),2);
+				border-color: $color;
+				
+				&-label {
+					color: $color;
+				}
+				&-icon {
+					fill: $color;
+				}
+			}
+
+			#{$features}:nth-child(#{$i}) &:hover {
+				&-label {
+					color: getColor('white');
+				}
+				&-icon {
+					fill: getColor('white');
+				}
+			}
+
+		}
+	}
+
+	// Overlay Treatment
+	&-overlay {
+		@include breakpoint(sm) {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			z-index: 2;
+			width: 100%;
+			opacity: 0.8;
+
+			@for $i from 1 through 5 {
+
+				#{$features}:nth-child(#{$i}) & {
+					$bg: nth(nth($feature-colors,$i),1);
+					background: $bg;
+				}
+			}
+		}
+	}
+
+	&-asset {
+
+		@include breakpoint(sm) {
+			bottom: 0;
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			left: 0;
+			top: 0;
+			z-index: 1;
+			overflow: hidden;
+
+			&-image {
+				object-fit: cover;
+				height: 100%;
+				width: 100%;
+				filter: blur(15px);
+				transition: filter 2s ease-in-out;
+
+				#{$features}:hover & {
+					filter: blur(5px);
+					transition: filter 2s ease-in-out;
+				}
+			}
+
+		}
+
+	}
+
 }
 
 .homepageCarousel {
