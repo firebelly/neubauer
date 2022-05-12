@@ -358,6 +358,10 @@
 
 	&-action {
 
+		&--call {
+			margin-right: 0;
+		}
+
 		@for $i from 1 through 5 {
 
 			#{$features}:nth-child(#{$i}) & {

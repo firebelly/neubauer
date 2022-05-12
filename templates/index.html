@@ -25,7 +25,9 @@
 
 {# Features #}
 {% set keyFeature = entry.homepageProjectFeature is not null and entry.homepageProjectFeature|length > 0 ? entry.homepageProjectFeature.one() : null %}
-    
+{% set featureSet = entry.homepageFeatureCards is not null and entry.homepageFeatureCards|length > 0 ? entry.homepageFeatureCards.all() : null %}    
+
+{# NOTE: previously method of returning features -- by pulling directly for index features
 {% set projectFeature, exFeature = null, null %}
 {% set featureEntries = {
     'researchIndex': {
@@ -37,12 +39,13 @@
         'fields': ['featuredExhibition','secondaryFeaturedExhibition']
     }
 }%}
+#}
 
+{#
 {% for key, obj in featureEntries %}
     {% set slug, primary, secondary = obj.slug, obj.fields[0], obj.fields[1] %}
     {% set indexQuery = craft.entries.section(key).one() %}
     {% set randomQuery = craft.entries.section(slug).order('RAND()').limit(10) %}
-    {# avoid redundancy by excluding ids #}
     {% set feature1 = indexQuery[primary]|length > 0 ? indexQuery[primary].one() : null %}
     {% set feature2 = indexQuery[secondary]|length > 0 ? indexQuery[secondary].one() : null %}
     
@@ -58,7 +61,7 @@
         }
     }%}
     {% set featureEntries = featureEntries|merge({ (key): featureObj }) %}
-{% endfor %}
+{% endfor %} #}
 
 <section 
     class="homepageCover" 
@@ -122,13 +125,16 @@
 </section>
 
 <section class="homepageExplore">
-    {% set featureSet = [
+    {# {% set featureSet = [
         featureEntries['researchIndex']['features']['primary'],
         featureEntries['exhibitionsIndex']['features']['primary'],
         featureEntries['researchIndex']['features']['secondary'],
         featureEntries['exhibitionsIndex']['features']['secondary']
-    ]%}
-    
+    ]%} #}
+    {% set featureCall = entry.homepageCallToActionCard is not null and entry.homepageCallToActionCard.prompt != '' and entry.homepageCallToActionCard.action != '' ? entry.homepageCallToActionCard : null %}
+    {% if featureCall %}
+    {% set featurePrompt, featureAction = entry['homepageCallToActionCard']['prompt'], entry['homepageCallToActionCard']['action'] %}
+    {% endif %}
     {% set featureSlideObj = {
         'cardName': 'homepageFeatures',
         'variant': 'features',
@@ -136,10 +142,19 @@
         'group': 2,
         'scrollable': true
     }%}
+    {% if featureCall %}
+    {% set featureSlideObj = featureSlideObj|merge({
+        'cardCall': {
+            'prompt': featurePrompt,
+            'action': featureAction
+        }
+    })%}
+    {% endif %}
     {{ carousels.featureCarousel('homepageCarousel',featureSlideObj) }}
 </section>
 
-{% for tab in entry.getFieldLayout().getTabs() if tab.name|slugify != 'opener' %}
+{% set excludeTabs = ['opener','features'] %}
+{% for tab in entry.getFieldLayout().getTabs() if tab.name|slugify not in excludeTabs  %}
 {% set tabName, tabSlug = tab.name, tab.name|slugify %}
 {% set tabTitle, tabOpener = "#{tabSlug}Title", "#{tabSlug}Opener" %}
 {% set tabIndex = tabSlug == 'news' ? 'news': "#{tabSlug}Index" %}

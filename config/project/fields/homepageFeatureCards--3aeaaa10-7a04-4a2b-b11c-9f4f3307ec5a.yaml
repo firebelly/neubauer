@@ -1,18 +1,19 @@
 columnSuffix: null
 contentColumnType: string
 fieldGroup: d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d # Homepage
-handle: homepageProjectFeature
-instructions: 'Add a project to feature on the homepage. Hint: This is the feature that slides into view when the user clicks the arrow within the cover image.'
-name: 'Opener Project Feature'
+handle: homepageFeatureCards
+instructions: 'Select up to 4 projects and/or exhibitions to feature in the homepage card carousel. Rearrange by drag & drop. '
+name: 'Homepage Feature Cards'
 searchable: true
 settings:
   allowSelfRelations: false
-  limit: '1'
+  limit: '4'
   localizeRelations: false
-  selectionLabel: ''
+  selectionLabel: 'Add a project or exhibition'
   showSiteMenu: true
   source: null
   sources:
+    - 'section:01aee8f9-1a88-4c82-b1ae-372cd5805db7' # Exhibitions
     - 'section:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects
   targetSiteId: null
   validateRelatedElements: false

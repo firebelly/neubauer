@@ -118,6 +118,7 @@
 {% set slideCount = slides|length %}
 {% set slideGroup = slideObj.group is not null ? slideObj.group : 3 %}
 {% set isScrollable = slideObj.scrollable is not null ? slideObj.scrollable : false %}
+{% set cardCall = slideObj.cardCall is not null ? slideObj.cardCall : null %}
 {% set arrowLeftPath = "/spritemap.svg#icon-arrow-left-20" %}
 {% set arrowRightPath = "/spritemap.svg#icon-arrow-right-20" %}
 {% set dotEmptyPath = "/spritemap.svg#icon-dot-empty" %}
@@ -170,6 +171,25 @@
 			}) %}
 			{{ cards.cardMiniFeature(cardName,slide,cardObj) }}
 			{% endfor %}
+
+			{% if cardCall %}
+			{% set prompt = slideObj.cardCall.prompt %}
+			{% set action = slideObj.cardCall.action %}
+			<div class="{{ cardName }} {{ cardName }}--call">
+				<div class="{{ cardName }}-wrap">
+					<h3 class="{{ cardName }}-title {{ cardName }}-title--call">{{ prompt }}</h3>
+					<a 
+						class="{{ cardName }}-action {{ cardName }}-action--link {{ cardName }}-action--call"
+						href="{{ siteUrl }}">
+						<span class="{{ cardName }}-action-label">{{ action }}</span>
+						<svg class="{{ cardName }}-action-icon">
+							<use xlink:href="{{ alias('@assetBasePath' ~ arrowRightPath) }}"></use>
+						</svg>
+					</a>
+				</div>
+			</div>
+			{% endif %}
+
 		</div>
 	</div>
   

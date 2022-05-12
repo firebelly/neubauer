@@ -1,0 +1,36 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: d718eb8e-8ecf-4c2a-ad3e-4e289eaebb2d # Homepage
+handle: homepageCallToActionCard
+instructions: 'Action labels for the final card in slider'
+name: 'Homepage Call-to-Action Card'
+searchable: false
+settings:
+  columns:
+    __assoc__:
+      -
+        - 2b2fd15a-7756-4bfb-aa5b-32060728e2c9 # Large Prompt
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+      -
+        - 9975ee29-08bc-4983-bc8e-02db8da51be6 # Link Label
+        -
+          __assoc__:
+            -
+              - width
+              - ''
+  contentTable: '{{%stc_homepagecalltoactioncard}}'
+  fieldLayout: table
+  maxRows: '1'
+  minRows: ''
+  placeholderKey: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: ''
+  staticField: ''
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

@@ -54,7 +54,7 @@ fieldLayouts:
             warning: null
             width: 100
           -
-            fieldUid: 66c07cbf-bdb2-49e6-978c-264ef2f2733c # Homepage Project Feature
+            fieldUid: 66c07cbf-bdb2-49e6-978c-264ef2f2733c # Opener Project Feature
             instructions: null
             label: null
             required: false
@@ -64,6 +64,28 @@ fieldLayouts:
             width: 100
         name: Opener
         sortOrder: 1
+      -
+        elements:
+          -
+            fieldUid: 3aeaaa10-7a04-4a2b-b11c-9f4f3307ec5a # Homepage Feature Cards
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+          -
+            fieldUid: defc87c9-3343-4b2a-8ff3-5d66200d13ab # Homepage Call-to-Action Card
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            warning: null
+            width: 100
+        name: Features
+        sortOrder: 2
       -
         elements:
           -
@@ -94,7 +116,7 @@ fieldLayouts:
             warning: null
             width: 100
         name: People
-        sortOrder: 2
+        sortOrder: 3
       -
         elements:
           -
@@ -125,7 +147,7 @@ fieldLayouts:
             warning: null
             width: 100
         name: Events
-        sortOrder: 3
+        sortOrder: 4
       -
         elements:
           -
@@ -156,7 +178,7 @@ fieldLayouts:
             warning: null
             width: 100
         name: News
-        sortOrder: 4
+        sortOrder: 5
 handle: homepage
 hasTitleField: false
 name: Homepage
