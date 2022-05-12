@@ -24,6 +24,10 @@
 		padding-bottom: 16em;
 	}
 
+	&--about {
+		@include justifyContent(flex-end);
+	}
+
 	> * {
 		@include flexChild(0 1 50%);
 	}
@@ -124,6 +128,7 @@
 	}
 
 	&-menu {
+		$menu: &;
 		@include flexParent();
 		@include justifyContent(center);
 		scroll-behavior: smooth; // todo
@@ -133,10 +138,19 @@
 			@include alignItems(end);
 		}
 
+		&--about {
+			display: block;
+		}
+
 		&-item {
 			@include flexChild(0 1 auto);
 			@include getType('action');
 			margin: 0 2em;
+
+			#{$menu}--about & {
+				$mb: math.div(20,12);
+				margin: 0 0 #{$mb}em 0;
+			}
 
 			a:link,
             a:visited,
@@ -151,12 +165,20 @@
 					color: getColor('green',30);
 				}
 
-				#{$parent}--about & {
-					color: getColor('red');
+				// ew
+				#{$parent}--people &,
+				#{$parent}--projects & {
+					text-decoration: none;
 				}
 
-				text-decoration: none;
             }
+		}
+
+		&-action {
+			$action: &;
+			@at-root {
+				@include actionButton(#{$action},getColor('red'),getColor('red',10));
+			}
 		}
 
 	}

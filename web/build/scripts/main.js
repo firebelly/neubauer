@@ -562,12 +562,14 @@ var scrollChyron = /*#__PURE__*/function () {
     key: "isChyronInView",
     value: function isChyronInView(el) {
       var self = this;
-      var pageTop = window.scrollY,
-          pageBottom = pageTop + window.innerHeight,
-          elTop = el.offsetTop,
-          elBottom = elTop + el.offsetHeight; // this isn't calculating properly
-
-      return pageTop < elBottom; //return ((pageTop < elTop) && (pageBottom > elBottom));
+      var bounding = el.getBoundingClientRect();
+      return bounding.top >= 0 && bounding.left >= 0 && bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) && bounding.right <= (window.innerWidth || document.documentElement.clientWidth); // let pageTop    = window.scrollY,
+      //     pageBottom = pageTop + window.innerHeight,
+      //     elTop      = el.offsetTop,
+      //     elBottom   = elTop + el.offsetHeight;
+      // this isn't calculating properly
+      // return ( pageTop < elBottom );
+      //return ((pageTop < elTop) && (pageBottom > elBottom));
     }
   }, {
     key: "pauseScroll",
@@ -619,17 +621,16 @@ var scrollChyron = /*#__PURE__*/function () {
         });
         self.chyron.addEventListener('mouseout', function () {
           return self.pauseScroll();
-        });
-        var chyron = self.chyron; // let view = self.isChyronInView(chyron);
+        }); // Only play chyron when in view
 
+        self._paused = self.isChyronInView(self.chyron) ? false : true;
         self.scrollInterval = setInterval(function () {
           return self.autoScroll();
-        }, self._interval); // document.addEventListener('scroll', function() {
-        //     self._viewable = self.isChyronInView(self.chyron);
-        //     // Throttle, and scroll chyron only when visible
-        //     window.requestAnimationFrame(function() {
-        //     });
-        // });
+        }, self._interval);
+        document.addEventListener('scroll', function () {
+          // Only play chyron when in view
+          self._paused = self.isChyronInView(self.chyron) ? false : true;
+        });
       });
     }
   }]);

@@ -20,13 +20,22 @@ class scrollChyron {
 
         let self = this;
 
-        let pageTop    = window.scrollY,
-            pageBottom = pageTop + window.innerHeight,
-            elTop      = el.offsetTop,
-            elBottom   = elTop + el.offsetHeight;
+        let bounding = el.getBoundingClientRect();
+
+        return (
+            bounding.top >= 0 &&
+            bounding.left >= 0 &&
+            bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+
+        // let pageTop    = window.scrollY,
+        //     pageBottom = pageTop + window.innerHeight,
+        //     elTop      = el.offsetTop,
+        //     elBottom   = elTop + el.offsetHeight;
 
         // this isn't calculating properly
-        return ( pageTop < elBottom );
+        // return ( pageTop < elBottom );
 
         //return ((pageTop < elTop) && (pageBottom > elBottom));
        
@@ -87,23 +96,17 @@ class scrollChyron {
 
             self.chyron.addEventListener('mouseover', () => self.pauseScroll(), );
             self.chyron.addEventListener('mouseout', () => self.pauseScroll() );
-            
-            let chyron = self.chyron;
 
-            // let view = self.isChyronInView(chyron);
+            // Only play chyron when in view
+            self._paused = self.isChyronInView(self.chyron) ? false : true;     
             
             self.scrollInterval = setInterval(() => self.autoScroll(), self._interval);
 
-            // document.addEventListener('scroll', function() {
+            document.addEventListener('scroll', function() {
+                // Only play chyron when in view
+                self._paused = self.isChyronInView(self.chyron) ? false : true;
 
-            //     self._viewable = self.isChyronInView(self.chyron);
-
-            //     // Throttle, and scroll chyron only when visible
-            //     window.requestAnimationFrame(function() {
-                    
-            //     });
-
-            // });
+            });
 
         });
         

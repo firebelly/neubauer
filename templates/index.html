@@ -27,42 +27,6 @@
 {% set keyFeature = entry.homepageProjectFeature is not null and entry.homepageProjectFeature|length > 0 ? entry.homepageProjectFeature.one() : null %}
 {% set featureSet = entry.homepageFeatureCards is not null and entry.homepageFeatureCards|length > 0 ? entry.homepageFeatureCards.all() : null %}    
 
-{# NOTE: previously method of returning features -- by pulling directly for index features
-{% set projectFeature, exFeature = null, null %}
-{% set featureEntries = {
-    'researchIndex': {
-        'slug': 'projects',
-        'fields': ['featuredProject','secondaryFeaturedProject']
-    },
-    'exhibitionsIndex': {
-        'slug': 'exhibitions',
-        'fields': ['featuredExhibition','secondaryFeaturedExhibition']
-    }
-}%}
-#}
-
-{#
-{% for key, obj in featureEntries %}
-    {% set slug, primary, secondary = obj.slug, obj.fields[0], obj.fields[1] %}
-    {% set indexQuery = craft.entries.section(key).one() %}
-    {% set randomQuery = craft.entries.section(slug).order('RAND()').limit(10) %}
-    {% set feature1 = indexQuery[primary]|length > 0 ? indexQuery[primary].one() : null %}
-    {% set feature2 = indexQuery[secondary]|length > 0 ? indexQuery[secondary].one() : null %}
-    
-    {% set primaryFeature = feature1 ? feature1 : (feature2 ? feature2 : randomQuery.one() ) %}
-    {% set secondaryFeature = (feature2 and primaryFeature.id != feature2.id) ? feature2 : randomQuery.id('not ' ~ primaryFeature.id).one() %}
-    {% set randomFeature = randomQuery.id('and, not ' ~ primaryFeature.id ~ ', not ' ~ secondaryFeature.id).one() %}
-
-    {% set featureObj = {
-        'features': {
-            'primary': primaryFeature, 
-            'secondary': secondaryFeature,
-            'random': randomFeature
-        }
-    }%}
-    {% set featureEntries = featureEntries|merge({ (key): featureObj }) %}
-{% endfor %} #}
-
 <section 
     class="homepageCover" 
     data-parallax-container="cover">
@@ -125,12 +89,6 @@
 </section>
 
 <section class="homepageExplore">
-    {# {% set featureSet = [
-        featureEntries['researchIndex']['features']['primary'],
-        featureEntries['exhibitionsIndex']['features']['primary'],
-        featureEntries['researchIndex']['features']['secondary'],
-        featureEntries['exhibitionsIndex']['features']['secondary']
-    ]%} #}
     {% set featureCall = entry.homepageCallToActionCard is not null and entry.homepageCallToActionCard|length > 0 ? entry.homepageCallToActionCard.one() : null %}
     {% if featureCall %}
     {% set featurePrompt, featureAction = featureCall['prompt'], featureCall['action'] %}

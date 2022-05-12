@@ -14,8 +14,16 @@
     <ul class="interiorIntro-menu interiorIntro-menu--{{ entrySection }}">
         {% for menuItem in menuList if menuItem.name|slugify not in excludeMenu %}
         {% set menuName,menuHandle = menuItem.name,menuItem.name|camel %}
+        {% set arrowDownPath = "/spritemap.svg#icon-arrow-down-20" %}
         <li class="interiorIntro-menu-item">
-            <a href="#{{ menuHandle }}">{{ menuName }}</a>
+            <a 
+                class="interiorIntro-menu-action interiorIntro-menu-action--link" href="#{{ menuHandle }}">
+                <span class="interiorIntro-menu-action-label">{{ menuName }}</span>
+                <svg 
+                    class="interiorIntro-menu-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowDownPath) }}"></use>
+                </svg>
+            </a>
         </li>
         {% endfor %}
     </ul>
