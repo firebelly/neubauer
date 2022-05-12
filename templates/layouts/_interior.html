@@ -5,6 +5,7 @@
 {% import 'macros/_cards' as cards %}
 {% import 'macros/_assets' as assets %}
 {% import 'macros/_controls' as controls %}
+{% import 'macros/_menus' as menus %}
 
 {% block content %}
 {# Global Vars #}
@@ -291,24 +292,23 @@
         {% if entrySection == 'people' and not abstract and not body %}
         <div class="interiorSummary-redactor">Bio coming soon</div>
         {% endif %}
-
+        {% set isAccordion = (body and abstract) %}
         {% if abstract %}
         <div class="interiorSummary-redactor interiorSummary-redactor--abstract">{{ abstract|raw }}</div>
         {% endif %}
 
         {% if body %}
-        {% set isAccordion = (body and abstract) %}
-
         {% if isAccordion %}
-        {# <a class="interiorSummary-accordion interiorSummary-accordion--{{ entrySection }}" href="" role="">
-            <span class="interiorSummary-accordion-label">Full Summary</span>
-            <svg class="interiorSummary-accordion-icon">
-                <use xlink:href="{{ alias('@assetBasePath' ~ expandPath) }}"></use>
-            </svg>
-        </a> #}
-        {% endif %}
-
+            {% set panelList = [
+                {
+                    'heading': 'Full Summary',
+                    'body': body|raw
+                }
+            ] %}
+            {{ menus.accordionMenu('panelSummary',panelList,true,true,'expand-20','contract-20') }}
+        {% else %}
         <div class="interiorSummary-redactor interiorSummary-redactor--body">{{ body|raw }}</div>
+        {% endif %}
         {% endif %}
 
         {% if email %}

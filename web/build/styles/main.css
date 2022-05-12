@@ -13350,6 +13350,9 @@ img {
 .interiorSummary-topics--projects {
   border-color: #51594A;
 }
+.panelSummary + .interiorSummary-topics--projects {
+  margin-top: 0;
+}
 .interiorSummary-topics--people {
   border-color: #1C2AA7;
 }
@@ -15099,6 +15102,80 @@ img {
 }
 .panelStatement-content > *,
 .panelDirections-content > * {
+  font: normal 2.4em/1.46 "apercu", sans-serif;
+}
+
+.panelSummary {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+.panelSummary-title {
+  margin: 0;
+  padding: 0;
+}
+.panelSummary-trigger {
+  border: none;
+  -webkit-appearance: none;
+  display: flex;
+  flex-flow: row wrap;
+  -webkit-box-alignpack: center;
+  -ms-flex-alignpack: center;
+  -webkit-align-itemspack: center;
+  align-items: center;
+  border-top: 1px solid transparent;
+  padding: 2em 0;
+  width: 100%;
+  outline: none;
+  background: none;
+  font-size: 1rem;
+  text-align: left;
+}
+.panelSummary-trigger::-moz-focus-inner {
+  border: 0;
+}
+.panelSummary-name {
+  flex: 0 1 80%;
+  display: block;
+  pointer-events: none;
+  outline: none;
+}
+.panelSummary-icon {
+  flex: 0 1 20%;
+  justify-content: flex-end;
+  pointer-events: none;
+  text-align: right;
+}
+.panelSummary-toggle {
+  height: 20px;
+  width: 20px;
+}
+.panelSummary-trigger[aria-expanded=true] .panelSummary-toggle--expand {
+  display: none;
+  visibility: hidden;
+}
+.panelSummary-trigger[aria-expanded=false] .panelSummary-toggle--contract {
+  display: none;
+  visibility: hidden;
+}
+.panelSummary-panel {
+  /* Edge bug - still relevant? */
+}
+.panelSummary-panel[hidden] {
+  display: none;
+}
+
+.panelSummary-name {
+  font: normal 2.8em/1.25 "apercu", sans-serif;
+}
+.panelSummary-trigger {
+  border-color: #51594A;
+  color: #51594A;
+}
+.panelSummary-toggle {
+  fill: #51594A;
+}
+.panelSummary-content > * {
   font: normal 2.4em/1.46 "apercu", sans-serif;
 }
 

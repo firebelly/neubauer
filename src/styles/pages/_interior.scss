@@ -406,6 +406,11 @@
 
 		&--projects {
 			border-color: getColor('green',30);
+
+			.panelSummary + & {
+				margin-top: 0;
+			}
+
 		}
 
 		&--people {
@@ -766,6 +771,30 @@
 
 	&-toggle {
 		fill: getColor('red');
+	}
+
+	&-content {
+		> * {
+			@include getType('subtitle');
+		}
+	}
+
+}
+
+@include accordionMenu('.panelSummary',$icon-size:20px, $default:false);
+.panelSummary {
+
+	&-name {
+		@include getType('h3-sans');
+	}
+
+	&-trigger {
+		border-color: getColor('green',30);
+		color: getColor('green',30);
+	}
+
+	&-toggle {
+		fill: getColor('green',30);
 	}
 
 	&-content {
