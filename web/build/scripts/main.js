@@ -210,7 +210,12 @@ var flyoutContent = {
 
       flyoutContent.content.ontransitionend = function () {
         // Overflow specs helps w vw-scrollbar issues
-        document.body.style.overflow = flyoutContent.isOpen ? 'hidden' : 'auto';
+        if (flyoutContent.isOpen) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.removeAttribute('style');
+        }
+
         flyoutContent.content.removeAttribute('style'); // On close, remove transition hook
 
         if (!flyoutContent.isOpen) {
