@@ -133,24 +133,19 @@
     ]%} #}
     {% set featureCall = entry.homepageCallToActionCard is not null and entry.homepageCallToActionCard.prompt != '' and entry.homepageCallToActionCard.action != '' ? entry.homepageCallToActionCard : null %}
     {% if featureCall %}
-    {% set featurePrompt, featureAction = entry['homepageCallToActionCard']['prompt'], entry['homepageCallToActionCard']['action'] %}
+    {% set featurePrompt, featureAction = featureCall['prompt'], featureCall['action'] %}
     {% endif %}
     {% set featureSlideObj = {
         'cardName': 'homepageFeatures',
         'variant': 'features',
         'slides': featureSet,
+        'cardCall': {
+            'prompt': featureCall ? featurePrompt : null,
+            'action': featureCall ? featureAction : null
+        },
         'group': 2,
         'scrollable': true
     }%}
-    {% if featureCall %}
-    {% set featureSlideObj = featureSlideObj|merge({
-        'cardCall': {
-            'prompt': featurePrompt,
-            'action': featureAction
-        }
-    })%}
-    {% endif %}
-    <span data-testing="{{ featurePrompt }}"></span>
     {{ carousels.featureCarousel('homepageCarousel',featureSlideObj) }}
 </section>
 
