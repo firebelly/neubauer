@@ -14,12 +14,14 @@
     "/build/svgs/icon-chevron-right.svg": "/build/svgs/icon-chevron-right.svg?id=c867f600120394b289d4d2d6ac68b8a6",
     "/build/svgs/icon-close-20.svg": "/build/svgs/icon-close-20.svg?id=60c7a83ccd07c057fb74503f5a83b04b",
     "/build/svgs/icon-close-70.svg": "/build/svgs/icon-close-70.svg?id=c07d9a03188832377c307d0b06347c31",
+    "/build/svgs/icon-contract-20.svg": "/build/svgs/icon-contract-20.svg?id=0717ad8a4aeee7cd4b2300b6a3e08473",
     "/build/svgs/icon-dbl-chevron-left.svg": "/build/svgs/icon-dbl-chevron-left.svg?id=233f512ea7a9eec8d9862bdbc8257725",
     "/build/svgs/icon-dbl-chevron-right.svg": "/build/svgs/icon-dbl-chevron-right.svg?id=63630eefcae32aca4668699deb709641",
     "/build/svgs/icon-dot-empty.svg": "/build/svgs/icon-dot-empty.svg?id=5b4cdbc2be79a65b932d93d4945c9703",
     "/build/svgs/icon-dot-filled.svg": "/build/svgs/icon-dot-filled.svg?id=f87adf6fe837ac21d8c6f6954b3e73a8",
     "/build/svgs/icon-download-20.svg": "/build/svgs/icon-download-20.svg?id=3ccef315c7a31b15290111a75e8c3c40",
     "/build/svgs/icon-email-20.svg": "/build/svgs/icon-email-20.svg?id=7bacf1010dfa5b83de9de619638c6c80",
+    "/build/svgs/icon-expand-20.svg": "/build/svgs/icon-expand-20.svg?id=24c8568de4030e6255248163af16d0db",
     "/build/svgs/icon-menu-20.svg": "/build/svgs/icon-menu-20.svg?id=ed2e73330d0de2269eeb8fae5551f236",
     "/build/svgs/icon-plus-20.svg": "/build/svgs/icon-plus-20.svg?id=03687e81a89c16b3e47e79705d3edeaf",
     "/build/svgs/icon-search-20.svg": "/build/svgs/icon-search-20.svg?id=dbd894e316d3ce080760cb29ba4326d4",
@@ -32,8 +34,5 @@
     "/build/svgs/logo-uchicago.svg": "/build/svgs/logo-uchicago.svg?id=8950c004f4995c00af77e508d8a07b37",
     "/build/videos/.DS_Store": "/build/videos/.DS_Store?id=08d64e1f9a81716cc133f85ad441757e",
     "/build/spritemap.svg": "/build/spritemap.svg?id=97bb93d1e2d081da059987499f94585d",
-    "/build/styles/main.css": "/build/styles/main.css?id=e82c340191d730074dbed0855dd1f746",
-    "/build/svgs/icon-expand.svg": "/build/svgs/icon-expand.svg?id=24c8568de4030e6255248163af16d0db",
-    "/build/svgs/icon-contract-20.svg": "/build/svgs/icon-contract-20.svg?id=0717ad8a4aeee7cd4b2300b6a3e08473",
-    "/build/svgs/icon-expand-20.svg": "/build/svgs/icon-expand-20.svg?id=24c8568de4030e6255248163af16d0db"
+    "/build/styles/main.css": "/build/styles/main.css?id=a3f40c65e9ac9ab0240e058f5b14c10d"
 }

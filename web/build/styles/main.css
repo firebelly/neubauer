@@ -6761,80 +6761,50 @@ img {
 .homepageFeatures-action--call {
   margin-right: 0;
 }
-.homepageFeatures:nth-child(1) .homepageFeatures-action {
+.homepageFeatures:nth-child(1) .homepageFeatures-action:not(:hover) {
   border-color: #330805;
 }
-.homepageFeatures:nth-child(1) .homepageFeatures-action-label {
+.homepageFeatures:nth-child(1) .homepageFeatures-action:not(:hover) .homepageFeatures-action-label {
   color: #330805;
 }
-.homepageFeatures:nth-child(1) .homepageFeatures-action-icon {
+.homepageFeatures:nth-child(1) .homepageFeatures-action:not(:hover) .homepageFeatures-action-icon {
   fill: #330805;
 }
-.homepageFeatures:nth-child(1) .homepageFeatures-action:hover-label {
-  color: #FFFFFF;
-}
-.homepageFeatures:nth-child(1) .homepageFeatures-action:hover-icon {
-  fill: #FFFFFF;
-}
-.homepageFeatures:nth-child(2) .homepageFeatures-action {
+.homepageFeatures:nth-child(2) .homepageFeatures-action:not(:hover) {
   border-color: #1A150D;
 }
-.homepageFeatures:nth-child(2) .homepageFeatures-action-label {
+.homepageFeatures:nth-child(2) .homepageFeatures-action:not(:hover) .homepageFeatures-action-label {
   color: #1A150D;
 }
-.homepageFeatures:nth-child(2) .homepageFeatures-action-icon {
+.homepageFeatures:nth-child(2) .homepageFeatures-action:not(:hover) .homepageFeatures-action-icon {
   fill: #1A150D;
 }
-.homepageFeatures:nth-child(2) .homepageFeatures-action:hover-label {
-  color: #FFFFFF;
-}
-.homepageFeatures:nth-child(2) .homepageFeatures-action:hover-icon {
-  fill: #FFFFFF;
-}
-.homepageFeatures:nth-child(3) .homepageFeatures-action {
+.homepageFeatures:nth-child(3) .homepageFeatures-action:not(:hover) {
   border-color: #4D3608;
 }
-.homepageFeatures:nth-child(3) .homepageFeatures-action-label {
+.homepageFeatures:nth-child(3) .homepageFeatures-action:not(:hover) .homepageFeatures-action-label {
   color: #4D3608;
 }
-.homepageFeatures:nth-child(3) .homepageFeatures-action-icon {
+.homepageFeatures:nth-child(3) .homepageFeatures-action:not(:hover) .homepageFeatures-action-icon {
   fill: #4D3608;
 }
-.homepageFeatures:nth-child(3) .homepageFeatures-action:hover-label {
-  color: #FFFFFF;
-}
-.homepageFeatures:nth-child(3) .homepageFeatures-action:hover-icon {
-  fill: #FFFFFF;
-}
-.homepageFeatures:nth-child(4) .homepageFeatures-action {
+.homepageFeatures:nth-child(4) .homepageFeatures-action:not(:hover) {
   border-color: #FFFFFF;
 }
-.homepageFeatures:nth-child(4) .homepageFeatures-action-label {
+.homepageFeatures:nth-child(4) .homepageFeatures-action:not(:hover) .homepageFeatures-action-label {
   color: #FFFFFF;
 }
-.homepageFeatures:nth-child(4) .homepageFeatures-action-icon {
+.homepageFeatures:nth-child(4) .homepageFeatures-action:not(:hover) .homepageFeatures-action-icon {
   fill: #FFFFFF;
 }
-.homepageFeatures:nth-child(4) .homepageFeatures-action:hover-label {
-  color: #FFFFFF;
-}
-.homepageFeatures:nth-child(4) .homepageFeatures-action:hover-icon {
-  fill: #FFFFFF;
-}
-.homepageFeatures:nth-child(5) .homepageFeatures-action {
+.homepageFeatures:nth-child(5) .homepageFeatures-action:not(:hover) {
   border-color: #151515;
 }
-.homepageFeatures:nth-child(5) .homepageFeatures-action-label {
+.homepageFeatures:nth-child(5) .homepageFeatures-action:not(:hover) .homepageFeatures-action-label {
   color: #151515;
 }
-.homepageFeatures:nth-child(5) .homepageFeatures-action-icon {
+.homepageFeatures:nth-child(5) .homepageFeatures-action:not(:hover) .homepageFeatures-action-icon {
   fill: #151515;
-}
-.homepageFeatures:nth-child(5) .homepageFeatures-action:hover-label {
-  color: #FFFFFF;
-}
-.homepageFeatures:nth-child(5) .homepageFeatures-action:hover-icon {
-  fill: #FFFFFF;
 }
 @media (min-width: 768px) {
   .homepageFeatures-overlay {

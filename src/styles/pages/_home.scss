@@ -357,6 +357,7 @@
 	}
 
 	&-action {
+		$action: &;
 
 		&--call {
 			margin-right: 0;
@@ -364,28 +365,22 @@
 
 		@for $i from 1 through 5 {
 
-			#{$features}:nth-child(#{$i}) & {
+			#{$features}:nth-child(#{$i}) &:not(:hover) {
 				$color: nth(nth($feature-colors,$i),2);
-				border-color: $color;
 				
-				&-label {
+				border-color: $color;
+
+				#{$action}-label {
 					color: $color;
 				}
-				&-icon {
+				#{$action}-icon {
 					fill: $color;
 				}
-			}
-
-			#{$features}:nth-child(#{$i}) &:hover {
-				&-label {
-					color: getColor('white');
-				}
-				&-icon {
-					fill: getColor('white');
-				}
+				
 			}
 
 		}
+
 	}
 
 	// Overlay Treatment
