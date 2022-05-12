@@ -131,7 +131,7 @@
         featureEntries['researchIndex']['features']['secondary'],
         featureEntries['exhibitionsIndex']['features']['secondary']
     ]%} #}
-    {% set featureCall = entry.homepageCallToActionCard is not null and entry.homepageCallToActionCard.prompt != '' and entry.homepageCallToActionCard.action != '' ? entry.homepageCallToActionCard : null %}
+    {% set featureCall = entry.homepageCallToActionCard is not null and entry.homepageCallToActionCard|length > 0 ? entry.homepageCallToActionCard.one() : null %}
     {% if featureCall %}
     {% set featurePrompt, featureAction = featureCall['prompt'], featureCall['action'] %}
     {% endif %}
