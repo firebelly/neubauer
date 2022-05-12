@@ -173,9 +173,9 @@
 			{% endfor %}
 
 			{% if cardCall %}
-			{% set prompt = slideObj.cardCall.prompt %}
-			{% set action = slideObj.cardCall.action %}
-			<div class="{{ cardName }} {{ cardName }}--call">
+			{% set prompt = cardCall.prompt %}
+			{% set action = cardCall.action %}
+			<div class="{{ cardName }} {{ cardName }}--call" data-test-qa="{{ cardCall|json_encode }}">
 				<div class="{{ cardName }}-wrap">
 					<h3 class="{{ cardName }}-title {{ cardName }}-title--call">{{ prompt }}</h3>
 					<a 
