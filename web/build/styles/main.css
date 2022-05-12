@@ -2802,205 +2802,6 @@ img {
   max-width: 810px;
 }
 
-.interiorTeam {
-  border-top: 1px solid transparent;
-  padding: 4em 4em 16em 4em;
-}
-.interiorTeam--projects {
-  border-color: #51594A;
-}
-.interiorTeam-title {
-  font: normal 6.5em/1.08 "domaine-text", serif;
-  letter-spacing: -0.035em;
-  margin-bottom: 1.2307692308em;
-}
-@media (min-width: 768px) {
-  .interiorTeam-list {
-    display: flex;
-    flex-flow: row wrap;
-  }
-}
-.interiorTeam-item {
-  border-top: 1px solid transparent;
-}
-.interiorTeam--projects .interiorTeam-item {
-  border-color: #51594A;
-}
-@media (min-width: 768px) {
-  .interiorTeam-item {
-    flex: 0 1 50%;
-    margin-bottom: 4em;
-  }
-}
-.interiorTeam-item-title {
-  padding: 2em 0;
-  font: normal 2.8em/1.25 "apercu", sans-serif;
-}
-.interiorTeam-item-title--btm {
-  display: none;
-  visibility: hidden;
-}
-.interiorTeam-item-title a:link,
-.interiorTeam-item-title a:visited,
-.interiorTeam-item-title a:hover,
-.interiorTeam-item-title a:active {
-  text-decoration: none;
-}
-.interiorTeam--projects .interiorTeam-item-title a:link,
-.interiorTeam--projects .interiorTeam-item-title a:visited,
-.interiorTeam--projects .interiorTeam-item-title a:hover,
-.interiorTeam--projects .interiorTeam-item-title a:active {
-  color: #51594A;
-}
-@media (min-width: 768px) {
-  .interiorTeam-item-details {
-    max-width: 460px;
-  }
-}
-.interiorTeam-item-subtitle {
-  font: normal 1.6em/1.56 "apercu", sans-serif;
-  margin-bottom: 0.625em;
-  font-weight: bold;
-}
-.interiorTeam-item-caption {
-  display: none;
-  visibility: hidden;
-}
-.interiorTeam-item-redactor {
-  font: normal 1.6em/1.56 "apercu", sans-serif;
-  margin-bottom: 1.25em;
-}
-.interiorTeam-item-redactor a:link,
-.interiorTeam-item-redactor a:visited,
-.interiorTeam-item-redactor a:hover,
-.interiorTeam-item-redactor a:active {
-  text-decoration: underline;
-}
-.interiorTeam--projects .interiorTeam-item-redactor a:link,
-.interiorTeam--projects .interiorTeam-item-redactor a:visited,
-.interiorTeam--projects .interiorTeam-item-redactor a:hover,
-.interiorTeam--projects .interiorTeam-item-redactor a:active {
-  color: #51594A;
-}
-.interiorTeam-item-asset {
-  margin-bottom: 2em;
-}
-.interiorTeam-item-asset-image {
-  height: 400px;
-  width: 675px;
-}
-.interiorTeam-item-action .interiorTeam-item-action {
-  display: inline-flex;
-  flex-flow: row nowrap;
-  font-size: 1rem;
-  margin-right: 4em;
-}
-.interiorTeam-item-action .interiorTeam-item-action--ghost {
-  border-radius: 5px;
-  border: 1px solid transparent;
-  padding: calc(1.5em - 1px) calc(2em - 1px);
-  position: relative;
-}
-.interiorTeam-item-action .interiorTeam-item-action--ghost::after {
-  transition: border-color 0.5s ease-in;
-  content: "";
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  border: 4px solid transparent;
-  border-radius: 9px;
-}
-.interiorTeam-item-action .interiorTeam-item-action--link {
-  position: relative;
-}
-.interiorTeam-item-action .interiorTeam-item-action--link::after {
-  transition: all 0.5s ease-in;
-  content: "";
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  width: calc(100% + 8px);
-  height: calc(100% + 12px);
-  background: none;
-}
-.interiorTeam-item-action .interiorTeam-item-action:focus {
-  outline: none;
-}
-.interiorTeam-item-action .interiorTeam-item-action:link, .interiorTeam-item-action .interiorTeam-item-action:visited, .interiorTeam-item-action .interiorTeam-item-action:hover, .interiorTeam-item-action .interiorTeam-item-action:active {
-  text-decoration: none;
-}
-.interiorTeam-item-action .interiorTeam-item-action-label, .interiorTeam-item-action .interiorTeam-item-action-icon {
-  position: relative;
-  z-index: 1;
-  flex: 0 1 auto;
-}
-.interiorTeam-item-action .interiorTeam-item-action-icon {
-  margin-left: 1em;
-  height: 20px;
-  width: 20px;
-}
-.interiorTeam-item-action .interiorTeam-item-action:hover {
-  cursor: pointer;
-}
-.interiorTeam-item-action .interiorTeam-item-action--link {
-  color: #51594A;
-}
-.interiorTeam-item-action .interiorTeam-item-action--link:link, .interiorTeam-item-action .interiorTeam-item-action--link:visited, .interiorTeam-item-action .interiorTeam-item-action--link:hover, .interiorTeam-item-action .interiorTeam-item-action--link:active {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  -webkit-text-decoration-color: #51594A;
-          text-decoration-color: #51594A;
-}
-.interiorTeam-item-action .interiorTeam-item-action--link:hover {
-  color: #FFFFFF;
-  -webkit-text-decoration-color: #FFFFFF;
-          text-decoration-color: #FFFFFF;
-  text-decoration-thickness: 4px;
-}
-.interiorTeam-item-action .interiorTeam-item-action--link:hover::after {
-  background: #800000;
-}
-.interiorTeam-item-action .interiorTeam-item-action--link:hover .interiorTeam-item-action-icon {
-  fill: #FFFFFF;
-}
-.interiorTeam-item-action .interiorTeam-item-action--link .interiorTeam-item-action-icon {
-  fill: #51594A;
-}
-.interiorTeam-item-action .interiorTeam-item-action--ghost {
-  border-color: #51594A;
-  color: #51594A;
-}
-.interiorTeam-item-action .interiorTeam-item-action--ghost:hover {
-  background: #800000;
-  color: #FFFFFF;
-  border-color: #800000;
-}
-.interiorTeam-item-action .interiorTeam-item-action--ghost:hover::after {
-  border-color: #FFFFFF;
-}
-.interiorTeam-item-action .interiorTeam-item-action--ghost:hover .interiorTeam-item-action-icon {
-  fill: #FFFFFF;
-}
-.interiorTeam-item-action .interiorTeam-item-action--ghost .interiorTeam-item-action-icon {
-  fill: #51594A;
-}
-.interiorTeam-item-action .interiorTeam-item-action-label {
-  font: normal 1.2em/1.67 "apercu", sans-serif;
-  letter-spacing: 0.1em;
-  text-decoration: inherit;
-  text-transform: uppercase;
-}
-.interiorTeam-item-action .interiorTeam-item-action-trigger {
-  text-align: center;
-  text-decoration: none;
-}
-.interiorTeam-item-action:nth-of-type(2) {
-  display: none;
-  visibility: hidden;
-}
-
 .interiorNarrative {
   border-top: 1px solid transparent;
   padding: 4em 4em 16em 4em;
@@ -14115,6 +13916,230 @@ img {
   color: #151515;
   -webkit-text-decoration-color: #151515;
           text-decoration-color: #151515;
+}
+
+/* ---------------------------------------------------------------------
+ Interior Team (project)
+------------------------------------------------------------------------ */
+.interiorTeam-item {
+  border-top: 1px solid transparent;
+  margin: 0 0.25em 0 0.25em;
+}
+.interiorTeam-item--events, .interiorTeam-item--news {
+  border: none;
+}
+.interiorTeam-item--news {
+  padding-right: 4em;
+}
+.interiorTeam-item-title {
+  font: normal 2em/1.5 "apercu", sans-serif;
+  margin-bottom: 0.5em;
+}
+.interiorTeam-item-title--top {
+  padding: 1em 0;
+}
+.interiorTeam-item--events .interiorTeam-item-title--top, .interiorTeam-item--news .interiorTeam-item-title--top {
+  display: none;
+  visibility: hidden;
+}
+.interiorTeam-item--people .interiorTeam-item-title--btm {
+  display: none;
+  visibility: hidden;
+}
+.interiorTeam-item-title a:link,
+.interiorTeam-item-title a:visited,
+.interiorTeam-item-title a:hover,
+.interiorTeam-item-title a:active {
+  text-decoration: none;
+}
+.interiorTeam-item-details {
+  margin: 2em 0 0 0;
+}
+.interiorTeam-item--events .interiorTeam-item-details, .interiorTeam-item--people .interiorTeam-item-details {
+  padding-right: 4em;
+}
+.interiorTeam-item-redactor {
+  display: block;
+  visibility: visible;
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+}
+.interiorTeam-item-subtitle {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+  margin-bottom: 0.625em;
+  font-weight: bold;
+}
+.interiorTeam-item-caption {
+  display: none;
+  visibility: hidden;
+}
+.interiorTeam-item-dateblock {
+  display: block;
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+}
+.interiorTeam-item--people .interiorTeam-item-dateblock {
+  display: none;
+  visibility: hidden;
+}
+.interiorTeam-item-dateblock {
+  margin-bottom: 0;
+  font-weight: bold;
+}
+.interiorTeam-item-buttons {
+  margin-top: 2em;
+}
+
+.interiorTeam-item-action {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  font-size: 1rem;
+  margin-right: 4em;
+}
+.interiorTeam-item-action--ghost {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: calc(1.5em - 1px) calc(2em - 1px);
+  position: relative;
+}
+.interiorTeam-item-action--ghost::after {
+  transition: border-color 0.5s ease-in;
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border: 4px solid transparent;
+  border-radius: 9px;
+}
+.interiorTeam-item-action--link {
+  position: relative;
+}
+.interiorTeam-item-action--link::after {
+  transition: all 0.5s ease-in;
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 12px);
+  background: none;
+}
+.interiorTeam-item-action:focus {
+  outline: none;
+}
+.interiorTeam-item-action:link, .interiorTeam-item-action:visited, .interiorTeam-item-action:hover, .interiorTeam-item-action:active {
+  text-decoration: none;
+}
+.interiorTeam-item-action-label, .interiorTeam-item-action-icon {
+  position: relative;
+  z-index: 1;
+  flex: 0 1 auto;
+}
+.interiorTeam-item-action-icon {
+  margin-left: 1em;
+  height: 20px;
+  width: 20px;
+}
+.interiorTeam-item-action:hover {
+  cursor: pointer;
+}
+
+.interiorTeam-item-action--link {
+  color: #51594A;
+}
+.interiorTeam-item-action--link:link, .interiorTeam-item-action--link:visited, .interiorTeam-item-action--link:hover, .interiorTeam-item-action--link:active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  -webkit-text-decoration-color: #51594A;
+          text-decoration-color: #51594A;
+}
+.interiorTeam-item-action--link:hover {
+  color: #FFFFFF;
+  -webkit-text-decoration-color: #FFFFFF;
+          text-decoration-color: #FFFFFF;
+  text-decoration-thickness: 4px;
+}
+.interiorTeam-item-action--link:hover::after {
+  background: #800000;
+}
+.interiorTeam-item-action--link:hover .interiorTeam-item-action-icon {
+  fill: #FFFFFF;
+}
+.interiorTeam-item-action--link .interiorTeam-item-action-icon {
+  fill: #51594A;
+}
+.interiorTeam-item-action--ghost {
+  border-color: #51594A;
+  color: #51594A;
+}
+.interiorTeam-item-action--ghost:hover {
+  background: #800000;
+  color: #FFFFFF;
+  border-color: #800000;
+}
+.interiorTeam-item-action--ghost:hover::after {
+  border-color: #FFFFFF;
+}
+.interiorTeam-item-action--ghost:hover .interiorTeam-item-action-icon {
+  fill: #FFFFFF;
+}
+.interiorTeam-item-action--ghost .interiorTeam-item-action-icon {
+  fill: #51594A;
+}
+.interiorTeam-item-action-label {
+  font: normal 1.2em/1.67 "apercu", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: inherit;
+  text-transform: uppercase;
+}
+.interiorTeam-item-action-trigger {
+  text-align: center;
+  text-decoration: none;
+}
+
+.interiorTeam-item {
+  border-color: #51594A;
+}
+.interiorTeam-item-title a:link,
+.interiorTeam-item-title a:visited,
+.interiorTeam-item-title a:hover,
+.interiorTeam-item-title a:active {
+  color: #51594A;
+}
+.interiorTeam-item-details {
+  color: #51594A;
+}
+
+.interiorTeam {
+  border-top: 1px solid transparent;
+  padding: 4em 4em 16em 4em;
+}
+.interiorTeam--projects {
+  border-color: #51594A;
+}
+.interiorTeam-title {
+  font: normal 6.5em/1.08 "domaine-text", serif;
+  letter-spacing: -0.035em;
+  margin-bottom: 1.2307692308em;
+}
+@media (min-width: 768px) {
+  .interiorTeam-list {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .interiorTeam-list > * {
+    flex: 0 1 calc(50% - 0.5em);
+  }
+}
+.interiorTeam-item {
+  padding: 2em 0;
+}
+.interiorTeam-item-title {
+  font: normal 2.8em/1.25 "apercu", sans-serif;
+}
+.interiorTeam-item-title--btm {
+  display: none;
+  visibility: hidden;
 }
 
 /* ---------------------------------------------------------------------

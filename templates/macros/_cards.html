@@ -82,7 +82,12 @@
         {% endif %}
     </picture>
     {% elseif isBio %}
+    {% if cardName == 'interiorTeam-item' %}
+    {# ew #}
+    <div data-team-image="none"></div>
+    {% else %}
     <div class="{{ cardName }}-asset--ghost"></div>
+    {% endif %}
     {% endif %}
 
     <div class="{{ cardName }}-details">

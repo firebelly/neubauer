@@ -466,11 +466,61 @@
 }
 
 /* ---------------------------------------------------------------------
+ Interior Team (project)
+------------------------------------------------------------------------ */
+@include cardCarousel('.interiorTeam-item',getColor('green',30),getColor('green',30));
+
+.interiorTeam {
+	$team: &;
+	border-top: 1px solid transparent;
+	padding: 4em 4em 16em 4em;
+
+	&--projects {
+		border-color: getColor('green',30);
+	}
+
+	&-title {
+		$mb: math.div(80,65);
+		@include getType('h1-normal');
+		margin-bottom: #{$mb}em;
+	}
+
+	// Cards
+	&-list {
+		@include breakpoint(sm) {
+			@include flexParent();
+
+			> * {
+				@include flexChild(0 1 calc(50% - 0.5em));
+			}
+
+		}
+	}
+
+	&-item {
+		padding: 2em 0;
+
+		&-title {
+			
+			@include getType('h3-sans');
+
+			&--btm {
+				@include totallyHide;
+			}
+		
+		}
+
+
+
+	}
+
+}
+	
+
+/* ---------------------------------------------------------------------
  Interior Module
  - e.g. About Impact Module
 ------------------------------------------------------------------------ */
-
-
 .interiorMod {
 	$mod: &;
 	border-top: 1px solid transparent;

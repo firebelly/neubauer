@@ -179,9 +179,6 @@
     <div class="interiorIntro-asset">
         <figure class="interiorIntro-frame">
         {% set cardImageSizes = utils.getAssetSizes('projects','interior')|json_decode %}
-            {# <div class="interiorIntro-placeholder"></div>
-            <div class="interiorIntro-caption">Nulla sollicitudin ornare ullamcorper. Duis sollicitudin, libero nec malesuada gravida. Purus purus lobortis mi, sit amet imperdiet ex massa in felis.</div>
-            #}
             <picture>
                 {{ assets.assetCard("interiorIntro-asset",cardImage,cardImageSizes) }} 
             </picture>
@@ -207,7 +204,6 @@
 
 {% if openerImage %}
 <div class="interiorCover-frame">
-    {# <div class="interiorCover-placeholder"></div> #}
     {% if openerImage %}
     {% set openerName = 'interiorCover-asset' %}
     {% set openerSizes = utils.getAssetSizes(entrySection,'interior')|json_decode %}
@@ -365,9 +361,11 @@
 <section class="interiorTeam interiorTeam--{{ entrySection }}" id="team">
     <h3 class="interiorTeam-title">Research Team</h3>
     <div class="interiorTeam-list">
+    {% set teamSizes = utils.getAssetSizes('people','card') %} 
     {% for member in team %}
-        {% set cardName,cardEntry,cardObj,cardVariant = 'interiorTeam-item',member,{},'' %}
-        {{ cards.cardArticle(cardName,cardEntry,cardObj,cardVariant) }}
+        {% set teamName,teamEntry,teamObj,teamVariant = 'interiorTeam-item',member,{},'' %}
+        {% set teamObj = teamObj|merge({'assetSizes': teamSizes})%}
+        {{ cards.cardArticle(teamName,teamEntry,teamObj,teamVariant) }}
     {% endfor %}
     </div>
 </section>

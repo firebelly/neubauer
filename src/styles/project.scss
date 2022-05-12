@@ -540,126 +540,139 @@ img {
 
 }
 
+// @include cardArticle('.interiorTeam-item',getColor('green',30),getColor('green',30));
 
+// .interiorTeam {
+// 	$team: &;
+// 	border-top: 1px solid transparent;
+// 	padding: 4em 4em 16em 4em;
 
-.interiorTeam {
-	$team: &;
-	border-top: 1px solid transparent;
-	padding: 4em 4em 16em 4em;
+// 	&--projects {
+// 		border-color: getColor('green',30);
+// 	}
 
-	&--projects {
-		border-color: getColor('green',30);
-	}
+// 	&-title {
+// 		$mb: math.div(80,65);
+// 		@include getType('h1-normal');
+// 		margin-bottom: #{$mb}em;
+// 	}
 
-	&-title {
-		$mb: math.div(80,65);
-		@include getType('h1-normal');
-		margin-bottom: #{$mb}em;
-	}
+// 	// Cards
+// 	&-list {
+// 		@include breakpoint(sm) {
+// 			@include flexParent();
+// 		}
+// 	}
 
-	// Cards
-	&-list {
-		@include breakpoint(sm) {
-			@include flexParent();
-		}
-	}
-	
-	&-item {
-		border-top: 1px solid transparent;
+// 	&-item {
 
-		#{$team}--projects & {
-			border-color: getColor('green',30);
-		}
+// 		&-title {
+// 			padding: 2em 0;
+// 			@include getType('h3-sans');
 
-		@include breakpoint(sm) {
-			@include flexChild(0 1 50%);
-			margin-bottom: 4em;
-		}
-
-		&-title {
-			padding: 2em 0;
-			@include getType('h3-sans');
-
-			&--btm {
-				@include totallyHide;
-			}
-
-			a:link,
-			a:visited,
-			a:hover,
-			a:active {
-				text-decoration: none;
-
-				#{$team}--projects & {
-					color: getColor('green',30);
-				}
-			
-			}	
-
-		}
+// 			&--btm {
+// 				@include totallyHide;
+// 			}
 		
-		&-details {
+// 		}
+// 	}
+	
+	//&-item {
+		// border-top: 1px solid transparent;
 
-			@include breakpoint(sm) {
-				max-width: 460px;
-			}
+		// #{$team}--projects & {
+		// 	border-color: getColor('green',30);
+		// }
+
+		// @include breakpoint(sm) {
+		// 	@include flexChild(0 1 50%);
+		// 	margin-bottom: 4em;
+		// }
+
+		// &-title {
+		// 	padding: 2em 0;
+		// 	@include getType('h3-sans');
+
+		// 	&--btm {
+		// 		@include totallyHide;
+		// 	}
+
+		// 	a:link,
+		// 	a:visited,
+		// 	a:hover,
+		// 	a:active {
+		// 		text-decoration: none;
+
+		// 		#{$team}--projects & {
+		// 			color: getColor('green',30);
+		// 		}
 			
-		}
+		// 	}	
 
-		&-subtitle {
-			$mb: math.div(10,16);
-			@include getType('caption');
-			margin-bottom: #{$mb}em;
-			font-weight: bold;
-		}
+		// }
+		
+		// &-details {
 
-		&-caption {
-			@include totallyHide;
-		}
-
-		&-redactor {
-			$mb: math.div(20,16);
-			@include getType('caption');
-			//max-word 285
-			margin-bottom: #{$mb}em;
-
-			a:link,
-			a:visited,
-			a:hover,
-			a:active {
-				text-decoration: underline;
-
-				#{$team}--projects & {
-					color: getColor('green',30);
-				}
+		// 	@include breakpoint(sm) {
+		// 		max-width: 460px;
+		// 	}
 			
-			}	
+		// }
 
-		}
+		// &-subtitle {
+		// 	$mb: math.div(10,16);
+		// 	@include getType('caption');
+		// 	margin-bottom: #{$mb}em;
+		// 	font-weight: bold;
+		// }
 
-		&-asset {
-			margin-bottom: 2em;
+		// &-caption {
+		// 	@include totallyHide;
+		// }
 
-			&-image {
-				height: 400px;
-				width: 675px;
-			}
+		// &-redactor {
+		// 	$mb: math.div(20,16);
+		// 	@include getType('caption');
+		// 	//max-word 285
+		// 	margin-bottom: #{$mb}em;
 
-		}
+		// 	a:link,
+		// 	a:visited,
+		// 	a:hover,
+		// 	a:active {
+		// 		text-decoration: underline;
 
-		&-action {
-			$action: &;
-			@include actionButton(#{$action},getColor('green',30),getColor('green',20));
+		// 		#{$team}--projects & {
+		// 			color: getColor('green',30);
+		// 		}
+			
+		// 	}	
 
-			&:nth-of-type(2) {
-				@include totallyHide;
-			}
+		// }
 
-		}
+		// &-asset {
+		// 	margin-bottom: 2em;
 
-	}
+		// 	&-image {
+		// 		height: 400px;
+		// 		width: 675px;
+		// 	}
 
-}
+		// }
+
+		// &-action {
+		// 	$action: &;
+		// 	@include actionButton(#{$action},getColor('green',30),getColor('green',20));
+
+		// 	&:nth-of-type(2) {
+		// 		@include totallyHide;
+		// 	}
+
+		// }
+
+	//}
+
+//}
 
 .interiorNarrative {
 	$narrative: &;
