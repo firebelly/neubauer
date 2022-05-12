@@ -156,8 +156,10 @@
 {% set tabIndex = tabSlug == 'news' ? 'news': "#{tabSlug}Index" %}
 {# TODO: news goes to /about #}
 {% set tabURL = craft.entries().section(tabIndex).one().uri %}
-{% set cardPrompt, cardAction = entry["#{tabSlug}Card"]['prompt'], entry["#{tabSlug}Card"]['action'] %}
-
+{% set cardCall = entry["#{tabSlug}Card"] is not nill and entry["#{tabSlug}Card"]|length > 0 ? entry["#{tabSlug}Card"].one() : null %}
+{% if cardCall %}
+{% set cardPrompt, cardAction = cardCall['prompt'], cardCall['action'] %}
+{% endif %}
 {% set cardObj = {
     'assetSizes': utils.getAssetSizes(tabSlug,'homepage'),
     'cardVariant': tabSlug
