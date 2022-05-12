@@ -6897,10 +6897,16 @@ img {
 }
 .homepageCarousel--features .homepageCarousel-slides {
   padding-bottom: 0;
+  padding-right: 0;
 }
 @media (min-width: 768px) {
   .homepageCarousel--features .homepageCarousel-slides {
     height: 820px;
+  }
+}
+@media (min-width: 768px) {
+  .homepageCarousel-slides > * {
+    width: calc(50% - 12em);
   }
 }
 

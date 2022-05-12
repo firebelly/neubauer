@@ -461,11 +461,18 @@
 
 		#{$carousel}--features & {
 			padding-bottom: 0;
+			padding-right: 0;
 
 			@include breakpoint(sm) {
 				height: 820px;
 			}
 
+		}
+
+		@include breakpoint(sm) {
+			> * {
+				width: calc(50% - 12em);
+			}
 		}
 	}
 
