@@ -364,7 +364,10 @@
     {% set teamSizes = utils.getAssetSizes('people','card') %} 
     {% for member in team %}
         {% set teamName,teamEntry,teamObj,teamVariant = 'interiorTeam-item',member,{},'' %}
-        {% set teamObj = teamObj|merge({'assetSizes': teamSizes})%}
+        {% set teamObj = teamObj|merge({
+            'assetSizes': teamSizes,
+            'trimContent': 300
+        })%}
         {{ cards.cardArticle(teamName,teamEntry,teamObj,teamVariant) }}
     {% endfor %}
     </div>

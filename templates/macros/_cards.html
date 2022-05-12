@@ -40,6 +40,9 @@
 {% set isBio = (entrySection == 'people') %}
 {% set isPeopleDirectory = (cardVariant == 'people' and cardName != 'peopleSlide' ) %}
 
+{# Project-specific #}
+{% set isProjectPerson = (cardName == 'interiorTeam-item') %}
+
 {# Event-specific #}
 {# ugh #}
 {% set isEventSlide = (cardName == 'eventsSlide') %}
@@ -82,12 +85,7 @@
         {% endif %}
     </picture>
     {% elseif isBio %}
-    {% if cardName == 'interiorTeam-item' %}
-    {# ew #}
-    <div data-team-image="none"></div>
-    {% else %}
     <div class="{{ cardName }}-asset--ghost"></div>
-    {% endif %}
     {% endif %}
 
     <div class="{{ cardName }}-details">
@@ -162,7 +160,7 @@
         {% endif %}
 
         {# Card: Date #}
-        {% if cardDate and not isNewsSlide %}
+        {% if cardDate and not isNewsSlide and not isProjectPerson %}
         <time 
             class="{{ cardName }}-dateblock"
             datetime="">
