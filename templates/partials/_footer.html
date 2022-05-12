@@ -74,6 +74,9 @@
                         href="{{ actionUrl }}{% if actionType == 'internalLink' and actionBlock.anchor != '' %}{{ actionBlock.anchor }}{% endif %}"
                         {% if actionType == 'externalLink' %}
                         target="_blank"
+                        {% endif %}
+                        {% if actionType == 'internalLink' and actionBlock.anchor != '' %}
+                        data-hash-scroll
                         {% endif %}>
                         <span class="footerNav-go-label">{{ navItem.heading }}</span>
                         <svg 

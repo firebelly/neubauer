@@ -1,6 +1,7 @@
 // Import local dependencies
 import appState from './utils/appState';
 import appForms from './utils/appForms';
+import hashScroll from './components/hashScroll';
 import tabbedContent from './components/tabbedContent';
 import accordionMenu from './components/accordionMenu';
 import flyoutContent from './components/flyoutContent';
@@ -9,12 +10,14 @@ import parallaxContent from './components/parallaxContent';
 import scrollCarousel from './components/scrollCarousel';
 import scrollChyron from './components/scrollChyron';
 
+
 // Inits
 appState.init();
 
 appForms.init();
 
 // Components
+hashScroll.init();
 accordionMenu.init();
 flyoutContent.init('nav');
 dialogContent.init({
