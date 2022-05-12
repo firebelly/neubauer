@@ -3773,6 +3773,8 @@ img {
 ------------------------------------------------------------------------ */
 .primaryFooter {
   position: relative;
+}
+.primaryContent--homepage + .primaryFooter {
   z-index: 1;
 }
 

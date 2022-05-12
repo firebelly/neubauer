@@ -263,7 +263,12 @@ $red-secondary: nth($red-theme,2);
 ------------------------------------------------------------------------ */
 .primaryFooter {
 	position: relative;
-	z-index: 1; //wut
+
+	.primaryContent--homepage + & {
+		// time sensitive terrible hack
+		z-index: 1; 
+	}
+
 }
 
 /* ---------------------------------------------------------------------
