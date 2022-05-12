@@ -173,7 +173,7 @@
 			{% endfor %}
 
 			{% if cardCall %}
-			{% set prompt = cardCall.prompt %}
+			{% set prompt = cardCall['prompt'] %}
 			{% set action = cardCall.action %}
 			<div class="{{ cardName }} {{ cardName }}--call" data-test-qa="{{ cardCall|json_encode }}">
 				<div class="{{ cardName }}-wrap">
