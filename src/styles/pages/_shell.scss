@@ -624,6 +624,10 @@ $red-secondary: nth($red-theme,2);
 			fill: getColor('white');
 		}
 
+		&-label {
+			pointer-events: none;
+		}
+
 	}
 
 	&-logo {

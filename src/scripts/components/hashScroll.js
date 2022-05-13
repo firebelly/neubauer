@@ -9,11 +9,18 @@ const hashScroll = {
 
         hashies.forEach(function(item) {
 
-            item.addEventListener('click', (e) => {
-                // e.stopPropagation();
-                // e.preventDefault();
+            item.addEventListener('click',(e) => {
                 
-                // console.log(e);
+                e.stopPropagation();
+                e.preventDefault();
+                
+                let myHash    = e.target.hash,
+                    hashHomie = document.querySelector(myHash); 
+                
+                    console.log(myHash, hashHomie);
+
+                hashHomie.scrollIntoView();
+ 
 
             });
 

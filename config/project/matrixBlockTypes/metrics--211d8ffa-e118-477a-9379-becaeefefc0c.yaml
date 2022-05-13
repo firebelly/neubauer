@@ -26,7 +26,7 @@ fieldLayouts:
         sortOrder: 1
 fields:
   5ba5eada-4ccb-4ca0-a520-75a5754991f9: # Caption
-    columnSuffix: pfjziheq
+    columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: caption
@@ -54,7 +54,7 @@ fields:
     translationMethod: none
     type: craft\redactor\Field
   fc6b0492-412d-4f80-89fc-b9b73ebdb601: # Statistic
-    columnSuffix: hylsyutn
+    columnSuffix: null
     contentColumnType: text
     fieldGroup: null
     handle: statistic

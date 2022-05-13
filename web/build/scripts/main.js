@@ -252,33 +252,6 @@ var flyoutContent = {
 
 /***/ }),
 
-/***/ "./src/scripts/components/hashScroll.js":
-/*!**********************************************!*\
-  !*** ./src/scripts/components/hashScroll.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-// hashScroll
-var hashScroll = {
-  init: function init() {
-    var self = this;
-    var hashies = document.querySelectorAll('[data-hash-scroll]');
-    hashies.forEach(function (item) {
-      item.addEventListener('click', function (e) {// e.stopPropagation();
-        // e.preventDefault();
-        // console.log(e);
-      });
-    });
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (hashScroll);
-
-/***/ }),
-
 /***/ "./src/scripts/components/parallaxContent.js":
 /*!***************************************************!*\
   !*** ./src/scripts/components/parallaxContent.js ***!
@@ -633,6 +606,25 @@ var scrollChyron = /*#__PURE__*/function () {
       self.chyron.scrollTo(self.chyron.scrollLeft + 1, 0);
     }
   }, {
+    key: "hashScroll",
+    value: function hashScroll() {
+      // chyron scroll event is interfering with scrollto event
+      // more time, better code, but for now...
+      var self = this;
+      var hashies = document.querySelectorAll('[data-hash-scroll]');
+      hashies.forEach(function (item) {
+        item.addEventListener('click', function (e) {
+          e.stopPropagation();
+          e.preventDefault();
+          var myHash = e.target.hash,
+              hashHomie = document.querySelector(myHash),
+              hashTop = hashHomie.offsetTop;
+          self._paused = true;
+          window.scrollTo(0, hashTop);
+        });
+      });
+    }
+  }, {
     key: "init",
     value: function init() {
       var self = this;
@@ -652,6 +644,7 @@ var scrollChyron = /*#__PURE__*/function () {
           // Only play chyron when in view
           self._paused = self.isChyronInView(self.chyron) ? false : true;
         });
+        self.hashScroll();
       });
     }
   }]);
@@ -927,16 +920,14 @@ var tabbedContent = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_appState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/appState */ "./src/scripts/utils/appState.js");
 /* harmony import */ var _utils_appForms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/appForms */ "./src/scripts/utils/appForms.js");
-/* harmony import */ var _components_hashScroll__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/hashScroll */ "./src/scripts/components/hashScroll.js");
-/* harmony import */ var _components_tabbedContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/tabbedContent */ "./src/scripts/components/tabbedContent.js");
-/* harmony import */ var _components_accordionMenu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/accordionMenu */ "./src/scripts/components/accordionMenu.js");
-/* harmony import */ var _components_flyoutContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/flyoutContent */ "./src/scripts/components/flyoutContent.js");
-/* harmony import */ var _components_dialogContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/dialogContent */ "./src/scripts/components/dialogContent.js");
-/* harmony import */ var _components_parallaxContent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/parallaxContent */ "./src/scripts/components/parallaxContent.js");
-/* harmony import */ var _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/scrollCarousel */ "./src/scripts/components/scrollCarousel.js");
-/* harmony import */ var _components_scrollChyron__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/scrollChyron */ "./src/scripts/components/scrollChyron.js");
+/* harmony import */ var _components_tabbedContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/tabbedContent */ "./src/scripts/components/tabbedContent.js");
+/* harmony import */ var _components_accordionMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/accordionMenu */ "./src/scripts/components/accordionMenu.js");
+/* harmony import */ var _components_flyoutContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/flyoutContent */ "./src/scripts/components/flyoutContent.js");
+/* harmony import */ var _components_dialogContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/dialogContent */ "./src/scripts/components/dialogContent.js");
+/* harmony import */ var _components_parallaxContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/parallaxContent */ "./src/scripts/components/parallaxContent.js");
+/* harmony import */ var _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/scrollCarousel */ "./src/scripts/components/scrollCarousel.js");
+/* harmony import */ var _components_scrollChyron__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/scrollChyron */ "./src/scripts/components/scrollChyron.js");
 // Import local dependencies
-
 
 
 
@@ -950,24 +941,23 @@ __webpack_require__.r(__webpack_exports__);
 _utils_appState__WEBPACK_IMPORTED_MODULE_0__["default"].init();
 _utils_appForms__WEBPACK_IMPORTED_MODULE_1__["default"].init(); // Components
 
-_components_hashScroll__WEBPACK_IMPORTED_MODULE_2__["default"].init();
-_components_accordionMenu__WEBPACK_IMPORTED_MODULE_4__["default"].init();
-_components_flyoutContent__WEBPACK_IMPORTED_MODULE_5__["default"].init('nav');
-_components_dialogContent__WEBPACK_IMPORTED_MODULE_6__["default"].init({
+_components_accordionMenu__WEBPACK_IMPORTED_MODULE_3__["default"].init();
+_components_flyoutContent__WEBPACK_IMPORTED_MODULE_4__["default"].init('nav');
+_components_dialogContent__WEBPACK_IMPORTED_MODULE_5__["default"].init({
   id: 'resultsFilter',
   gallery: false
 });
-_components_dialogContent__WEBPACK_IMPORTED_MODULE_6__["default"].init({
+_components_dialogContent__WEBPACK_IMPORTED_MODULE_5__["default"].init({
   id: 'artModal',
   gallery: true
 });
 
 if (document.querySelectorAll('[role="tablist"]').length > 0) {
-  _components_tabbedContent__WEBPACK_IMPORTED_MODULE_3__["default"].init();
+  _components_tabbedContent__WEBPACK_IMPORTED_MODULE_2__["default"].init();
 } // Homepage Parallax
 
 
-var homepageCover = new _components_parallaxContent__WEBPACK_IMPORTED_MODULE_7__["default"]({
+var homepageCover = new _components_parallaxContent__WEBPACK_IMPORTED_MODULE_6__["default"]({
   _id: 'cover'
 });
 
@@ -976,7 +966,7 @@ if (homepageCover.images !== null || homepageCover.titles !== null) {
 } // Homepage Carousels:
 
 
-var peopleCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_8__["default"]({
+var peopleCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_7__["default"]({
   _id: 'people'
 });
 
@@ -984,7 +974,7 @@ if (peopleCarousel.carousel !== null) {
   peopleCarousel.init();
 }
 
-var eventsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_8__["default"]({
+var eventsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_7__["default"]({
   _id: 'events'
 });
 
@@ -992,7 +982,7 @@ if (eventsCarousel.carousel !== null) {
   eventsCarousel.init();
 }
 
-var newsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_8__["default"]({
+var newsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_7__["default"]({
   _id: 'news'
 });
 
@@ -1001,7 +991,7 @@ if (newsCarousel.carousel !== null) {
 } // Chyron
 
 
-var footerChyron = new _components_scrollChyron__WEBPACK_IMPORTED_MODULE_9__["default"]({
+var footerChyron = new _components_scrollChyron__WEBPACK_IMPORTED_MODULE_8__["default"]({
   _id: 'footer'
 });
 

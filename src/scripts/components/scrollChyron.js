@@ -78,6 +78,35 @@ class scrollChyron {
 
     }
 
+    hashScroll() {
+        // chyron scroll event is interfering with scrollto event
+        // more time, better code, but for now...
+        let self = this;
+    
+        let hashies = document.querySelectorAll('[data-hash-scroll]');
+
+        hashies.forEach(function(item) {
+
+            item.addEventListener('click',(e) => {
+                
+                e.stopPropagation();
+                e.preventDefault();
+                
+                let myHash    = e.target.hash,
+                    hashHomie = document.querySelector(myHash),
+                    hashTop   = hashHomie.offsetTop;
+
+                self._paused = true;
+               
+                window.scrollTo(0,hashTop);
+ 
+            });
+
+        });
+        
+    }
+
+
     init() {
 
         let self = this;
@@ -97,6 +126,8 @@ class scrollChyron {
                 self._paused = self.isChyronInView(self.chyron) ? false : true;
 
             });
+
+            self.hashScroll();
 
         });
         

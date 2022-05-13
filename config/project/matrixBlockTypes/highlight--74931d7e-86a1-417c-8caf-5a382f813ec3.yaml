@@ -29,7 +29,7 @@ fields:
       limit: '1'
       localizeRelations: false
       selectionLabel: 'Select a project'
-      showSiteMenu: false
+      showSiteMenu: true
       source: null
       sources:
         - 'section:2098244b-aca8-47e2-98e7-0c0b057e76c9' # Projects

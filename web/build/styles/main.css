@@ -4354,6 +4354,9 @@ img {
 .footerNav-go-icon {
   fill: #FFFFFF;
 }
+.footerNav-go-label {
+  pointer-events: none;
+}
 .footerNav-logo {
   display: inline-flex;
   margin-bottom: 5em;
