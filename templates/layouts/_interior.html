@@ -153,7 +153,7 @@
             <ul class="interiorIntro-team-list">
                 {% for member in team %}
                 <li class="interiorIntro-team-item">
-                    <a href="{{ member.uri }}">{{ member.title }}</a>{{ loop.last ? '' : ', &nbsp;' }}
+                    <a href="{{ siteUrl }}{{ member.uri }}">{{ member.title }}</a>{{ loop.last ? '' : ', &nbsp;' }}
                 </li>
                 {% endfor %}
             </ul>
