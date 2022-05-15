@@ -15,6 +15,14 @@ appState.init();
 
 appForms.init();
 
+// Chyron
+const footerChyron = new scrollChyron({
+    _id: 'footer'
+});
+if ( footerChyron.chyron !== null ) {
+    footerChyron.init();
+}
+
 // Components
 accordionMenu.init();
 flyoutContent.init('nav');
@@ -59,10 +67,3 @@ if ( newsCarousel.carousel !== null ) {
     newsCarousel.init();
 }
 
-// Chyron
-const footerChyron = new scrollChyron({
-    _id: 'footer'
-});
-if ( footerChyron.chyron !== null ) {
-    footerChyron.init();
-}

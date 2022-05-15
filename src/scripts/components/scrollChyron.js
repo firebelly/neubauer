@@ -106,6 +106,43 @@ class scrollChyron {
         
     }
 
+    dialogScroll() {
+        // should have set this up differently
+
+        let self = this;
+
+        let dialogTrigger = document.querySelectorAll('[data-a11y-dialog-show]');
+
+        dialogTrigger.forEach(function(item) {
+
+            // item.addEventListener('click',(e) => {
+                
+            //     e.stopPropagation();
+            //     e.preventDefault();
+
+            //     let myHash    = e.target.hash,
+            //         hashHomie = document.querySelector(myHash);
+            //         // hashTop   = hashHomie.offsetTop;
+
+            //     let dialogContainer = document.getElementById('artModal_dialog'),
+            //         dialogList      = document.getElementById('artModal_container');
+            //         // dialogHeight    = dialogContainer.offsetHeight,
+            //         // listHeight      = dialogList.offsetHeight;
+                
+            //     // console.log(hashTop,dialogContainer,listHeight);
+
+            //     self._paused = true;
+
+            //     dialogContainer.addEventListener('scroll', function() {
+            //         console.log('scrolling in modal');
+            //     });
+ 
+            // });
+
+        });
+
+    }
+
 
     init() {
 
@@ -128,6 +165,7 @@ class scrollChyron {
             });
 
             self.hashScroll();
+            self.dialogScroll();
 
         });
         

@@ -24,8 +24,9 @@
 {% set overlay, query, sort, date, layout = overlay ?? 'off', query ?? '', sort ?? 'asc', date ?? '', layout ?? 'grid' %}
 {% set section = isSearchIndex ? (section ?? 'all') : indexSlug %}
 {# idx-specific filters #}
-{% set status = status ?? 'all' %}
+{% set status = status ?? 'active' %}
 {% set person = person ?? 'all' %}
+{% set personStatus = personStatus ?? 'current' %}
 {% set shindig = shindig ?? 'upcoming' %}
 {% set show = show ?? 'all' %}
 
@@ -52,6 +53,7 @@
 {{ hiddenInput('layout', layout) }}
 {{ hiddenInput('status', status) }}
 {{ hiddenInput('person', person) }}
+{{ hiddenInput('personStatus', personStatus) }}
 {{ hiddenInput('shindig', shindig) }}
 {{ hiddenInput('show', show) }}
 {{ hiddenInput('results', results) }}
@@ -71,7 +73,7 @@ bit of javascript to assign proper overflow style on the html tag #}
 {# Resource: https://craftcms.com/docs/3.x/relations.html#advanced-relationships #}
 {# add relatedParams to params #}
 {% set baseQuery = craft.entries() %}
-{% set sortedByDate = (section == 'events') %}
+{% set sortedByDate = (section == 'events') or (section == 'exhibitions') %}
 
 {# indices: section #}
 {% if section != 'all' %}
@@ -105,29 +107,39 @@ bit of javascript to assign proper overflow style on the html tag #}
 {# people: person type 
     IMPORTANT: this needs to follow the tag query
 #}
-{% if person and person != 'all' %}
+{% if person %}
+    {% set baseQuery = baseQuery.personTypeStatus(personStatus) %}
+    {% if person != 'all' %}
     {% set personSlug = (person == 'staff-leadership') ? 'staff,faculty-advisory-board' : person %}
     {% set personType = craft.categories().group('personTypes').slug(personSlug).all() %}
     {% set baseQuery = baseQuery.relatedTo(personType) %}
+    {% endif %}
 {% endif %}
 
 {# events: upcoming/past events #}
 {% if indexSlug == 'events' and shindig %}
+    {% set limit = 4 %}
+    {% set sortOrder = 'asc' %}
+
     {% if shindig == 'directors' %} 
     {% set eventType = craft.categories().group('eventTypes').slug('directors-lecture').one() %}
     {% set baseQuery = baseQuery.relatedTo(eventType) %}
-    {% else %}
-    {% set isFuture = (shindig == 'upcoming') %}
-    {% set timedIds = dates.toTheTimeMachine(baseQuery,isFuture) %}
-    {% set baseQuery = baseQuery.id(timedIds|json_decode) %}
     {% endif %}
+
+    {% set isAgnostic = (shindig == 'directors') ? true : false %}
+    {% set isFuture = (shindig == 'directors') ? false : (shindig == 'upcoming') %}
+    {% set sortedIds = dates.toTheTimeMachine(baseQuery,sortOrder,isAgnostic,isFuture)|trim %}
+    {% set baseQuery = craft.entries().id(sortedIds|json_decode) %}
 {% endif %}
 
 {# exhibitions: upcoming/past exhibitinos #}
-{% if indexSlug == 'exhibitions' and show and show != 'all' %}
-    {% set isFuture = (show == 'upcoming') %}
-    {% set timedIds = dates.toTheTimeMachine(baseQuery,isFuture) %}
-    {% set baseQuery = baseQuery.id(timedIds|json_decode) %} #}
+{% if indexSlug == 'exhibitions' and show %}
+    {% set limit = 11 %}
+    {% set sortOrder = 'asc' %}
+    {% set isAgnostic = (show == 'all') ? true : false %}
+    {% set isFuture = (show == 'all') ? false : (show == 'upcoming') %}
+    {% set sortedIds = dates.toTheTimeMachine(baseQuery,sortOrder,isAgnostic,isFuture)|trim %}
+    {% set baseQuery = craft.entries().id(sortedIds|json_decode) %}
 {% endif %}
 
 {% block date_directory %}
@@ -139,10 +151,18 @@ bit of javascript to assign proper overflow style on the html tag #}
 {% set byTitleExcludeArticles = "(CASE WHEN `title` LIKE 'The %' THEN SUBSTRING(`title`, 5) WHEN `title` LIKE 'A %' THEN SUBSTRING(`title`, 3) ELSE `title` END)" ~ sort %}
 {# get results #}
 {# TODO: exclude index pages from query #}
+
 {% if sortedByDate %}
-{% set currentResults = (query ? baseQuery.search(query) : baseQuery).limit(limit) %}
+{% set currentResults = (query ? baseQuery.search(query) : baseQuery).limit(limit).fixedOrder() %}
+{% else %}
+
+{% if section == 'people' %}
+{# note sprig is not updating the sort #}
+{% set currentResults = (query ? baseQuery.search(query) : baseQuery).orderBy('personLast '~ sort).limit(limit) %}
+
 {% else %}
 {% set currentResults = (query ? baseQuery.search(query) : baseQuery).orderBy(byTitleExcludeArticles).limit(limit) %}
+{% endif %}
 {% endif %}
 
 {# define pagination #}
@@ -155,14 +175,6 @@ bit of javascript to assign proper overflow style on the html tag #}
 }%}
 {# END RESULTING #}
 
-<div class="devTesting{{ env == 'dev' ? ' _is-debug' : '' }}">DEV TESTING RESULTS: 
-    <ul>
-        <li>Count: {{ results }}</li>
-        <li>People IDs: {{ peopleIds is defined ? peopleIds|length : 'N/A' }}</li>
-        <li>People Projects: {{ peopleProjects is defined ? peopleProjects|length : 'N/A' }}</li>
-        <li>Tagged People Projects: {{ taggedPeopleIds is defined ? taggedPeopleIds|json_encode : 'N/A' }}</li>
-    </ul>
-</div>
 
 {% if isSearchIndex %}
 {# Search Page Opener #}
@@ -310,14 +322,16 @@ bit of javascript to assign proper overflow style on the html tag #}
     {% endswitch %}
 
     {% set filterName,filterVariant,filterLabel,resultsId = 'resultsFilter',indexSlug,'Filter Results','#search_{{ searchId }}_results' %}
-    {{ controls.controlDimensions(filterName,filterVariant,filterLabel,filterList,resultsId,sort,layout,overlay) }}
+    {{ controls.controlDimensions(filterName,filterVariant,filterLabel,filterList,resultsId,sort,layout,personStatus,overlay) }}
 
 </section>
 
 <div id="indicator" class="searchIndicator"></div>
 
 {# RESULTS #}
-<section class="searchResults{% if not isSearchIndex %} searchResults--{{ section }}{% endif %}" id="search_index_results">
+<section 
+    class="searchResults{% if not isSearchIndex %} searchResults--{{ section }}{% endif %}{% if pageObj.page_info.totalPages == 1 %} _no-pagination{% endif %}" 
+    id="search_index_results">
     <h2 class="searchResults-title">Results:</h2>
 
     {% if results %}
@@ -377,7 +391,7 @@ bit of javascript to assign proper overflow style on the html tag #}
 </section>
 
 {# PAGINATION #}
-{% if results %}
+{% if results and pageObj.page_info.totalPages > 1 %}
 {% set pageName,pageRange,iconSize = 'searchPagination',5,20 %}
 {{ controls.controlPagination(pageName,pageObj,pageRange,iconSize) }} 
 {% endif %}

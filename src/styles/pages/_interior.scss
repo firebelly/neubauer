@@ -210,6 +210,10 @@
 		border: none;
 	}
 
+	&--exhibitions {
+		padding-top: 0;
+	}
+
 	@include breakpoint(sm) {
 		@include flexParent($display:flex,$values:row nowrap);
 		@include justifyContent(center);
@@ -244,6 +248,20 @@
 		&--projects {
 			@include visuallyHide;
 		}
+
+		&--exhibitions {
+			display: flex;
+			@include justifyContent(flex-end);
+		}
+
+	}
+
+	&-buttons {
+
+		&--stack {
+			width: 50%;
+		}
+
 	}
 
 	&-asset {

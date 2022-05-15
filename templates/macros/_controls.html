@@ -179,7 +179,6 @@
         {% set iconPath = "/spritemap.svg#icon-#{sortIcon}" %}
         <svg class="{{ sortName }}-icon">
             <use xlink:href="{{ alias('@assetBasePath' ~ iconPath) }}"></use>
-            {# <use xlink:href="{{ rev(iconPath) }}"></use> #}
         </svg>
         {% endif %}
     </a>
@@ -429,7 +428,7 @@
    @overlay    {str}  - (on|off) overlay state (sm viewport or larger only)
    @iconSize   {int}  - (optional)
 #}
-{% macro controlDimensions(filterName,filterVariant = "",filterLabel,filterList,resultsId,sort,layout,overlay = "off",iconSize = 20) %}
+{% macro controlDimensions(filterName,filterVariant = "",filterLabel,filterList,resultsId,sort,layout,personStatus,overlay = "off",iconSize = 20) %}
 
 {# If active tags... #}
 {% set activeTags = filterList|map(obj => (obj.slug == 'tags' ? obj.active : ''))|join('') %} 
@@ -448,6 +447,7 @@ Section: {{ activeSection }} #}
 {% set closePath = "/spritemap.svg#icon-close-#{iconSize}" %}
 {% set arrowPath = "/spritemap.svg#icon-arrow-right-#{iconSize}" %}
 {% set sortTogglePath = "/spritemap.svg#icon-sort-toggle" %}
+{% set checkPath = "/spritemap.svg#icon-checkmark-20" %}
 
 <div class="{{ filterName }} {{ filterName }}--{{ filterVariant }}">
 
@@ -477,6 +477,26 @@ Section: {{ activeSection }} #}
             <h4 class="{{ filterName }}-layout-title">Toggle View</h4>
             {% set layoutName,layoutOptions,activeLayout,layoutVariant = "#{filterName}-layout",['grid','list'],layout,'' %}
             {{ _self.controlLayout(layoutName,layoutOptions,activeLayout,layoutVariant) }}
+        </div>
+
+        {# STATUS #}
+        <div class="{{ filterName }}-status">
+            <div class="{{ filterName }}-status-control">
+                <input 
+                    class="{{ filterName }}-status-input"
+                    id="personStatus" 
+                    sprig
+                    s-val:personStatus={{ personStatus == 'current' ? 'past' : 'current' }}
+                    type="checkbox" 
+                    s-indicator="#indicator"
+                    {% if personStatus == 'current' %}checked{% endif %} />
+                <span class="{{ filterName }}-status-checkbox">
+                    <svg class="{{ filterName }}-status-icon">
+                        <use xlink:href="{{ alias('@assetBasePath' ~ checkPath) }}"></use>
+                    </svg>
+                </span>
+                <label class="{{ filterName }}-status-label" for="person-status" aria-label="Filter by person status">Show current researchers only</label>
+            </div>
         </div>
 
         {# SORT #}

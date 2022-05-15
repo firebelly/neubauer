@@ -28,13 +28,12 @@
         {% set imgId = "gallery_#{galleryImage.id}" %}
         <li class="{{ galleryName }}-thumb">
             <a 
-                href=""
+                href="#{{ imgId }}"
                 title="View large image" 
                 sprig
                 s-val:overlay="on"
                 s-val:current="{{ imgId }}"
-                data-a11y-dialog-show="artModal_dialog"
-                data-trigger-id="{{ imgId }}">
+                data-a11y-dialog-show="artModal_dialog">
                 <picture class="{{ galleryName }}-asset">
                 {% if gallerySizes %}
                     {{ assets.assetCard(galleryName,galleryImage,gallerySizes) }}
@@ -57,6 +56,7 @@
         class="{{ dialogName }}-overlay" 
         data-a11y-dialog-hide="{{ dialogName }}_dialog">
     </div>
+    
     <div 
         class="{{ dialogName }}-content" 
         id="{{ dialogName }}_content" 
@@ -107,4 +107,5 @@
             {% endfor %}
         </ul>
     </div>
+
 </div>

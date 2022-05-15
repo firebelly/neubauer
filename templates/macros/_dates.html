@@ -82,7 +82,12 @@
 </div>
 {% endmacro %}
 
+{# getDateByType: 
 
+@param dateObj {obj}   - Date object lives within a dateBlock matrix due to differences in formatting and content needs
+@param dateType {str}  - Date matrix block item type
+@return thisDate {str}  
+#}
 {% macro getDateByType(dateObj,dateType) %}
     {% set date_format = 'Y-m-d' %}
     {% set thisDate = null%}
@@ -111,9 +116,8 @@
 {% endmacro %}
 
 {# toTheTimeMachine: #}
-{% macro toTheTimeMachine(baseQuery,future = true) %}
-    {% set timeMachineIds = [] %}
-    {% set sortedIds = [] %}
+{% macro toTheTimeMachine(baseQuery,sortOrder = 'asc',isAgnostic = true,isFuture = true) %}
+    {% set sortedIds, sortedEntries = [], [] %}
     {% set date_format = 'Y-m-d' %}
     {% set today = now|date('Y-m-d') %}
     {% set datedEntries = baseQuery
@@ -125,26 +129,28 @@
         {% set dateObj =  entry.dateBlock[0] %}
         {% set dateType = dateObj.type %}
         {% set thisDate = _self.getDateByType(dateObj,dateType)|json_decode %}
-
-        {% if '-' not in thisDate %}
+        
+        {% if thisDate and (dateType == 'yearRange' or dateType == 'dateByYear') %}
         {# eh, normalize years-only #}
         {% set thisDate = "#{thisDate}-01-01" %}
         {% endif %}
 
-        {% if thisDate and ((future and today <= thisDate) or (not future and today > thisDate)) %}
-            {% set timeMachineIds = timeMachineIds|merge([entry.id]) %}
-            {# {% set sortedIds = sortedIds|merge([{sortDate: thisDate, sortId: entry.id}]) %} #}
-            {# {% set sortedIds = sortedIds|merge([{(entryId): thisDate}]) %} #}
+        {% if thisDate and ((isAgnostic) or (isFuture and today <= thisDate) or (not isFuture and today > thisDate)) %}
+            {% set sortedEntries = sortedEntries|merge([{
+                'sortId': entry.id,
+                'sortDate': thisDate
+            }]) %}
         {% endif %}
     {% endfor %}
+    {% if datedEntries %}
+    {% set sortedIds = sortedEntries|sort((a,b) => a.sortDate <=> b.sortDate)|column('sortId') %}
+    {% if sortOrder == 'asc' %}
+    {% set sortedIds = sortedIds|reverse %}
+    {% endif %}
+    {% endif %} 
+    
+    {{ sortedIds|json_encode }}
 
-    {# {% set timeMachineIds = timeMachineIds|merge(sortedIds|sort((a,b) => a.sortDate <=> b.sortDate)|column('sortId')) %}  #}
-
-    {# {% for entryId in sortedIds|sort((a,b) => a|keys[0] <=> b|keys[0]) %} 
-        {% set timeMachineIds = timeMachineIds|merge([entryId]) %}
-    {% endfor %} #}
-
-    {{ timeMachineIds|json_encode }}
 {% endmacro %}
 
 

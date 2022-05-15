@@ -400,6 +400,76 @@
 
 }
 
+
+/* -------------------------------------------------------------------------------
+ Status Control: Structure
+---------------------------------------------------------------------------------- */
+@mixin controlStatus($selector,$default:true) {
+
+    $size: 20px;
+    $border-size: 1px;
+    $triggerThreshold: 250%;
+    $color: getColor('blue');
+
+    #{$selector} {
+        font-size: 1rem;
+
+        &-control {
+            @include flexParent();
+            height: $size;
+            position: relative;
+        }
+
+        &-input { 
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            z-index: 2;
+            position: absolute;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+        }
+
+        &-checkbox,
+        &-label {
+            position: relative;
+            z-index: 1;  
+        }
+
+        &-checkbox {
+            border: 1px solid $color;
+            display: block;
+            height: $size;
+            width: $size;
+            margin-right: 1em;
+        }
+
+        &-icon {
+            height: $size;
+            width: $size;
+            fill: $color;
+            @include totallyHide;
+
+            #{$selector}-input:checked + #{$selector}-checkbox & {
+                @include totallyShow;
+            }
+
+        }
+
+        &-label {
+            @include getType('caption');
+        }
+
+    }
+
+}
+
+
 /* -------------------------------------------------------------------------------
  Pagination Control: Structure
 ---------------------------------------------------------------------------------- */

@@ -1,6 +1,6 @@
 {
     "/build/scripts/spritemap.js": "/build/scripts/spritemap.js?id=164c4c658f9eb07c6521825443db1dd1",
-    "/build/scripts/main.js": "/build/scripts/main.js?id=abc4439d6a126bd7a90d06495c46b50f",
+    "/build/scripts/main.js": "/build/scripts/main.js?id=e700c21b57b60f129e723bdde5453bd7",
     "/build/scripts/manifest.js": "/build/scripts/manifest.js?id=5b146026d602d1c7edde0ac09ee95d92",
     "/build/scripts/vendor.js": "/build/scripts/vendor.js?id=f1c9a31076147e70992774f5b9b631aa",
     "/build/images/.DS_Store": "/build/images/.DS_Store?id=a5c74e9c489ea7a65e52ff6f9ce33784",
@@ -33,6 +33,7 @@
     "/build/svgs/logo-neubauer.svg": "/build/svgs/logo-neubauer.svg?id=cf9b5cc20b4c62972bf09067e0901413",
     "/build/svgs/logo-uchicago.svg": "/build/svgs/logo-uchicago.svg?id=8950c004f4995c00af77e508d8a07b37",
     "/build/videos/.DS_Store": "/build/videos/.DS_Store?id=08d64e1f9a81716cc133f85ad441757e",
-    "/build/spritemap.svg": "/build/spritemap.svg?id=97bb93d1e2d081da059987499f94585d",
-    "/build/styles/main.css": "/build/styles/main.css?id=6aa2796b8047835a0a8bf0f805707aff"
+    "/build/spritemap.svg": "/build/spritemap.svg?id=9cb19c4b517df896c61205b61d1acad5",
+    "/build/styles/main.css": "/build/styles/main.css?id=0a212978ee7169fde5b1901f65812cf4",
+    "/build/svgs/icon-checkmark-20.svg": "/build/svgs/icon-checkmark-20.svg?id=6d74d7d128df1539caf87adcd322ecb5"
 }

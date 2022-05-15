@@ -204,7 +204,7 @@
 {% endif %}
 
 {% if openerImage %}
-<div class="interiorCover-frame">
+<figure class="interiorCover-frame">
     {% if openerImage %}
     {% set openerName = 'interiorCover-asset' %}
     {% set openerSizes = utils.getAssetSizes(entrySection,'interior')|json_decode %}
@@ -216,8 +216,8 @@
         {% endif %}
     </picture>
     {% endif %}
-    <div class="interiorCover-caption">{{ openerImage.one().caption }}</div>
-</div>
+    <figcaption class="interiorCover-caption">{{ openerImage.one().caption }}</figcaption>
+</figure>
 {% endif %}
 
 {# todo: streamline this #}
@@ -246,42 +246,40 @@
         {% if entrySection in ['people','events'] %}
         {% if cardImage %}
         {% set imageCaption = cardImage.one().caption ? cardImage.one().caption : null %}
-        <{{ imageCaption ? 'figure' : 'picture' }} class="interiorSummary-asset">
+        <figure class="interiorSummary-asset">
             {% set interiorSizes = utils.getAssetSizes(entrySection,'interior')|json_decode %}
             {% set imageName,imageObj = "interiorSummary-asset",cardImage %}
-            {{ assets.assetCard(imageName,imageObj,interiorSizes) }}
-
-            {% if imageCaption %}
+            <picture>{{ assets.assetCard(imageName,imageObj,interiorSizes) }}</picture>
             <figcaption class="interiorSummary-caption">{{ imageCaption }}</figcaption>
-            {% endif %}
-        </{{ imageCaption ? 'figure' : 'picture' }}>
+        </figure>
         {% endif %}
         {% endif %}
 
         {% if entrySection == 'exhibitions' %}
         {% if actionBlock %}
-        <div class="interiorSummary-buttons interiorSummary-buttons--stack">
+        <ul class="interiorSummary-buttons interiorSummary-buttons--stack">
             {% for item in actionBlock %}
             {% set actionType = item.type %}
             {% set actionURL = item.actionURL %}
             {% set actionPDF = (actionType == 'download' and actionURL|length > 0) ? actionURL.one().url : null %}
-            
-            <a 
-                class="interiorSummary-action interiorSummary-action--link"
-                href="{% if actionPDF %}{{ actionPDF }}{% endif %}"
-                title=""
-                role=""
-                {% if actionPDF %}
-                download
-                {% endif %}>
-                <span class="interiorSummary-action-label">{% if item.actionText %}{{ item.actionText }}{% endif %}</span>
-                <svg class="interiorSummary-action-icon">
-                    <use xlink:href="{{ alias('@assetBasePath' ~ downloadPath) }}"></use>
-                </svg>
-            </a>
+            <li>
+                <a 
+                    class="interiorSummary-action interiorSummary-action--link"
+                    href="{% if actionPDF %}{{ actionPDF }}{% endif %}"
+                    title=""
+                    role=""
+                    {% if actionPDF %}
+                    download
+                    {% endif %}>
+                    <span class="interiorSummary-action-label">{% if item.actionText %}{{ item.actionText }}{% endif %}</span>
+                    <svg class="interiorSummary-action-icon">
+                        <use xlink:href="{{ alias('@assetBasePath' ~ downloadPath) }}"></use>
+                    </svg>
+                </a>
+            </li>
             {% endfor %}
 
-        </div>
+        </ul>
         {% endif %}
         {% endif %}
     </div>

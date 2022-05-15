@@ -143,24 +143,9 @@ var dialogContent = {
           html = document.documentElement; // overflow settings are incompatible with sprig 
       // for reasons I don't have time to figure out
       // html.style.overflowY = 'hidden' (probs a race condition)
-
-      dialog.on('show', function (el, e) {
-        if (isGallery) {
-          var galleryContent = dialogContainer.querySelector("#".concat(dialogId, "_content")),
-              galleryList = dialogContainer.querySelector("#".concat(dialogId, "_list")),
-              currentId = e.currentTarget.getAttribute('data-trigger-id'),
-              currentItem = galleryList.querySelector("#".concat(currentId));
-          var currentOffset = currentItem.offsetTop;
-          console.log('open', dialogContainer.scrollTop);
-          document.location.hash = "#".concat(currentId); // galleryContent.addEventListener("scroll", event => {
-          //     console.log(`scrollTop: ${galleryContent.scrollTop}`);
-          // });
-          // //dialogContainer.scrollTo(0,currentOffset);
-          // currentItem.addEventListener('load', () => {
-          //     console.log('load');
-          // });
-        }
-      });
+      // dialog.on(
+      //     'show', (el,e) => {}
+      // );
     }
   }
 };
@@ -625,6 +610,30 @@ var scrollChyron = /*#__PURE__*/function () {
       });
     }
   }, {
+    key: "dialogScroll",
+    value: function dialogScroll() {
+      // should have set this up differently
+      var self = this;
+      var dialogTrigger = document.querySelectorAll('[data-a11y-dialog-show]');
+      dialogTrigger.forEach(function (item) {// item.addEventListener('click',(e) => {
+        //     e.stopPropagation();
+        //     e.preventDefault();
+        //     let myHash    = e.target.hash,
+        //         hashHomie = document.querySelector(myHash);
+        //         // hashTop   = hashHomie.offsetTop;
+        //     let dialogContainer = document.getElementById('artModal_dialog'),
+        //         dialogList      = document.getElementById('artModal_container');
+        //         // dialogHeight    = dialogContainer.offsetHeight,
+        //         // listHeight      = dialogList.offsetHeight;
+        //     // console.log(hashTop,dialogContainer,listHeight);
+        //     self._paused = true;
+        //     dialogContainer.addEventListener('scroll', function() {
+        //         console.log('scrolling in modal');
+        //     });
+        // });
+      });
+    }
+  }, {
     key: "init",
     value: function init() {
       var self = this;
@@ -645,6 +654,7 @@ var scrollChyron = /*#__PURE__*/function () {
           self._paused = self.isChyronInView(self.chyron) ? false : true;
         });
         self.hashScroll();
+        self.dialogScroll();
       });
     }
   }]);
@@ -939,7 +949,16 @@ __webpack_require__.r(__webpack_exports__);
  // Inits
 
 _utils_appState__WEBPACK_IMPORTED_MODULE_0__["default"].init();
-_utils_appForms__WEBPACK_IMPORTED_MODULE_1__["default"].init(); // Components
+_utils_appForms__WEBPACK_IMPORTED_MODULE_1__["default"].init(); // Chyron
+
+var footerChyron = new _components_scrollChyron__WEBPACK_IMPORTED_MODULE_8__["default"]({
+  _id: 'footer'
+});
+
+if (footerChyron.chyron !== null) {
+  footerChyron.init();
+} // Components
+
 
 _components_accordionMenu__WEBPACK_IMPORTED_MODULE_3__["default"].init();
 _components_flyoutContent__WEBPACK_IMPORTED_MODULE_4__["default"].init('nav');
@@ -988,15 +1007,6 @@ var newsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_7__["
 
 if (newsCarousel.carousel !== null) {
   newsCarousel.init();
-} // Chyron
-
-
-var footerChyron = new _components_scrollChyron__WEBPACK_IMPORTED_MODULE_8__["default"]({
-  _id: 'footer'
-});
-
-if (footerChyron.chyron !== null) {
-  footerChyron.init();
 }
 
 /***/ }),

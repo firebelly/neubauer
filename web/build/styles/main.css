@@ -339,6 +339,9 @@ Usage: @include breakpoint(md);
  Layout Control: Default Presentation
 ---------------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------------
+ Status Control: Structure
+---------------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------------
  Pagination Control: Structure
 ---------------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------------
@@ -7651,6 +7654,62 @@ img {
 .resultsFilter--exhibitions .resultsFilter-trigger--filter {
   display: none;
 }
+.resultsFilter-status {
+  display: none;
+}
+.resultsFilter-status {
+  font-size: 1rem;
+}
+.resultsFilter-status-control {
+  display: flex;
+  flex-flow: row wrap;
+  height: 20px;
+  position: relative;
+}
+.resultsFilter-status-input {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 2;
+  position: absolute;
+}
+.resultsFilter-status-input:hover {
+  cursor: pointer;
+}
+.resultsFilter-status-checkbox, .resultsFilter-status-label {
+  position: relative;
+  z-index: 1;
+}
+.resultsFilter-status-checkbox {
+  border: 1px solid #1C2AA7;
+  display: block;
+  height: 20px;
+  width: 20px;
+  margin-right: 1em;
+}
+.resultsFilter-status-icon {
+  height: 20px;
+  width: 20px;
+  fill: #1C2AA7;
+  display: none;
+  visibility: hidden;
+}
+.resultsFilter-status-input:checked + .resultsFilter-status-checkbox .resultsFilter-status-icon {
+  display: block;
+  visibility: visible;
+}
+.resultsFilter-status-label {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+}
+
+.resultsFilter--people .resultsFilter-status {
+  display: flex;
+  flex-flow: row wrap;
+  align-self: center;
+  flex-basis: 252px;
+}
 .resultsFilter-layout {
   display: none;
 }
@@ -7806,6 +7865,9 @@ img {
 .searchResults--exhibitions {
   margin: 4em 0 0 0;
   padding: 0;
+}
+.searchResults._no-pagination {
+  padding-bottom: 8em;
 }
 .searchResults-title {
   border: 0;
@@ -13161,6 +13223,9 @@ img {
   padding: 8em 0 0 0;
   border: none;
 }
+.interiorSummary--exhibitions {
+  padding-top: 0;
+}
 @media (min-width: 768px) {
   .interiorSummary {
     display: flex;
@@ -13215,6 +13280,13 @@ img {
   overflow: visible;
   position: static;
   width: auto;
+}
+.interiorSummary-frame--exhibitions {
+  display: flex;
+  justify-content: flex-end;
+}
+.interiorSummary-buttons--stack {
+  width: 50%;
 }
 .interiorSummary-asset {
   display: flex;
@@ -15203,19 +15275,28 @@ img {
     flex: 0 1 calc(25% - 0.5em);
   }
 }
+.artGallery-thumb a {
+  display: block;
+}
+.artGallery-thumb picture,
+.artGallery-thumb img {
+  pointer-events: none;
+}
 
 /* ---------------------------------------------------------------------
   Modal Gallery
 ------------------------------------------------------------------------ */
 .artModal-dialog, .artModal-overlay {
+  height: 100%;
+  width: 100%;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   position: fixed;
+  z-index: 2;
 }
 .artModal-dialog {
-  z-index: 2;
   display: flex;
   overflow-x: hidden;
   overflow-y: scroll;
