@@ -480,7 +480,7 @@ Section: {{ activeSection }} #}
         </div>
 
         {# STATUS #}
-        <div class="{{ filterName }}-status">
+        <div class="{{ filterName }}-status{% if personStatus is null %} _is-hidden{% endif %}">
             <div class="{{ filterName }}-status-control">
                 <input 
                     class="{{ filterName }}-status-input"

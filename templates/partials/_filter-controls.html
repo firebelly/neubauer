@@ -59,6 +59,11 @@
 {{ hiddenInput('results', results) }}
 {{ hiddenInput('page', page) }}
 
+{# Refine person status for non-people filter #}
+{% if section != 'people' %}
+    {% set personStatus = null %}
+{% endif %}
+
 {# NOTE:
 This is gross but the dialog.hide() method is not being triggered on close
 due to the sprig component re-render so quickest/dirtiest solution is to inject this tiny
@@ -107,7 +112,7 @@ bit of javascript to assign proper overflow style on the html tag #}
 {# people: person type 
     IMPORTANT: this needs to follow the tag query
 #}
-{% if person %}
+{% if section == 'people' %}
     {% set baseQuery = baseQuery.personTypeStatus(personStatus) %}
     {% if person != 'all' %}
     {% set personSlug = (person == 'staff-leadership') ? 'staff,faculty-advisory-board' : person %}

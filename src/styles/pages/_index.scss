@@ -111,18 +111,20 @@
 
 	&-status {
 		$status: &;
-		display: none;
-
+		@include alignSelf(center);
+		flex-basis: 252px; 
+		
 		@at-root {
-			@include controlStatus(#{$status});
+			@include controlStatus(#{$status},$default:false);
 		}
 
 		#{$filter}--people & {
-			@include flexParent();
-			@include alignSelf(center);
-			flex-basis: 252px; 
+			@include controlStatus--default(#{$status},$color:getColor('blue'));
 		}
 
+		#{$filter}--search & {
+			@include controlStatus--default(#{$status},$color:getColor('red'));
+		}
 
 	}
 

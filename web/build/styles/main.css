@@ -342,6 +342,9 @@ Usage: @include breakpoint(md);
  Status Control: Structure
 ---------------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------------
+ Status Control: Default Presentation
+---------------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------------
  Pagination Control: Structure
 ---------------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------------
@@ -7655,10 +7658,17 @@ img {
   display: none;
 }
 .resultsFilter-status {
-  display: none;
+  align-self: center;
+  flex-basis: 252px;
 }
 .resultsFilter-status {
+  display: flex;
+  flex-flow: row wrap;
   font-size: 1rem;
+}
+.resultsFilter-status._is-hidden {
+  display: none;
+  visibility: hidden;
 }
 .resultsFilter-status-control {
   display: flex;
@@ -7683,7 +7693,7 @@ img {
   z-index: 1;
 }
 .resultsFilter-status-checkbox {
-  border: 1px solid #1C2AA7;
+  border: 1px solid transparent;
   display: block;
   height: 20px;
   width: 20px;
@@ -7692,7 +7702,6 @@ img {
 .resultsFilter-status-icon {
   height: 20px;
   width: 20px;
-  fill: #1C2AA7;
   display: none;
   visibility: hidden;
 }
@@ -7704,11 +7713,17 @@ img {
   font: normal 1.6em/1.56 "apercu", sans-serif;
 }
 
-.resultsFilter--people .resultsFilter-status {
-  display: flex;
-  flex-flow: row wrap;
-  align-self: center;
-  flex-basis: 252px;
+.resultsFilter--people .resultsFilter-status .resultsFilter-status-checkbox {
+  border-color: #1C2AA7;
+}
+.resultsFilter--people .resultsFilter-status .resultsFilter-status-icon {
+  fill: #1C2AA7;
+}
+.resultsFilter--search .resultsFilter-status .resultsFilter-status-checkbox {
+  border-color: #800000;
+}
+.resultsFilter--search .resultsFilter-status .resultsFilter-status-icon {
+  fill: #800000;
 }
 .resultsFilter-layout {
   display: none;
