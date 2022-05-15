@@ -7317,6 +7317,10 @@ img {
   -webkit-align-itemspack: center;
   align-items: center;
 }
+.resultsFilter-trigger._is-hidden {
+  display: none;
+  visibility: hidden;
+}
 .resultsFilter-trigger:hover {
   cursor: pointer;
 }

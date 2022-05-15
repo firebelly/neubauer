@@ -502,7 +502,7 @@ Section: {{ activeSection }} #}
         {# SORT #}
         {% set sortOptions = ['asc','desc'] %}
         <button 
-            class="{{ filterName }}-trigger {{ filterName }}-trigger--sort"
+            class="{{ filterName }}-trigger {{ filterName }}-trigger--sort{% if filterVariant == 'exhibitions' %} _is-hidden{% endif %}"
             role="button"
             type="button"
             aria-label="Sort Alphabetically by Title"
