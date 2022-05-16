@@ -116,7 +116,7 @@
 {% endmacro %}
 
 {# toTheTimeMachine: #}
-{% macro toTheTimeMachine(baseQuery,sortOrder = 'asc',isAgnostic = true,isFuture = true) %}
+{% macro toTheTimeMachine(baseQuery,isAgnostic = true,isFuture = true) %}
     {% set sortedIds, sortedEntries = [], [] %}
     {% set date_format = 'Y-m-d' %}
     {% set today = now|date('Y-m-d') %}
@@ -125,30 +125,28 @@
         .dateBlock(':notempty:')
         .all()
     %}     
+
     {% for entry in datedEntries if entry.dateBlock[0] != "" %}
         {% set dateObj =  entry.dateBlock[0] %}
         {% set dateType = dateObj.type %}
         {% set thisDate = _self.getDateByType(dateObj,dateType)|json_decode %}
         
         {% if thisDate and (dateType == 'yearRange' or dateType == 'dateByYear') %}
-        {# eh, normalize years-only #}
         {% set thisDate = "#{thisDate}-01-01" %}
         {% endif %}
 
-        {% if thisDate and ((isAgnostic) or (isFuture and today <= thisDate) or (not isFuture and today > thisDate)) %}
+        {% if thisDate and (isAgnostic or ((isFuture and today <= thisDate) or (not isFuture and today > thisDate))) %}
             {% set sortedEntries = sortedEntries|merge([{
                 'sortId': entry.id,
                 'sortDate': thisDate
             }]) %}
         {% endif %}
     {% endfor %}
+
     {% if datedEntries %}
-    {% set sortedIds = sortedEntries|sort((a,b) => a.sortDate <=> b.sortDate)|column('sortId') %}
-    {% if sortOrder == 'asc' %}
-    {% set sortedIds = sortedIds|reverse %}
-    {% endif %}
+        {% set sortedIds = sortedEntries|sort((a,b) => a.sortDate <=> b.sortDate)|column('sortId')|reverse %}
     {% endif %} 
-    
+
     {{ sortedIds|json_encode }}
 
 {% endmacro %}

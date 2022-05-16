@@ -145,7 +145,7 @@
     }) %}
 {% case 'events' %}
     {% set eventsQuery = craft.entries.section('events') %}
-    {% set timedIds = dates.toTheTimeMachine(eventsQuery,true) %}
+    {% set timedIds = dates.toTheTimeMachine(eventsQuery,false,true) %}
     {% set eventCount = timedIds|length %}
     {# TODO #}
     {% if eventCount < 10 %}{% endif %}

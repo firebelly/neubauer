@@ -499,27 +499,32 @@ Section: {{ activeSection }} #}
             </div>
         </div>
 
-        {# SORT #}
+        {# SORT By TITLE OR DATE #}
         {% set sortOptions = ['asc','desc'] %}
+        {% set sortByTitle = (filterVariant == 'people' or filterVariant == 'projects' or (filterVariant == 'search' and (activeSection == 'all' or activeSection == 'projects' or activeSection == 'people'))) %}
+        {% set sortByDate = (filterVariant == 'events' or filterVariant == 'exhibitions' or (filterVariant == 'search' and (activeSection == 'events' or activeSection == 'exhibitions'))) %}
+    
         <button 
-            class="{{ filterName }}-trigger {{ filterName }}-trigger--sort{% if filterVariant == 'exhibitions' %} _is-hidden{% endif %}"
+            class="{{ filterName }}-trigger {{ filterName }}-trigger--sort{% if not sortByTitle and not sortByDate %} _is-hidden{% endif %}"
             role="button"
             type="button"
-            aria-label="Sort Alphabetically by Title"
+            aria-label="{% if sortByTitle %}Sort Alphabetically by Title{% endif %}{% if sortByDate %}Sort Chronologically{% endif %}"
             id="sort"
             sprig
             s-trigger="click"
             s-val:sort="{{ sortOptions|filter((option) => option != sort)|join('') }}"
             s-indicator="#indicator"
             >
-            <span class="{{ filterName }}-label {{ filterName }}-label--headline">Sort By Name {% if sort == 'asc' %}(A-Z){% else %}(Z-A){% endif %}</span>
+            <span class="{{ filterName }}-label {{ filterName }}-label--headline">
+                {% if sortByTitle %}
+                Sort By Name {% if sort == 'asc' %}(A-Z){% else %}(Z-A){% endif %}
+                {% endif %}
+                {% if sortByDate %}
+                Sort By Date
+                {% endif %}
+            </span>
             <svg class="{{ filterName }}-icon {{ filterName }}-icon--caret">
                 <use xlink:href="{{ alias('@assetBasePath' ~ sortTogglePath) }}"></use>
-                {# {% if sort == 'asc' %}
-                <use xlink:href="{{ alias('@assetBasePath' ~ caretDnPath) }}"></use>
-                {% else %}
-                <use xlink:href="{{ alias('@assetBasePath' ~ caretUpPath) }}"></use>
-                {% endif %} #}
             </svg>
         </button>
 

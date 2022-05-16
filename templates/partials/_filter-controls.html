@@ -18,7 +18,7 @@
 {# search result limit #}
 {% set limit = limit ?? 9 %}
 {# search filters #}
-{% set filters = ['section','tags','add-tag','remove-tag','search','sort'] %}
+{% set filters = ['section','tags','add-tag','remove-tag','search'] %}
 {% set trigger = sprig.trigger|split('_')[0] %}
 {# sprig default vars #}
 {% set overlay, query, sort, date, layout = overlay ?? 'off', query ?? '', sort ?? 'asc', date ?? '', layout ?? 'grid' %}
@@ -41,6 +41,9 @@
 {% if isSprig and (trigger == 'add-tag' or trigger == 'remove-tag') %}
 {% set tagsList = tags ? tags|split(',') : [] %}
 {% set tags = (trigger == 'remove-tag' ? tagsList|filter(v => v != removeTag) : tagsList|merge([addTag]))|join(',') %}
+{% endif %}
+{% if isSprig and (trigger == 'section' and sort != 'asc') %}
+{% set sort = 'asc' %}
 {% endif %}
 {# sprig update url #}
 {% do sprig.pushUrl('?' ~ {query: query, section: section, tags: tags, page: page}|url_encode) %}
@@ -122,38 +125,52 @@ bit of javascript to assign proper overflow style on the html tag #}
 {% endif %}
 
 {# events: upcoming/past events #}
-{% if indexSlug == 'events' and shindig %}
-    {% set limit = 4 %}
-    {% set sortOrder = 'asc' %}
-
+{% if (isSearchIndex and section == 'events') or indexSlug == 'events' and shindig %}
+    
     {% if shindig == 'directors' %} 
     {% set eventType = craft.categories().group('eventTypes').slug('directors-lecture').one() %}
     {% set baseQuery = baseQuery.relatedTo(eventType) %}
     {% endif %}
 
-    {% set isAgnostic = (shindig == 'directors') ? true : false %}
-    {% set isFuture = (shindig == 'directors') ? false : (shindig == 'upcoming') %}
-    {% set sortedIds = dates.toTheTimeMachine(baseQuery,sortOrder,isAgnostic,isFuture)|trim %}
-    {% set baseQuery = craft.entries().id(sortedIds|json_decode) %}
+    {% if isSearchIndex %}
+    {% set isAgnostic, isFuture = true, false %}
+    {% else %}
+    {% set limit = 4 %}
+    {% set isAgnostic = (shindig == 'directors') %}
+    {% set isFuture = (shindig == 'upcoming') %}
+    {% endif %}
+
+    {% set sortedIds = dates.toTheTimeMachine(baseQuery,isAgnostic,isFuture)|json_decode %}
+
+    {% if sort == 'desc' %}
+    {% set sortedIds = sortedIds|reverse %}
+    {% endif %}
+
+    {% set baseQuery = craft.entries().id(sortedIds) %}
 {% endif %}
 
-{# exhibitions: upcoming/past exhibitinos #}
-{% if indexSlug == 'exhibitions' and show %}
+{# exhibitions: upcoming/past exhibitions #}
+{% if (isSearchIndex and section == 'exhibitions') or (indexSlug == 'exhibitions' and show) %}
+    {% if isSearchIndex %}
+    {% set isAgnostic, isFuture = true, false %}
+    {% else %}
     {% set limit = 11 %}
-    {% set sortOrder = 'asc' %}
-    {% set isAgnostic = (show == 'all') ? true : false %}
-    {% set isFuture = (show == 'all') ? false : (show == 'upcoming') %}
-    {% set sortedIds = dates.toTheTimeMachine(baseQuery,sortOrder,isAgnostic,isFuture)|trim %}
-    {% set baseQuery = craft.entries().id(sortedIds|json_decode) %}
-{% endif %}
+    {% set isAgnostic = (show == 'all') %}
+    {% set isFuture = (show == 'upcoming') %}
+    {% endif %}
 
-{% block date_directory %}
-{# date directory is solely for dev testing #}
-{% endblock %}
+    {% set sortedIds = dates.toTheTimeMachine(baseQuery,isAgnostic,isFuture)|json_decode %}
+
+    {% if sort == 'desc' %}
+    {% set sortedIds = sortedIds|reverse %}
+    {% endif %}
+
+    {% set baseQuery = craft.entries().id(sortedIds) %}
+{% endif %}
 
 {# define sorting #}
 {% set byTitle = 'title ' ~ sort %}
-{% set byTitleExcludeArticles = "(CASE WHEN `title` LIKE 'The %' THEN SUBSTRING(`title`, 5) WHEN `title` LIKE 'A %' THEN SUBSTRING(`title`, 3) ELSE `title` END)" ~ sort %}
+{% set byTitleExcludeArticles = "(CASE WHEN `title` LIKE 'The %' THEN SUBSTRING(`title`, 5) WHEN `title` LIKE 'A %' THEN SUBSTRING(`title`, 3) WHEN `title` LIKE 'AN %' THEN SUBSTRING(`title`, 4) ELSE `title` END)" ~ sort %}
 {# get results #}
 {# TODO: exclude index pages from query #}
 
@@ -162,9 +179,7 @@ bit of javascript to assign proper overflow style on the html tag #}
 {% else %}
 
 {% if section == 'people' %}
-{# note sprig is not updating the sort #}
 {% set currentResults = (query ? baseQuery.search(query) : baseQuery).orderBy('personLast '~ sort).limit(limit) %}
-
 {% else %}
 {% set currentResults = (query ? baseQuery.search(query) : baseQuery).orderBy(byTitleExcludeArticles).limit(limit) %}
 {% endif %}
@@ -179,7 +194,6 @@ bit of javascript to assign proper overflow style on the html tag #}
     'current_page': page
 }%}
 {# END RESULTING #}
-
 
 {% if isSearchIndex %}
 {# Search Page Opener #}
@@ -377,11 +391,14 @@ bit of javascript to assign proper overflow style on the html tag #}
         })%}
 
         {% for entry in resultsByPage %}
+            {# handle unique exhibitions tmpl #}
             {% if exhibitionFeature and entry.id == exhibitionFeature.id %}
             {% set cardFeatureObj = cardObj %}
             {% set cardFeatureObj = cardFeatureObj|merge({'attrs': {'class': '_is-feature'}}) %}
             {{ cards.cardArticle(cardName,entry,cardFeatureObj) }}
+            
             {% else %}
+
             {{ cards.cardArticle(cardName,entry,cardObj) }}
             {% endif %}
         {% endfor %}
