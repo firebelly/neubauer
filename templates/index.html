@@ -118,6 +118,8 @@
 {% if cardCall %}
 {% set cardPrompt, cardAction = cardCall['prompt'], cardCall['action'] %}
 {% endif %}
+
+{% set hasEntries = true %}
 {% set cardObj = {
     'assetSizes': utils.getAssetSizes(tabSlug,'homepage'),
     'cardVariant': tabSlug
@@ -145,11 +147,11 @@
     }) %}
 {% case 'events' %}
     {% set eventsQuery = craft.entries.section('events') %}
-    {% set timedIds = dates.toTheTimeMachine(eventsQuery,false,true) %}
+    {% set timedIds = dates.toTheTimeMachine(eventsQuery,false,true)|json_decode %}
     {% set eventCount = timedIds|length %}
     {# TODO #}
     {% if eventCount < 10 %}{% endif %}
-    {% set tabEntries = eventsQuery.id(timedIds|json_decode) %}
+    {% set tabEntries = eventsQuery.id(timedIds) %}
     
     {% set slideObj = slideObj|merge({
         'slides': tabEntries,
@@ -157,13 +159,20 @@
     }) %}
 {% case 'news' %}
     {% set newsQuery = craft.entries.section('news') %}
-    {% set tabEntries = newsQuery[:10] %}
+    {% set isAgnostic, isFuture = true, false %}
+    {% set timedIds = dates.toTheTimeMachine(newsQuery,isAgnostic,isFuture)|json_decode %}
+    {% if timedIds|length > 0 %}
+    {% set tabEntries = craft.entries.id(timedIds).limit(10).fixedOrder() %}
     {% set slideObj = slideObj|merge({
         'slides': tabEntries,
         'group': 4
     }) %}
+    {% else %}
+    {% set hasEntries = false %}
+    {% endif %}
 {% endswitch %}
 
+{% if hasEntries %}
 <section class="homepageEntries homepageEntries--{{ tabSlug }}">
     <div class="homepageEntries-intro">
         <h2 class="homepageEntries-title">{{ entry[tabTitle] }}</h2>
@@ -184,5 +193,6 @@
     </div>
     {{ carousels.cardCarousel('homepageCarousel',slideObj) }}
 </section>
+{% endif %}
 {% endfor %}
 {% endblock %}
