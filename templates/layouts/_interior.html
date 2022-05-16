@@ -59,9 +59,10 @@
     1. Select two featured projects or exhibitions based on current topics and/or teams
     2. Third feature is totally random
     3. Ensure no entry redundancy based on entry ids
+    4. Apply fallback features
 #}
 {% set featureExplore = false %}
-{% set primaryFeature, secondaryFeature, randomFeature = null, null, null %}
+{% set featureList, primaryFeature, secondaryFeature, randomFeature = [], null, null, null %}
 {% switch entrySection %}
     {% case 'projects' %}
     {% set featureExplore = true %}
@@ -71,8 +72,6 @@
 
 {% if featureExplore %}
     {% set currentId = entry.id %}
-    {% set featureList = [] %}
-
     {% set entryQuery = craft.entries.section(entrySection) %}
     {% set relatedEntries = entryQuery.relatedTo(topicList).ids() %}
 
@@ -87,14 +86,31 @@
         {% endif %}
     {% endif %}
 
-    {% if featureList %}
-        {% set featureList = featureList|filter(v => v != currentId) %}
-        {% set primaryFeature = entryQuery.id(featureList|join(',')).order('RAND()').one() %}
-        {% set primaryId = primaryFeature.id %}
-        {% set featureList = featureList|filter(v => v != primaryId) %}
-        {% set secondaryFeature = entryQuery.id(featureList|join(',')).order('RAND()').one() %}
-        {% set secondaryId = secondaryFeature.id %}
-        {% set randomFeature = entryQuery.order('RAND()').id('and, not ' ~ currentId ~ ', not ' ~ primaryId ~ ', not ' ~ secondaryId).one() %}
+    {% if featureList|length > 0 %}
+        {% set featureIds = featureList|filter(v => v != currentId) %}
+        {% set primaryId = shuffle(featureIds)|first %}
+        {% set primaryFeature = craft.entries.id(primaryId).one() %}
+
+        {% if primaryFeature %}
+            {% set secondIds = featureIds|filter(v => v != primaryId) %}
+            {% if secondIds|length > 0 %}
+            {% set secondaryId = shuffle(secondIds)|first %}
+            {% set secondaryFeature = craft.entries.id(secondaryId).one() %}
+            {% set randomFeature = craft.entries.section(entrySection).order('RAND()').id('and, not ' ~ currentId ~ ', not ' ~ primaryId ~ ', not ' ~ secondaryId).one() %}
+            {% else %}
+            {# No relevant secondary feature #}
+            {% set secondaryFeature = craft.entries.section(entrySection).order('RAND()').id('and, not ' ~ currentId ~ ', not ' ~ primaryId).one() %}
+            {% set secondaryId = secondaryFeature.id %}
+            {% endif %}
+            {% set randomFeature = craft.entries.section(entrySection).order('RAND()').id('and, not ' ~ currentId ~ ', not ' ~ primaryId ~ ', not ' ~ secondaryId).one() %}
+        {% else %}
+            {# No relevant features #}
+            {% set primaryFeature = craft.entries.section(entrySection).order('RAND()').id('and, not ' ~ currentId).one() %}
+            {% set primaryId = primaryFeature.id %}
+            {% set secondaryFeature = craft.entries.section(entrySection).order('RAND()').id('and, not ' ~ currentId ~ ', not ' ~ primaryId).one() %}
+            {% set secondaryId = secondaryFeature.id %}
+            {% set randomFeature = craft.entries.section(entrySection).order('RAND()').id('and, not ' ~ currentId ~ ', not ' ~ primaryId ~ ', not ' ~ secondaryId).one() %}
+        {% endif %}
     {% endif %}
 {% endif %}
                       
@@ -500,7 +516,7 @@
 {% endif %}
 
 {# Feature Explore #}
-{% if featureExplore %}
+{% if primaryFeature and secondaryFeature %}
 <section class="interiorExplore">
     <h3 class="interiorExplore-title">Explore</h3>
     
