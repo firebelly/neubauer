@@ -56,8 +56,8 @@
 
 
 {# Featured Explore Entries 
-    1. Look for Featured Entries on Index
-    2. If no Featured Entries, select them randomly
+    1. Select two featured projects or exhibitions based on current topics and/or teams
+    2. Third feature is totally random
     3. Ensure no entry redundancy based on entry ids
 #}
 {% set featureExplore = false %}
@@ -65,28 +65,37 @@
 {% switch entrySection %}
     {% case 'projects' %}
     {% set featureExplore = true %}
-    {% set featureIndex = 'researchIndex' %}
-    {% set featureKey1 = 'featuredProject' %}
-    {% set featureKey2 = 'secondaryFeaturedProject' %}
-
     {% case 'exhibitions' %}
     {% set featureExplore = true %}
-    {% set featureIndex = 'exhibitionsIndex' %}
-    {% set featureKey1 = 'featuredExhibition' %}
-    {% set featureKey2 = 'secondaryFeaturedExhibition' %}
 {% endswitch %}
 
 {% if featureExplore %}
     {% set currentId = entry.id %}
-    {% set indexQuery = craft.entries.section(featureIndex).one() %}
-    {% set randomQuery = craft.entries.section(entrySection).order('RAND()').limit(10) %}
-    {# avoid redundancy by exludling ids #}
-    {% set feature1 = (indexQuery[featureKey1]|length > 0 and indexQuery[featureKey1].one().id != currentId) ? indexQuery[featureKey1].one() : null %}
-    {% set feature2 = (indexQuery[featureKey2]|length > 0 and indexQuery[featureKey2].one().id != currentId) ? indexQuery[featureKey2].one() : null %}
-    
-    {% set primaryFeature = feature1 ? feature1 : (feature2 ? feature2 : randomQuery.id('not ' ~ currentId).one() ) %}
-    {% set secondaryFeature = (feature2 and primaryFeature.id != feature2.id) ? feature2 : randomQuery.id('and, not ' ~ currentId ~ ', not ' ~ primaryFeature.id).one() %}
-    {% set randomFeature = randomQuery.id('and, not ' ~ currentId ~ ', not ' ~ primaryFeature.id ~ ', not ' ~ secondaryFeature.id).one() %}
+    {% set featureList = [] %}
+
+    {% set entryQuery = craft.entries.section(entrySection) %}
+    {% set relatedEntries = entryQuery.relatedTo(topicList).ids() %}
+
+    {% if relatedEntries|length > 0 %}
+        {% set featureList = featureList|merge(relatedEntries) %}
+    {% endif %}
+
+    {% if team %}
+        {% set teamEntries = entryQuery.relatedTo(team).ids() %}
+        {% if teamEntries|length > 0 %}
+            {% set featureList = featureList|merge(teamEntries) %}
+        {% endif %}
+    {% endif %}
+
+    {% if featureList %}
+        {% set featureList = featureList|filter(v => v != currentId) %}
+        {% set primaryFeature = entryQuery.id(featureList|join(',')).order('RAND()').one() %}
+        {% set primaryId = primaryFeature.id %}
+        {% set featureList = featureList|filter(v => v != primaryId) %}
+        {% set secondaryFeature = entryQuery.id(featureList|join(',')).order('RAND()').one() %}
+        {% set secondaryId = secondaryFeature.id %}
+        {% set randomFeature = entryQuery.order('RAND()').id('and, not ' ~ currentId ~ ', not ' ~ primaryId ~ ', not ' ~ secondaryId).one() %}
+    {% endif %}
 {% endif %}
                       
 {# Spotlights #}
@@ -495,36 +504,46 @@
 <section class="interiorExplore">
     <h3 class="interiorExplore-title">Explore</h3>
     
-    {% set featureList = [primaryFeature,secondaryFeature] %}
-    {% for feature in featureList %}
-    {% set featureType = loop.first ? 'primary' : 'secondary' %}
-        <article class="interiorExplore-feature interiorExplore-feature--{{ featureType }}">
-            <h4 class="interiorExplore-feature-label">
-            {% if featureType == 'primary' %}
-                Featured {{ entrySection == 'projects' ? 'Project' : 'Exhibition' }}
-            {% else %}
-                Continue Exploring
+    {% set exploreList = [primaryFeature,secondaryFeature] %}
+    {% set exploreSizes = utils.getAssetSizes(entrySection,'explore')|json_decode %}
+
+    {% for feature in exploreList %}
+        {% set exploreType = loop.first ? 'primary' : 'secondary' %}
+        {% set exploreLabel = (exploreType == 'primary') ? 'Featured ' ~ (entrySection == 'projects' ? 'Project' : 'Exhibition') : 'Continue Exploring' %}
+        {% set exploreImageObj = feature.cardImage is not null and feature.cardImage|length > 0 ? feature.cardImage : null %}
+        <article class="interiorExplore-feature interiorExplore-feature--{{ exploreType }}">
+
+            {% if exploreImageObj %}
+            <div class="interiorExplore-feature-overlay">{# color overlay #}</div>
+            <picture class="interiorExplore-feature-asset">
+                {{ assets.assetCard("interiorExplore-feature-asset",exploreImageObj,exploreSizes) }} 
+            </picture>
             {% endif %}
-            </h4>
-            <h5 class="interiorExplore-feature-title">{{ feature.title }}</h5>
-            <a 
-                class="interiorExplore-action interiorExplore-action--link"
-                href="{{ siteUrl }}/{{ feature.uri }}">
-                <span 
-                    class="interiorExplore-action-label">
-                    Explore
-                </span>
-                <svg 
-                    class="interiorExplore-action-icon">
-                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
-                </svg> 
-            </a>
+
+            <div class="interiorExplore-feature-content">
+                <h4 class="interiorExplore-feature-label">{{ exploreLabel }}</h4>
+                <h5 class="interiorExplore-feature-title">{{ feature.title }}</h5>
+                <a 
+                    class="interiorExplore-action interiorExplore-action--link"
+                    href="{{ siteUrl }}{{ feature.uri }}">
+                    <span 
+                        class="interiorExplore-action-label">
+                        Explore
+                    </span>
+                    <svg 
+                        class="interiorExplore-action-icon">
+                        <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+                    </svg> 
+                </a>
+            </div>
         </article>
     {% endfor %}
     {% if randomFeature %}
         <article class="interiorExplore-feature interiorExplore-feature--random">
-            <a class="interiorExplore-big" href="{{ siteUrl }}/{{ randomFeature.uri }}">
-                <span class="interiorExplore-big-label">Open To Inquiry</span>
+            <a 
+                class="interiorExplore-big" 
+                href="{{ siteUrl }}{{ randomFeature.uri }}">
+                <span class="interiorExplore-big-label">Take Me Somewhere Else</span>
                 <svg 
                     class="interiorExplore-big-icon">
                     <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
