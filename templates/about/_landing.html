@@ -13,11 +13,12 @@
     {% if menuList %}
     <ul class="interiorIntro-menu interiorIntro-menu--{{ entrySection }}">
         {% for menuItem in menuList if menuItem.name|slugify not in excludeMenu %}
-        {% set menuName,menuHandle = menuItem.name,menuItem.name|camel %}
+        {% set menuName,menuHandle,menuSlug = menuItem.name,menuItem.name|camel, menuItem.name|slugify %}
         {% set arrowDownPath = "/spritemap.svg#icon-arrow-down-20" %}
         <li class="interiorIntro-menu-item">
             <a 
-                class="interiorIntro-menu-action interiorIntro-menu-action--link" href="#{{ menuHandle }}">
+                class="interiorIntro-menu-action interiorIntro-menu-action--link" 
+                href="#{{ menuSlug }}">
                 <span class="interiorIntro-menu-action-label">{{ menuName }}</span>
                 <svg 
                     class="interiorIntro-menu-action-icon">
@@ -43,7 +44,7 @@
 {% set body = statement and statement.full != '' ? statement.full : null %}
 {% set statementImage = statement and (statement.image is not null and statement.image.one()) ? statement.image : null %}
 
-<section class="interiorMod interiorMod--{{ entrySection }} interiorMod--{{ modSlug }}" id="{{ modHandle }}">
+<section class="interiorMod interiorMod--{{ entrySection }} interiorMod--{{ modSlug }}" id="{{ modSlug }}">
 
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
 
@@ -86,7 +87,7 @@
 {% set impactCount = entry.impactModule is not null ? entry.impactModule|length : null %}
 {% set impactModule = impactCount ? entry.impactModule : null %}
 
-<section class="interiorMod interiorMod--{{ entrySection }} interiorMod--{{ modSlug }}" id="{{ modHandle }}">
+<section class="interiorMod interiorMod--{{ entrySection }} interiorMod--{{ modSlug }}" id="{{ modSlug }}">
 
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
 
@@ -153,7 +154,7 @@
 {% set staff = craft.entries().section('people') .search('personType:staff').all() %}
 {% set advisors = craft.entries().section('people') .search('personType:faculty-advisory-board').all() %}
 {% if staff or advisors %}
-<section class="interiorMod interiorMod--{{ entrySection }} interiorMod--{{ modSlug }}" id="{{ modHandle }}">
+<section class="interiorMod interiorMod--{{ entrySection }} interiorMod--{{ modSlug }}" id="{{ modSlug }}">
 
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
 
@@ -195,7 +196,7 @@
 {% case 'application-process' %} 
 {% set appCards = entry.cardBlock is not null and entry.cardBlock|length > 0 ? entry.cardBlock : null %}
 {% if appCards %}
-<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modHandle }}">
+<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modSlug }}">
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
 
     <div class="interiorMod-list interiorMod-list--3">
@@ -215,7 +216,7 @@
 {% case 'visit-the-collegium' %}
 {% set directions = entry.directions is not null and entry.directions|length > 0 ? entry.directions : null %}
 
-<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modHandle }}">
+<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modSlug }}">
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
     
     {% if directions %}
@@ -263,7 +264,7 @@
 
 {% case 'news-announcements' %}
 {% set news = craft.entries().section('news').all() %}
-<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modHandle }}">
+<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modSlug }}">
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
     <div class="interiorMod-list interiorMod-list--4">
         {% set newsName = 'interiorMod-card' %}
@@ -280,7 +281,7 @@
 
 {% case 'publications' %}
 {% set pubs = entry.publicationBlock is not null and entry.publicationBlock|length > 0 ? entry.publicationBlock : null %}
-<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modHandle }}">
+<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modSlug }}">
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
     <div class="interiorMod-list interiorMod-list--4">
         {% set pubName = 'interiorMod-cardlette' %}

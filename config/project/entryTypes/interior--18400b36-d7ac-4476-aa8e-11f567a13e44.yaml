@@ -158,6 +158,14 @@ fieldLayouts:
             width: 100
         name: Publications
         sortOrder: 3
+      -
+        elements:
+          -
+            template: control-panel/people/_people-projects.html
+            type: craft\fieldlayoutelements\Template
+            width: 100
+        name: Teams
+        sortOrder: 4
 handle: interior
 hasTitleField: false
 name: Interior

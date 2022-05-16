@@ -150,6 +150,18 @@ class scrollChyron {
     
         window.addEventListener('load',() => {
 
+            let hasHash = (window.location.hash !== '');
+
+            if ( hasHash) {
+                let currentHash = window.location.hash,
+                    hashHomie   = document.querySelector(currentHash),
+                    hashTop     = hashHomie.offsetTop;
+
+                setTimeout(function() {
+                    window.scrollTo(0, hashTop);
+                }, 1);
+            }
+
             self.chyron.addEventListener('mouseover', () => self.pauseScroll(), );
             self.chyron.addEventListener('mouseout', () => self.pauseScroll() );
 
@@ -160,8 +172,8 @@ class scrollChyron {
 
             document.addEventListener('scroll', function() {
                 // Only play chyron when in view
+                console.log('scrolling');
                 self._paused = self.isChyronInView(self.chyron) ? false : true;
-
             });
 
             self.hashScroll();

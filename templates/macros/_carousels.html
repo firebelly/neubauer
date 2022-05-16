@@ -68,11 +68,12 @@
 			{% if cardCall %}
 			{% set prompt = slideObj.cardCall.prompt %}
 			{% set action = slideObj.cardCall.action %}
+			{% set url = slideObj.cardCall.url %}
 			<div class="{{ carouselName }}-call">
 				<div class="{{ carouselName }}-call-prompt">{{ prompt }}</div>
 				<a 
 					class="{{ carouselName }}-call-action {{ carouselName }}-call-action--link"
-					href="{{ siteUrl }}">
+					href="{{ siteUrl }}{{ url }}">
 					<span class="{{ carouselName }}-call-action-label">{{ action }}</span>
 					<svg class="{{ carouselName }}-call-action-icon">
 						<use xlink:href="{{ alias('@assetBasePath' ~ arrowRightPath) }}"></use>
@@ -180,7 +181,7 @@
 					<h3 class="{{ cardName }}-title {{ cardName }}-title--call">{{ prompt }}</h3>
 					<a 
 						class="{{ cardName }}-action {{ cardName }}-action--link {{ cardName }}-action--call"
-						href="{{ siteUrl }}">
+						href="{{ siteUrl }}projects">
 						<span class="{{ cardName }}-action-label">{{ action }}</span>
 						<svg class="{{ cardName }}-action-icon">
 							<use xlink:href="{{ alias('@assetBasePath' ~ arrowRightPath) }}"></use>

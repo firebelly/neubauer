@@ -1,0 +1,50 @@
+<style>
+.adminTip-list {
+    margin-left: 2em;
+    margin-bottom: 3em;
+    list-style-type: disc;
+}
+.adminTip-item {
+    margin-bottom: 1em;
+}
+.adminTip-p {
+    margin-bottom: 3em;
+}
+.adminTip-box {
+    margin-top: 0;
+    margin-bottom: 3em;
+    background: #f3f7fc;
+    padding: 1em;
+    border-radius: 10px;
+}
+.adminTip-title {
+    margin: 0 0 14px 0;
+}
+</style>
+
+{% set currentPerson = element %}
+{% set projects = craft.entries()
+    .section('projects') 
+    .search('projectTeam:' ~ currentPerson ~ '')
+    .all()
+%}
+<p class="adminTip-box"><strong>Hint:</strong> To assign a Person to a Project Team, go to the project's admin page, click the "Project Team" tab.</p>
+
+{% if currentPerson.slug %}
+<h2 class="adminTip-title"><strong>"{{ currentPerson }}:"</strong>  is on the Project Team for:</h2>
+{% if projects|length %}
+<ul class="adminTip-list">
+{% for entry in projects %}
+    <li class="adminTip-item">
+        {% if entry.isEditable() %}
+        <a href="{{ entry.cpEditUrl }}">{{ entry }}</a>
+        {% else %}
+        {{ entry }}
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% else %}
+<p class="adminTip-p">"{{ currentPerson }}" is not listed on any project teams.
+{% endif %}
+{% endif %} 
