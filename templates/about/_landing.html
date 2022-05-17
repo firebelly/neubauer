@@ -57,7 +57,7 @@
                 {{ assets.assetCard('interiorSummary-frame',statementImage,statementSizes) }}
             {% endif %}
             <picture>
-            <figcaption class="interiorSummary-caption">{{ statementImage.caption }}</figcaption>
+            <figcaption class="interiorSummary-caption">{{ statementImage.one().caption }}</figcaption>
         </figure>
         <div class="interiorSummary-main interiorSummary-main--directors">
             {% set isAccordion = (body and abstract) %}
@@ -100,7 +100,7 @@
                 {{ assets.assetCard('interiorMod-asset',impactImage,impactSizes) }}
                 {% endif %}
             </picture>
-            <figcaption class="interiorMod-frame-caption">{{ impactImage.caption }}</figcaption>
+            <figcaption class="interiorMod-frame-caption">{{ impactImage.one().caption }}</figcaption>
         </figure>
         <div class="interiorMod-main interiorMod-main--{{ modSlug }}">
             <div class="interiorMod-main-content">
