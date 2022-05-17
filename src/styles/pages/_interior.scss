@@ -631,6 +631,15 @@
 			position: absolute;
 			left: 0;
 			top: 100%;
+
+			em {
+				font-style: italic;
+			}
+
+			strong, b {
+				font-weight: bold;
+			}
+
 		}
 
 	}

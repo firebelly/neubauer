@@ -2,7 +2,7 @@
     "buttons": ["formatting","bold", "italic","html"],
     "formatting": ["p"],
     "plugins": ["fullscreen", "limiter", "counter"],
-    "limiter": 150,
+    "limiter": 250,
     "linkNewTab": true,
     "toolbarFixed": true,
     "pastePlainText": true,

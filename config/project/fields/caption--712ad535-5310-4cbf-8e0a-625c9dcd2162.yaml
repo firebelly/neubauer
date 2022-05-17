@@ -2,7 +2,7 @@ columnSuffix: null
 contentColumnType: text
 fieldGroup: 10ed9c28-61c3-4258-bc65-24b2ecaa7930 # Asset
 handle: caption
-instructions: 'A brief image or video caption that adds context or credit to the media. (Max character count: 150)'
+instructions: 'A brief image or video caption that adds context or credit to the media. (Max character count: 250)'
 name: Caption
 searchable: true
 settings:

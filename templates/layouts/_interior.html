@@ -208,7 +208,7 @@
             <picture>
                 {{ assets.assetCard("interiorIntro-asset",cardImage,cardImageSizes) }} 
             </picture>
-            <figcaption class="interiorIntro-caption">{{ cardImage.one().caption }}</figcaption>
+            <figcaption class="interiorIntro-caption">{{ cardImage.one().caption|raw }}</figcaption>
         </figure>
     </div>
     {% endif %}
@@ -422,8 +422,13 @@
 {% if relatedProject %}
 <section class="interiorRelated interiorRelated--{{ entrySection }}">
     <h3 class="interiorRelated-title interiorRelated-title--hidden">Related Project</h3>
-    {% set cardName,cardVariant,cardLabel,cardObj = 'relatedArticle','related','This exhibition is part of',{} %}
-    {{ cards.cardFeature(relatedProject,cardLabel,cardName,cardVariant) }}
+    {% set relatedObj = {
+        'assetSizes': utils.getAssetSizes('exhibitions','related'),
+        'cardVariant': 'related',
+        'cardLabel': 'This exhibition is part of'
+    }%}
+    {% set relatedName = 'relatedArticle' %}
+    {{ cards.cardFeature(relatedName,relatedProject,relatedObj) }}
 </section>
 {% endif %}
 

@@ -2762,15 +2762,26 @@ img {
 
 .interiorCover-frame {
   margin: 0 4em;
+  position: relative;
 }
-.interiorCover-placeholder {
-  width: 1360px;
-  height: 700px;
-  background: lightgray;
+.interiorCover-asset {
+  display: block;
+  padding-bottom: 4em;
 }
 .interiorCover-caption {
   font: normal 1.6em/1.56 "apercu", sans-serif;
-  padding: 2.5em 0 0 0;
+  display: block;
+  padding-top: 0;
+  width: 25%;
+  position: absolute;
+  left: 0;
+  top: 100%;
+}
+.interiorCover-caption em {
+  font-style: italic;
+}
+.interiorCover-caption strong, .interiorCover-caption b {
+  font-weight: bold;
 }
 
 .interiorSpotlight {
@@ -14663,6 +14674,12 @@ img {
   position: absolute;
   left: 0;
   top: 100%;
+}
+.interiorMod-frame-caption em {
+  font-style: italic;
+}
+.interiorMod-frame-caption strong, .interiorMod-frame-caption b {
+  font-weight: bold;
 }
 .interiorMod-asset {
   display: block;
