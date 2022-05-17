@@ -163,7 +163,7 @@
 
 <section class="interiorIntro interiorIntro--{{ entrySection }}">
     <div class="interiorIntro-details">
-        <h1 class="interiorIntro-subtitle">{{ entrySubtitle }}{% if personType %}, {% if entryDate %}{{ entryDate }} {% endif %}{{ personType[0] }}{% endif %}</h1>
+        <h1 class="interiorIntro-subtitle interiorIntro-subtitle--{{ entrySection }}">{{ entrySubtitle }}{% if personType %}, {% if entryDate %}{{ entryDate }} {% endif %}{{ personType[0] }}{% endif %}</h1>
         <h2 class="interiorIntro-title">{{ entryTitle }}</h2>
         
         {% if affiliation %}

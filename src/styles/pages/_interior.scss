@@ -80,10 +80,16 @@
 	}
 
 	&-subtitle {
+		$mb: math.div(20,16);
 		@include getType('caption');
-		$translate: calc(100% - 2em);
-		flex-grow: 1;
-		transform: translateY($translate);
+		margin-bottom: #{$mb}em;
+		
+		&--projects {
+			$translate: calc(100% - 2em);
+			flex-grow: 1;
+			transform: translateY($translate);
+		}
+
 	}
 
 	&-prompt {

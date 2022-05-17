@@ -12823,6 +12823,9 @@ img {
 }
 .interiorIntro-subtitle {
   font: normal 1.6em/1.56 "apercu", sans-serif;
+  margin-bottom: 1.25em;
+}
+.interiorIntro-subtitle--projects {
   flex-grow: 1;
   transform: translateY(calc(100% - 2em));
 }
