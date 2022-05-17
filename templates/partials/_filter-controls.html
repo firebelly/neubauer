@@ -22,7 +22,7 @@
 {% set trigger = sprig.trigger|split('_')[0] %}
 {# sprig default vars #}
 {% set overlay, query, sort, date, layout = overlay ?? 'off', query ?? '', sort ?? 'asc', date ?? '', layout ?? 'grid' %}
-{% set section = isSearchIndex ? (section ?? 'all') : indexSlug %}
+{% set section = isSearchIndex ? (section ?? 'projects') : indexSlug %}
 {# idx-specific filters #}
 {% set status = status ?? 'active' %}
 {% set person = person ?? 'all' %}
@@ -74,6 +74,12 @@ bit of javascript to assign proper overflow style on the html tag #}
 {% if isSprig %}
 <script>
     document.documentElement.style.overflowY = "{{ overlay == 'on' ? 'hidden' : '' }}";
+    if ( "{{ overlay == 'on' }}" ) {
+        document.querySelector('[data-modal-parent]').style.zIndex = 20;
+    }
+    else {
+        document.querySelector('[data-modal-parent]').removeAttribute('style');
+    }
 </script>
 {% endif %}
 

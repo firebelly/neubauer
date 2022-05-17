@@ -28,7 +28,11 @@
         {% include 'partials/_nav' %}
     </header>
 
-    <main class="primaryContent{% if entry.slug == 'homepage' %} primaryContent--homepage{% endif %}" id="primaryContent" tabindex="-1">     
+    <main 
+        class="primaryContent{% if entry.slug == 'homepage' %} primaryContent--homepage{% endif %}" 
+        id="primaryContent" 
+        data-modal-parent
+        tabindex="-1">     
         {% block content %}
         {% endblock %}
     </main>
