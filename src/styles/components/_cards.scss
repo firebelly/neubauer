@@ -66,6 +66,20 @@
                 }
             }
         }
+
+        &-video {
+            $video: &;
+            margin-bottom: 2em;
+            position: relative;
+            padding-bottom: 59%; // snowflake
+
+            iframe {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+            }
+            
+        }
         
         &-team {
             margin-bottom: 1em;

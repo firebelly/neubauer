@@ -18,6 +18,10 @@
         font-size: 1rem;
         margin-right: 4em;
 
+        &:not(:first-of-type) {
+            margin-top: 2em;
+        }
+
         &--ghost {
             border-radius: 5px;
             border: $border-size solid transparent;

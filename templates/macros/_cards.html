@@ -23,6 +23,7 @@
 
 {# Main content #}
 {% set cardImage = cardEntry.cardImage and cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
+{% set cardVideo = cardEntry.video and cardEntry.video != '' ? cardEntry.video : null %}
 {% set cardAbstract = cardEntry.abstract is not null and cardEntry.abstract != '' ? cardEntry.abstract : 
                 cardEntry.exhibitionAbstract is not null and cardEntry.exhibitionAbstract != '' ? cardEntry.exhibitionAbstract :
                 cardEntry.teaser is not null and cardEntry.teaser != '' ? cardEntry.teaser :
@@ -86,6 +87,29 @@
     </picture>
     {% elseif isBio %}
     <div class="{{ cardName }}-asset--ghost"></div>
+    {% endif %}
+
+    {# Card: Video #}
+    {% if cardVideo %}
+    {% set videoSizes = cardObj is not null and 'assetSizes' in cardObj|keys ? cardObj['assetSizes']|json_decode : null %}
+    {% set videoWidth, videoHeight = videoSizes['lg'][0],videoSizes['lg'][1] %}
+    <div class="{{ cardName }}-video">
+       {{ cardVideo.render({
+            width: videoWidth,
+            height: videoHeight,
+            params: {
+                autoplay: 0,
+                rel: 0,
+                mute: 0,
+                loop: 1,
+                autopause: 1,
+            },
+            attributes: {
+                title: 'Watch'
+            }
+        }) 
+        }}
+    </div>
     {% endif %}
 
     <div class="{{ cardName }}-details">
@@ -214,20 +238,47 @@
 
         {# Card: Actions #}
         {% set actionList = cardEntry.actionBlock is not null and cardEntry.actionBlock|length > 0 ? cardEntry.actionBlock.all() : null %}
-        {# interest of time, just grab one #}
-        {% set actionItem = actionList ? actionList[0] : null %}
-        {% set actionType = actionItem ? actionItem.type : null %}
-        {% set actionLabel = actionType and actionType == 'register' ? 'Register' : (isBio ? 'Full Bio' : 'Learn More') %}
-        {% set actionUrl   = actionType ? actionItem.actionURL : cardUrl %}
-        {% set isExternal = (actionType and (actionType == 'register' or actionType == 'custom')) %}
+        {# If actionBlock not explicity added to entry (i.e. interior page), ensure these are looped in #}
+        {% if not actionList %}
+            {% set actionList = [{
+                'actionURL': cardUrl,
+                'type': 'page'
+            }]%}
+        {% endif %}
         <div class="{{ cardName }}-buttons">
+        {% for actionItem in actionList if (actionItem.actionURL is not null and actionItem.actionURL|length > 0 and actionItem.actionURL != '') %}
+            {% set actionType = actionItem.type != '' ? actionItem.type : null %}
+            {% set actionUrl = actionType ? actionItem.actionURL : cardUrl %}
+            {% set actionPDF = null %}
+            {% set actionLabel = (isBio ? 'Full Bio' : 'Learn More') %}
+            {% set isExternal = false %}
+            {% switch actionType %}
+                {% case 'register' %}
+                {% set actionLabel = 'Register' %}
+                {% set isExternal = true %}
+                {% case 'custom' %}
+                {% set isExternal = true %}
+                {% set actionLabel = actionItem.actionText != '' ? actionItem.actionText : actionLabel %}
+                {% case 'download' %}
+                {% set actionLabel = actionItem.actionText != '' ? actionItem.actionText : actionLabel %}
+                {% set actionPDF = (actionUrl|length > 0) ? actionUrl.one().url : null %}
+                {% case 'media' %}
+                {% set actionLabel = actionItem.actionText != '' ? actionItem.actionText : actionLabel %}
+                {% set isExternal = true %}
+                {% default %}
+            {% endswitch %}
+            {% set actionUI = (isPeopleDirectory or isNewsSlide or isExhibitionDirectory or loop.index > 1) ? 'link' : 'ghost' %}
             <a 
-                class="{{ cardName }}-action {{ cardName }}-action--{{ isPeopleDirectory or isNewsSlide or isExhibitionDirectory ? 'link' : 'ghost' }}"
-                href="{{ actionUrl }}"
+                class="{{ cardName }}-action {{ cardName }}-action--{{ actionUI }}"
+                href="{% if actionPDF %}{{ actionPDF }}{% else %}{{ actionUrl }}{% endif %}"
                 title=""
                 role=""
+                data-type="{{ actionType }}"
                 {% if isExternal %}
                 target="_blank"
+                {% endif %}
+                {% if actionPDF %}
+                download
                 {% endif %}>
                 <span class="{{ cardName }}-action-label">{{ actionLabel }}</span>
                 <svg class="{{ cardName }}-action-icon">
@@ -246,6 +297,7 @@
                 </svg>
             </a>
             {% endif %}
+        {% endfor %}
         </div>
     </div>
 </article>
