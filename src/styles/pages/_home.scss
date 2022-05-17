@@ -337,6 +337,11 @@
 
 	}
 
+	&--call {
+		@include justifyContent(center);
+		padding-right: 0;
+	}
+
 	&-title {
 
 		a:link,

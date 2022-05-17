@@ -9,6 +9,7 @@
 {% import 'macros/_utils' as utils %}
 {% import 'macros/_dates' as dates %}
 {% import 'macros/_assets' as assets %}
+{% import 'macros/_actions' as actions %}
 {% import 'macros/_controls' as controls %}
 
 {% set entrySection = cardEntry.section|lower %}
@@ -247,44 +248,13 @@
         {% endif %}
         <div class="{{ cardName }}-buttons">
         {% for actionItem in actionList if (actionItem.actionURL is not null and actionItem.actionURL|length > 0 and actionItem.actionURL != '') %}
-            {% set actionType = actionItem.type != '' ? actionItem.type : null %}
-            {% set actionUrl = actionType ? actionItem.actionURL : cardUrl %}
-            {% set actionPDF = null %}
-            {% set actionLabel = (isBio ? 'Full Bio' : 'Learn More') %}
-            {% set isExternal = false %}
-            {% switch actionType %}
-                {% case 'register' %}
-                {% set actionLabel = 'Register' %}
-                {% set isExternal = true %}
-                {% case 'custom' %}
-                {% set isExternal = true %}
-                {% set actionLabel = actionItem.actionText != '' ? actionItem.actionText : actionLabel %}
-                {% case 'download' %}
-                {% set actionLabel = actionItem.actionText != '' ? actionItem.actionText : actionLabel %}
-                {% set actionPDF = (actionUrl|length > 0) ? actionUrl.one().url : null %}
-                {% case 'media' %}
-                {% set actionLabel = actionItem.actionText != '' ? actionItem.actionText : actionLabel %}
-                {% set isExternal = true %}
-                {% default %}
-            {% endswitch %}
-            {% set actionUI = (isPeopleDirectory or isNewsSlide or isExhibitionDirectory or loop.index > 1) ? 'link' : 'ghost' %}
-            <a 
-                class="{{ cardName }}-action {{ cardName }}-action--{{ actionUI }}"
-                href="{% if actionPDF %}{{ actionPDF }}{% else %}{{ actionUrl }}{% endif %}"
-                title=""
-                role=""
-                data-type="{{ actionType }}"
-                {% if isExternal %}
-                target="_blank"
-                {% endif %}
-                {% if actionPDF %}
-                download
-                {% endif %}>
-                <span class="{{ cardName }}-action-label">{{ actionLabel }}</span>
-                <svg class="{{ cardName }}-action-icon">
-                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
-                </svg>
-            </a>
+            {% set isLink = (isPeopleDirectory or isNewsSlide or isExhibitionDirectory or loop.index > 1) %}
+            {% set actionObj = {
+                'ui': isLink ? 'link' : 'ghost',
+                'label': (isBio ? 'Full Bio' : 'Learn More')
+            } %}
+            {{ actions.actionBlockItem(cardName,actionItem,actionObj) }}
+
             {% if cardEntry.personEmail and isPeopleDirectory %}
             <a 
                 class="{{ cardName }}-action {{ cardName }}-action--link"

@@ -5,6 +5,7 @@
 {% import 'macros/_cards' as cards %}
 {% import 'macros/_assets' as assets %}
 {% import 'macros/_controls' as controls %}
+{% import 'macros/_actions' as actions %}
 {% import 'macros/_menus' as menus %}
 
 {% block content %}
@@ -53,6 +54,10 @@
 {# Exhibition Specifics #}
 {% set hasGallery = entry.galleryImage is not null and entry.galleryImage|length > 0 ? true : false %}
 {% set relatedProject = entry.relatedProject is not null and entry.relatedProject|length > 0 ? entry.relatedProject.one() : null %}
+
+{# Event Specifics #}
+{% set speakerList = entry.eventSpeakers is not null and entry.eventSpeakers|length > 0 ? entry.eventSpeakers.all() : null %}
+{% set participantList = entry.eventParticipants is not null and entry.eventParticipants|length > 0 ? entry.eventParticipants.all() : null %}
 
 
 {# Featured Explore Entries 
@@ -349,6 +354,15 @@
         </div>
         {% endif %}
 
+        {% if entrySection == 'events' and entry.actionBlock and entry.actionBlock|length > 0 %}
+        {% set actionList = entry.actionBlock.all() %}
+        <div class="interiorSummary-buttons">
+            {% for actionItem in actionList if (actionItem.actionURL is not null and actionItem.actionURL|length > 0 and actionItem.actionURL != '') %}
+            {{ actions.actionBlockItem('interiorSummary',actionItem) }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
         {% if topicList and entrySection != 'exhibitions' %}
         <div class="interiorSummary-topics interiorSummary-topics--{{ entrySection }}">
             <h3 class="interiorSummary-topics-subtitle">Topics</h3>
@@ -401,6 +415,34 @@
 </section>
 {% endif %}
 {% endif %}
+
+{# SPEAKER LIST #}
+{% if entrySection == 'events' and (speakerList or participantList) %}
+<section class="interiorTeam interiorTeam--{{ entrySection }}" id="team">
+    <h3 class="interiorTeam-title">Speakers &amp; Participants</h3>
+    <div class="interiorTeam-list">
+        {% for person in speakerList %}
+        <article class="interiorTeam-item">
+            <h4 class="interiorTeam-item-title">{{ person.speakerName }}</h4>
+            <h5 class="interiorTeam-item-subtitle">{{ person.type|title }}</h5>
+            <div class="interiorTeam-item-redactor">
+                {{ person.speakerBio|raw }}
+            </div>
+        </article>
+        {% endfor %}
+        {% for person in participantList %}
+        <article class="interiorTeam-item">
+            <h4 class="interiorTeam-item-title">{{ person.speakerName }}</h4>
+            <h5 class="interiorTeam-item-subtitle">{{ person.type|title }}</h5>
+            <div class="interiorTeam-item-redactor">
+                {{ person.speakerBio|raw }}
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
 
 {% if team %}
 <section class="interiorTeam interiorTeam--{{ entrySection }}" id="team">

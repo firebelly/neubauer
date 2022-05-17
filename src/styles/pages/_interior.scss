@@ -329,6 +329,9 @@
             #{$summary}--news & {
 				color: getColor('red');
 			}
+			#{$summary}--events & {
+				color: getColor('yellow',10);
+			}
 		}	
 
         h2 {
@@ -476,6 +479,28 @@
 		@at-root {
 			@include actionButton(#{$action},getColor('blue'),getColor('blue',10));
 		}
+
+
+		#{$summary}--events & {
+			border-color: getColor('yellow',10);
+			color: getColor('yellow',10);
+
+			#{$action}-icon {
+				fill: getColor('yellow',10);
+			}
+
+			&:hover {
+				border-color: getColor('red');
+				color: getColor('white');
+
+				#{$action}-icon {
+					fill: getColor('white');
+				}
+
+			}
+
+		}
+
 		&-label {
 			@include getType('action');
 		}
@@ -523,6 +548,10 @@
 		border-color: getColor('green',30);
 	}
 
+	&--events {
+		border-color: getColor('yellow',10);
+	}
+
 	&-title {
 		$mb: math.div(80,65);
 		@include getType('h1-normal');
@@ -536,6 +565,14 @@
 
 			> * {
 				@include flexChild(0 1 calc(50% - 0.5em));
+			}
+
+			#{$team}--events & {
+
+				> * {
+					@include flexChild(0 1 calc(25% - 0.5em));
+				}
+
 			}
 
 		}

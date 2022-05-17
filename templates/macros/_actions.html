@@ -28,10 +28,63 @@
         <svg 
             class="{{ actionName }}-icon">
             {% set iconPath = "/spritemap.svg#icon-#{actionIcon}" %}
-            <use xlink:href="{{ rev(iconPath) }}"></use>
-            {% endif %}
+            <use xlink:href="{{ alias('@assetBasePath' ~ iconPath) }}"></use>
         </svg> 
         {% endif %}
 </a>
 {% endmacro %}
 
+{# actionItem: 
+   Derived from actionBlock
+#}
+{% macro actionBlockItem(actionName,actionItem,actionObj) %}
+
+{% set actionType = actionItem.type != '' ? actionItem.type : null %}
+{% set actionUrl = actionType ? actionItem.actionURL : cardUrl %}
+{% set actionLabel = actionObj is not null and 'label' in actionObj|keys ? actionObj['label'] : null %}
+{% set actionUI = actionObj is not null and 'ui' in actionObj|keys ? actionObj['ui'] : 'ghost' %}
+{% set actionPDF = null %}
+{% set isExternal = false %}
+{% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
+{% set emailPath = "/spritemap.svg#icon-email-20" %}
+{% set dnldPath = "/spritemap.svg#icon-download-20" %}
+{% set externalPath = "/spritemap.svg#icon-external-20" %}
+{% set iconPath = arrowPath %}
+
+{% switch actionType %}
+    {% case 'register' %}
+    {% set actionLabel = 'Register' %}
+    {% set iconPath = externalPath %}
+    {% set isExternal = true %}
+    {% case 'custom' %}
+    {% set isExternal = true %}
+    {% set actionLabel = actionItem.actionText != '' ? actionItem.actionText : actionLabel %}
+    {% set iconPath = externalPath %}
+    {% case 'download' %}
+    {% set actionLabel = actionItem.actionText != '' ? actionItem.actionText : actionLabel %}
+    {% set actionPDF = (actionUrl|length > 0) ? actionUrl.one().url : null %}
+    {% set iconPath = dnldPath %}
+    {% case 'media' %}
+    {% set actionLabel = actionItem.actionText != '' ? actionItem.actionText : actionLabel %}
+    {% set iconPath = externalPath %}
+    {% set isExternal = true %}
+    {% default %}
+{% endswitch %}
+<a 
+    class="{{ actionName }}-action {{ actionName }}-action--{{ actionUI }}"
+    href="{% if actionPDF %}{{ actionPDF }}{% else %}{{ actionUrl }}{% endif %}"
+    title=""
+    role=""
+    data-type="{{ actionType }}"
+    {% if isExternal %}
+    target="_blank"
+    {% endif %}
+    {% if actionPDF %}
+    download
+    {% endif %}>
+    <span class="{{ actionName }}-action-label">{{ actionLabel }}</span>
+    <svg class="{{ actionName }}-action-icon">
+        <use xlink:href="{{ alias('@assetBasePath' ~ iconPath) }}"></use>
+    </svg>
+</a>
+{% endmacro %}

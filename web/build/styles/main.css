@@ -6429,6 +6429,10 @@ img {
 .homepageFeatures:nth-child(5) .homepageFeatures-question {
   color: #151515;
 }
+.homepageFeatures--call {
+  justify-content: center;
+  padding-right: 0;
+}
 .homepageFeatures-title a:link,
 .homepageFeatures-title a:visited,
 .homepageFeatures-title a:active {
@@ -13315,6 +13319,12 @@ img {
 .interiorSummary--news .interiorSummary-redactor a:active {
   color: #800000;
 }
+.interiorSummary--events .interiorSummary-redactor a:link,
+.interiorSummary--events .interiorSummary-redactor a:visited,
+.interiorSummary--events .interiorSummary-redactor a:hover,
+.interiorSummary--events .interiorSummary-redactor a:active {
+  color: #3F3606;
+}
 .interiorSummary-redactor h2 {
   font: normal 6.5em/1.08 "domaine-text", serif;
   letter-spacing: -0.035em;
@@ -13961,6 +13971,20 @@ img {
   text-decoration: none;
 }
 
+.interiorSummary--events .interiorSummary-action {
+  border-color: #3F3606;
+  color: #3F3606;
+}
+.interiorSummary--events .interiorSummary-action .interiorSummary-action-icon {
+  fill: #3F3606;
+}
+.interiorSummary--events .interiorSummary-action:hover {
+  border-color: #800000;
+  color: #FFFFFF;
+}
+.interiorSummary--events .interiorSummary-action:hover .interiorSummary-action-icon {
+  fill: #FFFFFF;
+}
 .interiorSummary-action-label {
   font: normal 1.2em/1.67 "apercu", sans-serif;
   letter-spacing: 0.1em;
@@ -14187,6 +14211,9 @@ img {
 .interiorTeam--projects {
   border-color: #51594A;
 }
+.interiorTeam--events {
+  border-color: #3F3606;
+}
 .interiorTeam-title {
   font: normal 6.5em/1.08 "domaine-text", serif;
   letter-spacing: -0.035em;
@@ -14199,6 +14226,9 @@ img {
   }
   .interiorTeam-list > * {
     flex: 0 1 calc(50% - 0.5em);
+  }
+  .interiorTeam--events .interiorTeam-list > * {
+    flex: 0 1 calc(25% - 0.5em);
   }
 }
 .interiorTeam-item {
