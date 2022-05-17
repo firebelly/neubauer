@@ -46,7 +46,9 @@
 {% set sort = 'asc' %}
 {% endif %}
 {# sprig update url #}
-{% do sprig.pushUrl('?' ~ {query: query, section: section, tags: tags, page: page}|url_encode) %}
+{% set urlParams = {query: query, section: section, tags: tags, person: person, page: page} %}
+
+{% do sprig.pushUrl('?' ~ urlParams|url_encode) %}
 {# sprig persistent state #}
 {{ hiddenInput('overlay', overlay) }}
 {{ hiddenInput('section', section) }}

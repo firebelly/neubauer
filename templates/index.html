@@ -117,6 +117,7 @@
 {% set cardCall = entry["#{tabSlug}Card"] is not null and entry["#{tabSlug}Card"]|length > 0 ? entry["#{tabSlug}Card"].one() : null %}
 {% if cardCall %}
 {% set cardPrompt, cardAction = cardCall['prompt'], cardCall['action'] %}
+{% set cardUrl = tabSlug == 'news' ? 'about#news-announcements' : (tabSlug == 'people' ? 'people?query=&section=people&tags=&person=visiting-fellow&page=1' : tabSlug) %}
 {% endif %}
 
 {% set hasEntries = true %}
@@ -131,7 +132,7 @@
     'cardCall': {
         'prompt': cardPrompt,
         'action': cardAction,
-        'url': tabSlug == 'news' ? 'about#news-announcements' : tabSlug 
+        'url': cardUrl
     }
 }%}
 
