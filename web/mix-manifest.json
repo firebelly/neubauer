@@ -2,6 +2,7 @@
     "/build/scripts/spritemap.js": "/build/scripts/spritemap.js?id=164c4c658f9eb07c6521825443db1dd1",
     "/build/scripts/main.js": "/build/scripts/main.js?id=6e39b7365befa808542d047e84416868",
     "/build/scripts/manifest.js": "/build/scripts/manifest.js?id=5b146026d602d1c7edde0ac09ee95d92",
+    "/build/styles/main.css": "/build/styles/main.css?id=6253e9bd7fdca0dac8f04b6f24ba69b0",
     "/build/scripts/vendor.js": "/build/scripts/vendor.js?id=f1c9a31076147e70992774f5b9b631aa",
     "/build/images/.DS_Store": "/build/images/.DS_Store?id=a5c74e9c489ea7a65e52ff6f9ce33784",
     "/build/fonts/.DS_Store": "/build/fonts/.DS_Store?id=eabcf559aa7f613da2e5f418a72034b2",
@@ -10,6 +11,7 @@
     "/build/svgs/icon-arrow-right-20.svg": "/build/svgs/icon-arrow-right-20.svg?id=f49987c52884fa94f41eac7edfa08f50",
     "/build/svgs/icon-caret-down-20.svg": "/build/svgs/icon-caret-down-20.svg?id=49cbd6e3dd20f6f29e82570c33e6b740",
     "/build/svgs/icon-caret-up-20.svg": "/build/svgs/icon-caret-up-20.svg?id=53e70718051f834aac9f1fe205df57b7",
+    "/build/svgs/icon-checkmark-20.svg": "/build/svgs/icon-checkmark-20.svg?id=6d74d7d128df1539caf87adcd322ecb5",
     "/build/svgs/icon-chevron-left.svg": "/build/svgs/icon-chevron-left.svg?id=c4a36507c4611a5e9cd6436bc7bffecd",
     "/build/svgs/icon-chevron-right.svg": "/build/svgs/icon-chevron-right.svg?id=c867f600120394b289d4d2d6ac68b8a6",
     "/build/svgs/icon-close-20.svg": "/build/svgs/icon-close-20.svg?id=60c7a83ccd07c057fb74503f5a83b04b",
@@ -32,8 +34,5 @@
     "/build/svgs/icon-sort-toggle.svg": "/build/svgs/icon-sort-toggle.svg?id=c5759fd416e4fbc91ec87798de64e964",
     "/build/svgs/logo-neubauer.svg": "/build/svgs/logo-neubauer.svg?id=cf9b5cc20b4c62972bf09067e0901413",
     "/build/svgs/logo-uchicago.svg": "/build/svgs/logo-uchicago.svg?id=8950c004f4995c00af77e508d8a07b37",
-    "/build/videos/.DS_Store": "/build/videos/.DS_Store?id=08d64e1f9a81716cc133f85ad441757e",
-    "/build/spritemap.svg": "/build/spritemap.svg?id=9cb19c4b517df896c61205b61d1acad5",
-    "/build/styles/main.css": "/build/styles/main.css?id=6253e9bd7fdca0dac8f04b6f24ba69b0",
-    "/build/svgs/icon-checkmark-20.svg": "/build/svgs/icon-checkmark-20.svg?id=6d74d7d128df1539caf87adcd322ecb5"
+    "/build/videos/.DS_Store": "/build/videos/.DS_Store?id=08d64e1f9a81716cc133f85ad441757e"
 }

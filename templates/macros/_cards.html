@@ -149,7 +149,7 @@
         {% set showContent = cardObj and 'showContent' in cardObj|keys ? cardObj['showContent'] : true %}
         {% set trimContent = cardObj and 'trimContent' in cardObj|keys ? cardObj['trimContent'] : false %}
         {% set trimAbstract = trimContent and cardAbstract ? (cardAbstract|length > trimContent ? cardAbstract|slice(0,trimContent + 1)|split(' ')|slice(0,-1)|join(' ') ~ '...' : cardAbstract ) : null %}
-        {% set trimBody = trimContent and cardBody ? (cardBody|length > trimContent ? cardBody|slice(0,trimContent + 1)|split(' ')|slice(0,-1)|join(' ') ~ '...' : cardBody ) : null %}
+        {% set trimBody = trimContent and cardBody ? (cardBody|length > trimContent ? cardBody|striptags|truncate(trimContent,'...',true) : cardBody ) : null %}
 
         {% if showContent and not isEventSlide and not isNewsSlide %}
         {% if cardAbstract %}
