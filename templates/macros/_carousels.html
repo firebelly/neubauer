@@ -176,12 +176,13 @@
 			{% if cardCall %}
 			{% set prompt = cardCall['prompt'] %}
 			{% set action = cardCall.action %}
+			{% set url = cardCall.url %}
 			<div class="{{ cardName }} {{ cardName }}--call" data-test-qa="{{ cardCall|json_encode }}">
 				<div class="{{ cardName }}-wrap">
 					<h3 class="{{ cardName }}-title {{ cardName }}-title--call">{{ prompt }}</h3>
 					<a 
 						class="{{ cardName }}-action {{ cardName }}-action--link {{ cardName }}-action--call"
-						href="{{ siteUrl }}projects">
+						href="{{ siteUrl }}{{ url }}">
 						<span class="{{ cardName }}-action-label">{{ action }}</span>
 						<svg class="{{ cardName }}-action-icon">
 							<use xlink:href="{{ alias('@assetBasePath' ~ arrowRightPath) }}"></use>

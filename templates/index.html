@@ -99,7 +99,8 @@
         'slides': featureSet,
         'cardCall': {
             'prompt': featureCall ? featurePrompt : null,
-            'action': featureCall ? featureAction : null
+            'action': featureCall ? featureAction : null,
+            'url': 'research'
         },
         'group': 2,
         'scrollable': true
@@ -117,7 +118,16 @@
 {% set cardCall = entry["#{tabSlug}Card"] is not null and entry["#{tabSlug}Card"]|length > 0 ? entry["#{tabSlug}Card"].one() : null %}
 {% if cardCall %}
 {% set cardPrompt, cardAction = cardCall['prompt'], cardCall['action'] %}
-{% set cardUrl = tabSlug == 'news' ? 'about#news-announcements' : (tabSlug == 'people' ? 'people?query=&section=people&tags=&person=visiting-fellow&page=1' : tabSlug) %}
+{% switch tabSlug %}
+    {% case 'news' %}
+    {% set cardUrl = 'about#news-announcements' %}
+    {% case 'people' %}
+    {% set cardUrl = 'people?query=&section=people&tags=&person=visiting-fellow&page=1' %}
+    {% case 'projects' %}
+    {% set cardUrl = 'research' %}
+    {% default %}
+    {% set cardUrl = tabSlug %}
+{% endswitch %}
 {% endif %}
 
 {% set hasEntries = true %}
