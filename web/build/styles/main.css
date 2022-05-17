@@ -14645,6 +14645,9 @@ img {
 .interiorMod-wrap {
   padding-top: 8em;
 }
+.interiorMod-frame {
+  position: relative;
+}
 .interiorMod-frame--impact {
   width: 100%;
 }
@@ -14655,11 +14658,15 @@ img {
 }
 .interiorMod-frame-caption {
   font: normal 1.6em/1.56 "apercu", sans-serif;
-  display: inline-flex;
+  display: block;
+  width: 50%;
+  position: absolute;
+  left: 0;
+  top: 100%;
 }
 .interiorMod-asset {
   display: block;
-  margin-bottom: 4em;
+  padding-bottom: 4em;
 }
 @media (min-width: 768px) {
   .interiorMod-main {
@@ -14667,9 +14674,6 @@ img {
     flex-flow: row wrap;
     justify-content: flex-end;
   }
-}
-.interiorMod-main--impact {
-  margin-top: -3em;
 }
 .interiorMod-main-content {
   flex: 0 1 50%;

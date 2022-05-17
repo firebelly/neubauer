@@ -612,7 +612,8 @@
 	}
 
 	&-frame {
-		
+		position: relative;
+
 		&--impact {
 			width: 100%;
 		}
@@ -625,14 +626,18 @@
 
 		&-caption {
 			@include getType('caption');
-			display: inline-flex;
+			display: block;
+			width: 50%;
+			position: absolute;
+			left: 0;
+			top: 100%;
 		}
 
 	}
 
 	&-asset {
 		display: block;
-		margin-bottom: 4em;
+		padding-bottom: 4em;
 	}
 
 	&-main {
@@ -640,10 +645,6 @@
 		@include breakpoint(sm) {
 			@include flexParent();
 			@include justifyContent(flex-end);
-		}
-
-		&--impact {
-			margin-top: -3em;//ew
 		}
 
 		&-content {
