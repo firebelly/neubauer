@@ -65,6 +65,15 @@
 		$pr: math.div(40,16);
 		@include getType('caption');
 		padding: #{$pt}em #{$pr}em 0 0;
+
+		em {
+			font-style: italic;
+		}
+
+		strong, b {
+			font-weight: bold;
+		}
+
 	}
 
 	&-title {
