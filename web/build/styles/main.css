@@ -14056,6 +14056,418 @@ img {
 }
 
 /* ---------------------------------------------------------------------
+ Interior Projects (person)
+------------------------------------------------------------------------ */
+.interiorProjects-item-topics-list {
+  display: flex;
+  flex-flow: row wrap;
+  content: "list";
+}
+.interiorProjects-item-topics-list--feature {
+  justify-content: center;
+}
+.interiorProjects-item-topics-item {
+  flex: 0 1 auto;
+  margin: 0 1em 1em 0;
+  position: relative;
+}
+.interiorProjects-item-topics-item:hover {
+  cursor: pointer;
+}
+.interiorProjects-item-topics-item._is-active .interiorProjects-item-topics-icon--remove {
+  display: inline-flex;
+}
+.interiorProjects-item-topics-trigger {
+  display: block;
+}
+.interiorProjects-item-topics-trigger--tag {
+  display: flex;
+  flex-flow: row wrap;
+  -webkit-box-alignpack: center;
+  -ms-flex-alignpack: center;
+  -webkit-align-itemspack: center;
+  align-items: center;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  z-index: 1;
+}
+.interiorProjects-item-topics-input--faux {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  opacity: 0;
+  z-index: 2;
+}
+.interiorProjects-item-topics-input--faux:hover {
+  cursor: pointer;
+}
+.interiorProjects-item-topics-input--faux:checked + .interiorProjects-item-topics-trigger .interiorProjects-item-topics-icon--remove {
+  display: inline-flex;
+}
+.interiorProjects-item-topics-icon--remove {
+  height: 20px;
+  width: 20px;
+  margin-left: 0.3571428571em;
+}
+
+.interiorProjects-item-topics-item:hover .interiorProjects-item-topics-trigger--tag, .interiorProjects-item-topics-item._is-active .interiorProjects-item-topics-trigger--tag {
+  color: #E5E8FF;
+  background: #1C2AA7;
+}
+.interiorProjects-item-topics-trigger--tag {
+  border-color: #1C2AA7;
+}
+.interiorProjects-item-topics-trigger--tag, .interiorProjects-item-topics-trigger--tag:link, .interiorProjects-item-topics-trigger--tag:visited, .interiorProjects-item-topics-trigger--tag:hover, .interiorProjects-item-topics-trigger--tag:active {
+  color: #1C2AA7;
+  text-decoration: none;
+}
+.interiorProjects-item-topics-input--faux:checked + .interiorProjects-item-topics-trigger--tag {
+  color: #E5E8FF;
+  background: #1C2AA7;
+}
+.interiorProjects-item-topics-label--tag {
+  font: normal 1.4em/1.43 "apercu", sans-serif;
+}
+.interiorProjects-item-topics-icon--remove {
+  fill: #E5E8FF;
+  display: none;
+}
+.interiorProjects-item-topics-dialog .interiorProjects-item-topics-trigger--tag, .interiorProjects-item-topics--callout .interiorProjects-item-topics-trigger--tag {
+  border-color: #E5E8FF;
+  z-index: 1;
+}
+.interiorProjects-item-topics-dialog .interiorProjects-item-topics-trigger--tag, .interiorProjects-item-topics-dialog .interiorProjects-item-topics-trigger--tag:link, .interiorProjects-item-topics-dialog .interiorProjects-item-topics-trigger--tag:visited, .interiorProjects-item-topics-dialog .interiorProjects-item-topics-trigger--tag:hover, .interiorProjects-item-topics-dialog .interiorProjects-item-topics-trigger--tag:active, .interiorProjects-item-topics--callout .interiorProjects-item-topics-trigger--tag, .interiorProjects-item-topics--callout .interiorProjects-item-topics-trigger--tag:link, .interiorProjects-item-topics--callout .interiorProjects-item-topics-trigger--tag:visited, .interiorProjects-item-topics--callout .interiorProjects-item-topics-trigger--tag:hover, .interiorProjects-item-topics--callout .interiorProjects-item-topics-trigger--tag:active {
+  color: #E5E8FF;
+}
+.interiorProjects-item-topics-dialog .interiorProjects-item-topics-item:hover .interiorProjects-item-topics-trigger--tag,
+.interiorProjects-item-topics-dialog .interiorProjects-item-topics-item._is-active .interiorProjects-item-topics-trigger--tag,
+.interiorProjects-item-topics-dialog .interiorProjects-item-topics-input--faux:checked + .interiorProjects-item-topics-trigger--tag, .interiorProjects-item-topics--callout .interiorProjects-item-topics-item:hover .interiorProjects-item-topics-trigger--tag,
+.interiorProjects-item-topics--callout .interiorProjects-item-topics-item._is-active .interiorProjects-item-topics-trigger--tag,
+.interiorProjects-item-topics--callout .interiorProjects-item-topics-input--faux:checked + .interiorProjects-item-topics-trigger--tag {
+  color: #1C2AA7;
+  background: #E5E8FF;
+}
+.interiorProjects-item-topics-dialog .interiorProjects-item-topics-icon--remove, .interiorProjects-item-topics--callout .interiorProjects-item-topics-icon--remove {
+  fill: #1C2AA7;
+}
+
+.interiorProjects-item {
+  font-size: 1rem;
+  margin: 0 0 6em 0;
+}
+@media (min-width: 768px) {
+  .interiorProjects-item {
+    margin: 0 0.25em 8em 0.25em;
+  }
+}
+.interiorProjects-item-title {
+  font: normal 2em/1.5 "apercu", sans-serif;
+  margin-bottom: 0.5em;
+}
+.interiorProjects-item-title a:link,
+.interiorProjects-item-title a:visited,
+.interiorProjects-item-title a:hover,
+.interiorProjects-item-title a:active {
+  text-decoration: none;
+}
+.interiorProjects-item-title--top {
+  display: none;
+  visibility: hidden;
+}
+.interiorProjects-item-subtitle {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+  margin-bottom: 1.25em;
+}
+.interiorProjects-item-asset {
+  margin-bottom: 2em;
+}
+.interiorProjects-item-asset {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  font-size: 1rem;
+}
+@supports not (aspect-ratio: 1) {
+  .interiorProjects-item-asset--16-9 {
+    padding-bottom: calc(16/9 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .interiorProjects-item-asset--16-9 .interiorProjects-item-asset-image {
+    aspect-ratio: 16/9;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorProjects-item-asset--16-9 .interiorProjects-item-asset-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorProjects-item-asset--16-4_5 {
+    padding-bottom: calc(16/4.5 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .interiorProjects-item-asset--16-4_5 .interiorProjects-item-asset-image {
+    aspect-ratio: 16/4.5;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorProjects-item-asset--16-4_5 .interiorProjects-item-asset-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorProjects-item-asset--2-3 {
+    padding-bottom: calc(2/3 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .interiorProjects-item-asset--2-3 .interiorProjects-item-asset-image {
+    aspect-ratio: 2/3;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorProjects-item-asset--2-3 .interiorProjects-item-asset-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorProjects-item-asset--1-1 {
+    padding-bottom: calc(1/1 * 100%);
+  }
+}
+@supports (aspect-ratio: 1) {
+  .interiorProjects-item-asset--1-1 .interiorProjects-item-asset-image {
+    aspect-ratio: 1/1;
+  }
+}
+@supports not (aspect-ratio: 1) {
+  .interiorProjects-item-asset--1-1 .interiorProjects-item-asset-image {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+.interiorProjects-item-asset-image, .interiorProjects-item-asset-video {
+  max-width: 100%;
+}
+
+.interiorProjects-item-team {
+  margin-bottom: 1em;
+}
+.interiorProjects-item-team-title {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.interiorProjects-item-team-title.focusable:active, .interiorProjects-item-team-title.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.interiorProjects-item-team-item {
+  display: inline-block;
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+}
+.interiorProjects-item-caption {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+}
+.interiorProjects-item-redactor {
+  display: none;
+  visibility: hidden;
+}
+.interiorProjects-item-dateblock {
+  font: normal 1.6em/1.56 "apercu", sans-serif;
+  display: block;
+  margin-bottom: 0.625em;
+}
+.interiorProjects-item-dateblock span {
+  display: inline-block;
+  font-size: 0.75em;
+  vertical-align: text-top;
+}
+.interiorProjects-item-topics-title {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.interiorProjects-item-topics-title.focusable:active, .interiorProjects-item-topics-title.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.interiorProjects-item-buttons {
+  margin-top: 1em;
+}
+
+.interiorProjects-item-action {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  font-size: 1rem;
+  margin-right: 4em;
+}
+.interiorProjects-item-action--ghost {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: calc(1.5em - 1px) calc(2em - 1px);
+  position: relative;
+}
+.interiorProjects-item-action--ghost::after {
+  transition: border-color 0.5s ease-in;
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border: 4px solid transparent;
+  border-radius: 9px;
+}
+.interiorProjects-item-action--link {
+  position: relative;
+}
+.interiorProjects-item-action--link::after {
+  transition: all 0.5s ease-in;
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 12px);
+  background: none;
+}
+.interiorProjects-item-action:focus {
+  outline: none;
+}
+.interiorProjects-item-action:link, .interiorProjects-item-action:visited, .interiorProjects-item-action:hover, .interiorProjects-item-action:active {
+  text-decoration: none;
+}
+.interiorProjects-item-action-label, .interiorProjects-item-action-icon {
+  position: relative;
+  z-index: 1;
+  flex: 0 1 auto;
+}
+.interiorProjects-item-action-icon {
+  margin-left: 1em;
+  height: 20px;
+  width: 20px;
+}
+.interiorProjects-item-action:hover {
+  cursor: pointer;
+}
+
+.interiorProjects-item-action--link {
+  color: #1C2AA7;
+}
+.interiorProjects-item-action--link:link, .interiorProjects-item-action--link:visited, .interiorProjects-item-action--link:hover, .interiorProjects-item-action--link:active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  -webkit-text-decoration-color: #1C2AA7;
+          text-decoration-color: #1C2AA7;
+}
+.interiorProjects-item-action--link:hover {
+  color: #FFFFFF;
+  -webkit-text-decoration-color: #FFFFFF;
+          text-decoration-color: #FFFFFF;
+  text-decoration-thickness: 4px;
+}
+.interiorProjects-item-action--link:hover::after {
+  background: #800000;
+}
+.interiorProjects-item-action--link:hover .interiorProjects-item-action-icon {
+  fill: #FFFFFF;
+}
+.interiorProjects-item-action--link .interiorProjects-item-action-icon {
+  fill: #1C2AA7;
+}
+.interiorProjects-item-action--ghost {
+  border-color: #1C2AA7;
+  color: #1C2AA7;
+}
+.interiorProjects-item-action--ghost:hover {
+  background: #800000;
+  color: #FFFFFF;
+  border-color: #800000;
+}
+.interiorProjects-item-action--ghost:hover::after {
+  border-color: #FFFFFF;
+}
+.interiorProjects-item-action--ghost:hover .interiorProjects-item-action-icon {
+  fill: #FFFFFF;
+}
+.interiorProjects-item-action--ghost .interiorProjects-item-action-icon {
+  fill: #1C2AA7;
+}
+.interiorProjects-item-action-label {
+  font: normal 1.2em/1.67 "apercu", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: inherit;
+  text-transform: uppercase;
+}
+.interiorProjects-item-action-trigger {
+  text-align: center;
+  text-decoration: none;
+}
+
+.interiorProjects-item-title a:link,
+.interiorProjects-item-title a:visited,
+.interiorProjects-item-title a:hover,
+.interiorProjects-item-title a:active {
+  color: #1C2AA7;
+}
+.interiorProjects-item-team-name:link, .interiorProjects-item-team-name:visited, .interiorProjects-item-team-name:hover, .interiorProjects-item-team-name:active {
+  color: #1C2AA7;
+}
+
+.interiorProjects {
+  border-top: 1px solid #1C2AA7;
+  padding: 4em 4em 16em 4em;
+}
+.interiorProjects-title {
+  font: normal 6.5em/1.08 "domaine-text", serif;
+  letter-spacing: -0.035em;
+  margin-bottom: 1.2307692308em;
+}
+@media (min-width: 768px) {
+  .interiorProjects-list {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .interiorProjects-list > * {
+    flex: 0 1 calc(50% - 0.5em);
+  }
+}
+
+/* ---------------------------------------------------------------------
  Interior Module
  - e.g. About Impact Module
 ------------------------------------------------------------------------ */

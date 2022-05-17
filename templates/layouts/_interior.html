@@ -353,7 +353,10 @@
         <div class="interiorSummary-topics interiorSummary-topics--{{ entrySection }}">
             <h3 class="interiorSummary-topics-subtitle">Topics</h3>
             <ul class="interiorSummary-topics-list">
-            {% for topic in topicList %}
+            {% set topicCleaner = [] %}
+            {% for topic in topicList if topic.title|slugify not in topicCleaner %}
+                {# lol gross #}
+                {% set topicCleaner = topicCleaner|merge([topic.title|slugify]) %}
                 <li class="interiorSummary-topics-item">
                     <a 
                         class="interiorSummary-topics-trigger interiorSummary-topics-trigger--tag"
@@ -369,15 +372,34 @@
 </section>
 
 {% if entrySection == 'people' and projectList %}
+{% set projectCount = projectList|length %}
 {% set projectFeature = projectList[0] %}
 {% set featureSizes = utils.getAssetSizes('projects','feature') %}
 {% set featureObj = {
     'assetSizes': featureSizes,
     'cardVariant': 'callout',
-    'cardLabel': 'Projects',
+    'cardLabel': projectCount > 1 ? 'Feature Project' : 'Project',
     'cardId': 'projects'
 }%}
 {{ cards.cardFeature('personFeature',projectFeature,featureObj) }}
+
+{% if projectCount > 1 %}
+<section class="interiorProjects">
+    <h3 class="interiorProjects-title">Projects</h3>
+    <div class="interiorProjects-list">
+    {% set projectSizes = utils.getAssetSizes('projects','card') %} 
+    {% set projectObj = {
+        'variant': 'projects',
+        'assetSizes': projectSizes,
+        'trimContent': 300
+    } %}
+    {% set projectName = 'interiorProjects-item' %}
+    {% for projectEntry in projectList if projectEntry.id != projectFeature.id %}
+        {{ cards.cardArticle(projectName,projectEntry,projectObj) }}
+    {% endfor %}
+    </div>
+</section>
+{% endif %}
 {% endif %}
 
 {% if team %}
@@ -386,12 +408,12 @@
     <div class="interiorTeam-list">
     {% set teamSizes = utils.getAssetSizes('people','card') %} 
     {% for member in team %}
-        {% set teamName,teamEntry,teamObj,teamVariant = 'interiorTeam-item',member,{},'' %}
+        {% set teamName,teamEntry,teamObj = 'interiorTeam-item',member,{} %}
         {% set teamObj = teamObj|merge({
             'assetSizes': teamSizes,
             'trimContent': 300
         })%}
-        {{ cards.cardArticle(teamName,teamEntry,teamObj,teamVariant) }}
+        {{ cards.cardArticle(teamName,teamEntry,teamObj) }}
     {% endfor %}
     </div>
 </section>

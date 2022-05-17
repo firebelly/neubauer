@@ -550,7 +550,36 @@
 	}
 
 }
-	
+
+/* ---------------------------------------------------------------------
+ Interior Projects (person)
+------------------------------------------------------------------------ */
+@include cardDirectory('.interiorProjects-item',getColor('blue'),getColor('blue',10));
+
+.interiorProjects {
+	$projects: &;
+	border-top: 1px solid getColor('blue');
+	padding: 4em 4em 16em 4em;
+
+	&-title {
+		$mb: math.div(80,65);
+		@include getType('h1-normal');
+		margin-bottom: #{$mb}em;
+	}
+
+	&-list {
+
+		@include breakpoint(sm) {
+			@include flexParent();
+
+			> * {
+				@include flexChild(0 1 calc(50% - 0.5em));
+			}
+
+		}
+	}
+
+}
 
 /* ---------------------------------------------------------------------
  Interior Module
