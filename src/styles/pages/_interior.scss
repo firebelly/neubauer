@@ -180,6 +180,11 @@
 			@at-root {
 				@include actionButton(#{$action},getColor('red'),getColor('red',10));
 			}
+
+			&-label {
+				pointer-events: none;
+			}
+
 		}
 
 	}

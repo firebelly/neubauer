@@ -591,21 +591,38 @@ var scrollChyron = /*#__PURE__*/function () {
       self.chyron.scrollTo(self.chyron.scrollLeft + 1, 0);
     }
   }, {
+    key: "scrollToHash",
+    value: function scrollToHash(targetHash) {
+      var self = this;
+      setTimeout(function () {
+        var hashHomie = document.querySelector(targetHash),
+            hashTop = hashHomie.offsetTop;
+        window.location.hash = targetHash;
+        window.scrollTo(0, hashTop);
+      }, 300);
+    }
+  }, {
     key: "hashScroll",
     value: function hashScroll() {
       // chyron scroll event is interfering with scrollto event
-      // more time, better code, but for now...
+      // ensure smooth, accurate scroll-to-hash
+      // if more time, better code, but for now...
       var self = this;
       var hashies = document.querySelectorAll('[data-hash-scroll]');
       hashies.forEach(function (item) {
         item.addEventListener('click', function (e) {
           e.stopPropagation();
           e.preventDefault();
-          var myHash = e.target.hash,
-              hashHomie = document.querySelector(myHash),
-              hashTop = hashHomie.offsetTop;
-          self._paused = true;
-          window.scrollTo(0, hashTop);
+          var currentPage = window.location.pathname,
+              targetPage = e.target.pathname,
+              targetHash = e.target.hash;
+
+          if (currentPage == targetPage) {
+            self._paused = true;
+            self.scrollToHash(targetHash);
+          } else {
+            window.location = e.target.href;
+          }
         });
       });
     }
@@ -638,17 +655,6 @@ var scrollChyron = /*#__PURE__*/function () {
     value: function init() {
       var self = this;
       window.addEventListener('load', function () {
-        var hasHash = window.location.hash !== '';
-
-        if (hasHash) {
-          var currentHash = window.location.hash,
-              hashHomie = document.querySelector(currentHash),
-              hashTop = hashHomie.offsetTop;
-          setTimeout(function () {
-            window.scrollTo(0, hashTop);
-          }, 1);
-        }
-
         self.chyron.addEventListener('mouseover', function () {
           return self.pauseScroll();
         });
@@ -664,7 +670,22 @@ var scrollChyron = /*#__PURE__*/function () {
           // Only play chyron when in view
           console.log('scrolling');
           self._paused = self.isChyronInView(self.chyron) ? false : true;
-        });
+        }); // Handle hash scrolling
+
+        var targetHash = window.location.hash; // Reset location to prevent auto-scroll on load
+
+        window.location.hash = '';
+
+        if (targetHash !== '') {
+          // This delay still isn't effective in preventing a fault scroll-to position. 
+          // TO DO:
+          // Caching, likely, to account for content loads, etc.
+          setTimeout(function () {
+            self._paused = true;
+            self.scrollToHash(targetHash);
+          }, 300);
+        }
+
         self.hashScroll();
         self.dialogScroll();
       });

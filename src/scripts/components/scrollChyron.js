@@ -78,9 +78,26 @@ class scrollChyron {
 
     }
 
+    scrollToHash(targetHash) {
+
+        let self = this;
+
+        setTimeout(() => {
+
+            let hashHomie = document.querySelector(targetHash),
+                hashTop   = hashHomie.offsetTop;  
+            
+            window.location.hash = targetHash;
+            window.scrollTo(0,hashTop);
+
+        }, 300);
+
+    }
+
     hashScroll() {
         // chyron scroll event is interfering with scrollto event
-        // more time, better code, but for now...
+        // ensure smooth, accurate scroll-to-hash
+        // if more time, better code, but for now...
         let self = this;
     
         let hashies = document.querySelectorAll('[data-hash-scroll]');
@@ -92,13 +109,17 @@ class scrollChyron {
                 e.stopPropagation();
                 e.preventDefault();
                 
-                let myHash    = e.target.hash,
-                    hashHomie = document.querySelector(myHash),
-                    hashTop   = hashHomie.offsetTop;
-
-                self._paused = true;
-               
-                window.scrollTo(0,hashTop);
+                let currentPage = window.location.pathname,
+                    targetPage  = e.target.pathname,
+                    targetHash  = e.target.hash;
+                
+                if ( currentPage == targetPage ) {
+                    self._paused = true;
+                    self.scrollToHash(targetHash);
+                }
+                else {
+                    window.location = e.target.href;
+                }
  
             });
 
@@ -150,18 +171,6 @@ class scrollChyron {
     
         window.addEventListener('load',() => {
 
-            let hasHash = (window.location.hash !== '');
-
-            if ( hasHash) {
-                let currentHash = window.location.hash,
-                    hashHomie   = document.querySelector(currentHash),
-                    hashTop     = hashHomie.offsetTop;
-
-                setTimeout(function() {
-                    window.scrollTo(0, hashTop);
-                }, 1);
-            }
-
             self.chyron.addEventListener('mouseover', () => self.pauseScroll(), );
             self.chyron.addEventListener('mouseout', () => self.pauseScroll() );
 
@@ -175,6 +184,21 @@ class scrollChyron {
                 console.log('scrolling');
                 self._paused = self.isChyronInView(self.chyron) ? false : true;
             });
+
+            // Handle hash scrolling
+            let targetHash = window.location.hash;
+            // Reset location to prevent auto-scroll on load
+            window.location.hash = '';
+
+            if ( targetHash !== '' ) {
+                // This delay still isn't effective in preventing a fault scroll-to position. 
+                // TO DO:
+                // Caching, likely, to account for content loads, etc.
+                setTimeout(() => {
+                    self._paused = true;
+                    self.scrollToHash(targetHash);
+                }, 300);
+            }
 
             self.hashScroll();
             self.dialogScroll();

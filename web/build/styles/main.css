@@ -13029,6 +13029,10 @@ img {
   text-decoration: none;
 }
 
+.interiorIntro-menu-action-label {
+  pointer-events: none;
+}
+
 /* ---------------------------------------------------------------------
  Interior Summary
 ------------------------------------------------------------------------ */

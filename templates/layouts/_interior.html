@@ -208,7 +208,7 @@
             <picture>
                 {{ assets.assetCard("interiorIntro-asset",cardImage,cardImageSizes) }} 
             </picture>
-            <figcaption class="interiorIntro-caption">{{ cardImage.caption }}</figcaption>
+            <figcaption class="interiorIntro-caption">{{ cardImage.one().caption }}</figcaption>
         </figure>
     </div>
     {% endif %}
