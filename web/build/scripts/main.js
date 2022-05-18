@@ -594,12 +594,25 @@ var scrollChyron = /*#__PURE__*/function () {
     key: "scrollToHash",
     value: function scrollToHash(targetHash) {
       var self = this;
-      setTimeout(function () {
+      var scrollCount = 0; // Account for lazy loading images by patching the scroll
+      // NOTE: Important we use scrollTo versus scrollIntoView
+      // so as to ensure syncronicity with chyron scrolling
+
+      function scrollLoop() {
         var hashHomie = document.querySelector(targetHash),
-            hashTop = hashHomie.offsetTop;
-        window.location.hash = targetHash;
-        window.scrollTo(0, hashTop);
-      }, 300);
+            hashOffset = hashHomie.offsetTop;
+        ++scrollCount;
+        if (scrollCount === 3) return;
+        window.scrollTo(0, hashOffset);
+        setTimeout(function () {
+          scrollLoop();
+        }, 600);
+      }
+
+      var hashHomie = document.querySelector(targetHash),
+          hashOffset = hashHomie.offsetTop;
+      window.scrollTo(0, hashOffset);
+      scrollLoop();
     }
   }, {
     key: "hashScroll",
@@ -677,13 +690,10 @@ var scrollChyron = /*#__PURE__*/function () {
         window.location.hash = '';
 
         if (targetHash !== '') {
-          // This delay still isn't effective in preventing a fault scroll-to position. 
-          // TO DO:
-          // Caching, likely, to account for content loads, etc.
-          setTimeout(function () {
-            self._paused = true;
-            self.scrollToHash(targetHash);
-          }, 300);
+          self._paused = true;
+          self.scrollToHash(targetHash); // For consistency, reapply the hash
+
+          window.location.hash = targetHash;
         }
 
         self.hashScroll();
@@ -1040,6 +1050,15 @@ var newsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_7__["
 
 if (newsCarousel.carousel !== null) {
   newsCarousel.init();
+} // About Carousels
+
+
+var publicationsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_7__["default"]({
+  _id: 'publications'
+});
+
+if (publicationsCarousel.carousel !== null) {
+  publicationsCarousel.init();
 }
 
 /***/ }),

@@ -82,16 +82,35 @@ class scrollChyron {
 
         let self = this;
 
-        setTimeout(() => {
+        let scrollCount = 0;
 
-            let hashHomie = document.querySelector(targetHash),
-                hashTop   = hashHomie.offsetTop;  
-            
-            window.location.hash = targetHash;
-            window.scrollTo(0,hashTop);
+        // Account for lazy loading images by patching the scroll
+        // NOTE: Important we use scrollTo versus scrollIntoView
+        // so as to ensure syncronicity with chyron scrolling
+        function scrollLoop() {
 
-        }, 300);
+            let hashHomie  = document.querySelector(targetHash),
+                hashOffset = hashHomie.offsetTop;
 
+            ++scrollCount;
+
+            if ( scrollCount === 3 ) return;
+
+            window.scrollTo(0,hashOffset);
+
+            setTimeout(() => {
+                scrollLoop();
+            }, 600);
+    
+        }
+
+        let hashHomie  = document.querySelector(targetHash),
+            hashOffset = hashHomie.offsetTop;
+
+        window.scrollTo(0,hashOffset);
+    
+        scrollLoop();
+       
     }
 
     hashScroll() {
@@ -191,13 +210,10 @@ class scrollChyron {
             window.location.hash = '';
 
             if ( targetHash !== '' ) {
-                // This delay still isn't effective in preventing a fault scroll-to position. 
-                // TO DO:
-                // Caching, likely, to account for content loads, etc.
-                setTimeout(() => {
-                    self._paused = true;
-                    self.scrollToHash(targetHash);
-                }, 300);
+                self._paused = true;
+                self.scrollToHash(targetHash);
+                // For consistency, reapply the hash
+                window.location.hash = targetHash;
             }
 
             self.hashScroll();

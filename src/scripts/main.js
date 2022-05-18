@@ -67,3 +67,10 @@ if ( newsCarousel.carousel !== null ) {
     newsCarousel.init();
 }
 
+// About Carousels
+const publicationsCarousel = new scrollCarousel({
+    _id: 'publications'
+});
+if ( publicationsCarousel.carousel !== null ) {
+    publicationsCarousel.init();
+}

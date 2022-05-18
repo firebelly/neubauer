@@ -5157,6 +5157,12 @@ img {
 .homepageCarousel--news .homepageCarousel-slides::-webkit-scrollbar-thumb {
   background: #FFE5E6;
 }
+.homepageCarousel--publications .homepageCarousel-slides {
+  scrollbar-color: #FFE5E6 transparent;
+}
+.homepageCarousel--publications .homepageCarousel-slides::-webkit-scrollbar-thumb {
+  background: #FFE5E6;
+}
 .homepageCarousel--people .homepageCarousel-button--control {
   border-color: #1C2AA7;
 }
@@ -5164,6 +5170,9 @@ img {
   border-color: #3F3606;
 }
 .homepageCarousel--news .homepageCarousel-button--control {
+  border-color: #800000;
+}
+.homepageCarousel--publications .homepageCarousel-button--control {
   border-color: #800000;
 }
 .homepageCarousel-button-icon--active {
@@ -5185,6 +5194,9 @@ img {
   fill: #3F3606;
 }
 .homepageCarousel--news .homepageCarousel-button-icon {
+  fill: #800000;
+}
+.homepageCarousel--publications .homepageCarousel-button-icon {
   fill: #800000;
 }
 .homepageCarousel--people .homepageCarousel-call {
@@ -14698,14 +14710,10 @@ img {
 .interiorMod-frame--impact {
   width: 100%;
 }
-.interiorMod-frame-placeholder {
-  height: 700px;
-  width: 100%;
-  background-color: lightgray;
-}
 .interiorMod-frame-caption {
   font: normal 1.6em/1.56 "apercu", sans-serif;
   display: block;
+  padding-right: 1.25em;
   width: 50%;
   position: absolute;
   left: 0;
@@ -15653,6 +15661,25 @@ img {
 .panelDirections-content > * {
   font: normal 2.4em/1.46 "apercu", sans-serif;
 }
+.panelStatement-content a:link,
+.panelStatement-content a:visited,
+.panelStatement-content a:hover,
+.panelStatement-content a:active,
+.panelDirections-content a:link,
+.panelDirections-content a:visited,
+.panelDirections-content a:hover,
+.panelDirections-content a:active {
+  color: #800000;
+}
+.panelStatement-content em,
+.panelDirections-content em {
+  font-style: italic;
+}
+.panelStatement-content b, .panelStatement-content strong,
+.panelDirections-content b,
+.panelDirections-content strong {
+  font-weight: bold;
+}
 
 .panelSummary {
   margin: 0;
@@ -15717,15 +15744,615 @@ img {
 .panelSummary-name {
   font: normal 2.8em/1.25 "apercu", sans-serif;
 }
-.panelSummary-trigger {
+.interiorSummary--projects .panelSummary-trigger {
   border-color: #51594A;
   color: #51594A;
 }
-.panelSummary-toggle {
+.interiorSummary--news .panelSummary-trigger {
+  border-color: #800000;
+  color: #800000;
+}
+.interiorSummary--projects .panelSummary-toggle {
   fill: #51594A;
+}
+.interiorSummary--news .panelSummary-toggle {
+  fill: #800000;
 }
 .panelSummary-content > * {
   font: normal 2.4em/1.46 "apercu", sans-serif;
+}
+
+.aboutCarousel {
+  font-size: 1rem;
+  margin-bottom: 11em;
+}
+.aboutCarousel-frame {
+  overflow: hidden;
+}
+.aboutCarousel-slides {
+  display: flex;
+  padding: 0 4em 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-scroll-snap-type: x mandatory;
+      scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+.aboutCarousel-slides::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.aboutCarousel-slides::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: transparent;
+}
+.aboutCarousel-slides::-webkit-scrollbar-track {
+  background: transparent;
+}
+.aboutCarousel-slides > * {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  transform-origin: center center;
+  transform: scale(1);
+  transition: transform 0.5s;
+  position: relative;
+  width: calc(100% - 2em);
+}
+@media (min-width: 768px) {
+  .aboutCarousel-slides--1 > * {
+    width: calc(100% - 2em);
+  }
+  .aboutCarousel-slides--2 > * {
+    width: calc(50% - 2em);
+  }
+  .aboutCarousel-slides--3 > * {
+    width: calc(33.3333333333% - 2em);
+  }
+  .aboutCarousel-slides--4 > * {
+    width: calc(25% - 2em);
+  }
+}
+.aboutCarousel-legend {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.aboutCarousel-legend.focusable:active, .aboutCarousel-legend.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.aboutCarousel-button {
+  background: none;
+  border: none;
+  border-radius: none;
+  font-size: inherit;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+}
+.aboutCarousel-button--control {
+  border: 1px solid transparent;
+  border-radius: 5px;
+  display: inline-flex;
+  position: relative;
+  margin: 0 1em 2em 0;
+  padding: 1.5em;
+}
+.aboutCarousel-button--control::after {
+  transition: border-color 0.5s ease-in;
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border: 4px solid transparent;
+  border-radius: 9px;
+}
+.aboutCarousel-button--control:hover {
+  background: #800000;
+  color: #FFFFFF;
+  border-color: #800000;
+}
+.aboutCarousel-button--control:hover::after {
+  border-color: #FFFFFF;
+}
+.aboutCarousel-button--control:hover .aboutCarousel-button-icon {
+  fill: #FFFFFF;
+}
+.aboutCarousel-button:hover {
+  cursor: pointer;
+}
+.aboutCarousel-button-label {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.aboutCarousel-button-label.focusable:active, .aboutCarousel-button-label.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.aboutCarousel-button-label, .aboutCarousel-button-icon {
+  pointer-events: none;
+}
+.aboutCarousel-button-icon {
+  height: 20px;
+  width: 20px;
+}
+.aboutCarousel-nav {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.aboutCarousel-nav.focusable:active, .aboutCarousel-nav.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.aboutCarousel-call {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  -webkit-box-alignpack: center;
+  -ms-flex-alignpack: center;
+  -webkit-align-itemspack: center;
+  align-items: center;
+  flex: 1 0 auto;
+  border: 1px solid transparent;
+  margin-right: 0;
+  padding: 4em;
+}
+.aboutCarousel-call > * {
+  flex: 0 1 auto;
+}
+.aboutCarousel-call-prompt {
+  font: normal 2.8em/1.25 "apercu", sans-serif;
+  margin-bottom: 0.7142857143em;
+  text-align: center;
+}
+
+.aboutCarousel-slides {
+  scrollbar-width: thin;
+}
+.aboutCarousel--people .aboutCarousel-slides {
+  scrollbar-color: #E5E8FF transparent;
+}
+.aboutCarousel--people .aboutCarousel-slides::-webkit-scrollbar-thumb {
+  background: #E5E8FF;
+}
+.aboutCarousel--events .aboutCarousel-slides {
+  scrollbar-color: #FFF2B2 transparent;
+}
+.aboutCarousel--events .aboutCarousel-slides::-webkit-scrollbar-thumb {
+  background: #FFF2B2;
+}
+.aboutCarousel--news .aboutCarousel-slides {
+  scrollbar-color: #FFE5E6 transparent;
+}
+.aboutCarousel--news .aboutCarousel-slides::-webkit-scrollbar-thumb {
+  background: #FFE5E6;
+}
+.aboutCarousel--publications .aboutCarousel-slides {
+  scrollbar-color: #FFE5E6 transparent;
+}
+.aboutCarousel--publications .aboutCarousel-slides::-webkit-scrollbar-thumb {
+  background: #FFE5E6;
+}
+.aboutCarousel--people .aboutCarousel-button--control {
+  border-color: #1C2AA7;
+}
+.aboutCarousel--events .aboutCarousel-button--control {
+  border-color: #3F3606;
+}
+.aboutCarousel--news .aboutCarousel-button--control {
+  border-color: #800000;
+}
+.aboutCarousel--publications .aboutCarousel-button--control {
+  border-color: #800000;
+}
+.aboutCarousel-button-icon--active {
+  display: none;
+  visibility: hidden;
+}
+[aria-current=true] .aboutCarousel-button-icon--active {
+  display: block;
+  visibility: visible;
+}
+[aria-current=true] .aboutCarousel-button-icon--inactive {
+  display: none;
+  visibility: hidden;
+}
+.aboutCarousel--people .aboutCarousel-button-icon {
+  fill: #1C2AA7;
+}
+.aboutCarousel--events .aboutCarousel-button-icon {
+  fill: #3F3606;
+}
+.aboutCarousel--news .aboutCarousel-button-icon {
+  fill: #800000;
+}
+.aboutCarousel--publications .aboutCarousel-button-icon {
+  fill: #800000;
+}
+.aboutCarousel--people .aboutCarousel-call {
+  border-color: #1C2AA7;
+  color: #1C2AA7;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  font-size: 1rem;
+  margin-right: 4em;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action:not(:first-of-type) {
+  margin-top: 2em;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--ghost {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: calc(1.5em - 1px) calc(2em - 1px);
+  position: relative;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--ghost::after {
+  transition: border-color 0.5s ease-in;
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border: 4px solid transparent;
+  border-radius: 9px;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--link {
+  position: relative;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--link::after {
+  transition: all 0.5s ease-in;
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 12px);
+  background: none;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action:focus {
+  outline: none;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action:link, .aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action:visited, .aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action:hover, .aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action:active {
+  text-decoration: none;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action-label, .aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action-icon {
+  position: relative;
+  z-index: 1;
+  flex: 0 1 auto;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action-icon {
+  margin-left: 1em;
+  height: 20px;
+  width: 20px;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action:hover {
+  cursor: pointer;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--link {
+  color: #1C2AA7;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--link:link, .aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--link:visited, .aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--link:hover, .aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--link:active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  -webkit-text-decoration-color: #1C2AA7;
+          text-decoration-color: #1C2AA7;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--link:hover {
+  color: #FFFFFF;
+  -webkit-text-decoration-color: #FFFFFF;
+          text-decoration-color: #FFFFFF;
+  text-decoration-thickness: 4px;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--link:hover::after {
+  background: #800000;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--link:hover .aboutCarousel-call-action-icon {
+  fill: #FFFFFF;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--link .aboutCarousel-call-action-icon {
+  fill: #1C2AA7;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--ghost {
+  border-color: #1C2AA7;
+  color: #1C2AA7;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--ghost:hover {
+  background: #800000;
+  color: #FFFFFF;
+  border-color: #800000;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--ghost:hover::after {
+  border-color: #FFFFFF;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--ghost:hover .aboutCarousel-call-action-icon {
+  fill: #FFFFFF;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action--ghost .aboutCarousel-call-action-icon {
+  fill: #1C2AA7;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action-label {
+  font: normal 1.2em/1.67 "apercu", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: inherit;
+  text-transform: uppercase;
+}
+.aboutCarousel--people .aboutCarousel-call .aboutCarousel-call-action-trigger {
+  text-align: center;
+  text-decoration: none;
+}
+.aboutCarousel--events .aboutCarousel-call {
+  border-color: #3F3606;
+  color: #3F3606;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  font-size: 1rem;
+  margin-right: 4em;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action:not(:first-of-type) {
+  margin-top: 2em;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--ghost {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: calc(1.5em - 1px) calc(2em - 1px);
+  position: relative;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--ghost::after {
+  transition: border-color 0.5s ease-in;
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border: 4px solid transparent;
+  border-radius: 9px;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--link {
+  position: relative;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--link::after {
+  transition: all 0.5s ease-in;
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 12px);
+  background: none;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action:focus {
+  outline: none;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action:link, .aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action:visited, .aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action:hover, .aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action:active {
+  text-decoration: none;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action-label, .aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action-icon {
+  position: relative;
+  z-index: 1;
+  flex: 0 1 auto;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action-icon {
+  margin-left: 1em;
+  height: 20px;
+  width: 20px;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action:hover {
+  cursor: pointer;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--link {
+  color: #3F3606;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--link:link, .aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--link:visited, .aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--link:hover, .aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--link:active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  -webkit-text-decoration-color: #3F3606;
+          text-decoration-color: #3F3606;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--link:hover {
+  color: #FFFFFF;
+  -webkit-text-decoration-color: #FFFFFF;
+          text-decoration-color: #FFFFFF;
+  text-decoration-thickness: 4px;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--link:hover::after {
+  background: #800000;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--link:hover .aboutCarousel-call-action-icon {
+  fill: #FFFFFF;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--link .aboutCarousel-call-action-icon {
+  fill: #3F3606;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--ghost {
+  border-color: #3F3606;
+  color: #3F3606;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--ghost:hover {
+  background: #800000;
+  color: #FFFFFF;
+  border-color: #800000;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--ghost:hover::after {
+  border-color: #FFFFFF;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--ghost:hover .aboutCarousel-call-action-icon {
+  fill: #FFFFFF;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action--ghost .aboutCarousel-call-action-icon {
+  fill: #3F3606;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action-label {
+  font: normal 1.2em/1.67 "apercu", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: inherit;
+  text-transform: uppercase;
+}
+.aboutCarousel--events .aboutCarousel-call .aboutCarousel-call-action-trigger {
+  text-align: center;
+  text-decoration: none;
+}
+.aboutCarousel--news .aboutCarousel-call {
+  border-color: #800000;
+  color: #800000;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  font-size: 1rem;
+  margin-right: 4em;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action:not(:first-of-type) {
+  margin-top: 2em;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--ghost {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: calc(1.5em - 1px) calc(2em - 1px);
+  position: relative;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--ghost::after {
+  transition: border-color 0.5s ease-in;
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border: 4px solid transparent;
+  border-radius: 9px;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--link {
+  position: relative;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--link::after {
+  transition: all 0.5s ease-in;
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 12px);
+  background: none;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action:focus {
+  outline: none;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action:link, .aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action:visited, .aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action:hover, .aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action:active {
+  text-decoration: none;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action-label, .aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action-icon {
+  position: relative;
+  z-index: 1;
+  flex: 0 1 auto;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action-icon {
+  margin-left: 1em;
+  height: 20px;
+  width: 20px;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action:hover {
+  cursor: pointer;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--link {
+  color: #800000;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--link:link, .aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--link:visited, .aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--link:hover, .aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--link:active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  -webkit-text-decoration-color: #800000;
+          text-decoration-color: #800000;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--link:hover {
+  color: #FFFFFF;
+  -webkit-text-decoration-color: #FFFFFF;
+          text-decoration-color: #FFFFFF;
+  text-decoration-thickness: 4px;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--link:hover::after {
+  background: #800000;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--link:hover .aboutCarousel-call-action-icon {
+  fill: #FFFFFF;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--link .aboutCarousel-call-action-icon {
+  fill: #800000;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--ghost {
+  border-color: #800000;
+  color: #800000;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--ghost:hover {
+  background: #800000;
+  color: #FFFFFF;
+  border-color: #800000;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--ghost:hover::after {
+  border-color: #FFFFFF;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--ghost:hover .aboutCarousel-call-action-icon {
+  fill: #FFFFFF;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action--ghost .aboutCarousel-call-action-icon {
+  fill: #800000;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action-label {
+  font: normal 1.2em/1.67 "apercu", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: inherit;
+  text-transform: uppercase;
+}
+.aboutCarousel--news .aboutCarousel-call .aboutCarousel-call-action-trigger {
+  text-align: center;
+  text-decoration: none;
+}
+
+.aboutCarousel {
+  margin: 8em 0 0 0;
+}
+.aboutCarousel .newsSlide {
+  border-top: none;
+}
+.aboutCarousel .newsSlide-title--top {
+  display: none;
 }
 
 /* ---------------------------------------------------------------------

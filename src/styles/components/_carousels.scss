@@ -199,6 +199,12 @@ Carousel Scroller: Default Presentation
                     background: getColor('red',10);
                 }
             }
+            #{$selector}--publications & {
+                scrollbar-color: getColor('red',10) transparent;
+                &::-webkit-scrollbar-thumb {
+                    background: getColor('red',10);
+                }
+            }
         }
 
         &-button {
@@ -212,6 +218,9 @@ Carousel Scroller: Default Presentation
                     border-color: getColor('yellow',10);
                 }
                 #{$selector}--news & {
+                    border-color: getColor('red');
+                }
+                #{$selector}--publications & {
                     border-color: getColor('red');
                 }
             }	
@@ -243,6 +252,10 @@ Carousel Scroller: Default Presentation
                 }
 
                 #{$selector}--news & {
+                    fill: getColor('red');
+                }
+
+                #{$selector}--publications & {
                     fill: getColor('red');
                 }
     

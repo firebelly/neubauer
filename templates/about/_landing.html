@@ -1,6 +1,7 @@
 {% import 'macros/_utils' as utils %}
 {% import 'macros/_dates' as dates %}
 {% import 'macros/_cards' as cards %}
+{% import 'macros/_carousels' as carousels %}
 {% import 'macros/_assets' as assets %}
 {% import 'macros/_controls' as controls %}
 {% import 'macros/_menus' as menus %}
@@ -263,39 +264,58 @@
     {% endif %}
 </section>
 
-{% case 'news-announcements' %}
-{% set news = craft.entries().section('news').all() %}
-<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modSlug }}">
-    <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
-    <div class="interiorMod-list interiorMod-list--4">
-        {% set newsName = 'interiorMod-card' %}
-        {% set newsObj = {
-            'cardVariant': 'news',
-            'showContent': false,
-            'assetSizes': utils.getAssetSizes('about','news')
-        }%}
-        {% for newsEntry in news %}
-            {{ cards.cardArticle(newsName,newsEntry,newsObj) }}
-        {% endfor %}
-    </div>
-</section>
-
 {% case 'publications' %}
 {% set pubs = entry.publicationBlock is not null and entry.publicationBlock|length > 0 ? entry.publicationBlock : null %}
 <section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modSlug }}">
     <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
-    <div class="interiorMod-list interiorMod-list--4">
-        {% set pubName = 'interiorMod-cardlette' %}
-        {% set pubObj = {
-            'cardVariant': 'publications',
+
+    {% set pubName = 'interiorMod-cardlette' %}
+    {% set pubObj = {
+        'cardObj': {
             'showContent': false,
             'assetSizes': utils.getAssetSizes('about','publications')
-        }%}
-        {% for pubEntry in pubs %}
-        {{ cards.cardMini(pubName,pubEntry,pubObj) }}
-        {% endfor %}
-    </div>
+        },
+        'slides': pubs[:10],
+        'group': 2,
+        'cardName': pubName,
+        'variant': 'publications'
+    }%}
+    {{ carousels.cardCarousel('aboutCarousel',pubObj) }}
 </section>
+
+{% case 'news-announcements' %}
+
+{% set newsQuery = craft.entries.section('news') %}
+{% set hasNews = false %}
+{% set isAgnostic, isFuture = true, false %}
+{% set timedIds = dates.toTheTimeMachine(newsQuery,isAgnostic,isFuture)|json_decode %}
+{% if timedIds|length > 0 %}
+{% set newsEntries = craft.entries.id(timedIds).limit(10).fixedOrder() %}
+{% set hasNews = true %}
+{# 
+Disable news card call here, for now, as we don't have a News index page, 
+and this would only direct the user back to this about landing page. #}
+{#
+{% set homepageCard = craft.entries().section('homepage').one()['newsCard'] %}
+{% set cardCall = homepageCard is not null and homepageCard|length > 0 ? homepageCard.one() : null %}
+{% set cardPrompt = cardCall is not null ? cardCall['prompt'] : null %}
+{% set cardAction = cardCall is not null ? cardCall['action'] : null %}
+{% set cardUrl = 'about#news-announcements' %} 
+#}
+{% set newsObj = {
+    'slides': newsEntries,
+    'group': 4,
+    'variant': 'news',
+    'cardName': 'newsSlide',
+    'cardCall': null
+} %}
+{% endif %}
+{% if hasNews %}
+<section class="interiorMod interiorMod--{{ entrySection }}" id="{{ modSlug }}">
+    <h3 class="interiorMod-title interiorMod-title--{{ entrySection }}">{{ modName }}</h3>
+    {{ carousels.cardCarousel('aboutCarousel',newsObj) }}
+</section>
+{% endif %}
 
 {% endswitch %}
 {% endfor %}

@@ -664,15 +664,11 @@
 			width: 100%;
 		}
 
-		&-placeholder {
-			height: 700px; // todo
-			width: 100%;
-			background-color: lightgray;
-		}
-
 		&-caption {
+			$pr: math.div(20,16);
 			@include getType('caption');
 			display: block;
+			padding-right: #{$pr}em;
 			width: 50%;
 			position: absolute;
 			left: 0;
@@ -892,24 +888,57 @@
 		> * {
 			@include getType('subtitle');
 		}
+
+		a:link,
+		a:visited,
+		a:hover,
+		a:active {
+			color: getColor('red');
+		}
+
+		em {
+			font-style: italic;
+		}
+
+		b, strong {
+			font-weight: bold;
+		}
+
 	}
 
 }
 
 @include accordionMenu('.panelSummary',$icon-size:20px, $default:false);
 .panelSummary {
+	$summary: '.interiorSummary';
+	$panel: &;
 
 	&-name {
 		@include getType('h3-sans');
 	}
 
 	&-trigger {
-		border-color: getColor('green',30);
-		color: getColor('green',30);
+
+		#{$summary}--projects & {
+			border-color: getColor('green',30);
+			color: getColor('green',30);
+		}
+
+		#{$summary}--news & {
+			border-color: getColor('red');
+			color: getColor('red');
+		}
+
 	}
 
 	&-toggle {
-		fill: getColor('green',30);
+		#{$summary}--projects & {
+			fill: getColor('green',30);
+		}
+		#{$summary}--news & {
+			fill: getColor('red');
+		}
+
 	}
 
 	&-content {
@@ -919,6 +948,23 @@
 	}
 
 }
+
+@include carouselScroller('.aboutCarousel');
+.aboutCarousel {
+	margin: 8em 0 0 0;
+
+	.newsSlide {
+		border-top: none;
+	
+		&-title {
+			&--top {
+				display: none;
+			}
+		}
+	}
+
+}
+
 
 
 /* ---------------------------------------------------------------------

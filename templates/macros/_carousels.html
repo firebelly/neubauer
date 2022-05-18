@@ -9,9 +9,9 @@
 {% set slideCount = slides|length %}
 {% set slideGroup = slideObj.group is not null ? slideObj.group : 3 %}
 {# Card vars #}
-{% set cardName = slideObj.cardName is not null ? slideObj.cardName : '' %}
-{% set cardObj = slideObj.cardObj is not null ? slideObj.cardObj : [] %}
-{% set cardCall = slideObj.cardCall is not null ? slideObj.cardCall : null %}
+{% set cardName = 'cardName' in slideObj|keys and slideObj.cardName is not null ? slideObj.cardName : '' %}
+{% set cardObj = 'cardObj' in slideObj|keys and slideObj.cardObj is not null ? slideObj.cardObj : [] %}
+{% set cardCall = 'cardCall' in slideObj|keys and slideObj.cardCall is not null ? slideObj.cardCall : null %}
 {# Icon vars #}
 {% set arrowLeftPath = "/spritemap.svg#icon-arrow-left-20" %}
 {% set arrowRightPath = "/spritemap.svg#icon-arrow-right-20" %}
@@ -62,7 +62,11 @@
 					},
 					'trimContent': 200
 				}) %}
+				{% if cardName and cardName == 'interiorMod-cardlette' %}
+				{{ cards.cardMini(cardName,slide,cardObj) }}
+				{% else %}
 				{{ cards.cardArticle(cardName,slide,cardObj) }}
+				{% endif %}
 			{% endfor %}
 
 			{% if cardCall %}
