@@ -3121,6 +3121,9 @@ img {
   position: relative;
   padding-bottom: 59%;
 }
+.tabPanel-item--search .tabPanel-item-video {
+  padding-bottom: 77.5%;
+}
 .tabPanel-item-video iframe {
   position: absolute;
   height: 100%;
@@ -3894,6 +3897,7 @@ img {
 
 .contactForm-field--email .contactForm-button {
   margin-right: 0;
+  margin-top: 0;
 }
 .contactForm-icon {
   height: 20px;
@@ -8382,6 +8386,9 @@ img {
   margin-bottom: 2em;
   position: relative;
   padding-bottom: 59%;
+}
+.searchArticle--search .searchArticle-video {
+  padding-bottom: 77.5%;
 }
 .searchArticle-video iframe {
   position: absolute;
@@ -14754,6 +14761,9 @@ img {
   position: relative;
   padding-bottom: 59%;
 }
+.interiorProjects-item--search .interiorProjects-item-video {
+  padding-bottom: 77.5%;
+}
 .interiorProjects-item-video iframe {
   position: absolute;
   height: 100%;
@@ -15284,6 +15294,9 @@ img {
   margin-bottom: 2em;
   position: relative;
   padding-bottom: 59%;
+}
+.interiorMod-card--search .interiorMod-card-video {
+  padding-bottom: 77.5%;
 }
 .interiorMod-card-video iframe {
   position: absolute;

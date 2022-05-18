@@ -7,7 +7,7 @@ import flyoutContent from './components/flyoutContent';
 import dialogContent from './components/dialogContent';
 import parallaxContent from './components/parallaxContent';
 import scrollCarousel from './components/scrollCarousel';
-import scrollChyron from './components/scrollChyron';
+import handleScroll from './components/handleScroll';
 
 
 // Inits
@@ -16,7 +16,7 @@ appState.init();
 appForms.init();
 
 // Chyron
-const footerChyron = new scrollChyron({
+const footerChyron = new handleScroll({
     _id: 'footer'
 });
 if ( footerChyron.chyron !== null ) {

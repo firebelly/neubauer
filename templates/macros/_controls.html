@@ -261,6 +261,7 @@
 <li>
     <a 
         class="{{ pageName }}-{{ pageSlug }} {{ pageName }}-{{ pageSlug }}--{{ groupKey }}{{ isInactive ? ' _is-inactive' : '' }}" 
+        id="{{ pageName }}_{{ pageSlug }}_{{ pageSlug == 'nav' ? pageTrigger : pageUrl }}"
         href=""
         sprig
         s-val:page="{{ pageUrl }}"

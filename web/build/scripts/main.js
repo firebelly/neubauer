@@ -237,6 +237,206 @@ var flyoutContent = {
 
 /***/ }),
 
+/***/ "./src/scripts/components/handleScroll.js":
+/*!************************************************!*\
+  !*** ./src/scripts/components/handleScroll.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+// handleScroll
+// NOTE: originally this handled only the chyron functonality
+// but ended up rolling in a few other pieces to prevent scroll interference
+var handleScroll = /*#__PURE__*/function () {
+  function handleScroll(options) {
+    _classCallCheck(this, handleScroll);
+
+    this.options = options || null;
+    this._id = this.options._id;
+    this.chyron = this._id !== null ? document.querySelector("[data-chyron=\"".concat(this._id, "\"]")) : null;
+    this._scrollable = true;
+    this._paused = false;
+    this._viewable = false;
+    this._reset = '_is-resetting';
+    this._interval = 20;
+  }
+
+  _createClass(handleScroll, [{
+    key: "isChyronInView",
+    value: function isChyronInView(el) {
+      var self = this;
+      var bounding = el.getBoundingClientRect();
+      return bounding.top >= 0 && bounding.left >= 0 && bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) && bounding.right <= (window.innerWidth || document.documentElement.clientWidth);
+    }
+  }, {
+    key: "pauseScroll",
+    value: function pauseScroll() {
+      var self = this;
+      self._paused = !self._paused;
+    }
+  }, {
+    key: "resetScroll",
+    value: function resetScroll() {
+      var self = this;
+      self.chyron.classList.add(self._reset);
+      self.chyron.scrollTo(0, 0);
+      self.chyron.classList.remove(self._reset);
+      self.scrollInterval = setInterval(function () {
+        return self.autoScroll();
+      }, self._interval);
+    }
+  }, {
+    key: "autoScroll",
+    value: function autoScroll() {
+      var self = this;
+      var currentLeft = self.chyron.scrollLeft,
+          chyronWidth = self.chyron.scrollWidth - self.chyron.offsetWidth; // update scrollable bool based on scroll position
+
+      self._scrollable = currentLeft !== chyronWidth;
+
+      if (self._paused) {
+        return;
+      }
+
+      console.log('chyron...'); // if we've reached the end of the chyron, 
+      // clear the interval, and reset 
+
+      if (!self._scrollable) {
+        clearInterval(self.scrollInterval);
+        self.resetScroll();
+      }
+
+      self.chyron.scrollTo(self.chyron.scrollLeft + 1, 0);
+    }
+  }, {
+    key: "scrollToHash",
+    value: function scrollToHash(targetHash) {
+      var self = this;
+      var scrollCount = 0; // Account for lazy loading images by patching the scroll
+      // NOTE: Important we use scrollTo versus scrollIntoView
+      // so as to ensure syncronicity with chyron scrolling
+
+      function scrollLoop() {
+        var hashHomie = document.querySelector(targetHash),
+            hashOffset = hashHomie.offsetTop;
+        ++scrollCount;
+        if (scrollCount === 3) return;
+        window.scrollTo(0, hashOffset);
+        setTimeout(function () {
+          scrollLoop();
+        }, 600);
+      }
+
+      var hashHomie = document.querySelector(targetHash),
+          hashOffset = hashHomie.offsetTop;
+      window.scrollTo(0, hashOffset);
+      scrollLoop();
+    }
+  }, {
+    key: "hashScroll",
+    value: function hashScroll() {
+      // chyron scroll event is interfering with scrollto event
+      // ensure smooth, accurate scroll-to-hash
+      // if more time, better code, but for now...
+      var self = this;
+      var hashies = document.querySelectorAll('[data-hash-scroll]');
+      hashies.forEach(function (item) {
+        item.addEventListener('click', function (e) {
+          e.stopPropagation();
+          e.preventDefault();
+          console.log(e.target);
+          var currentPage = window.location.pathname,
+              targetPage = e.target.pathname,
+              targetHash = e.target.hash;
+
+          if (currentPage == targetPage) {
+            self._paused = true;
+            self.scrollToHash(targetHash);
+          } else {
+            window.location = e.target.href;
+          }
+        });
+      });
+    }
+  }, {
+    key: "dialogScroll",
+    value: function dialogScroll() {
+      // should have set this up differently
+      var self = this;
+      var dialogTrigger = document.querySelectorAll('[data-a11y-dialog-show]');
+      dialogTrigger.forEach(function (item) {// item.addEventListener('click',(e) => {
+        //     e.stopPropagation();
+        //     e.preventDefault();
+        //     let myHash    = e.target.hash,
+        //         hashHomie = document.querySelector(myHash);
+        //         // hashTop   = hashHomie.offsetTop;
+        //     let dialogContainer = document.getElementById('artModal_dialog'),
+        //         dialogList      = document.getElementById('artModal_container');
+        //         // dialogHeight    = dialogContainer.offsetHeight,
+        //         // listHeight      = dialogList.offsetHeight;
+        //     // console.log(hashTop,dialogContainer,listHeight);
+        //     self._paused = true;
+        //     dialogContainer.addEventListener('scroll', function() {
+        //         console.log('scrolling in modal');
+        //     });
+        // });
+      });
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      var self = this;
+      window.addEventListener('load', function () {
+        self.chyron.addEventListener('mouseover', function () {
+          return self.pauseScroll();
+        });
+        self.chyron.addEventListener('mouseout', function () {
+          return self.pauseScroll();
+        }); // Only play chyron when in view
+
+        self._paused = self.isChyronInView(self.chyron) ? false : true;
+        self.scrollInterval = setInterval(function () {
+          return self.autoScroll();
+        }, self._interval);
+        document.addEventListener('scroll', function () {
+          // Only play chyron when in view
+          console.log('scrolling');
+          self._paused = self.isChyronInView(self.chyron) ? false : true;
+        }); // Handle hash scrolling
+
+        var targetHash = window.location.hash; // Reset location to prevent auto-scroll on load
+
+        window.location.hash = '';
+
+        if (targetHash !== '') {
+          self._paused = true;
+          self.scrollToHash(targetHash); // For consistency, reapply the hash
+
+          window.location.hash = targetHash;
+        }
+
+        self.hashScroll();
+        self.dialogScroll();
+      });
+    }
+  }]);
+
+  return handleScroll;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (handleScroll);
+
+/***/ }),
+
 /***/ "./src/scripts/components/parallaxContent.js":
 /*!***************************************************!*\
   !*** ./src/scripts/components/parallaxContent.js ***!
@@ -512,203 +712,6 @@ var scrollCarousel = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./src/scripts/components/scrollChyron.js":
-/*!************************************************!*\
-  !*** ./src/scripts/components/scrollChyron.js ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
-// scrollChyron
-var scrollChyron = /*#__PURE__*/function () {
-  function scrollChyron(options) {
-    _classCallCheck(this, scrollChyron);
-
-    this.options = options || null;
-    this._id = this.options._id;
-    this.chyron = this._id !== null ? document.querySelector("[data-chyron=\"".concat(this._id, "\"]")) : null;
-    this._scrollable = true;
-    this._paused = false;
-    this._viewable = false;
-    this._reset = '_is-resetting';
-    this._interval = 20;
-  }
-
-  _createClass(scrollChyron, [{
-    key: "isChyronInView",
-    value: function isChyronInView(el) {
-      var self = this;
-      var bounding = el.getBoundingClientRect();
-      return bounding.top >= 0 && bounding.left >= 0 && bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) && bounding.right <= (window.innerWidth || document.documentElement.clientWidth);
-    }
-  }, {
-    key: "pauseScroll",
-    value: function pauseScroll() {
-      var self = this;
-      self._paused = !self._paused;
-    }
-  }, {
-    key: "resetScroll",
-    value: function resetScroll() {
-      var self = this;
-      self.chyron.classList.add(self._reset);
-      self.chyron.scrollTo(0, 0);
-      self.chyron.classList.remove(self._reset);
-      self.scrollInterval = setInterval(function () {
-        return self.autoScroll();
-      }, self._interval);
-    }
-  }, {
-    key: "autoScroll",
-    value: function autoScroll() {
-      var self = this;
-      var currentLeft = self.chyron.scrollLeft,
-          chyronWidth = self.chyron.scrollWidth - self.chyron.offsetWidth; // update scrollable bool based on scroll position
-
-      self._scrollable = currentLeft !== chyronWidth;
-
-      if (self._paused) {
-        return;
-      }
-
-      console.log('chyron...'); // if we've reached the end of the chyron, 
-      // clear the interval, and reset 
-
-      if (!self._scrollable) {
-        clearInterval(self.scrollInterval);
-        self.resetScroll();
-      }
-
-      self.chyron.scrollTo(self.chyron.scrollLeft + 1, 0);
-    }
-  }, {
-    key: "scrollToHash",
-    value: function scrollToHash(targetHash) {
-      var self = this;
-      var scrollCount = 0; // Account for lazy loading images by patching the scroll
-      // NOTE: Important we use scrollTo versus scrollIntoView
-      // so as to ensure syncronicity with chyron scrolling
-
-      function scrollLoop() {
-        var hashHomie = document.querySelector(targetHash),
-            hashOffset = hashHomie.offsetTop;
-        ++scrollCount;
-        if (scrollCount === 3) return;
-        window.scrollTo(0, hashOffset);
-        setTimeout(function () {
-          scrollLoop();
-        }, 600);
-      }
-
-      var hashHomie = document.querySelector(targetHash),
-          hashOffset = hashHomie.offsetTop;
-      window.scrollTo(0, hashOffset);
-      scrollLoop();
-    }
-  }, {
-    key: "hashScroll",
-    value: function hashScroll() {
-      // chyron scroll event is interfering with scrollto event
-      // ensure smooth, accurate scroll-to-hash
-      // if more time, better code, but for now...
-      var self = this;
-      var hashies = document.querySelectorAll('[data-hash-scroll]');
-      hashies.forEach(function (item) {
-        item.addEventListener('click', function (e) {
-          e.stopPropagation();
-          e.preventDefault();
-          var currentPage = window.location.pathname,
-              targetPage = e.target.pathname,
-              targetHash = e.target.hash;
-
-          if (currentPage == targetPage) {
-            self._paused = true;
-            self.scrollToHash(targetHash);
-          } else {
-            window.location = e.target.href;
-          }
-        });
-      });
-    }
-  }, {
-    key: "dialogScroll",
-    value: function dialogScroll() {
-      // should have set this up differently
-      var self = this;
-      var dialogTrigger = document.querySelectorAll('[data-a11y-dialog-show]');
-      dialogTrigger.forEach(function (item) {// item.addEventListener('click',(e) => {
-        //     e.stopPropagation();
-        //     e.preventDefault();
-        //     let myHash    = e.target.hash,
-        //         hashHomie = document.querySelector(myHash);
-        //         // hashTop   = hashHomie.offsetTop;
-        //     let dialogContainer = document.getElementById('artModal_dialog'),
-        //         dialogList      = document.getElementById('artModal_container');
-        //         // dialogHeight    = dialogContainer.offsetHeight,
-        //         // listHeight      = dialogList.offsetHeight;
-        //     // console.log(hashTop,dialogContainer,listHeight);
-        //     self._paused = true;
-        //     dialogContainer.addEventListener('scroll', function() {
-        //         console.log('scrolling in modal');
-        //     });
-        // });
-      });
-    }
-  }, {
-    key: "init",
-    value: function init() {
-      var self = this;
-      window.addEventListener('load', function () {
-        self.chyron.addEventListener('mouseover', function () {
-          return self.pauseScroll();
-        });
-        self.chyron.addEventListener('mouseout', function () {
-          return self.pauseScroll();
-        }); // Only play chyron when in view
-
-        self._paused = self.isChyronInView(self.chyron) ? false : true;
-        self.scrollInterval = setInterval(function () {
-          return self.autoScroll();
-        }, self._interval);
-        document.addEventListener('scroll', function () {
-          // Only play chyron when in view
-          console.log('scrolling');
-          self._paused = self.isChyronInView(self.chyron) ? false : true;
-        }); // Handle hash scrolling
-
-        var targetHash = window.location.hash; // Reset location to prevent auto-scroll on load
-
-        window.location.hash = '';
-
-        if (targetHash !== '') {
-          self._paused = true;
-          self.scrollToHash(targetHash); // For consistency, reapply the hash
-
-          window.location.hash = targetHash;
-        }
-
-        self.hashScroll();
-        self.dialogScroll();
-      });
-    }
-  }]);
-
-  return scrollChyron;
-}();
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (scrollChyron);
-
-/***/ }),
-
 /***/ "./src/scripts/components/tabbedContent.js":
 /*!*************************************************!*\
   !*** ./src/scripts/components/tabbedContent.js ***!
@@ -979,7 +982,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_dialogContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/dialogContent */ "./src/scripts/components/dialogContent.js");
 /* harmony import */ var _components_parallaxContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/parallaxContent */ "./src/scripts/components/parallaxContent.js");
 /* harmony import */ var _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/scrollCarousel */ "./src/scripts/components/scrollCarousel.js");
-/* harmony import */ var _components_scrollChyron__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/scrollChyron */ "./src/scripts/components/scrollChyron.js");
+/* harmony import */ var _components_handleScroll__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/handleScroll */ "./src/scripts/components/handleScroll.js");
 // Import local dependencies
 
 
@@ -994,7 +997,7 @@ __webpack_require__.r(__webpack_exports__);
 _utils_appState__WEBPACK_IMPORTED_MODULE_0__["default"].init();
 _utils_appForms__WEBPACK_IMPORTED_MODULE_1__["default"].init(); // Chyron
 
-var footerChyron = new _components_scrollChyron__WEBPACK_IMPORTED_MODULE_8__["default"]({
+var footerChyron = new _components_handleScroll__WEBPACK_IMPORTED_MODULE_8__["default"]({
   _id: 'footer'
 });
 

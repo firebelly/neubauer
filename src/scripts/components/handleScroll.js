@@ -1,5 +1,7 @@
-// scrollChyron
-class scrollChyron {
+// handleScroll
+// NOTE: originally this handled only the chyron functonality
+// but ended up rolling in a few other pieces to prevent scroll interference
+class handleScroll {
 
     constructor(options) {
 
@@ -127,6 +129,8 @@ class scrollChyron {
                 
                 e.stopPropagation();
                 e.preventDefault();
+
+                console.log(e.target);
                 
                 let currentPage = window.location.pathname,
                     targetPage  = e.target.pathname,
@@ -225,6 +229,6 @@ class scrollChyron {
 
 }
 
-export default scrollChyron
+export default handleScroll
 
 

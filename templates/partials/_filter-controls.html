@@ -70,9 +70,11 @@
 {% endif %}
 
 {# NOTE:
-This is gross but the dialog.hide() method is not being triggered on close
+1. This is gross but the dialog.hide() method is not being triggered on close
 due to the sprig component re-render so quickest/dirtiest solution is to inject this tiny
-bit of javascript to assign proper overflow style on the html tag #}
+bit of javascript to assign proper overflow style on the html tag 
+2. Also gross: ensuring a smooth scroll top of search filters after pagination
+#}
 {% if isSprig %}
 <script>
     document.documentElement.style.overflowY = "{{ overlay == 'on' ? 'hidden' : '' }}";
@@ -82,11 +84,18 @@ bit of javascript to assign proper overflow style on the html tag #}
     else {
         document.querySelector('[data-modal-parent]').removeAttribute('style');
     }
+    if ( "{{ trigger == 'searchPagination' }}" ) {
+        paginationOffset = document.querySelector('[data-pagination-scroll]').offsetTop;
+        window.scrollTo(0,paginationOffset);
+    }
 </script>
 {% endif %}
 
 {# BEGIN RESULTING #}
-{# Resource: https://craftcms.com/docs/3.x/relations.html#advanced-relationships #}
+{# Resource: https://craftcms.com/docs/3.x/relations.html#advanced-relationships 
+    TODO:
+    https://craftcms.com/docs/3.x/dev/eager-loading-elements.html#accessing-eager-loaded-elements
+#}
 {# add relatedParams to params #}
 {% set baseQuery = craft.entries() %}
 {% set sortedByDate = (section == 'events') or (section == 'exhibitions') %}
@@ -266,7 +275,7 @@ bit of javascript to assign proper overflow style on the html tag #}
 
 {% endswitch %}
 
-<section class="searchFilters">
+<section class="searchFilters" id="searchFilters" data-pagination-scroll>
 
     <h2 class="searchFilters-title{{ indexSlug == 'search' or indexSlug == 'people' or indexSlug == 'exhibitions' ? ' searchFilters-title--hide' : '' }}">
     {% switch indexSlug %}

@@ -71,7 +71,14 @@
             $video: &;
             margin-bottom: 2em;
             position: relative;
-            padding-bottom: 59%; // snowflake
+            // Aspect ratio here varies 
+            // across contexts:
+            // narrative cards = 59%
+            padding-bottom: 59%; 
+
+            #{$selector}--search & {
+                padding-bottom: 77.5%; 
+            }
 
             iframe {
                 position: absolute;

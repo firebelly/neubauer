@@ -43,7 +43,6 @@ return [
         'excludedUriPatterns' => [
            [
                'siteId' => '',
-               'uriPattern' => 'people',
            ],
         ],
 
