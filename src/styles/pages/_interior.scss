@@ -598,6 +598,81 @@
 }
 
 /* ---------------------------------------------------------------------
+ Interior Citations (project)
+------------------------------------------------------------------------ */
+.interiorCitations {
+	$citation: &;
+	border-top: 1px solid transparent;
+	padding: 4em 4em 16em 4em;
+
+	&--projects {
+		border-color: getColor('green',30);
+	}
+
+	&-title {
+		$mb: math.div(80,65);
+		@include getType('h1-normal');
+		margin-bottom: #{$mb}em;
+	}
+
+	// Cards
+	&-list {
+		@include breakpoint(sm) {
+			@include flexParent();
+			margin-left: -0.25em;
+			
+			> * {
+				@include flexChild(0 1 calc(50% - 0.5em));
+			}
+
+		}
+	}
+
+	&-item {
+		border-top: 1px solid getColor('green',30);
+		margin: 0 0.25em;
+		padding: 2em 8em 4em 0;
+	}
+
+	&-subtitle {
+		$mb: math.div(5,16);
+		@include getType('caption');
+		margin-bottom: #{$mb}em;
+	}
+	
+	&-cite {
+		font-size: 1rem;
+		> * {
+			display: block;
+		}
+
+		&-title {
+			$mb: math.div(5,30);
+			@include getType('h3-italic');
+			margin-bottom: #{$mb}em;
+		}
+
+		&-source {
+			$mb: math.div(10,16);
+			@include getType('caption');
+			margin-bottom: #{$mb}em;
+		}
+	}
+
+	&-action {
+		$action: &;
+		@at-root {
+			@include actionButton(#{$action},getColor('green',30),getColor('green'));
+		}
+		&-icon {
+			height: 20px;
+			width: 20px;
+		}
+	}
+
+}
+
+/* ---------------------------------------------------------------------
  Interior Projects (person)
 ------------------------------------------------------------------------ */
 @include cardDirectory('.interiorProjects-item',getColor('blue'),getColor('blue',10));

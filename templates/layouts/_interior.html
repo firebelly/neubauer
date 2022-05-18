@@ -24,7 +24,7 @@
 {% set entryDate = (entry.dateBlock is not null and entry.dateBlock[0] != '') ? dates.printDate(entry.dateBlock[0]) : null %}
 {% set spotlightBlock = entry.spotlightBlock is not null and entry.spotlightBlock|length > 0 ? entry.spotlightBlock.all() : null %}
 {% set narrativeBlock = entry.narrativeBlock is not null and entry.narrativeBlock|length > 0 ? entry.narrativeBlock.all() : null %}
-
+{% set citationList = entry.citationList is not null and entry.citationList|length > 0 ? entry.citationList.all() : null %}
 {% set abstract = entry.abstract is not null and entry.abstract != '' ? entry.abstract : 
                 (entry.exhibitionAbstract is not null and entry.exhibitionAbstract != '' ? entry.exhibitionAbstract: 
                 entry.teaser is not null and entry.teaser != '' ? entry.teaser: 
@@ -584,6 +584,37 @@
 </section>
 {% endif %}
 
+{% if citationList %}
+{% set externalPath = "/spritemap.svg#icon-external-20" %}
+<section class="interiorCitations interiorCitations--{{ entrySection }}" id="citations">
+    <h3 class="interiorCitations-title">Reading List</h3>
+    <div class="interiorCitations-list">
+        {% for item in citationList %}
+        {% set articleTitle, articlePeople, articleSource, articleUrl = item.articleTitle, item.articleContributors, item.publicationName, item.articleUrl %}
+        <article class="interiorCitations-item">
+            <h4 class="interiorCitations-subtitle">{{ articlePeople}}</h4>
+            <cite class="interiorCitations-cite">
+                <span class="interiorCitations-cite-title">{{ articleTitle }}</span>
+                <span class="interiorCitations-cite-source">{{ articleSource }}</span>
+            </cite>
+            <a 
+                class="interiorCitations-action interiorCitations-action--link"
+                href="{{ articleUrl }}"
+                title=""
+                role=""
+                target="_blank">
+                <span class="interiorCitations-action-label">Read</span>
+                <svg class="interiorCitations-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ externalPath) }}"></use>
+                </svg>
+            </a>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+
 {# Feature Explore #}
 {% if primaryFeature and secondaryFeature %}
 <section class="interiorExplore">
@@ -636,7 +667,6 @@
             </a>
         </article>
     {% endif %}
-    
 </section>
 
 
