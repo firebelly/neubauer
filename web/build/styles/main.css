@@ -14264,6 +14264,9 @@ img {
 .interiorCitations--projects {
   border-color: #51594A;
 }
+.interiorCitations--people {
+  border-color: #1C2AA7;
+}
 .interiorCitations-title {
   font: normal 6.5em/1.08 "domaine-text", serif;
   letter-spacing: -0.035em;
@@ -14280,9 +14283,15 @@ img {
   }
 }
 .interiorCitations-item {
-  border-top: 1px solid #51594A;
+  border-top: 1px solid transparent;
   margin: 0 0.25em;
   padding: 2em 8em 4em 0;
+}
+.interiorCitations--projects .interiorCitations-item {
+  border-color: #51594A;
+}
+.interiorCitations--people .interiorCitations-item {
+  border-color: #1C2AA7;
 }
 .interiorCitations-subtitle {
   font: normal 1.6em/1.56 "apercu", sans-serif;
@@ -14303,22 +14312,22 @@ img {
   font: normal 1.6em/1.56 "apercu", sans-serif;
   margin-bottom: 0.625em;
 }
-.interiorCitations-action {
+.interiorCitations--projects .interiorCitations-action {
   display: inline-flex;
   flex-flow: row nowrap;
   font-size: 1rem;
   margin-right: 4em;
 }
-.interiorCitations-action:not(:first-of-type) {
+.interiorCitations--projects .interiorCitations-action:not(:first-of-type) {
   margin-top: 2em;
 }
-.interiorCitations-action--ghost {
+.interiorCitations--projects .interiorCitations-action--ghost {
   border-radius: 5px;
   border: 1px solid transparent;
   padding: calc(1.5em - 1px) calc(2em - 1px);
   position: relative;
 }
-.interiorCitations-action--ghost::after {
+.interiorCitations--projects .interiorCitations-action--ghost::after {
   transition: border-color 0.5s ease-in;
   content: "";
   position: absolute;
@@ -14329,10 +14338,10 @@ img {
   border: 4px solid transparent;
   border-radius: 9px;
 }
-.interiorCitations-action--link {
+.interiorCitations--projects .interiorCitations-action--link {
   position: relative;
 }
-.interiorCitations-action--link::after {
+.interiorCitations--projects .interiorCitations-action--link::after {
   transition: all 0.5s ease-in;
   content: "";
   position: absolute;
@@ -14342,75 +14351,185 @@ img {
   height: calc(100% + 12px);
   background: none;
 }
-.interiorCitations-action:focus {
+.interiorCitations--projects .interiorCitations-action:focus {
   outline: none;
 }
-.interiorCitations-action:link, .interiorCitations-action:visited, .interiorCitations-action:hover, .interiorCitations-action:active {
+.interiorCitations--projects .interiorCitations-action:link, .interiorCitations--projects .interiorCitations-action:visited, .interiorCitations--projects .interiorCitations-action:hover, .interiorCitations--projects .interiorCitations-action:active {
   text-decoration: none;
 }
-.interiorCitations-action-label, .interiorCitations-action-icon {
+.interiorCitations--projects .interiorCitations-action-label, .interiorCitations--projects .interiorCitations-action-icon {
   position: relative;
   z-index: 1;
   flex: 0 1 auto;
 }
-.interiorCitations-action-icon {
+.interiorCitations--projects .interiorCitations-action-icon {
   margin-left: 1em;
   height: 20px;
   width: 20px;
 }
-.interiorCitations-action:hover {
+.interiorCitations--projects .interiorCitations-action:hover {
   cursor: pointer;
 }
-
-.interiorCitations-action--link {
+.interiorCitations--projects .interiorCitations-action--link {
   color: #51594A;
 }
-.interiorCitations-action--link:link, .interiorCitations-action--link:visited, .interiorCitations-action--link:hover, .interiorCitations-action--link:active {
+.interiorCitations--projects .interiorCitations-action--link:link, .interiorCitations--projects .interiorCitations-action--link:visited, .interiorCitations--projects .interiorCitations-action--link:hover, .interiorCitations--projects .interiorCitations-action--link:active {
   text-decoration: underline;
   text-underline-offset: 4px;
   -webkit-text-decoration-color: #51594A;
           text-decoration-color: #51594A;
 }
-.interiorCitations-action--link:hover {
+.interiorCitations--projects .interiorCitations-action--link:hover {
   color: #FFFFFF;
   -webkit-text-decoration-color: #FFFFFF;
           text-decoration-color: #FFFFFF;
   text-decoration-thickness: 4px;
 }
-.interiorCitations-action--link:hover::after {
+.interiorCitations--projects .interiorCitations-action--link:hover::after {
   background: #800000;
 }
-.interiorCitations-action--link:hover .interiorCitations-action-icon {
+.interiorCitations--projects .interiorCitations-action--link:hover .interiorCitations-action-icon {
   fill: #FFFFFF;
 }
-.interiorCitations-action--link .interiorCitations-action-icon {
+.interiorCitations--projects .interiorCitations-action--link .interiorCitations-action-icon {
   fill: #51594A;
 }
-.interiorCitations-action--ghost {
+.interiorCitations--projects .interiorCitations-action--ghost {
   border-color: #51594A;
   color: #51594A;
 }
-.interiorCitations-action--ghost:hover {
+.interiorCitations--projects .interiorCitations-action--ghost:hover {
   background: #800000;
   color: #FFFFFF;
   border-color: #800000;
 }
-.interiorCitations-action--ghost:hover::after {
+.interiorCitations--projects .interiorCitations-action--ghost:hover::after {
   border-color: #FFFFFF;
 }
-.interiorCitations-action--ghost:hover .interiorCitations-action-icon {
+.interiorCitations--projects .interiorCitations-action--ghost:hover .interiorCitations-action-icon {
   fill: #FFFFFF;
 }
-.interiorCitations-action--ghost .interiorCitations-action-icon {
+.interiorCitations--projects .interiorCitations-action--ghost .interiorCitations-action-icon {
   fill: #51594A;
 }
-.interiorCitations-action-label {
+.interiorCitations--projects .interiorCitations-action-label {
   font: normal 1.2em/1.67 "apercu", sans-serif;
   letter-spacing: 0.1em;
   text-decoration: inherit;
   text-transform: uppercase;
 }
-.interiorCitations-action-trigger {
+.interiorCitations--projects .interiorCitations-action-trigger {
+  text-align: center;
+  text-decoration: none;
+}
+
+.interiorCitations--people .interiorCitations-action {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  font-size: 1rem;
+  margin-right: 4em;
+}
+.interiorCitations--people .interiorCitations-action:not(:first-of-type) {
+  margin-top: 2em;
+}
+.interiorCitations--people .interiorCitations-action--ghost {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: calc(1.5em - 1px) calc(2em - 1px);
+  position: relative;
+}
+.interiorCitations--people .interiorCitations-action--ghost::after {
+  transition: border-color 0.5s ease-in;
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border: 4px solid transparent;
+  border-radius: 9px;
+}
+.interiorCitations--people .interiorCitations-action--link {
+  position: relative;
+}
+.interiorCitations--people .interiorCitations-action--link::after {
+  transition: all 0.5s ease-in;
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 12px);
+  background: none;
+}
+.interiorCitations--people .interiorCitations-action:focus {
+  outline: none;
+}
+.interiorCitations--people .interiorCitations-action:link, .interiorCitations--people .interiorCitations-action:visited, .interiorCitations--people .interiorCitations-action:hover, .interiorCitations--people .interiorCitations-action:active {
+  text-decoration: none;
+}
+.interiorCitations--people .interiorCitations-action-label, .interiorCitations--people .interiorCitations-action-icon {
+  position: relative;
+  z-index: 1;
+  flex: 0 1 auto;
+}
+.interiorCitations--people .interiorCitations-action-icon {
+  margin-left: 1em;
+  height: 20px;
+  width: 20px;
+}
+.interiorCitations--people .interiorCitations-action:hover {
+  cursor: pointer;
+}
+.interiorCitations--people .interiorCitations-action--link {
+  color: #1C2AA7;
+}
+.interiorCitations--people .interiorCitations-action--link:link, .interiorCitations--people .interiorCitations-action--link:visited, .interiorCitations--people .interiorCitations-action--link:hover, .interiorCitations--people .interiorCitations-action--link:active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  -webkit-text-decoration-color: #1C2AA7;
+          text-decoration-color: #1C2AA7;
+}
+.interiorCitations--people .interiorCitations-action--link:hover {
+  color: #FFFFFF;
+  -webkit-text-decoration-color: #FFFFFF;
+          text-decoration-color: #FFFFFF;
+  text-decoration-thickness: 4px;
+}
+.interiorCitations--people .interiorCitations-action--link:hover::after {
+  background: #800000;
+}
+.interiorCitations--people .interiorCitations-action--link:hover .interiorCitations-action-icon {
+  fill: #FFFFFF;
+}
+.interiorCitations--people .interiorCitations-action--link .interiorCitations-action-icon {
+  fill: #1C2AA7;
+}
+.interiorCitations--people .interiorCitations-action--ghost {
+  border-color: #1C2AA7;
+  color: #1C2AA7;
+}
+.interiorCitations--people .interiorCitations-action--ghost:hover {
+  background: #800000;
+  color: #FFFFFF;
+  border-color: #800000;
+}
+.interiorCitations--people .interiorCitations-action--ghost:hover::after {
+  border-color: #FFFFFF;
+}
+.interiorCitations--people .interiorCitations-action--ghost:hover .interiorCitations-action-icon {
+  fill: #FFFFFF;
+}
+.interiorCitations--people .interiorCitations-action--ghost .interiorCitations-action-icon {
+  fill: #1C2AA7;
+}
+.interiorCitations--people .interiorCitations-action-label {
+  font: normal 1.2em/1.67 "apercu", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: inherit;
+  text-transform: uppercase;
+}
+.interiorCitations--people .interiorCitations-action-trigger {
   text-align: center;
   text-decoration: none;
 }

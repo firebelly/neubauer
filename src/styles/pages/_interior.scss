@@ -608,6 +608,9 @@
 	&--projects {
 		border-color: getColor('green',30);
 	}
+	&--people {
+		border-color: getColor('blue');
+	}
 
 	&-title {
 		$mb: math.div(80,65);
@@ -620,7 +623,7 @@
 		@include breakpoint(sm) {
 			@include flexParent();
 			margin-left: -0.25em;
-			
+
 			> * {
 				@include flexChild(0 1 calc(50% - 0.5em));
 			}
@@ -629,9 +632,18 @@
 	}
 
 	&-item {
-		border-top: 1px solid getColor('green',30);
+		border-top: 1px solid transparent;
 		margin: 0 0.25em;
 		padding: 2em 8em 4em 0;
+
+		#{$citation}--projects & {
+			border-color: getColor('green',30);
+		}
+
+		#{$citation}--people & {
+			border-color: getColor('blue');
+		}
+
 	}
 
 	&-subtitle {
@@ -662,7 +674,13 @@
 	&-action {
 		$action: &;
 		@at-root {
-			@include actionButton(#{$action},getColor('green',30),getColor('green'));
+			#{$citation}--projects {
+				@include actionButton(#{$action},getColor('green',30),getColor('green'));
+			}
+			#{$citation}--people {
+				@include actionButton(#{$action},getColor('blue'),getColor('blue',10));
+			}
+
 		}
 		&-icon {
 			height: 20px;
