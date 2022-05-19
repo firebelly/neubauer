@@ -1,0 +1,97 @@
+/* _interior-narrative.scss */
+@use "utils/_utils" as *;
+@use "components/__components" as *;
+@use "sass:math";
+
+@forward 'project';
+
+
+.interiorNarrative {
+	$narrative: &;
+	border-top: 1px solid transparent;
+	padding: 4em 4em 16em 4em;
+
+	&--projects {
+		border-color: getColor('green',30);
+	}
+
+	&--exhibitions {
+		border-color: getColor('gray');
+	}
+
+	&-title {
+		$mb: math.div(80,65);
+		@include getType('h1-normal');
+		margin-bottom: #{$mb}em;
+	}
+}	
+
+.tabList {
+	$tabs: &;
+	@include flexParent;
+	border-bottom: 1px solid transparent;
+	margin-bottom: 4em;
+
+	&--projects {
+		border-bottom-color: getColor('green',30);
+	}
+
+	&--exhibitions {
+		border-bottom-color: getColor('black',10);
+	}
+
+	&-item {
+		@include resetButton;
+		$pb: math.div(10,28);
+		$mr: math.div(40,28);
+		@include getType('h3-sans');
+		border-bottom: 10px solid transparent;
+		padding-bottom: #{$pb}em;
+		margin-right: #{$mr}em;
+
+		
+		&:hover,
+		&[role="tab"][aria-selected="true"] {
+			#{$tabs}--projects & {
+				border-bottom-color: getColor('green',30);
+			}
+			#{$tabs}--exhibitions & {
+				border-bottom-color: getColor('black',10);
+			}
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		#{$tabs}--projects & {
+			color: getColor('green',30);
+		}
+
+	}
+}
+
+.tabPanel {
+	$tab-panel: &;
+	@include flexParent();
+
+	&[role="tabpanel"]._is-hidden {
+		display: none;
+	}
+
+	&-item {
+		// TODO: fix spacing
+		$panel-item: &;
+		@include flexChild(0 1 calc(33% - 0.5em));
+
+		#{$tab-panel}--4 & {
+			@include flexChild(0 1 calc(25% - 0.5em));
+		}
+
+		@at-root {
+			@include cardDirectory(#{$panel-item},getColor('gray'),getColor('gray',10));
+	
+		}
+	}
+}
+

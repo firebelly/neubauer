@@ -1,0 +1,93 @@
+/* _interior-panels.scss */
+
+@use "utils/_utils" as *;
+@use "components/__components" as *;
+@use "sass:math";
+
+@forward 'project';
+
+/* ---------------------------------------------------------------------
+ Interior Panels
+------------------------------------------------------------------------ */
+@include accordionMenu('.panelDirections',$icon-size:20px, $default:false);
+@include accordionMenu('.panelStatement',$icon-size:20px, $default:false);
+.panelStatement,
+.panelDirections {
+
+	&-name {
+		@include getType('h3-sans');
+	}
+
+	&-trigger {
+		border-color: getColor('red');
+		color: getColor('red');
+	}
+
+	&-toggle {
+		fill: getColor('red');
+	}
+
+	&-content {
+		> * {
+			@include getType('subtitle');
+		}
+
+		a:link,
+		a:visited,
+		a:hover,
+		a:active {
+			color: getColor('red');
+		}
+
+		em {
+			font-style: italic;
+		}
+
+		b, strong {
+			font-weight: bold;
+		}
+
+	}
+
+}
+
+@include accordionMenu('.panelSummary',$icon-size:20px, $default:false);
+.panelSummary {
+	$summary: '.interiorSummary';
+	$panel: &;
+
+	&-name {
+		@include getType('h3-sans');
+	}
+
+	&-trigger {
+
+		#{$summary}--projects & {
+			border-color: getColor('green',30);
+			color: getColor('green',30);
+		}
+
+		#{$summary}--news & {
+			border-color: getColor('red');
+			color: getColor('red');
+		}
+
+	}
+
+	&-toggle {
+		#{$summary}--projects & {
+			fill: getColor('green',30);
+		}
+		#{$summary}--news & {
+			fill: getColor('red');
+		}
+
+	}
+
+	&-content {
+		> * {
+			@include getType('subtitle');
+		}
+	}
+
+}

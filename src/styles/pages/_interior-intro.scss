@@ -1,0 +1,204 @@
+/* _interior-intro.scss */
+
+@use "utils/_utils" as *;
+@use "components/__components" as *;
+@use "sass:math";
+
+@forward 'project';
+
+
+/* ---------------------------------------------------------------------
+  Interior Intro
+------------------------------------------------------------------------ */
+.interiorIntro {
+	$parent: &;
+	padding: 0 8em 5em 8em;
+	@include flexParent($display:flex,$values:row nowrap);
+	@include justifyContent(center);
+
+	&--people  {
+		padding-top: 12em;
+		padding-bottom: 16em;
+	}
+
+	&--about {
+		@include justifyContent(flex-end);
+	}
+
+	> * {
+		@include flexChild(0 1 50%);
+	}
+
+	&-details {
+		padding-right: 8em;
+		text-align: center;
+
+		#{$parent}--projects & {
+			@include breakpoint(sm) {
+				@include flexParent($display:flex,$values:column);
+			}
+		}
+
+        #{$parent}--news & {
+			@include breakpoint(sm) {
+				flex-basis: 75%;
+			}
+		}
+	}
+
+	&-asset {
+		// todo
+		overflow: hidden;
+	}
+
+	&-placeholder {
+		background: lightgray;
+		height: 700px;
+		width: 640px;
+	}
+
+	&-caption {
+		$pt: math.div(20,16);
+		$pr: math.div(40,16);
+		@include getType('caption');
+		padding: #{$pt}em #{$pr}em 0 0;
+
+		em {
+			font-style: italic;
+		}
+
+		strong, b {
+			font-weight: bold;
+		}
+
+	}
+
+	&-title {
+		$mb-lg: math.div(40,65);
+		$mb-sm: math.div(20,65);
+		@include getType('h1-normal');
+		margin-bottom: #{$mb-lg}em;
+
+		#{$parent}--people & {
+			margin-bottom: #{$mb-sm}em;
+		}
+
+	}
+
+	&-subtitle {
+		$mb: math.div(20,16);
+		@include getType('caption');
+		margin-bottom: #{$mb}em;
+		
+		&--projects {
+			$translate: calc(100% - 2em);
+			flex-grow: 1;
+			transform: translateY($translate);
+		}
+
+	}
+
+	&-prompt {
+		$mb: math.div(80,28);
+		@include getType('h3-sans');
+		margin-bottom: #{$mb}em;
+	}
+
+	&-team {
+		&-title {
+			@include visuallyHide;
+		}
+
+		&-list {				
+			@include flexParent();
+			@include justifyContent(center);
+			margin-bottom: 1em;
+		}
+
+		&-item {
+			@include getType('caption');
+
+			a:link,
+            a:visited,
+            a:hover,
+            a:active {
+
+				#{$parent}--people & {
+					color: getColor('blue',10);
+				}
+
+				#{$parent}--projects & {
+                	color: getColor('green',30);
+				}
+            }
+
+		}
+
+	}
+
+	&-date {
+		@include getType('caption');
+	}
+
+	&-menu {
+		$menu: &;
+		@include flexParent();
+		@include justifyContent(center);
+		scroll-behavior: smooth; // todo
+	
+		&--projects {
+			flex-grow: 1;
+			@include alignItems(end);
+		}
+
+		&--about {
+			display: block;
+		}
+
+		&-item {
+			@include flexChild(0 1 auto);
+			@include getType('action');
+			margin: 0 2em;
+
+			#{$menu}--about & {
+				$mb: math.div(20,12);
+				margin: 0 0 #{$mb}em 0;
+			}
+
+			a:link,
+            a:visited,
+            a:hover,
+            a:active {
+
+				#{$parent}--people & {
+					color: getColor('blue');
+				}
+
+				#{$parent}--projects & {
+					color: getColor('green',30);
+				}
+
+				// ew
+				#{$parent}--people &,
+				#{$parent}--projects & {
+					text-decoration: none;
+				}
+
+            }
+		}
+
+		&-action {
+			$action: &;
+			@at-root {
+				@include actionButton(#{$action},getColor('red'),getColor('red',10));
+			}
+
+			&-label {
+				pointer-events: none;
+			}
+
+		}
+
+	}
+
+}

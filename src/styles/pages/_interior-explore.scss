@@ -1,0 +1,173 @@
+/* _interior-explore.scss */
+
+@use "utils/_utils" as *;
+@use "components/__components" as *;
+@use "sass:math";
+
+@forward 'project';
+
+/* ---------------------------------------------------------------------
+ Interior Explore, e.g. feature projects and/or exhibitions
+------------------------------------------------------------------------ */
+.interiorExplore {
+	$explore: &;
+	background: getColor('white');
+
+	$explore-colors: (
+		(#FF9F99, #934C31,#330805),
+		(#6CE8BB, #934C31, #262626)
+	);
+
+	@include breakpoint(sm) {
+		@include flexParent();
+		@include justifyContent(center);
+		@include alignItems(center);
+
+		> * {
+			@include flexChild(0 1 33.333%);
+		}
+	}
+
+	&-title {
+		@include visuallyHide;
+	}
+
+	&-feature {
+		$feature: &;
+		height: 400px;
+		position: relative;
+		text-align: center;
+
+		@include breakpoint(sm) {
+			height: 600px;
+		}
+
+		@for $i from 1 through 2 {
+
+			&:nth-of-type(#{$i}) {
+				$color: nth(nth($explore-colors,$i),3);
+	
+				#{$feature}-label,
+				#{$feature}-title,
+				#{$feature}-title a {
+					color: $color;
+				}
+				@include actionButton(#{$explore}-action,$color,$color);
+				
+				#{$explore}-action {
+					margin-right: 0;
+				}
+
+			}
+	
+		}
+
+		&--random {
+			background: getColor('blue');
+			@include flexParent($display:flex,$values:column wrap);
+			@include justifyContent(center);
+			@include alignItems(center);
+		}
+
+		// Overlay Treatment
+		&-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			z-index: 2;
+			width: 100%;
+			opacity: 0.8;
+
+			@for $i from 1 through 2 {
+
+				#{$feature}:nth-of-type(#{$i}) & {
+					background: nth(nth($explore-colors,$i),1);
+				}
+		
+			}
+
+			@include breakpoint(sm) {
+
+				@for $i from 1 through 2 {
+
+					#{$feature}:nth-of-type(#{$i}) & {
+						background: nth(nth($explore-colors,$i),2);
+					}
+			
+				}
+		
+			}
+		}
+
+		&-asset {
+			bottom: 0;
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			left: 0;
+			top: 0;
+			z-index: 1;
+			overflow: hidden;
+
+			&-image {
+				object-fit: cover;
+				height: 100%;
+				width: 100%;
+				filter: blur(15px);
+				transition: filter 2s ease-in-out;
+
+				#{$feature}:hover & {
+					filter: blur(5px);
+					transition: filter 2s ease-in-out;
+				}
+			}
+		}
+
+		&-content {
+			@include flexParent($display:flex,$values:column wrap);
+			@include justifyContent(center);
+			@include alignItems(center);
+			height: 100%;
+			padding: 0 6em;
+			position: relative;
+			z-index: 2;
+		}
+
+		&-label {
+			$mb: math.div(20,16);
+			@include getType('caption');
+			margin-bottom: #{$mb}em;
+		}
+		&-title {
+			$mb: math.div(40,28);
+			@include getType('h3-sans');
+			margin-bottom: #{$mb}em;
+		}
+	}
+
+	&-big {
+
+		&:link,
+		&:visited,
+		&:hover,
+		&:active {
+			text-decoration: none;
+		}
+
+		&-label {
+			@include getType('h2-sans');
+			color: getColor('white');
+		}
+
+		&-icon {
+			display: block;
+			height: 70px;
+			width: 70px;
+			fill: getColor('white');
+			margin: 0 auto;
+		}
+
+	}
+
+}	

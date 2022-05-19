@@ -75,13 +75,13 @@
 				@include flexChild(0 1 calc(50% - 0.5em));
 			}
 
-			#{$team}--events & {
+			// #{$team}--events & {
 
-				> * {
-					@include flexChild(0 1 calc(25% - 0.5em));
-				}
+			// 	> * {
+			// 		@include flexChild(0 1 calc(25% - 0.5em));
+			// 	}
 
-			}
+			// }
 
 		}
 	}

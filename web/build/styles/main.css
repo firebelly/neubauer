@@ -13202,9 +13202,6 @@ img {
   .interiorTeam-list > * {
     flex: 0 1 calc(50% - 0.5em);
   }
-  .interiorTeam--events .interiorTeam-list > * {
-    flex: 0 1 calc(25% - 0.5em);
-  }
 }
 .interiorTeam-item {
   padding: 2em 0;

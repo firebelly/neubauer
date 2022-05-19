@@ -1,0 +1,238 @@
+/* _interior-mod.scss */
+
+@use "utils/_utils" as *;
+@use "components/__components" as *;
+@use "sass:math";
+
+@forward 'project';
+
+/* ---------------------------------------------------------------------
+ Interior Module, e.g. About Impact Module
+------------------------------------------------------------------------ */
+.interiorMod {
+	$mod: &;
+	border-top: 1px solid transparent;
+	padding: 4em 4em 16em 4em;
+
+	&--about {
+		border-color: getColor('red');
+	}
+
+	&-title {
+		@include getType('h1-normal');
+	}
+
+	&-subtitle {
+		$mv: math.div(20,40);
+		$mt: math.div(80,40);
+		@include getType('h2-sans');
+		border-top: 1px solid getColor('red');
+		margin-top: #{$mt}em;
+		padding: #{$mv}em 0;
+	}
+
+	&-wrap {
+		padding-top: 8em;
+	}
+
+	&-frame {
+		position: relative;
+
+		&--impact {
+			width: 100%;
+		}
+
+		&-caption {
+			$pr: math.div(20,16);
+			@include getType('caption');
+			display: block;
+			padding-right: #{$pr}em;
+			width: 50%;
+			position: absolute;
+			left: 0;
+			top: 100%;
+
+			em {
+				font-style: italic;
+			}
+
+			strong, b {
+				font-weight: bold;
+			}
+
+		}
+
+	}
+
+	&-asset {
+		display: block;
+		padding-bottom: 4em;
+	}
+
+	&-main {
+
+		@include breakpoint(sm) {
+			@include flexParent();
+			@include justifyContent(flex-end);
+		}
+
+		&-content {
+			@include flexChild(0 1 50%);
+		}
+
+	}
+
+	&-redactor {
+		$mb: math.div(40,24);
+		@include getType('subtitle');
+		margin: 0 0 #{$mb}em 0;
+
+		a:link,
+		a:visited,
+		a:hover,
+		a:active {
+			text-underline-offset: 5px;
+
+			#{$mod}--about & {
+				color: getColor('red');
+			}
+		}	
+
+		em {
+			font-style: italic;
+		}
+	
+		&--body {
+
+			&._is-hidden {
+				@include visuallyHide;
+			}
+
+		}
+
+	}
+
+    &-matrix {
+        @include flexParent();
+
+        @include breakpoint(sm) {
+            > * {
+                @include flexChild()
+            }
+        }
+    }
+
+	&-card {
+		$card: &;
+		@at-root {
+			@include cardDirectory(#{$card},getColor('red'),getColor('red',10));
+		}
+        flex-basis: 50%;
+	}
+
+	&-metric {
+		margin-bottom: 4em;
+		max-width: 295px;
+
+		&-stat {
+			@include getType('o-normal');
+		}
+
+		&-caption {
+			@include getType('caption');
+		}
+
+	}
+
+    &-list {
+		$margin-total: 0.5em;
+		
+		@include breakpoint(sm) {
+			margin-top: 6em;
+		}
+
+        &--2 {
+            @include flexParent();
+            > * {
+                @include flexChild(1 1 50%);
+            }
+        }
+
+        &--4 {
+
+			@include breakpoint(sm) {
+				@include flexParent();
+				> * {
+					@include flexChild(0 1 calc(25% - #{$margin-total}));
+				}
+			}
+
+        }
+
+        &--3 {
+
+			@include breakpoint(sm) {
+				@include flexParent();
+				> * {
+					@include flexChild(0 1 calc(33.333% - #{$margin-total}));
+				}
+			}
+        }
+
+		&--highlight {
+            @include flexParent();
+
+			> * {
+				flex-basis: 100%;
+			}
+
+			@include breakpoint(sm) {
+				> * {
+					@include flexChild(1 1 50%);
+				}
+			}
+        }
+
+		&--visit {
+
+			@include breakpoint(sm) {
+				
+				@include flexParent();
+				> * {
+					$gap: 4.5;
+					$margin: math.div(4.5,2);
+					&:nth-child(1) {
+						margin-right: #{$margin}em;
+					}
+					&:nth-child(2) {
+						margin-left: #{$margin}em;
+					}
+					@include flexChild(1 1 calc(50% - #{$gap}em));
+				}
+			}
+		}
+
+    }
+	&-directions {
+		$mb: math.div(40,24);
+		
+		> * {
+			@include getType('subtitle');
+		}
+
+		p {
+			margin-bottom: #{$mb}em;
+		}
+
+	}
+
+    &-cardlette {
+        $cardlette: &;
+
+        @at-root {
+            @include cardMini(#{$cardlette},getColor('red'),getColor('red',10));
+        }
+
+    }
+
+}

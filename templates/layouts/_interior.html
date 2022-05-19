@@ -419,9 +419,9 @@
 {# SPEAKER LIST #}
 {% if entrySection == 'events' and (speakerList or participantList) %}
 <section class="interiorTeam interiorTeam--{{ entrySection }}" id="team">
-    <h3 class="interiorTeam-title">Speakers &amp; Participants</h3>
+    <h3 class="interiorTeam-title">Speakers</h3>
     <div class="interiorTeam-list">
-        {% for person in speakerList %}
+        {% for person in speakerList if person.speakerName != '' %}
         <article class="interiorTeam-item">
             <h4 class="interiorTeam-item-title">{{ person.speakerName }}</h4>
             <h5 class="interiorTeam-item-subtitle">{{ person.type|title }}</h5>
