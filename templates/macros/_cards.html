@@ -29,7 +29,7 @@
 {# Main content #}
 {% set showImage = cardObj is not null and 'showImage' in cardObj|keys ? cardObj['showImage'] : true %}
 {% set imageKey = isFeatureExhibition ? 'openerImage' : 'cardImage' %}
-{% set cardImage = cardEntry[imageKey] and cardEntry[imageKey][0] is not null ? cardEntry[imageKey] : null %}
+{% set cardImage = cardEntry[imageKey] and cardEntry[imageKey]|length > 0 ? cardEntry[imageKey] : null %}
 {% set cardVideo = cardEntry.video and cardEntry.video != '' ? cardEntry.video : null %}
 {% set cardAbstract = cardEntry.abstract is not null and cardEntry.abstract != '' ? cardEntry.abstract : 
                 cardEntry.exhibitionAbstract is not null and cardEntry.exhibitionAbstract != '' ? cardEntry.exhibitionAbstract :

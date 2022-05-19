@@ -12928,10 +12928,7 @@ img {
   font: normal 1.4em/1.43 "apercu", sans-serif;
 }
 
-/* _interior.scss */
-/* ---------------------------------------------------------------------
- Interior-specific  declarations
------------------------------------------------------------------------- */
+/* _interior-intro.scss */
 /* ---------------------------------------------------------------------
   Interior Intro
 ------------------------------------------------------------------------ */
@@ -13210,6 +13207,7 @@ img {
   pointer-events: none;
 }
 
+/* _interior-summary.scss */
 /* ---------------------------------------------------------------------
  Interior Summary
 ------------------------------------------------------------------------ */
@@ -13343,6 +13341,12 @@ img {
 .interiorSummary--events .interiorSummary-redactor a:hover,
 .interiorSummary--events .interiorSummary-redactor a:active {
   color: #3F3606;
+}
+.interiorSummary--exhibitions .interiorSummary-redactor a:link,
+.interiorSummary--exhibitions .interiorSummary-redactor a:visited,
+.interiorSummary--exhibitions .interiorSummary-redactor a:hover,
+.interiorSummary--exhibitions .interiorSummary-redactor a:active {
+  color: #151515;
 }
 .interiorSummary-redactor h2 {
   font: normal 6.5em/1.08 "domaine-text", serif;
@@ -14028,6 +14032,7 @@ img {
           text-decoration-color: #151515;
 }
 
+/* _interior.scss */
 /* ---------------------------------------------------------------------
  Interior Team (project)
 ------------------------------------------------------------------------ */
