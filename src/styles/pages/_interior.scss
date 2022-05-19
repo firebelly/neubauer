@@ -75,13 +75,15 @@
 				@include flexChild(0 1 calc(50% - 0.5em));
 			}
 
-			// #{$team}--events & {
+			#{$team}--events & {
+				margin-left: -4em;
 
-			// 	> * {
-			// 		@include flexChild(0 1 calc(25% - 0.5em));
-			// 	}
+				> * {
+					@include flexChild(0 1 calc(50% - 8em));
+					margin: 0 4em;
+				}
 
-			// }
+			}
 
 		}
 	}
