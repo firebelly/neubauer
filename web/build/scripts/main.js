@@ -500,7 +500,8 @@ var parallaxContent = /*#__PURE__*/function () {
         var title = container.querySelector("[data-parallax-title=\"".concat(self._id, "\"]")),
             image = container.querySelector("[data-parallax-image=\"".concat(self._id, "\"]")),
             feature = container.querySelector("[data-parallax-feature=\"".concat(self._id, "\"]")),
-            header = document.querySelector("[data-parallax-header=\"".concat(self._id, "\"]"));
+            header = document.querySelector("[data-parallax-header=\"".concat(self._id, "\"]")),
+            action = document.querySelector("[data-parallax-follow=\"".concat(self._id, "\"]"));
 
         if (self._state === '_active') {
           if (title !== null) {
@@ -521,9 +522,12 @@ var parallaxContent = /*#__PURE__*/function () {
 
           feature.addEventListener('transitionend', function () {
             self._state = '_done';
-            container.addEventListener('click', function (el) {
-              el.stopPropagation();
-              slideThings(container);
+            container.addEventListener('click', function (e) {
+              e.stopPropagation();
+
+              if (e.target !== action) {
+                slideThings(container);
+              }
             });
           });
         }

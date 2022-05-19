@@ -51,8 +51,8 @@ class parallaxContent {
             let title   = container.querySelector(`[data-parallax-title="${self._id}"]`),
                 image   = container.querySelector(`[data-parallax-image="${self._id}"]`),
                 feature = container.querySelector(`[data-parallax-feature="${self._id}"]`),
-                header  = document.querySelector(`[data-parallax-header="${self._id}"]`);
-
+                header  = document.querySelector(`[data-parallax-header="${self._id}"]`),
+                action  = document.querySelector(`[data-parallax-follow="${self._id}"]`);
             
             if ( self._state === '_active' ) {
 
@@ -76,11 +76,13 @@ class parallaxContent {
 
                     self._state = '_done';
 
-                    container.addEventListener('click', (el) => {
+                    container.addEventListener('click', (e) => {
 
-                        el.stopPropagation();
-
-                        slideThings(container);
+                        e.stopPropagation();
+                        
+                        if ( e.target !== action ) {
+                            slideThings(container);
+                        }
                    
                     });
 
