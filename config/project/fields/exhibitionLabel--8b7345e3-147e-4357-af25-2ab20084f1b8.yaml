@@ -1,4 +1,4 @@
-columnSuffix: slbyomsl
+columnSuffix: null
 contentColumnType: string
 fieldGroup: 840b4f3b-b9bb-4665-8929-9d5969e6c272 # Exhibition
 handle: exhibitionLabel
@@ -29,7 +29,7 @@ settings:
           - featured
         -
           - default
-          - ''
+          - '1'
 translationKeyFormat: null
 translationMethod: none
 type: craft\fields\Dropdown

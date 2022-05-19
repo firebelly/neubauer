@@ -379,7 +379,7 @@ bit of javascript to assign proper overflow style on the html tag
             'activeTags': filterList|map(obj => (obj.slug == 'tags' ? obj.active : ''))|join('') 
         }%}
         {% set exhibitionFeature = null %}
-        {% if indexSlug == 'exhibitions' %}
+        {% if indexSlug == 'exhibitions' and show != 'past' %}
             {% set featureQuery = craft.entries.section('exhibitionsIndex').one()['featuredExhibition'] %}
             {% if featureQuery|length > 0 %}
                 {# Feature Exhibition #}
@@ -391,6 +391,7 @@ bit of javascript to assign proper overflow style on the html tag
                 {% set featureObj = cardObj|merge({
                     'assetSizes': featureSizes,
                     'cardVariant': cardVariant,
+                    'cardLabel': entry.exhibitionLabel.label,
                     'isFeature': true
                 })%}
                 {{ cards.cardArticle(featureName,exhibitionFeature,featureObj) }}
