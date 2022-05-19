@@ -28,7 +28,7 @@
 #}
 {% macro assetCard(imageName,imageObj,imageSizes = null,aspectRatio = null) %}
     {# dum check to prevent unknown method in gallery #}
-    {% set thisImage = (imageName == 'artGallery' or imageName == 'artModal') ? imageObj :  imageObj.one() %}
+    {% set thisImage = (imageName == 'artGallery' or imageName == 'artModal') ? imageObj :  imageObj[0] %}
     
     {% set thisWidth, thisHeight = thisImage.getWidth(), thisImage.getHeight() %}
 

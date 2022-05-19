@@ -96,8 +96,18 @@ bit of javascript to assign proper overflow style on the html tag
     TODO:
     https://craftcms.com/docs/3.x/dev/eager-loading-elements.html#accessing-eager-loaded-elements
 #}
-{# add relatedParams to params #}
-{% set baseQuery = craft.entries() %}
+{% set eagerElements = [['cardImage', {'kind': 'image'}],'dateBlock','topicList'] %}
+{# Exclude index pages from query #} 
+{% set sections = craft.sections.allSections() %}
+{% set indexIds = ['and'] %}
+{# Loop through all single sections #}
+{% for singleSection in sections if singleSection.type == 'single' %}
+    {% set singleEntry = craft.entries.sectionId(singleSection.id).one() %}
+    {% set indexIds = indexIds|merge([singleEntry.id]) %}
+{% endfor %}
+{% set excludeIndices = indexIds|join(', not ') %} 
+
+{% set baseQuery = craft.entries().with(eagerElements) %}
 {% set sortedByDate = (section == 'events') or (section == 'exhibitions') %}
 
 {# indices: section #}
@@ -163,7 +173,7 @@ bit of javascript to assign proper overflow style on the html tag
     {% set sortedIds = sortedIds|reverse %}
     {% endif %}
 
-    {% set baseQuery = craft.entries().id(sortedIds) %}
+    {% set baseQuery = craft.entries().with(eagerElements).id(sortedIds) %}
 {% endif %}
 
 {# exhibitions: upcoming/past exhibitions #}
@@ -182,24 +192,16 @@ bit of javascript to assign proper overflow style on the html tag
     {% set sortedIds = sortedIds|reverse %}
     {% endif %}
 
-    {% set baseQuery = craft.entries().id(sortedIds) %}
+    {% set baseQuery = craft.entries().with(eagerElements).id(sortedIds) %}
 {% endif %}
-
-{# define sorting #}
-{% set byTitle = 'title ' ~ sort %}
-{% set byTitleExcludeArticles = "(CASE WHEN `title` LIKE 'The %' THEN SUBSTRING(`title`, 5) WHEN `title` LIKE 'A %' THEN SUBSTRING(`title`, 3) WHEN `title` LIKE 'AN %' THEN SUBSTRING(`title`, 4) ELSE `title` END)" ~ sort %}
-{# get results #}
-{# TODO: exclude index pages from query #}
 
 {% if sortedByDate %}
 {% set currentResults = (query ? baseQuery.search(query) : baseQuery).limit(limit).fixedOrder() %}
-{% else %}
-
-{% if section == 'people' %}
+{% elseif section == 'people' %}
 {% set currentResults = (query ? baseQuery.search(query) : baseQuery).orderBy('personLast '~ sort).limit(limit) %}
 {% else %}
-{% set currentResults = (query ? baseQuery.search(query) : baseQuery).orderBy(byTitleExcludeArticles).limit(limit) %}
-{% endif %}
+{% set byTitleNoArticles = "(CASE WHEN `title` LIKE 'The %' THEN SUBSTRING(`title`, 5) WHEN `title` LIKE 'A %' THEN SUBSTRING(`title`, 3) WHEN `title` LIKE 'AN %' THEN SUBSTRING(`title`, 4) ELSE `title` END)" ~ sort %}
+{% set currentResults = (query ? baseQuery.search(query) : baseQuery).id(excludeIndices).orderBy(byTitleNoArticles).limit(limit) %}
 {% endif %}
 
 {# define pagination #}
@@ -395,7 +397,6 @@ bit of javascript to assign proper overflow style on the html tag
                 {% endif %}
             {% endif %}
         {% endif %}
-        {# exclude feature ex from bulk results #}
 
         {% set cardName = (section == 'people') ? 'searchBio' : 'searchArticle' %}
         {% set sectionKey = isSearchIndex ? 'search' : section %}
@@ -419,14 +420,13 @@ bit of javascript to assign proper overflow style on the html tag
             {{ cards.cardArticle(cardName,entry,cardObj) }}
             {% endif %}
         {% endfor %}
-
     </div>
     {% else %}
         <div class="searchResults-content">
             <div class="searchResults-apology">No results</div>
         </div>
     {% endif %}
-  
+
 </section>
 
 {# PAGINATION #}

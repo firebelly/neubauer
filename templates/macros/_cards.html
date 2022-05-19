@@ -24,7 +24,7 @@
 
 {# Main content #}
 {% set showImage = cardObj is not null and 'showImage' in cardObj|keys ? cardObj['showImage'] : true %}
-{% set cardImage = cardEntry.cardImage and cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
+{% set cardImage = cardEntry.cardImage and cardEntry.cardImage[0] is not null ? cardEntry.cardImage : null %}
 {% set cardVideo = cardEntry.video and cardEntry.video != '' ? cardEntry.video : null %}
 {% set cardAbstract = cardEntry.abstract is not null and cardEntry.abstract != '' ? cardEntry.abstract : 
                 cardEntry.exhibitionAbstract is not null and cardEntry.exhibitionAbstract != '' ? cardEntry.exhibitionAbstract :
@@ -174,7 +174,7 @@
         <div class="{{ cardName }}-team">
             <h3 class="{{ cardName }}-team-title">Project Team:</h3>
             <ul class="{{ cardName }}-team-list">
-            {% for person in cardTeam %}
+            {% for person in cardTeam.all() %}
                 <li class="{{ cardName }}-team-item">
                     <a 
                         class="{{ cardName }}-team-name"
@@ -290,7 +290,7 @@
 {% set cardLabel = cardObj is not null and 'cardLabel' in cardObj|keys ? cardObj['cardLabel'] : null %}
 {% set cardId = cardObj is not null and 'cardId' in cardObj|keys ? cardObj['cardId'] : null %}
 {% set cardImage = null %}
-{% set cardImage = cardEntry.cardImage and cardEntry.cardImage.one() is not null ? cardEntry.cardImage : null %}
+{% set cardImage = cardEntry.cardImage and cardEntry.cardImage[0] is not null ? cardEntry.cardImage : null %}
 {% set team = cardEntry.projectTeam.all() %}
 {% set topics = cardEntry.topicList.all() %}
 {% set date = cardEntry.dateBlock is not null and cardEntry.dateBlock|length == 1 ? dates.printDate(cardEntry.dateBlock[0]) : null %}
