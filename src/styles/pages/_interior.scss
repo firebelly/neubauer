@@ -6,7 +6,41 @@
 
 @forward 'project';
 
+/* ---------------------------------------------------------------------
+ Interior Cover
+------------------------------------------------------------------------ */
+.interiorCover {
 
+	&-frame {
+		margin: 0 4em;
+		position: relative;
+	}
+
+	&-asset {
+		display: block;
+		padding-bottom: 4em;
+	} 
+
+	&-caption {
+		@include getType('caption');
+		display: block;
+		padding-top: 0;
+		width: 25%;
+		position: absolute;
+		left: 0;
+		top: 100%;
+
+		em {
+			font-style: italic;
+		}
+
+		strong, b {
+			font-weight: bold;
+		}
+
+	}
+
+}
 
 /* ---------------------------------------------------------------------
  Interior Team (project)
@@ -72,7 +106,7 @@
 }
 
 /* ---------------------------------------------------------------------
- Interior Citations (project)
+ Interior Citations (project, people)
 ------------------------------------------------------------------------ */
 .interiorCitations {
 	$citation: &;
@@ -195,508 +229,54 @@
 }
 
 /* ---------------------------------------------------------------------
- Interior Module
- - e.g. About Impact Module
+ Interior Spotlight (projects)
 ------------------------------------------------------------------------ */
-.interiorMod {
-	$mod: &;
-	border-top: 1px solid transparent;
-	padding: 4em 4em 16em 4em;
+.interiorSpotlight {
+	background:  #51594A; //todo
+	height: 900px;
+	@include flexParent($display:flex,$values:column nowrap);
+	@include justifyContent(center);
 
-	&--about {
-		border-color: getColor('red');
+	> * {
+		@include flexChild();
 	}
 
-	&-title {
-		@include getType('h1-normal');
+	* {
+		color: getColor('green',20);
 	}
 
 	&-subtitle {
-		$mv: math.div(20,40);
-		$mt: math.div(80,40);
-		@include getType('h2-sans');
-		border-top: 1px solid getColor('red');
-		margin-top: #{$mt}em;
-		padding: #{$mv}em 0;
-	}
-
-	&-wrap {
-		padding-top: 8em;
-	}
-
-	&-frame {
-		position: relative;
-
-		&--impact {
-			width: 100%;
-		}
-
-		&-caption {
-			$pr: math.div(20,16);
-			@include getType('caption');
-			display: block;
-			padding-right: #{$pr}em;
-			width: 50%;
-			position: absolute;
-			left: 0;
-			top: 100%;
-
-			em {
-				font-style: italic;
-			}
-
-			strong, b {
-				font-weight: bold;
-			}
-
-		}
-
-	}
-
-	&-asset {
-		display: block;
-		padding-bottom: 4em;
-	}
-
-	&-main {
-
-		@include breakpoint(sm) {
-			@include flexParent();
-			@include justifyContent(flex-end);
-		}
-
-		&-content {
-			@include flexChild(0 1 50%);
-		}
-
-	}
-
-	&-redactor {
-		$mb: math.div(40,24);
-		@include getType('subtitle');
-		margin: 0 0 #{$mb}em 0;
-
-		a:link,
-		a:visited,
-		a:hover,
-		a:active {
-			text-underline-offset: 5px;
-
-			#{$mod}--about & {
-				color: getColor('red');
-			}
-		}	
-
-		em {
-			font-style: italic;
-		}
-	
-		&--body {
-
-			&._is-hidden {
-				@include visuallyHide;
-			}
-
-		}
-
-	}
-
-    &-matrix {
-        @include flexParent();
-
-        @include breakpoint(sm) {
-            > * {
-                @include flexChild()
-            }
-        }
-    }
-
-	&-card {
-		$card: &;
-		@at-root {
-			@include cardDirectory(#{$card},getColor('red'),getColor('red',10));
-		}
-        flex-basis: 50%;
-	}
-
-	&-metric {
-		margin-bottom: 4em;
-		max-width: 295px;
-
-		&-stat {
-			@include getType('o-normal');
-		}
-
-		&-caption {
-			@include getType('caption');
-		}
-
-	}
-
-    &-list {
-		$margin-total: 0.5em;
-		
-		@include breakpoint(sm) {
-			margin-top: 6em;
-		}
-
-        &--2 {
-            @include flexParent();
-            > * {
-                @include flexChild(1 1 50%);
-            }
-        }
-
-        &--4 {
-
-			@include breakpoint(sm) {
-				@include flexParent();
-				> * {
-					@include flexChild(0 1 calc(25% - #{$margin-total}));
-				}
-			}
-
-        }
-
-        &--3 {
-
-			@include breakpoint(sm) {
-				@include flexParent();
-				> * {
-					@include flexChild(0 1 calc(33.333% - #{$margin-total}));
-				}
-			}
-        }
-
-		&--highlight {
-            @include flexParent();
-
-			> * {
-				flex-basis: 100%;
-			}
-
-			@include breakpoint(sm) {
-				> * {
-					@include flexChild(1 1 50%);
-				}
-			}
-        }
-
-		&--visit {
-
-			@include breakpoint(sm) {
-				
-				@include flexParent();
-				> * {
-					$gap: 4.5;
-					$margin: math.div(4.5,2);
-					&:nth-child(1) {
-						margin-right: #{$margin}em;
-					}
-					&:nth-child(2) {
-						margin-left: #{$margin}em;
-					}
-					@include flexChild(1 1 calc(50% - #{$gap}em));
-				}
-			}
-		}
-
-    }
-
-	&-map {
-
-	}
-
-	&-directions {
-		$mb: math.div(40,24);
-		
-		> * {
-			@include getType('subtitle');
-		}
-
-		p {
-			margin-bottom: #{$mb}em;
-		}
-
-	}
-
-    &-cardlette {
-        $cardlette: &;
-
-        @at-root {
-            @include cardMini(#{$cardlette},getColor('red'),getColor('red',10));
-        }
-
-		// @include flexParent($display:flex,$values:column nowrap);
-
-    }
-
-}
-
-@include accordionMenu('.panelDirections',$icon-size:20px, $default:false);
-@include accordionMenu('.panelStatement',$icon-size:20px, $default:false);
-.panelStatement,
-.panelDirections {
-
-	&-name {
+		$mb: math.div(20,30);
 		@include getType('h3-sans');
+		margin-bottom: #{$mb}em;
+		text-align: center;
 	}
 
-	&-trigger {
-		border-color: getColor('red');
-		color: getColor('red');
-	}
-
-	&-toggle {
-		fill: getColor('red');
-	}
-
-	&-content {
-		> * {
-			@include getType('subtitle');
-		}
-
-		a:link,
-		a:visited,
-		a:hover,
-		a:active {
-			color: getColor('red');
-		}
-
-		em {
-			font-style: italic;
-		}
-
-		b, strong {
-			font-weight: bold;
-		}
-
-	}
-
-}
-
-@include accordionMenu('.panelSummary',$icon-size:20px, $default:false);
-.panelSummary {
-	$summary: '.interiorSummary';
-	$panel: &;
-
-	&-name {
-		@include getType('h3-sans');
-	}
-
-	&-trigger {
-
-		#{$summary}--projects & {
-			border-color: getColor('green',30);
-			color: getColor('green',30);
-		}
-
-		#{$summary}--news & {
-			border-color: getColor('red');
-			color: getColor('red');
-		}
-
-	}
-
-	&-toggle {
-		#{$summary}--projects & {
-			fill: getColor('green',30);
-		}
-		#{$summary}--news & {
-			fill: getColor('red');
-		}
-
-	}
-
-	&-content {
-		> * {
-			@include getType('subtitle');
-		}
-	}
-
-}
-
-@include carouselScroller('.aboutCarousel');
-.aboutCarousel {
-	margin: 8em 0 0 0;
-
-	.newsSlide {
-		border-top: none;
-	
-		&-title {
-			&--top {
-				display: none;
-			}
-		}
-	}
-
-}
-
-
-
-/* ---------------------------------------------------------------------
- Interior Explore
- i.e. feature projects and/or exhibitions
------------------------------------------------------------------------- */
-.interiorExplore {
-	$explore: &;
-	background: getColor('white');
-
-	$explore-colors: (
-		(#FF9F99, #934C31,#330805),
-		(#6CE8BB, #934C31, #262626)
-	);
-
-	@include breakpoint(sm) {
-		@include flexParent();
+	&-list {
+		@include flexParent($display:flex,$values:row nowrap);
 		@include justifyContent(center);
 		@include alignItems(center);
-
-		> * {
-			@include flexChild(0 1 33.333%);
-		}
+		text-align: center;
 	}
+
+	&-item {
+		@include getType('h1-italic');
+		
+		font-style: italic;
+		max-width: 810px;
+
+	}
+
+}
+
+/* ---------------------------------------------------------------------
+ Interior Related (exhibitions)
+------------------------------------------------------------------------ */
+.interiorRelated {
 
 	&-title {
-		@include visuallyHide;
-	}
-
-	&-feature {
-		$feature: &;
-		height: 400px;
-		position: relative;
-		text-align: center;
-
-		@include breakpoint(sm) {
-			height: 600px;
-		}
-
-		@for $i from 1 through 2 {
-
-			&:nth-of-type(#{$i}) {
-				$color: nth(nth($explore-colors,$i),3);
-	
-				#{$feature}-label,
-				#{$feature}-title,
-				#{$feature}-title a {
-					color: $color;
-				}
-				@include actionButton(#{$explore}-action,$color,$color);
-				
-				#{$explore}-action {
-					margin-right: 0;
-				}
-
-			}
-	
-		}
-
-		&--random {
-			background: getColor('blue');
-			@include flexParent($display:flex,$values:column wrap);
-			@include justifyContent(center);
-			@include alignItems(center);
-		}
-
-		// Overlay Treatment
-		&-overlay {
-			position: absolute;
-			top: 0;
-			left: 0;
-			height: 100%;
-			z-index: 2;
-			width: 100%;
-			opacity: 0.8;
-
-			@for $i from 1 through 2 {
-
-				#{$feature}:nth-of-type(#{$i}) & {
-					background: nth(nth($explore-colors,$i),1);
-				}
-		
-			}
-
-			@include breakpoint(sm) {
-
-				@for $i from 1 through 2 {
-
-					#{$feature}:nth-of-type(#{$i}) & {
-						background: nth(nth($explore-colors,$i),2);
-					}
-			
-				}
-		
-			}
-		}
-
-		&-asset {
-			bottom: 0;
-			position: absolute;
-			height: 100%;
-			width: 100%;
-			left: 0;
-			top: 0;
-			z-index: 1;
-			overflow: hidden;
-
-			&-image {
-				object-fit: cover;
-				height: 100%;
-				width: 100%;
-				filter: blur(15px);
-				transition: filter 2s ease-in-out;
-
-				#{$feature}:hover & {
-					filter: blur(5px);
-					transition: filter 2s ease-in-out;
-				}
-			}
-		}
-
-		&-content {
-			@include flexParent($display:flex,$values:column wrap);
-			@include justifyContent(center);
-			@include alignItems(center);
-			height: 100%;
-			padding: 0 6em;
-			position: relative;
-			z-index: 2;
-		}
-
-		&-label {
-			$mb: math.div(20,16);
-			@include getType('caption');
-			margin-bottom: #{$mb}em;
-		}
-		&-title {
-			$mb: math.div(40,28);
-			@include getType('h3-sans');
-			margin-bottom: #{$mb}em;
+		&--hidden {
+			@include visuallyHide;
 		}
 	}
-
-	&-big {
-
-		&:link,
-		&:visited,
-		&:hover,
-		&:active {
-			text-decoration: none;
-		}
-
-		&-label {
-			@include getType('h2-sans');
-			color: getColor('white');
-		}
-
-		&-icon {
-			display: block;
-			height: 70px;
-			width: 70px;
-			fill: getColor('white');
-			margin: 0 auto;
-		}
-
-	}
-
-}	
+}

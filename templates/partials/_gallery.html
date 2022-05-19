@@ -11,6 +11,22 @@
 <script>
     isOverlay = "{{ overlay == 'on' ? true : false }}";
     document.documentElement.style.overflowY = isOverlay ? 'hidden' : '';
+    document.querySelector('[data-modal-parent]').style.zIndex = 20;
+    if ( "{{ overlay == 'on' }}" ) {
+        modalThumbs = document.querySelectorAll('[data-modal-thumb]');
+        currentImage = document.getElementById("{{ current }}");
+        setTimeout(() => {
+            currentImage.scrollIntoView({inline:'center',block:'center'});
+            // prevent a gross jolt 
+            // by fading in the image after scroll
+            modalThumbs.forEach(function(img) {
+                img.classList.remove('_is-fade');
+            });
+        },100);
+    }
+    else {
+        history.replaceState(null,null,'');
+    }
 </script>
 {% endif %}
 
@@ -28,7 +44,8 @@
         {% set imgId = "gallery_#{galleryImage.id}" %}
         <li class="{{ galleryName }}-thumb">
             <a 
-                href="#{{ imgId }}"
+                id="{{ imgId }}_thumb"
+                href=""
                 title="View large image" 
                 sprig
                 s-val:overlay="on"
@@ -91,8 +108,9 @@
             {% set imgId = "gallery_#{galleryImage.id}" %}
             {% set imgCaption = galleryImage.caption != '' ? galleryImage.caption : null %}
             <li 
-                class="{{ dialogName }}-item{{ current == imgId ? ' _is-current' : '' }}" 
-                id="{{ imgId }}">
+                class="{{ dialogName }}-item{{ current == imgId ? ' _is-current' : '' }} _is-fade" 
+                id="{{ imgId }}"
+                data-modal-thumb>
                 <picture class="{{ dialogName }}-asset">
                 {% if overlaySizes %}
                     {{ assets.assetCard(dialogName,galleryImage,overlaySizes) }}

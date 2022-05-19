@@ -34,7 +34,7 @@
 
     {# default square to landscape #}
     {% set orientation = (thisWidth < thisHeight) ? 'portrait' : 'landscape' %}
-    {% set thisRatio = orientation == 'portrait' ? (thisWidth/thisHeight) : (thisHeight/thisWidth) %}
+    {% set thisRatio = thisHeight/thisWidth %}
     
     {% set defaultWidth, defaultHeight = 450, 350 %}
     {% set transformSmSizes, transformLgSizes = [],[] %}

@@ -96,7 +96,7 @@
 
 		@include breakpoint(sm) {
 			height: $sm-asset-height;
-			width: $sm-asset-width;
+			//width: $sm-asset-width;
 		}
 
 		&._is-sliding {

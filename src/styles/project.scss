@@ -21,7 +21,7 @@ html {
 
 body {
 	$max: map-get($breakpoints,'xl');
-	max-width: #{$max};
+	//max-width: #{$max};
 	min-height: -webkit-fill-available;
 	overflow-x: hidden;
 	background: getColor('white');
@@ -138,6 +138,7 @@ img {
 
 /* ---------------------------------------------------------------------
   Theme
+  // eh could be handled better
 ------------------------------------------------------------------------ */
 // Themed body class
 .primaryTheme {
@@ -260,8 +261,6 @@ img {
 	padding: 4em;
 }
 
-
-
 /* ---------------------------------------------------------------------
   Primary Content
 ------------------------------------------------------------------------ */
@@ -279,168 +278,26 @@ img {
 }
 
 /* ---------------------------------------------------------------------
-  Index Pages
+  About Carousels
 ------------------------------------------------------------------------ */
-.openerImage {
-	$image: &;
+@include carouselScroller('.aboutCarousel');
+.aboutCarousel {
+	margin: 8em 0 0 0;
 
-	@at-root {
-		@include assetItem(#{$image});
-	}
-
-	margin: 0 4em;
-
-}
-
-.pageOpener {
-	$opener: &;
-	@extend %gutter;
-
-	@include breakpoint(sm) {
-		@include flexParent();
-
-		> * {
-			@include flexChild(0 1 50%);
-		}	
-	}
-
-	&--search {
-		padding: 0;
-	}
-
-	&--exhibitions,
-	&--research {
-		padding-bottom: 6em;
-
-		@include breakpoint(sm) {
-			padding-bottom: 16em;
-		}
-
-	}
-
-	&-title {
-		$p: math.div(20,120);
-		@include getType('o-normal');
-		padding: 0 #{$p}em 0 0;
-
-		&--search {
-			$pr: math.div(40,65);
-			@include getType('h1-normal');
-			padding-right: #{$pr}em;
-		}
-
-		#{$opener}--exhibitions & {
-			$pb: math.div(20,40);
-			@include getType('h2-normal');
-			padding: 0 0 #{$pb}em 0;
-
-			@include breakpoint(sm) {
-				@include getType('o-normal');
-			}
-
-		}
-
-	}
-
-	&-desc {
-		$p: math.div(20,24);
-		@include getType('subtitle');
-		//padding-left: #{$p}em;
-	}
+	.newsSlide {
+		border-top: none;
 	
-}
-
-/* ---------------------------------------------------------------------
-  Search Index
------------------------------------------------------------------------- */
-.searchOpener {
-	@extend %gutter;
-
-	&-title {
-		@include getType('h4-sans');
-		margin-bottom: 1em;			
-	}
-
-	&-form {
-		@extend %global-half;
-		margin-top: 12em;
-	}
-	
-}
-
-/* ---------------------------------------------------------------------
-  Search Index Form
------------------------------------------------------------------------- */
-.indexSearch {
-	$search: &;
-
-	@at-root {
-		@include fieldSearch(#{$search});
-	}
-
-	&-field {
-
-		&-input {
-			background-color: getColor('red',30);
-			border-color: getColor('red');
-			color: getColor('red');
-
-			&::placeholder {
-				color: getColor('red');
+		&-title {
+			&--top {
+				display: none;
 			}
-
 		}
-
-	}
-
-	&-submit {
-		@include flexParent();
-		@include alignItems(center);
-		border-color: getColor('red');
-
-		&-label {
-			$mr: math.div(10,12);
-			@include getType('micro');
-			margin-right: #{$mr}em;
-			color: getColor('red');
-			text-transform: uppercase;	
-		}
-
-		&-icon {
-			fill: getColor('red');
-		}
-
-	}
-
-}
-
-
-
-/* ---------------------------------------------------------------------
-  Date Directory - dev only
------------------------------------------------------------------------- */
-.dateDirectory {
-	font-size: 1rem;
-
-	&-title {
-		@include getType('h3-normal');
-		margin-bottom: 1em;
-	}
-
-	&-list {
-		font-size: 1rem;
-		margin-bottom: 2em;
-	}
-
-	&-name {
-		@include getType('p');
-		font-weight: bold;
 	}
 
 }
 
 /* ---------------------------------------------------------------------
-  Person
+  Person (is this still being used?)
 ------------------------------------------------------------------------ */
 .contentContainer {
 	font-size: 1rem;
@@ -480,197 +337,25 @@ img {
 	font-size: 2.4em;
 }
 
+/* ---------------------------------------------------------------------
+  Date Directory - dev only
+------------------------------------------------------------------------ */
+.dateDirectory {
+	font-size: 1rem;
 
-
-.interiorCover {
-
-	&-frame {
-		margin: 0 4em;
-		position: relative;
-	}
-
-	&-asset {
-		display: block;
-		padding-bottom: 4em;
-	} 
-
-	&-caption {
-		@include getType('caption');
-		display: block;
-		padding-top: 0;
-		width: 25%;
-		position: absolute;
-		left: 0;
-		top: 100%;
-
-		em {
-			font-style: italic;
-		}
-
-		strong, b {
-			font-weight: bold;
-		}
-
-	}
-
-}
-
-.interiorSpotlight {
-	background:  #51594A; //todo
-	height: 900px;
-	@include flexParent($display:flex,$values:column nowrap);
-	@include justifyContent(center);
-
-	> * {
-		@include flexChild();
-	}
-
-	* {
-		color: getColor('green',20);
-	}
-
-	&-subtitle {
-		$mb: math.div(20,30);
-		@include getType('h3-sans');
-		margin-bottom: #{$mb}em;
-		text-align: center;
+	&-title {
+		@include getType('h3-normal');
+		margin-bottom: 1em;
 	}
 
 	&-list {
-		@include flexParent($display:flex,$values:row nowrap);
-		@include justifyContent(center);
-		@include alignItems(center);
-		text-align: center;
+		font-size: 1rem;
+		margin-bottom: 2em;
 	}
 
-	&-item {
-		@include getType('h1-italic');
-		
-		font-style: italic;
-		max-width: 810px;
-
+	&-name {
+		@include getType('p');
+		font-weight: bold;
 	}
 
 }
-
-.interiorNarrative {
-	$narrative: &;
-	border-top: 1px solid transparent;
-	padding: 4em 4em 16em 4em;
-
-	&--projects {
-		border-color: getColor('green',30);
-	}
-
-	&--exhibitions {
-		border-color: getColor('gray');
-	}
-
-	&-title {
-		$mb: math.div(80,65);
-		@include getType('h1-normal');
-		margin-bottom: #{$mb}em;
-	}
-}	
-
-
-.interiorRelated {
-
-	&-title {
-		&--hidden {
-			@include visuallyHide;
-		}
-	}
-}
-
-/* ---------------------------------------------------------------------
-  Narratives Tabs
------------------------------------------------------------------------- */
-.tabList {
-	$tabs: &;
-	@include flexParent;
-	border-bottom: 1px solid transparent;
-	margin-bottom: 4em;
-
-	&--projects {
-		border-bottom-color: getColor('green',30);
-	}
-
-	&--exhibitions {
-		border-bottom-color: getColor('black',10);
-	}
-
-	&-item {
-		@include resetButton;
-		$pb: math.div(10,28);
-		$mr: math.div(40,28);
-		@include getType('h3-sans');
-		border-bottom: 10px solid transparent;
-		padding-bottom: #{$pb}em;
-		margin-right: #{$mr}em;
-
-		
-		&:hover,
-		&[role="tab"][aria-selected="true"] {
-			#{$tabs}--projects & {
-				border-bottom-color: getColor('green',30);
-			}
-			#{$tabs}--exhibitions & {
-				border-bottom-color: getColor('black',10);
-			}
-		}
-
-		&:hover {
-			cursor: pointer;
-		}
-
-		#{$tabs}--projects & {
-			color: getColor('green',30);
-		}
-
-	}
-}
-
-.tabPanel {
-	$tab-panel: &;
-	@include flexParent();
-
-	&[role="tabpanel"]._is-hidden {
-		display: none;
-	}
-
-	&-item {
-		// TODO: fix spacing
-		$panel-item: &;
-		@include flexChild(0 1 calc(33% - 0.5em));
-
-		#{$tab-panel}--4 & {
-			@include flexChild(0 1 calc(25% - 0.5em));
-		}
-
-		@at-root {
-			@include cardDirectory(#{$panel-item},getColor('gray'),getColor('gray',10));
-	
-		}
-	}
-}
-
-/* ---------------------------------------------------------------------
-  Gallery
------------------------------------------------------------------------- */
-.interiorGallery {
-	$gallery: &;
-	border-top: 1px solid transparent;
-	padding: 4em 4em 16em 4em;
-
-	&--exhibitions {
-		border-color: getColor('gray');
-	}
-
-	&-title {
-		$mb: math.div(80,65);
-		@include getType('h1-normal');
-		margin-bottom: #{$mb}em;
-	}
-
-}	

@@ -9,398 +9,76 @@
 
 @forward 'project';
 
-
 /* ---------------------------------------------------------------------
-  Search Filter / Tabs / Dialog
+  Opener
 ------------------------------------------------------------------------ */
-.searchFilters {
-	padding: 0 4em;
-
-	&-title {
-		$mt: math.div(40,65);
-		$mb: math.div(80,65);
-		@include getType('h1-normal');
-		margin: #{$mt}em 0 #{$mb}em 0;
-
-		&--hide {
-			@include visuallyHide;
-		}
-	}
-
-}
-
-// Loading indicator
-.searchIndicator {
-
-	&.htmx-request {
-		// Fade following sibs
-		// (search results and pagination)
-		~ * {
-			opacity: 0.3;
-		}
-
-	}
-
-}
-
-.searchTabs {
-	$parent: &;
-	display: none;
-	
-	@include breakpoint(sm) {
-		@include flexParent();
-		margin-bottom: 4em;
-		border-bottom: 1px solid transparent;
-		padding-bottom: 1.7em;
-		@include themedProperty(border-bottom-color,1);
-
-		&--people {
-			margin-top: 6em;
-		}
-
-		> * {
-			@include flexChild();
-		}
-	}
-
-	&-item {
-		margin-right: 4em;	
-	}
-
-	&-trigger {
-		$height: math.div(10,28);
-		@include getType('h3-sans');
-		text-decoration-color: transparent;
-		text-underline-offset: #{$height}em;
-		text-decoration-thickness: #{$height}em;
-
-		&:hover,
-		&._is-active {
-			@include themedProperty(text-decoration-color,1,$parent);
-		}
-
-	}
-
-}
-
-.resultsFilter {
-	$filter: &;
+.openerImage {
+	$image: &;
 
 	@at-root {
-		@include controlDialog(#{$filter},$theme:true);
+		@include assetItem(#{$image});
 	}
 
-	&-controls {
-		#{$filter}--exhibitions  & {
-			
-		}
-	}
-
-	&-controls {
-		#{$filter}--events  & {
-			display: none;
-		}
-	}
-
-	&-trigger--filter {
-
-		#{$filter}--exhibitions  & {
-			display: none;
-		}
-	}
-
-	&-status {
-		$status: &;
-		@include alignSelf(center);
-		flex-basis: 252px; 
-		
-		@at-root {
-			@include controlStatus(#{$status},$default:false);
-		}
-
-		#{$filter}--people & {
-			@include controlStatus--default(#{$status},$color:getColor('blue'));
-		}
-
-		#{$filter}--search & {
-			@include controlStatus--default(#{$status},$color:getColor('red'));
-		}
-
-	}
-
-	&-layout {
-		$layout: &;
-		display: none;
-
-		@at-root {
-			@include controlLayout(#{$layout},$height:2.5em,$width:2.5em);
-		}
-
-		#{$filter}--exhibitions & {
-			@include flexParent();
-			@include alignItems(center);
-			margin-bottom: 2em;
-
-			@include breakpoint(sm) {
-				margin-bottom: 0;
-			}
-
-			&-title {
-				$mr: math.div(25,16);
-				@include getType('caption');
-				font-weight: bold;
-				margin: 0 #{$mr}em 0 0;
-			}
-
-			&-name {
-				@include getType('caption');
-			}
-		}
-	}
+	margin: 0 4em;
 
 }
 
-/* ---------------------------------------------------------------------
-  Search Results
------------------------------------------------------------------------- */
-$results: '.searchResults';
-.searchResults {
-	padding: 0 4em;
+.pageOpener {
+	$opener: &;
+	@extend %gutter;
 
-	&--exhibitions {
-		margin: 4em 0 0 0;
+	@include breakpoint(sm) {
+		@include flexParent();
+
+		> * {
+			@include flexChild(0 1 50%);
+		}	
+	}
+
+	&--search {
 		padding: 0;
 	}
 
-	&._no-pagination {
-		padding-bottom: 8em;
+	&--exhibitions,
+	&--research {
+		padding-bottom: 6em;
+
+		@include breakpoint(sm) {
+			padding-bottom: 16em;
+		}
+
 	}
 
 	&-title {
-		@include visuallyHide;
+		$p: math.div(20,120);
+		@include getType('o-normal');
+		padding: 0 #{$p}em 0 0;
+
+		&--search {
+			$pr: math.div(40,65);
+			@include getType('h1-normal');
+			padding-right: #{$pr}em;
+		}
+
+		#{$opener}--exhibitions & {
+			$pb: math.div(20,40);
+			@include getType('h2-normal');
+			padding: 0 0 #{$pb}em 0;
+
+			@include breakpoint(sm) {
+				@include getType('o-normal');
+			}
+
+		}
+
 	}
 
-	&-apology {
-		$mb: math.div(80,24);
+	&-desc {
+		$p: math.div(20,24);
 		@include getType('subtitle');
-		margin-bottom: #{$mb}em;
+		//padding-left: #{$p}em;
 	}
-
-	&-content {
-		$content: 7;
-        $margin: 0.5em;
-        $thirds: math.div(100,30) * 10%;
-        $halves-percent: calc(50% - $margin);
-        $thirds-percent: calc($thirds - $margin);
-        
-        @include breakpoint(sm) {
-            @include flexParent();
-            margin-left: -0.25em;
-
-            > * {
-                @include flexChild(0 1 #{$halves-percent});
-            }
-
-			&--search,
-			&--projects {
-				> * {
-					@include flexChild(0 1 #{$thirds-percent});
-				}
-			}
-
-			&--exhibitions {
-				$x-margin: 8em;
-				$halves-percent: calc(50% - $x-margin);
-				> * {
-					@include flexChild(0 1 #{$halves-percent});
-				}
-
-			}
-
-
-        }
-		
-		&._is-grid {
-			margin-left: 0;
-
-			// .searchArticle {
-			// 	width: 50%;
-			// }
-
-		}
-
-		&._is-list {
-			display: block;
-			padding: 0 4em;
-
-			.searchArticle {
-				@include flexParent($display: flex, $values: row nowrap);
-				border-top: 1px solid getColor('gray');
-				padding: 2em 0;
-				margin: 0;
-
-
-				> * {
-					@include flexChild();
-				}
-			
-				&-asset {
-					// fix these
-					height: 70px;
-					width: 70px;
-					margin: 0 2em 0 0;
-
-					@include breakpoint(sm) {
-						height: 200px;
-						width: 200px;
-					}
-				}
-				
-			}
-
-		}
-
-	}
-
-}
-
-.searchArticle {
-	$article: &;
-
-	@at-root {
-		@include cardDirectory(#{$article},$theme:true);
-	}
-
-
-
-	&--exhibitions {
-		margin: 0 2em 8em 2em;
-
-		@include breakpoint(sm) {
-			margin: 0 4em 8em 4em;
-		}
-
-		#{$article}-topics {
-			display: none;
-		}
-
-		#{$results}-content._is-grid & {
-			// In grid view, hide article if feature in list
-			&._is-feature {
-				display: none;
-			}
-
-			#{$article}-buttons {
-				display: none;
-			}
-		}
-
-		#{$results}-content._is-list & {
-
-			// #{$article}-subtitle {
-			// 	$mb: math.div(20,16);
-			// 	@include getType('caption');
-			// 	margin-bottom: #{$mb}em;
-			// }
-
-			#{$article}-title {
-				@include getType('h3-normal');
-			}
-
-			#{$article}-dateblock {
-				$mb: math.div(40,16);
-				margin-bottom: #{$mb}em;
-			}
-		}
-
-	}
-
-	&--feature {
-		
-		#{$article}-details {
-			color: getColor('gray');
-
-			a:link,
-			a:visited,
-			a:hover,
-			a:active {
-				color: getColor('gray');
-			}
-
-		}
-
-		#{$article}-subtitle {
-			$mb: math.div(20,16);
-			@include getType('caption');
-			margin-bottom: #{$mb}em;
-		}
-
-		#{$article}-topics {
-			display: none;
-		}
-
-		// Exhibition Feature: Grid View
-		#{$results}-content._is-grid & {
-			flex-basis: 100%;
-			margin-left: 0;
-			margin-right: 0;
-			width: 100%;
-
-			#{$article}-asset {
-				margin-bottom: 4em;
-			}
-
-			#{$article}-details {
-				@include flexParent($display:flex,$values:column wrap);
-				@include justifyContent(center);
-				@include alignItems(center);
-			}
-
-			#{$article}-title {
-				@include getType('h2-sans');
-				text-align: center;
-			}
-
-			#{$article}-dateblock {
-				@include getType('p');
-				margin-bottom: 0;
-			}
-
-			#{$article}-buttons {
-				margin: 4em 0 0 0;
-			}
-
-			#{$article}-action {
-				margin: 0;
-			}
-			
-		}
-
-		$action: #{$article}-action;
-		@include actionButton(#{$action},getColor('gray'),getColor('gray',10));
-
-	}
-
-	&-asset {
-
-		#{$results}-content._is-grid & {
-			width: 100%;
-			height: auto;
-		}
-	}
-
-}
-
-.searchBio {
-	$bio: &;
-
-	@at-root {
-		@include cardBio(#{$bio},$theme:true);
-	}
-
-	&-title--top {
-		@include totallyHide;
-	}
+	
 }
 
 /* ---------------------------------------------------------------------

@@ -9,6 +9,25 @@
 
 @forward 'project';
 
+/* ---------------------------------------------------------------------
+  Gallery
+------------------------------------------------------------------------ */
+.interiorGallery {
+	$gallery: &;
+	border-top: 1px solid transparent;
+	padding: 4em 4em 16em 4em;
+
+	&--exhibitions {
+		border-color: getColor('gray');
+	}
+
+	&-title {
+		$mb: math.div(80,65);
+		@include getType('h1-normal');
+		margin-bottom: #{$mb}em;
+	}
+
+}	
 
 /* ---------------------------------------------------------------------
   Thumbs
@@ -61,7 +80,7 @@
         bottom: 0; 
         left: 0; 
         position: fixed;
-        z-index: 2;
+        //z-index: 2;
     }
 
     &-dialog {
@@ -71,6 +90,7 @@
         &[aria-hidden="true"] {
             display: none; 
         }
+        z-index: 20;
 
     }
 
@@ -140,6 +160,13 @@
 
     &-item {
         margin-bottom: 8em;
+        opacity: 1;
+
+        &._is-fade {
+            opacity: 0;
+            transition: opacity 2s ease-in;
+        }
+
     }
 
     &-caption {
