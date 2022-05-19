@@ -102,6 +102,12 @@
 		$mb: math.div(80,28);
 		@include getType('h3-sans');
 		margin-bottom: #{$mb}em;
+	
+		span {
+			$mb: math.div(5,28);
+			display: block;
+			margin-bottom: #{$mb}em;
+		}
 	}
 
 	&-team {

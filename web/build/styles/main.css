@@ -14067,6 +14067,10 @@ img {
   font: normal 2.8em/1.25 "apercu", sans-serif;
   margin-bottom: 2.8571428571em;
 }
+.interiorIntro-prompt span {
+  display: block;
+  margin-bottom: 0.1785714286em;
+}
 .interiorIntro-team-title {
   border: 0;
   clip: rect(0 0 0 0);
