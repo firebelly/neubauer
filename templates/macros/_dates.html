@@ -144,10 +144,13 @@
     {% endfor %}
 
     {% if datedEntries %}
-        {% set sortedIds = sortedEntries|sort((a,b) => a.sortDate <=> b.sortDate)|column('sortId')|reverse %}
+        {% set sortedIds = sortedEntries|sort((a,b) => a.sortDate <=> b.sortDate)|column('sortId') %}
     {% endif %} 
+    {% if sortedIds and not isFuture %}
+        {% set sortedIds = sortedIds|reverse %}
+    {% endif %}
 
-    {{ sortedIds|json_encode }}
+    {{ sortedIds|json_encode|raw }}
 
 {% endmacro %}
 
