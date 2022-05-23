@@ -209,6 +209,7 @@ img {
 			}
 
 			.searchTabs {
+				$tabs: &;
 
 				&-trigger {
 					color: $theme-primary;

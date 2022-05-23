@@ -12,23 +12,40 @@
 .interiorMod {
 	$mod: &;
 	border-top: 1px solid transparent;
-	padding: 4em 4em 16em 4em;
+	padding: 2em 2em 4em 2em;
+
+	@include breakpoint(sm) {
+		padding: 4em 4em 16em 4em;
+	}
 
 	&--about {
 		border-color: getColor('red');
 	}
 
 	&-title {
-		@include getType('h1-normal');
+		@include getType('h2-normal');
+
+		@include breakpoint(md) {
+			@include getType('h1-normal');
+		}
+
 	}
 
 	&-subtitle {
-		$mv: math.div(20,40);
-		$mt: math.div(80,40);
-		@include getType('h2-sans');
+		$mv: math.div(20,20);
+		$mt: math.div(60,20);
+		@include getType('h4-sans');
 		border-top: 1px solid getColor('red');
 		margin-top: #{$mt}em;
 		padding: #{$mv}em 0;
+
+		@include breakpoint(md) {
+			$mv: math.div(20,40);
+			$mt: math.div(80,40);
+			@include getType('h2-sans');
+			margin-top: #{$mt}em;
+			padding: #{$mv}em 0;
+		}
 	}
 
 	&-wrap {
@@ -37,6 +54,12 @@
 
 	&-frame {
 		position: relative;
+		// about
+		margin-bottom: 6em;
+
+		@include breakpoint(md) {
+			margin-bottom: 0;
+		}
 
 		&--impact {
 			width: 100%;
@@ -46,11 +69,14 @@
 			$pr: math.div(20,16);
 			@include getType('caption');
 			display: block;
-			padding-right: #{$pr}em;
-			width: 50%;
-			position: absolute;
-			left: 0;
-			top: 100%;
+
+			@include breakpoint(md) {
+				padding-right: #{$pr}em;
+				width: 50%;
+				position: absolute;
+				left: 0;
+				top: 100%;
+			}
 
 			em {
 				font-style: italic;
@@ -66,7 +92,12 @@
 
 	&-asset {
 		display: block;
-		padding-bottom: 4em;
+		padding-bottom: 2em;
+
+		@include breakpoint(md) {
+			padding-bottom: 4em;
+		}
+
 	}
 
 	&-main {
@@ -83,9 +114,15 @@
 	}
 
 	&-redactor {
-		$mb: math.div(40,24);
-		@include getType('subtitle');
+		$mb: math.div(60,20);
+		@include getType('p');
 		margin: 0 0 #{$mb}em 0;
+
+		@include breakpoint(md) {
+			$mb: math.div(40,24);
+			@include getType('subtitle');
+			margin: 0 0 #{$mb}em 0;
+		}
 
 		a:link,
 		a:visited,
@@ -128,18 +165,69 @@
 			@include cardDirectory(#{$card},getColor('red'),getColor('red',10));
 		}
         flex-basis: 50%;
+
+		@at-root {
+			#{$mod}--about & {
+				#{$card}-details {
+					padding-right: 6em;
+				}
+				#{$card}-title {
+					$mb: math.div(5,20);
+					margin-bottom: #{$mb}em;
+				}
+				#{$card}-subtitle {
+					$mb: math.div(10,20);
+					@include getType('h4-italic');
+					margin-bottom: #{$mb}em;
+				}
+				#{$card}-caption {
+					display: none;
+				}
+				#{$card}-action {
+					margin-top: 0;
+					margin-bottom: 2em;
+
+					&--tel,
+					&--email {
+						text-decoration: none;
+					}
+
+					&--email {
+						#{$card}-action-label {
+							text-transform: capitalize;
+						}
+					}
+
+				}
+
+			}
+		}
+
 	}
 
 	&-metric {
-		margin-bottom: 4em;
-		max-width: 295px;
+		margin-bottom: 6em;
+
+		@include breakpoint(md) {
+			margin-bottom: 4em;
+			max-width: 295px; // ew
+		}
 
 		&-stat {
-			@include getType('o-normal');
+			@include getType('h1-normal');
+
+			@include breakpoint(md) {
+				@include getType('o-normal');
+			}
+
 		}
 
 		&-caption {
-			@include getType('caption');
+			@include getType('fine');
+
+			@include breakpoint(md) {
+				@include getType('caption');
+			}
 		}
 
 	}
@@ -152,16 +240,25 @@
 		}
 
         &--2 {
-            @include flexParent();
-            > * {
-                @include flexChild(1 1 50%);
-            }
+
+			@include breakpoint(sm) {
+				@include flexParent();
+				> * {
+					@include flexChild(1 1 50%);
+				}
+			}
+
         }
 
         &--4 {
 
 			@include breakpoint(sm) {
 				@include flexParent();
+				> * {
+					@include flexChild(0 1 calc(50% - #{$margin-total}));
+				}
+			}
+			@include breakpoint(md) {
 				> * {
 					@include flexChild(0 1 calc(25% - #{$margin-total}));
 				}
@@ -213,11 +310,27 @@
 		}
 
     }
+
+	&-map {
+		margin: 6em 0 4em 0;
+
+		@include breakpoint(md) {
+			margin: 0;
+		}
+
+	}
+
+
 	&-directions {
 		$mb: math.div(40,24);
 		
 		> * {
-			@include getType('subtitle');
+			@include getType('p');
+
+			@include breakpoint(md) {
+				@include getType('subtitle');
+			}
+
 		}
 
 		p {

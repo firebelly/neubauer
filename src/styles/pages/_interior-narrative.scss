@@ -9,7 +9,11 @@
 .interiorNarrative {
 	$narrative: &;
 	border-top: 1px solid transparent;
-	padding: 4em 4em 16em 4em;
+	padding: 4em 4em 6em 4em;
+
+	@include breakpoint(md) {
+		padding-bottom: 16em;
+	}
 
 	&--projects {
 		border-color: getColor('green',30);
@@ -20,9 +24,16 @@
 	}
 
 	&-title {
-		$mb: math.div(80,65);
-		@include getType('h1-normal');
+		$mb: math.div(60,40);
+		@include getType('h2-normal');
 		margin-bottom: #{$mb}em;
+
+		@include breakpoint(md) {
+			$mb: math.div(80,65);
+			@include getType('h1-normal');
+			margin-bottom: #{$mb}em;
+		}
+
 	}
 }	
 
@@ -80,14 +91,17 @@
 	}
 
 	&-item {
-		// TODO: fix spacing
 		$panel-item: &;
-		@include flexChild(0 1 calc(33% - 0.5em));
+		
+		@include breakpoint(md) {
+			@include flexChild(0 1 calc(33% - 0.5em));
 
-		#{$tab-panel}--4 & {
-			@include flexChild(0 1 calc(25% - 0.5em));
+			#{$tab-panel}--4 & {
+				@include flexChild(0 1 calc(25% - 0.5em));
+			}
+
 		}
-
+		
 		@at-root {
 			@include cardDirectory(#{$panel-item},getColor('gray'),getColor('gray',10));
 	

@@ -43,10 +43,12 @@
 {# Icons #}
 {% set arrowPath = "/spritemap.svg#icon-arrow-right-20" %}
 {% set emailPath = "/spritemap.svg#icon-email-20" %}
+{% set phonePath = "/spritemap.svg#icon-phone-20" %}
 
 {# Person-specific #}
 {% set isBio = (entrySection == 'people') %}
 {% set isPeopleDirectory = (cardVariant == 'people' and cardName != 'peopleSlide' ) %}
+{% set isStaffDirectory = (cardVariant == 'staff' or cardVariant == 'advisors') %}
 
 {# Project-specific #}
 {% set isProjectPerson = (cardName == 'interiorTeam-item') %}
@@ -128,7 +130,7 @@
         <div class="{{ cardName }}-subtitle">{{ exhibitionLabel ?? 'Featured' }}</div>
         {% endif %}
 
-        {% if cardDate and isNewsSlide %}
+        {% if cardDate|trim != '' and isNewsSlide %}
         <time 
             class="{{ cardName }}-dateblock"
             datetime="">
@@ -188,7 +190,7 @@
         {% endif %}
 
         {# Card: Date #}
-        {% if cardDate and not isNewsSlide and not isProjectPerson %}
+        {% if cardDate|trim != '' and not isNewsSlide and not isProjectPerson %}
         <time 
             class="{{ cardName }}-dateblock"
             datetime="">
@@ -250,6 +252,8 @@
             }]%}
         {% endif %}
         <div class="{{ cardName }}-buttons">
+
+        {% if not isStaffDirectory %}
         {% for actionItem in actionList if (actionItem.actionURL is not null and actionItem.actionURL|length > 0 and actionItem.actionURL != '') %}
             {% set isLink = (isPeopleDirectory or isNewsSlide or isExhibitionDirectory or loop.index > 1) %}
             {% set actionObj = {
@@ -257,7 +261,7 @@
                 'label': (isBio ? 'Full Bio' : 'Learn More')
             } %}
             {{ actions.actionBlockItem(cardName,actionItem,actionObj) }}
-
+        {% endfor %}
             {% if cardEntry.personEmail and isPeopleDirectory %}
             <a 
                 class="{{ cardName }}-action {{ cardName }}-action--link"
@@ -270,7 +274,46 @@
                 </svg>
             </a>
             {% endif %}
-        {% endfor %}
+            {% endif %}
+
+            {% if isStaffDirectory %}
+            {% if cardEntry.personEmail != '' %}
+            <a 
+                class="{{ cardName }}-action {{ cardName }}-action--link {{ cardName }}-action--email"
+                href="mailto:{{ cardEntry.personEmail }}"
+                title=""
+                role="">
+                <span class="{{ cardName }}-action-label">Email</span>
+                <svg class="{{ cardName }}-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ emailPath) }}"></use>
+                </svg>
+            </a>
+            {% endif %}
+            {% if cardEntry.personPhone != '' %}
+            {% set cleanPhone = utils.formatPhone(cardEntry.personPhone) %}
+            <a 
+                class="{{ cardName }}-action {{ cardName }}-action--link {{ cardName }}-action--tel"
+                href="tel:{{ cardEntry.personPhone }}"
+                title=""
+                role="">
+                <span class="{{ cardName }}-action-label">{{ cleanPhone }}</span>
+                <svg class="{{ cardName }}-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ phonePath) }}"></use>
+                </svg>
+            </a>
+            {% endif %}
+            
+            <a 
+                class="{{ cardName }}-action {{ cardName }}-action--link {{ cardName }}-action--bio"
+                href="{{ cardEntry.uri }}"
+                title=""
+                role="">
+                <span class="{{ cardName }}-action-label">Full Bio</span>
+                <svg class="{{ cardName }}-action-icon">
+                    <use xlink:href="{{ alias('@assetBasePath' ~ arrowPath) }}"></use>
+                </svg>
+            </a>
+            {% endif %}
         </div>
     </div>
 </article>

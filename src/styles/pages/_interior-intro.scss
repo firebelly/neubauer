@@ -12,30 +12,69 @@
 ------------------------------------------------------------------------ */
 .interiorIntro {
 	$parent: &;
-	padding: 0 8em 5em 8em;
+	padding: 0 2em 5em 2em;
 	@include flexParent($display:flex,$values:row nowrap);
 	@include justifyContent(center);
 
-	&--people  {
-		padding-top: 12em;
-		padding-bottom: 16em;
-	}
-
-	&--about {
-		@include justifyContent(flex-end);
+	@include breakpoint(md) {
+		padding: 0 8em 5em 8em;
 	}
 
 	> * {
 		@include flexChild(0 1 50%);
 	}
 
+	&--people  {
+		padding-top: 12em;
+		padding-bottom: 16em;
+	}
+
+	&--projects {
+		@include flexParent($display:flex,$values:row wrap);
+		
+		> * {
+			@include flexChild(0 1 100%);
+		}
+
+		@include breakpoint(md) {
+			@include flexParent($display:flex,$values:row nowrap);
+
+			> * {
+				@include flexChild(0 1 50%);
+			}
+
+		}
+
+	}
+
+	&--about {
+		
+		@include breakpoint(sm) {
+			@include justifyContent(flex-end);
+		}
+
+	}
+
 	&-details {
-		padding-right: 8em;
+		margin-top: 4em;
+		padding: 0 2em;
 		text-align: center;
 
+		@include breakpoint(sm) {
+			padding-right: 8em;
+		}
+
+		@include breakpoint(md) {
+			margin-top: 0;
+		}
+
 		#{$parent}--projects & {
+			order: 1;
 			@include breakpoint(sm) {
 				@include flexParent($display:flex,$values:column);
+			}
+			@include breakpoint(md) {
+				order: 0;
 			}
 		}
 
@@ -48,7 +87,13 @@
 
 	&-asset {
 		// todo
-		overflow: hidden;
+		//overflow: hidden;
+
+		@include breakpoint(sm) {
+
+		}
+
+
 	}
 
 	&-placeholder {
@@ -58,10 +103,10 @@
 	}
 
 	&-caption {
-		$pt: math.div(20,16);
-		$pr: math.div(40,16);
-		@include getType('caption');
-		padding: #{$pt}em #{$pr}em 0 0;
+		$pt: math.div(5,12);
+		@include getType('micro');
+		padding: #{$pt}em 0 0 0;
+		text-align: center;
 
 		em {
 			font-style: italic;
@@ -71,16 +116,34 @@
 			font-weight: bold;
 		}
 
+		@include breakpoint(md) {
+			$pt: math.div(20,16);
+			$pr: math.div(40,16);
+			@include getType('caption');
+			padding: #{$pt}em #{$pt}em 0 0;
+			text-align: left;
+		}
+
 	}
 
 	&-title {
-		$mb-lg: math.div(40,65);
-		$mb-sm: math.div(20,65);
-		@include getType('h1-normal');
-		margin-bottom: #{$mb-lg}em;
+		$mb: math.div(20,30);
+		@include getType('h3-normal');
+		margin-bottom: #{$mb}em;
+
+		@include breakpoint(md) {
+			$mb: math.div(40,65);
+			@include getType('h1-normal');
+			margin-bottom: #{$mb}em;
+		}
 
 		#{$parent}--people & {
-			margin-bottom: #{$mb-sm}em;
+			
+			@include breakpoint(md) {
+				$mb: math.div(20,65);
+				margin-bottom: #{$mb}em;
+			}
+
 		}
 
 	}
@@ -148,9 +211,18 @@
 
 	&-menu {
 		$menu: &;
-		@include flexParent();
-		@include justifyContent(center);
+		margin: 4em 10.85em;
 		scroll-behavior: smooth; // todo
+
+		@include breakpoint(sm) {
+
+		}
+
+		@include breakpoint(md) {
+			@include flexParent();
+			@include justifyContent(center);
+			margin: 0;
+		}
 	
 		&--projects {
 			flex-grow: 1;
@@ -158,17 +230,53 @@
 		}
 
 		&--about {
-			display: block;
+			flex-basis: 100%;
+			margin: 0 auto;
+
+			@include breakpoint(sm) {
+				display: block;
+				margin: 0;
+				flex-basis: 50%;
+			}
+
 		}
 
 		&-item {
+			$ph: math.div(21.5,12);
+			$pb: math.div(10,12);
 			@include flexChild(0 1 auto);
 			@include getType('action');
+			border-bottom: 1px solid transparent;
 			margin: 0 2em;
+			padding: #{$pb}em #{$ph}em;
+
+			&:last-of-type {
+				border: none;
+			}
+
+			@include breakpoint(md) {
+
+				#{$menu}--projects &,
+				#{$menu}--people & {	
+					border: none;
+					padding: 0;
+				}
+			}
+
+			#{$menu}--projects & {
+				border-color: getColor('green',30);
+			}
+
+			#{$menu}--people & {
+				border-color: getColor('blue');
+			}
 
 			#{$menu}--about & {
 				$mb: math.div(20,12);
+				border-color: getColor('red');
 				margin: 0 0 #{$mb}em 0;
+				padding-left: 0;
+				padding-right: 0;
 			}
 
 			a:link,
@@ -190,6 +298,15 @@
 					text-decoration: none;
 				}
 
+				#{$parent}--about & {
+					text-decoration: none;
+
+					// @include breakpoint(sm) {
+					// 	text-decoration: underline;
+					// }
+
+				}
+
             }
 		}
 
@@ -201,7 +318,18 @@
 
 			&-label {
 				pointer-events: none;
+
+				#{$parent}--about & {
+					flex-grow: 1;
+				}
+
 			}
+
+			#{$parent}--about & {
+				margin-right: 0;
+				width: 100%;
+			} 
+
 
 		}
 

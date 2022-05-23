@@ -455,19 +455,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var parallaxContent = /*#__PURE__*/function () {
   function parallaxContent(options) {
-    var _this$state;
-
     _classCallCheck(this, parallaxContent);
 
     this.options = options || null;
     this._id = this.options._id;
     this.images = this._id !== null ? document.querySelectorAll("[data-parallax-image=\"".concat(this._id, "\"]")) : null;
-    this.containers = this._id !== null ? document.querySelectorAll("[data-parallax-container=\"".concat(this._id, "\"]")) : null; // Parallax state: _default, _active, _done
+    this.containers = this._id !== null ? document.querySelectorAll("[data-parallax-container=\"".concat(this._id, "\"]")) : null;
+    this._state = {
+      _default: true,
+      _active: false
+    }; // Styling hook for transitions
 
-    this._state = (_this$state = this.state) !== null && _this$state !== void 0 ? _this$state : '_default'; // Styling hook for transitions
-
-    this._isSliding = '_is-sliding';
-    this._imagePad = 33;
+    this._sliding = '_is-sliding';
+    this._imagePad = 30;
   }
 
   _createClass(parallaxContent, [{
@@ -485,8 +485,8 @@ var parallaxContent = /*#__PURE__*/function () {
     value: function translateContent(el, distance) {
       var self = this;
 
-      if (self._state !== '_default') {
-        el.classList.add(self._isSliding);
+      if (self._state['_active']) {
+        el.classList.add(self._sliding);
       }
 
       el.style.transform = "translate3d(0,-".concat(distance, "px, 0)");
@@ -500,10 +500,11 @@ var parallaxContent = /*#__PURE__*/function () {
         var title = container.querySelector("[data-parallax-title=\"".concat(self._id, "\"]")),
             image = container.querySelector("[data-parallax-image=\"".concat(self._id, "\"]")),
             feature = container.querySelector("[data-parallax-feature=\"".concat(self._id, "\"]")),
-            header = document.querySelector("[data-parallax-header=\"".concat(self._id, "\"]")),
-            action = document.querySelector("[data-parallax-follow=\"".concat(self._id, "\"]"));
+            header = document.querySelector("[data-parallax-header=\"".concat(self._id, "\"]"));
+        var slideables = [title, image, feature]; // Vertically slide cover text out of view;
+        // Vertically slide feature into view
 
-        if (self._state === '_active') {
+        if (self._state['_active']) {
           if (title !== null) {
             var headerHeight = header.offsetHeight,
                 titleDistance = title.offsetTop + title.offsetHeight + headerHeight;
@@ -519,42 +520,36 @@ var parallaxContent = /*#__PURE__*/function () {
             var featureDistance = feature.offsetTop;
             self.translateContent(feature, featureDistance);
           }
-
-          feature.addEventListener('transitionend', function () {
-            self._state = '_done';
-            container.addEventListener('click', function (e) {
-              e.stopPropagation();
-
-              if (e.target !== action) {
-                slideThings(container);
-              }
-            });
-          });
-        }
-
-        if (self._state === '_done') {
-          var slideables = [title, image, feature];
+        } else {
           slideables.forEach(function (el) {
             self.translateContent(el, 0);
           });
-          feature.addEventListener('transitionend', function () {
-            self._state = '_default';
-            slideables.forEach(function (el) {
-              el.classList.remove(self._isSliding);
-            });
-          });
         }
+
+        feature.addEventListener('transitionend', function () {
+          if (self._state['_default']) {
+            slideables.forEach(function (el) {
+              el.classList.remove(self._sliding);
+            });
+          }
+        });
       }
 
       self.containers.forEach(function (el) {
-        var trigger = el.querySelector("[data-parallax-title-trigger=\"".concat(self._id, "\"]"));
+        var trigger = el.querySelector("[data-parallax-title-trigger=\"".concat(self._id, "\"]")),
+            link = el.querySelector("[data-parallax-follow=\"".concat(self._id, "\"]"));
+        el.addEventListener('click', function (e) {
+          e.stopPropagation(); // Return to _default state                
 
-        if (trigger !== null) {
-          trigger.addEventListener('click', function () {
-            self._state = '_active';
-            slideThings(el);
-          });
-        }
+          if (e.target === link) {
+            return;
+          } // Toggle state
+
+
+          self._state['_default'] = !self._state['_default'];
+          self._state['_active'] = !self._state['_active'];
+          slideThings(el);
+        });
       });
     }
   }, {
@@ -570,7 +565,7 @@ var parallaxContent = /*#__PURE__*/function () {
             // Enable the parallax only when visible
             var enableParallax = self.isContentInView(container);
 
-            if (enableParallax && self._state === '_default') {
+            if (enableParallax && self._state['_default']) {
               self.translateContent(image, distance);
             }
           });

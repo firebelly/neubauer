@@ -57,7 +57,7 @@
                 {% set statementSizes = utils.getAssetSizes('about','director')|json_decode %}
                 {{ assets.assetCard('interiorSummary-frame',statementImage,statementSizes) }}
             {% endif %}
-            <picture>
+            </picture>
             <figcaption class="interiorSummary-caption">{{ statementImage.one().caption }}</figcaption>
         </figure>
         <div class="interiorSummary-main interiorSummary-main--directors">

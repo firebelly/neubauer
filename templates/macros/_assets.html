@@ -33,7 +33,7 @@
     {% set thisWidth, thisHeight = thisImage.getWidth(), thisImage.getHeight() %}
 
     {# default square to landscape #}
-    {% set orientation = (thisWidth < thisHeight) ? 'portrait' : 'landscape' %}
+    {% set orientation = (thisWidth < thisHeight) ? 'portrait' : (thisWidth == thisHeight ? 'square' : 'landscape') %}
     {% set thisRatio = thisHeight/thisWidth %}
     
     {% set defaultWidth, defaultHeight = 450, 350 %}
@@ -69,30 +69,24 @@
         {% endif %} #}
 
         {% set transformSmSizes = [
-            {'width': smWidth,'height': smHeight},
-            {'width': smThreshhold, 'ratio': smRatio}
+            {width: smWidth, height: smHeight},
+            {width: smThreshhold, ratio: smRatio}
         ]%}
         {% set transformLgSizes = [
-            {'width': lgWidth,'height': lgHeight},
-            {'width': lgThreshhold, 'ratio': lgRatio}
+            {width: lgWidth, height: lgHeight},
+            {width: lgThreshhold, ratio: lgRatio}
         ]%}
     {% endif %}
-
-    {# Fill the transform size arrays
-    {% if smSizeObj %}
-        {% set transformSmSizes = transformSmSizes|merge(smSizeObj) %}
-    {% endif %}
-    {% if lgSizeObj %}
-        {% set transformLgSizes = transformLgSizes|merge(lgSizeObj) %}
-    {% endif %} #}
     
     {# Prep the image sources #}
     {% set transformSettings = {mode: 'crop', position: thisImage.focalPoint(), jpegQuality: 72} %}
     {% set imageSource = craft.imager.placeholder({ width: defaultWidth, height: defaultHeight }) %}
 
     {% set transformedSm = craft.imager.transformImage(thisImage,transformSmSizes,transformSettings,{ fillTransforms: true }) %}
+    {# {% set transformedImgs = transformedSm %} #}
     {% set transformedLg = craft.imager.transformImage(thisImage,transformLgSizes,transformSettings,{ fillTransforms: true }) %}
-    {% set transformedImgs = transformedSm|merge(transformedLg) %}
+    
+    {# {% set transformedImgs = transformedSm|merge(transformedLg) %} #}
 
     {# Accommodate different ratios across small and large images via sourcing #}
     <source 
@@ -110,8 +104,9 @@
         alt="{{ thisImage.altText ?? '' }}"
         loading="lazy"
         src="{{ imageSource }}" 
-        sizes="100vw" 
-        srcset="{{ transformedImgs ? transformedImgs | srcset : '' }}" />
+        sizes="100vw" />
+
+        {# srcset="{{ transformedImgs ? transformedImgs | srcset : '' }}" #}
 
 {% endmacro %}
 

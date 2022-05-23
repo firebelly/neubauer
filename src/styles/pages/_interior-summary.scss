@@ -12,7 +12,20 @@
 .interiorSummary {
 	$summary: &;
 	border-top: 1px solid transparent;
-	padding: 4em 4em 16em 4em;
+	padding: 4em 4em 8em 4em;
+
+	@include breakpoint(sm) {
+		@include flexParent($display:flex,$values:row nowrap);
+		@include justifyContent(center);
+
+		> * {
+			@include flexChild(0 1 50%);
+		}
+	}
+
+	@include breakpoint(md) {
+		padding-bottom: 16em;
+	}
 
 	&--people {
 		border-color: getColor('blue');
@@ -29,23 +42,25 @@
 	&--about {
 		padding: 8em 0 0 0;
 		border: none;
+
+		@include breakpoint(md) {
+			padding-bottom: 0;
+		}
 	}
 
 	&--exhibitions {
 		padding-top: 0;
 	}
 
-	@include breakpoint(sm) {
-		@include flexParent($display:flex,$values:row nowrap);
-		@include justifyContent(center);
-
-		> * {
-			@include flexChild(0 1 50%);
-		}
-	}
-
 	&-title {
-		@include getType('h1-normal');
+		$mb: math.div(20,40);
+		@include getType('h2-normal');
+		margin-bottom: #{$mb}em;
+
+		@include breakpoint(md) {
+			@include getType('h1-normal');
+			margin-bottom: 0;
+		}
 
 		&--people,
 		&--exhibitions,
@@ -53,17 +68,14 @@
         &--events {
 			@include visuallyHide;
 		}
-	}
 
-	&-placeholder {
-		// width: 100%;
-		// height: 100%;
-		// background: lightgray; //todo
 	}
 
 	&-frame {
+		margin: 0 0 4em 0;
+
 		@include breakpoint(sm) {
-			margin-right: 4em;
+			margin: 0 4em 0 0;
 		}
 	
 		&--projects {
@@ -99,10 +111,6 @@
 
 	&-main {
 	
-		&--directors {
-			flex-basis: 100%;
-		}
-
         #{$summary}--news & {
 			flex-basis: 100%;
 		}
@@ -110,9 +118,15 @@
 	}
 
 	&-redactor {
-		$mb: math.div(40,24);
-		@include getType('subtitle');
+		$mb: math.div(60,16);
+		@include getType('caption');
 		margin: 0 0 #{$mb}em 0;
+
+		@include breakpoint(md) {
+			$mb: math.div(40,24);
+			@include getType('subtitle');
+			margin: 0 0 #{$mb}em 0;
+		}
 
 		a:link,
 		a:visited,

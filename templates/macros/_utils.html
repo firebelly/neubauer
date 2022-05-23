@@ -208,3 +208,24 @@
     {{ "#{str}s" }}
     {% endif %}
 {% endmacro %}
+
+{# NOTE: should be a custom filter #}
+{% macro formatPhone(str) %}
+    {% set str = str|trim %}
+
+    {% if str starts with 'tel:' %}
+    {% set str = str|replace('tel:','') %}
+    {% endif %}
+
+    {% set str_count = str|length %}
+    {% if str_count == 12 and '-' in str %}
+        {% set str = str|replace('-','.') %}
+    {% elseif str_count == 10 %}
+        {% set area = str|slice(0,3) %}
+        {% set ex = str|slice(3,3) %}
+        {% set sub = str|slice(6,4) %}
+        {% set str = "#{area}.#{ex}.#{sub}" %}
+    {% endif %}
+
+    {{ str }}
+{% endmacro %}

@@ -14,21 +14,25 @@
 ------------------------------------------------------------------------ */
 .openerImage {
 	$image: &;
+	margin: 0 2em;
 
 	@at-root {
 		@include assetItem(#{$image});
 	}
 
-	margin: 0 4em;
+	@include breakpoint(sm) {
+		margin: 0 4em;
+	}
 
 }
 
 .pageOpener {
 	$opener: &;
-	@extend %gutter;
+	padding: 2em;
 
 	@include breakpoint(sm) {
 		@include flexParent();
+		padding: 4em;
 
 		> * {
 			@include flexChild(0 1 50%);
@@ -50,33 +54,48 @@
 	}
 
 	&-title {
-		$p: math.div(20,120);
-		@include getType('o-normal');
-		padding: 0 #{$p}em 0 0;
-
-		&--search {
-			$pr: math.div(40,65);
-			@include getType('h1-normal');
-			padding-right: #{$pr}em;
-		}
+		$p: math.div(20,65);
+		@include getType('h1-normal');
+		padding: 0 0 #{$p}em 0;
 
 		#{$opener}--exhibitions & {
 			$pb: math.div(20,40);
 			@include getType('h2-normal');
 			padding: 0 0 #{$pb}em 0;
+		}
 
-			@include breakpoint(sm) {
-				@include getType('o-normal');
+		@include breakpoint(sm) {
+			$p: math.div(20,120);
+			@include getType('o-normal');
+			padding: 0 #{$p}em 0 0;
+
+			&--search {
+				$pr: math.div(40,65);
+				@include getType('h1-normal');
+				padding-right: #{$pr}em;
+			}
+	
+			#{$opener}--exhibitions & {
+	
+				@include breakpoint(sm) {
+					@include getType('o-normal');
+				}
+	
 			}
 
 		}
 
+		
+
 	}
 
 	&-desc {
-		$p: math.div(20,24);
-		@include getType('subtitle');
-		//padding-left: #{$p}em;
+		@include getType('caption');
+
+		@include breakpoint(md) {
+			@include getType('subtitle');
+		}
+
 	}
 	
 }

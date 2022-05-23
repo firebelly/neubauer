@@ -14,8 +14,12 @@
 .panelStatement,
 .panelDirections {
 
-	&-name {
-		@include getType('h3-sans');
+	&-name {	
+		@include getType('h4-sans');
+
+		@include breakpoint(md) {
+			@include getType('h3-sans');
+		}
 	}
 
 	&-trigger {
@@ -28,8 +32,13 @@
 	}
 
 	&-content {
+
 		> * {
-			@include getType('subtitle');
+			@include getType('caption');
+
+			@include breakpoint(md) {
+				@include getType('subtitle');
+			}
 		}
 
 		a:link,
@@ -57,7 +66,12 @@
 	$panel: &;
 
 	&-name {
-		@include getType('h3-sans');
+		@include getType('caption');
+
+		@include breakpoint(md) {
+			@include getType('h3-sans');
+		}
+
 	}
 
 	&-trigger {
@@ -70,6 +84,11 @@
 		#{$summary}--news & {
 			border-color: getColor('red');
 			color: getColor('red');
+		}
+
+		#{$summary}--exhibitions & {
+			border-color: getColor('gray');
+			color: getColor('gray');
 		}
 
 	}
@@ -85,8 +104,14 @@
 	}
 
 	&-content {
+		padding-bottom: 4em;
+
 		> * {
-			@include getType('subtitle');
+			@include getType('caption');
+
+			@include breakpoint(md) {
+				@include getType('subtitle');
+			}
 		}
 	}
 

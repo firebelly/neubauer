@@ -93,15 +93,15 @@
 		background-attachment: fixed;
 		filter: blur(15px);
 		transform: translate3d(0,0,0);
+		transition: filter 2s ease-in-out;
 
 		@include breakpoint(sm) {
 			height: $sm-asset-height;
-			//width: $sm-asset-width;
 		}
 
 		&._is-sliding {
 			filter: blur(0);
-			transition: transform 2s ease-in, filter 2s ease-in;
+			transition: transform 2s ease-in-out, filter 2s ease-in-out;
 		}
 
 	}
@@ -300,10 +300,9 @@
 @include cardMiniFeature('.homepageFeatures',getColor('black'));
 
 .homepageExplore {
-	// eh, some calculation is off 
-	// and this covers an exposed sliver
+	// cover up the sliver of scrollbar
 	position: relative;
-	top: 1em;
+	margin-bottom: -1em;
 }
 
 .homepageFeatures {

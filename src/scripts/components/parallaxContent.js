@@ -8,12 +8,15 @@ class parallaxContent {
         this.images     = this._id !== null ? document.querySelectorAll(`[data-parallax-image="${this._id}"]`) : null;
         this.containers = this._id !== null ? document.querySelectorAll(`[data-parallax-container="${this._id}"]`) : null;
         
-        // Parallax state: _default, _active, _done
-        this._state = this.state ?? '_default'; 
-        // Styling hook for transitions
-        this._isSliding = '_is-sliding';
+        this._state = {
+            _default: true,
+            _active: false
+        };
 
-        this._imagePad = 33;
+        // Styling hook for transitions
+        this._sliding = '_is-sliding';
+
+        this._imagePad = 30;
         
     }
 
@@ -34,8 +37,8 @@ class parallaxContent {
         
         let self = this;
 
-        if ( self._state !== '_default' ) {
-            el.classList.add(self._isSliding);
+        if ( self._state['_active'] ) {
+            el.classList.add(self._sliding);
         }
         
         el.style.transform = `translate3d(0,-${distance}px, 0)`;
@@ -51,10 +54,13 @@ class parallaxContent {
             let title   = container.querySelector(`[data-parallax-title="${self._id}"]`),
                 image   = container.querySelector(`[data-parallax-image="${self._id}"]`),
                 feature = container.querySelector(`[data-parallax-feature="${self._id}"]`),
-                header  = document.querySelector(`[data-parallax-header="${self._id}"]`),
-                action  = document.querySelector(`[data-parallax-follow="${self._id}"]`);
+                header  = document.querySelector(`[data-parallax-header="${self._id}"]`);
             
-            if ( self._state === '_active' ) {
+            let slideables = [title,image,feature];
+
+            // Vertically slide cover text out of view;
+            // Vertically slide feature into view
+            if ( self._state['_active'] ) {
 
                 if ( title !== null ) {
                     let headerHeight  = header.offsetHeight,
@@ -72,54 +78,49 @@ class parallaxContent {
                     self.translateContent(feature,featureDistance);
                 }
 
-                feature.addEventListener('transitionend', () => {
-
-                    self._state = '_done';
-
-                    container.addEventListener('click', (e) => {
-
-                        e.stopPropagation();
-                        
-                        if ( e.target !== action ) {
-                            slideThings(container);
-                        }
-                   
-                    });
-
-                });
-
             }
-            
-            if ( self._state === '_done' ) {
+            else {
                 
-                let slideables = [title,image,feature];
-
                 slideables.forEach((el) => {
                     self.translateContent(el,0);
                 });
-
-                feature.addEventListener('transitionend', () => {
-                    self._state = '_default';
-                    slideables.forEach((el) => {
-                        el.classList.remove(self._isSliding);
-                    });
-    
-                });
-
+            
             }
+
+            feature.addEventListener('transitionend', () => {
+                
+                if ( self._state['_default'] ) {
+                    slideables.forEach((el) => {
+                        el.classList.remove(self._sliding);
+                    });
+                }
+
+            });
 
         }
 
         self.containers.forEach((el) => {
 
-            const trigger = el.querySelector(`[data-parallax-title-trigger="${self._id}"]`);
+            const trigger = el.querySelector(`[data-parallax-title-trigger="${self._id}"]`),
+                  link    = el.querySelector(`[data-parallax-follow="${self._id}"]`);
 
-            if ( trigger !== null ) {
-                trigger.addEventListener('click', () => {
-                    self._state = '_active';
-                    slideThings(el);
-                });
-            }        
+            el.addEventListener('click', (e) => {
+
+                e.stopPropagation();
+
+                // Return to _default state                
+                if ( e.target === link ) {
+                    return;
+                }
+
+                // Toggle state
+                self._state['_default'] = !self._state['_default'];
+                self._state['_active'] = !self._state['_active'];
+
+                slideThings(el);
+
+            });
+
 
         });
 
@@ -143,7 +144,7 @@ class parallaxContent {
                     // Enable the parallax only when visible
                     let enableParallax = self.isContentInView(container);
 
-                    if ( enableParallax && self._state === '_default' ) {
+                    if ( enableParallax && self._state['_default'] ) {
                         self.translateContent(image,distance);
                     }
                 

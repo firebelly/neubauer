@@ -177,6 +177,13 @@ Carousel Scroller: Default Presentation
 @mixin carouselScroller--default($selector) {
 
     #{$selector} {
+
+        #{$selector}--features & {
+            scrollbar-color: getColor('blue',10) getColor('blue',10);
+            &::-webkit-scrollbar-thumb {
+                background: getColor('blue',10);
+            }
+        }
         
         &-slides {
             scrollbar-width: thin;

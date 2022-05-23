@@ -140,6 +140,11 @@
 		&:hover,
 		&._is-active {
 			@include themedProperty(text-decoration-color,1,$parent);
+
+			#{$parent}--projects & {
+				text-decoration-color: getColor('green');
+			}
+
 		}
 
 	}
