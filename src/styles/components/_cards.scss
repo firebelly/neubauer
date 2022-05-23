@@ -206,18 +206,29 @@
         content:"#{$selector}";
     
         &-label {
-            @include getType('h1-normal');
+            @include getType('h2-normal');
+
+            @include breakpoint(md) {
+                @include getType('h1-normal');
+            }
         }
     
         &-title {
-            $mb: math.div(20,40);
-            @include getType('h2-sans');
+            $mb: math.div(10,20);
+            @include getType('h4-sans');
             margin-bottom: #{$mb}em;
             text-align: center;
+
+            @include breakpoint(md) {
+                $mb: math.div(20,40);
+                @include getType('h2-sans');
+                margin-bottom: #{$mb}em;
+            }
+
         }
     
         &-content {
-            margin: 8em 0 12em 0;
+            margin: 6em 0;
             
             @include breakpoint(sm) {
                 @include flexParent();
@@ -226,10 +237,15 @@
                     @include flexChild(0 1 50%);
                 }
             }
+
+            @include breakpoint(md) {
+                margin: 8em 0 12em 0;
+            }
             
         }
     
         &-asset {
+            display: block;
             margin-bottom: 2em;
             @include breakpoint(sm) {
                 margin-bottom: 0;
@@ -298,7 +314,12 @@
             }
 
             &-item {
-                @include getType('h4-sans');
+                @include getType('fine');
+
+                @include breakpoint(md) {
+                    @include getType('h4-sans');
+                }
+
             }
 
         }        
@@ -366,12 +387,16 @@
 
         &-buttons {
             @include flexParent();
-            @include justifyContent(center);
             margin-top: 4em;
     
             > * {
                 @include flexChild();
             }
+
+            @include breakpoint(md) {
+                 @include justifyContent(center);
+            }
+            
         }
 
         &-action {

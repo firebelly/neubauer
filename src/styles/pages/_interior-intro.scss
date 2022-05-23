@@ -18,15 +18,16 @@
 
 	@include breakpoint(md) {
 		padding: 0 8em 5em 8em;
+
+		&--people  {
+			padding-top: 12em;
+			padding-bottom: 16em;
+		}
+
 	}
 
 	> * {
 		@include flexChild(0 1 50%);
-	}
-
-	&--people  {
-		padding-top: 12em;
-		padding-bottom: 16em;
 	}
 
 	&--projects {
@@ -162,8 +163,8 @@
 	}
 
 	&-prompt {
-		$mb: math.div(80,28);
-		@include getType('h3-sans');
+		$mb: math.div(40,20);
+		@include getType('h4-sans');
 		margin-bottom: #{$mb}em;
 	
 		span {
@@ -171,6 +172,13 @@
 			display: block;
 			margin-bottom: #{$mb}em;
 		}
+
+		@include breakpoint(md) {
+			$mb: math.div(80,28);
+			@include getType('h3-sans');
+			margin-bottom: #{$mb}em;
+		}
+
 	}
 
 	&-team {
