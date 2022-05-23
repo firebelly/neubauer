@@ -4312,8 +4312,8 @@ img {
   -ms-flex-alignpack: center;
   -webkit-align-itemspack: center;
   align-items: center;
-  height: calc(100vw - 8em);
-  width: calc(100vw - 8em);
+  height: calc(100% - 8em);
+  width: calc(100% - 8em);
   top: 100%;
   left: 4em;
   position: absolute;

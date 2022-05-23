@@ -18,6 +18,7 @@
 	$sm-asset-height: 940px;
 	$xs-cover-height: 640px;
 	$sm-cover-height: 820px;
+
 	height: 100%;
 	min-height: $xs-cover-height;
 	position: relative;
@@ -149,8 +150,8 @@
 	@include justifyContent(center);
 	@include alignItems(center);
 	// TODO: fix these dims
-	height: calc(100vw - 8em);
-	width: calc(100vw - 8em);
+	height: calc(100% - 8em);
+	width: calc(100% - 8em);
 	top: 100%;
 	left: 4em;
 	position: absolute;
