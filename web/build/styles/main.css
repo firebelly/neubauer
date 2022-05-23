@@ -4493,9 +4493,9 @@ img {
   }
 }
 .homepageEntries-title {
-  font: normal 6.5em/1.08 "domaine-text", serif;
+  font: normal 4em/1.12 "domaine-text", serif;
   letter-spacing: -0.035em;
-  margin-bottom: 0.3076923077em;
+  margin-bottom: 0.5em;
 }
 .homepageEntries--people .homepageEntries-title {
   color: #1C2AA7;
@@ -4506,6 +4506,8 @@ img {
 @media (min-width: 768px) {
   .homepageEntries-title {
     margin-bottom: 0;
+    font: normal 6.5em/1.08 "domaine-text", serif;
+    letter-spacing: -0.035em;
   }
 }
 .homepageEntries-body {

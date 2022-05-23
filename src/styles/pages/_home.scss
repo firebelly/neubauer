@@ -236,8 +236,8 @@
 	}
 
 	&-title {
-		$mb: math.div(20,65);
-		@include getType('h1-normal');
+		$mb: math.div(20,40);
+		@include getType('h2-normal');
 		margin-bottom: #{$mb}em;
 
 		#{$entries}--people & {
@@ -250,6 +250,7 @@
 
 		@include breakpoint(sm) {
 			margin-bottom: 0;
+			@include getType('h1-normal');
 		}
 		
 	}
