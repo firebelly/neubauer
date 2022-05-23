@@ -450,7 +450,7 @@
     {% endif %}>
 
     {% if image %}
-    <div class="{{ cardName }}-asset">
+    <picture class="{{ cardName }}-asset">
         {% set assetName,assetImage = "#{cardName}-asset",image %}
         {% set assetSizes = cardObj is not null and 'assetSizes' in cardObj|keys ? cardObj['assetSizes']|json_decode : null %}
         {% if assetSizes %}
@@ -458,7 +458,7 @@
         {% else %}
             {{ assets.assetCard(cardName,cardImage) }}
         {% endif %}
-    </div>
+    </picture>
     {% endif %}
 
     {% if title %}
