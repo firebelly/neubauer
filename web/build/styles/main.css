@@ -3421,13 +3421,23 @@ img {
 }
 .primaryContact-social {
   background: #FFE5E6;
-  padding: 4em 4em 8.4em 4em;
+  padding: 2em 2em 8em 2em;
   color: #800000;
+}
+@media (min-width: 62em) {
+  .primaryContact-social {
+    padding: 4em 4em 8.4em 4em;
+  }
 }
 .primaryContact-news {
   background: #800000;
-  padding: 4em 4em 8.4em 4em;
+  padding: 2em 2em 8em 2em;
   color: #FFFFFF;
+}
+@media (min-width: 62em) {
+  .primaryContact-news {
+    padding: 4em 4em 8.4em 4em;
+  }
 }
 .primaryContact-title {
   font: normal 3em/1.17 "domaine-text", serif;
@@ -8153,7 +8163,12 @@ img {
   Search Filter / Tabs / Dialog
 ------------------------------------------------------------------------ */
 .searchFilters {
-  padding: 0 4em;
+  padding: 0 2em;
+}
+@media (min-width: 62em) {
+  .searchFilters {
+    padding: 0 4em;
+  }
 }
 .searchFilters-title {
   font: normal 6.5em/1.08 "domaine-text", serif;
@@ -9342,7 +9357,12 @@ img {
   Search Results
 ------------------------------------------------------------------------ */
 .searchResults {
-  padding: 0 4em;
+  padding: 0 2em;
+}
+@media (min-width: 62em) {
+  .searchResults {
+    padding: 0 4em;
+  }
 }
 .searchResults--exhibitions {
   margin: 4em 0 0 0;

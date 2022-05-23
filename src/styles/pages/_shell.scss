@@ -305,14 +305,23 @@ $red-secondary: nth($red-theme,2);
 
 	&-social {
 		background: getColor('red',10);
-		padding: 4em 4em 8.4em 4em;
+		padding: 2em 2em 8em 2em;
 		color: getColor('red');
+
+		@include breakpoint(md) {
+			padding: 4em 4em 8.4em 4em;
+		}
+
 	}
 
 	&-news {
 		background: getColor('red');
-		padding: 4em 4em 8.4em 4em;
+		padding: 2em 2em 8em 2em;
 		color: getColor('white');
+
+		@include breakpoint(md) {
+			padding: 4em 4em 8.4em 4em;
+		}
 	}
 
 	&-title {

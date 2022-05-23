@@ -77,7 +77,11 @@
   Search Filter / Tabs / Dialog
 ------------------------------------------------------------------------ */
 .searchFilters {
-	padding: 0 4em;
+	padding: 0 2em;
+
+	@include breakpoint(md) {
+		padding: 0 4em;
+	}
 
 	&-title {
 		$mt: math.div(40,65);
@@ -233,7 +237,11 @@
 ------------------------------------------------------------------------ */
 $results: '.searchResults';
 .searchResults {
-	padding: 0 4em;
+	padding: 0 2em;
+
+	@include breakpoint(md) {
+		padding: 0 4em;
+	}
 
 	&--exhibitions {
 		margin: 4em 0 0 0;
