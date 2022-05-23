@@ -4066,6 +4066,7 @@ img {
 ------------------------------------------------------------------------ */
 .homepageCover {
   height: 100%;
+  min-height: 640px;
   position: relative;
   overflow: hidden;
   z-index: 1;
