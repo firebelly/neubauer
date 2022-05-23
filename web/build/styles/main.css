@@ -4065,7 +4065,7 @@ img {
   Homepage
 ------------------------------------------------------------------------ */
 .homepageCover {
-  height: 100vw;
+  height: 100%;
   position: relative;
   overflow: hidden;
   z-index: 1;
