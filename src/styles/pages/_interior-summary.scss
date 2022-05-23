@@ -12,7 +12,7 @@
 .interiorSummary {
 	$summary: &;
 	border-top: 1px solid transparent;
-	padding: 4em 4em 8em 4em;
+	padding: 2em 2em 8em 2em;
 
 	@include breakpoint(sm) {
 		@include flexParent($display:flex,$values:row nowrap);
@@ -24,7 +24,7 @@
 	}
 
 	@include breakpoint(md) {
-		padding-bottom: 16em;
+		padding: 4em 4em 16em 4em;
 	}
 
 	&--people {

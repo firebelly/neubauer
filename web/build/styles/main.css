@@ -14665,7 +14665,7 @@ img {
 ------------------------------------------------------------------------ */
 .interiorSummary {
   border-top: 1px solid transparent;
-  padding: 4em 4em 8em 4em;
+  padding: 2em 2em 8em 2em;
 }
 @media (min-width: 768px) {
   .interiorSummary {
@@ -14679,7 +14679,7 @@ img {
 }
 @media (min-width: 62em) {
   .interiorSummary {
-    padding-bottom: 16em;
+    padding: 4em 4em 16em 4em;
   }
 }
 .interiorSummary--people {
