@@ -2441,6 +2441,7 @@ img {
 ------------------------------------------------------------------------ */
 .primaryContent {
   position: relative;
+  overflow: hidden;
   z-index: 1;
   padding: 2em 0 0 0;
 }
@@ -4093,7 +4094,7 @@ img {
   transition: transform 2s ease-in;
 }
 .homepageCover-tagline {
-  font: normal 6.5em/1.08 "domaine-text", serif;
+  font: normal 4em/1.12 "domaine-text", serif;
   letter-spacing: -0.035em;
   margin-bottom: 0.3076923077em;
   text-align: center;
@@ -4103,7 +4104,7 @@ img {
   font-style: italic;
   letter-spacing: -0.03em;
 }
-@media (min-width: 768px) {
+@media (min-width: 62em) {
   .homepageCover-tagline {
     font: normal 12em/1 "domaine-text", serif;
     letter-spacing: -0.02em;

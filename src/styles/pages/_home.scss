@@ -50,7 +50,7 @@
 
 	&-tagline {
 		$mb: math.div(20,65);
-		@include getType('h1-normal');
+		@include getType('h2-normal');
 		margin-bottom: #{$mb}em;
 		text-align: center;
 
@@ -60,7 +60,7 @@
 			letter-spacing: -0.03em;
 		}
 
-		@include breakpoint(sm) {
+		@include breakpoint(md) {
 			$mb: math.div(20,120);
 			@include getType('o-normal');
 			text-align: left;
