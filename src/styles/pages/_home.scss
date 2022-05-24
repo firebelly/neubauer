@@ -102,11 +102,12 @@ $sm-cover-height: 900px;
 		background-position: 50% 50%;
 		background-size: cover;
 		background-blend-mode: multiply;
+		filter: blur(5px);
 		transform: translate3d(0,0,0);
 		
 		@include breakpoint(sm) {
 			height: $sm-cover-height + $blur;
-			background-attachment: fixed;
+			background-attachment: fixed; //mobile does not like this
 			filter: blur(15px);
 			transition: filter 2s ease-in-out;
 		}

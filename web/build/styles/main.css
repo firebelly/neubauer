@@ -4148,6 +4148,7 @@ img {
   background-position: 50% 50%;
   background-size: cover;
   background-blend-mode: multiply;
+  filter: blur(5px);
   transform: translate3d(0, 0, 0);
 }
 @media (min-width: 768px) {
