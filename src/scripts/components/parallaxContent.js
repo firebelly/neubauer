@@ -157,11 +157,15 @@ class parallaxContent {
 
     }
 
-    init() {
+    init(options) {
 
         let self = this;
 
-        if ( self.images !== null ) {
+        let viewport = options.viewportState !== null ? options.viewportState : null;
+
+        console.log(viewport);
+
+        if ( self.images !== null && viewport !== 'xs' ) {
             self.defaultState();
         }
         

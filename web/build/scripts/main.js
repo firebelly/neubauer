@@ -574,10 +574,12 @@ var parallaxContent = /*#__PURE__*/function () {
     }
   }, {
     key: "init",
-    value: function init() {
+    value: function init(options) {
       var self = this;
+      var viewport = options.viewportState !== null ? options.viewportState : null;
+      console.log(viewport);
 
-      if (self.images !== null) {
+      if (self.images !== null && viewport !== 'xs') {
         self.defaultState();
       }
 
@@ -1026,7 +1028,9 @@ var homepageCover = new _components_parallaxContent__WEBPACK_IMPORTED_MODULE_6__
 });
 
 if (homepageCover.images !== null || homepageCover.titles !== null) {
-  homepageCover.init();
+  homepageCover.init({
+    'viewportState': _utils_appState__WEBPACK_IMPORTED_MODULE_0__["default"].currentViewport
+  });
 } // Homepage Carousels:
 
 

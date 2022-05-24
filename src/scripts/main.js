@@ -44,7 +44,9 @@ const homepageCover = new parallaxContent({
     _id: 'cover'
 });
 if ( homepageCover.images !== null || homepageCover.titles !== null ) {
-    homepageCover.init();
+    homepageCover.init({
+        'viewportState': appState.currentViewport
+    });
 }
 
 // Homepage Carousels:
