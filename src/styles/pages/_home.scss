@@ -33,7 +33,7 @@
 
 	&-title {
 		padding: 0 2em;
-		top: 92px;
+		top: 172px;
 		position: relative;
 		z-index: 2;
 		color: getColor('white');
@@ -41,7 +41,7 @@
 
 		@include breakpoint(sm) {
 			width: 900px;
-			top: 185px;
+			top: 265px;
 			left: 200px;
 		}
 
@@ -52,21 +52,29 @@
 	}
 
 	&-tagline {
-		$mb: math.div(20,65);
+		$mb: math.div(20,40);
 		@include getType('h2-normal');
 		margin-bottom: #{$mb}em;
 		text-align: center;
 
 		em {
+			display: block;
 			font-family: $font-tertiary;
 			font-style: italic; //todo
 			letter-spacing: -0.03em;
 		}
 
-		@include breakpoint(md) {
+		@include breakpoint(sm) {
+			$mb: math.div(20,65);
+			@include getType('h1-normal');
+			margin-bottom: #{$mb}em;
+			text-align: left;
+		}
+
+		@include breakpoint(lg) {
 			$mb: math.div(20,120);
 			@include getType('o-normal');
-			text-align: left;
+			margin-bottom: #{$mb}em;
 		}
 		
 	}

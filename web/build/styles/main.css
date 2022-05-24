@@ -4082,7 +4082,7 @@ img {
 }
 .homepageCover-title {
   padding: 0 2em;
-  top: 92px;
+  top: 172px;
   position: relative;
   z-index: 2;
   color: #FFFFFF;
@@ -4091,7 +4091,7 @@ img {
 @media (min-width: 768px) {
   .homepageCover-title {
     width: 900px;
-    top: 185px;
+    top: 265px;
     left: 200px;
   }
 }
@@ -4101,19 +4101,28 @@ img {
 .homepageCover-tagline {
   font: normal 4em/1.12 "domaine-text", serif;
   letter-spacing: -0.035em;
-  margin-bottom: 0.3076923077em;
+  margin-bottom: 0.5em;
   text-align: center;
 }
 .homepageCover-tagline em {
+  display: block;
   font-family: "domaine-text-italic", serif;
   font-style: italic;
   letter-spacing: -0.03em;
 }
-@media (min-width: 62em) {
+@media (min-width: 768px) {
+  .homepageCover-tagline {
+    font: normal 6.5em/1.08 "domaine-text", serif;
+    letter-spacing: -0.035em;
+    margin-bottom: 0.3076923077em;
+    text-align: left;
+  }
+}
+@media (min-width: 1260px) {
   .homepageCover-tagline {
     font: normal 12em/1 "domaine-text", serif;
     letter-spacing: -0.02em;
-    text-align: left;
+    margin-bottom: 0.1666666667em;
   }
 }
 .homepageCover-prompt {
