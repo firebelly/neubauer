@@ -4129,7 +4129,7 @@ img {
   top: 0;
   left: 0;
   position: fixed;
-  z-index: -1;
+  z-index: 1;
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
@@ -4343,15 +4343,28 @@ img {
   margin-bottom: 1.25em;
 }
 .homepageFeature-title {
-  font: normal 2.8em/1.25 "apercu", sans-serif;
-  margin-bottom: 0.5em;
+  font: normal 2em/1.5 "apercu", sans-serif;
+  margin-bottom: 1em;
   text-align: center;
 }
+@media (min-width: 768px) {
+  .homepageFeature-title {
+    font: normal 2.8em/1.25 "apercu", sans-serif;
+    margin-bottom: 0.5em;
+  }
+}
 .homepageFeature-question {
-  font: normal 3em/1.17 "domaine-text-italic", serif;
-  letter-spacing: -0.01em;
-  margin-bottom: 0.5em;
+  font: normal 2em/1.5 "domaine-text-italic", serif;
+  margin-bottom: 1em;
+  font-style: italic;
   text-align: center;
+}
+@media (min-width: 768px) {
+  .homepageFeature-question {
+    font: normal 3em/1.17 "domaine-text-italic", serif;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5em;
+  }
 }
 .homepageFeature .homepageFeature-action {
   display: inline-flex;

@@ -88,7 +88,7 @@
 		top: 0;
 		left: 0;
 		position: fixed;
-		z-index: -1;
+		z-index: 1;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
 		background-size: contain;
@@ -183,17 +183,31 @@
 	}
 
 	&-title {
-		$mb: math.div(20,40);
-		@include getType('h3-sans');
+		$mb: math.div(20,20);
+		@include getType('h4-sans');
 		margin-bottom: #{$mb}em;
 		text-align: center;
+
+		@include breakpoint(sm) {
+			$mb: math.div(20,40);
+			@include getType('h3-sans');
+			margin-bottom: #{$mb}em;
+		}
 	}
 
 	&-question {
-		$mb: math.div(20,40);
-		@include getType('h3-italic');
+		$mb: math.div(20,20);
+		@include getType('h4-italic');
 		margin-bottom: #{$mb}em;
+		font-style: italic;
 		text-align: center;
+
+		@include breakpoint(sm) {
+			$mb: math.div(20,40);
+			@include getType('h3-italic');
+			margin-bottom: #{$mb}em;
+		}
+
 	}
 
 	@include actionButton(#{$feature}-action,getColor('green',20),getColor('green',20));
