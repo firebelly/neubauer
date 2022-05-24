@@ -17160,11 +17160,11 @@ img {
 /* _interior-narrative.scss */
 .interiorNarrative {
   border-top: 1px solid transparent;
-  padding: 4em 4em 6em 4em;
+  padding: 2em 2em 6em 2em;
 }
 @media (min-width: 62em) {
   .interiorNarrative {
-    padding-bottom: 16em;
+    padding: 4em 4em 16em 4em;
   }
 }
 .interiorNarrative--projects {
@@ -17655,7 +17655,12 @@ img {
 ------------------------------------------------------------------------ */
 .interiorGallery {
   border-top: 1px solid transparent;
-  padding: 4em 4em 16em 4em;
+  padding: 2em 2em 6em 2em;
+}
+@media (min-width: 62em) {
+  .interiorGallery {
+    padding: 4em 4em 16em 4em;
+  }
 }
 .interiorGallery--exhibitions {
   border-color: #151515;

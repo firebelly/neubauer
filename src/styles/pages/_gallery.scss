@@ -15,7 +15,11 @@
 .interiorGallery {
 	$gallery: &;
 	border-top: 1px solid transparent;
-	padding: 4em 4em 16em 4em;
+	padding: 2em 2em 6em 2em;
+
+    @include breakpoint(md) {
+        padding: 4em 4em 16em 4em;
+    }
 
 	&--exhibitions {
 		border-color: getColor('gray');
