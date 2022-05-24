@@ -61,6 +61,10 @@
 		padding: 0 2em;
 		text-align: center;
 
+		#{$parent}--exhibitions & {
+			flex-basis: 100%;
+		}
+
 		@include breakpoint(sm) {
 			padding-right: 8em;
 		}

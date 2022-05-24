@@ -83,8 +83,12 @@
 		}
 
 		&--exhibitions {
-			display: flex;
-			@include justifyContent(flex-end);
+			
+			@include breakpoint(sm) {
+				display: flex;
+				@include justifyContent(flex-end);
+			}
+
 		}
 
 	}

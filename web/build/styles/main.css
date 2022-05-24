@@ -13249,8 +13249,13 @@ img {
  Interior Cover
 ------------------------------------------------------------------------ */
 .interiorCover-frame {
-  margin: 0 4em;
+  margin: 0 2em;
   position: relative;
+}
+@media (min-width: 768px) {
+  .interiorCover-frame {
+    margin: 0 4em;
+  }
 }
 .interiorCover-asset {
   display: block;
@@ -14409,6 +14414,9 @@ img {
   padding: 0 2em;
   text-align: center;
 }
+.interiorIntro--exhibitions .interiorIntro-details {
+  flex-basis: 100%;
+}
 @media (min-width: 768px) {
   .interiorIntro-details {
     padding-right: 8em;
@@ -14853,9 +14861,11 @@ img {
   position: static;
   width: auto;
 }
-.interiorSummary-frame--exhibitions {
-  display: flex;
-  justify-content: flex-end;
+@media (min-width: 768px) {
+  .interiorSummary-frame--exhibitions {
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 .interiorSummary-buttons--stack {
   width: 50%;
