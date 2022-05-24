@@ -4065,8 +4065,7 @@ img {
   Homepage
 ------------------------------------------------------------------------ */
 .homepageCover {
-  height: 100%;
-  min-height: 640px;
+  height: 580px;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -4124,7 +4123,7 @@ img {
   }
 }
 .homepageCover-asset {
-  height: 100%;
+  height: 680px;
   width: 100%;
   top: 0;
   left: 0;
@@ -4132,7 +4131,7 @@ img {
   z-index: 1;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  background-size: contain;
+  background-size: cover;
   background-blend-mode: multiply;
   background-attachment: fixed;
   filter: blur(15px);
@@ -4142,7 +4141,6 @@ img {
 @media (min-width: 768px) {
   .homepageCover-asset {
     height: 940px;
-    background-size: cover;
   }
 }
 .homepageCover-asset._is-sliding {

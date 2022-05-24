@@ -12,8 +12,9 @@
 {# Opener Image #}
 {% set openerImage = entry.homepageCover is not null and entry.homepageCover|length > 0 ? entry.homepageCover.one() : null %}
 {% set openerSizes = utils.getAssetSizes('homepage','opener')|json_decode %}
-{% set resizedOpenerImage = assets.assetSrc(openerImage,openerSizes) %}
-{% set openerSrc = resizedOpenerImage %}
+{% set smOpenerSrc = assets.assetSrc(openerImage,openerSizes,'sm') %}
+{% set lgOpenerSrc = assets.assetSrc(openerImage,openerSizes,'lg') %}
+
 
 {# Opener Text #}
 {% set openerTagline = entry.openerTagline is not null ? entry.openerTagline : null %}
@@ -84,7 +85,7 @@
 
     <div 
         class="homepageCover-asset" 
-        style='background-image: url({{ openerSrc|trim }});'
+        style='background-image: url({{ lgOpenerSrc|trim }});'
         data-parallax-image="cover"></div>
 
 </section>

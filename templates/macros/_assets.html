@@ -133,16 +133,15 @@
 {% endmacro %}
 
 {# assetSrc: #}
-{% macro assetSrc(imageObj,imageSizes) %}
+{% macro assetSrc(imageObj,imageSizes,sizeKey) %}
     {% set thisImage = imageObj %}
     {% set thisWidth, thisHeight = thisImage.getWidth(), thisImage.getHeight() %}
-    {% set smWidth, smHeight = imageSizes['sm'][0], imageSizes['sm'][1] %}
-    {% set lgWidth, lgHeight = imageSizes['lg'][0], imageSizes['lg'][1] %}
+    {% set sizeWidth, sizeHeight = imageSizes[sizeKey][0], imageSizes[sizeKey][1] %}
     {% set newImage = craft.imager.transformImage(imageObj, { 
         mode: 'crop',
         position: thisImage.focalPoint(),
-        width: lgWidth, 
-        height: lgHeight, 
+        width: sizeWidth, 
+        height: sizeHeight, 
         jpegQuality: 72 }) %}
     {{ newImage }}
 {% endmacro %}

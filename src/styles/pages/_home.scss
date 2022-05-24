@@ -14,13 +14,14 @@
   Homepage
 ------------------------------------------------------------------------ */
 .homepageCover {
-	$sm-nav-height: 80px;
+	$nav-height: 80px;
+	// factor in nav height
+	$xs-asset-height: 680px;
+	$xs-cover-height: 580px;
 	$sm-asset-height: 940px;
-	$xs-cover-height: 640px;
 	$sm-cover-height: 820px;
 
-	height: 100%;
-	min-height: $xs-cover-height;
+	height: $xs-cover-height;
 	position: relative;
 	overflow: hidden;
 	z-index: 1;
@@ -82,8 +83,7 @@
 	}
 
 	&-asset {
-		// todo
-		height: 100%;
+		height: $xs-asset-height;
 		width: 100%;
 		top: 0;
 		left: 0;
@@ -91,7 +91,7 @@
 		z-index: 1;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
-		background-size: contain;
+		background-size: cover;
 		background-blend-mode: multiply;
 		background-attachment: fixed;
 		filter: blur(15px);
@@ -100,7 +100,6 @@
 
 		@include breakpoint(sm) {
 			height: $sm-asset-height;
-			background-size: cover;
 		}
 
 		&._is-sliding {
