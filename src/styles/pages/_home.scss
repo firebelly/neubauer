@@ -100,13 +100,14 @@
 		z-index: 1;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
-		background-size: cover;
+		background-size: 50%;
 		background-blend-mode: multiply;
-		background-attachment: fixed;
 		transform: translate3d(0,0,0);
 		
 		@include breakpoint(sm) {
 			height: $sm-cover-height;
+			background-attachment: fixed;
+			background-size: cover;
 			filter: blur(15px);
 			transition: filter 2s ease-in-out;
 		}
