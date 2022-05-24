@@ -4146,7 +4146,7 @@ img {
   z-index: 1;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  background-size: 50%;
+  background-size: cover;
   background-blend-mode: multiply;
   transform: translate3d(0, 0, 0);
 }
@@ -4154,7 +4154,6 @@ img {
   .homepageCover-asset {
     height: 940px;
     background-attachment: fixed;
-    background-size: cover;
     filter: blur(15px);
     transition: filter 2s ease-in-out;
   }
@@ -6264,6 +6263,7 @@ img {
 
 .homepageExplore {
   position: relative;
+  z-index: 2;
   margin-bottom: -1em;
 }
 
