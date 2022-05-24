@@ -6793,9 +6793,13 @@ img {
 }
 
 .projectFeature {
-  padding: 4em;
+  padding: 2em;
   font-size: 1rem;
-  content: ".projectFeature";
+}
+@media (min-width: 62em) {
+  .projectFeature {
+    padding: 4em;
+  }
 }
 .projectFeature-label {
   font: normal 4em/1.12 "domaine-text", serif;
@@ -7259,9 +7263,13 @@ img {
 }
 
 .personFeature {
-  padding: 4em;
+  padding: 2em;
   font-size: 1rem;
-  content: ".personFeature";
+}
+@media (min-width: 62em) {
+  .personFeature {
+    padding: 4em;
+  }
 }
 .personFeature-label {
   font: normal 4em/1.12 "domaine-text", serif;
@@ -7728,9 +7736,13 @@ img {
 }
 
 .relatedArticle {
-  padding: 4em;
+  padding: 2em;
   font-size: 1rem;
-  content: ".relatedArticle";
+}
+@media (min-width: 62em) {
+  .relatedArticle {
+    padding: 4em;
+  }
 }
 .relatedArticle-label {
   font: normal 4em/1.12 "domaine-text", serif;
@@ -9531,7 +9543,12 @@ img {
 }
 .searchResults-content._is-list {
   display: block;
-  padding: 0 4em;
+  padding: 0 2em;
+}
+@media (min-width: 62em) {
+  .searchResults-content._is-list {
+    padding: 0 4em;
+  }
 }
 .searchResults-content._is-list .searchArticle {
   display: flex;
@@ -13427,11 +13444,11 @@ img {
 
 .interiorTeam {
   border-top: 1px solid transparent;
-  padding: 4em 4em 6em 4em;
+  padding: 2em 2em 6em 2em;
 }
 @media (min-width: 62em) {
   .interiorTeam {
-    padding-bottom: 16em;
+    padding: 4em 4em 16em 4em;
   }
 }
 .interiorTeam--projects {

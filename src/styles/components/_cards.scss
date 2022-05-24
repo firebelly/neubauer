@@ -201,9 +201,12 @@
     @include assetItem(#{$selector}-img);
     
     #{$selector} {
-        padding: 4em;
+        padding: 2em;
         font-size: 1rem;
-        content:"#{$selector}";
+
+        @include breakpoint(md) {
+            padding: 4em;
+        }
     
         &-label {
             @include getType('h2-normal');

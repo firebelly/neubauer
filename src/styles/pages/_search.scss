@@ -307,7 +307,11 @@ $results: '.searchResults';
 
 		&._is-list {
 			display: block;
-			padding: 0 4em;
+			padding: 0 2em;
+
+			@include breakpoint(md) {
+				padding: 0 4em;
+			}
 
 			.searchArticle {
 				@include flexParent($display: flex, $values: row nowrap);
