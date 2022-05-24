@@ -88,6 +88,7 @@
 		top: 0;
 		left: 0;
 		position: fixed;
+		overflow: hidden;
 		z-index: 1;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
@@ -151,8 +152,9 @@
 	@include justifyContent(center);
 	@include alignItems(center);
 	// TODO: fix these dims
-	height: calc(100% - 8em);
-	width: calc(100% - 8em);
+	height: calc(100% - 2em);
+	width: calc(100% - 2em);
+	padding: 0 2em;
 	top: 100%;
 	left: 4em;
 	position: absolute;
