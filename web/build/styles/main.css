@@ -16506,6 +16506,7 @@ img {
 .interiorMod--about .interiorMod-card .interiorMod-card-subtitle {
   font: normal 2em/1.5 "domaine-text-italic", serif;
   margin-bottom: 0.5em;
+  font-style: italic;
 }
 .interiorMod--about .interiorMod-card .interiorMod-card-caption {
   display: none;
