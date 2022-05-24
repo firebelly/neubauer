@@ -2461,6 +2461,7 @@ img {
 }
 .aboutCarousel-slides {
   display: flex;
+  margin-left: 0.25em;
   padding: 0 4em 1em 0;
   overflow-x: auto;
   overflow-y: hidden;
@@ -2490,6 +2491,9 @@ img {
   width: calc(100% - 2em);
 }
 @media (min-width: 768px) {
+  .aboutCarousel-slides {
+    margin-left: 0;
+  }
   .aboutCarousel-slides--1 > * {
     width: calc(100% - 2em);
   }
@@ -4813,6 +4817,7 @@ img {
 }
 .homepageCarousel-slides {
   display: flex;
+  margin-left: 0.25em;
   padding: 0 4em 1em 0;
   overflow-x: auto;
   overflow-y: hidden;
@@ -4842,6 +4847,9 @@ img {
   width: calc(100% - 2em);
 }
 @media (min-width: 768px) {
+  .homepageCarousel-slides {
+    margin-left: 0;
+  }
   .homepageCarousel-slides--1 > * {
     width: calc(100% - 2em);
   }
@@ -17219,6 +17227,7 @@ img {
 }
 .narrativeCarousel-slides {
   display: flex;
+  margin-left: 0.25em;
   padding: 0 4em 1em 0;
   overflow-x: auto;
   overflow-y: hidden;
@@ -17248,6 +17257,9 @@ img {
   width: calc(100% - 2em);
 }
 @media (min-width: 768px) {
+  .narrativeCarousel-slides {
+    margin-left: 0;
+  }
   .narrativeCarousel-slides--1 > * {
     width: calc(100% - 2em);
   }

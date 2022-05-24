@@ -22,6 +22,7 @@
           
         &-slides {
             display: flex;
+            margin-left: 0.25em;
             padding: 0 4em 1em 0;
             overflow-x: auto;
             overflow-y: hidden;
@@ -57,6 +58,7 @@
 
             // Calculate slide width based on slide hook
             @include breakpoint(sm) {
+                margin-left: 0;
                 
                 @for $i from 1 through 4 {
                     $p: '%';
