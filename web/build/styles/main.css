@@ -2461,7 +2461,7 @@ img {
 }
 .aboutCarousel-slides {
   display: flex;
-  margin-left: 0.25em;
+  margin-left: 0.3em;
   padding: 0 4em 1em 0;
   overflow-x: auto;
   overflow-y: hidden;
@@ -4817,7 +4817,7 @@ img {
 }
 .homepageCarousel-slides {
   display: flex;
-  margin-left: 0.25em;
+  margin-left: 0.3em;
   padding: 0 4em 1em 0;
   overflow-x: auto;
   overflow-y: hidden;
@@ -17227,7 +17227,7 @@ img {
 }
 .narrativeCarousel-slides {
   display: flex;
-  margin-left: 0.25em;
+  margin-left: 0.3em;
   padding: 0 4em 1em 0;
   overflow-x: auto;
   overflow-y: hidden;
