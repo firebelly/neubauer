@@ -12,9 +12,8 @@
 {# Opener Image #}
 {% set openerImage = entry.homepageCover is not null and entry.homepageCover|length > 0 ? entry.homepageCover.one() : null %}
 {% set openerSizes = utils.getAssetSizes('homepage','opener')|json_decode %}
-{% set smOpenerSrc = assets.assetSrc(openerImage,openerSizes,'sm') %}
+{# {% set smOpenerSrc = assets.assetSrc(openerImage,openerSizes,'sm') %} #}
 {% set lgOpenerSrc = assets.assetSrc(openerImage,openerSizes,'lg') %}
-
 
 {# Opener Text #}
 {% set openerTagline = entry.openerTagline is not null ? entry.openerTagline : null %}

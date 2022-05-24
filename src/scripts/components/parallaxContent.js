@@ -161,10 +161,6 @@ class parallaxContent {
 
         let self = this;
 
-        // let viewport = options.viewportState !== null ? options.viewportState : null;
-
-        // console.log(viewport);
-
         if ( self.images !== null ) {
             self.defaultState();
         }
