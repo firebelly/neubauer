@@ -88,9 +88,10 @@
 		top: 0;
 		left: 0;
 		position: fixed;
+		z-index: -1;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
-		background-size: cover;
+		background-size: contain;
 		background-blend-mode: multiply;
 		background-attachment: fixed;
 		filter: blur(15px);
@@ -99,6 +100,7 @@
 
 		@include breakpoint(sm) {
 			height: $sm-asset-height;
+			background-size: cover;
 		}
 
 		&._is-sliding {
