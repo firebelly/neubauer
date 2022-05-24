@@ -5,7 +5,8 @@
 
 @forward 'project';
 
-
+@include carouselScroller('.narrativeCarousel');
+@include cardDirectory('.narrativeSlide',getColor('gray'),getColor('gray',10));
 .interiorNarrative {
 	$narrative: &;
 	border-top: 1px solid transparent;
@@ -54,12 +55,17 @@
 	&-item {
 		@include resetButton;
 		$pb: math.div(10,28);
-		$mr: math.div(40,28);
-		@include getType('h3-sans');
+		$mr: math.div(40,20);
+		@include getType('h4-sans');
 		border-bottom: 10px solid transparent;
 		padding-bottom: #{$pb}em;
 		margin-right: #{$mr}em;
 
+		@include breakpoint(sm) {
+			$mr: math.div(40,28);
+			@include getType('h3-sans');
+			margin-right: #{$mr}em;
+		}
 		
 		&:hover,
 		&[role="tab"][aria-selected="true"] {
@@ -89,23 +95,38 @@
 	&[role="tabpanel"]._is-hidden {
 		display: none;
 	}
+}
 
-	&-item {
-		$panel-item: &;
-		
-		@include breakpoint(md) {
-			@include flexChild(0 1 calc(33% - 0.5em));
+.narrativeSlide {
+	$carousel: '.narrativeCarousel';
+	margin: 0 0.25em;
+	max-width: calc(100vw - 6em);
 
-			#{$tab-panel}--4 & {
-				@include flexChild(0 1 calc(25% - 0.5em));
+	&._is-single {
+		min-width: calc(100vw - 6em);
+	
+		@include breakpoint(sm) {
+			min-width: calc(33vw - 2em);
+		}
+	}
+	
+	&-title {
+
+		a:link,
+		a:visited,
+		a:hover,
+		a:active {
+
+			#{$carousel}--projects & {
+				color: getColor('green',30);
 			}
 
 		}
-		
-		@at-root {
-			@include cardDirectory(#{$panel-item},getColor('gray'),getColor('gray',10));
-	
-		}
+
+
+
 	}
+
 }
+
 

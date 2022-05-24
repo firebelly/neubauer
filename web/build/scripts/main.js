@@ -1063,6 +1063,15 @@ var publicationsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODU
 
 if (publicationsCarousel.carousel !== null) {
   publicationsCarousel.init();
+} // Narrative Carousels
+
+
+var exhibitionsCarousel = new _components_scrollCarousel__WEBPACK_IMPORTED_MODULE_7__["default"]({
+  _id: 'exhibitions'
+});
+
+if (exhibitionsCarousel.carousel !== null) {
+  exhibitionsCarousel.init();
 }
 
 /***/ }),

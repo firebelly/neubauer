@@ -7,6 +7,7 @@
 {% import 'macros/_controls' as controls %}
 {% import 'macros/_actions' as actions %}
 {% import 'macros/_menus' as menus %}
+{% import 'macros/_carousels' as carousels %}
 
 {% block content %}
 {# Global Vars #}
@@ -527,10 +528,20 @@
     </div>
     
     {% set allCount = narrativeBlock|length %}
-    {% set narrativeName = 'tabPanel-item' %}
+    {# {% set narrativeName = 'tabPanel-item' %} #}
+    {% set narrativeName = 'narrativeSlide' %}
     {% set narrativeObj = {
-        'assetSizes': utils.getAssetSizes('narrative','card')
+        'assetSizes': utils.getAssetSizes('narrative','card'),
+        'cardVariant': 'light'
     } %}
+
+    {% set narrativeSlideObj = {
+        'variant': entrySection,
+        'group': 3,
+        'cardName': narrativeName,
+        'cardObj': narrativeObj,
+        'cardCall': null
+    }%}
 
     <div 
         class="tabPanel{% if allCount > 3 %} tabPanel--4{% endif %}"
@@ -539,12 +550,11 @@
         id="all-tab"
         aria-labelledby="all">
 
-        {% for n in narrativeBlock %}
-        {# default to "Update" if narr type does not exist #}
-        {# {% set type = n.narrativeType|length > 0 ? n.narrativeType[0].title : 'Update' %} #}
-            {% set narrativeEntry = n.item[0] %}
-            {{ cards.cardArticle(narrativeName,narrativeEntry,narrativeObj) }}
-        {% endfor %}
+        {% set narrativeSlideObj = narrativeSlideObj|merge({
+            'slides': narrativeBlock
+        }) %}
+
+        {{ carousels.cardCarousel('narrativeCarousel',narrativeSlideObj) }}
     </div>
 
     {% for type, objs in narratives %}
@@ -557,9 +567,16 @@
         id="{{ tabSlug }}-tab"
         aria-labelledby="{{ tabSlug }}">
 
+         {% set narrativeSlideObj = narrativeSlideObj|merge({
+            'slides': objs
+        }) %}
+
+        {{ carousels.cardCarousel('narrativeCarousel',narrativeSlideObj) }}
+{# 
         {% for narrative in objs %}
             {{ cards.cardArticle(narrativeName,narrative,narrativeObj) }}
-        {% endfor %}
+        {% endfor %} #}
+
 
     </div>
     {% endfor %}

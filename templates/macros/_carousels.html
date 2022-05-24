@@ -58,12 +58,16 @@
 					'attrs': {
 						'role': 'group',
 						'aria-label': "slide #{loop.index} of #{slideCount}",
-						'data-carousel-item': ''
+						'data-carousel-item': '',
+						'class': slideCount == 1 ? '_is-single' : ''
 					},
 					'trimContent': 200
 				}) %}
 				{% if cardName and cardName == 'interiorMod-cardlette' %}
 				{{ cards.cardMini(cardName,slide,cardObj) }}
+				{% elseif carouselName == 'narrativeCarousel' %}
+				{% set narrEntry = 'item' in slide|keys ? slide.item[0] : slide %}
+            	{{ cards.cardArticle(cardName,narrEntry,cardObj) }}
 				{% else %}
 				{{ cards.cardArticle(cardName,slide,cardObj) }}
 				{% endif %}

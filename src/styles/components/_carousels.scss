@@ -212,6 +212,18 @@ Carousel Scroller: Default Presentation
                     background: getColor('red',10);
                 }
             }
+            #{$selector}--exhibitions & {
+                scrollbar-color: getColor('gray',10) transparent;
+                &::-webkit-scrollbar-thumb {
+                    background: getColor('gray',10);
+                }
+            }
+            #{$selector}--projects & {
+                scrollbar-color: getColor('green',10) transparent;
+                &::-webkit-scrollbar-thumb {
+                    background: getColor('green',10);
+                }
+            }
         }
 
         &-button {
@@ -229,6 +241,12 @@ Carousel Scroller: Default Presentation
                 }
                 #{$selector}--publications & {
                     border-color: getColor('red');
+                }
+                #{$selector}--exhibitions & {
+                    border-color: getColor('gray');
+                }
+                #{$selector}--projects & {
+                    border-color: getColor('green',30);
                 }
             }	
 

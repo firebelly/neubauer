@@ -76,3 +76,11 @@ const publicationsCarousel = new scrollCarousel({
 if ( publicationsCarousel.carousel !== null ) {
     publicationsCarousel.init();
 }
+
+// Narrative Carousels
+const exhibitionsCarousel = new scrollCarousel({
+    _id: 'exhibitions'
+});
+if ( exhibitionsCarousel.carousel !== null ) {
+    exhibitionsCarousel.init();
+}
