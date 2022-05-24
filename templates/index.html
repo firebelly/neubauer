@@ -132,6 +132,7 @@
 {% endif %}
 
 {% set hasEntries = true %}
+{% set eagerElements = [['cardImage', {'kind': 'image'}],'dateBlock','topicList'] %}
 {% set cardObj = {
     'assetSizes': utils.getAssetSizes(tabSlug,'homepage'),
     'cardVariant': tabSlug
@@ -151,6 +152,7 @@
 {% case 'people' %}
     {% set tabEntries = craft.entries()
         .section('people') 
+        .with(eagerElements)
         .search('personType:visiting-fellow' ~ ' AND personTypeStatus:current')
         .all()
     %}
@@ -158,24 +160,24 @@
         'slides': tabEntries,
         'group': 3
     }) %}
+
 {% case 'events' %}
     {% set eventsQuery = craft.entries.section('events') %}
-    {% set timedIds = dates.toTheTimeMachine(eventsQuery,false,true)|json_decode %}
-    {% set eventCount = timedIds|length %}
-    {# TODO #}
-    {% if eventCount < 10 %}{% endif %}
-    {% set tabEntries = eventsQuery.id(timedIds) %}
+    {% set isAgnostic, isFuture = false,true %}
+    {% set timedIds = dates.toTheTimeMachine(eventsQuery,isAgnostic,isFuture)|json_decode %}
+    {% set tabEntries = craft.entries().with(eagerElements).id(timedIds).limit(10).fixedOrder() %}
     
     {% set slideObj = slideObj|merge({
         'slides': tabEntries,
         'group': 3
     }) %}
+
 {% case 'news' %}
     {% set newsQuery = craft.entries.section('news') %}
     {% set isAgnostic, isFuture = true, false %}
     {% set timedIds = dates.toTheTimeMachine(newsQuery,isAgnostic,isFuture)|json_decode %}
     {% if timedIds|length > 0 %}
-    {% set tabEntries = craft.entries.id(timedIds).limit(10).fixedOrder() %}
+    {% set tabEntries = craft.entries().with(eagerElements).id(timedIds).limit(10).fixedOrder() %}
     {% set slideObj = slideObj|merge({
         'slides': tabEntries,
         'group': 4
