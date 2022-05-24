@@ -234,9 +234,13 @@ $sm-cover-height: 900px;
 
 .homepageEntries {
 	$entries: &;
-	padding: 4em 0 4em 4em;
+	padding: 2em 0 2em 2em;
 	position: relative;
 	z-index: 2; // obfuscate the parallax cover
+
+	@include breakpoint(md) {
+		padding: 4em 0 4em 4em;
+	}
 
 	&--people {
 		background: getColor('blue',10); 
