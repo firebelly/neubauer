@@ -15,13 +15,13 @@
 .primaryHeader {
 	@include flexParent();
 	@include justifyContent(space-between);
+	@include alignItems(center);
 	padding: 2em;
 	font-size: 1rem;
 	position: relative;
 	z-index: 10;
 
 	@include breakpoint(sm) {
-		@include alignItems(center);
 		padding-left: 4em;
 		padding-right: 3em;
 		background-blend-mode: multiply;

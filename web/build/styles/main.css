@@ -3116,6 +3116,10 @@ img {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  -webkit-box-alignpack: center;
+  -ms-flex-alignpack: center;
+  -webkit-align-itemspack: center;
+  align-items: center;
   padding: 2em;
   font-size: 1rem;
   position: relative;
@@ -3123,10 +3127,6 @@ img {
 }
 @media (min-width: 768px) {
   .primaryHeader {
-    -webkit-box-alignpack: center;
-    -ms-flex-alignpack: center;
-    -webkit-align-itemspack: center;
-    align-items: center;
     padding-left: 4em;
     padding-right: 3em;
     background-blend-mode: multiply;
@@ -4069,15 +4069,15 @@ img {
   Homepage
 ------------------------------------------------------------------------ */
 .homepageCover {
-  height: 585px;
+  height: 583px;
   position: relative;
-  top: -80px;
+  top: -82px;
   overflow: hidden;
   z-index: 1;
 }
 @media (min-width: 768px) {
   .homepageCover {
-    height: 845px;
+    height: 843px;
   }
 }
 .homepageCover-title {
