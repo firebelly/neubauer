@@ -15,19 +15,19 @@
 ------------------------------------------------------------------------ */
 .homepageCover {
 	$nav-height: 80px;
+	$blur: 15px;
 	// factor in nav height
-	$xs-asset-height: 680px;
-	$xs-cover-height: 580px;
-	$sm-asset-height: 940px;
-	$sm-cover-height: 820px;
+	$xs-cover-height: 680px;
+	$sm-cover-height: 940px;
 
-	height: $xs-cover-height;
+	height: $xs-cover-height - $nav-height - $blur;
 	position: relative;
+	top: $nav-height * -1;
 	overflow: hidden;
 	z-index: 1;
 
 	@include breakpoint(sm) {
-		height: $sm-cover-height;
+		height: $sm-cover-height - $nav-height - $blur;
 		//margin-bottom: -12px; // account for image blur
 	}
 
@@ -83,7 +83,7 @@
 	}
 
 	&-asset {
-		height: $xs-asset-height;
+		height: $xs-cover-height;
 		width: 100%;
 		top: 0;
 		left: 0;
@@ -100,7 +100,7 @@
 		transition: filter 2s ease-in-out;
 
 		@include breakpoint(sm) {
-			height: $sm-asset-height;
+			height: $sm-cover-height;
 		}
 
 		&._is-sliding {
@@ -152,8 +152,8 @@
 	@include justifyContent(center);
 	@include alignItems(center);
 	// TODO: fix these dims
-	height: calc(100% - 4em);
-	width: calc(100% - 4em);
+	height: calc(100% - 2em);
+	width: calc(100% - 2em);
 	padding: 0 2em;
 	top: 100%;
 	left: 1em;

@@ -575,11 +575,10 @@ var parallaxContent = /*#__PURE__*/function () {
   }, {
     key: "init",
     value: function init(options) {
-      var self = this;
-      var viewport = options.viewportState !== null ? options.viewportState : null;
-      console.log(viewport);
+      var self = this; // let viewport = options.viewportState !== null ? options.viewportState : null;
+      // console.log(viewport);
 
-      if (self.images !== null && viewport !== 'xs') {
+      if (self.images !== null) {
         self.defaultState();
       }
 
