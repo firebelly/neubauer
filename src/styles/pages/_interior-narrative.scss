@@ -55,7 +55,7 @@
 	&-item {
 		@include resetButton;
 		$pb: math.div(10,28);
-		$mr: math.div(40,20);
+		$mr: math.div(20,20);
 		@include getType('h4-sans');
 		border-bottom: 10px solid transparent;
 		padding-bottom: #{$pb}em;
@@ -83,6 +83,10 @@
 
 		#{$tabs}--projects & {
 			color: getColor('green',30);
+		}
+
+		#{$tabs}--exhibitions & {
+			color: getColor('gray');
 		}
 
 	}

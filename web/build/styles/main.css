@@ -18275,7 +18275,7 @@ img {
   font: normal 2em/1.5 "apercu", sans-serif;
   border-bottom: 10px solid transparent;
   padding-bottom: 0.3571428571em;
-  margin-right: 2em;
+  margin-right: 1em;
 }
 @media (min-width: 768px) {
   .tabList-item {
@@ -18294,6 +18294,9 @@ img {
 }
 .tabList--projects .tabList-item {
   color: #51594A;
+}
+.tabList--exhibitions .tabList-item {
+  color: #151515;
 }
 
 .tabPanel {
