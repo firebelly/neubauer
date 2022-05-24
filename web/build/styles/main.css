@@ -4149,13 +4149,13 @@ img {
   background-size: cover;
   background-blend-mode: multiply;
   background-attachment: fixed;
-  filter: blur(15px);
   transform: translate3d(0, 0, 0);
-  transition: filter 2s ease-in-out;
 }
 @media (min-width: 768px) {
   .homepageCover-asset {
     height: 940px;
+    filter: blur(15px);
+    transition: filter 2s ease-in-out;
   }
 }
 .homepageCover-asset._is-sliding {
