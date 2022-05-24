@@ -4069,15 +4069,15 @@ img {
   Homepage
 ------------------------------------------------------------------------ */
 .homepageCover {
-  height: 583px;
+  height: 640px;
   position: relative;
-  top: -82px;
+  margin-top: -82px;
   overflow: hidden;
   z-index: 1;
 }
 @media (min-width: 768px) {
   .homepageCover {
-    height: 843px;
+    height: 900px;
   }
 }
 .homepageCover-title {
@@ -4137,7 +4137,7 @@ img {
   }
 }
 .homepageCover-asset {
-  height: 680px;
+  height: 670px;
   width: 100%;
   top: 0;
   left: 0;
@@ -4152,7 +4152,7 @@ img {
 }
 @media (min-width: 768px) {
   .homepageCover-asset {
-    height: 940px;
+    height: 930px;
     background-attachment: fixed;
     filter: blur(15px);
     transition: filter 2s ease-in-out;
@@ -4330,7 +4330,7 @@ img {
   height: calc(100% - 2em);
   width: calc(100% - 2em);
   padding: 0 2em;
-  top: 100%;
+  top: 640px;
   left: 1em;
   position: absolute;
   z-index: 2;
@@ -4349,6 +4349,7 @@ img {
     width: 675px;
     left: auto;
     right: 4em;
+    top: 100%;
     padding: 0 8em;
   }
 }

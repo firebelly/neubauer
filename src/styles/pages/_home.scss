@@ -13,21 +13,21 @@
 /* ---------------------------------------------------------------------
   Homepage
 ------------------------------------------------------------------------ */
-.homepageCover {
-	$nav-height: 82px;
-	$blur: 15px;
-	// factor in nav height
-	$xs-cover-height: 680px;
-	$sm-cover-height: 940px;
+$nav-height: 82px;
+$blur: 30px;
+// factor in nav height
+$xs-cover-height: 640px;
+$sm-cover-height: 900px;
 
-	height: $xs-cover-height - $nav-height - $blur;
+.homepageCover {
+	height: $xs-cover-height;
 	position: relative;
-	top: $nav-height * -1;
+	margin-top: $nav-height * -1;
 	overflow: hidden;
 	z-index: 1;
 
 	@include breakpoint(sm) {
-		height: $sm-cover-height - $nav-height - $blur;
+		height: $sm-cover-height;
 		//margin-bottom: -12px; // account for image blur
 	}
 
@@ -91,7 +91,7 @@
 	}
 
 	&-asset {
-		height: $xs-cover-height;
+		height: $xs-cover-height + $blur;
 		width: 100%;
 		top: 0;
 		left: 0;
@@ -105,7 +105,7 @@
 		transform: translate3d(0,0,0);
 		
 		@include breakpoint(sm) {
-			height: $sm-cover-height;
+			height: $sm-cover-height + $blur;
 			background-attachment: fixed;
 			filter: blur(15px);
 			transition: filter 2s ease-in-out;
@@ -163,7 +163,7 @@
 	height: calc(100% - 2em);
 	width: calc(100% - 2em);
 	padding: 0 2em;
-	top: 100%;
+	top: $xs-cover-height;
 	left: 1em;
 	position: absolute;
 	z-index: 2;
@@ -182,6 +182,7 @@
 		width: 675px;
 		left: auto;
 		right: 4em;
+		top: 100%;
 		padding: 0 8em;
 	}
 
