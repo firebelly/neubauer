@@ -1,4 +1,4 @@
-dateModified: 1652975729
+dateModified: 1654527782
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -315,65 +315,6 @@ plugins:
     enabled: true
     licenseKey: RTSE5PWUIJUVG3QKHQ38VE75
     schemaVersion: 3.10.0
-    settings:
-      apiKey: ''
-      cacheControlHeader: 'public, s-maxage=31536000, max-age=0'
-      cacheDuration: null
-      cacheElementQueries: true
-      cacheElements: true
-      cachePurgerType: putyourlightson\blitz\drivers\purgers\DummyPurger
-      cacheStorageSettings:
-        __assoc__:
-          -
-            - folderPath
-            - '@webroot/cache/blitz'
-          -
-            - createGzipFiles
-            - ''
-          -
-            - createBrotliFiles
-            - ''
-      cacheStorageType: putyourlightson\blitz\drivers\storage\FileStorage
-      cacheWarmerSettings:
-        __assoc__:
-          -
-            - concurrency
-            - '3'
-      cacheWarmerType: putyourlightson\blitz\drivers\warmers\GuzzleWarmer
-      cachingEnabled: '1'
-      clearCacheAutomatically: '1'
-      customSiteUris: ''
-      debug: false
-      deployerType: putyourlightson\blitz\drivers\deployers\DummyDeployer
-      driverJobPriority: 100
-      excludedQueryStringParams:
-        - gclid
-        - fbclid
-      excludedUriPatterns: ''
-      includedQueryStringParams:
-        - '.*'
-      includedUriPatterns:
-        -
-          __assoc__:
-            -
-              - uriPattern
-              - '*'
-      injectScriptEvent: DOMContentLoaded
-      integrations:
-        - putyourlightson\blitz\drivers\integrations\FeedMeIntegration
-        - putyourlightson\blitz\drivers\integrations\SeomaticIntegration
-      maxRetryAttempts: 10
-      mutexTimeout: 1
-      outputComments: true
-      queryStringCaching: '0'
-      queueJobTtr: 300
-      refreshCacheAutomaticallyForGlobals: true
-      refreshCacheJobPriority: 10
-      refreshCacheWhenElementSavedNotLive: false
-      refreshCacheWhenElementSavedUnchanged: false
-      sendPoweredByHeader: true
-      warmCacheAutomatically: '1'
-      warmPagesWithQueryStringParams: true
   cp-css:
     edition: standard
     enabled: true

@@ -40,11 +40,11 @@ return [
         ],
 
         // The URI patterns to exclude from caching (overrides any matching patterns to include). Set `siteId` to a blank string to indicate all sites.
-        'excludedUriPatterns' => [
-           [
-               'siteId' => '',
-           ],
-        ],
+        // 'excludedUriPatterns' => [
+        //    [
+        //        'siteId' => ''
+        //    ],
+        // ],
 
         // The storage type to use.
         //'cacheStorageType' => 'putyourlightson\blitz\drivers\storage\FileStorage',
