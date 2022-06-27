@@ -1,4 +1,4 @@
-dateModified: 1654527782
+dateModified: 1656364979
 email:
   fromEmail: betsy@firebellydesign.com
   fromName: 'Neubauer Collegium'
@@ -376,6 +376,10 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 3.2.0
+  sitemap:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.2
   sprig:
     edition: standard
     enabled: true
