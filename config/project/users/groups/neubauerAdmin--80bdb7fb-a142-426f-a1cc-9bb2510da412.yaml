@@ -2,6 +2,7 @@ description: 'Allowed access to user and page content management; prevented from
 handle: neubauerAdmin
 name: 'Neubauer Admin'
 permissions:
+  - accessplugin-seo
   - accesscp
   - registerusers
   - moderateusers
@@ -112,7 +113,6 @@ permissions:
   - 'editcategories:d7bc1724-cfca-4d62-8b29-dbb9996201d1' # Event Types
   - 'editcategories:92afd0f9-75fa-4c34-87cf-55d7e10d1709' # Narrative Types
   - 'editcategories:dbb74986-f45a-4de0-b349-f466e988a4cb' # Person Types
-  - 'editcategories:464d6956-ffb4-4883-a8af-830c2242c869'
   - 'editcategories:44640def-c232-4e0a-b207-660156167038' # Topics
   - 'saveassetinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
   - 'createfoldersinvolume:ed2564a5-16db-476f-bd15-c976a55d38fa' # Manual Uploads
